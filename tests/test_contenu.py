@@ -79,6 +79,8 @@ def corpus_ui():
          norm((build.NEURON / "src/generators.py").read_text(encoding="utf-8"))]
     m += [deux_variantes(f.read_text(encoding="utf-8")) for f in (build.NEURON / "src/pages").rglob("*.html")]
     m += [deux_variantes(f.read_text(encoding="utf-8")) for f in (build.NEURON / "src/data").glob("*.json")]
+    # Maquettes publiées (vignettes générées) : reproductions d'interface déjà en ligne
+    m += [deux_variantes(f.read_text(encoding="utf-8")) for f in (build.NEURON / "docs/fr").rglob("*.html")]
     return "\n".join(m)
 
 
@@ -103,12 +105,12 @@ class TestContenu(unittest.TestCase):
     def test_interface_reprise_de_l_application(self):
         for p, x in self.lus.items():
             for t in x.ui:
-                self.assertIn(t, self.ui, f"{p or 'accueil'} : libellé d'interface inconnu : {t[:100]}")
+                self.assertTrue(t in self.ui, f"{p or 'accueil'} : libellé d'interface inconnu : {t[:100]}")
 
     def test_titres_de_la_page_source(self):
         for p, x in self.lus.items():
             for t in x.titres:
-                self.assertIn(t, self.sources[p], f"{p or 'accueil'} : titre absent de la page source : {t}")
+                self.assertTrue(t in self.sources[p], f"{p or 'accueil'} : titre absent de la page source : {t}")
 
 
 if __name__ == "__main__":
