@@ -144,6 +144,10 @@ def rendre_mobile(nav):
     return "".join(h)
 
 
+# Titres de colonne du pied reliés à leur page hub (sinon ces hubs n'ont aucun lien entrant)
+HUBS_PIED = {"Plateforme": "corrext/", "Solutions": "solutions/", "Ressources": "ressources/"}
+
+
 def rendre_pied(pied):
     cols = []
     for c in pied["colonnes"]:
@@ -155,7 +159,9 @@ def rendre_pied(pied):
     cols.append(("Légal", pied["legal"]))
     h = ['<footer class="pied">\n<div class="wrap">\n<div class="fp-g">\n']
     for titre, items in cols:
-        h.append(f'<div><p>{_e(titre)}</p><ul>\n')
+        hub = HUBS_PIED.get(titre)
+        tete = f'<a href="{_a(hub)}">{_e(titre)}</a>' if hub else _e(titre)
+        h.append(f'<div><p>{tete}</p><ul>\n')
         for i in items:
             if i["href"]:
                 h.append(f'<li><a href="{_a(i["href"])}">{_e(i["texte"])}</a></li>\n')

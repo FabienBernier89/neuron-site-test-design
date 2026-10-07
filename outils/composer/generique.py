@@ -184,7 +184,7 @@ def h_siblings(sec, ctx):
         reste = a.replace(win, "")
         em = blocs(reste, "em")
         cs.append((brut(bloc(reste, "b")), brut(bloc(reste, "span")), (txt(em[0]) if em else None, href(a)),
-                   scene(355, 199, '<div class="maq">' + win + "</div>", titre=tf, label=tf)))
+                   scene(355, 199, V.vignette(win), titre=tf, label=tf)))
     if not cs:
         for a in blocs(sec, "a"):
             b = blocs(a, "b")
@@ -325,10 +325,18 @@ def h_hc(sec, ctx):
             + f'<div class="fq-l">{"".join(qr)}</div>{reste_txt}</div></div></section>\n')
 
 
+HAUTEUR_DEMO = {"chnell": 760, "gestion-de-projet": 760, "editeur-de-relecture": 760, "extraits-registre-commerce": 760}
+
+
 def h_tdemo(sec, ctx):
     zone = "".join(blocs(sec, "div", "cx-ex")) + bloc(sec, "div", attr='id="cx"')
     ctx["demo"] = True
-    return section(scene(1176, 720, f'<div class="cx-zone">{zone}</div>', titre="Corrext", label="Démonstration de l'interface Corrext"), "sec sec-st", "demo")
+    outil = ctx["P"].rstrip("/").split("/")[-1]
+    ctx["outil"] = outil
+    sc = scene(1176, HAUTEUR_DEMO.get(outil, 720), f'<div class="cx-zone">{zone}</div>', sim="visite-" + outil, curseur=False,
+               titre="Corrext", label="Démonstration de l'interface Corrext")
+    sc = sc.replace(f'data-sim="visite-{outil}"', f'data-sim="visite-{outil}" data-reinit="non" data-interactif data-tenue="0"', 1)
+    return section(sc, "sec sec-st", "demo")
 
 
 def h_glist(sec, ctx):
@@ -497,10 +505,13 @@ def composer(P):
             f = h_generique
         out.append(f(sec, ctx))
     corps = "".join(out)
+    tete_ = entete(P)
     if ctx.get("demo"):
         st, sc = scripts_demo(P)
         corps = st + corps + liens(sc, P)
-    ecrire(P, entete(P), corps)
+        o = ctx["outil"]
+        tete_ = tete_.replace("gabarit: standard\n", f"gabarit: standard\nscripts: visite-{o}.js\nstyles: skin-{o}.css\n")
+    ecrire(P, tete_, corps)
     return inconnus
 
 

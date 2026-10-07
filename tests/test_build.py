@@ -40,6 +40,19 @@ class TestBuild(unittest.TestCase):
                     cible = cible / "index.html"
                 self.assertTrue(cible.exists(), f"{p or 'accueil'} : lien cassé {ref}")
 
+    def test_referencement_repris_du_site(self):
+        """Chaque page garde les balises de référencement de la page Neur.on correspondante (URL de production)."""
+        import json
+        for p, h in self.pages.items():
+            tete = h[:h.index("</head>")]
+            self.assertIn(f'<link rel="canonical" href="https://neur-on.ai/fr/{p}">', tete, p or "accueil")
+            self.assertIn('<meta property="og:title"', tete, p)
+            self.assertIn('hreflang="x-default"', tete, p)
+            lds = re.findall(r'<script type="application/ld\+json">(.*?)</script>', h, re.S)
+            self.assertTrue(lds, f"{p or 'accueil'} : aucune donnée structurée")
+            for ld in lds:
+                json.loads(ld)
+
     def test_un_seul_h1(self):
         for p, h in self.pages.items():
             self.assertEqual(len(re.findall(r"<h1[ >]", h)), 1, p)

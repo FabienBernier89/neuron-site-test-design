@@ -5,9 +5,11 @@ Bibliothèque standard uniquement. Lit le site Neur.on (Sites/neuron) pour le m�
 page, la page 404 et les données de démonstration, sans jamais y écrire.
 """
 import hashlib
+import json
 import os
 import re
 import shutil
+import struct
 import sys
 from pathlib import Path
 
@@ -36,7 +38,7 @@ TETE = """<!DOCTYPE html>
 <meta name="robots" content="noindex, nofollow">
 <title>@TITRE@</title>
 <meta name="description" content="@DESC@">
-<script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"systeme"}catch(e){}</script>
+@SEO@<script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"systeme"}catch(e){}</script>
 <link rel="icon" href="{{ROOT}}assets/img/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -131,19 +133,120 @@ def version():
     return h.hexdigest()[:8]
 
 
+SEO_TETE = re.compile(r'<link rel="(?:canonical|alternate)"[^>]*>|<meta (?:property="og:[^"]+"|name="twitter:[^"]+"|name="theme-color")[^>]*>')
+DONNEES = re.compile(r'<script type="application/ld\+json">.*?</script>', re.S)
+
+
+def seo(page):
+    """Référencement de la page Neur.on correspondante, repris tel quel : canonique et hreflang vers les URL de
+    production, Open Graph, données structurées (la version retenue se publiera à ces adresses)."""
+    s = NEURON / "docs/fr" / page / "index.html"
+    if not page.endswith("/") and page:
+        return ""
+    if not s.exists():
+        return ""
+    h = s.read_text(encoding="utf-8")
+    tete = SEO_TETE.findall(h[:h.find("</head>")])
+    image = re.search(r'<meta property="og:image" content="([^"]+)"', h)
+    return "".join(x + "\n" for x in tete + [completer(d, image.group(1) if image else None) for d in DONNEES.findall(h)])
+
+
+def completer(bloc, image):
+    """Complète les entités principales des champs recommandés pour les résultats enrichis, à partir des visuels
+    réels du site : image de partage pour un article qui n'en a pas, logo pour une organisation."""
+    d = json.loads(bloc[bloc.index(">") + 1:bloc.rindex("<")])
+    modifie = False
+    for o in (d.get("@graph") or [d]) if isinstance(d, dict) else d:
+        if o.get("@type") in ("Article", "BlogPosting", "NewsArticle") and "image" not in o and image:
+            o["image"] = image
+            modifie = True
+        if o.get("@type") == "Organization" and "logo" not in o and o.get("url", "").startswith("https://neur-on.ai"):
+            o["logo"] = "https://neur-on.ai/assets/img/neuron-logo.png"
+            modifie = True
+    if not modifie:
+        return bloc
+    return '<script type="application/ld+json">' + json.dumps(d, ensure_ascii=False) + "</script>"
+
+
+_TAILLES = {}
+
+
+def taille_image(f):
+    """Largeur et hauteur intrinsèques d'une image PNG, JPEG, WebP ou SVG (None si illisible)."""
+    if f in _TAILLES:
+        return _TAILLES[f]
+    r = None
+    try:
+        b = f.read_bytes()
+        if b[:8] == b"\x89PNG\r\n\x1a\n":
+            r = struct.unpack(">II", b[16:24])
+        elif b[:2] == b"\xff\xd8":
+            i = 2
+            while i < len(b) - 9:
+                if b[i] != 0xFF:
+                    i += 1
+                    continue
+                m, n = b[i + 1], struct.unpack(">H", b[i + 2:i + 4])[0]
+                if m in (0xC0, 0xC1, 0xC2):
+                    h, w = struct.unpack(">HH", b[i + 5:i + 9])
+                    r = (w, h)
+                    break
+                i += 2 + n
+        elif b[:4] == b"RIFF" and b[8:12] == b"WEBP":
+            if b[12:16] == b"VP8X":
+                r = (1 + int.from_bytes(b[24:27], "little"), 1 + int.from_bytes(b[27:30], "little"))
+            elif b[12:16] == b"VP8L":
+                x = int.from_bytes(b[21:25], "little")
+                r = ((x & 0x3FFF) + 1, ((x >> 14) & 0x3FFF) + 1)
+            elif b[12:16] == b"VP8 ":
+                w, h = struct.unpack("<HH", b[26:30])
+                r = (w & 0x3FFF, h & 0x3FFF)
+        elif f.suffix == ".svg":
+            s = b[:2000].decode("utf-8", "ignore")
+            vb = re.search(r'viewBox="[\d.\s-]*?([\d.]+)\s+([\d.]+)"', s)
+            if vb:
+                r = (round(float(vb.group(1))), round(float(vb.group(2))))
+    except OSError:
+        pass
+    _TAILLES[f] = r
+    return r
+
+
+def dimensionner(html):
+    """Ajoute largeur et hauteur aux images qui n'en ont pas (pas de décalage de mise en page) et le chargement
+    différé aux images du contenu situées après la première section."""
+    def poser(m):
+        img = m.group(0)
+        if "width=" in img and "height=" in img:
+            return img
+        src = re.search(r'src="\{\{ROOT\}\}([^"?]+)', img)
+        r = taille_image(NEURON / src.group(1)) if src else None
+        if not r:
+            src2 = re.search(r'src="\{\{ROOT\}\}(assets/[^"?]+)', img)
+            r = taille_image(ASSETS.parent / src2.group(1)) if src2 else None
+        return img[:-1].rstrip("/").rstrip() + f' width="{r[0]}" height="{r[1]}">' if r else img
+    html = re.sub(r"<img\b[^>]*>", poser, html)
+    debut = html.find("<main")
+    premiere = html.find("</section>", debut)
+    if debut < 0 or premiere < 0:
+        return html
+    suite = re.sub(r'<img\b(?![^>]*\bloading=)', '<img loading="lazy" decoding="async"', html[premiere:])
+    return html[:premiere] + suite
+
+
 def assembler(meta, corps, page, nav, pied, v):
     cx = 'id="cx"' in corps
     sim = "data-sim" in corps or "data-ech" in corps
-    feuilles = (["cx.css"] if cx else []) + (["maq.css"] if 'class="maq' in corps else [])
+    feuilles = (["cx.css"] if cx else []) + (["maq.css"] if 'class="maq' in corps else []) + meta.get("styles", "").split()
     lien_cx = "".join('<link rel="stylesheet" href="{{ROOT}}assets/' + f + "?v=" + v + '">\n' for f in feuilles)
-    html = (TETE.replace("@TITRE@", meta["title"]).replace("@DESC@", meta["description"])
+    html = (TETE.replace("@TITRE@", meta["title"]).replace("@DESC@", meta["description"]).replace("@SEO@", seo(page))
             .replace("@V@", v).replace("@CX@", lien_cx))
     html += menu.rendre_entete(nav, meta.get("menu", ""), minimal=meta.get("gabarit") == "contact")
     html += '<main id="main">\n' + corps + "</main>\n" + menu.rendre_pied(pied)
     demo = 'id="cxSrc"' in corps
-    scripts = ["nav.js"] + (["corrext-demo.js"] if demo else []) + (["sim-data.js", "sim.js"] if sim or demo else [])
+    scripts = ["nav.js"] + (["corrext-demo.js"] if demo else []) + (["sim-data.js", "sim.js"] if sim or demo else []) + meta.get("scripts", "").split()
     html += "".join('<script src="{{ROOT}}assets/' + s + "?v=" + v + '" defer></script>\n' for s in scripts)
-    return relier(html + "</body>\n</html>\n", page)
+    return relier(dimensionner(html + "</body>\n</html>\n"), page)
 
 
 def page_404(nav, pied, v):
@@ -154,6 +257,7 @@ def page_404(nav, pied, v):
              '<div class="hero-d"><p>' + lead + '</p><a class="btn" href="{{ROOT}}">Neur.on</a></div></div></section>\n')
     meta = {"title": "Page introuvable · Neur.on", "description": "Page introuvable."}
     html = assembler(meta, corps, "", nav, pied, v)
+    html = DONNEES.sub("", SEO_TETE.sub("", html)).replace("\n\n", "\n")  # la page 404 n'a ni canonique ni données structurées
     return html.replace("<head>\n", '<head>\n<base href="' + BASE_PAGES + '">\n', 1)
 
 
@@ -173,6 +277,8 @@ def main():
         sortie.write_text(assembler(meta, corps, page, nav, pied, v), encoding="utf-8")
     (DOCS / "404.html").write_text(page_404(nav, pied, v), encoding="utf-8")
     (DOCS / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
+    if (NEURON / "docs/llms.txt").exists():  # résumé pour les moteurs IA, tel que publié avec le site Neur.on
+        shutil.copy2(NEURON / "docs/llms.txt", DOCS / "llms.txt")
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
     print(f"{len(PAGES)} pages écrites dans {DOCS}")
 

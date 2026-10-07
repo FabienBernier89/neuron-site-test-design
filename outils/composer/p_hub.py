@@ -18,7 +18,13 @@ for li in blocs(pt, "li"):
 out.append(section(tuiles(items, "tl txt")))
 po = bloc(t, "section", "postes")
 h, p = tete(po)
-out.append(section(h2(h, "une seule salle de contrôle") + f'<p class="intro">{p}</p>' + lignes_features(po)))
+co = EX["co"]
+et, nivs, soc, ide = textes_extrait()
+VIS = [(V.vue_alternatives("co", esc(co["src"]), esc(co["out"]["en"]["main"]), esc(co["out"]["en"]["alt"][0]["t"]), co["out"]["en"]["alt"][0]["e"], len(co["out"]["en"]["alt"]), tabs=True), "alts", 556),
+       (V.vue_analyse("Contrat_assurance.docx", "2,5", "pages standard", "Français", "Assurance privée"), "analyse", 440),
+       (V.vue_chnell(co["lookup"]), None, 470),
+       (V.vue_extrait(et, nivs, soc, ide, "German", 2, ("Company", "Target language", "Certification level")), "extrait", 540)]
+out.append(section(h2(h, "une seule salle de contrôle") + f'<p class="intro">{p}</p>' + lignes_features(po, visuels=VIS)))
 us = bloc(t, "section", "usp")
 lead = bloc(us, "div", "usp-lead")
 a = blocs(lead, "a", "feat-link")[0]

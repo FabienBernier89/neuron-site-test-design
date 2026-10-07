@@ -3,6 +3,8 @@ title: Fast lookup CHnell : concordancier du droit suisse · Neur.on
 description: Fast lookup CHnell, le concordancier bilingue de Corrext : plus de 20 000 documents officiels suisses alignés, 30 domaines, vos propres ressources.
 menu: corrext
 gabarit: standard
+scripts: visite-chnell.js
+styles: skin-chnell.css
 -->
 <style>/* Démo CHnell : la page de l'application reproduite en pleine largeur dans le cadre .cx (couleurs via --cx-*) */
 .cx-chnell.cxl-page{max-width:none;box-shadow:none;border-radius:0;padding:22px 18px 18px}
@@ -54,7 +56,7 @@ gabarit: standard
 </div>
 </section>
 <section class="sec sec-st" id="demo"><div class="wrap">
-<div class="ech" data-ech="1176x720"><div class="st" role="img" aria-label="Démonstration de l'interface Corrext" style="width:1176px;height:720px"><div class="st-f"><div class="fen"><div class="fen-b" aria-hidden="true"><i></i><i></i><i></i><span>Corrext</span></div><div class="fen-c" data-scene data-ui><div class="cx-zone"><div class="cx-ex" id="cxEx" role="group" aria-label="Requêtes de démonstration">
+<div class="ech" data-ech="1176x760"><div class="st" data-sim="visite-chnell" data-reinit="non" data-interactif data-tenue="0" aria-label="Démonstration de l'interface Corrext" style="width:1176px;height:760px"><div class="st-f"><div class="fen"><div class="fen-b" aria-hidden="true"><i></i><i></i><i></i><span>Corrext</span></div><div class="fen-c" data-scene data-ui><div class="cx-zone"><div class="cx-ex" id="cxEx" role="group" aria-label="Requêtes de démonstration">
       <span>Choisissez une requête :</span>
       <button type="button" data-ex="verzugszins" class="on">Verzugszins · droit des obligations</button>
       <button type="button" data-ex="bankgeheimnis">Bankgeheimnis · droit bancaire</button>
@@ -164,7 +166,7 @@ gabarit: standard
           <p class="cx-note" id="cxlNote" hidden></p>
         </div>
       </div>
-    </div></div></div></div></div></div></div>
+    </div></div></div></div></div><button type="button" class="sim-pause" aria-pressed="false" aria-label="Mettre en pause la démonstration" data-libre><svg class="ic-p" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 1.5v7M7.5 1.5v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="ic-l" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.8v6.4L8.4 5z" fill="currentColor"/></svg></button></div></div>
 </div></section>
 <section class="sec"><div class="wrap">
 <h2 class="h2">Ce que fait Fast lookup <em>CHnell, exactement</em></h2><p class="intro">Fast lookup CHnell est le concordancier bilingue de Corrext. Il recherche un mot, une expression ou un terme dans des segments alignés tirés des sources officielles suisses et de vos propres ressources, surligne le terme dans les deux langues et cite pour chaque occurrence son domaine et sa source. Tout ce qui suit a été observé dans l'application.</p><div class="tl txt t2"><div><b>Recherche</b><p><strong class="kf">Un mot, une expression ou un terme</strong>, saisi dans le champ « Search for a word, an expression, a term » et lancé par le bouton Search. Le terme est <strong class="kf">surligné dans les deux langues</strong> des résultats.</p></div><div><b>Paires de langues</b><p><strong class="kf">Allemand, français, italien et anglais</strong>, en source comme en cible, avec un bouton d'inversion et une croix d'effacement sur chaque sélecteur. Paire par défaut dans l'application : German → French.</p></div><div><b>Opérateurs</b><p>Guillemets "", signe - et or, rappelés sous le champ de recherche avec une icône d'information.</p></div><div><b>Résultats</b><p><strong class="kf">Segments alignés</strong> source et cible, terme surligné, domaine en capitales, <strong class="kf">source citée sur chaque ligne</strong>, lien Show in context et bouton Show more results. Verzugszins : plus de 300 résultats ; Bankgeheimnis : plus de 400 résultats.</p></div><div><b>Domaines</b><p><strong class="kf">Trente</strong> : Other, Banking &amp; Finance, Supervisory (FINMA), Fund Prospectuses, Company Law, Articles of Association, M&amp;A, Accounting, Contracts &amp; GTCs, Data Protection, Real Estate, Criminal Law, Litigation &amp; Enforcement, Arbitration, Employment &amp; Social Ins., Private Insurance, Family &amp; Inheritance, Patent Law, Intellectual Property, Tax &amp; Customs, Administrative Law, Constitution &amp; Publ. Internat. Law, Migration Law, Med &amp; Pharma, Telecom &amp; Transports, Environment, Education, Culture &amp; Tourism, Army &amp; Military, Legal Profession, Trade. Multi-sélection dans le panneau Advanced search.</p></div><div><b>Types de ressource</b><p>All resources, Shared resources ou Own resources : les <strong class="kf">ressources propres de votre organisation</strong> sont distinguées des jeux de données partagés.</p></div><div><b>Sources</b><p><strong class="kf">fedlex.admin.ch</strong>, <strong class="kf">Feuille fédérale (Bundesblatt)</strong>, estv.admin.ch, fedpol.admin.ch, rassemblées dans les jeux de données Neur.on. Filtre « Select sources » dans le panneau Advanced search.</p></div><div><b>Fast Lookup contextuel</b><p>Dans Traduction texte et document, surlignez un mot du texte source : le bouton Fast Lookup ouvre CHnell sur ce mot, en contexte, <strong class="kf">sans quitter la traduction</strong>.</p></div></div>

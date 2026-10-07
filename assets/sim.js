@@ -53,8 +53,19 @@
     });
     racine.addEventListener("mouseenter", function () { self.survol = true; });
     racine.addEventListener("mouseleave", function () { self.survol = false; });
+    /* Démo interactive : le premier geste réel du visiteur arrête la visite guidée */
+    if (racine.hasAttribute("data-interactif")) {
+      ["pointerdown", "keydown"].forEach(function (type) {
+        racine.addEventListener(type, function (e) {
+          if (!e.isTrusted || (e.target.closest && e.target.closest(".sim-pause"))) return;
+          self.arret = true;
+          /* un appui interrompu ne doit pas laisser de contrôle enfoncé */
+          [].forEach.call(self.scene.querySelectorAll(".press"), function (x) { x.classList.remove("press"); });
+        });
+      });
+    }
   }
-  Lecteur.prototype.actif = function () { return this.visible && !this.pause && !this.survol; };
+  Lecteur.prototype.actif = function () { return this.visible && !this.pause && !this.survol && !this.arret; };
   Lecteur.prototype.q = function (sel) { return sel ? this.scene.querySelector(sel) : this.scene; };
   Lecteur.prototype.qa = function (sel) { return [].slice.call(this.scene.querySelectorAll(sel)); };
   Lecteur.prototype.attendre = function (ms) {
@@ -63,6 +74,7 @@
     return new Promise(function (fin) {
       var reste = ms, avant = performance.now();
       function tic(t) {
+        if (self.arret) return;
         if (self.actif()) reste -= t - avant;
         avant = t;
         if (reste <= 0) fin(); else requestAnimationFrame(tic);
@@ -89,6 +101,22 @@
     var self = this, el = typeof sel === "string" ? this.q(sel) : sel;
     el.classList.add("press");
     return this.attendre(170).then(function () { el.classList.remove("press"); return self.attendre(140); });
+  };
+  /* Clic réel sur un contrôle de la démo (avec enfoncement visible) */
+  Lecteur.prototype.cliquer = function (sel) {
+    var self = this, el = typeof sel === "string" ? this.q(sel) : sel;
+    if (!el) return this.attendre(200);
+    return this.appui(el).then(function () { el.click(); return self.attendre(250); });
+  };
+  /* Choix d'une valeur dans un vrai sélecteur (événement change) */
+  Lecteur.prototype.valeur = function (sel, v) {
+    var self = this, el = typeof sel === "string" ? this.q(sel) : sel;
+    return this.appui(el).then(function () {
+      el.value = v;
+      el.dispatchEvent(new Event("change", { bubbles: true }));
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+      return self.attendre(250);
+    });
   };
   /* Révèle un texte mot par mot : fondu et léger glissement, 22 ms de décalage par mot (balises internes conservées) */
   Lecteur.prototype.mots = function (sel, texte, html) {
@@ -158,11 +186,14 @@
     var self = this, fn = SCENES[this.r.getAttribute("data-sim")];
     if (!fn) return;
     var tenue = +(this.r.getAttribute("data-tenue") || 2000);
+    var reinit = this.r.getAttribute("data-reinit") !== "non";
     (function boucle() {
-      self.scene.innerHTML = self.modele;
-      poserPilules(self.scene);
-      compter(self.scene);
-      fn(self).then(function () { if (!reduit) return self.attendre(tenue).then(boucle); });
+      if (reinit) {
+        self.scene.innerHTML = self.modele;
+        poserPilules(self.scene);
+        compter(self.scene);
+      }
+      fn(self).then(function () { if (!reduit && !self.arret) return self.attendre(tenue).then(boucle); });
     })();
   };
 
@@ -447,6 +478,104 @@
     return jouer(l, etapes.concat(finir(cr)));
   };
 
+  /* Vues par fonction : le HTML porte l'état final, la scène rejoue le parcours qui y mène */
+
+  /* Lot de fichiers : dépôt, barres de progression décalées, statut final de chaque fichier */
+  SCENES.lot = function (l) {
+    var cr = l.q(".cr"), fs = l.qa(".cr-file"), z = l.q(".vw-drop");
+    var etapes = [function () {
+      fs.forEach(function (f) { f.classList.remove("charge", "fait"); f.classList.add("cache"); });
+      return l.attendre(900);
+    }];
+    if (z) etapes.push(function () { return l.appui(z); });
+    fs.forEach(function (f) { etapes.push(function () { f.classList.remove("cache"); return l.attendre(280); }); });
+    etapes.push(function () { fs.forEach(function (f) { f.classList.add("charge"); }); return l.attendre(2700); });
+    fs.forEach(function (f, i) { etapes.push(function () { f.classList.add("fait"); return l.attendre(i < fs.length - 1 ? 450 : 2800); }); });
+    return jouer(l, etapes.concat(finir(cr)));
+  };
+
+  /* Devis : relecture interne, puis parcours personnalisé et niveau de relecture du fichier */
+  SCENES.devis = function (l) {
+    var cr = l.q(".cr"), o = l.qa(".vw-opt"), niv = l.q(".vw-niv");
+    var choisi = niv.querySelector(".cr-v").textContent, premier = niv.querySelector(".cr-menu span").getAttribute("data-v");
+    function marquer(v) {
+      niv.querySelector(".cr-v").textContent = v;
+      [].forEach.call(niv.querySelectorAll(".cr-menu span"), function (s) { s.classList.toggle("on", s.getAttribute("data-v") === v); });
+    }
+    return jouer(l, [
+      function () { cr.classList.add("interne"); o[0].classList.add("on"); o[1].classList.remove("on"); marquer(premier); return l.attendre(1500); },
+      function () { return l.appui(o[1]); },
+      function () { o[0].classList.remove("on"); o[1].classList.add("on"); cr.classList.remove("interne"); return l.attendre(1200); },
+      function () { return l.selection(".vw-niv", choisi); },
+      fixe(1300),
+      function () { return l.appui(".vw-go"); },
+      fixe(2600)
+    ].concat(finir(cr)));
+  };
+
+  /* Alternatives : l'étincelle ouvre le panneau, le pagineur passe d'un moteur à l'autre */
+  SCENES.alts = function (l) {
+    var cr = l.q(".cr"), d = EX[cr.getAttribute("data-ex")], n = d.out.en.alt.length;
+    function alt(i) {
+      return function () {
+        var a = l.q(".cr-alt"), e = l.q(".cr-alt-e");
+        a.classList.add("sort");
+        e.classList.remove("on");
+        return l.attendre(230).then(function () {
+          l.q(".cr-pgn").textContent = (i + 1) + " / " + n;
+          e.textContent = d.out.en.alt[i].e;
+          e.classList.add("on");
+          return l.mots(a, d.out.en.alt[i].t);
+        });
+      };
+    }
+    var etapes = [
+      function () { cr.classList.remove("alts"); return l.attendre(1300); },
+      function () { return l.appui(".cr-spark"); },
+      function () { cr.classList.add("alts"); return l.attendre(800); },
+      alt(0), fixe(2600)
+    ];
+    if (n > 1) etapes = etapes.concat([function () { return l.appui(".cr-dn"); }, alt(1), fixe(2600), function () { return l.appui(".cr-up"); }, alt(0), fixe(1800)]);
+    return jouer(l, etapes.concat(finir(cr)));
+  };
+
+  /* Analyse d'un fichier : dépôt, analyse, puis pages standard, langue et catégorie détectées */
+  SCENES.analyse = function (l) {
+    var cr = l.q(".cr"), c = l.q(".vw-carte");
+    return jouer(l, [
+      function () { cr.classList.remove("fini"); c.classList.add("cache"); return l.attendre(900); },
+      function () { c.classList.remove("cache"); return l.attendre(2000); },
+      function () { cr.classList.add("fini"); return l.attendre(3600); }
+    ].concat(finir(cr)));
+  };
+
+  /* Commande d'extrait : le niveau de certification change, le récapitulatif suit */
+  SCENES.extrait = function (l) {
+    var cr = l.q(".cr"), cs = l.qa(".vw-niv-c"), dd = l.q(".vw-ord-n");
+    var fin = cs.filter(function (c) { return c.classList.contains("on"); })[0] || cs[cs.length - 1];
+    function choisir(c, tenue) {
+      return function () {
+        return l.appui(c).then(function () {
+          cs.forEach(function (x) { x.classList.toggle("on", x === c); });
+          dd.classList.add("sort");
+          return l.attendre(230);
+        }).then(function () {
+          dd.textContent = c.querySelector("b").textContent;
+          dd.classList.remove("sort");
+          return l.attendre(tenue);
+        });
+      };
+    }
+    return jouer(l, [
+      function () { cs.forEach(function (x) { x.classList.remove("on"); }); dd.textContent = ""; return l.attendre(1100); },
+      choisir(cs[0], 1500), choisir(cs[1], 1500), choisir(fin, 3000)
+    ].concat(finir(cr)));
+  };
+
+  /* Registre public : une page peut ajouter sa scène (scripts chargés après sim.js) */
+  window.SIM = { enregistrer: function (nom, fn) { SCENES[nom] = fn; }, suite: suite, fixe: fixe, jouer: jouer, reduit: reduit };
+
+  function demarrer() {
   var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
     es.forEach(function (e) { e.target.__lecteur.visible = e.isIntersecting; });
   }, { threshold: 0.4 }) : null;
@@ -459,4 +588,7 @@
     if (io) io.observe(r); else l.visible = true;
     l.lancer();
   });
+  }
+  /* DOMContentLoaded tombe après tous les scripts différés : les scènes propres à une page sont alors enregistrées */
+  if (document.readyState === "complete") demarrer(); else document.addEventListener("DOMContentLoaded", demarrer);
 })();

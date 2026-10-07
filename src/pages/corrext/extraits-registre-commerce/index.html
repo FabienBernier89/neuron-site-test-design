@@ -3,6 +3,8 @@ title: Extraits du registre du commerce traduits et certifiés
 description: Traduction certifiée d'extraits du registre du commerce suisse, commandée en ligne : certification Corrext, notariée ou apostillée, plus de 30 langues.
 menu: corrext
 gabarit: standard
+scripts: visite-extraits-registre-commerce.js
+styles: skin-extraits-registre-commerce.css
 -->
 <style>/* ============ DÉMO · parcours de commande auszug-hr.ch (préfixe .cxr-, couleurs via --cx-*) ============ */
 .cxr [hidden]{display:none!important}
@@ -114,7 +116,7 @@ gabarit: standard
 </div>
 </section>
 <section class="sec sec-st" id="demo"><div class="wrap">
-<div class="ech" data-ech="1176x720"><div class="st" role="img" aria-label="Démonstration de l'interface Corrext" style="width:1176px;height:720px"><div class="st-f"><div class="fen"><div class="fen-b" aria-hidden="true"><i></i><i></i><i></i><span>Corrext</span></div><div class="fen-c" data-scene data-ui><div class="cx-zone"><div class="cx cxr" id="cx" aria-label="Démonstration du parcours de commande auszug-hr.ch, service Corrext">
+<div class="ech" data-ech="1176x760"><div class="st" data-sim="visite-extraits-registre-commerce" data-reinit="non" data-interactif data-tenue="0" aria-label="Démonstration de l'interface Corrext" style="width:1176px;height:760px"><div class="st-f"><div class="fen"><div class="fen-b" aria-hidden="true"><i></i><i></i><i></i><span>Corrext</span></div><div class="fen-c" data-scene data-ui><div class="cx-zone"><div class="cx cxr" id="cx" aria-label="Démonstration du parcours de commande auszug-hr.ch, service Corrext">
       <div class="cx-top">
         <span class="cx-logo"><img src="{{ROOT}}assets/img/corrext-logo.svg" alt="Corrext" class="cx-brand"></span>
         <span class="home">Commercial register extract</span>
@@ -234,7 +236,7 @@ gabarit: standard
         </div>
         <p class="cx-note">Démo : parcours simulé, aucune donnée n'est transmise.</p>
       </div>
-    </div></div></div></div></div></div></div>
+    </div></div></div></div></div><button type="button" class="sim-pause" aria-pressed="false" aria-label="Mettre en pause la démonstration" data-libre><svg class="ic-p" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 1.5v7M7.5 1.5v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="ic-l" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.8v6.4L8.4 5z" fill="currentColor"/></svg></button></div></div>
 </div></section>
 <section class="sec"><div class="wrap">
 <h2 class="h2">Ce que couvre le <em>service, exactement</em></h2><p class="intro">Extraits du registre du commerce est le service en ligne de Corrext qui délivre la traduction certifiée d'un extrait du registre du commerce suisse. La société se recherche par nom ou par IDE ; la langue cible, le niveau de certification, le mode de livraison et le délai se choisissent à la commande, entièrement en ligne sur auszug-hr.ch.</p><div class="tl txt t2"><div><b>Recherche</b><p>Par <strong class="kf">nom de société</strong> ou par <strong class="kf">IDE</strong>, à la première étape de la commande. La langue cible se choisit au même endroit, une fois la société sélectionnée.</p></div><div><b>Langues</b><p><strong class="kf">Plus de 30 langues cibles</strong>. Allemand, français, italien, anglais et espagnol en tête du sélecteur, puis les autres langues disponibles sur la plateforme.</p></div><div><b>Niveau 1 · Standard Corrext Certification</b><p>Traduction accompagnée d'un certificat <strong class="kf">signé et tamponné par Corrext</strong>. En règle générale : usage interne, partenaires et tiers privés.</p></div><div><b>Niveau 2 · Notarized Certification</b><p>Traduction certifiée <strong class="kf">authentifiée par un notaire suisse</strong>. En règle générale : autorités et tribunaux suisses.</p></div><div><b>Niveau 3 · Notarized & Apostilled Certification</b><p>Certification notariée, puis <strong class="kf">apostille</strong> délivrée par la Chancellerie d'État selon la <strong class="kf">Convention de La Haye</strong> du 5 octobre 1961. En règle générale : autorités étrangères d'un État partie à la Convention.</p></div><div><b>Livraison</b><p>Par <strong class="kf">e-mail (PDF)</strong>, ou e-mail et <strong class="kf">exemplaire papier</strong> envoyé par poste ou par coursier. L'adresse postale est saisie à la commande.</p></div><div><b>Délai</b><p><strong class="kf">Standard ou express</strong>, pour la Suisse et l'international. Le délai se choisit à la quatrième étape et s'affiche avant validation de la commande.</p></div><div><b>Qui traduit</b><p>Des <strong class="kf">traducteurs juridiques professionnels</strong> spécialisés dans le corporate housekeeping, assistés des modèles de langage que l'équipe Corrext de juristes-linguistes et de data scientists a entraînés sur les extraits du registre du commerce suisse.</p></div><div><b>Confidentialité</b><p>Infrastructure suisse <strong class="kf">certifiée ISO 27001</strong>. Traitement conforme à la <strong class="kf">LPD suisse et au RGPD</strong>.</p></div></div>

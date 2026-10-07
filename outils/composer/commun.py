@@ -3,11 +3,13 @@ import re
 from source import *
 from comp import *
 import app as A
+import vues as V
 
 C = "{{ROOT}}contact/"
 
 
-def lignes_features(sec, titre_fen="Corrext", depart=0):
+def lignes_features(sec, titre_fen="Corrext", depart=0, visuels=None):
+    """visuels : liste facultative de (contenu, sim, hauteur) qui remplace les maquettes du site actuel."""
     lignes = []
     for i, f in enumerate(blocs(sec, "div", "feature")):
         h3 = bloc(f, "h3")
@@ -20,7 +22,11 @@ def lignes_features(sec, titre_fen="Corrext", depart=0):
         a = blocs(f, "a", "feat-link")
         lien = (txt(a[0]), re.search(r'href="([^"]+)"', a[0]).group(1)) if a else None
         win = blocs(f, "div", "win")
-        vis = scene(764, 515, '<div class="maq">' + win[0] + "</div>", titre=titre_fen, label=pill or titre) if win else ""
+        if visuels and i < len(visuels) and visuels[i]:
+            contenu, sim, haut = visuels[i]
+            vis = scene(764, haut, contenu, sim=sim, titre=titre_fen, curseur=False, label=pill or titre)
+        else:
+            vis = scene(764, 515, '<div class="maq">' + win[0] + "</div>", titre=titre_fen, label=pill or titre) if win else ""
         lignes.append(ft(pill, titre, texte, vis, lien, inv=(i + depart) % 2 == 1, liste=liste))
     return "".join(lignes)
 
@@ -52,6 +58,29 @@ def textes_demo():
                  "reset": txt(bloc(reph, "button", "rst")), "apply": txt(bloc(reph, "button", attr='id="cxSetApply"')),
                  "ph": re.search(r'placeholder="([^"]+)"', bloc(reph, "textarea")).group(1)},
     }
+
+
+NIVEAUX_RELECTURE = ["Relecture légère (traducteur juridique)", "Relecture complète (traducteur juridique)", "Double relecture et traduction certifiée"]
+
+
+def fichiers_demo(*cles):
+    """Fichiers de la démo publiée (onglets File translation et PDF to Word), rendus comme traduits."""
+    T = textes_demo()
+    return [dict(T[c], run=T["fichier"]["run"], fin=T["fichier"]["fin"]) for c in cles]
+
+
+def textes_extrait():
+    """Libellés de la démo « Extraits du registre du commerce » (étapes, niveaux, récapitulatif)."""
+    from source import charger as _ch
+    cx = bloc(_ch("corrext/extraits-registre-commerce/"), "div", attr='id="cx"')
+    st = bloc(cx, "ol", attr='id="cxrSteps"')
+    etapes = [txt(x) for x in re.findall(r'<span class="l">(.*?)</span>', st, re.S)]
+    nivs = bloc(cx, "div", attr='id="cxrLevels"')
+    niveaux = [(brut(interne(bloc(c, "b"))), brut(blocs(c, "span")[-1])) for c in blocs(nivs, "button", "cxr-card")]
+    res = bloc(cx, "div", attr='id="cxrRes"')
+    societe = txt(bloc(bloc(res, "span", "cxr-co"), "b"))
+    ide = brut(blocs(bloc(res, "span", "cxr-co"), "span")[-1])
+    return etapes, niveaux, societe, ide
 
 
 def faq_section(t):

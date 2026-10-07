@@ -1,0 +1,126 @@
+/* Habillage de la démo Fast lookup CHnell au niveau de rendu des écrans Corrext animés (.cr).
+   Portée : .cx-zone uniquement. Mouvements par transform et opacity, courbe de décélération commune.
+   Classes posées par la visite guidée (assets/visite-chnell.js) : cxv-vide, cxv-focus, cxv-ferme, cxv-libre, --cxv-y. */
+
+/* Palette et réglages locaux (redéclarés sur .cx, qui porte ses propres variables) */
+.cx-zone,
+.cx-zone .cx{
+  --cx-ink:#1e1f3b;--cx-text:#3a3c56;--cx-muted:#6c7089;--cx-ph:#6c7089;--cx-line:rgba(30,31,59,.09);--cx-bg:#f7f8fc;
+  --cx-indigo:#3b34c9;--cx-indigo-d:#2f29a8;--cx-indigo-soft:#efeefc;--cx-hl:#fff2a8;
+  --cx-ease:cubic-bezier(.22,.8,.24,1);--cx-r:8px;--cx-r-ctl:6px;
+  --cx-ombre:0 1px 2px rgba(30,31,59,.06);
+  --cx-ombre-menu:0 8px 30px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);
+  --cx-anneau:0 0 0 3px rgba(59,52,201,.12)}
+.cx-zone{position:relative;background:#fff;font:400 13px/1.5 "Inter",var(--ui);color:var(--cx-text)}
+.cx-zone .cx{font:400 13px/1.5 "Inter",var(--ui);color:var(--cx-text)}
+.cx-zone .cx button,.cx-zone .cx input,.cx-zone .cx select{font-family:"Inter",var(--ui)}
+
+/* Cadrage de la visite : le contenu glisse verticalement (transform), la page ne défile jamais */
+.cx-zone > .cx-ex,.cx-zone > .cx{transform:translateY(calc(var(--cxv-y,0px) * -1));transition:transform .45s var(--cx-ease)}
+/* Le visiteur prend la main : cadrage converti en défilement interne, sans saut */
+.cx-zone.cxv-libre{overflow-y:auto;scrollbar-width:none}
+.cx-zone.cxv-libre::-webkit-scrollbar{display:none}
+.cx-zone.cxv-libre > .cx-ex,.cx-zone.cxv-libre > .cx{transform:none;transition:none}
+
+/* Bandeau des requêtes de démonstration */
+.cx-zone .cx-ex{gap:8px;margin:0;padding:10px 20px;border-bottom:1px solid var(--cx-line);background:var(--cx-bg)}
+.cx-zone .cx-ex span{margin-right:2px;font:400 12.5px/18px "Inter",var(--ui);color:var(--cx-muted)}
+.cx-zone .cx-ex button{padding:5px 12px;border:1px solid var(--cx-line);border-radius:999px;background:#fff;box-shadow:var(--cx-ombre);font:500 12.5px/18px "Inter",var(--ui);color:var(--cx-ink);transition:transform .12s var(--cx-ease)}
+.cx-zone .cx-ex button:hover{border-color:rgba(59,52,201,.3)}
+.cx-zone .cx-ex button.on{border-color:var(--cx-ink);background:var(--cx-ink);color:#fff}
+
+/* Barre de l'application */
+.cx-zone .cx-top{gap:18px;height:48px;padding:0 20px;border-bottom:1px solid var(--cx-line)}
+.cx-zone .cx-logo .cx-brand{height:24px}
+.cx-zone .cx-top .home{font:500 13px/19.5px "Inter",var(--ui);color:var(--cx-indigo)}
+.cx-zone .cx-top .bell{width:28px;height:28px;color:var(--cx-muted)}
+.cx-zone .cx-top .bell svg{width:16px;height:16px}
+.cx-zone .cx-avatar{width:28px;height:28px;background:var(--cx-indigo-soft);font:600 12px/1 "Inter",var(--ui);color:var(--cx-indigo)}
+
+/* Page CHnell (la scène est dessinée à taille fixe puis réduite : mise en page de bureau à toute largeur) */
+.cx-zone .cx-chnell.cxl-page{padding:18px 24px 22px}
+.cx-zone .cx-chnell .head{gap:2px;margin-bottom:14px}
+.cx-zone .cx-chnell .logo .cx-brand{height:34px}
+.cx-zone .cx-chnell .pow{font:400 12px/18px "Inter",var(--ui);color:var(--cx-muted)}
+
+/* Langues */
+.cx-zone .cxl-langs{grid-template-columns:1fr auto 1fr;gap:10px;max-width:600px;margin:0 auto 12px}
+.cx-zone .cxl-selwrap .cx-sel,.cx-zone .cxl-srcsel .cx-sel{height:38px;padding-top:0;padding-bottom:0;border:1px solid var(--cx-line);border-radius:var(--cx-r-ctl);background-color:#fff;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236c7089' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");box-shadow:var(--cx-ombre);font:500 13px/19.5px "Inter",var(--ui);color:var(--cx-ink)}
+.cx-zone .cxl-x{color:var(--cx-muted);border-radius:var(--cx-r-ctl);transition:transform .12s var(--cx-ease)}
+.cx-zone .cxl-x:hover{background:var(--cx-indigo-soft);color:var(--cx-indigo)}
+.cx-zone .cxl-swap{width:38px;height:38px;margin:0;border:1px solid var(--cx-line);border-radius:var(--cx-r-ctl);box-shadow:var(--cx-ombre);color:var(--cx-indigo);transition:transform .12s var(--cx-ease)}
+.cx-zone .cxl-swap:hover{background:var(--cx-indigo-soft)}
+
+/* Recherche avancée */
+.cx-zone .cxl-adv{gap:6px;margin:0 0 10px;padding:4px 0;font:500 13px/19.5px "Inter",var(--ui);color:var(--cx-indigo);transform-origin:0 50%;transition:transform .12s var(--cx-ease)}
+.cx-zone .cxl-adv svg{transition:transform .3s var(--cx-ease)}
+.cx-zone .cxl-advp{margin-bottom:14px;padding:14px 16px 16px;border:1px solid var(--cx-line);border-radius:var(--cx-r);background:var(--cx-bg);animation:cxv-in .4s var(--cx-ease) backwards}
+.cx-zone .cxl-advp.cxv-ferme{opacity:0;transform:translateY(-4px);transition:opacity .2s ease,transform .25s var(--cx-ease)}
+.cx-zone .cxl-advp .cx-h4{margin:0 0 8px;font:600 12.5px/18px "Inter",var(--ui);color:var(--cx-ink)}
+.cx-zone .cxl-radios{gap:18px;margin-bottom:12px}
+.cx-zone .cxl-radios label{font:400 13px/19.5px "Inter",var(--ui);color:var(--cx-ink)}
+.cx-zone .cxl-advp .cx-chips{gap:6px;margin-bottom:12px}
+.cx-zone .cx-chip{padding:4px 11px;border:1px solid var(--cx-line);border-radius:999px;background:#fff;box-shadow:var(--cx-ombre);font:500 12px/18px "Inter",var(--ui);color:var(--cx-text);transition:transform .12s var(--cx-ease)}
+.cx-zone .cx-chip:hover{border-color:rgba(59,52,201,.3)}
+.cx-zone .cxl-advp .cx-chip.on{border-color:rgba(59,52,201,.3);background:var(--cx-indigo-soft);color:var(--cx-indigo)}
+.cx-zone .cxl-srcsel{max-width:300px}
+.cx-zone .cxl-srcsel .cx-sel{padding-right:32px}
+
+/* Champ de recherche */
+.cx-zone .cxl-search{flex-direction:row;gap:10px;margin-bottom:8px}
+.cx-zone .cxl-input{height:40px;padding:0 12px;border:1px solid var(--cx-line);border-radius:var(--cx-r-ctl);box-shadow:var(--cx-ombre);font:400 13.5px/1.5 "Inter",var(--ui);color:var(--cx-ink);transition:transform .12s var(--cx-ease)}
+.cx-zone .cxl-input::placeholder{color:var(--cx-ph);opacity:1}
+.cx-zone .cxl-input:focus,.cx-zone .cxl-input.cxv-focus{outline:none;border-color:rgba(59,52,201,.55);box-shadow:var(--cx-anneau)}
+.cx-zone .cx-btn{height:40px;padding:0 18px;border-radius:var(--cx-r-ctl);background:var(--cx-indigo);box-shadow:var(--cx-ombre);font:600 13px/1 "Inter",var(--ui);transition:transform .12s var(--cx-ease)}
+.cx-zone .cx-btn:hover{background:var(--cx-indigo-d)}
+.cx-zone .cxl-ops{gap:6px;margin:0 0 14px;font:400 12px/18px "Inter",var(--ui);color:var(--cx-muted)}
+
+/* Résultats : segments alignés, terme surligné, domaine et source sur chaque ligne */
+.cx-zone #cxlRes{transition:opacity .3s ease,transform .45s var(--cx-ease)}
+.cx-zone.cxv-vide #cxlRes{opacity:0;transform:translateY(6px);pointer-events:none}
+.cx-zone .cx-chnell .cols{grid-template-columns:1fr 1fr;border:1px solid var(--cx-line);border-radius:var(--cx-r);background:#fff;box-shadow:var(--cx-ombre)}
+.cx-zone .cx-chnell .colh{padding:10px 14px;border-bottom:1px solid var(--cx-line);font:400 12.5px/18px "Inter",var(--ui);color:var(--cx-ink)}
+.cx-zone .cx-chnell .colh i{font-weight:500}
+.cx-zone .cx-chnell .colh small{font:400 12px/18px "Inter",var(--ui);color:var(--cx-muted)}
+.cx-zone .cx-chnell .colh.r,.cx-zone .cx-chnell .cell.r{background:var(--cx-bg)}
+.cx-zone .cx-chnell .cell{padding:12px 14px 10px;font:400 12.5px/1.55 "Inter",var(--ui);color:var(--cx-ink)}
+.cx-zone .cx-chnell .cell.r{color:var(--cx-text)}
+.cx-zone .cx-chnell .cell mark{padding:0 2px;border-radius:2px;background:var(--cx-hl);color:var(--cx-ink)}
+.cx-zone .cx-chnell .meta{margin:0;padding:0 14px 12px;align-items:flex-end;gap:12px;border-bottom:1px solid var(--cx-line);font:400 12px/18px "Inter",var(--ui);text-transform:none;letter-spacing:0;color:var(--cx-muted)}
+.cx-zone .cx-chnell .meta > * + *::before{content:none}
+.cx-zone .cx-chnell .meta .dom{margin-bottom:2px;font:600 12px/18px "Inter",var(--ui);letter-spacing:.04em;color:var(--cx-indigo)}
+.cx-zone .cxl-page .meta button{font:500 12px/18px "Inter",var(--ui);color:var(--cx-indigo);transition:transform .12s var(--cx-ease)}
+.cx-zone .cxl-page .cols > .meta:nth-last-child(2){border-bottom:0}
+.cx-zone .cxl-ctxline{padding:8px 14px;font:400 12px/18px "Inter",var(--ui);color:var(--cx-ink);background:var(--cx-indigo-soft)}
+.cx-zone .cxl-empty{padding:28px 14px;font:400 13px/19.5px "Inter",var(--ui);color:var(--cx-muted)}
+.cx-zone .cxl-page .more button{padding:10px;border-radius:var(--cx-r);font:500 12.5px/18px "Inter",var(--ui);color:var(--cx-indigo);transition:transform .12s var(--cx-ease)}
+.cx-zone .cxl-page .more button:hover{background:var(--cx-bg)}
+.cx-zone .cx-note{padding:10px 0 0;font:400 12px/18px "Inter",var(--ui);color:var(--cx-muted)}
+
+/* Entrées : les lignes de résultats arrivent l'une après l'autre (fondu et glissement, 50 ms de décalage) */
+@keyframes cxv-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.cx-zone .cx-chnell .cols > *{animation:cxv-in .45s var(--cx-ease) backwards}
+.cx-zone .cx-chnell .cols > :nth-child(n+3){animation-delay:50ms}
+.cx-zone .cx-chnell .cols > :nth-child(n+5){animation-delay:100ms}
+.cx-zone .cx-chnell .cols > :nth-child(n+7){animation-delay:150ms}
+.cx-zone .cx-chnell .cols > :nth-child(n+9){animation-delay:200ms}
+.cx-zone .cx-chnell .cols > :nth-child(n+11){animation-delay:250ms}
+.cx-zone .cx-chnell .cols > :nth-child(n+13){animation-delay:300ms}
+.cx-zone .cxl-page .more{animation:cxv-in .45s var(--cx-ease) .25s backwards}
+.cx-zone .cx-note{animation:cxv-in .4s var(--cx-ease) backwards}
+
+/* Squelette de recherche : barres douces balayées par un reflet (transform) */
+.cx-zone .cxl-shim{padding:16px 14px 6px}
+.cx-zone .cx-shim{position:relative;height:9px;margin:6px 0 11px;overflow:hidden;border-radius:5px;background:#eef0f7;animation:cxv-in .3s ease backwards}
+.cx-zone .cx-shim::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);animation:cxv-sk 1.15s ease-in-out infinite}
+@keyframes cxv-sk{to{transform:translateX(100%)}}
+
+/* Appui sur un contrôle (classe .press posée par le lecteur) */
+.cx-zone .press{transform:scale(.96)}
+.cx-zone .cxl-input.press,.cx-zone .cx-sel.press{transform:scale(.98)}
+.cx-zone .cxl-x.press{transform:translateY(-50%) scale(.9)}
+.cx-zone .cx-sel{transition:transform .12s var(--cx-ease)}
+
+@media (prefers-reduced-motion:reduce){
+  .cx-zone,.cx-zone *,.cx-zone *::before,.cx-zone *::after{transition:none!important;animation:none!important}
+}

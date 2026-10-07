@@ -7,8 +7,14 @@ out.append(hero("Cabinets d'avocats.", "Traduire un dossier sans jamais le sorti
 out.append(distinctions())
 wh = bloc(t, "section", "who")
 lignes = []
-for i, (r, cle) in enumerate(zip(blocs(wh, "article", "sc-row"), ["co", "lb", "ldip"])):
-    vis = scene(764, 360, A.fragment_travail(esc(EX[cle]["src"]), esc(EX[cle]["out"]["en"]["main"])), titre=EX[cle]["label"], label=EX[cle]["label"])
+d = EX["ldip"]
+VIS = [  # contentieux : lot de pièces ; transactions : devis et relecture complète ; arbitrage : alternatives par moteur
+    (764, 444, V.vue_fichiers(fichiers_demo("pdf", "fichier")), "lot", "Traduction d'un lot de fichiers"),
+    (764, 476, V.vue_devis("Darlehensvertrag_2026.docx", "DE → FR", NIVEAUX_RELECTURE, NIVEAUX_RELECTURE[1]), "devis", "Devis avec relecture complète par un traducteur juridique"),
+    (764, 476, V.vue_alternatives("ldip", esc(d["src"]), esc(d["out"]["en"]["main"]), esc(d["out"]["en"]["alt"][0]["t"]), d["out"]["en"]["alt"][0]["e"], len(d["out"]["en"]["alt"])), "alts", "Alternatives attribuées à leur moteur"),
+]
+for i, (r, (w, h, ui, sim, lab)) in enumerate(zip(blocs(wh, "article", "sc-row"), VIS)):
+    vis = scene(w, h, ui, sim=sim, curseur=False, label=lab)
     lignes.append(ft(txt(bloc(r, "span", "sc-a")), brut(bloc(r, "h3")), brut(bloc(r, "p")), vis, inv=i % 2 == 1))
 out.append(section(h2(txt(bloc(wh, "h2")), "gagne des heures") + "".join(lignes)))
 out.append(gov_bento(t, "outil de traduction en ligne"))
@@ -20,7 +26,7 @@ for a in blocs(sb, "a", "jv-tool"):
     titre_fen = txt(bloc(bloc(win, "div", "jv-bar"), "b"))
     reste = a.replace(win, "")
     cs.append((brut(bloc(reste, "b")), brut(bloc(reste, "span")), (txt(bloc(reste, "em")), re.search(r'href="([^"]+)"', a).group(1)),
-               scene(355, 199, '<div class="maq">' + win + "</div>", titre=titre_fen, label=titre_fen)))
+               scene(355, 199, V.vignette(win), titre=titre_fen, label=titre_fen)))
 out.append(section(h2(txt(bloc(sb, "h2")), "les plus utilisés") + cartes(cs)))
 tm = bloc(t, "section", "temo")
 lk = EX["co"]["lookup"]

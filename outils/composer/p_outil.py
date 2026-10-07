@@ -14,11 +14,11 @@ lead = bloc(fa, "div", "facts-lead")
 faits = {txt(bloc(f, "b")): brut(bloc(f, "p")) for f in blocs(fa, "div", "fact")}
 SC = [("Text translation", "traduire", A.fragment_travail(), "Corrext"),
       ("Moteurs", "sensible", A.fragment_moteurs(esc(EX["co"]["src"]), esc(EX["co"]["out"]["en"]["main"])), "Corrext"),
-      ("Alternatives", "moteurs", A.fragment_travail(esc(EX["ldip"]["src"]), esc(EX["ldip"]["out"]["en"]["main"])), "Corrext"),
+      ("Alternatives", "alts", V.vue_alternatives("ldip", esc(EX["ldip"]["src"]), esc(EX["ldip"]["out"]["en"]["main"]), esc(EX["ldip"]["out"]["en"]["alt"][0]["t"]), EX["ldip"]["out"]["en"]["alt"][0]["e"], len(EX["ldip"]["out"]["en"]["alt"])), "Corrext"),
       ("Langues", "langues", A.fragment_travail(esc(EX["lb"]["src"]), esc(EX["lb"]["out"]["en"]["main"])), "Corrext")]
 lignes = []
 for i, (cle, sim, ui, titre) in enumerate(SC):
-    lignes.append(ft(None, cle, faits.pop(cle), scene(764, 400, ui, sim=sim, titre=titre, curseur=False, label=cle), inv=i % 2 == 1))
+    lignes.append(ft(None, cle, faits.pop(cle), scene(764, 476 if sim == "alts" else 400, ui, sim=sim, titre=titre, curseur=False, label=cle), inv=i % 2 == 1))
 liens_lead = "".join(f'<a class="lien" href="{re.search(r"href=\"([^\"]+)\"", a).group(1)}">{txt(a)}</a> ' for a in blocs(lead, "a", "feat-link"))
 out.append(section(h2(txt(bloc(lead, "h2")), "exactement") + f'<p class="intro">{brut(bloc(lead, "p"))}</p>' + "".join(lignes)))
 out.append(section(tuiles([(None, k, v) for k, v in faits.items()], "tl txt t2")))

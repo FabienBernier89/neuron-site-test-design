@@ -3,6 +3,8 @@ import re
 from source import *
 from comp import *
 from app import app_corrext
+from commun import fichiers_demo
+import vues as V
 
 
 def app_ecran():
@@ -53,7 +55,9 @@ for i, f in enumerate(blocs(pr, "div", "feature")):
     a = bloc(f, "a", "feat-link")
     lien = (txt(a), re.search(r'href="([^"]+)"', a).group(1))
     maq = '<div class="maq">' + bloc(f, "div", "win") + "</div>"
-    lignes.append(ft(pill, titre, texte, scene(764, 515, maq, label=pill), lien, inv=i % 2 == 1, liste=liste))
+    vis = (scene(764, 444, V.vue_fichiers(fichiers_demo("fichier", "pdf")), sim="lot", curseur=False, label=pill)
+           if "doc-body" in maq else scene(764, 515, maq, label=pill))
+    lignes.append(ft(pill, titre, texte, vis, lien, inv=i % 2 == 1, liste=liste))
 out.append(section(h2(txt(bloc(tete, "h2")), "seule plateforme") + f'<p class="intro">{brut(bloc(tete, "p"))}</p>' + "".join(lignes)))
 
 # 5. Agents : bento, chiffres d'économies dans les petites tuiles
