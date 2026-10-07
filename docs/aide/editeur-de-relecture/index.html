@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="systeme">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Éditeur de relecture · Centre d'aide · Neur.on</title>
+<meta name="description" content="Relire un fichier dans l'éditeur de Corrext, utiliser le panneau latéral, travailler dans Word, faire apprendre la mémoire, valider et récupérer la traduction.">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"systeme"}catch(e){}</script>
+<link rel="icon" href="../../assets/img/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;1,8..60,300&display=swap">
+<link rel="stylesheet" href="../../assets/site.css?v=91bce176">
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+<p class="ruban" data-libre>Version de test de design du site Neur.on, non indexée.</p>
+<header class="hd" id="hd">
+<div class="wrap hd-in">
+<a class="hd-logo" href="../../" aria-label="Neur.on, retour à l'accueil"><img class="logo-c" src="../../assets/img/neuron-logo.png" alt="Neur.on" width="92" height="28"><img class="logo-s" src="../../assets/img/neuron-logo-blanc.png" alt="" width="92" height="28"></a>
+<nav class="hd-nav" aria-label="Navigation principale">
+<button type="button" class="hd-i" aria-expanded="false" aria-controls="mg-corrext" data-mg>Corrext<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<button type="button" class="hd-i" aria-expanded="false" aria-controls="mg-solutions" data-mg>Solutions<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<a class="hd-i" href="../../lexmachina/">LexMachina</a>
+<button type="button" class="hd-i actif" aria-expanded="false" aria-controls="mg-ressources" data-mg>Ressources<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+</nav>
+<div class="hd-cta"><a class="btn btn-s" href="../../contact/">Demander une démo</a><button type="button" class="hd-burger" id="hdBurger" aria-expanded="false" aria-controls="mm" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button></div>
+</div>
+<div class="mg" id="mg-corrext" hidden>
+<div class="wrap mg-in">
+<div class="mg-col"><p class="mg-h">La plateforme</p>
+<a class="mg-a" href="../../corrext/"><b>Corrext, le poste de commande</b><em>Projets, devis, ressources et droits dans un seul environnement suisse</em></a>
+<a class="mg-a" href="../../lexmachina/"><b>LexMachina</b><em>Le moteur entraîné sur le droit et la finance suisses</em></a>
+<a class="mg-a" href="../../securite-souverainete/"><b>Sécurité et souveraineté</b><em>Où vos données sont stockées, traitées et par quel moteur</em></a>
+<a class="mg-a" href="../../corrext/api-on-premises/"><b>API et on-premises</b><em>Intégration à vos DMS, intranets et workflows</em></a>
+</div>
+<div class="mg-col"><p class="mg-h">Les outils</p>
+<a class="mg-a" href="../../corrext/traduction-texte-et-document/"><b>Traduction texte et document</b><em>Texte, fichiers, PDF vers Word, réécriture</em></a>
+<a class="mg-a" href="../../corrext/gestion-de-projet/"><b>Gestion de projet</b><em>Relecture humaine à la carte, devis et délai instantanés</em></a>
+<a class="mg-a" href="../../corrext/editeur-de-relecture/"><b>Éditeur de relecture</b><em>Relecture phrase par phrase, corrections gardées en mémoire</em></a>
+<a class="mg-a" href="../../corrext/chnell/"><b>Fast lookup CHnell</b><em>Le concordancier du droit suisse, 30 domaines</em></a>
+<a class="mg-a" href="../../corrext/extraits-registre-commerce/"><b>Extraits du registre</b><em>Traduction certifiée, notariée, apostillée</em></a>
+</div>
+<div class="mg-col"><p class="mg-h">Aller plus loin</p>
+<a class="mg-a" href="../../niveaux-de-qualite/"><b>Quatre niveaux de qualité</b><em>De la traduction machine à la certification</em></a>
+<a class="mg-a" href="../../langues-et-formats/"><b>Langues et formats</b><em>30 langues, quatre natives, tous vos formats bureautiques</em></a>
+<a class="mg-a" href="../../aide/"><b>Centre d'aide</b><em>Comment faire, étape par étape</em></a>
+</div>
+<a class="mg-card" href="../../corrext/traduction-texte-et-document/#demo"><span class="mg-mini" aria-hidden="true"><span class="mg-mw"><i></i><i></i><i></i></span></span><b>Essayez sans inscription</b><span class="mg-t">L'interface de Corrext, reproduite à l'identique sur trois extraits de droit suisse.</span><span class="lien">Ouvrir la démo en direct</span></a>
+</div>
+</div>
+<div class="mg" id="mg-solutions" hidden>
+<div class="wrap mg-in">
+<div class="mg-col"><p class="mg-h">Par métier</p>
+<a class="mg-a" href="../../solutions/cabinets-avocats/"><b>Cabinets d'avocats</b></a>
+<a class="mg-a" href="../../solutions/banques-finance/"><b>Banques et finance</b></a>
+<a class="mg-a" href="../../solutions/directions-juridiques/"><b>Directions juridiques et Legal Ops</b></a>
+<a class="mg-a" href="../../solutions/autorites-administration/"><b>Autorités et administration</b></a>
+<a class="mg-a" href="../../solutions/fiduciaires-conseil/"><b>Fiduciaires et conseil</b></a>
+<a class="mg-a" href="../../solutions/editeurs-legaltech/"><b>LegalTechs et éditeurs</b></a>
+</div>
+<div class="mg-col"><p class="mg-h">Par domaine du droit</p>
+<a class="mg-a" href="../../traduction/contrats/"><b>Contrats</b></a>
+<a class="mg-a" href="../../traduction/droit-des-societes/"><b>Droit des sociétés</b></a>
+<a class="mg-a" href="../../traduction/fusions-acquisitions/"><b>Fusions et acquisitions</b></a>
+<a class="mg-a" href="../../traduction/contentieux-arbitrage/"><b>Contentieux et arbitrage</b></a>
+<a class="mg-a" href="../../traduction/banque-finance/"><b>Banque et finance</b></a>
+<a class="mg-a" href="../../traduction/compliance-finma/"><b>Compliance et FINMA</b></a>
+<a class="mg-a" href="../../traduction/"><b>Tous les domaines</b></a>
+</div>
+<div class="mg-col"><p class="mg-h">Par paire de langues</p>
+<a class="mg-a" href="../../traduction/allemand-francais/"><b>Allemand vers français</b></a>
+<a class="mg-a" href="../../traduction/francais-allemand/"><b>Français vers allemand</b></a>
+<a class="mg-a" href="../../traduction/allemand-anglais/"><b>Allemand vers anglais</b></a>
+<a class="mg-a" href="../../traduction/francais-anglais/"><b>Français vers anglais</b></a>
+<a class="mg-a" href="../../traduction/italien-francais/"><b>Italien vers français</b></a>
+<a class="mg-a" href="../../traduction/anglais-allemand/"><b>Anglais vers allemand</b></a>
+</div>
+<a class="mg-card" href="../../comparatif/"><span class="mg-mini" aria-hidden="true"><span class="mg-mw"><i></i><i></i><i></i></span></span><b>Vous hésitez encore ?</b><span class="mg-t">Ce que Corrext fait que les outils génériques ne font pas, comparé point par point.</span><span class="lien">Voir les comparatifs</span></a>
+</div>
+</div>
+<div class="mg" id="mg-ressources" hidden>
+<div class="wrap mg-in">
+<div class="mg-col"><p class="mg-h">Comprendre</p>
+<a class="mg-a" href="../../ressources/blog/"><b>Blog</b><em>Droit suisse, traduction et intelligence artificielle</em></a>
+<a class="mg-a" href="../../ressources/guides/"><b>Guides</b><em>Méthodes de fond, signées par nos spécialistes</em></a>
+<a class="mg-a" href="../../ressources/etudes/"><b>Études et benchmarks</b><em>Nos mesures sur corpus de droit suisse</em></a>
+</div>
+<div class="mg-col"><p class="mg-h">Consulter</p>
+<a class="mg-a" href="../../ressources/glossaire/"><b>Glossaire juridique suisse</b><em>Chaque terme en allemand, français, italien et anglais</em></a>
+<a class="mg-a" href="../../aide/"><b>Centre d'aide Corrext</b><em>Prise en main et réponses pratiques</em></a>
+<a class="mg-a" href="../../aide/decouvrir-corrext/"><b>Questions fréquentes</b><em>Corrext, LexMachina, relecture, prix</em></a>
+</div>
+<div class="mg-col"><p class="mg-h">Comparer</p>
+<a class="mg-a" href="../../comparatif/deepl-traduction-juridique/"><b>Corrext et DeepL</b></a>
+<a class="mg-a" href="../../comparatif/chatgpt-traduction-juridique/"><b>Corrext et les LLM généralistes</b></a>
+<a class="mg-a" href="../../comparatif/agence-ou-plateforme/"><b>Agence de traduction ou plateforme</b></a>
+</div>
+<a class="mg-card" href="../../a-propos/"><span class="mg-mini" aria-hidden="true"><span class="mg-mw"><i></i><i></i><i></i></span></span><b>Neur.on</b><span class="mg-t">Une société suisse, une infrastructure suisse, un moteur entraîné sur le droit suisse.</span><span class="lien">À propos et distinctions</span></a>
+</div>
+</div>
+</header>
+<div class="mg-voile" hidden></div>
+<div class="mm" id="mm" hidden>
+<div class="wrap">
+<div class="mm-g"><button type="button" class="mm-h" aria-expanded="false">Corrext<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="mm-b" hidden>
+<p>La plateforme</p>
+<a href="../../corrext/">Corrext, le poste de commande</a>
+<a href="../../lexmachina/">LexMachina</a>
+<a href="../../securite-souverainete/">Sécurité et souveraineté</a>
+<a href="../../corrext/api-on-premises/">API et on-premises</a>
+<p>Les outils</p>
+<a href="../../corrext/traduction-texte-et-document/">Traduction texte et document</a>
+<a href="../../corrext/gestion-de-projet/">Gestion de projet</a>
+<a href="../../corrext/editeur-de-relecture/">Éditeur de relecture</a>
+<a href="../../corrext/chnell/">Fast lookup CHnell</a>
+<a href="../../corrext/extraits-registre-commerce/">Extraits du registre</a>
+<p>Aller plus loin</p>
+<a href="../../niveaux-de-qualite/">Quatre niveaux de qualité</a>
+<a href="../../langues-et-formats/">Langues et formats</a>
+<a href="../../aide/">Centre d'aide</a>
+<a href="../../corrext/traduction-texte-et-document/#demo">Ouvrir la démo en direct</a>
+</div></div>
+<div class="mm-g"><button type="button" class="mm-h" aria-expanded="false">Solutions<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="mm-b" hidden>
+<p>Par métier</p>
+<a href="../../solutions/cabinets-avocats/">Cabinets d'avocats</a>
+<a href="../../solutions/banques-finance/">Banques et finance</a>
+<a href="../../solutions/directions-juridiques/">Directions juridiques et Legal Ops</a>
+<a href="../../solutions/autorites-administration/">Autorités et administration</a>
+<a href="../../solutions/fiduciaires-conseil/">Fiduciaires et conseil</a>
+<a href="../../solutions/editeurs-legaltech/">LegalTechs et éditeurs</a>
+<p>Par domaine du droit</p>
+<a href="../../traduction/contrats/">Contrats</a>
+<a href="../../traduction/droit-des-societes/">Droit des sociétés</a>
+<a href="../../traduction/fusions-acquisitions/">Fusions et acquisitions</a>
+<a href="../../traduction/contentieux-arbitrage/">Contentieux et arbitrage</a>
+<a href="../../traduction/banque-finance/">Banque et finance</a>
+<a href="../../traduction/compliance-finma/">Compliance et FINMA</a>
+<a href="../../traduction/">Tous les domaines</a>
+<p>Par paire de langues</p>
+<a href="../../traduction/allemand-francais/">Allemand vers français</a>
+<a href="../../traduction/francais-allemand/">Français vers allemand</a>
+<a href="../../traduction/allemand-anglais/">Allemand vers anglais</a>
+<a href="../../traduction/francais-anglais/">Français vers anglais</a>
+<a href="../../traduction/italien-francais/">Italien vers français</a>
+<a href="../../traduction/anglais-allemand/">Anglais vers allemand</a>
+<a href="../../comparatif/">Voir les comparatifs</a>
+</div></div>
+<a class="mm-h" href="../../lexmachina/">LexMachina</a>
+<div class="mm-g"><button type="button" class="mm-h" aria-expanded="false">Ressources<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="mm-b" hidden>
+<p>Comprendre</p>
+<a href="../../ressources/blog/">Blog</a>
+<a href="../../ressources/guides/">Guides</a>
+<a href="../../ressources/etudes/">Études et benchmarks</a>
+<p>Consulter</p>
+<a href="../../ressources/glossaire/">Glossaire juridique suisse</a>
+<a href="../../aide/">Centre d'aide Corrext</a>
+<a href="../../aide/decouvrir-corrext/">Questions fréquentes</a>
+<p>Comparer</p>
+<a href="../../comparatif/deepl-traduction-juridique/">Corrext et DeepL</a>
+<a href="../../comparatif/chatgpt-traduction-juridique/">Corrext et les LLM généralistes</a>
+<a href="../../comparatif/agence-ou-plateforme/">Agence de traduction ou plateforme</a>
+<a href="../../a-propos/">À propos et distinctions</a>
+</div></div>
+<a class="btn mm-cta" href="../../contact/">Demander une démo</a>
+</div>
+</div>
+<main id="main">
+<section class="sec hc-s"><div class="wrap hc-g"><nav class="hc-nav" aria-label="Rubriques du centre d'aide"><a class="hc-retour" href="../../aide/">Centre d'aide</a><p>Utiliser Corrext</p><ul><li><a href="../../aide/decouvrir-corrext/">Découvrir Corrext</a></li><li><a href="../../aide/premiers-pas/">Premiers pas</a></li><li><a href="../../aide/traduction-texte-et-document/">Traduction texte et document</a></li><li><a href="../../aide/gestion-de-projet/">Gestion de projet</a></li><li><a href="../../aide/editeur-de-relecture/">Éditeur de relecture</a></li><li><a href="../../aide/chnell/">Fast lookup CHnell</a></li><li><a href="../../aide/extraits-registre/">Extraits du registre du commerce</a></li><li><a href="../../aide/formats-et-langues/">Formats et langues</a></li><li><a href="../../aide/securite-et-confidentialite/">Sécurité, confidentialité et compte</a></li><li><a href="../../aide/depannage/">Dépannage</a></li></ul><p>Administrer Corrext</p><ul><li><a href="../../aide/admin-organisation/">Organisation, membres et rôles</a></li><li><a href="../../aide/admin-moteurs/">Moteurs et confidentialité</a></li><li><a href="../../aide/admin-memoires/">Mémoires et terminologie</a></li></ul></nav><div class="hc-m"><h1 class="h1">Éditeur de relecture</h1><p class="intro">L'éditeur de relecture s'ouvre depuis un projet avec « Open in CAT ». Vous y relisez segment par segment, avec la mémoire, CHnell et les alternatives à portée de main, puis vous validez et récupérez le fichier.</p><div class="fq-l"><details><summary>Comment relire un fichier dans l'éditeur ?</summary><div class="r"><div class="hc-a"><p>Dans le tableau de bord du projet, le bouton « Open in CAT » ouvre l'éditeur de relecture. Le document s'y affiche en deux colonnes, texte source à gauche et traduction à droite, phrase par phrase. Vous corrigez la traduction dans la colonne de droite, vous confirmez chaque phrase relue et vous vous aidez du panneau latéral : mémoires, Fast Lookup, assistant IA et Sync.</p><ol class="hc-steps"><li>Ouvrez le projet depuis « My projects » sur l'accueil, puis repérez la ligne du fichier dans le tableau des tâches.</li><li>Cliquez sur <b>« Open in CAT »</b> : l'éditeur s'ouvre sur le document traduit.</li><li>Retrouvez un mot avec <b>« Filter source »</b> ou <b>« Filter target »</b>.</li><li>Cliquez sur une phrase : le panneau latéral affiche les correspondances de mémoire et les alternatives de l'assistant IA.</li><li>Corrigez la traduction dans la colonne de droite, puis cochez la case de la phrase pour la confirmer.</li><li>Suivez la progression en pourcentage en haut de l'éditeur, puis revenez au tableau de bord avec <b>« Back »</b>.</li></ol><div class="hc-know"><b>À savoir</b><ul><li>Le repère « MT » signale une phrase issue de la traduction automatique ; sa jauge donne une indication de qualité.</li><li>Les phrases répétées et les balises incohérentes entre source et traduction sont signalées dans le tableau.</li><li>En confidentialité standard, vos corrections enrichissent votre mémoire de traduction et servent à vos projets suivants.</li></ul></div></div></div></details><details><summary>À quoi sert le panneau latéral de l'éditeur ?</summary><div class="r"><div class="hc-a"><p>Le panneau latéral de l'éditeur réunit quatre outils, accessibles par les icônes à droite de l'écran : les mémoires de traduction, Fast Lookup, l'assistant IA et Sync. Ils portent sur la phrase sélectionnée et ne modifient rien tant que vous ne cliquez pas sur « Apply ».</p><ol class="hc-steps"><li>Sélectionnez une phrase dans l'éditeur.</li><li>Onglet <b>« Translation memories »</b> : consultez les traductions déjà validées proches de la phrase et appliquez-en une avec « Apply ».</li><li>Onglet <b>« Fast Lookup »</b> : cherchez un mot dans les mémoires et dans CHnell, côté « Source » ou côté « Target ».</li><li>Onglet <b>« AI Assistant »</b>, partie « Alternatives » : comparez la phrase traduite par plusieurs moteurs, et obtenez-en d'autres avec « Generate more ».</li><li>Partie <b>« Rephrasing »</b> : choisissez un style dans « Settings » (Formal legal, Financial, Simplified, Formal, Informal) ou l'option « Shorten », puis cliquez sur « Apply ».</li><li>Onglet <b>« Sync »</b> : arbitrez les conflits entre versions et les décisions de propagation.</li></ol><div class="hc-know"><b>À savoir</b><ul><li>Dans Fast Lookup, le terme cherché est surligné dans la source et dans la traduction, avec le nom du document d'origine.</li><li>La reformulation souligne les mots modifiés : vous voyez l'écart avant d'appliquer.</li><li>Sync ne sert que si plusieurs personnes travaillent sur le même fichier, ou si vous l'avez ouvert dans plusieurs sessions.</li></ul></div></div></div></details><details><summary>Mes corrections servent-elles aux traductions suivantes ?</summary><div class="r"><div class="hc-a"><p>Oui, en confidentialité Standard. Les segments que vous corrigez et confirmez dans l'éditeur enrichissent la mémoire de traduction de votre organisation. Corrext propose ensuite ces correspondances dans les projets suivants, pour les phrases proches : la traduction s'adapte peu à peu à votre vocabulaire. En mode Highly sensitive content, rien n'est réutilisé.</p><div class="hc-know"><b>À savoir</b><ul><li>Les correspondances de la mémoire s'affichent dans l'onglet « Translation memories » du panneau latéral, avec un bouton « Apply ».</li><li>La mémoire sert exclusivement à votre organisation.</li></ul></div></div></div></details><details><summary>Comment relire dans Word ?</summary><div class="r"><div class="hc-a"><p>Si vous préférez relire dans Word, exportez le fichier depuis le tableau de bord avec « Export docx », ouvrez-le dans Word et affichez le complément Corrext depuis le ruban. Son panneau reprend l'assistant IA, Fast Lookup, les correspondances de mémoire et Sync. Une fois la relecture terminée, réimportez le fichier dans le projet avec « Reimport docx ».</p><ol class="hc-steps"><li>Dans le tableau de bord du projet, cliquez sur <b>« Export docx »</b> pour le fichier à relire.</li><li>Ouvrez le fichier exporté dans Word, puis cliquez sur le bouton <b>« Corrext »</b> du ruban pour afficher le panneau « Corrext editor ».</li><li>Connectez-vous avec <b>« Log in »</b> si le panneau le demande.</li><li>Relisez en vous aidant des onglets « AI Assistant », « Fast Lookup », « Matches » et « Sync ».</li><li>Enregistrez le document, puis réimportez-le dans le projet avec <b>« Reimport docx »</b>.</li></ol><div class="hc-know"><b>À savoir</b><ul><li>Le complément ne s'ouvre que sur un document exporté par « Export docx » : un fichier issu de la traduction rapide est refusé.</li><li>Il faut être membre du projet et disposer de Word 2021 ou de Microsoft 365.</li><li>Pendant le chargement d'un long document, ne fermez ni le panneau ni le fichier ; vous pouvez déjà travailler, puis résoudre les conflits dans « Sync ».</li></ul></div></div></div></details><details><summary>Comment valider et récupérer la traduction ?</summary><div class="r"><div class="hc-a"><p>Quand la relecture est terminée, le bouton « Validate » du tableau de bord clôt la tâche : l'action est définitive. Le tableau de bord donne aussi un aperçu du fichier (« Preview »), l'export Word et le téléchargement de la mémoire du projet au format TMX.</p><ol class="hc-steps"><li>Vérifiez la progression affichée dans l'éditeur, puis revenez au tableau de bord.</li><li>Relisez le rendu du fichier avec <b>« Preview »</b>.</li><li>Cliquez sur <b>« Validate »</b> sous l'état « Reviewing » de la tâche, puis confirmez.</li><li>Pour clore toutes les tâches d'un coup, utilisez <b>« Validate all »</b>.</li><li>Téléchargez la traduction et, au besoin, la mémoire du projet avec <b>« Download TMX »</b>.</li></ol><div class="hc-know"><b>À savoir</b><ul><li>La validation ne peut pas être annulée : Corrext le rappelle dans la fenêtre de confirmation.</li><li>Une tâche passe par les états « Reviewing », « Validated », puis « Exported » lorsque le fichier Word a été exporté.</li><li>Le format TMX est le format d'échange standard des mémoires de traduction : il se réutilise dans la plupart des outils de traduction.</li></ul></div></div></div></details></div></div></div></section>
+<section class="cta"><div class="wrap"><h2><span class="l1">Une question</span> <span class="l2">reste sans réponse ?</span></h2><a class="btn" href="../../contact/">Demander une démo</a></div></section>
+</main>
+<footer class="pied">
+<div class="wrap">
+<div class="fp-g">
+<div><p>Plateforme</p><ul>
+<li><a href="../../corrext/">Corrext, la plateforme</a></li>
+<li><a href="../../corrext/traduction-texte-et-document/">Traduction texte et document</a></li>
+<li><a href="../../corrext/gestion-de-projet/">Gestion de projet</a></li>
+<li><a href="../../corrext/editeur-de-relecture/">Éditeur de relecture</a></li>
+<li><a href="../../corrext/chnell/">Fast lookup CHnell</a></li>
+<li><a href="../../corrext/extraits-registre-commerce/">Extraits du registre</a></li>
+<li><a href="../../corrext/api-on-premises/">API et on-premises</a></li>
+<li><a href="../../lexmachina/">LexMachina, le moteur</a></li>
+</ul></div>
+<div><p>Solutions</p><ul>
+<li><a href="../../solutions/cabinets-avocats/">Cabinets d'avocats</a></li>
+<li><a href="../../solutions/banques-finance/">Banques et finance</a></li>
+<li><a href="../../solutions/directions-juridiques/">Directions juridiques</a></li>
+<li><a href="../../solutions/autorites-administration/">Autorités et administration</a></li>
+<li><a href="../../solutions/fiduciaires-conseil/">Fiduciaires et conseil</a></li>
+<li><a href="../../solutions/editeurs-legaltech/">LegalTechs et éditeurs</a></li>
+<li><a href="../../traduction/">Traduction par domaine</a></li>
+</ul></div>
+<div><p>Ressources</p><ul>
+<li><a href="../../ressources/blog/">Blog</a></li>
+<li><a href="../../ressources/guides/">Guides</a></li>
+<li><a href="../../ressources/glossaire/">Glossaire juridique</a></li>
+<li><a href="../../ressources/etudes/">Études et benchmarks</a></li>
+<li><a href="../../comparatif/">Comparatifs</a></li>
+<li><a href="../../aide/">Centre d'aide</a></li>
+<li><a href="../../securite-souverainete/">Sécurité et souveraineté</a></li>
+</ul></div>
+<div><p>Neur.on</p><ul>
+<li><a href="../../a-propos/">À propos et distinctions</a></li>
+<li><a href="../../a-propos/presse/">Presse</a></li>
+<li><a href="../../contact/">Demander une démo</a></li>
+</ul></div>
+<div><p>Contact</p><ul>
+<li><span>Place de la Gare 15, 1700 Fribourg</span></li>
+<li><a href="mailto:team@corrext.com">team@corrext.com</a></li>
+</ul></div>
+<div><p>Légal</p><ul>
+<li><a href="../../mentions-legales/">Mentions légales et CGU</a></li>
+<li><a href="../../protection-des-donnees/">Protection des données</a></li>
+</ul></div>
+</div>
+<div class="fp-b"><span>© 2026 Neur.on AI Solutions SA · Fribourg, Suisse. Tous droits réservés.</span><div class="theme" role="group" aria-label="Thème d'affichage"><button type="button" data-theme-set="systeme" aria-label="Thème du système"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6 13.5h4" stroke="currentColor" stroke-width="1.4"/></svg></button><button type="button" data-theme-set="clair" aria-label="Thème clair"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button><button type="button" data-theme-set="sombre" aria-label="Thème sombre"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3a5.5 5.5 0 1 0 6.5 6.5z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></button></div></div>
+<p class="fp-iso">ISO 27001 · Hébergement en Suisse (Infomaniak) · nLPD et RGPD</p>
+</div>
+</footer>
+<script src="../../assets/nav.js?v=91bce176" defer></script>
+</body>
+</html>

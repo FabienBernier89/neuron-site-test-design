@@ -18,20 +18,9 @@ NEURON = Path(os.environ.get("NEURON_SRC", ICI.parent / "neuron")).resolve()
 SRC, DOCS, ASSETS = ICI / "src", ICI / "docs", ICI / "assets"
 BASE_PAGES = "/neuron-site-test-design/"  # chemin du site sur GitHub Pages (404 servie à toute profondeur)
 
-# Les 11 pages modèles, par chemin publié (source : src/pages/<chemin>index.html)
-PAGES = [
-    "",
-    "corrext/",
-    "corrext/traduction-texte-et-document/",
-    "lexmachina/",
-    "securite-souverainete/",
-    "solutions/cabinets-avocats/",
-    "traduction/contrats/",
-    "traduction/allemand-francais/",
-    "ressources/blog/",
-    "ressources/blog/traduire-contrat-droit-suisse/",
-    "contact/",
-]
+# Toutes les pages présentes dans src/pages (chemin publié ; source : src/pages/<chemin>index.html), accueil en tête
+PAGES = sorted((("" if str(f.parent.relative_to(SRC / "pages")) == "." else str(f.parent.relative_to(SRC / "pages")) + "/")
+                for f in (SRC / "pages").rglob("index.html")), key=lambda p: (p != "", p))
 ARTICLE = "ressources/blog/traduire-contrat-droit-suisse/"
 PAIRE = re.compile(r"^traduction/(allemand|francais|italien|anglais)-(francais|allemand|anglais|italien)/$")
 BILLET = re.compile(r"^ressources/(blog|actualites)/[^/]+/$")
@@ -126,9 +115,11 @@ def copier_assets():
 
 
 def copier_images(html):
-    """Recopie les couvertures de blog et d'actualités citées par une page."""
-    for chemin in set(re.findall(r'\{\{ROOT\}\}(assets/img/(?:blog|actualites)/[^"\s?]+)', html)):
+    """Recopie les images et documents du site Neur.on cités par une page (couvertures, illustrations, PDF)."""
+    for chemin in set(re.findall(r'\{\{ROOT\}\}(assets/(?:img|docs)/[^"\s?)#]+)', html)):
         cible = DOCS / chemin
+        if cible.exists() or not (NEURON / chemin).is_file():
+            continue
         cible.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(NEURON / chemin, cible)
 
@@ -149,7 +140,8 @@ def assembler(meta, corps, page, nav, pied, v):
             .replace("@V@", v).replace("@CX@", lien_cx))
     html += menu.rendre_entete(nav, meta.get("menu", ""), minimal=meta.get("gabarit") == "contact")
     html += '<main id="main">\n' + corps + "</main>\n" + menu.rendre_pied(pied)
-    scripts = ["nav.js"] + (["corrext-demo.js"] if cx else []) + (["sim-data.js", "sim.js"] if sim or cx else [])
+    demo = 'id="cxSrc"' in corps
+    scripts = ["nav.js"] + (["corrext-demo.js"] if demo else []) + (["sim-data.js", "sim.js"] if sim or demo else [])
     html += "".join('<script src="{{ROOT}}assets/' + s + "?v=" + v + '" defer></script>\n' for s in scripts)
     return relier(html + "</body>\n</html>\n", page)
 

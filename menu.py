@@ -84,8 +84,7 @@ def lire_pied(pied):
 
 def rendre_entete(nav, actif="", minimal=False):
     h = ['<a class="skip" href="#main">Aller au contenu</a>\n',
-         '<p class="ruban" data-libre>Version de test de design, non indexée. Une page modèle par type : '
-         'les liens sans page mènent au modèle de leur type.</p>\n',
+         '<p class="ruban" data-libre>Version de test de design du site Neur.on, non indexée.</p>\n',
          '<header class="hd' + (" min" if minimal else "") + '" id="hd">\n<div class="wrap hd-in">\n',
          '<a class="hd-logo" href="{{ROOT}}" aria-label="Neur.on, retour à l\'accueil">'
          '<img class="logo-c" src="{{ROOT}}assets/img/neuron-logo.png" alt="Neur.on" width="92" height="28">'

@@ -1,0 +1,271 @@
+<!--page
+title: Fast lookup CHnell : concordancier du droit suisse · Neur.on
+description: Fast lookup CHnell, le concordancier bilingue de Corrext : plus de 20 000 documents officiels suisses alignés, 30 domaines, vos propres ressources.
+menu: corrext
+gabarit: standard
+-->
+<style>/* Démo CHnell : la page de l'application reproduite en pleine largeur dans le cadre .cx (couleurs via --cx-*) */
+.cx-chnell.cxl-page{max-width:none;box-shadow:none;border-radius:0;padding:22px 18px 18px}
+.cxl-page [hidden]{display:none !important}
+.cxl-page button:focus-visible,.cxl-page input:focus-visible,.cxl-page select:focus-visible{outline:2px solid var(--cx-indigo);outline-offset:2px}
+.cxl-langs{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;max-width:600px;margin:0 auto 14px}
+.cxl-selwrap{position:relative;display:flex}
+.cxl-selwrap .cx-sel{border:1px solid var(--cx-line);border-radius:8px;padding:10px 60px 10px 12px}
+.cxl-x{position:absolute;right:34px;top:50%;transform:translateY(-50%);width:22px;height:22px;border:0;background:transparent;color:var(--cx-muted);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.cxl-x svg{width:12px;height:12px}
+.cxl-x:hover{background:var(--cx-indigo-soft);color:var(--cx-indigo)}
+.cxl-swap{width:36px;height:36px;border:1px solid var(--cx-line);border-radius:8px;background:#fff;color:var(--cx-indigo);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.cxl-swap svg{width:16px;height:16px}
+.cxl-swap:hover{background:var(--cx-indigo-soft)}
+.cxl-adv{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;color:var(--cx-indigo);font-weight:600;font-size:12.5px;cursor:pointer;padding:4px 0;margin:0 0 10px}
+.cxl-adv svg{width:14px;height:14px;transition:transform .2s}
+.cxl-adv[aria-expanded="true"] svg{transform:rotate(180deg)}
+.cxl-advp{border:1px solid var(--cx-line);border-radius:var(--r-btn);padding:14px;margin-bottom:14px;background:var(--cx-bg)}
+.cxl-advp .cx-h4{font-size:12.5px;font-weight:700;color:var(--cx-ink);margin:0 0 8px}
+.cxl-radios{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:14px}
+.cxl-radios label{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--cx-ink);cursor:pointer}
+.cxl-radios input{accent-color:var(--cx-indigo);width:15px;height:15px;margin:0}
+.cxl-advp .cx-chips{margin-bottom:14px}
+.cxl-advp .cx-chip{background:#fff}
+.cxl-advp .cx-chip.on{background:var(--cx-indigo-soft)}
+.cxl-srcsel{max-width:320px}
+.cxl-srcsel .cx-sel{border:1px solid var(--cx-line);border-radius:8px;padding:10px 32px 10px 12px}
+.cxl-search{display:flex;gap:10px;margin-bottom:8px}
+.cxl-input{flex:1;min-width:0;border:1px solid var(--cx-line);border-radius:8px;padding:10px 12px;font-family:inherit;font-size:13px;color:var(--cx-ink);background:#fff}
+.cxl-input::placeholder{color:var(--cx-ph);opacity:1}
+.cxl-ops{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--cx-muted);margin:0 0 16px}
+.cxl-ops svg{width:14px;height:14px;color:var(--cx-indigo);flex-shrink:0}
+.cxl-page .cols > :last-child{border-bottom:0}
+.cxl-page .meta button{border:0;background:transparent;color:var(--cx-indigo);font-weight:600;font-size:11px;white-space:nowrap;cursor:pointer;padding:0;font-family:inherit}
+.cxl-page .meta button:hover{text-decoration:underline}
+.cxl-ctxline{grid-column:1 / -1;padding:8px 10px;font-size:11.5px;color:var(--cx-ink);background:var(--cx-indigo-soft);border-bottom:1px solid var(--cx-line)}
+.cxl-empty{grid-column:1 / -1;padding:26px 10px;text-align:center;font-size:12.5px;color:var(--cx-muted)}
+.cxl-shim{grid-column:1 / -1;padding:14px 10px 4px}
+.cxl-page .more{padding:0}
+.cxl-page .more button{width:100%;border:0;background:transparent;color:var(--cx-indigo);font-weight:600;font-size:12px;padding:10px;cursor:pointer;font-family:inherit}
+.cxl-page .more button:hover{background:var(--cx-bg)}
+@media(prefers-reduced-motion:reduce){.cxl-adv svg{transition:none}}
+@media(max-width:560px){.cxl-langs{grid-template-columns:1fr}.cxl-swap{margin:0 auto}.cxl-search{flex-direction:column}.cx-chnell.cxl-page{padding:18px 14px 14px}}</style>
+<style>@media (prefers-reduced-motion:reduce){.tvis-svg .anim{display:none}}</style>
+<section class="hero">
+<div class="wrap hero-g">
+<h1 class="h1"><span class="n">Fast lookup CHnell.</span> <span class="s">Chaque terme vérifié dans son contexte officiel</span></h1>
+<div class="hero-d"><p>CHnell aligne des segments source et cible tirés des sources officielles suisses (Fedlex, Feuille fédérale, administrations fédérales) et de vos propres ressources, dans 30 domaines du droit et de la finance. Accessible depuis toute traduction, d'un simple surlignage. Cherchez un terme ci-dessous.</p><a class="btn" href="{{ROOT}}fr/contact/">Demander une démo</a></div>
+</div>
+</section>
+<section class="sec sec-st" id="demo"><div class="wrap">
+<div class="ech" data-ech="1176x720"><div class="st" role="img" aria-label="Démonstration de l'interface Corrext" style="width:1176px;height:720px"><div class="st-f"><div class="fen"><div class="fen-b" aria-hidden="true"><i></i><i></i><i></i><span>Corrext</span></div><div class="fen-c" data-scene data-ui><div class="cx-zone"><div class="cx-ex" id="cxEx" role="group" aria-label="Requêtes de démonstration">
+      <span>Choisissez une requête :</span>
+      <button type="button" data-ex="verzugszins" class="on">Verzugszins · droit des obligations</button>
+      <button type="button" data-ex="bankgeheimnis">Bankgeheimnis · droit bancaire</button>
+    </div><div class="cx" id="cx" aria-label="Démonstration de l'interface Corrext, outil Fast lookup CHnell">
+      <div class="cx-top">
+        <span class="cx-logo"><img src="{{ROOT}}assets/img/corrext-logo.svg" alt="Corrext" class="cx-brand"></span>
+        <span class="home">Home</span>
+        <span class="grow"></span>
+        <span class="bell" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
+        <span class="cx-avatar" aria-hidden="true">AM</span>
+      </div>
+
+      <!-- Page CHnell -->
+      <div class="cx-chnell cxl-page">
+        <div class="head">
+          <span class="logo"><img src="{{ROOT}}assets/img/chnell-logo.svg" alt="CHnell" class="cx-brand"></span>
+          <span class="pow">powered by Neur.on</span>
+        </div>
+
+        <!-- Barre de langues -->
+        <div class="cxl-langs">
+          <div class="cxl-selwrap">
+            <select class="cx-sel" id="cxlL1" aria-label="Langue source">
+              <option value="" hidden></option>
+              <option value="German" selected>German</option>
+              <option value="French">French</option>
+              <option value="Italian">Italian</option>
+              <option value="English">English</option>
+            </select>
+            <button type="button" class="cxl-x" id="cxlL1X" aria-label="Effacer la langue source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+          </div>
+          <button type="button" class="cxl-swap" id="cxlSwap" aria-label="Inverser les langues"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 5h18"/><polyline points="7 23 3 19 7 15"/><path d="M21 19H3"/></svg></button>
+          <div class="cxl-selwrap">
+            <select class="cx-sel" id="cxlL2" aria-label="Langue cible">
+              <option value="" hidden></option>
+              <option value="German">German</option>
+              <option value="French" selected>French</option>
+              <option value="Italian">Italian</option>
+              <option value="English">English</option>
+            </select>
+            <button type="button" class="cxl-x" id="cxlL2X" aria-label="Effacer la langue cible"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+          </div>
+        </div>
+
+        <!-- Advanced search -->
+        <button type="button" class="cxl-adv" id="cxlAdvBtn" aria-expanded="false" aria-controls="cxlAdv">Advanced search <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="cxl-advp" id="cxlAdv" hidden>
+          <p class="cx-h4">Resource type</p>
+          <div class="cxl-radios" role="radiogroup" aria-label="Resource type">
+            <label><input type="radio" name="cxlRes" value="all" checked> All resources</label>
+            <label><input type="radio" name="cxlRes" value="shared"> Shared resources</label>
+            <label><input type="radio" name="cxlRes" value="own"> Own resources</label>
+          </div>
+          <p class="cx-h4">Domains</p>
+          <div class="cx-chips" id="cxlDoms" role="group" aria-label="Domains">
+            <button type="button" class="cx-chip" data-dom="OTHER" aria-pressed="false">Other</button>
+            <button type="button" class="cx-chip" data-dom="BANKING &amp; FINANCE" aria-pressed="false">Banking &amp; Finance</button>
+            <button type="button" class="cx-chip" data-dom="SUPERVISORY (FINMA)" aria-pressed="false">Supervisory (FINMA)</button>
+            <button type="button" class="cx-chip" data-dom="FUND PROSPECTUSES" aria-pressed="false">Fund Prospectuses</button>
+            <button type="button" class="cx-chip" data-dom="COMPANY LAW" aria-pressed="false">Company Law</button>
+            <button type="button" class="cx-chip" data-dom="ARTICLES OF ASSOCIATION" aria-pressed="false">Articles of Association</button>
+            <button type="button" class="cx-chip" data-dom="M&amp;A" aria-pressed="false">M&amp;A</button><button type="button" class="cx-chip" data-dom="ACCOUNTING" aria-pressed="false">Accounting</button><button type="button" class="cx-chip" data-dom="CONTRACTS &amp; GTCS" aria-pressed="false">Contracts &amp; GTCs</button><button type="button" class="cx-chip" data-dom="DATA PROTECTION" aria-pressed="false">Data Protection</button><button type="button" class="cx-chip" data-dom="REAL ESTATE" aria-pressed="false">Real Estate</button>
+            <button type="button" class="cx-chip" data-dom="CRIMINAL LAW" aria-pressed="false">Criminal Law</button>
+            <button type="button" class="cx-chip" data-dom="LITIGATION &amp; ENFORCEMENT" aria-pressed="false">Litigation &amp; Enforcement</button>
+            <button type="button" class="cx-chip" data-dom="ARBITRATION" aria-pressed="false">Arbitration</button>
+            <button type="button" class="cx-chip" data-dom="EMPLOYMENT &amp; SOCIAL INS." aria-pressed="false">Employment &amp; Social Ins.</button>
+            <button type="button" class="cx-chip" data-dom="PRIVATE INSURANCE" aria-pressed="false">Private Insurance</button>
+            <button type="button" class="cx-chip" data-dom="FAMILY &amp; INHERITANCE" aria-pressed="false">Family &amp; Inheritance</button>
+            <button type="button" class="cx-chip" data-dom="PATENT LAW" aria-pressed="false">Patent Law</button>
+            <button type="button" class="cx-chip" data-dom="INTELLECTUAL PROPERTY" aria-pressed="false">Intellectual Property</button>
+            <button type="button" class="cx-chip" data-dom="TAX LAW &amp; CUSTOMS" aria-pressed="false">Tax &amp; Customs</button>
+            <button type="button" class="cx-chip" data-dom="ADMINISTRATIVE LAW" aria-pressed="false">Administrative Law</button>
+            <button type="button" class="cx-chip" data-dom="CONSTITUTION &amp; PUBL. INTERNAT. LAW" aria-pressed="false">Constitution &amp; Publ. Internat. Law</button>
+            <button type="button" class="cx-chip" data-dom="MIGRATION LAW" aria-pressed="false">Migration Law</button>
+            <button type="button" class="cx-chip" data-dom="MED &amp; PHARMA" aria-pressed="false">Med &amp; Pharma</button>
+            <button type="button" class="cx-chip" data-dom="TELECOM &amp; TRANSPORTS" aria-pressed="false">Telecom &amp; Transports</button>
+            <button type="button" class="cx-chip" data-dom="ENVIRONMENT" aria-pressed="false">Environment</button>
+            <button type="button" class="cx-chip" data-dom="EDUCATION, CULTURE &amp; TOURISM" aria-pressed="false">Education, Culture &amp; Tourism</button>
+            <button type="button" class="cx-chip" data-dom="ARMY &amp; MILITARY" aria-pressed="false">Army &amp; Military</button>
+            <button type="button" class="cx-chip" data-dom="LEGAL PROFESSION" aria-pressed="false">Legal Profession</button>
+            <button type="button" class="cx-chip" data-dom="TRADE" aria-pressed="false">Trade</button>
+          </div>
+          <p class="cx-h4">Sources</p>
+          <div class="cxl-srcsel">
+            <select class="cx-sel" id="cxlSrc" aria-label="Sources">
+              <option value="">Select sources</option>
+              <option value="fedlex.admin.ch">fedlex.admin.ch</option>
+              <option value="Feuille Fédérale/Bundesblatt">Feuille Fédérale/Bundesblatt</option>
+              <option value="estv.admin.ch">estv.admin.ch</option>
+              <option value="fedpol.admin.ch">fedpol.admin.ch</option>
+              <option value="all">All</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Champ de recherche -->
+        <div class="cxl-search">
+          <input type="text" class="cxl-input" id="cxlQ" value="Verzugszins" placeholder="Search for a word, an expression, a term" aria-label="Terme à rechercher" autocomplete="off">
+          <button type="button" class="cx-btn" id="cxlGo">Search</button>
+        </div>
+        <p class="cxl-ops"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Supported search operators: "" - or</p>
+
+        <!-- Résultats -->
+        <div id="cxlRes" aria-live="polite">
+          <div class="cols" id="cxlCols"></div>
+          <div class="more" id="cxlMoreWrap"><button type="button" id="cxlMore">Show more results</button></div>
+          <p class="cx-note" id="cxlNote" hidden></p>
+        </div>
+      </div>
+    </div></div></div></div></div></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2">Ce que fait Fast lookup <em>CHnell, exactement</em></h2><p class="intro">Fast lookup CHnell est le concordancier bilingue de Corrext. Il recherche un mot, une expression ou un terme dans des segments alignés tirés des sources officielles suisses et de vos propres ressources, surligne le terme dans les deux langues et cite pour chaque occurrence son domaine et sa source. Tout ce qui suit a été observé dans l'application.</p><div class="tl txt t2"><div><b>Recherche</b><p><strong class="kf">Un mot, une expression ou un terme</strong>, saisi dans le champ « Search for a word, an expression, a term » et lancé par le bouton Search. Le terme est <strong class="kf">surligné dans les deux langues</strong> des résultats.</p></div><div><b>Paires de langues</b><p><strong class="kf">Allemand, français, italien et anglais</strong>, en source comme en cible, avec un bouton d'inversion et une croix d'effacement sur chaque sélecteur. Paire par défaut dans l'application : German → French.</p></div><div><b>Opérateurs</b><p>Guillemets "", signe - et or, rappelés sous le champ de recherche avec une icône d'information.</p></div><div><b>Résultats</b><p><strong class="kf">Segments alignés</strong> source et cible, terme surligné, domaine en capitales, <strong class="kf">source citée sur chaque ligne</strong>, lien Show in context et bouton Show more results. Verzugszins : plus de 300 résultats ; Bankgeheimnis : plus de 400 résultats.</p></div><div><b>Domaines</b><p><strong class="kf">Trente</strong> : Other, Banking &amp; Finance, Supervisory (FINMA), Fund Prospectuses, Company Law, Articles of Association, M&amp;A, Accounting, Contracts &amp; GTCs, Data Protection, Real Estate, Criminal Law, Litigation &amp; Enforcement, Arbitration, Employment &amp; Social Ins., Private Insurance, Family &amp; Inheritance, Patent Law, Intellectual Property, Tax &amp; Customs, Administrative Law, Constitution &amp; Publ. Internat. Law, Migration Law, Med &amp; Pharma, Telecom &amp; Transports, Environment, Education, Culture &amp; Tourism, Army &amp; Military, Legal Profession, Trade. Multi-sélection dans le panneau Advanced search.</p></div><div><b>Types de ressource</b><p>All resources, Shared resources ou Own resources : les <strong class="kf">ressources propres de votre organisation</strong> sont distinguées des jeux de données partagés.</p></div><div><b>Sources</b><p><strong class="kf">fedlex.admin.ch</strong>, <strong class="kf">Feuille fédérale (Bundesblatt)</strong>, estv.admin.ch, fedpol.admin.ch, rassemblées dans les jeux de données Neur.on. Filtre « Select sources » dans le panneau Advanced search.</p></div><div><b>Fast Lookup contextuel</b><p>Dans Traduction texte et document, surlignez un mot du texte source : le bouton Fast Lookup ouvre CHnell sur ce mot, en contexte, <strong class="kf">sans quitter la traduction</strong>.</p></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2">Trois situations où <em>CHnell tranche</em></h2><div class="cd"><div><b>Un seul terme sur 200 pages</b><p>Avant de trancher entre deux traductions d'un même terme, cherchez-le dans CHnell : les segments alignés montrent l'usage officiel, dans la Feuille fédérale ou dans Fedlex, avec le domaine de chaque occurrence. La décision repose sur une source citée plutôt que sur une intuition.</p></div><div><b>Citer la Feuille fédérale dans un mémoire</b><p>Recherchez l'expression allemande, lisez en regard la version française telle qu'elle a été publiée et ouvrez le contexte : vous reprenez la formulation officielle, avec sa source, sans la reconstituer de mémoire.</p></div><div><b>Le terme FINMA en trois langues</b><p>Filtrez les domaines Supervisory (FINMA) ou Banking &amp; Finance, cherchez le terme en allemand, puis changez la langue cible pour vérifier le français et l'italien : chaque résultat cite sa source.</p></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<div class="bt"><div class="bt-g"><h2 class="h3s">D'où viennent les segments que <em>CHnell affiche</em> ?</h2><p>De textes officiels suisses : Fedlex, la Feuille fédérale, les publications des administrations fédérales comme l'AFC ou fedpol, rassemblés dans les jeux de données Neur.on, plus de 15 millions de segments multilingues. S'y ajoutent les ressources propres de votre organisation, recherchées séparément des ressources partagées.</p><a class="lien" href="{{ROOT}}fr/lexmachina/">LexMachina, le moteur entraîné sur ces données</a></div><div class="bt-p"><b>Source citée sur chaque segment.</b><p>Feuille fédérale, fedlex.admin.ch, estv.admin.ch, fedpol.admin.ch : la ligne de source accompagne chaque résultat.</p></div><div class="bt-p"><b>Domaine attribué.</b><p>Chaque segment porte l'un des 30 domaines, de Banking &amp; Finance à Trade, et se filtre par domaine.</p></div><div class="bt-p bt-l"><b>Ressources propres distinctes des ressources partagées.</b><p>Le filtre Resource type sépare Own resources et Shared resources.</p></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2">Les autres outils <em>de Corrext</em></h2><div class="cd"><a href="{{ROOT}}fr/corrext/traduction-texte-et-document/"><b><b>Traduction texte et document</b></b><p>Texte ou fichier traduit en quelques secondes, moteur au choix, alternatives comparées, reformulation en cinq styles.</p></a><a href="{{ROOT}}fr/corrext/gestion-de-projet/"><b><b>Gestion de projet</b></b><p>Projet en trois étapes, relecture interne ou externe en trois niveaux, devis et délai instantanés.</p></a><a href="{{ROOT}}fr/corrext/extraits-registre-commerce/"><b><b>Extraits du registre du commerce</b></b><p>Traduction certifiée, notariée ou apostillée, commandée en ligne en quatre étapes.</p></a></div>
+</div></section>
+<section class="sec"><div class="wrap fq"><h2 class="h2">Questions fréquentes sur Fast lookup CHnell</h2><div><details><summary>Qu'est-ce qu'un concordancier bilingue ?</summary><div class="r"><p>Un outil qui affiche côte à côte un segment dans la langue source et sa traduction telle qu'elle a été publiée. CHnell surligne le terme recherché dans les deux langues et indique, pour chaque segment, son domaine et sa source, par exemple fedlex.admin.ch ou la Feuille fédérale. Vous voyez comment un terme est réellement traduit dans les textes officiels, pas seulement comment il pourrait l'être.</p></div></details><details><summary>Quelles sources alimentent CHnell ?</summary><div class="r"><p>Des textes officiels suisses : Fedlex (fedlex.admin.ch), la Feuille fédérale (Bundesblatt), les publications des administrations fédérales comme l'AFC (estv.admin.ch) et fedpol (fedpol.admin.ch), rassemblés dans les jeux de données Neur.on. S'y ajoutent les ressources propres de votre organisation, distinguées des ressources partagées.</p></div></details><details><summary>Quels domaines sont couverts ?</summary><div class="r"><p>Trente domaines, dont Banking &amp; Finance, Supervisory (FINMA), Fund Prospectuses, Company Law, Articles of Association, M&amp;A, Accounting, Contracts &amp; GTCs, Data Protection, Real Estate, Criminal Law, Litigation &amp; Enforcement, Arbitration, Employment &amp; Social Ins., Tax &amp; Customs, Administrative Law, Intellectual Property, Med &amp; Pharma, Environment et Trade. Chaque segment porte son domaine et le filtre Domains permet d'en combiner plusieurs.</p></div></details><details><summary>Quels opérateurs de recherche sont disponibles ?</summary><div class="r"><p>Trois opérateurs, rappelés sous le champ de recherche : les guillemets "", le signe - et or. Ils s'utilisent comme dans les moteurs de recherche courants : expression exacte, exclusion d'un mot, alternative entre deux termes. La recherche porte sur un mot, une expression ou un terme et se lance avec le bouton Search.</p></div></details><details><summary>Puis-je ajouter mes propres ressources ?</summary><div class="r"><p>L'application distingue, dans le filtre Resource type, Own resources et Shared resources : les ressources propres à votre organisation sont recherchées séparément des jeux de données partagés. La mise en place de vos ressources se voit en démonstration, avec un expert Neur.on.</p></div></details><details><summary>Comment utiliser CHnell sans quitter une traduction ?</summary><div class="r"><p>Dans Traduction texte et document, surlignez un mot du texte source : un bouton Fast Lookup apparaît et ouvre CHnell sur ce mot, en contexte, avec les segments alignés, le domaine et la source de chaque occurrence. Vous revenez ensuite à votre traduction.</p></div></details></div></div></section>
+<section class="cta"><div class="wrap"><h2><span class="l1">Voyez CHnell</span> <span class="l2">sur votre terminologie</span></h2><a class="btn" href="{{ROOT}}fr/contact/">Demander une démo</a></div></section>
+<script>
+/* Démo CHnell : deux requêtes réelles (segments, domaines, sources et compteurs observés dans Corrext le 14 septembre 2026). Aucune donnée inventée. */
+(function(){
+  var DATA={
+    verzugszins:{q:"Verzugszins",count:324,rows:[
+      {a:"Kann die Zahlstelle den fehlenden Betrag zuzüglich Verzugszins nicht mehr der betroffenen Person nachbelasten, zum Beispiel weil diese nicht mehr ihre Kundin ist, so ist die Zahlstelle zur Leistung des fehlenden Betrages zuzüglich Verzugszins verpflichtet.",b:"Si l'agent payeur ne peut plus prélever ultérieurement le montant manquant avec l'intérêt moratoire, notamment parce que la personne concernée n'est plus cliente de son établissement, il reste tenu de verser le montant correspondant.",dom:"OTHER",src:"Feuille Fédérale/Bundesblatt - Source: Feuille Fédérale/Bundesblatt - Data Set: Neur.on"},
+      {a:"Art. 24 Verzugszins Auf Einmalzahlungen, abgeltenden Steuern und Abgeltungszahlungen, die der ESTV verspätet überwiesen werden, ist ohne Mahnung ein Verzugszins nach Ablauf der in diesem Gesetz festgelegten Fristen bis zum Datum des Eingangs geschuldet.",b:"5373 Art. 24 Intérêt moratoire Un intérêt moratoire est dû sans sommation dès l'échéance des délais fixés dans la présente loi sur les paiements uniques, les impôts libératoires et les paiements libératoires virés en retard à l'AFC et jusqu'à réception des sommes dues.",dom:"TAX LAW & CUSTOMS",src:"SIF FF20125365 Bundesgesetz-über-die-internationale-Quellenbesteuerung-IQG - Source: fedlex.admin.ch - Data Set: Neur.on"}],
+      mark:["Verzugszins","intérêt moratoire"]},
+    bankgeheimnis:{q:"Bankgeheimnis",count:425,rows:[
+      {a:"Anlässlich dieses Treffens wurde der Kundenberater misstrauisch, da die Kundin auffällige Fragen über das Schweizer Bankgeheimnis und das Geldwäschereigesetz stellte.",b:"Lors de l'entretien, le conseiller à la clientèle est devenu méfiant parce que la cliente posait des questions suspectes sur le secret bancaire suisse et sur la loi sur le blanchiment d'argent.",dom:"BANKING & FINANCE",src:"MROS - Source: fedpol.admin.ch - Data Set: Neur.on"},
+      {a:"Obwohl der Begriff Bankgeheimnis im Initiativtext nicht und im Argumentarium nur sparsam verwendet wird, beabsichtigt die Initiative insbesondere die Verankerung des steuerlichen Bankgeheimnisses im Inland auf Verfassungsstufe.",b:"Bien que le terme ne figure pas dans le texte de l'initiative et que l'argumentaire du comité d'initiative n'en fasse qu'un usage parcimonieux, un des buts principaux de l'initiative est d'inscrire la notion de secret bancaire dans la Constitution.",dom:"TAX LAW & CUSTOMS",src:"ESTV FF20156429 Botschaft-zur-Volksinitiative-Ja-zum-Schutz-der-Privatsphäre- - Source: fedlex.admin.ch - Data Set: Neur.on"}],
+      mark:["Bankgeheimnis","secret bancaire"]}
+  };
+  var $=function(id){return document.getElementById(id);};
+  var cx=$("cx"); if(!cx) return;
+  var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var q=$("cxlQ"),go=$("cxlGo"),l1=$("cxlL1"),l2=$("cxlL2"),swap=$("cxlSwap"),advBtn=$("cxlAdvBtn"),adv=$("cxlAdv"),
+      doms=$("cxlDoms"),srcSel=$("cxlSrc"),cols=$("cxlCols"),moreWrap=$("cxlMoreWrap"),more=$("cxlMore"),note=$("cxlNote"),ex=$("cxEx");
+  var st={key:"verzugszins",live:true,shown:0,timer:null};
+
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");}
+  /* Surlignage : une seule expression combinée, insensible à la casse, pour ne jamais imbriquer deux <mark> */
+  function hl(text,marks){var re=new RegExp(marks.map(escRe).join("|"),"gi");return esc(text).replace(re,function(m){return "<mark>"+m+"</mark>";});}
+  function setNote(t){note.textContent=t;note.hidden=!t;}
+  function empty(label,noteText){cols.innerHTML='<div class="cxl-empty">'+esc(label)+'</div>';moreWrap.hidden=true;setNote(noteText||"");}
+  function setPill(key){[].forEach.call(ex.querySelectorAll("[data-ex]"),function(b){b.classList.toggle("on",b.getAttribute("data-ex")===key);});}
+
+  /* Filtres du panneau Advanced search */
+  function activeDoms(){return [].map.call(doms.querySelectorAll('[aria-pressed="true"]'),function(b){return b.getAttribute("data-dom");});}
+  function resType(){var r=cx.querySelector('input[name="cxlRes"]:checked');return r?r.value:"all";}
+  function filterRows(d){
+    var ds=activeDoms(),sv=srcSel.value,rt=resType();
+    return d.rows.filter(function(r){
+      if(rt==="own") return false; /* les segments de la démo appartiennent tous aux jeux de données partagés */
+      if(ds.length&&ds.indexOf(r.dom)<0) return false;
+      if(sv&&sv!=="all"&&r.src.indexOf(sv)<0) return false;
+      return true;
+    });
+  }
+  function pairOk(){var a=l1.value,b=l2.value;return (a==="German"&&b==="French")||(a==="French"&&b==="German");}
+
+  function render(){
+    var d=DATA[st.key];
+    if(!l1.value||!l2.value){empty("No results","Démo : sélectionnez une langue source et une langue cible.");return;}
+    if(!pairOk()){empty("No results","Démo : segments disponibles pour la paire German ↔ French uniquement.");return;}
+    var rows=filterRows(d);
+    if(!rows.length){empty("No results for these filters","Démo : deux requêtes et quatre segments réels sont disponibles.");return;}
+    var flip=(l1.value==="French");
+    var h='<div class="colh"><i>'+esc(d.q)+'</i> in '+esc(l1.value)+'<small>'+d.count+' results</small></div><div class="colh r"><i>'+esc(d.q)+'</i> in '+esc(l2.value)+'</div>';
+    rows.forEach(function(r,i){
+      var left=flip?r.b:r.a,right=flip?r.a:r.b;
+      h+='<div class="cell">'+hl(left,d.mark)+'</div><div class="cell r">'+hl(right,d.mark)+'</div>';
+      h+='<div class="meta"><span><span class="dom">'+esc(r.dom)+'</span>'+esc(r.src)+'</span><button type="button" class="cxl-ctx" aria-expanded="false" aria-controls="cxlCtx'+i+'">Show in context</button></div>';
+      h+='<div class="cxl-ctxline" id="cxlCtx'+i+'" hidden>Démo : le contexte complet s\'ouvre dans l\'application.</div>';
+    });
+    cols.innerHTML=h;moreWrap.hidden=false;setNote("");st.shown=rows.length;
+  }
+
+  function search(){
+    var v=q.value.trim().toLowerCase(),key=DATA[v]?v:null;
+    clearTimeout(st.timer);setPill(key);
+    if(!key){st.live=false;empty("No results","Démo : deux requêtes disponibles, Verzugszins et Bankgeheimnis.");return;}
+    st.key=key;st.live=true;
+    if(reduce){render();return;}
+    cols.innerHTML='<div class="cxl-shim"><div class="cx-shim"></div><div class="cx-shim" style="width:72%"></div><div class="cx-shim" style="width:86%"></div></div>';
+    moreWrap.hidden=true;setNote("");
+    st.timer=setTimeout(render,420);
+  }
+  function refresh(){if(st.live){clearTimeout(st.timer);render();}}
+
+  go.addEventListener("click",search);
+  q.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();search();}});
+  ex.addEventListener("click",function(e){var b=e.target.closest("[data-ex]");if(!b) return;q.value=DATA[b.getAttribute("data-ex")].q;search();});
+  swap.addEventListener("click",function(){var a=l1.value;l1.value=l2.value;l2.value=a;refresh();});
+  l1.addEventListener("change",refresh);l2.addEventListener("change",refresh);
+  $("cxlL1X").addEventListener("click",function(){l1.value="";refresh();});
+  $("cxlL2X").addEventListener("click",function(){l2.value="";refresh();});
+  advBtn.addEventListener("click",function(){var open=advBtn.getAttribute("aria-expanded")==="true";advBtn.setAttribute("aria-expanded",String(!open));adv.hidden=open;});
+  doms.addEventListener("click",function(e){var b=e.target.closest(".cx-chip");if(!b) return;var on=b.getAttribute("aria-pressed")==="true";b.setAttribute("aria-pressed",String(!on));b.classList.toggle("on",!on);refresh();});
+  srcSel.addEventListener("change",refresh);
+  [].forEach.call(cx.querySelectorAll('input[name="cxlRes"]'),function(r){r.addEventListener("change",refresh);});
+  cols.addEventListener("click",function(e){var b=e.target.closest(".cxl-ctx");if(!b) return;var line=$(b.getAttribute("aria-controls"));var open=b.getAttribute("aria-expanded")==="true";b.setAttribute("aria-expanded",String(!open));line.hidden=open;});
+  more.addEventListener("click",function(){var d=DATA[st.key];setNote("Démo : "+st.shown+" des "+d.count+" résultats affichés ; l'application en propose davantage.");});
+
+  /* Démarrage : résultats de Verzugszins affichés sans attente */
+  render();
+})();
+</script>

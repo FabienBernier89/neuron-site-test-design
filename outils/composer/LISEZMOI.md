@@ -10,3 +10,15 @@ cd outils/composer && python3 p_accueil.py
 ```
 
 Node est nécessaire pour lire les données de la démo Corrext.
+
+## Pages complétées
+
+`generique.py` compose toutes les autres pages publiées du site Neur.on, absentes de `src/pages`.
+
+- Chaque type de bloc (hero, faits, situations, encadré, cartes, FAQ, termes, articles, glossaire, aide, etc.) a sa transposition.
+- Un repli structuré traite les blocs rares.
+
+```
+cd outils/composer && python3 generique.py                 # toutes les pages manquantes
+cd outils/composer && python3 generique.py aide/chnell/    # une page précise
+```

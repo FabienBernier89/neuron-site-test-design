@@ -32,7 +32,7 @@ class TestBuild(unittest.TestCase):
         for p, h in self.pages.items():
             base = ICI / "docs" / p
             for ref in re.findall(r'(?:href|src)="([^"]+)"', h):
-                if ref.startswith(("http", "mailto:", "#", "data:")):
+                if ref.startswith(("http", "mailto:", "tel:", "#", "data:")):
                     continue
                 chemin = ref.split("#")[0].split("?")[0]
                 cible = (base / chemin).resolve()
@@ -53,26 +53,27 @@ class TestBuild(unittest.TestCase):
                 self.assertEqual(ouvre, ferme, f"{p or 'accueil'} : <{tag}> {ouvre} ouvertes, {ferme} fermées")
 
     def test_pages_modeles(self):
+        """Une page présente se sert elle-même ; un chemin sans page renvoie au modèle de son type."""
         m = build.modele
-        self.assertEqual(m("corrext/chnell/"), "corrext/traduction-texte-et-document/")
-        self.assertEqual(m("niveaux-de-qualite/"), "corrext/")
-        self.assertEqual(m("solutions/banques-finance/"), "solutions/cabinets-avocats/")
-        self.assertEqual(m("traduction/francais-anglais/"), "traduction/allemand-francais/")
-        self.assertEqual(m("traduction/fusions-acquisitions/"), "traduction/contrats/")
-        self.assertEqual(m("traduction/"), "traduction/contrats/")
-        self.assertEqual(m("comparatif/deepl-traduction-juridique/"), "lexmachina/")
-        self.assertEqual(m("ressources/blog/legaltech-avocats-allies-ou-concurrents/"),
-                         "ressources/blog/traduire-contrat-droit-suisse/")
-        self.assertEqual(m("ressources/glossaire/"), "ressources/blog/")
-        self.assertEqual(m("aide/decouvrir-corrext/"), "ressources/blog/")
-        self.assertEqual(m("a-propos/"), "")
-        self.assertEqual(m("mentions-legales/"), "")
+        for p in build.PAGES:
+            self.assertEqual(m(p), p)
+        self.assertEqual(m("solutions/inexistante/"), "solutions/cabinets-avocats/")
+        self.assertEqual(m("traduction/francais-italien/"), "traduction/allemand-francais/")
+        self.assertEqual(m("traduction/inexistante/"), "traduction/contrats/")
+        self.assertEqual(m("ressources/blog/billet-inexistant/"), "ressources/blog/traduire-contrat-droit-suisse/")
+        self.assertEqual(m("chemin/inconnu/"), "")
 
     def test_relier(self):
-        h = build.relier('<a href="{{ROOT}}fr/solutions/banques-finance/#x">', "corrext/")
-        self.assertEqual(h, '<a href="../solutions/cabinets-avocats/" data-modele="solutions/banques-finance/">')
+        h = build.relier('<a href="{{ROOT}}fr/solutions/inexistante/#x">', "corrext/")
+        self.assertEqual(h, '<a href="../solutions/cabinets-avocats/" data-modele="solutions/inexistante/">')
         self.assertEqual(build.relier('<a href="{{ROOT}}">', ""), '<a href="./">')
         self.assertEqual(build.relier('<img src="{{ROOT}}assets/img/x.png">', "a/b/"), '<img src="../../assets/img/x.png">')
+
+    def test_menu_sans_page_modele(self):
+        """Une fois le site complet, aucune entrée du méga-menu ne doit tomber sur une page modèle."""
+        manquants = sorted(set(re.findall(r'data-modele="([^"]+)"', self.pages[""])))
+        if len(build.PAGES) > 100:
+            self.assertEqual(manquants, [])
 
 
 if __name__ == "__main__":

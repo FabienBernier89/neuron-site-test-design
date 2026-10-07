@@ -1,0 +1,720 @@
+<!--page
+title: Éditeur de relecture Corrext : outil de TAO juridique suisse
+description: Relisez vos traductions phrase par phrase dans Corrext. Chaque correction rejoint votre mémoire, hébergée en Suisse, et sert à vos projets suivants.
+menu: corrext
+gabarit: standard
+-->
+<style>/* Démo Éditeur de relecture · éditeur segment par segment reproduit dans le cadre Corrext (préfixe .cxe-, couleurs --cx-* uniquement) */
+.cx [hidden]{display:none!important}
+.cxe-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.cxe-app{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:14px;padding:16px 18px 6px;align-items:start}
+.cxe-app.fold{grid-template-columns:minmax(0,1fr) auto}
+.cxe-ed,.cxe-side{border:1px solid var(--cx-line);border-radius:var(--r-btn);background:#fff;min-width:0;overflow:hidden}
+/* Barre d'outils */
+.cxe-tb{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;padding:9px 12px;border-bottom:1px solid var(--cx-line)}
+.cxe-back{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--cx-indigo);margin-right:4px}
+.cxe-back svg{width:14px;height:14px}
+.cxe-tools{display:inline-flex;align-items:center;gap:6px}
+.cxe-tag{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10.5px;font-weight:700;color:var(--cx-ink);background:var(--cx-dim-2);border-radius:6px;padding:3px 6px;line-height:1.3}
+.cxe-f{width:18px;text-align:center;font-size:12.5px;color:var(--cx-dim)}
+.cxe-f.b{font-weight:800}
+.cxe-f.i{font-style:italic;font-family:Georgia,serif}
+.cxe-f.u{text-decoration:underline}
+.cxe-sep{width:1px;height:20px;background:var(--cx-line);margin:0 2px}
+.cxe-copy{width:34px;height:26px;border:0;border-radius:6px;background:var(--cx-indigo-soft);color:var(--cx-indigo);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.cxe-copy:hover{background:var(--cx-lav)}
+.cxe-copy svg{width:16px;height:16px}
+.cxe-prog{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--cx-ink);font-variant-numeric:tabular-nums}
+.cxe-prog .bar{width:72px;height:8px;border-radius:8px;background:var(--cx-line);overflow:hidden}
+.cxe-prog .bar i{display:block;height:100%;background:var(--cx-indigo);transform:scaleX(0);transform-origin:left center;transition:transform .3s ease}
+/* Tableau des segments */
+.cxe-scroll{overflow:auto;max-height:560px}
+.cxe-tab{width:100%;min-width:520px;border-collapse:collapse;table-layout:fixed;font-size:12.5px;line-height:1.5}
+.cxe-tab col.c-id{width:44px}
+.cxe-tab col.c-ind{width:50px}
+.cxe-tab col.c-ok{width:44px}
+.cxe-tab th{position:sticky;top:0;z-index:2;background:var(--cx-bg);padding:8px 6px;border-bottom:1px solid var(--cx-line);font-weight:700;color:var(--cx-ink);text-align:center;vertical-align:middle}
+.cxe-tab td{position:relative;padding:8px;border-bottom:1px solid var(--cx-line);vertical-align:middle;color:var(--cx-ink)}
+.cxe-tab tbody tr{cursor:pointer}
+.cxe-tab td.id{text-align:center;font-weight:700}
+.cxe-tab td.ok{text-align:center}
+.cxe-tab td.ind{text-align:center;padding:8px 4px;background:var(--cx-indigo-soft);background:color-mix(in srgb,var(--cx-lav) 42%,#fff)}
+.cxe-tab tr.sel td{background:var(--cx-indigo-soft)}
+.cxe-tab tr.sel td.ind{background:color-mix(in srgb,var(--cx-lav) 62%,#fff)}
+.cxe-src{color:var(--cx-text)}
+.cxe-tgt{min-height:1.5em;border-radius:4px;padding:1px 3px;margin:-1px -3px;outline:0;cursor:text;overflow-wrap:anywhere}
+.cxe-tgt:hover{box-shadow:inset 0 0 0 1px var(--cx-dim-2)}
+.cxe-tgt:focus{box-shadow:inset 0 0 0 2px var(--cx-indigo);background:#fff}
+.cxe-chk{width:16px;height:16px;accent-color:var(--cx-indigo);margin:0;cursor:pointer;vertical-align:middle}
+.cxe-ind{display:inline-flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:600;color:var(--cx-text);letter-spacing:.02em}
+.cxe-ind b{font-weight:600}
+.cxe-gauge{display:inline-flex;width:22px;height:9px;border:1px solid var(--cx-muted);border-radius:6px;overflow:hidden;background:#fff}
+.cxe-gauge i{flex:1}
+.cxe-gauge i+i{border-left:1px solid #fff}
+.cxe-gauge i.on{background:var(--cx-indigo)}
+.cxe-sim{font-size:10px;font-weight:700;color:var(--cx-indigo)}
+.cxe-rep{display:flex;justify-content:center;margin-top:4px;color:var(--cx-indigo)}
+.cxe-rep svg{width:14px;height:14px}
+.cxe-filter{display:flex;align-items:center;gap:5px;border:1px solid var(--cx-line);border-radius:8px;background:#fff;padding:4px 5px 4px 8px;font-weight:400}
+.cxe-filter:focus-within{border-color:var(--cx-indigo)}
+.cxe-filter svg{width:13px;height:13px;color:var(--cx-muted);flex-shrink:0}
+.cxe-filter input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:12px;color:var(--cx-ink);padding:2px 0}
+.cxe-filter input::placeholder{color:var(--cx-ph);opacity:1}
+.cxe-clr{width:22px;height:22px;border:0;background:transparent;color:var(--cx-muted);border-radius:4px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.cxe-clr:hover{color:var(--cx-ink);background:var(--cx-bg)}
+.cxe-clr svg{width:12px;height:12px}
+.cxe-tab tr.cxe-none{cursor:default}
+.cxe-tab tr.cxe-none td{text-align:center;color:var(--cx-muted);font-style:italic;padding:18px}
+/* Traduction mise à jour : voile qui s'efface (opacité seule) */
+.cxe-tab td.cxe-upd::after{content:"";position:absolute;inset:0;background:var(--cx-hl);mix-blend-mode:multiply;opacity:0;pointer-events:none;animation:cxeFlash 1.2s ease}
+@keyframes cxeFlash{0%{opacity:.8}100%{opacity:0}}
+/* Panneau latéral */
+.cxe-side{display:grid;grid-template-columns:minmax(0,1fr) 52px;grid-template-rows:auto 1fr}
+.cxe-head{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 14px;border-bottom:1px solid var(--cx-line);min-height:46px}
+.cxe-title{margin:0;font-size:13.5px;font-weight:700;color:var(--cx-indigo)}
+.cxe-fold{width:30px;height:30px;border:0;border-radius:6px;background:transparent;color:var(--cx-indigo);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.cxe-fold:hover{background:var(--cx-indigo-soft)}
+.cxe-fold svg{width:18px;height:18px;transition:transform .2s ease}
+.cxe-app.fold .cxe-fold svg{transform:rotate(180deg)}
+.cxe-rail{grid-column:2;grid-row:2;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0;border-left:1px solid var(--cx-line)}
+.cxe-rb{position:relative;width:36px;height:36px;border:0;border-radius:8px;background:transparent;color:var(--cx-indigo);display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-size:12px;font-weight:700}
+.cxe-rb:hover{background:var(--cx-indigo-soft)}
+.cxe-rb[aria-selected="true"]{background:var(--cx-indigo);color:#fff}
+.cxe-rb svg{width:19px;height:19px;flex-shrink:0}
+.cxe-rb .l{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.cxe-dot{position:absolute;top:3px;right:3px;width:9px;height:9px;border-radius:50%;background:var(--cx-indigo);border:2px solid #fff}
+.cxe-rb[aria-selected="true"] .cxe-dot{background:#fff;border-color:var(--cx-indigo)}
+.cxe-body{grid-column:1;grid-row:2;padding:12px 14px 14px;max-height:560px;overflow:auto;min-width:0}
+.cxe-app.fold .cxe-side{grid-template-columns:52px}
+.cxe-app.fold .cxe-title,.cxe-app.fold .cxe-body{display:none}
+.cxe-app.fold .cxe-head{justify-content:center;padding:8px 0}
+.cxe-app.fold .cxe-rail{grid-column:1;border-left:0}
+.cxe-pan p{margin:0}
+.cxe-pan:focus{outline:none}
+/* Onglet Translation memories */
+.cxe-empty{border:1px solid var(--cx-line);border-radius:8px;padding:16px 14px;text-align:center;font-size:12.5px;font-style:italic;color:var(--cx-muted)}
+.cxe-match{border:1px solid var(--cx-line);border-radius:8px;padding:11px 12px}
+.cxe-pan .cxe-ml{font-size:11px;font-weight:700;color:var(--cx-muted);letter-spacing:.02em;margin-bottom:6px}
+.cxe-ms{font-size:12.5px;color:var(--cx-text)}
+.cxe-pan .cxe-mt{font-size:12.5px;color:var(--cx-ink);margin-top:7px;padding-top:7px;border-top:1px dashed var(--cx-line)}
+.cxe-ma{display:flex;justify-content:flex-end;margin-top:10px}
+.cxe-sm{padding:6px 14px;font-size:12px}
+.cxe-pan .cx-note{padding:10px 0 0}
+/* Onglet Fast Lookup */
+.cx .cxe-live{margin:0 0 10px}
+.cxe-q{display:flex;gap:8px;margin-bottom:10px}
+.cxe-qbox{flex:1;display:flex;align-items:center;gap:7px;border:1px solid var(--cx-line);border-radius:8px;padding:0 5px 0 10px;min-width:0;background:#fff}
+.cxe-qbox:focus-within{border-color:var(--cx-indigo)}
+.cxe-qbox > svg{width:14px;height:14px;color:var(--cx-muted);flex-shrink:0}
+.cxe-qbox input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:12.5px;color:var(--cx-ink);padding:8px 0}
+.cxe-q .cx-btn{display:inline-flex;align-items:center;gap:6px}
+.cxe-q .cx-btn svg{width:14px;height:14px}
+.cxe-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--cx-bg);border:1px solid var(--cx-line);border-radius:8px;padding:3px;margin-bottom:4px;max-width:260px}
+.cxe-seg button{border:1.5px solid transparent;background:transparent;border-radius:6px;padding:5px 10px;font-size:12.5px;font-weight:700;color:var(--cx-ink);cursor:pointer}
+.cxe-seg button.on{background:#fff;border-color:var(--cx-indigo);color:var(--cx-indigo)}
+.cxe-pan .cxe-h{font-size:13px;font-weight:700;color:var(--cx-ink);margin:12px 0 6px}
+.cxe-nr{font-size:12.5px;color:var(--cx-text)}
+.cxe-res{border:1px solid var(--cx-line);border-radius:8px;overflow:hidden}
+.cxe-rh,.cxe-rr{display:grid;grid-template-columns:1fr 1fr}
+.cxe-rh span{padding:8px 10px;background:var(--cx-bg);font-size:12px;font-weight:700;color:var(--cx-ink)}
+.cxe-rr{border-top:1px solid var(--cx-line)}
+.cxe-pan .cxe-rr p{padding:9px 10px;font-size:12px;line-height:1.5;color:var(--cx-ink)}
+.cxe-rr mark{background:var(--cx-hl);color:inherit;padding:0 1px}
+.cxe-pan .cxe-rr .doc{grid-column:1 / -1;padding:0 10px 9px;font-size:11px;font-weight:600;color:var(--cx-indigo);text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
+/* Onglet AI Assistant */
+.cxe-ai{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.cxe-ai button{border:1.5px solid var(--cx-line);background:var(--cx-bg);border-radius:8px;padding:7px 10px;font-size:12.5px;font-weight:700;color:var(--cx-ink);cursor:pointer}
+.cxe-ai button.on{background:#fff;border-color:var(--cx-indigo);color:var(--cx-indigo)}
+.cxe-box{border:1px solid var(--cx-line);border-radius:8px;padding:10px 12px}
+.cxe-gen{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;padding:2px 0;font-size:12.5px;font-weight:700;color:var(--cx-indigo);cursor:pointer}
+.cxe-gen:disabled{color:var(--cx-dim);cursor:default}
+.cxe-gen svg{width:15px;height:15px}
+.cxe-pan .cxe-alt{font-size:12.5px;line-height:1.55;color:var(--cx-ink);padding:10px 0;border-bottom:1px solid var(--cx-line)}
+.cxe-pan .cxe-alt:last-child{border-bottom:0;padding-bottom:2px}
+.cxe-alt .e{color:var(--cx-indigo)}
+.cxe-rrow{display:flex;gap:8px;margin-bottom:10px;align-items:stretch}
+.cxe-rrow .cx-sel{border:1px solid var(--cx-line);border-radius:8px;flex:1;min-width:0;width:auto;padding:9px 32px 9px 12px}
+.cxe-setb{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--cx-line);border-radius:8px;background:#fff;padding:0 12px;font-size:12.5px;font-weight:600;color:var(--cx-ink);cursor:pointer;flex-shrink:0}
+.cxe-setb svg{width:14px;height:14px;transition:transform .2s ease}
+.cxe-setb[aria-expanded="true"] svg{transform:rotate(180deg)}
+.cx .cxe-pop{position:static;width:auto;margin:0 0 10px;box-shadow:none}
+.cxe-pop .cx-chips{margin-bottom:10px}
+.cxe-rout{font-size:13px;line-height:1.6;color:var(--cx-ink);min-height:62px}
+.cxe-rout u{text-decoration:underline;text-decoration-color:var(--cx-indigo);text-underline-offset:3px;color:var(--cx-indigo)}
+.cxe-rfoot{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:10px}
+.cxe-icb{width:32px;height:32px;border:1px solid var(--cx-line);border-radius:8px;background:#fff;color:var(--cx-indigo);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.cxe-icb:hover{background:var(--cx-indigo-soft)}
+.cxe-icb svg{width:15px;height:15px}
+.cxe-rnote .cx-btn{margin-top:10px}
+/* Onglet Sync */
+.cxe-sblock+.cxe-sblock{margin-top:16px}
+.cxe-pan .cxe-sh{font-size:13px;font-weight:700;color:var(--cx-ink);margin:0 0 8px}
+.cxe-sh:focus{outline:none}
+.cxe-sync{border:1px solid var(--cx-line);border-radius:8px;padding:10px 12px}
+.cxe-pan .cxe-sl{font-size:11px;font-weight:700;color:var(--cx-muted);margin-bottom:6px}
+.cxe-ver{display:grid;grid-template-columns:86px 1fr;gap:8px;font-size:12.5px;padding:5px 0;color:var(--cx-ink)}
+.cxe-ver+.cxe-ver{border-top:1px dashed var(--cx-line)}
+.cxe-ver.one{grid-template-columns:1fr}
+.cxe-ver b{font-size:11.5px;color:var(--cx-indigo)}
+.cxe-sact{display:flex;justify-content:flex-end;gap:8px;margin-top:10px;flex-wrap:wrap}
+.cxe-okst{border:1px solid var(--cx-line);border-radius:8px;padding:14px;text-align:center;font-size:12.5px;font-style:italic;color:var(--cx-muted)}
+.cxe-okst svg{display:block;margin:6px auto 0;width:18px;height:18px;color:var(--cx-indigo)}
+.cxe-pchk{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--cx-ink);margin-top:8px;cursor:pointer}
+.cxe-note{padding:4px 18px 16px}
+@media(max-width:940px){
+  .cxe-app,.cxe-app.fold{grid-template-columns:minmax(0,1fr)}
+  .cxe-side,.cxe-app.fold .cxe-side{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto}
+  .cxe-fold{display:none}
+  .cxe-app.fold .cxe-title,.cxe-app.fold .cxe-body{display:block}
+  .cxe-app.fold .cxe-head{justify-content:space-between;padding:8px 10px 8px 14px}
+  .cxe-rail,.cxe-app.fold .cxe-rail{grid-column:1;grid-row:2;flex-direction:row;justify-content:flex-start;border-left:0;border-bottom:1px solid var(--cx-line);padding:8px 10px;overflow-x:auto;gap:6px}
+  .cxe-rb{width:auto;height:34px;padding:0 10px;white-space:nowrap}
+  .cxe-rb .l{position:static;width:auto;height:auto;overflow:visible;clip:auto}
+  .cxe-body{grid-row:3;max-height:none}
+  .cxe-scroll{max-height:420px}
+}
+@media(max-width:560px){
+  .cxe-app{padding:12px 12px 4px}
+  /* Sur téléphone, chaque segment devient une ligne empilée : source au-dessus, traduction dessous */
+  .cxe-tab{min-width:0}
+  .cxe-tab colgroup{display:none}
+  .cxe-tab thead tr{display:grid;grid-template-columns:minmax(0,1fr) 40px;gap:6px;padding:8px 0 8px 8px;background:var(--cx-bg);border-bottom:1px solid var(--cx-line)}
+  .cxe-tab thead th{display:block;position:static;padding:0;border:0;background:transparent}
+  .cxe-tab thead th:nth-child(1),.cxe-tab thead th:nth-child(4){display:none}
+  .cxe-tab thead th:nth-child(2),.cxe-tab thead th:nth-child(3){grid-column:1}
+  .cxe-tab thead th:nth-child(5){grid-column:2;grid-row:1 / span 2;align-self:center}
+  .cxe-tab tbody tr[data-i]{display:grid;grid-template-columns:40px minmax(0,1fr) 40px;grid-template-areas:"id src ok" "ind tgt ok";border-bottom:1px solid var(--cx-line)}
+  .cxe-tab tbody tr[data-i] td{display:block;border-bottom:0}
+  .cxe-tab td.id{grid-area:id;padding:8px 4px 4px}
+  .cxe-tab td.cxe-src{grid-area:src;padding:8px 8px 6px}
+  .cxe-tab td.cxe-src+td{grid-area:tgt;padding:6px 8px 9px;border-top:1px dashed var(--cx-line)}
+  .cxe-tab td.ind{grid-area:ind;display:flex;align-items:center;justify-content:center}
+  .cxe-tab td.ok{grid-area:ok;display:flex;align-items:center;justify-content:center;padding:8px 4px}
+  .cxe-tab tr.cxe-none{display:block}
+  .cxe-tab tr.cxe-none td{display:block}
+  .cxe-prog .bar{width:44px}
+  .cxe-q{flex-wrap:wrap}
+  .cxe-q .cx-btn{flex:1;justify-content:center}
+  .cxe-ver{grid-template-columns:1fr;gap:2px}
+  .cxe-note{padding:4px 12px 14px}
+}
+@media(prefers-reduced-motion:reduce){
+  .cxe-prog .bar i,.cxe-fold svg,.cxe-setb svg{transition:none}
+  .cxe-tab td.cxe-upd::after{animation:none}
+}
+/* Page : paragraphes successifs dans l'encadré et titre de section dans un bloc fonctionnalité */
+.cxe-gov .gov-box p+p{margin-top:12px}
+.cxe-links{display:flex;flex-direction:column;gap:10px;margin-top:26px}
+.cxe-word{padding:84px 0}
+.cxe-word .feat-txt h2{font-size:clamp(24px,2.6vw,32px);color:var(--ink);margin-bottom:16px;letter-spacing:-.02em;line-height:1.2}
+.cxe-word .feat-txt h2 .pn{color:var(--blue)}
+.cxe-word .word-panel .pbox{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cxe-word .word-panel .pbox.on{border-color:var(--blue-d);color:var(--blue-d);font-weight:700}</style>
+<style>@media (prefers-reduced-motion:reduce){.tvis-svg .anim{display:none}}</style>
+<section class="hero">
+<div class="wrap hero-g">
+<h1 class="h1"><span class="n">Éditeur de relecture.</span> <span class="s">Vos corrections servent à vos prochaines traductions</span></h1>
+<div class="hero-d"><p>L'éditeur de relecture est l'outil de TAO (traduction assistée par ordinateur) intégré à Corrext. Il présente votre document phrase par phrase : l'original à gauche, la traduction à droite. Vous corrigez, puis vous confirmez. Chaque correction est gardée en mémoire et reprise dans vos traductions suivantes.</p><a class="btn" href="{{ROOT}}fr/contact/">Demander une démo</a></div>
+</div>
+</section>
+<section class="sec sec-st" id="demo"><div class="wrap">
+<div class="ech" data-ech="1176x720"><div class="st" role="img" aria-label="Démonstration de l'interface Corrext" style="width:1176px;height:720px"><div class="st-f"><div class="fen"><div class="fen-b" aria-hidden="true"><i></i><i></i><i></i><span>Corrext</span></div><div class="fen-c" data-scene data-ui><div class="cx-zone"><div class="cx" id="cx" aria-label="Démonstration de l'interface Corrext, éditeur de relecture">
+      <div class="cx-top">
+        <span class="cx-logo"><img src="{{ROOT}}assets/img/corrext-logo.svg" alt="Corrext" class="cx-brand"></span>
+        <span class="home">Home</span>
+        <span class="grow"></span>
+        <span class="bell" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
+        <span class="cx-avatar" aria-hidden="true">AM</span>
+      </div>
+
+      <div class="cxe-app" id="cxeApp">
+
+        <!-- Éditeur : barre d'outils et tableau des segments -->
+        <div class="cxe-ed">
+          <div class="cxe-tb">
+            <span class="cxe-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 19l-7-7 7-7"/></svg>Back</span>
+            <span class="cxe-tools" aria-hidden="true">
+              <span class="cxe-tag">&lt;tag&gt;</span><span class="cxe-tag">&lt;/tag&gt;</span><span class="cxe-tag">&lt;tag/&gt;</span>
+              <span class="cxe-f b">B</span><span class="cxe-f i">I</span><span class="cxe-f u">U</span>
+            </span>
+            <span class="cxe-sep" aria-hidden="true"></span>
+            <button type="button" class="cxe-copy" id="cxeCopy" aria-label="Copy source : copier la source dans la traduction du segment choisi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5v14"/><path d="M8 12h12M15 7l5 5-5 5"/></svg></button>
+            <span class="cxe-prog"><span class="bar" aria-hidden="true"><i id="cxePBar"></i></span><span id="cxePNum">0%</span><span class="cxe-sr"> des segments confirmés</span></span>
+          </div>
+          <div class="cxe-scroll">
+            <table class="cxe-tab">
+              <caption class="cxe-sr">Segments du document, source en français et traduction en allemand</caption>
+              <colgroup><col class="c-id"><col><col><col class="c-ind"><col class="c-ok"></colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col"><span class="cxe-sr">Source (français)</span>
+                    <span class="cxe-filter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="text" enterkeyhint="search" id="cxeFs" placeholder="Filter source" aria-label="Filter source" autocomplete="off"><button type="button" class="cxe-clr" data-for="cxeFs" aria-label="Effacer le filtre source"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></span>
+                  </th>
+                  <th scope="col"><span class="cxe-sr">Traduction (allemand)</span>
+                    <span class="cxe-filter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="text" enterkeyhint="search" id="cxeFt" placeholder="Filter target" aria-label="Filter target" autocomplete="off"><button type="button" class="cxe-clr" data-for="cxeFt" aria-label="Effacer le filtre traduction"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></span>
+                  </th>
+                  <th scope="col"><span class="cxe-sr">Origine de la traduction</span></th>
+                  <th scope="col"><input type="checkbox" class="cxe-chk" id="cxeAll" aria-label="Confirmer tous les segments"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-i="0">
+                  <td class="id">0<span class="cxe-rep" title="Phrase répétée au segment 5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12"/><path d="m7 22-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/></svg><span class="cxe-sr">Phrase répétée au segment 5</span></span></td>
+                  <td class="cxe-src">Contrat de mandat (exemple fictif)</td>
+                  <td><div class="cxe-tgt" contenteditable="true" role="textbox" aria-label="Traduction du segment 0" lang="de" spellcheck="false">Auftragsvertrag (fiktives Beispiel)</div></td>
+                  <td class="ind"><span class="cxe-ind" title="Machine translation"><b>MT</b><span class="cxe-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="cxe-sr">Traduction automatique, qualité haute</span></span></td>
+                  <td class="ok"><input type="checkbox" class="cxe-chk" aria-label="Confirmer le segment 0"></td>
+                </tr>
+                <tr data-i="1">
+                  <td class="id">1</td>
+                  <td class="cxe-src">Article 1 · Objet</td>
+                  <td><div class="cxe-tgt" contenteditable="true" role="textbox" aria-label="Traduction du segment 1" lang="de" spellcheck="false">Artikel 1 · Gegenstand</div></td>
+                  <td class="ind"><span class="cxe-ind" title="Machine translation"><b>MT</b><span class="cxe-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="cxe-sr">Traduction automatique, qualité haute</span></span></td>
+                  <td class="ok"><input type="checkbox" class="cxe-chk" aria-label="Confirmer le segment 1"></td>
+                </tr>
+                <tr data-i="2" class="sel">
+                  <td class="id">2</td>
+                  <td class="cxe-src">La Mandataire fournit à la Mandante des prestations de conseil en conformité réglementaire, conformément au cahier des charges annexé.</td>
+                  <td><div class="cxe-tgt" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Traduction du segment 2" lang="de" spellcheck="false">Die Auftragnehmerin erbringt der Auftraggeberin gemäss beiliegendem Leistungsverzeichnis beratende Dienstleistungen in regulatorischer Hinsicht.</div></td>
+                  <td class="ind"><span class="cxe-ind" title="Machine translation"><b>MT</b><span class="cxe-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span><span class="cxe-sr">Traduction automatique, qualité moyenne</span></span></td>
+                  <td class="ok"><input type="checkbox" class="cxe-chk" aria-label="Confirmer le segment 2"></td>
+                </tr>
+                <tr data-i="3">
+                  <td class="id">3</td>
+                  <td class="cxe-src">Toute facture impayée à l'échéance porte intérêt moratoire à 5 % l'an.</td>
+                  <td><div class="cxe-tgt" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Traduction du segment 3" lang="de" spellcheck="false">Für jede bei Fälligkeit unbezahlte Rechnung ist ein Verzugszins von 5 % pro Jahr geschuldet.</div></td>
+                  <td class="ind"><span class="cxe-ind" title="Translation memory"><b>TM</b><span class="cxe-sim">100%</span><span class="cxe-sr">Reprise de la mémoire de traduction, correspondance complète</span></span></td>
+                  <td class="ok"><input type="checkbox" class="cxe-chk" aria-label="Confirmer le segment 3"></td>
+                </tr>
+                <tr data-i="4">
+                  <td class="id">4</td>
+                  <td class="cxe-src">Le présent contrat est soumis au droit suisse, en particulier au Code des obligations. Le for exclusif est à Fribourg.</td>
+                  <td><div class="cxe-tgt" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Traduction du segment 4" lang="de" spellcheck="false">Dieser Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg.</div></td>
+                  <td class="ind"><span class="cxe-ind" title="Machine translation"><b>MT</b><span class="cxe-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="cxe-sr">Traduction automatique, qualité haute</span></span></td>
+                  <td class="ok"><input type="checkbox" class="cxe-chk" aria-label="Confirmer le segment 4"></td>
+                </tr>
+                <tr data-i="5">
+                  <td class="id">5<span class="cxe-rep" title="Phrase répétée au segment 0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12"/><path d="m7 22-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/></svg><span class="cxe-sr">Phrase répétée au segment 0</span></span></td>
+                  <td class="cxe-src">Contrat de mandat (exemple fictif)</td>
+                  <td><div class="cxe-tgt" contenteditable="true" role="textbox" aria-label="Traduction du segment 5" lang="de" spellcheck="false">Mandatsvertrag (fiktives Beispiel)</div></td>
+                  <td class="ind"><span class="cxe-ind" title="Machine translation"><b>MT</b><span class="cxe-gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="cxe-sr">Traduction automatique, qualité haute</span></span></td>
+                  <td class="ok"><input type="checkbox" class="cxe-chk" aria-label="Confirmer le segment 5"></td>
+                </tr>
+                <tr class="cxe-none" id="cxeNone" hidden><td colspan="5">Aucune phrase ne correspond au filtre.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Panneau latéral à quatre onglets -->
+        <div class="cxe-side">
+          <div class="cxe-head">
+            <p class="cxe-title" id="cxeTitle">Translation memories</p>
+            <button type="button" class="cxe-fold" id="cxeFold" aria-expanded="true" aria-controls="cxeBody" aria-label="Replier le panneau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+          </div>
+          <div class="cxe-rail" role="tablist" aria-orientation="vertical" aria-label="Onglets du panneau">
+            <button type="button" class="cxe-rb" role="tab" id="cxeT0" aria-selected="true" aria-controls="cxeP0" data-title="Translation memories"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg><span class="l">Translation memories</span></button>
+            <button type="button" class="cxe-rb" role="tab" id="cxeT1" aria-selected="false" aria-controls="cxeP1" data-title="Fast Lookup" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19V5a2 2 0 0 1 2-2h12v15H7a2 2 0 0 0-2 2 2 2 0 0 0 2 2h12"/><path d="M10 3v7l2.5-1.8L15 10V3"/></svg><span class="l">Fast Lookup</span></button>
+            <button type="button" class="cxe-rb" role="tab" id="cxeT2" aria-selected="false" aria-controls="cxeP2" data-title="AI Assistant" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4"/><circle cx="12" cy="3.5" r="1"/><path d="M9 13h.01M15 13h.01M9.5 16h5"/></svg><span class="l">AI Assistant</span></button>
+            <button type="button" class="cxe-rb" role="tab" id="cxeT3" aria-selected="false" aria-controls="cxeP3" data-title="Sync" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 20v-4h-4"/></svg><span class="l">Sync</span><span class="cxe-dot" id="cxeDot" aria-hidden="true"></span><span class="cxe-sr" id="cxeDotTxt">, 3 éléments en attente</span></button>
+          </div>
+          <div class="cxe-body" id="cxeBody">
+
+            <!-- Translation memories -->
+            <div class="cxe-pan" id="cxeP0" role="tabpanel" aria-labelledby="cxeT0" tabindex="0">
+              <div id="cxeMem"></div>
+            </div>
+
+            <!-- Fast Lookup -->
+            <div class="cxe-pan" id="cxeP1" role="tabpanel" aria-labelledby="cxeT1" tabindex="0" hidden>
+              <button type="button" class="cx-switch cxe-live" id="cxeLiveSw" aria-pressed="true"><i aria-hidden="true"></i> Live search</button>
+              <form class="cxe-q" id="cxeQForm" role="search" autocomplete="off">
+                <span class="cxe-qbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="text" enterkeyhint="search" id="cxeQ" value="intérêt moratoire" aria-label="Rechercher un terme dans les mémoires et dans CHnell"><button type="button" class="cxe-clr" id="cxeQClr" aria-label="Effacer la recherche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></span>
+                <button type="submit" class="cx-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search</button>
+              </form>
+              <div class="cxe-seg" role="group" aria-label="Côté de la recherche">
+                <button type="button" class="on" data-side="src" aria-pressed="true">Source</button>
+                <button type="button" data-side="tgt" aria-pressed="false">Target</button>
+              </div>
+              <div id="cxeLk"></div>
+            </div>
+
+            <!-- AI Assistant -->
+            <div class="cxe-pan" id="cxeP2" role="tabpanel" aria-labelledby="cxeT2" tabindex="0" hidden>
+              <div class="cxe-ai" role="tablist" aria-label="Fonctions de l'assistant IA">
+                <button type="button" class="on" role="tab" id="cxeAiA" aria-selected="true" aria-controls="cxeAiAP">Alternatives</button>
+                <button type="button" role="tab" id="cxeAiR" aria-selected="false" aria-controls="cxeAiRP" tabindex="-1">Rephrasing</button>
+              </div>
+              <div id="cxeAiAP" role="tabpanel" aria-labelledby="cxeAiA">
+                <div class="cxe-box">
+                  <button type="button" class="cxe-gen" id="cxeMore"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 16 8"/><path d="m14 6 4 4"/><path d="M19 3v3M17.5 4.5h3M7 3v2M6 4h2M20 13v2M19 14h2"/></svg>Generate more</button>
+                  <div id="cxeAlt"></div>
+                </div>
+              </div>
+              <div id="cxeAiRP" role="tabpanel" aria-labelledby="cxeAiR" hidden>
+                <div id="cxeRWrap">
+                  <div class="cxe-rrow">
+                    
+                    <button type="button" class="cxe-setb" id="cxeSet" aria-expanded="false" aria-controls="cxePop">Settings <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+                  </div>
+                  <div class="cx-set-pop cxe-pop" id="cxePop">
+                    <p class="cx-h5" id="cxeStyH">Styles</p>
+                    <div class="cx-chips" role="group" aria-labelledby="cxeStyH">
+                      <button type="button" class="cx-chip" data-style="legal" aria-pressed="false">Formal legal</button>
+                      <button type="button" class="cx-chip" data-style="fin" aria-pressed="false">Financial</button>
+                      <button type="button" class="cx-chip" data-style="simp" aria-pressed="false">Simplified</button>
+                      <button type="button" class="cx-chip" data-style="formal" aria-pressed="false">Formal</button>
+                      <button type="button" class="cx-chip" data-style="inf" aria-pressed="false">Informal</button>
+                    </div>
+                    <p class="cx-h5" id="cxeOptH">Options</p>
+                    <div class="cx-chips" role="group" aria-labelledby="cxeOptH"><button type="button" class="cx-chip" id="cxeShort" aria-pressed="false">Shorten</button></div>
+                    <div class="cx-set-act"><button type="button" class="rst" id="cxeReset">Reset</button><button type="button" class="cx-btn" id="cxeSetOk">Apply</button></div>
+                  </div>
+                  <div class="cxe-box">
+                    <div class="cxe-rout" id="cxeROut" lang="de"></div>
+                    <div class="cxe-rfoot">
+                      <button type="button" class="cxe-icb" id="cxeRegen" aria-label="Régénérer la reformulation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg></button>
+                      <button type="button" class="cx-btn" id="cxeRApply">Apply</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="cxe-rnote" id="cxeRNote" hidden>
+                  <p class="cxe-empty">Démo : la reformulation est préparée sur le segment 4, la clause de droit applicable.</p>
+                  <button type="button" class="cx-btn ghost" id="cxeGo4">Choisir le segment 4</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sync -->
+            <div class="cxe-pan" id="cxeP3" role="tabpanel" aria-labelledby="cxeT3" tabindex="0" hidden>
+              <div id="cxeSync"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <p class="cx-note cxe-note">Démo : cliquez une phrase, corrigez sa traduction, confirmez-la, puis ouvrez les quatre onglets du panneau. Rien n'est envoyé.</p>
+      <p class="cxe-sr" id="cxeLive" aria-live="polite"></p>
+    </div></div></div></div></div></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2">Ce que fait l'éditeur de <em>relecture, exactement</em></h2><p class="intro">Un outil de TAO découpe le document en segments. Un segment, c'est une phrase ou un titre. Vous relisez chaque segment face à son original, vous le corrigez si besoin, puis vous le confirmez.</p><div class="tl txt t2"><div><b>Deux colonnes</b><p><strong class="kf">L'original à gauche, la traduction à droite</strong>, segment par segment. Un filtre de recherche au-dessus de chaque colonne retrouve une phrase côté source ou côté traduction.</p></div><div><b>Origine de chaque phrase</b><p>Un indicateur signale si la traduction vient <strong class="kf">du moteur ou de la mémoire de traduction</strong>. Pour la traduction automatique, une jauge donne le <strong class="kf">niveau de qualité</strong> : bas, moyen ou haut. La mémoire de traduction rassemble les traductions déjà validées.</p></div><div><b>Confirmation</b><p><strong class="kf">Une case par segment</strong> confirme sa relecture. La progression du document s'affiche <strong class="kf">en pourcentage</strong>, en haut de l'éditeur.</p></div><div><b>Barre d'outils</b><p><strong class="kf">Balises de mise en forme</strong> (ouvrante, fermante, autonome), gras, italique, souligné, et copie de la source dans la traduction. Les balises marquent la mise en forme du document d'origine.</p></div><div><b>Contrôles</b><p>L'éditeur repère les <strong class="kf">phrases répétées</strong> et les <strong class="kf">balises incohérentes</strong>.</p></div><div><b>Mémoires</b><p>Pour la phrase choisie, les <strong class="kf">traductions déjà validées les plus proches</strong>. Un clic sur Apply les reprend dans la traduction.</p></div><div><b>Fast Lookup</b><p>Recherche en direct dans <strong class="kf">vos mémoires et dans CHnell</strong>, côté source ou côté cible. Chaque résultat est bilingue, le terme est surligné des deux côtés et le document d'origine est indiqué.</p></div><div><b>Assistant IA</b><p>Alternatives : la même phrase traduite par plusieurs moteurs, côte à côte, et d'autres sur demande. Rephrasing : une reformulation en <strong class="kf">cinq styles</strong> (juridique formel, financier, simplifié, formel, informel), avec une option pour raccourcir. Les mots modifiés par la reformulation sont soulignés.</p></div><div><b>Sync</b><p><strong class="kf">Pour relire à plusieurs</strong> : les conflits entre deux versions à arbitrer, les modifications d'un collègue à intégrer, et la propagation d'une correction aux phrases identiques.</p></div><div><b>Tableau de bord</b><p>Confidentialité, type de relecture, langues, avancement, fichiers de référence, instructions, mémoires et équipe. Pour chaque fichier : <strong class="kf">Open in CAT</strong>, Preview, Export docx, Reimport docx, <strong class="kf">Download TMX</strong> et Validate. TMX est le format standard d'échange des mémoires de traduction.</p></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<div class="bt"><div class="bt-g"><h2 class="h3s">Vos corrections servent-elles à vos <em>prochaines traductions</em> ?</h2><p>Oui, en confidentialité standard. Chaque correction faite dans l'éditeur est gardée dans votre mémoire de traduction. Au projet suivant, Corrext la reprend. La traduction s'adapte ainsi, projet après projet, à votre façon d'écrire. Et un même passage reste traduit de la même manière d'un projet à l'autre.</p><a class="lien" href="{{ROOT}}fr/securite-souverainete/">Sécurité et souveraineté des données</a></div><div class="bt-p"><b>Vous corrigez.</b><p>Dans l'éditeur, une phrase à la fois, face à l'original.</p></div><div class="bt-p"><b>La correction est gardée.</b><p>Le projet est conservé sur les serveurs suisses de Corrext et sert de mémoire à vous seul.</p></div><div class="bt-p"><b>Le projet suivant la reprend.</b><p>Vos formulations reviennent, et vos traductions restent cohérentes entre les projets.</p></div><div class="bt-p"><b>Sauf en mode hautement sensible.</b><p>Stockage et traitement uniquement en Suisse, aucune réutilisation en mémoire.</p></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2">Du fichier déposé au <em>document validé</em></h2><p class="intro">La relecture est une étape d'un projet Corrext. Voici le parcours complet, dans l'ordre de l'application. Les quatre premières étapes se font à la création du projet.</p><div class="tl t4 tl-ledger"><div><span class="n">01</span><div><b>Création du projet</b><p>Nom, langues cibles, niveau de confidentialité, traduction ou non des commentaires du document.</p></div></div><div><span class="n">02</span><div><b>Analyse des fichiers</b><p>Chaque fichier est compté en pages standard. Une page standard compte 1 800 caractères, espaces compris.</p></div></div><div><span class="n">03</span><div><b>Terminologie du projet</b><p>Corrext extrait lui-même les termes candidats du document. Vous fixez leur traduction, ou vous ajoutez vos propres termes.</p></div></div><div><span class="n">04</span><div><b>Choix du moteur</b><p>LexMachina, 100 % suisse, ou un moteur tiers autorisé par votre organisation : DeepL Pro, Azure OpenAI GPT, Claude. Les moteurs tiers sont hébergés à l'étranger.</p></div></div><div><span class="n">05</span><div><b>Traduction automatique</b><p>Le moteur choisi traduit le document. Les termes fixés à l'étape 3 sont repris tels quels.</p></div></div><div><span class="n">06</span><div><b>Relecture dans l'éditeur</b><p>Open in CAT : vous relisez, corrigez et confirmez chaque phrase, seul ou à plusieurs.</p></div></div><div><span class="n">07</span><div><b>Validation</b><p>Le fichier relu est validé depuis le tableau de bord du projet.</p></div></div><div><span class="n">08</span><div><b>Export</b><p>Le document traduit s'exporte en Word. La mémoire du fichier se télécharge au format TMX.</p></div></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2">Trois usages de l'éditeur <em>de relecture</em></h2><div class="cd"><div><b>Les mêmes mots d'un contrat à l'autre</b><p>Vos juristes corrigent la première traduction d'un contrat type. Les traductions suivantes reprennent leurs formulations, et les termes fixés sont respectés. Le vocabulaire de la maison reste stable, projet après projet.</p></div><div><b>Relire à plusieurs avant un envoi</b><p>Deux relecteurs se partagent le document. L'onglet Sync signale les conflits entre versions et les modifications de l'autre. Il propose aussi de répercuter une correction sur les phrases identiques.</p></div><div><b>Traiter un dossier sensible</b><p>Le projet est créé en mode contenu hautement sensible : stockage et traitement uniquement en Suisse. Vous relisez dans le même éditeur, et aucune phrase n'est réutilisée en mémoire.</p></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2">Travailler dans Word. Le même panneau, dans votre traitement <em>de texte</em></h2><p class="intro">La relecture peut aussi se faire dans Microsoft Word. Exportez le document depuis le tableau de bord du projet (Export docx). Ouvrez-le dans Word avec le complément Corrext : l'assistant IA, Fast Lookup, les mémoires et Sync s'y trouvent dans un panneau latéral. Une fois la relecture faite, réimportez le fichier (Reimport docx).</p><ul class="liste"><li>Export docx, relecture dans Word, puis Reimport docx</li><li>Assistant IA, Fast Lookup, mémoires et Sync dans le complément</li><li>Connexion requise, réservé aux membres du projet, Office 2021 ou Microsoft 365</li></ul>
+</div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2">Les autres outils <em>de Corrext</em></h2><div class="cd"><a href="{{ROOT}}fr/corrext/gestion-de-projet/"><b><b>Gestion de projet</b></b><p>Le projet en trois étapes : confidentialité, fichiers analysés, relecture interne ou externe, devis et délai.</p></a><a href="{{ROOT}}fr/corrext/chnell/"><b><b>Fast lookup CHnell</b></b><p>Le concordancier du droit suisse : sources officielles, 30 domaines, vos propres ressources.</p></a><a href="{{ROOT}}fr/corrext/traduction-texte-et-document/"><b><b>Traduction texte et document</b></b><p>Texte ou fichier traduit tout de suite, alternatives par moteur, PDF vers Word, réécriture en cinq styles.</p></a></div>
+</div></section>
+<section class="sec"><div class="wrap fq"><h2 class="h2">Questions fréquentes sur l'éditeur de relecture</h2><div><details><summary>Qu'est-ce qu'un outil de TAO ?</summary><div class="r"><p>TAO signifie traduction assistée par ordinateur (« CAT tool » en anglais). Un tel outil découpe le document en segments, c'est-à-dire en phrases ou en titres, et place chacun face à sa traduction. Le relecteur corrige puis confirme chaque segment, avec l'aide des mémoires et de la terminologie. Dans Corrext, cet outil s'appelle l'éditeur de relecture.</p></div></details><details><summary>Comment ouvrir l'éditeur de relecture ?</summary><div class="r"><p>Depuis le tableau de bord d'un projet. Chaque fichier y porte un bouton Open in CAT, qui ouvre le document dans l'éditeur. Le projet lui-même se crée dans Gestion de projet : langues, niveau de confidentialité, terminologie et moteur de traduction.</p></div></details><details><summary>Mes corrections servent-elles aux prochaines traductions ?</summary><div class="r"><p>Oui, en confidentialité standard. Vos projets sont conservés sur les serveurs suisses de Corrext et servent de mémoire de traduction à vous seul. Une correction faite aujourd'hui est reprise dans vos projets suivants. La traduction s'adapte ainsi à votre langue et reste cohérente d'un projet à l'autre.</p></div></details><details><summary>Et en mode contenu hautement sensible ?</summary><div class="r"><p>Dans ce mode (Highly sensitive content), les traductions ne nourrissent pas la mémoire. Les données sont stockées et traitées uniquement en Suisse. Le mode est disponible en français, en allemand, en italien et en anglais. Vous le choisissez à la création de chaque projet.</p></div></details><details><summary>Peut-on relire à plusieurs le même document ?</summary><div class="r"><p>Oui. L'onglet Sync gère le travail à plusieurs. Il présente les conflits entre deux versions d'une même phrase, à arbitrer. Il liste les modifications d'un collègue, à intégrer. Il propose enfin de répercuter une correction sur les phrases identiques du document : c'est la propagation. L'équipe du projet se gère depuis le tableau de bord.</p></div></details><details><summary>Faut-il Microsoft Word pour relire ?</summary><div class="r"><p>Non. L'éditeur de relecture s'utilise directement dans Corrext. Si vous préférez Word, exportez le document depuis le tableau de bord (Export docx), relisez-le avec le complément Corrext, puis réimportez-le (Reimport docx). Le complément demande une connexion, l'appartenance au projet et Office 2021 ou Microsoft 365.</p></div></details><details><summary>Les termes que je fixe sont-ils respectés ?</summary><div class="r"><p>Oui. À la création du projet, Corrext extrait lui-même les termes candidats du document. Vous fixez leur traduction, ou vous ajoutez vos propres termes. Un terme fixé est repris tel quel dans la traduction automatique, que vous relisez ensuite dans l'éditeur.</p></div></details><details><summary>Quels formats de fichiers puis-je relire ?</summary><div class="r"><p>Ceux que vous déposez dans un projet : .pdf, .doc, .docx, .xls, .xlsx, .ppt et .pptx, jusqu'à 50 Mo par fichier. L'application conseille le format original plutôt que le PDF. Depuis le tableau de bord, le document relu s'exporte en Word, et sa mémoire se télécharge au format TMX, le format standard d'échange des mémoires de traduction.</p></div></details></div></div></section>
+<section class="cta"><div class="wrap"><h2><span class="l1">Voyez l'éditeur de</span> <span class="l2">relecture sur vos propres documents</span></h2><a class="btn" href="{{ROOT}}fr/contact/">Demander une démo</a></div></section>
+<script>
+/* Démo Éditeur de relecture · segments éditables, confirmation, filtres et panneau latéral à quatre onglets.
+   Contrat fictif ; les extraits CHnell reprennent des résultats réels déjà publiés sur le site. */
+(function(){
+  var cx=document.getElementById('cx'); if(!cx){return;}
+  var reduce=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var $=function(id){return document.getElementById(id);};
+  var each=function(list,fn){Array.prototype.forEach.call(list,fn);};
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function norm(s){return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+  var liveEl=$('cxeLive'),lt;
+  function say(t){clearTimeout(lt);liveEl.textContent='';lt=setTimeout(function(){liveEl.textContent=t;},40);}
+
+  /* ---------- Données de démonstration ---------- */
+  var ALT=[
+    [{e:'LexMachina',t:'Mandatsvertrag (fiktives Beispiel)'},{e:'DeepL Pro',t:'Auftragsvertrag (fiktives Beispiel)'},{e:'Azure OpenAI GPT',t:'Auftragsvertrag (fiktives Beispiel)'}],
+    [{e:'LexMachina',t:'Artikel 1 · Gegenstand'},{e:'DeepL Pro',t:'Artikel 1 · Gegenstand'},{e:'Azure OpenAI GPT',t:'Artikel 1 · Gegenstand'}],
+    [{e:'LexMachina',t:'Die Auftragnehmerin erbringt der Auftraggeberin gemäss beiliegendem Leistungsverzeichnis beratende Dienstleistungen in regulatorischer Hinsicht.'},
+     {e:'DeepL Pro',t:'Die Beauftragte erbringt für die Auftraggeberin Beratungsleistungen im Bereich der Einhaltung gesetzlicher Vorschriften gemäss dem im Anhang beigefügten Lastenheft.'},
+     {e:'Azure OpenAI GPT',t:'Die Beauftragte erbringt für die Auftraggeberin Beratungsleistungen im Bereich der regulatorischen Compliance gemäss dem beigefügten Pflichtenheft.'}],
+    [{e:'LexMachina',t:'Jede bei Fälligkeit offene Rechnung wird mit einem Verzugszins von 5% p.a. verzinst.'},
+     {e:'DeepL Pro',t:'Für jede Rechnung, die bei Fälligkeit noch nicht beglichen ist, fallen Verzugszinsen in Höhe von 5 % pro Jahr an.'},
+     {e:'Azure OpenAI GPT',t:'Jede bei Fälligkeit unbezahlte Rechnung trägt einen Verzugszins von 5 % pro Jahr.'}],
+    [{e:'LexMachina',t:'Dieser Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg.'},
+     {e:'DeepL Pro',t:'Der vorliegende Vertrag unterliegt schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg.'},
+     {e:'Azure OpenAI GPT',t:'Dieser Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Der ausschliessliche Gerichtsstand ist in Freiburg.'}]
+  ];
+
+  ALT[5]=ALT[0];
+  var MEM=[
+    null,
+    {s:'Article 1 · Objet du contrat',t:'Artikel 1 · Vertragsgegenstand',n:'Démo : formulation validée lors d\'un projet précédent.'},
+    {s:'La Mandataire fournit à la Mandante des prestations de conseil en conformité réglementaire, conformément au cahier des charges annexé au présent contrat.',t:'Die Beauftragte erbringt für die Auftraggeberin Beratungsleistungen im Bereich der regulatorischen Compliance gemäss dem diesem Vertrag beigefügten Pflichtenheft.',n:'Démo : cette formulation a été corrigée et validée dans un projet précédent. Apply la reprend ici.'},
+    {s:'Toute facture impayée à l\'échéance porte intérêt moratoire à 5 % l\'an.',t:'Für jede bei Fälligkeit unbezahlte Rechnung ist ein Verzugszins von 5 % pro Jahr geschuldet.',n:'Démo : la traduction de ce segment a été reprise telle quelle de la mémoire.'},
+    null,
+    null
+  ];
+  var REPH={4:{
+    none:'Dieser Vertrag <u>ist dem schweizerischen</u> Recht <u>unterworfen</u>, <u>namentlich</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.',
+    legal:'<u>Der vorliegende</u> Vertrag <u>unterliegt dem schweizerischen</u> Recht, <u>namentlich</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.',
+    fin:'Dieser Vertrag <u>unterliegt dem Schweizer</u> Recht, insbesondere dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.',
+    simp:'Dieser Vertrag <u>richtet sich nach dem</u> Recht <u>der Schweiz</u>, <u>vor allem nach</u> dem Obligationenrecht. <u>Der alleinige</u> Gerichtsstand ist Freiburg.',
+    formal:'Dieser Vertrag <u>unterliegt dem schweizerischen</u> Recht, <u>namentlich</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.',
+    inf:'Dieser Vertrag <u>unterliegt dem Schweizer</u> Recht, <u>genauer gesagt</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.',
+    short:'<u>Der</u> Vertrag <u>unterliegt dem schweizerischen</u> Recht, <u>vorrangig</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.'
+  }};
+  var LK={
+    tm:[{s:'Toute facture impayée à l\'échéance porte intérêt moratoire à 5 % l\'an.',t:'Für jede bei Fälligkeit unbezahlte Rechnung ist ein Verzugszins von 5 % pro Jahr geschuldet.',d:'Contrat-cadre_conseil.docx'}],
+    ch:[{s:'Si l\'agent payeur ne peut plus prélever ultérieurement le montant manquant avec l\'intérêt moratoire, notamment parce que la personne concernée n\'est plus cliente de son établissement, il reste tenu de verser le montant correspondant.',
+         t:'Kann die Zahlstelle den fehlenden Betrag zuzüglich Verzugszins nicht mehr der betroffenen Person nachbelasten, zum Beispiel weil diese nicht mehr ihre Kundin ist, so ist die Zahlstelle zur Leistung des fehlenden Betrages zuzüglich Verzugszins verpflichtet.',d:'Feuille Fédérale/Bundesblatt'},
+        {s:'Art. 24 Intérêt moratoire Un intérêt moratoire est dû sans sommation dès l\'échéance des délais fixés dans la présente loi sur les paiements uniques, les impôts libératoires et les paiements libératoires virés en retard à l\'AFC et jusqu\'à réception des sommes dues.',
+         t:'Art. 24 Verzugszins Auf Einmalzahlungen, abgeltenden Steuern und Abgeltungszahlungen, die der ESTV verspätet überwiesen werden, ist ohne Mahnung ein Verzugszins nach Ablauf der in diesem Gesetz festgelegten Fristen bis zum Datum des Eingangs geschuldet.',d:'Bundesgesetz-über-die-internationale-Quellenbesteuerung-IQG'}]
+  };
+  var REP={0:5,5:0};
+
+  /* ---------- Segments ---------- */
+  var rows=cx.querySelectorAll('.cxe-tab tbody tr[data-i]');
+  var tg=[],src=[],box=[],sel=2;
+  var last=[];
+  each(rows,function(r,i){tg[i]=r.querySelector('.cxe-tgt');src[i]=r.querySelector('.cxe-src').textContent;box[i]=r.querySelector('.cxe-chk');last[i]=tg[i].textContent;});
+
+  function select(i){
+    if(i===sel){return;}
+    sel=i;
+    each(rows,function(r,k){r.classList.toggle('sel',k===i);});
+    renderMem();renderAlt();renderReph(false);
+  }
+  each(rows,function(r,i){
+    r.addEventListener('click',function(e){
+      if(e.target.closest('input,button')){return;}
+      select(i);
+    });
+    tg[i].addEventListener('focus',function(){select(i);});
+  });
+
+  /* Progression : une case par segment, case générale en tête */
+  var all=$('cxeAll'),pbar=$('cxePBar'),pnum=$('cxePNum');
+  function progress(){
+    var n=0;box.forEach(function(b){if(b.checked){n++;}});
+    var p=Math.round(n*100/box.length);
+    pbar.style.transform='scaleX('+(p/100)+')';pnum.textContent=p+'%';
+    all.checked=n===box.length;all.indeterminate=n>0&&n<box.length;
+  }
+  box.forEach(function(b,i){b.addEventListener('change',function(){progress();say(b.checked?'Segment '+i+' confirmé.':'Segment '+i+' de nouveau à relire.');});});
+  all.addEventListener('change',function(){var v=all.checked;box.forEach(function(b){b.checked=v;});progress();say(v?'Tous les segments sont confirmés.':'Aucun segment confirmé.');});
+
+  /* Filtres source et traduction */
+  var fs=$('cxeFs'),ft=$('cxeFt'),none=$('cxeNone');
+  function filter(){
+    var a=norm(fs.value.trim()),b=norm(ft.value.trim()),vis=0;
+    each(rows,function(r,i){var ok=(!a||norm(src[i]).indexOf(a)>=0)&&(!b||norm(tg[i].textContent).indexOf(b)>=0);r.hidden=!ok;if(ok){vis++;}});
+    none.hidden=vis>0;
+  }
+  fs.addEventListener('input',filter);ft.addEventListener('input',filter);
+  each(cx.querySelectorAll('.cxe-clr[data-for]'),function(btn){btn.addEventListener('click',function(){var inp=$(btn.getAttribute('data-for'));inp.value='';filter();inp.focus();});});
+
+  /* Mise à jour d'une traduction (mémoire, reformulation, Sync, copie de la source) */
+  function setT(i,text,msg,noProp){
+    tg[i].textContent=text;last[i]=text;
+    if(box[i].checked){box[i].checked=false;progress();}
+    var td=tg[i].parentNode;td.classList.remove('cxe-upd');void td.offsetWidth;td.classList.add('cxe-upd');
+    if(msg){say(msg);}
+    if(!noProp){checkProp(i);}
+    filter();
+  }
+  $('cxeCopy').addEventListener('click',function(){setT(sel,src[sel],'Source copiée dans la traduction du segment '+sel+'.');});
+
+  /* Saisie directe : texte brut, pas de retour à la ligne, la case de confirmation se décoche */
+  var editT={};
+  tg.forEach(function(t,i){
+    t.addEventListener('input',function(){
+      if(box[i].checked){box[i].checked=false;progress();}
+      clearTimeout(editT[i]);editT[i]=setTimeout(function(){edited(i);},900);
+    });
+    t.addEventListener('blur',function(){clearTimeout(editT[i]);edited(i);});
+    t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();}});
+    t.addEventListener('paste',function(e){
+      e.preventDefault();
+      var txt=((e.clipboardData||window.clipboardData).getData('text')||'').replace(/\s+/g,' ');
+      var s=window.getSelection();if(!s.rangeCount){return;}
+      var rg=s.getRangeAt(0);rg.deleteContents();var node=document.createTextNode(txt);rg.insertNode(node);
+      rg.setStartAfter(node);rg.collapse(true);s.removeAllRanges();s.addRange(rg);
+    });
+  });
+
+  /* ---------- Panneau latéral ---------- */
+  var app=$('cxeApp'),fold=$('cxeFold'),title=$('cxeTitle');
+  var rbs=cx.querySelectorAll('.cxe-rb'),pans=[$('cxeP0'),$('cxeP1'),$('cxeP2'),$('cxeP3')];
+  function setFold(on){
+    app.classList.toggle('fold',on);
+    fold.setAttribute('aria-expanded',on?'false':'true');
+    fold.setAttribute('aria-label',on?'Déplier le panneau':'Replier le panneau');
+  }
+  fold.addEventListener('click',function(){setFold(!app.classList.contains('fold'));});
+  function tab(k,focus){
+    each(rbs,function(b,j){var on=j===k;b.setAttribute('aria-selected',on?'true':'false');b.tabIndex=on?0:-1;pans[j].hidden=!on;});
+    title.textContent=rbs[k].getAttribute('data-title');
+    if(app.classList.contains('fold')){setFold(false);}
+    if(focus){rbs[k].focus();}
+  }
+  each(rbs,function(b,j){
+    b.addEventListener('click',function(){tab(j);});
+    b.addEventListener('keydown',function(e){
+      var n=null,L=rbs.length;
+      if(e.key==='ArrowDown'||e.key==='ArrowRight'){n=(j+1)%L;}
+      else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){n=(j+L-1)%L;}
+      else if(e.key==='Home'){n=0;}else if(e.key==='End'){n=L-1;}
+      if(n!==null){e.preventDefault();tab(n,true);}
+    });
+  });
+
+  /* Onglet Translation memories */
+  var memBox=$('cxeMem');
+  function renderMem(){
+    var m=MEM[sel];
+    if(!m){memBox.innerHTML='<p class="cxe-empty">Démo : aucune traduction validée proche du segment '+sel+'. Choisissez le segment 1, 2 ou 3.</p>';return;}
+    memBox.innerHTML='<div class="cxe-match"><p class="cxe-ml">From this project\'s TM</p><p class="cxe-ms">'+esc(m.s)+'</p><p class="cxe-mt" lang="de">'+esc(m.t)+'</p><div class="cxe-ma"><button type="button" class="cx-btn cxe-sm" id="cxeMemOk">Apply</button></div></div><p class="cx-note">'+esc(m.n)+'</p>';
+    $('cxeMemOk').addEventListener('click',function(){setT(sel,m.t,'Traduction de la mémoire appliquée au segment '+sel+'.');});
+  }
+
+  /* Onglet Fast Lookup : mémoires et CHnell, côté source ou cible */
+  var lk=$('cxeLk'),q=$('cxeQ'),liveSw=$('cxeLiveSw'),side='src',lkT;
+  var sideBtns=cx.querySelectorAll('.cxe-seg button');
+  var RX={src:/int[ée]r[êe]ts?\s+moratoires?/gi,tgt:/Verzugszins\w*/g};
+  function mark(text,rx){return esc(text).replace(rx,function(x){return '<mark>'+x+'</mark>';});}
+  function block(list){
+    return '<div class="cxe-res"><div class="cxe-rh"><span>Source</span><span>Target</span></div>'+list.map(function(r){
+      return '<div class="cxe-rr"><p>'+mark(r.s,RX.src)+'</p><p lang="de">'+mark(r.t,RX.tgt)+'</p><p class="doc">'+esc(r.d)+'</p></div>';
+    }).join('')+'</div>';
+  }
+  function lookup(announce){
+    var v=norm(q.value.trim()),hit=false;
+    if(v){hit=side==='src'?(v.indexOf('moratoire')>=0||v.indexOf('interet')>=0):(v.indexOf('verzug')>=0);}
+    var h='<p class="cxe-h">Translation memories</p>'+(hit?block(LK.tm):'<p class="cxe-nr">No result</p>');
+    h+='<p class="cxe-h">CHnell</p>'+(hit?block(LK.ch):'<p class="cxe-nr">No result</p>');
+    if(!hit&&v){h+='<p class="cx-note">Démo : essayez « intérêt moratoire » côté Source, ou « Verzugszins » côté Target.</p>';}
+    lk.innerHTML=h;
+    if(announce){say(hit?'1 résultat dans les mémoires, 2 dans CHnell.':'Aucun résultat.');}
+  }
+  $('cxeQForm').addEventListener('submit',function(e){e.preventDefault();lookup(true);});
+  q.addEventListener('input',function(){if(liveSw.getAttribute('aria-pressed')==='true'){clearTimeout(lkT);lkT=setTimeout(function(){lookup(true);},400);}});
+  $('cxeQClr').addEventListener('click',function(){q.value='';lookup(false);q.focus();});
+  liveSw.addEventListener('click',function(){var on=liveSw.getAttribute('aria-pressed')!=='true';liveSw.setAttribute('aria-pressed',on?'true':'false');liveSw.classList.toggle('off',!on);});
+  each(sideBtns,function(b){b.addEventListener('click',function(){
+    side=b.getAttribute('data-side');
+    each(sideBtns,function(o){var on=o===b;o.classList.toggle('on',on);o.setAttribute('aria-pressed',on?'true':'false');});
+    q.value=side==='src'?'intérêt moratoire':'Verzugszins';
+    lookup(true);
+  });});
+
+  /* Onglet AI Assistant : Alternatives et Rephrasing */
+  var aiT=[$('cxeAiA'),$('cxeAiR')],aiP=[$('cxeAiAP'),$('cxeAiRP')];
+  function aiTab(k,focus){
+    aiT.forEach(function(b,j){var on=j===k;b.classList.toggle('on',on);b.setAttribute('aria-selected',on?'true':'false');b.tabIndex=on?0:-1;aiP[j].hidden=!on;});
+    if(focus){aiT[k].focus();}
+  }
+  aiT.forEach(function(b,j){
+    b.addEventListener('click',function(){aiTab(j);});
+    b.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();aiTab(1-j,true);}});
+  });
+  var altBox=$('cxeAlt'),more=$('cxeMore'),shown=2,gt;
+  function renderAlt(){
+    altBox.innerHTML=ALT[sel].slice(0,shown).map(function(x){return '<p class="cxe-alt"><span lang="de">'+esc(x.t)+'</span> <span class="e">- '+esc(x.e)+'</span></p>';}).join('');
+    more.disabled=shown>=ALT[sel].length;
+  }
+  more.addEventListener('click',function(){
+    if(more.disabled){return;}
+    more.disabled=true;
+    altBox.insertAdjacentHTML('beforeend','<p class="cxe-alt"><span class="cx-shim" style="display:block"></span><span class="cx-shim" style="display:block;width:60%"></span></p>');
+    clearTimeout(gt);
+    gt=setTimeout(function(){shown=3;renderAlt();say('Alternative ajoutée : Azure OpenAI GPT.');},reduce?0:700);
+  });
+
+  var style=null,shorten=false,pStyle=null,pShort=false,rt;
+  var rWrap=$('cxeRWrap'),rNote=$('cxeRNote'),rOut=$('cxeROut'),setB=$('cxeSet'),pop=$('cxePop');
+  var chips=pop.querySelectorAll('[data-style]'),shortChip=$('cxeShort');
+  function rephHTML(){var d=REPH[sel];return shorten?d.short:d[style||'none'];}
+  function renderReph(anim){
+    var d=REPH[sel];
+    rWrap.hidden=!d;rNote.hidden=!!d;
+    if(!d){return;}
+    clearTimeout(rt);
+    if(anim&&!reduce){
+      rOut.innerHTML='<span class="cx-shim" style="display:block"></span><span class="cx-shim" style="display:block;width:70%"></span>';
+      rt=setTimeout(function(){rOut.innerHTML=rephHTML();},650);
+    }else{rOut.innerHTML=rephHTML();}
+  }
+  function syncChips(){
+    each(chips,function(c){var on=c.getAttribute('data-style')===pStyle;c.classList.toggle('on',on);c.setAttribute('aria-pressed',on?'true':'false');});
+    shortChip.classList.toggle('on',pShort);shortChip.setAttribute('aria-pressed',pShort?'true':'false');
+  }
+  function openPop(open){
+    pop.classList.toggle('on',open);setB.setAttribute('aria-expanded',open?'true':'false');
+    if(open){pStyle=style;pShort=shorten;syncChips();chips[0].focus();}
+  }
+  setB.addEventListener('click',function(){openPop(!pop.classList.contains('on'));});
+  pop.addEventListener('keydown',function(e){if(e.key==='Escape'){openPop(false);setB.focus();}});
+  each(chips,function(c){c.addEventListener('click',function(){var s=c.getAttribute('data-style');pStyle=pStyle===s?null:s;syncChips();});});
+  shortChip.addEventListener('click',function(){pShort=!pShort;syncChips();});
+  $('cxeReset').addEventListener('click',function(){pStyle=null;pShort=false;syncChips();});
+  $('cxeSetOk').addEventListener('click',function(){style=pStyle;shorten=pShort;openPop(false);setB.focus();renderReph(true);say('Reformulation régénérée.');});
+  $('cxeRegen').addEventListener('click',function(){renderReph(true);});
+  $('cxeRApply').addEventListener('click',function(){if(REPH[sel]){setT(sel,rOut.textContent,'Reformulation appliquée au segment '+sel+'.');}});
+  $('cxeGo4').addEventListener('click',function(){select(4);rows[4].scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});setB.focus();});
+
+  /* Onglet Sync : conflits, modifications entrantes, propagation */
+  var syncBox=$('cxeSync'),dot=$('cxeDot'),dotTxt=$('cxeDotTxt');
+  var S={
+    conflict:{seg:1,mine:'Artikel 1 · Gegenstand',last:'Artikel 1 · Vertragsgegenstand'},
+    incoming:{seg:4,text:'Der vorliegende Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg.'},
+    prop:{from:0,to:5,text:'Auftragsvertrag (fiktives Beispiel)'}
+  };
+  var OK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+  /* Une saisie réelle (texte différent du dernier connu) déclenche le contrôle des répétitions */
+  function edited(i){var t=tg[i].textContent;if(t===last[i]){return;}last[i]=t;checkProp(i);filter();}
+  function checkProp(i){
+    if(!(i in REP)){return;}
+    var j=REP[i];
+    if(tg[i].textContent!==tg[j].textContent){
+      S.prop={from:i,to:j,text:tg[i].textContent};renderSync();
+      say('Le segment '+j+' est identique : une décision de propagation attend dans Sync.');
+    }else if(S.prop){S.prop=null;renderSync();}
+  }
+  function renderSync(focusSel){
+    var h='<div class="cxe-sblock"><p class="cxe-sh" id="cxeSh1" tabindex="-1">Conflicting changes</p>';
+    if(S.conflict){
+      var c=S.conflict;
+      h+='<div class="cxe-sync"><p class="cxe-sl">Segment '+c.seg+'</p><div class="cxe-ver"><b>My Edit · AM</b><span lang="de">'+esc(c.mine)+'</span></div><div class="cxe-ver"><b>Last Edit · LM</b><span lang="de">'+esc(c.last)+'</span></div><div class="cxe-sact"><button type="button" class="cx-btn ghost cxe-sm" data-act="keep">Keep all My Edits</button><button type="button" class="cx-btn cxe-sm" data-act="applyall">Apply all Last Edits</button></div></div>';
+    }else{h+='<p class="cxe-okst">No conflicting change to resolve.'+OK+'</p>';}
+    h+='</div><div class="cxe-sblock"><p class="cxe-sh" id="cxeSh2" tabindex="-1">Incoming changes</p>';
+    if(S.incoming){
+      var n=S.incoming;
+      h+='<div class="cxe-sync"><p class="cxe-sl">Segment '+n.seg+' · LM</p><div class="cxe-ver one"><span lang="de">'+esc(n.text)+'</span></div><div class="cxe-sact"><button type="button" class="cx-btn cxe-sm" data-act="incoming">Apply</button></div></div>';
+    }else{h+='<p class="cxe-okst">No incoming change to apply.'+OK+'</p>';}
+    h+='</div><div class="cxe-sblock"><p class="cxe-sh" id="cxeSh3" tabindex="-1">Propagation decisions</p>';
+    if(S.prop){
+      var p=S.prop;
+      h+='<div class="cxe-sync"><p class="cxe-sl">Segment '+p.from+' · repeated</p><div class="cxe-ver one"><span lang="de">'+esc(p.text)+'</span></div><label class="cxe-pchk"><input type="checkbox" class="cxe-chk" id="cxePropBox" checked> Segment '+p.to+'</label><div class="cxe-sact"><button type="button" class="cx-btn ghost cxe-sm" data-act="asis">Keep as is</button><button type="button" class="cx-btn cxe-sm" data-act="prop">Apply</button></div></div>';
+    }else{h+='<p class="cxe-okst">No propagation decision required.'+OK+'</p>';}
+    h+='</div>';
+    syncBox.innerHTML=h;
+    var pend=(S.conflict?1:0)+(S.incoming?1:0)+(S.prop?1:0);
+    dot.hidden=!pend;dotTxt.textContent=pend?', '+pend+(pend>1?' éléments':' élément')+' en attente':'';
+    if(focusSel){var f=$(focusSel);if(f){f.focus();}}
+  }
+  syncBox.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-act]');if(!b){return;}
+    var a=b.getAttribute('data-act');
+    if(a==='keep'){S.conflict=null;renderSync('cxeSh1');say('Conflit résolu : votre version est conservée.');}
+    else if(a==='applyall'){var c=S.conflict;S.conflict=null;setT(c.seg,c.last,'Conflit résolu : la dernière version est appliquée au segment '+c.seg+'.',true);renderSync('cxeSh1');}
+    else if(a==='incoming'){var n=S.incoming;S.incoming=null;setT(n.seg,n.text,'Modification du collègue appliquée au segment '+n.seg+'.',true);renderSync('cxeSh2');}
+    else if(a==='prop'){var p=S.prop,go=$('cxePropBox').checked;S.prop=null;if(go){setT(p.to,p.text,'Correction propagée au segment '+p.to+'.',true);}renderSync('cxeSh3');}
+    else if(a==='asis'){S.prop=null;renderSync('cxeSh3');say('Segment laissé tel quel.');}
+  });
+
+  /* État initial */
+  progress();renderMem();renderAlt();renderReph(false);lookup(false);renderSync();
+})();
+</script>

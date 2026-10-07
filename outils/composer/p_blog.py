@@ -11,7 +11,7 @@ feat = (f'<a class="bl-f" href="{re.search(r"href=\"([^\"]+)\"", fe).group(1)}">
         f'<p class="x">{brut(bloc(bloc(fe, "div", "bl-feat-body"), "p"))}</p>'
         f'<span class="meta"><img src="{AUTEUR}" alt="" width="30" height="30"><span>{ms[1]}</span><time>{ms[0]}</time></span></div></a>')
 cs = blocs(bloc(t, "section", "bl-list"), "a", "bl-card")
-out.append(section(feat + grille([carte_blog(c) for c in cs[1:10]]), "sec bl-s"))
+out.append(section(feat + grille([carte_blog(c) for c in cs[1:]]), "sec bl-s"))
 ac = bloc(t, "a", "bl-actu-card")
 li = bloc(t, "section", "bl-li")
 btn = bloc(li, "a", "btn")

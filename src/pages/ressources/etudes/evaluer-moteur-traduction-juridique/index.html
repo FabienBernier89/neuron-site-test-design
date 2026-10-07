@@ -1,0 +1,168 @@
+<!--page
+title: Évaluer un moteur de traduction sur le droit suisse · Neur.on
+description: Six critères mesurables, un protocole en double aveugle et sept pièges qui faussent les comparaisons de moteurs sur des textes de droit suisse.
+menu: ressources
+gabarit: standard
+-->
+<section class="hero">
+<div class="wrap hero-g">
+<h1 class="h1"><span class="n">Étude.</span> <span class="s">Comment évaluer un moteur de traduction sur le droit suisse</span></h1>
+<div class="hero-d"><p>Cette page ne publie pas un classement. Elle publie une méthode : les critères qui se mesurent, le protocole qui empêche de se tromper, et les erreurs de raisonnement qui font conclure trop vite. Les résultats d'un premier corpus seront publiés ici.</p><a class="btn" href="{{ROOT}}fr/contact/">Demander une démo</a></div>
+</div>
+</section>
+<section class="ar-s"><div class="wrap"><div class="ar ar-c">
+      <p class="meta">Par l'équipe juridique et linguistique de Neur.on · 15 septembre 2026 · Mis à jour le 15 septembre 2026</p>
+
+      <p class="art-lead">La question « quel est le meilleur moteur de traduction pour le droit suisse ? » n'a pas de réponse tant qu'on n'a pas dit sur quoi, dans quel sens, selon quels critères et avec quelle marge d'erreur. Ce document propose une méthode que n'importe quelle direction juridique peut appliquer sans laboratoire, et que n'importe qui peut contester point par point.</p>
+
+      <nav class="toc" id="sommaire" aria-label="Sommaire de l'étude">
+        <b>Sommaire</b>
+        <ol>
+          <li><a href="#pourquoi">Pourquoi les scores automatiques ne suffisent pas</a></li>
+          <li><a href="#criteres">Six critères mesurables</a></li>
+          <li><a href="#corpus">Constituer le corpus</a></li>
+          <li><a href="#protocole">Le protocole d'évaluation</a></li>
+          <li><a href="#pieges">Sept pièges méthodologiques</a></li>
+          <li><a href="#rendre">Rendre compte des résultats</a></li>
+          <li><a href="#suite">Ce qui sera publié sur cette page</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="pourquoi">1. Pourquoi les scores automatiques ne suffisent pas</h2>
+
+      <p>Les métriques automatiques de traduction comparent une sortie à une traduction de référence et mesurent leur proximité. Elles sont utiles pour suivre l'évolution d'un système au fil des versions. Elles sont trompeuses pour arbitrer un choix juridique, pour une raison structurelle : <strong>elles ne distinguent pas une nuance de formulation d'une erreur de droit</strong>.</p>
+
+      <p>Une phrase qui rend correctement tous les mots mais cite un article inexistant, ou attribue une compétence à une juridiction étrangère, reste proche de la référence et obtient un bon score. Une phrase parfaitement exacte mais formulée autrement que la référence est pénalisée. Pour un juriste, c'est exactement l'inverse de ce qui compte.</p>
+
+      <p>L'évaluation d'un moteur sur du droit doit donc être <strong>humaine, sur des critères binaires définis à l'avance</strong>. Binaires, parce qu'une note sur dix mesure surtout l'humeur de l'évaluateur, alors qu'une question fermée du type « la référence légale citée est-elle exacte ? » donne le même verdict chez deux personnes différentes.</p>
+
+      <h2 id="criteres">2. Six critères mesurables</h2>
+
+      <p>Chaque critère se note conforme ou non conforme, segment par segment. Quand un critère ne s'applique pas à un segment, il est marqué non applicable et sort du dénominateur pour ce segment.</p>
+
+      <div class="crit">
+        <span class="cn"><i></i> Critère 1</span>
+        <h3>Exactitude de la référence légale</h3>
+        <p>La sortie cite-t-elle le bon texte, avec l'abréviation correspondant à la langue cible, le bon numéro d'article et la bonne subdivision ?</p>
+        <p class="q"><b>Non conforme si :</b> l'abréviation reste celle de la langue source, l'abréviation appartient à un autre texte, le numéro d'article ou l'alinéa change, la nomenclature de subdivision n'est pas celle de la langue cible.</p>
+      </div>
+
+      <div class="crit">
+        <span class="cn"><i></i> Critère 2</span>
+        <h3>Conformité terminologique aux textes officiels</h3>
+        <p>Le terme retenu figure-t-il dans la version officielle du texte cité, ou dans une source officielle du domaine ?</p>
+        <p class="q"><b>Non conforme si :</b> le terme est un synonyme correct mais absent des textes officiels, un emprunt à un autre ordre juridique, ou une traduction littérale d'un terme qui possède déjà un équivalent légal établi.</p>
+      </div>
+
+      <div class="crit">
+        <span class="cn"><i></i> Critère 3</span>
+        <h3>Cohérence à l'intérieur du document</h3>
+        <p>Un même terme source est-il rendu par un même terme cible d'un bout à l'autre du document, titres, notes et annexes compris ?</p>
+        <p class="q"><b>Mesure :</b> ce critère ne se note pas au segment mais au document. Relevez chaque terme source clé, comptez ses rendus distincts, et notez non conforme dès qu'un terme clé reçoit plus d'un rendu sans justification.</p>
+      </div>
+
+      <div class="crit">
+        <span class="cn"><i></i> Critère 4</span>
+        <h3>Noms de juridictions et d'autorités</h3>
+        <p>Les juridictions, autorités et registres mentionnés sont-ils désignés par leur nom suisse dans la langue cible ?</p>
+        <p class="q"><b>Non conforme si :</b> une juridiction suisse est rendue par le nom d'une juridiction étrangère, un nom d'autorité est traduit littéralement alors qu'une dénomination officielle existe, ou le niveau de juridiction change.</p>
+      </div>
+
+      <div class="crit">
+        <span class="cn"><i></i> Critère 5</span>
+        <h3>Montants, dates et unités au format suisse</h3>
+        <p>Les données chiffrées sont-elles exactes et conformes aux conventions d'écriture de la langue cible en Suisse ?</p>
+        <p class="q"><b>Non conforme si :</b> un chiffre, un taux ou un délai diffère de la source, le séparateur des milliers n'est pas l'apostrophe, la monnaie change de code, ou une date devient ambiguë en version anglaise.</p>
+      </div>
+
+      <div class="crit">
+        <span class="cn"><i></i> Critère 6</span>
+        <h3>Intégrité du segment</h3>
+        <p>La sortie contient-elle tout le contenu de la source, et rien d'autre ?</p>
+        <p class="q"><b>Non conforme si :</b> une proposition est omise, un contenu est ajouté, un guillemet ou un caractère parasite apparaît en tête ou en fin de sortie, ou la sortie est tronquée.</p>
+      </div>
+
+      <p>Ces six critères ne sont pas d'égale gravité, et il ne faut surtout pas en faire une moyenne. <strong>Séparez les erreurs disqualifiantes des écarts de préférence.</strong> Une référence légale fausse et une omission rendent un segment inutilisable ; un terme correct mais absent des textes officiels demande une correction, sans plus. Publiez donc deux taux distincts : le taux de segments comportant au moins une erreur disqualifiante, et le taux de segments comportant au moins un écart à corriger.</p>
+
+      <h2 id="corpus">3. Constituer le corpus</h2>
+
+      <p>Le corpus décide du résultat davantage que les moteurs. Quatre exigences.</p>
+
+      <h3>Représentativité</h3>
+      <p>Le corpus doit refléter ce que vous traitez réellement, pas ce qui est facile à collecter. Croisez trois dimensions : le domaine (contrats, contentieux, droit des sociétés, réglementation financière, droit administratif), le type de document (acte, écriture, décision, correspondance, clause type), et le sens de traduction. <strong>Un moteur performant en allemand vers français peut ne pas l'être en français vers allemand</strong> : les deux sens doivent être comptés séparément, jamais agrégés.</p>
+
+      <h3>Taille</h3>
+      <p>Il n'existe pas de nombre magique de segments : la taille utile dépend du nombre de critères, de la rareté des phénomènes observés et de la précision souhaitée. La règle pratique est de raisonner par case : chaque combinaison domaine multiplié par sens de traduction doit contenir assez de segments pour qu'un écart ne repose pas sur une ou deux phrases. Mieux vaut un corpus petit et équilibré qu'un corpus vaste et concentré sur un seul domaine.</p>
+
+      <h3>Densité de phénomènes</h3>
+      <p>Composez délibérément une part du corpus de segments qui contiennent ce que vous voulez mesurer : des références légales, des noms de juridictions, des montants, des dates, des termes réglementaires. Un corpus de phrases neutres ne mesure rien d'utile, parce que tous les moteurs y réussissent.</p>
+
+      <h3>Traçabilité et confidentialité</h3>
+      <p>Chaque segment doit porter sa provenance, pour que l'exactitude puisse être vérifiée dans la source officielle. Si vous utilisez des documents internes, pseudonymisez-les avant toute transmission à un moteur tiers, et documentez ce traitement : un corpus d'évaluation est un traitement de données comme un autre. Ce point est développé dans notre article sur <a href="{{ROOT}}fr/ressources/blog/secret-professionnel-outils-traduction/">le lieu de traitement</a>.</p>
+
+      <div class="art-note">
+        <p><b>Gelez le corpus et versionnez-le.</b> Un corpus qui évolue entre deux campagnes rend les résultats incomparables. Attribuez-lui un numéro de version, une date, et conservez-le tel quel pour la campagne suivante.</p>
+      </div>
+
+      <h2 id="protocole">4. Le protocole d'évaluation</h2>
+
+      <ol>
+        <li><strong>Figer les paramètres.</strong> Même paire de langues, même réglages, même mode de confidentialité, même absence ou présence de glossaire pour tous les moteurs. Une différence de configuration invalide la comparaison entière.</li>
+        <li><strong>Générer en une seule fenêtre de temps</strong> et enregistrer la date et l'heure de chaque sortie. Les moteurs évoluent ; une sortie sans date n'est pas une donnée.</li>
+        <li><strong>Anonymiser les sorties.</strong> Retirez toute mention du moteur, y compris les indices de formatage qui le trahissent, et attribuez un identifiant neutre.</li>
+        <li><strong>Randomiser l'ordre de présentation</strong>, différemment pour chaque évaluateur, afin que la fatigue et l'effet d'ordre ne se concentrent pas sur le même moteur.</li>
+        <li><strong>Faire évaluer par deux personnes indépendantes</strong>, sans communication entre elles, sur la même grille.</li>
+        <li><strong>Mesurer l'accord entre évaluateurs</strong> avant de regarder les résultats. Un accord faible signale que la grille est ambiguë, pas que les évaluateurs sont mauvais : il faut alors préciser les définitions et recommencer.</li>
+        <li><strong>Résoudre les désaccords par un tiers arbitre</strong>, qui ne connaît pas davantage l'origine des sorties, et consigner la règle dégagée pour les cas suivants.</li>
+        <li><strong>Répliquer.</strong> Rejouez un sous-ensemble du corpus à quelques semaines d'intervalle, avec les mêmes paramètres, pour mesurer la variance dans le temps.</li>
+      </ol>
+
+      <p>Ce dernier point n'est pas théorique. Lors d'une session d'observation, la régénération de certains segments a produit des sorties <strong>strictement identiques</strong>, tandis que d'autres segments variaient d'une génération à l'autre. Une campagne qui ne mesure pas cette variance ne peut pas dire si un écart entre deux moteurs est un écart de qualité ou un aléa de génération.</p>
+
+      <h2 id="pieges">5. Sept pièges méthodologiques</h2>
+
+      <ol>
+        <li><strong>Juger sur une phrase.</strong> C'est le piège le plus courant et le plus coûteux. Une phrase bien traduite ne dit rien du comportement d'un moteur sur un document de soixante pages, où la cohérence devient le premier critère.</li>
+        <li><strong>Confondre fluidité et exactitude.</strong> Les moteurs récents produisent des phrases agréables. Une sortie fluide qui cite un texte inexistant est plus dangereuse qu'une sortie maladroite, parce qu'elle n'appelle pas la vérification. Lors de la même session d'observation, une sortie a rendu le nom de la juridiction suprême suisse par celui d'une juridiction étrangère, dans une phrase par ailleurs parfaitement construite.</li>
+        <li><strong>Oublier la variance entre générations.</strong> Comparer une sortie de chaque moteur revient à comparer deux tirages. Sans réplication, l'écart mesuré peut être entièrement dû au hasard de génération.</li>
+        <li><strong>Agréger les sens de traduction.</strong> Un score moyen entre allemand vers français et français vers allemand masque exactement l'information qui vous intéresse.</li>
+        <li><strong>Laisser voir le nom du moteur.</strong> L'évaluateur qui sait ce qu'il note ne note plus la sortie, il note son opinion du moteur.</li>
+        <li><strong>Mélanger gravité et préférence.</strong> Compter dans le même total une référence légale fausse et un choix stylistique discutable produit un chiffre que personne ne peut interpréter.</li>
+        <li><strong>Évaluer sur des textes publics très diffusés.</strong> Les textes de loi les plus cités sont abondamment présents dans les données d'entraînement des modèles généralistes. Réussir sur eux ne prédit pas la performance sur vos documents. Gardez-en pour le contrôle, mais construisez le cœur du corpus sur des textes moins exposés.</li>
+      </ol>
+
+      <div class="art-note">
+        <p><b>Un huitième piège, organisationnel.</b> Faire évaluer par la personne qui a choisi le moteur. Séparez toujours celui qui décide et celui qui note ; à défaut, l'aveugle est la seule protection qui reste.</p>
+      </div>
+
+      <h2 id="rendre">6. Rendre compte des résultats</h2>
+
+      <p>Un rapport d'évaluation crédible publie tout ce qui permet de le contester.</p>
+
+      <ul>
+        <li><strong>La composition du corpus</strong> : nombre de segments par domaine et par sens de traduction, provenance, date de constitution, version.</li>
+        <li><strong>Les paramètres exacts</strong> de chaque génération, et leur date.</li>
+        <li><strong>La grille de critères</strong>, avec les définitions de non-conformité employées.</li>
+        <li><strong>Le taux d'accord entre évaluateurs</strong>, avant arbitrage.</li>
+        <li><strong>Les résultats par critère et par case</strong>, jamais un score global unique.</li>
+        <li><strong>La variance mesurée</strong> lors de la réplication.</li>
+        <li><strong>Les limites</strong>, en toutes lettres : ce que le corpus ne couvre pas, ce que la méthode ne mesure pas.</li>
+      </ul>
+
+      <p>Et une règle de prudence : <strong>n'utilisez jamais un classement de moteurs comme argument de vente</strong>, y compris le vôtre. Un classement est valable pour un corpus, une date et une configuration. Ce qui se transmet honnêtement, c'est la méthode et les données, pas le podium.</p>
+
+      <h2 id="suite">7. Ce qui sera publié sur cette page</h2>
+
+      <p>Nous appliquons actuellement cette méthode à un premier corpus de droit suisse, construit selon les exigences décrites au point 3 et couvrant les paires de langues nationales. <strong>Les résultats seront publiés sur cette page</strong>, avec la composition du corpus, la grille utilisée, les taux d'accord entre évaluateurs et les limites de l'exercice.</p>
+
+      <p>D'ici là, aucun chiffre n'est avancé ici : une méthode ne prouve rien par elle-même, et publier un score avant d'avoir publié le protocole serait exactement ce que ce document déconseille.</p>
+
+      <div class="art-end">
+        <p>Si vous souhaitez appliquer cette méthode à vos propres documents, la comparaison de sorties est accessible directement dans l'application : la fonction Alternatives de <a href="{{ROOT}}fr/corrext/traduction-texte-et-document/">Traduction texte et document</a> affiche jusqu'à quatre propositions, chacune attribuée à son moteur, ce qui permet de constituer un corpus d'évaluation à partir de vos textes réels. Le fonctionnement du moteur suisse est décrit sur la page <a href="{{ROOT}}fr/lexmachina/">LexMachina</a>, et une <a href="{{ROOT}}fr/comparatif/">comparaison raisonnée des approches</a> complète la lecture.</p>
+      </div>
+    </div></div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2">À lire ensuite</h2><div class="cd"><a href="{{ROOT}}fr/ressources/blog/traduire-contrat-droit-suisse/"><b><b>Le quadrilinguisme légal suisse</b></b><p>Pourquoi la terminologie n'est pas affaire de goût, et où la vérifier.</p></a><a href="{{ROOT}}fr/ressources/blog/secret-professionnel-outils-traduction/"><b><b>Secret professionnel et lieu de traitement</b></b><p>Ce qu'il faut savoir avant de confier un corpus à un moteur tiers.</p></a><a href="{{ROOT}}fr/ressources/guides/organiser-traduction-cabinet/"><b><b>Organiser la traduction en cabinet</b></b><p>Règles, rôles et indicateurs pour piloter la traduction juridique.</p></a></div>
+</div></section>
+<section class="sec"><div class="wrap fq"><h2 class="h2">Questions fréquentes</h2><div><details><summary>Pourquoi les scores automatiques ne suffisent-ils pas pour un texte juridique ?</summary><div class="r"><p>Parce qu'ils mesurent une proximité de surface avec une traduction de référence, et non l'exactitude d'une référence légale. Une phrase qui cite le mauvais article ou la mauvaise juridiction peut obtenir un très bon score automatique : elle est fluide, proche de la référence, et juridiquement fausse. Sur du droit, l'évaluation doit être faite par des humains, sur des critères binaires définis à l'avance.</p></div></details><details><summary>Combien de segments faut-il pour évaluer un moteur de traduction juridique ?</summary><div class="r"><p>Il n'existe pas de nombre universel : la taille dépend du nombre de critères, de la rareté des phénomènes observés et de la précision recherchée. La règle utile est ailleurs : le corpus doit couvrir chaque domaine, chaque sens de traduction et chaque type de document que vous traitez réellement, avec assez de segments par case pour qu'un écart ne tienne pas à une phrase. Un corpus déséquilibré donne un résultat faux quelle que soit sa taille.</p></div></details><details><summary>Qu'est-ce qu'une évaluation en aveugle pour des moteurs de traduction ?</summary><div class="r"><p>C'est une évaluation dans laquelle l'évaluateur ne sait pas quel moteur a produit la sortie qu'il note. Les sorties sont anonymisées, mélangées et présentées dans un ordre aléatoire. Sans cet aveugle, le nom du moteur influence la notation, dans les deux sens : indulgence envers celui que l'on connaît, sévérité envers celui que l'on soupçonne.</p></div></details><details><summary>Faut-il évaluer une seule fois ou plusieurs fois le même segment ?</summary><div class="r"><p>Plusieurs fois, à des dates différentes. Une sortie peut varier d'une génération à l'autre, ou au contraire rester strictement identique. Lors d'une session d'observation, la régénération de la même phrase a produit des sorties strictement identiques pour certains segments, tandis que d'autres variaient. Une mesure faite une seule fois ne dit pas si l'écart observé est une différence de qualité ou une variation de génération.</p></div></details><details><summary>Quels critères mesurer sur des textes de droit suisse ?</summary><div class="r"><p>Six critères se notent de façon binaire et donc reproductible : l'exactitude de la référence légale, la conformité terminologique aux textes officiels, la cohérence à l'intérieur d'un même document, le traitement des noms de juridictions et d'autorités, la gestion des montants et des dates au format suisse, et l'intégrité du segment, c'est-à-dire l'absence d'omission, d'ajout et de caractère parasite.</p></div></details></div></div></section>
+<section class="cta"><div class="wrap"><h2><span class="l1">Appliquer cette méthode</span> <span class="l2">à vos propres documents</span></h2><a class="btn" href="{{ROOT}}fr/contact/">Demander une démo</a></div></section>
