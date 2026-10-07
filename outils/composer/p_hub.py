@@ -5,7 +5,11 @@ out = []
 ph = bloc(t, "section", "phero")
 out.append(hero("Corrext :", "reprenez le contrôle de vos traductions", brut(bloc(ph, "p", "lead")), ("Demander une démo", C)))
 dash = bloc(ph, "div", "dash")
-out.append(section(scene(1176, 640, '<div class="maq">' + dash + "</div>", sim="tableau", label="Tableau de bord de Corrext, données de démonstration"), "sec sec-st"))
+tl = [txt(b) for b in blocs(dash, "button", "dtab")]
+pans = [interne(p) for p in blocs(dash, "div", "dpanel")]
+kp = interne(bloc(dash, "div", "kpis"))
+ecran = A.tableau_bord(tl, pans, txt(bloc(dash, "span", "ddata")), kp)
+out.append(section(scene(1176, 640, ecran, sim="tableau", curseur=False, label="Tableau de bord de Corrext, données de démonstration"), "sec sec-st"))
 pt = bloc(t, "section", "ptrust")
 items = []
 for li in blocs(pt, "li"):

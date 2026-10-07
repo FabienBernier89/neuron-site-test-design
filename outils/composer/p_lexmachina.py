@@ -15,11 +15,13 @@ for i, c in enumerate(blocs(nl, "div", "nlex-card")):
     eng = txt(bloc(c, "div", "eng"))
     pp = bloc(c, "p")
     cartes_.append(f'<div class="mx-p"><small>{eng}</small><p class="q4-out" data-q4="{i}" lang="en">{interne(pp).strip()}</p></div>')
+sorties = [interne(bloc(c, "p")).strip() for c in blocs(nl, "div", "nlex-card")]
+ecran = A.ecran_comparaison(phrase, sorties[0], sorties[1], "DeepL Pro")
 ui = (f'<div class="mx q4"><div class="mx-p q4-src"><small>{lb}</small><p>{phrase}</p></div>'
       f'<div class="mx-g">{"".join(cartes_)}</div></div>')
 titre_fen = txt(bloc(nl, "span", "nlex-tag"))
 out.append(section(h2(h, "quatre caractères") + f'<p class="intro">{p}</p>'
-                   + scene(1176, 420, ui, sim="quatre", titre=titre_fen, curseur=False, label="Comparaison des sorties LexMachina et DeepL Pro")
+                   + scene(1176, 440, ecran, sim="quatre", titre=titre_fen, curseur=False, label="Comparaison des sorties LexMachina et DeepL Pro")
                    + f'<p class="legende">{brut(bloc(nl, "p", "nlex-note"))}</p><p class="legende">{brut(bloc(nl, "p", "nlex-cap"))}</p>'))
 # Ce qu'est LexMachina : tuiles chiffres, puis cartes à puces
 sp = bloc(t, "section", "nlspec")

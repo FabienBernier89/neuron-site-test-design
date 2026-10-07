@@ -2,6 +2,7 @@
 import re
 from source import *
 from comp import *
+import app as A
 
 C = "{{ROOT}}contact/"
 
@@ -22,6 +23,35 @@ def lignes_features(sec, titre_fen="Corrext", depart=0):
         vis = scene(764, 515, '<div class="maq">' + win[0] + "</div>", titre=titre_fen, label=pill or titre) if win else ""
         lignes.append(ft(pill, titre, texte, vis, lien, inv=(i + depart) % 2 == 1, liste=liste))
     return "".join(lignes)
+
+
+def textes_demo():
+    """Textes de l'écran Corrext tels qu'ils figurent dans la démo publiée (page Traduction texte et document)."""
+    from source import charger as _ch, liens as _li
+    p = "corrext/traduction-texte-et-document/"
+    cx = bloc(_li(_ch(p), p), "div", attr='id="cx"')
+    av = bloc(cx, "div", "cx-notice")
+    hi = bloc(cx, "div", "cx-hint")
+
+    def depot(pid, rid, stid, fin):
+        pan = bloc(cx, "div", attr=f'id="{pid}"')
+        dr = bloc(pan, "button", "cx-drop")
+        row = bloc(pan, "div", attr=f'id="{rid}"')
+        return {"drop_t": brut(interne(bloc(dr, "span", "t"))), "drop_s": brut(interne(bloc(dr, "span", "s"))),
+                "nom": txt(bloc(row, "span", "fn")), "sous": txt(bloc(row, "span", "fs")),
+                "run": txt(bloc(row, "span", attr=f'id="{stid}"')), "fin": fin}
+
+    reph = bloc(cx, "div", attr='id="cxp-reph"')
+    chips = blocs(reph, "div", "cx-chips")
+    return {
+        "notice": (txt(bloc(av, "b")), brut(re.sub(r"<b>.*?</b>", "", interne(av), flags=re.S))),
+        "hint": (brut(interne(bloc(hi, "div", "ill"))), txt(bloc(hi, "b")), brut(bloc(hi, "p"))),
+        "fichier": depot("cxp-file", "cxFileRow", "cxFileSt", "Download"),
+        "pdf": depot("cxp-pdf", "cxPdfRow", "cxPdfSt", "Download .docx"),
+        "reph": {"styles": [txt(c) for c in blocs(chips[0], "button")], "options": [txt(c) for c in blocs(chips[1], "button")],
+                 "reset": txt(bloc(reph, "button", "rst")), "apply": txt(bloc(reph, "button", attr='id="cxSetApply"')),
+                 "ph": re.search(r'placeholder="([^"]+)"', bloc(reph, "textarea")).group(1)},
+    }
 
 
 def faq_section(t):

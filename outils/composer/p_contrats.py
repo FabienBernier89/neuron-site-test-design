@@ -4,7 +4,7 @@ t = liens(charger(P), P)
 out = []
 th = bloc(t, "section", "thero")
 out.append(hero("Contrats.", "Le Code des obligations, d'une langue à l'autre", brut(bloc(th, "p", "lead")), ("Demander une démo", C)))
-out.append(scene_statique(ui_statique("co"), EX["co"]["label"], 340))
+out.append(scene_statique(A.fragment_travail(esc(EX["co"]["src"]), esc(EX["co"]["out"]["en"]["main"])), EX["co"]["label"], 320))
 out.append(termes(t, "dans les quatre langues"))
 out.append(faits(t, "concrètement"))
 tl = bloc(t, "section", "tlaws")

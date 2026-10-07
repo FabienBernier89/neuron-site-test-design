@@ -8,7 +8,7 @@ out.append(distinctions())
 wh = bloc(t, "section", "who")
 lignes = []
 for i, (r, cle) in enumerate(zip(blocs(wh, "article", "sc-row"), ["co", "lb", "ldip"])):
-    vis = scene(764, 515, ui_statique(cle), titre=EX[cle]["label"], label=EX[cle]["label"])
+    vis = scene(764, 360, A.fragment_travail(esc(EX[cle]["src"]), esc(EX[cle]["out"]["en"]["main"])), titre=EX[cle]["label"], label=EX[cle]["label"])
     lignes.append(ft(txt(bloc(r, "span", "sc-a")), brut(bloc(r, "h3")), brut(bloc(r, "p")), vis, inv=i % 2 == 1))
 out.append(section(h2(txt(bloc(wh, "h2")), "gagne des heures") + "".join(lignes)))
 out.append(gov_bento(t, "outil de traduction en ligne"))
