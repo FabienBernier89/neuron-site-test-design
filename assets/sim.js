@@ -119,7 +119,8 @@
     var rejouer = this.r.getAttribute("data-sim") !== "visite";
     (function boucle() {
       if (rejouer) self.scene.innerHTML = self.modele;
-      fn(self).then(function () { if (!reduit && !self.arret) return self.attendre(2000).then(boucle); });
+      var tenue = +(self.r.getAttribute("data-tenue") || 2000);
+      fn(self).then(function () { if (!reduit && !self.arret) return self.attendre(tenue).then(boucle); });
     })();
   };
 
@@ -257,6 +258,111 @@
       function () { return l.classe("mark", "vu", true); },
       function () { return l.attendre(4200); }
     ]));
+  };
+
+  /* Révèle un texte mot par mot : fondu et léger glissement, 22 ms de décalage par mot */
+  Lecteur.prototype.mots = function (sel, texte) {
+    var el = this.q(sel), liste = texte.split(" ");
+    el.classList.remove("on");
+    el.textContent = "";
+    liste.forEach(function (mot, i) {
+      var s = document.createElement("span");
+      s.className = "w";
+      s.style.setProperty("--i", i);
+      s.textContent = mot;
+      el.appendChild(s);
+      el.appendChild(document.createTextNode(" "));
+    });
+    void el.offsetWidth;
+    el.classList.add("on");
+    return this.attendre(liste.length * 22 + 450);
+  };
+
+  function remplirLookup(l, lk) {
+    l.q(".lk-q").textContent = lk.q;
+    l.q(".lk-l1").textContent = lk.l1;
+    l.q(".lk-l2").textContent = lk.l2;
+    l.q(".lk-c").textContent = lk.count;
+    var r = l.q(".lk-r");
+    r.textContent = "";
+    lk.rows.forEach(function (ligne, i) {
+      var bloc = document.createElement("div"), a = document.createElement("p"), b = document.createElement("p"), s = document.createElement("small");
+      var j = ligne.a.indexOf(lk.q);
+      bloc.style.setProperty("--i", i);
+      if (j >= 0) {
+        var m = document.createElement("mark");
+        m.textContent = lk.q;
+        a.appendChild(document.createTextNode(ligne.a.slice(0, j)));
+        a.appendChild(m);
+        a.appendChild(document.createTextNode(ligne.a.slice(j + lk.q.length)));
+      } else {
+        a.textContent = ligne.a;
+      }
+      b.textContent = ligne.b;
+      s.textContent = ligne.src;
+      bloc.appendChild(a); bloc.appendChild(b); bloc.appendChild(s);
+      r.appendChild(bloc);
+    });
+  }
+
+  /* Scène d'accueil : interface Corrext redessinée, un extrait différent à chaque boucle */
+  SCENES.app = function (l) {
+    var cles = ["co", "lb", "ldip"], k = cles[(l.n || 0) % cles.length];
+    l.n = (l.n || 0) + 1;
+    var d = EX[k], app = l.q(".app"), src = l.q(".app-src"), terme = app.getAttribute("data-terme-" + k);
+    function moteur(i, texte) {
+      return function () {
+        var seg = l.q(".app-seg"), cible = seg.querySelector('[data-i="' + i + '"]'), e = l.q(".app-e"), out = l.q(".app-out");
+        l.q(".app-pill").style.transform = "translateX(" + (i * 100) + "%)";
+        [].forEach.call(seg.querySelectorAll("span"), function (s) { s.classList.toggle("on", s === cible); });
+        e.classList.add("efface");
+        out.classList.add("sort");
+        return l.attendre(260).then(function () {
+          e.textContent = cible.textContent;
+          e.classList.remove("efface");
+          out.classList.remove("sort");
+          return l.mots(".app-out", texte);
+        });
+      };
+    }
+    var etapes = [
+      function () { return l.attendre(700); },
+      function () { l.q('.app-h[data-k="' + k + '"]').classList.add("on"); return l.attendre(600); },
+      function () { src.classList.add("rempli", "tape"); return l.taper(".app-txt", d.src, 62); },
+      function () { return l.attendre(500); },
+      function () { src.classList.remove("tape"); l.q(".app-send").classList.add("press"); return l.attendre(170); },
+      function () { l.q(".app-send").classList.remove("press"); app.classList.add("envoye"); return l.attendre(1250); },
+      function () { return l.mots(".app-out", d.out.en.main); },
+      function () { return l.attendre(1800); },
+      function () { app.classList.add("alts"); return l.attendre(900); },
+      moteur(1, d.out.en.alt[0].t),
+      function () { return l.attendre(2400); },
+      moteur(2, d.out.en.alt[1].t),
+      function () { return l.attendre(2400); },
+      moteur(0, d.out.en.main),
+      function () { return l.attendre(1400); }
+    ];
+    if (d.lookup && terme && d.src.indexOf(terme) >= 0) {
+      etapes = etapes.concat([
+        function () {
+          var el = l.q(".app-txt"), i = d.src.indexOf(terme), m = document.createElement("mark");
+          m.textContent = terme;
+          el.textContent = "";
+          el.appendChild(document.createTextNode(d.src.slice(0, i)));
+          el.appendChild(m);
+          el.appendChild(document.createTextNode(d.src.slice(i + terme.length)));
+          void m.offsetWidth;
+          m.classList.add("on");
+          remplirLookup(l, d.lookup);
+          return l.attendre(900);
+        },
+        function () { app.classList.add("lk"); return l.attendre(5000); },
+        function () { app.classList.remove("lk"); return l.attendre(900); }
+      ]);
+    }
+    etapes.push(function () { return l.attendre(1200); });
+    etapes.push(function () { if (!reduit) app.classList.add("fin"); return l.attendre(480); });
+    return suite(etapes);
   };
 
   var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
