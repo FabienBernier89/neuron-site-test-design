@@ -37,7 +37,7 @@ PAIRE = re.compile(r"^traduction/(allemand|francais|italien|anglais)-(francais|a
 BILLET = re.compile(r"^ressources/(blog|actualites)/[^/]+/$")
 LIEN = re.compile(r'href="\{\{ROOT\}\}(?:fr/)?([^"#?]*)([#?][^"]*)?"')
 ENTETE = re.compile(r"\A<!--page\n(.*?)\n-->\n", re.S)
-IMAGES = ["neuron-logo.png", "neuron-logo-blanc.png", "neuron-mark.png", "favicon.ico"]
+IMAGES = ["neuron-logo.png", "neuron-logo-blanc.png", "neuron-mark.png", "favicon.ico", "corrext-logo.svg", "chnell-logo.svg", "chnell-symbol.png"]
 
 TETE = """<!DOCTYPE html>
 <html lang="fr" data-theme="systeme">
