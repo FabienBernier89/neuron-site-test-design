@@ -44,6 +44,14 @@ class TestBuild(unittest.TestCase):
         for p, h in self.pages.items():
             self.assertEqual(len(re.findall(r"<h1[ >]", h)), 1, p)
 
+    def test_balises_equilibrees(self):
+        """Une balise restée ouverte (textarea, select) avale la suite de la page, scripts compris."""
+        for p, h in self.pages.items():
+            for tag in ("div", "section", "main", "a", "ul", "li", "select", "textarea", "form", "figure", "details", "p"):
+                ouvre = len(re.findall(r"<" + tag + r"[\s>]", h))
+                ferme = h.count("</" + tag + ">")
+                self.assertEqual(ouvre, ferme, f"{p or 'accueil'} : <{tag}> {ouvre} ouvertes, {ferme} fermées")
+
     def test_pages_modeles(self):
         m = build.modele
         self.assertEqual(m("corrext/chnell/"), "corrext/traduction-texte-et-document/")
