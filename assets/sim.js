@@ -127,28 +127,40 @@
     return etapes.reduce(function (p, f) { return p.then(f); }, Promise.resolve());
   }
 
-  /* S1 et S3 : visite guidée de la vraie démo Corrext (#cx), contrôles réels */
+  /* S1 et S3 : visite guidée de la vraie démo Corrext (#cx), contrôles réels.
+     Premier extrait : alternatives, puis moteur tiers (Highly sensitive coupé, avis affiché), retour à LexMachina. */
   SCENES.visite = function (l) {
-    return suite(["co", "lb", "ldip"].map(function (cle) {
+    return suite(["co", "lb", "ldip"].map(function (cle, n) {
       return function () {
-        return suite([
+        var etapes = [
           function () { return l.cliquer('#cxEx [data-ex="' + cle + '"]', true); },
-          function () { return l.attendre(2600); },
+          function () { return l.attendre(4800); },
           function () { return l.cliquer("#cxSpark", true); },
-          function () { return l.attendre(2400); },
+          function () { return l.attendre(2800); },
           function () { return l.cliquer("#cxDn", true); },
-          function () { return l.attendre(2200); },
-          function () { return l.cliquer("#cxAltX", true); },
-          function () {
-            if (!EX[cle].lookup) return l.attendre(600);
-            return suite([
-              function () { return l.cliquer("#cxLookupBtn", true); },
-              function () { return l.attendre(3200); },
-              function () { return l.cliquer("#cxLkClose", true); }
-            ]);
-          },
-          function () { return l.attendre(800); }
-        ]);
+          function () { return l.attendre(2400); },
+          function () { return l.cliquer("#cxAltX", true); }
+        ];
+        if (n === 0) {
+          etapes = etapes.concat([
+            function () { return l.cliquer("#cxSwitch", true); },
+            function () { return l.attendre(900); },
+            function () { return l.choisir("#cxEng", "DeepL Pro"); },
+            function () { return l.attendre(5200); },
+            function () { return l.choisir("#cxEng", "LexMachina"); },
+            function () { return l.attendre(1800); },
+            function () { return l.cliquer("#cxSwitch", true); }
+          ]);
+        }
+        if (EX[cle].lookup) {
+          etapes = etapes.concat([
+            function () { return l.cliquer("#cxLookupBtn", true); },
+            function () { return l.attendre(3600); },
+            function () { return l.cliquer("#cxLkClose", true); }
+          ]);
+        }
+        etapes.push(function () { return l.attendre(900); });
+        return suite(etapes);
       };
     }));
   };
