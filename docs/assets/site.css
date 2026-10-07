@@ -325,8 +325,9 @@ ul{padding:0;list-style:none}
 .ft-t .h3s{margin-bottom:16px}
 .ft-t p{color:var(--muted)}
 .ft-t ul{display:grid;gap:8px;margin-top:16px}
-.ft-t li{display:flex;gap:10px;color:var(--text)}
-.ft-t li::before{content:"";flex:0 0 6px;height:6px;margin-top:9px;border-radius:50%;background:var(--ink)}
+.ft-t li{position:relative;padding-left:16px;color:var(--text)}
+.ft-t li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.ft-t li a{color:var(--accent-d)}
 .ft-t .lien{margin-top:16px}
 
 /* Écrans intermédiaires et mobiles */
