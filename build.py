@@ -143,7 +143,8 @@ def version():
 def assembler(meta, corps, page, nav, pied, v):
     cx = 'id="cx"' in corps
     sim = "data-sim" in corps or "data-ech" in corps
-    lien_cx = '<link rel="stylesheet" href="{{ROOT}}assets/cx.css?v=' + v + '">\n' if cx else ""
+    feuilles = (["cx.css"] if cx else []) + (["maq.css"] if 'class="maq' in corps else [])
+    lien_cx = "".join('<link rel="stylesheet" href="{{ROOT}}assets/' + f + "?v=" + v + '">\n' for f in feuilles)
     html = (TETE.replace("@TITRE@", meta["title"]).replace("@DESC@", meta["description"])
             .replace("@V@", v).replace("@CX@", lien_cx))
     html += menu.rendre_entete(nav, meta.get("menu", ""), minimal=meta.get("gabarit") == "contact")

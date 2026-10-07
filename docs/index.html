@@ -11,7 +11,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;1,8..60,300&display=swap">
-<link rel="stylesheet" href="assets/site.css?v=7fe10118">
+<link rel="stylesheet" href="assets/site.css?v=eb66c119">
+<link rel="stylesheet" href="assets/cx.css?v=eb66c119">
+<link rel="stylesheet" href="assets/maq.css?v=eb66c119">
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
@@ -167,11 +169,310 @@
 </div>
 </div>
 <main id="main">
-<section class="hero">
-  <div class="wrap hero-g">
-    <h1 class="h1"><span class="n">Votre solution de traduction par IA</span> <span class="s">pour le droit, la fiscalité et la finance</span></h1>
-  </div>
+<section class="hero hero-a">
+<div class="wrap">
+<h1 class="h1"><span class="n">Votre solution de traduction par IA</span> <span class="s">pour le droit, la fiscalité et la finance</span></h1>
+<div class="hero-act"><a class="btn" href="contact/">Demander une démo</a><p class="note">Démo sur mesure · en français, allemand, italien ou anglais · hébergement 100% suisse</p></div>
+</div>
+<div class="wrap hero-st"><div class="ech" data-ech="1176x680"><div class="st" data-sim="visite" aria-label="Démonstration de l'interface Corrext" style="width:1176px;height:680px"><div class="st-f"><div class="fen"><div class="fen-b" aria-hidden="true"><i></i><i></i><i></i><span>Corrext</span></div><div class="fen-c" data-scene data-ui><div class="cx-zone"><div class="cx-ex" id="cxEx" role="group" aria-label="Extraits de démonstration">
+      <span>Choisissez un extrait :</span>
+      <button type="button" data-ex="co" class="on">Contrat · art. 104 CO</button>
+      <button type="button" data-ex="lb">Banque · art. 47 LB</button>
+      <button type="button" data-ex="ldip">Arbitrage · art. 186 LDIP</button>
+    </div><div class="cx" id="cx" aria-label="Démonstration de l'interface Corrext">
+      <div class="cx-top">
+        <span class="cx-logo"><img src="assets/img/corrext-logo.svg" alt="Corrext" class="cx-brand"></span>
+        <span class="home">Home</span>
+        <span class="grow"></span>
+        <span class="bell" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
+        <span class="cx-avatar" aria-hidden="true">AM</span>
+      </div>
+
+      <div class="cx-notice" id="cxNotice" role="status">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <b>Attorney-Client privilege notice</b>
+        You have chosen to use third-party translation engines hosted abroad. Before uploading your file(s), your organization requires you to remove any references that could potentially disclose the identity of clients, any other related parties, or the subject matter at hand. Third-party translation engines hosted abroad may exclusively be used for documents that have been completely pseudonymized. The use of such engines for high-profile or price-sensitive matters is strictly prohibited.
+      </div>
+
+      <div class="cx-tabs">
+        <div class="cx-tablist" role="tablist" aria-label="Outils Traduction texte et document">
+          <button type="button" class="cx-tab on" data-tab="text" role="tab" aria-selected="true">Text translation</button>
+          <button type="button" class="cx-tab" data-tab="file" role="tab" aria-selected="false">File translation</button>
+          <button type="button" class="cx-tab" data-tab="pdf" role="tab" aria-selected="false">PDF to Word</button>
+          <button type="button" class="cx-tab" data-tab="reph" role="tab" aria-selected="false">Rephrasing</button>
+        </div>
+        <button type="button" class="cx-switch" id="cxSwitch" aria-pressed="true"><i aria-hidden="true"></i> Highly sensitive content</button>
+      </div>
+
+      <!-- Onglet Text translation -->
+      <div class="cx-panel on" id="cxp-text">
+        <div class="cx-work">
+          <div class="cx-bar">
+            <select class="cx-sel" id="cxSrcLang" aria-label="Langue source"><option>Detect language</option><option>Detected language (French)</option></select>
+            <span class="cx-swap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 5h18"/><polyline points="7 23 3 19 7 15"/><path d="M21 19H3"/></svg></span>
+            <select class="cx-sel" id="cxTgt" aria-label="Langue cible"><option value="de">German</option><option value="en">English</option><option value="it">Italian</option></select>
+            <select class="cx-sel" id="cxEng" aria-label="Moteur de traduction"><option>LexMachina</option><option>DeepL Pro</option><option>Azure OpenAI - GPT</option></select>
+          </div>
+          <div class="cx-panes">
+            <div class="cx-pane">
+              <textarea class="cx-src" id="cxSrc" readonly aria-label="Texte source" placeholder="Enter the text you would like to translate.&#10;&#10;To translate files, simply upload them directly into our file translation interface."></textarea>
+              <button type="button" class="cx-ic clear" id="cxClear" aria-label="Effacer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+              <button type="button" class="cx-lookup-btn" id="cxLookupBtn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8zM19 14l.9 2.6 2.6.9-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9z"/></svg> Fast Lookup</button>
+              <div class="cx-foot"><span class="ur" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h10a5 5 0 0 1 0 10H9"/><path d="M7 6 3 10l4 4"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10H11a5 5 0 0 0 0 10h4"/><path d="m17 6 4 4-4 4"/></svg></span><span class="cnt" id="cxCnt">0 / 10000</span></div>
+            </div>
+            <div class="cx-pane">
+              <div class="cx-out" id="cxOut" aria-live="polite"></div>
+              <button type="button" class="cx-ic copy" id="cxCopy" aria-label="Copier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+              <button type="button" class="cx-ic spark" id="cxSpark" aria-label="Alternatives"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8zM19 14l.9 2.6 2.6.9-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9z"/></svg></button>
+              <div class="cx-foot"><span class="ur" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h10a5 5 0 0 1 0 10H9"/><path d="M7 6 3 10l4 4"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10H11a5 5 0 0 0 0 10h4"/><path d="m17 6 4 4-4 4"/></svg></span></div>
+            </div>
+          </div>
+          <div class="cx-alts" id="cxAlts">
+            <div class="h">Alternatives
+              <span class="gen"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8z"/></svg> Generate more</span>
+              <span class="pg"><span id="cxPg">1 / 2</span>
+                <button type="button" id="cxUp" aria-label="Alternative précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+                <button type="button" id="cxDn" aria-label="Alternative suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></button>
+                <button type="button" id="cxAltX" aria-label="Fermer les alternatives"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+              </span>
+            </div>
+            <div class="t" id="cxAltT"></div>
+          </div>
+        </div>
+        <div class="cx-hint">
+          <div class="ill" aria-hidden="true">Le débiteur en demeure doit des <mark>intérêts moratoires</mark> au taux de 5% l'an, conformément à l'art. 104 al. 1 CO.</div>
+          <div><b>Need a quick word translation check?</b><p>To quickly verify the meaning or usage of a word in context, simply highlight the chosen word and click on “Fast Lookup”.</p></div>
+        </div>
+      </div>
+
+      <!-- Onglet File translation -->
+      <div class="cx-panel cx-upl" id="cxp-file">
+        <div class="cfg">
+          <div><label for="cxFEng">Translation engine</label><select class="cx-sel" id="cxFEng"><option>LexMachina</option><option>DeepL Pro</option><option>Azure OpenAI - GPT</option></select></div>
+          <div><label for="cxFTgt">Translation target language</label><select class="cx-sel" id="cxFTgt"><option>German</option><option>English</option><option>Italian</option><option>French</option></select></div>
+        </div>
+        <p class="cx-h4">Upload your file(s)</p>
+        <button type="button" class="cx-drop" id="cxFileDrop">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3-3 3 3"/></svg></span>
+          <span class="t"><b>Click to upload</b> or drag and drop up to 25 files</span>
+          <span class="s">Supported file types: .pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx<br>Max file size: 50MB</span>
+        </button>
+        <div class="cx-file" id="cxFileRow">
+          <span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+          <span class="fm"><span class="fn">Darlehensvertrag_2026.docx</span><span class="fs" id="cxFileSub">248 KB · 14 pages · German → French</span><span class="bar"><i id="cxFileBar"></i></span></span>
+          <span class="st" id="cxFileSt">Translating…</span>
+        </div>
+        <p class="cx-note">Démo : le dépôt est simulé, le fichier n'est pas envoyé.</p>
+      </div>
+
+      <!-- Onglet PDF to Word -->
+      <div class="cx-panel cx-upl" id="cxp-pdf">
+        <p class="cx-h4" style="margin-top:14px">Upload your file(s)</p>
+        <button type="button" class="cx-drop" id="cxPdfDrop">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3-3 3 3"/></svg></span>
+          <span class="t"><b>Click to upload</b> or drag and drop up to 25 files</span>
+          <span class="s">Supported file types: .pdf<br>Max file size: 50MB</span>
+        </button>
+        <div class="cx-file" id="cxPdfRow">
+          <span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+          <span class="fm"><span class="fn">Pieces_arbitrage_scan.pdf</span><span class="fs">3.1 MB · 42 pages · scan</span><span class="bar"><i id="cxPdfBar"></i></span></span>
+          <span class="st" id="cxPdfSt">Converting…</span>
+        </div>
+        <p class="cx-note">Démo : la conversion est simulée, le fichier n'est pas envoyé.</p>
+      </div>
+
+      <!-- Onglet Rephrasing -->
+      <div class="cx-panel" id="cxp-reph">
+        <div class="cx-work">
+          <div class="cx-bar reph">
+            <select class="cx-sel" aria-label="Langue source"><option>Detect language</option><option selected>Detected language (French)</option></select>
+            <span class="cx-swap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></span>
+            
+            <div class="cx-setwrap">
+              <select class="cx-sel" id="cxSetBtn" aria-label="Settings"><option>Settings</option></select>
+              <span class="cx-dot" id="cxSetDot" aria-hidden="true"></span>
+              <div class="cx-set-pop" id="cxSetPop">
+                <p class="cx-h5">Styles</p>
+                <div class="cx-chips" id="cxStyles">
+                  <button type="button" class="cx-chip" data-style="Formal legal">Formal legal</button>
+                  <button type="button" class="cx-chip" data-style="Financial">Financial</button>
+                  <button type="button" class="cx-chip" data-style="Simplified">Simplified</button>
+                  <button type="button" class="cx-chip" data-style="Formal">Formal</button>
+                  <button type="button" class="cx-chip" data-style="Informal">Informal</button>
+                </div>
+                <p class="cx-h5">Options</p>
+                <div class="cx-chips"><button type="button" class="cx-chip" data-style="Shorten">Shorten</button></div>
+                <div class="cx-set-act"><button type="button" class="rst" id="cxSetReset">Reset</button><button type="button" class="cx-btn" id="cxSetApply">Apply</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="cx-panes">
+            <div class="cx-pane">
+              <textarea class="cx-src" id="cxRSrc" readonly aria-label="Texte à reformuler" placeholder="Enter the text you would like to rephrase."></textarea>
+              <div class="cx-foot"><span class="ur" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h10a5 5 0 0 1 0 10H9"/><path d="M7 6 3 10l4 4"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10H11a5 5 0 0 0 0 10h4"/><path d="m17 6 4 4-4 4"/></svg></span><span class="cnt" id="cxRCnt">0 / 5000</span></div>
+            </div>
+            <div class="cx-pane">
+              <div class="cx-out" id="cxROut" aria-live="polite"></div>
+              <button type="button" class="cx-ic copy" aria-label="Copier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+              <button type="button" class="cx-ic regen" aria-label="Régénérer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 1 3 6.7L3 16"/><path d="M3 21v-5h5"/></svg></button>
+              <div class="cx-foot"><span class="ur" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h10a5 5 0 0 1 0 10H9"/><path d="M7 6 3 10l4 4"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10H11a5 5 0 0 0 0 10h4"/><path d="m17 6 4 4-4 4"/></svg></span></div>
+            </div>
+          </div>
+        </div>
+        <p class="cx-note" id="cxRNote">Démo : réécriture disponible sur l'extrait « Contrat · art. 104 CO », avec le réglage par défaut et le style Simplified.</p>
+      </div>
+
+      <!-- Fast Lookup : CHnell -->
+      <div class="cx-modal" id="cxModal" role="dialog" aria-modal="true" aria-label="Fast Lookup CHnell">
+        <div class="cx-chnell">
+          <div class="head">
+            <span class="logo"><img src="assets/img/chnell-logo.svg" alt="CHnell" class="cx-brand"></span>
+            <span class="pow">powered by Neur.on</span>
+          </div>
+          <div class="q">
+            <span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span id="cxLkQ">Verzugszins</span></span>
+            <span class="lang" id="cxLkL1">German</span>
+            <span class="sw" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 5h18"/><polyline points="7 23 3 19 7 15"/><path d="M21 19H3"/></svg></span>
+            <span class="lang" id="cxLkL2">French</span>
+          </div>
+          <div class="cols" id="cxLkCols"></div>
+          <div class="more">Show more results</div>
+          <div class="close"><button type="button" class="cx-btn ghost" id="cxLkClose">Close</button></div>
+        </div>
+      </div>
+    </div></div><span class="sim-cur" aria-hidden="true"></span></div></div></div><button type="button" class="sim-pause" aria-pressed="false" aria-label="Mettre en pause la démonstration" data-libre><svg class="ic-p" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 1.5v7M7.5 1.5v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="ic-l" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.8v6.4L8.4 5z" fill="currentColor"/></svg></button></div></div></div>
 </section>
+<section class="sec dist"><div class="wrap"><p class="i">Adopté par les professionnels du droit et de la finance suisses</p><ul style="grid-template-columns:repeat(6,minmax(0,1fr))"><li><b>Swiss FinTech Awards 2024</b><span>Lauréat Early Stage</span></li><li><b>BILANZ</b><span>Entreprises les plus innovantes 2024</span></li><li><b>Digital Shapers 2023</b></li><li><b>Soutenu par Innosuisse</b></li><li><b>ISO 27001 certifié</b></li><li><b>Hébergement 100% suisse</b><span>Infomaniak</span></li></ul></div></section>
+<section class="sec"><div class="wrap">
+<div class="tl t4"><div><span class="n">15 M+</span><div><p>Segments juridiques &amp; financiers multilingues</p></div></div><div><span class="n">30</span><div><p>Langues sur la plateforme, dont DE · FR · IT · EN en natif</p></div></div><div><span class="n">4</span><div><p>Moteurs orchestrés, dont LexMachina entraîné sur le droit suisse</p></div></div><div><span class="n">1</span><div><p>Mode Highly sensitive : stockage et traitement exclusivement en Suisse</p></div></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2">Toute votre traduction juridique, sur une <em>seule plateforme</em></h2><p class="intro">Du simple copier-coller jusqu'à l'installation sur vos propres serveurs : Corrext réunit tous les acteurs et tous vos outils dans un environnement sécurisé.</p><div class="ft"><div class="ft-t"><span class="pill">Traduction texte et document</span><h3 class="h3s">Vos fichiers traduits dans leur format d'origine</h3><p>Déposez vos documents et récupérez une traduction dans le format d'origine. Vingt-cinq fichiers par envoi, choix du moteur et de la langue cible, mode Highly sensitive pour les dossiers confidentiels.</p><ul><li>Word, PDF, Excel, PowerPoint : jusqu'à 25 fichiers de 50 Mo par envoi</li><li>Conversion PDF vers Word intégrée</li><li>Moteur et langue cible au choix pour chaque envoi</li></ul><a class="lien" href="corrext/traduction-texte-et-document/">Découvrir Traduction texte et document</a></div><div class="ech" data-ech="764x515"><div class="st" role="img" aria-label="Traduction texte et document" style="width:764px;height:515px"><div class="st-f"><div class="fen"><div class="fen-b" aria-hidden="true"><i></i><i></i><i></i><span>Corrext</span></div><div class="fen-c" data-scene data-ui><div class="maq"><div class="win">
+          <div class="win-top"><span class="d"></span><span class="d"></span><span class="d"></span></div>
+          <div class="doc-body">
+            <div class="doc-paper">
+              <div class="doc-h"></div>
+              <div class="doc-l w95"></div><div class="doc-l w90"></div><div class="doc-l w75"></div>
+              <div class="doc-table">
+                <span class="hd"></span><span class="hd"></span><span class="hd"></span>
+                <span></span><span></span><span></span>
+                <span></span><span></span><span></span>
+              </div>
+              <div class="doc-l w90"></div><div class="doc-l w60"></div>
+              <div class="doc-page"><span>Vertrag_FR.docx</span><span>p. 14 / 100</span></div>
+            </div>
+            <div class="fmt-row">
+              <span class="fmt">PDF</span><span class="fmt">DOCX</span><span class="fmt">XLSX</span><span class="fmt">PPTX</span><span class="fmt">PDF → Word</span>
+            </div>
+          </div>
+        </div></div></div></div></div></div></div></div><div class="ft inv"><div class="ft-t"><span class="pill">AI Review Assistant</span><h3 class="h3s">Relisez dans Word, harmonisez en un clic</h3><p>La review se fait dans un document Word bilingue, avec l'assistant IA intégré. Il détecte un changement de terme et propose de l'harmoniser partout, sans copier-coller ni perte de contexte.</p><ul><li>Source et cible côte à côte dans MS Word</li><li>Harmonisation terminologique sur tout le document</li><li>Collaboration temps réel avec des juristes-linguistes</li></ul><a class="lien" href="corrext/#integrations">Voir l'assistant en action</a></div><div class="ech" data-ech="764x515"><div class="st" role="img" aria-label="AI Review Assistant" style="width:764px;height:515px"><div class="st-f"><div class="fen"><div class="fen-b" aria-hidden="true"><i></i><i></i><i></i><span>Corrext</span></div><div class="fen-c" data-scene data-ui><div class="maq"><div class="win">
+          <div class="win-top"><span class="d"></span><span class="d"></span><span class="d"></span></div>
+          <div class="word-rib">
+            <span class="tabb">Accueil</span><span>Insertion</span><span>Révision</span>
+            <span class="tabb brand">Corrext</span>
+          </div>
+          <div class="word-area">
+            <div class="word-doc">
+              <div class="wl src w90"></div><div class="wl src w80"></div>
+              <div class="wl tgt w90"></div><div class="wl tgt w65"></div>
+              <div class="wl src w80"></div><div class="wl tgt w90"></div><div class="wl tgt w65"></div>
+            </div>
+            <div class="word-panel">
+              <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3 3 3 0 0 0-3 3 3 3 0 0 0 0 6 3 3 0 0 0 3 3 3 3 0 0 0 6 0 3 3 0 0 0 3-3 3 3 0 0 0 0-6 3 3 0 0 0-3-3 3 3 0 0 0-3-3z"/></svg> Assistant IA</div>
+              <div class="tip">Terme harmonisé : « <b>Verzugszins</b> ». L'appliquer dans tout le document ?
+                <div class="tip-act"><span class="tip-yes">Oui, partout</span><span class="tip-no">Ignorer</span></div>
+              </div>
+              <div class="pf">Terminologie</div>
+              <div class="pbox">CHnell · droit suisse</div>
+            </div>
+          </div>
+        </div></div></div></div></div></div></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<div class="bt"><div class="bt-g"><h2 class="h3s">Des agents IA spécialisés, <em>du devis à la livraison</em></h2><p>Neur.on automatise les trois étapes les plus coûteuses de la traduction juridique, sans jamais retirer le contrôle aux juristes.</p></div><div class="bt-p"><span class="n">60 %</span><b>Analyse automatisée par des agents juridiques</b><p>d'économies jusqu'à<br>sur la gestion de projet</p></div><div class="bt-p"><span class="n">50 %</span><b>Le bon modèle, prompté avec les bonnes données</b><p>d'économies jusqu'à<br>sur la traduction machine</p></div><div class="bt-p bt-l"><span class="n">80 %</span><b>Une review assistée, pas remplacée</b><p>d'économies jusqu'à<br>sur la relecture</p></div></div><p class="legende">Économies indicatives « jusqu'à », mesurées sur des projets types. La technologie augmente le juriste, elle ne le remplace pas.</p>
+</div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2">Traduire le droit suisse suppose de <em>le connaître</em></h2><p class="intro">Un outil générique traduit des mots. LexMachina retrouve le terme exact du droit, de la fiscalité et de la finance suisses.</p><div class="tl txt"><div><b>Entraînée sur le droit suisse</b><p>LexMachina apprend des ATF/BGE, des textes FINMA et des codes (CO, CC, LP). Plus de 15 millions de segments juridiques et financiers, pas un modèle généraliste.</p></div><div><b>Terminologie suisse en contexte</b><p>CHnell, le concordancier de Neur.on, met plus de 20 000 documents officiels, répartis en 30 domaines (Feuille fédérale, ESTV, FINMA, Fedlex), à portée d'un surlignage, avec vos propres ressources : chaque terme se vérifie dans son contexte réel.</p></div><div><b>Quadrilinguisme natif</b><p>Toutes les paires DE · FR · IT · EN en natif, et 30 langues sur la plateforme, avec jusqu'à quatre alternatives comparées d'un moteur à l'autre et une relecture experte en option.</p></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2"><em>Quatre niveaux</em> de qualité, du gisting à l'assermentation</h2><p class="intro">Vous choisissez le niveau de finition adapté à l'enjeu, et vous ne payez que ce dont vous avez besoin.</p><div class="tl t4"><div><span class="n">1</span><div><b>Traduction machine</b><p>Pour comprendre vite : revue de pièces, discovery, lecture interne. Le moteur LexMachina, sans relecture.</p></div></div><div><span class="n">2</span><div><b>Post-édition</b><p>Light ou full : contrats, CGV, correspondance. Relus par un juriste-linguiste pour un rendu publiable.</p></div></div><div><span class="n">3</span><div><b>Relecture juridique</b><p>Relecture experte pour les enjeux forts : avis de droit, publication, documents engageants.</p></div></div><div><span class="n">4</span><div><b>Certification &amp; apostille</b><p>Traduction assermentée et légalisée, via un réseau de traducteurs experts, pour les dossiers officiels.</p></div></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<h2 class="h2">Ces solutions traduisent. Neur.on <em>maîtrise le droit suisse</em>.</h2><p class="intro">Une agence externe, un outil générique comme DeepL ou un LLM généraliste rendent service sur une demi-page. Pour un contrat de 60 pages ou 500 pages de pièces d'arbitrage, la sécurité, la terminologie suisse et la gestion documentaire font la différence.</p><div class="tb"><table class="cmp">
+        <thead>
+          <tr>
+            <th style="text-align:left">&nbsp;</th>
+            <th class="brand">Neur.on</th>
+            <th>Agence externe</th>
+            <th>DeepL</th>
+            <th>LLM généraliste</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Spécialisation droit suisse native</th>
+            <td class="brand"><span class="cmp-y" aria-hidden="true"></span> Oui</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Variable</td>
+            <td><span class="cmp-n" aria-hidden="true"></span> Non</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Généraliste</td>
+          </tr>
+          <tr>
+            <th>Terminologie suisse en contexte (CHnell, 30 domaines)</th>
+            <td class="brand"><span class="cmp-y" aria-hidden="true"></span> Intégrée</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Selon le prestataire</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> À créer soi-même</td>
+            <td><span class="cmp-n" aria-hidden="true"></span> Non</td>
+          </tr>
+          <tr>
+            <th>Quadrilinguisme DE · FR · IT · EN</th>
+            <td class="brand"><span class="cmp-y" aria-hidden="true"></span> Natif</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Selon les langues</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Sans contexte juridique</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Sans contexte juridique</td>
+          </tr>
+          <tr>
+            <th>Stockage en Suisse, mode 100 % Suisse au choix</th>
+            <td class="brand"><span class="cmp-y" aria-hidden="true"></span> Oui</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Variable</td>
+            <td><span class="cmp-n" aria-hidden="true"></span> Non</td>
+            <td><span class="cmp-n" aria-hidden="true"></span> Non</td>
+          </tr>
+          <tr>
+            <th>Gestion documentaire &amp; OCR (tous formats)</th>
+            <td class="brand"><span class="cmp-y" aria-hidden="true"></span> Oui</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Manuelle</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Limité</td>
+            <td><span class="cmp-n" aria-hidden="true"></span> Non</td>
+          </tr>
+          <tr>
+            <th>Traçabilité &amp; droits granulaires</th>
+            <td class="brand"><span class="cmp-y" aria-hidden="true"></span> Oui</td>
+            <td><span class="cmp-n" aria-hidden="true"></span> Hors plateforme</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Selon l'offre</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Selon l'offre</td>
+          </tr>
+          <tr>
+            <th>Vos contenus réservés à votre propre mémoire</th>
+            <td class="brand"><span class="cmp-y" aria-hidden="true"></span> Contractuel</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Variable</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Selon l'offre</td>
+            <td><span class="cmp-p" aria-hidden="true"></span> Selon l'offre</td>
+          </tr>
+          <tr>
+            <th>Relecture humaine spécialisée</th>
+            <td class="brand"><span class="cmp-y" aria-hidden="true"></span> En option</td>
+            <td><span class="cmp-y" aria-hidden="true"></span> Oui</td>
+            <td><span class="cmp-n" aria-hidden="true"></span> Non</td>
+            <td><span class="cmp-n" aria-hidden="true"></span> Non</td>
+          </tr>
+        </tbody>
+      </table></div><p class="legende cmp-leg"><span><span class="cmp-y" aria-hidden="true"></span> Oui / natif</span><span><span class="cmp-p" aria-hidden="true"></span> Partiel / variable</span><span><span class="cmp-n" aria-hidden="true"></span> Non couvert</span></p>
+</div></section>
+<section class="sec"><div class="wrap">
+<div class="bt"><div class="bt-g"><span class="pill">Sécurité et souveraineté</span><h2 class="h3s">Vos documents les plus sensibles <em>restent en Suisse</em></h2><p>Pour un avocat ou un banquier, la confidentialité est une condition, pas un réglage. Neur.on est une solution suisse : entité, infrastructure et moteur. Vous choisissez, projet par projet, le niveau de confidentialité, et le mode Highly sensitive garde tout en Suisse.</p><a class="lien" href="securite-souverainete/">Sécurité et souveraineté</a></div><div class="bt-p"><b>Stockage 100% suisse</b><p>Vos projets et vos mémoires sont conservés sur les serveurs suisses de Corrext (Infomaniak, en Suisse).</p></div><div class="bt-p"><b>Mode Highly sensitive</b><p>Stockage et traitement exclusivement en Suisse, hors US CLOUD Act, sans réutilisation en mémoire. Disponible en EN, FR, IT, DE.</p></div><div class="bt-p"><b>Conforme nLPD &amp; RGPD</b><p>Respect de la loi suisse sur la protection des données comme du RGPD européen, par conception.</p></div><div class="bt-p"><b>ISO&nbsp;27001 certifié</b><p>Sécurité de l'information certifiée depuis 2024, chiffrement de bout en bout des flux et du stockage.</p></div></div>
+</div></section>
+<section class="sec"><div class="wrap fq"><h2 class="h2">Tout ce qu'il faut savoir</h2><div><details><summary>Comment Neur.on garantit-il la précision sur le droit suisse ?</summary><div class="r"><p>LexMachina, notre moteur, est entraîné sur plus de 15 millions de segments juridiques et financiers suisses : ATF/BGE, textes FINMA, codes (CO, CC, LP). Vous pouvez comparer jusqu'à quatre alternatives d'autres moteurs, vérifier chaque terme dans son contexte officiel avec CHnell, et demander une relecture par un juriste-linguiste.</p></div></details><details><summary>Mes données restent-elles souveraines ?</summary><div class="r"><p>Vous choisissez, projet par projet. En mode Standard, vos données sont stockées sur les serveurs suisses de Corrext et traitées par le moteur que vous sélectionnez : LexMachina en Suisse ; DeepL Pro, Azure OpenAI GPT ou Claude à l'étranger, avec un avertissement de pseudonymisation. En mode Highly sensitive, stockage et traitement restent exclusivement en Suisse, sans réutilisation en mémoire. Le tout certifié ISO&nbsp;27001, conforme nLPD et RGPD.</p></div></details><details><summary>Quelles langues et quels domaines sont couverts ?</summary><div class="r"><p>Trente langues sur la plateforme, avec l'allemand, le français, l'italien et l'anglais en natif (mode Highly sensitive et LexMachina). CHnell couvre 30 domaines, du droit bancaire et de la surveillance FINMA à l'arbitrage, la fiscalité, la propriété intellectuelle ou le droit des sociétés. Pour les traductions certifiées, notariées ou apostillées, Corrext propose un service en ligne dédié.</p></div></details><details><summary>Quelle différence avec DeepL ou un LLM généraliste ?</summary><div class="r"><p>Les outils génériques traduisent du texte sans connaître le droit suisse ni ses sources officielles, et hébergent vos données hors de Suisse. Corrext vous laisse les utiliser quand c'est pertinent, dans un cadre gouverné, et met à côté un moteur entraîné sur le droit suisse, la comparaison d'alternatives, la vérification terminologique en contexte et un mode 100 % Suisse.</p></div></details><details><summary>La plateforme est-elle agnostique aux modèles d'IA ?</summary><div class="r"><p>Oui. Dans Corrext, vous choisissez le moteur à chaque traduction : LexMachina, DeepL Pro, Azure OpenAI GPT ou Claude, et vous comparez jusqu'à quatre alternatives attribuées à leur moteur. Une solution pérenne, qui évolue avec l'état de l'art sans vous enfermer.</p></div></details><details><summary>Comment intégrer Neur.on à nos outils existants ?</summary><div class="r"><p>Via le plugin Microsoft Word, l'application web Corrext, ou l'API REST pour vos DMS, intranets et workflows. La gestion des droits est granulaire, jusqu'au niveau document (SharePoint / AD). Un déploiement on-premises est possible. Réservez une démo pour cadrer l'intégration avec un expert.</p></div></details></div></div></section>
+<section class="cta"><div class="wrap"><h2><span class="l1">Prêt à voir Neur.on</span> <span class="l2">sur vos propres documents ?</span></h2><a class="btn" href="contact/">Demander une démo</a></div></section>
 </main>
 <footer class="pied">
 <div class="wrap">
@@ -222,6 +523,9 @@
 <p class="fp-iso">ISO 27001 · Hébergement en Suisse (Infomaniak) · nLPD et RGPD</p>
 </div>
 </footer>
-<script src="assets/nav.js?v=7fe10118" defer></script>
+<script src="assets/nav.js?v=eb66c119" defer></script>
+<script src="assets/corrext-demo.js?v=eb66c119" defer></script>
+<script src="assets/sim-data.js?v=eb66c119" defer></script>
+<script src="assets/sim.js?v=eb66c119" defer></script>
 </body>
 </html>
