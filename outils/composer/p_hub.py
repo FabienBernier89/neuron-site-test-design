@@ -1,0 +1,29 @@
+from commun import *
+P = "corrext/"
+t = liens(charger(P), P)
+out = []
+ph = bloc(t, "section", "phero")
+out.append(hero("Corrext :", "reprenez le contrôle de vos traductions", brut(bloc(ph, "p", "lead")), ("Demander une démo", C)))
+dash = bloc(ph, "div", "dash")
+out.append(section(scene(1176, 640, '<div class="maq">' + dash + "</div>", sim="tableau", label="Tableau de bord de Corrext, données de démonstration"), "sec sec-st"))
+pt = bloc(t, "section", "ptrust")
+items = []
+for li in blocs(pt, "li"):
+    tt = bloc(li, "span", "ptrust-t")
+    items.append((None, brut(bloc(tt, "b")), brut(interne(blocs(tt, "span")[1]))))
+out.append(section(tuiles(items, "tl txt")))
+po = bloc(t, "section", "postes")
+h, p = tete(po)
+out.append(section(h2(h, "une seule salle de contrôle") + f'<p class="intro">{p}</p>' + lignes_features(po)))
+us = bloc(t, "section", "usp")
+lead = bloc(us, "div", "usp-lead")
+a = blocs(lead, "a", "feat-link")[0]
+petites = [(brut(bloc(r, "b")), brut(bloc(r, "p")), "") for r in blocs(us, "div", "usp-row")]
+out.append(section(bento({"titre": h2(txt(bloc(lead, "h2")), "agnostique et pérenne", "h3s"), "texte": brut(bloc(lead, "p")),
+                          "lien": (txt(a), re.search(r'href="([^"]+)"', a).group(1))}, petites)))
+qb = bloc(t, "section", "qband")
+out.append(section(bande(brut(bloc(qb, "b")), ("Demander une démo", C))))
+out.append(faq_section(t))
+out.append(cta_section(t, "Voyez Corrext"))
+ecrire(P, entete_existant(P), "".join(out))
+print("hub écrit")
