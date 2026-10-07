@@ -229,8 +229,8 @@
   SCENES.avis = function (l) {
     return suite([
       function () { return l.attendre(800); },
-      function () { return l.cliquer(".mx-l li.tiers", false); },
-      function () { return l.classe(".mx-l li", "on", false).then(function () { return l.classe(".mx-l li.tiers", "on", true); }); },
+      function () { return l.cliquer(".mx-l li:nth-child(2)", false); },
+      function () { return l.classe(".mx-l li", "on", false).then(function () { return l.classe(".mx-l li:nth-child(2)", "on", true); }); },
       function () { return l.classe(".mx-avis", "on", true); },
       function () { return l.attendre(3200); },
       function () { return l.classe(".mx-avis", "on", false); },

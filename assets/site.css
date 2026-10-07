@@ -106,6 +106,7 @@ ul{padding:0;list-style:none}
 .h3s{font:300 30px/36px var(--serif);color:var(--ink)}
 .intro{max-width:680px;margin:-16px 0 32px;color:var(--text)}
 .pill{display:inline-flex;align-items:center;padding:6px 10px;border:1px solid var(--ink);border-radius:999px;font:500 12px/16px var(--sans);color:var(--ink)}
+.legende + .tb,.intro + .tb{margin-top:24px}
 .cmp-leg{display:flex;flex-wrap:wrap;gap:8px 24px}
 .cmp-leg > span{display:inline-flex;align-items:center;gap:8px}
 .bt-p .n{font:500 40px/48px var(--num);color:var(--ink)}
@@ -155,9 +156,12 @@ ul{padding:0;list-style:none}
 .mx-l li i{width:14px;height:14px;border-radius:50%;border:1.5px solid #c9d1de}
 .mx-l li.on i{border:4px solid #06122e}
 .mx-l li span{margin-left:auto;font-size:11px;color:var(--mid)}
-.mx-avis{position:absolute;left:50%;top:50%;width:300px;transform:translate(-50%,-50%) scale(.96);opacity:0;padding:16px;border:1px solid rgba(0,0,0,.06);border-radius:8px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.1);transition:opacity .3s,transform .3s}
+.mx-avis{position:absolute;left:50%;top:50%;width:min(560px,86%);transform:translate(-50%,-50%) scale(.96);opacity:0;padding:16px;border:1px solid rgba(0,0,0,.06);border-radius:8px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.1);transition:opacity .3s,transform .3s}
 .mx-avis.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .mx-avis b{display:block;margin-bottom:6px;font:600 13px/19.5px var(--ui)}
+.mx-avis p{font:400 12px/18px var(--ui);color:#404040}
+.duo li b{color:var(--ink);font-weight:600}
+.tb th{vertical-align:top}
 
 /* Scène « quatre caractères » (S4) */
 .q4{gap:12px}
