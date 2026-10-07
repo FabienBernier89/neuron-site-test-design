@@ -51,7 +51,7 @@ TETE = """<!DOCTYPE html>
 <link rel="icon" href="{{ROOT}}assets/img/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;1,8..60,300&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;1,8..60,300&display=swap">
 <link rel="stylesheet" href="{{ROOT}}assets/site.css?v=@V@">
 @CX@</head>
 <body>

@@ -69,15 +69,17 @@
       requestAnimationFrame(tic);
     });
   };
-  Lecteur.prototype.taper = function (sel, texte, cps) {
+  Lecteur.prototype.taper = function (sel, texte, cps, apres) {
     var el = this.q(sel), self = this, i = 0, pas = Math.max(1, Math.round(texte.length / 120));
-    if (reduit) { el.textContent = texte; return Promise.resolve(); }
+    if (reduit) { el.textContent = texte; if (apres) apres(texte.length); return Promise.resolve(); }
     el.textContent = "";
     function suite() {
       if (i >= texte.length) return Promise.resolve();
       i = Math.min(texte.length, i + pas);
       el.textContent = texte.slice(0, i);
-      return self.attendre(1000 / (cps || 60) * pas).then(suite);
+      if (apres) apres(i);
+      /* rythme humain : chaque pas varie de 70 à 130 % */
+      return self.attendre(1000 / (cps || 60) * pas * (0.7 + Math.random() * 0.6)).then(suite);
     }
     return suite();
   };
@@ -263,7 +265,7 @@
   /* Révèle un texte mot par mot : fondu et léger glissement, 22 ms de décalage par mot */
   Lecteur.prototype.mots = function (sel, texte) {
     var el = this.q(sel), liste = texte.split(" ");
-    el.classList.remove("on");
+    el.classList.remove("vu", "sort");
     el.textContent = "";
     liste.forEach(function (mot, i) {
       var s = document.createElement("span");
@@ -274,7 +276,7 @@
       el.appendChild(document.createTextNode(" "));
     });
     void el.offsetWidth;
-    el.classList.add("on");
+    el.classList.add("vu");
     return this.attendre(liste.length * 22 + 450);
   };
 
@@ -305,47 +307,111 @@
     });
   }
 
-  /* Scène d'accueil : interface Corrext redessinée, un extrait différent à chaque boucle */
+  /* Scène d'accueil : écran Corrext « Text translation », un extrait différent à chaque boucle */
   SCENES.app = function (l) {
     var cles = ["co", "lb", "ldip"], k = cles[(l.n || 0) % cles.length];
     l.n = (l.n || 0) + 1;
-    var d = EX[k], app = l.q(".app"), src = l.q(".app-src"), terme = app.getAttribute("data-terme-" + k);
-    function moteur(i, texte) {
+    var d = EX[k], cr = l.q(".cr"), terme = cr.getAttribute("data-terme-" + k), entree = l.q(".cr-in"), cnt = l.q(".cr-cnt");
+    var tiers = d.out.en.alt.filter(function (x) { return x.e === "DeepL Pro"; })[0] || d.out.en.alt[0];
+    function appui(sel) {
+      var el = l.q(sel);
+      el.classList.add("press");
+      return l.attendre(170).then(function () { el.classList.remove("press"); return l.attendre(140); });
+    }
+    function squelette() {
+      var out = l.q(".cr-out");
+      out.classList.remove("vu");
+      out.textContent = "";
+      for (var i = 0; i < 3; i++) { var s = document.createElement("span"); s.className = "cr-sk"; out.appendChild(s); }
+    }
+    function choisir(v) {
       return function () {
-        var seg = l.q(".app-seg"), cible = seg.querySelector('[data-i="' + i + '"]'), e = l.q(".app-e"), out = l.q(".app-out");
-        l.q(".app-pill").style.transform = "translateX(" + (i * 100) + "%)";
-        [].forEach.call(seg.querySelectorAll("span"), function (s) { s.classList.toggle("on", s === cible); });
-        e.classList.add("efface");
+        return appui(".cr-eng").then(function () {
+          cr.classList.add("menu");
+          return l.attendre(650);
+        }).then(function () {
+          [].forEach.call(l.scene.querySelectorAll(".cr-menu span"), function (s) { s.classList.toggle("on", s.getAttribute("data-v") === v); });
+          return l.attendre(450);
+        }).then(function () {
+          cr.classList.remove("menu");
+          l.q(".cr-eng-v").textContent = v;
+          return l.attendre(200);
+        });
+      };
+    }
+    function retraduire(texte) {
+      return function () {
+        var out = l.q(".cr-out");
         out.classList.add("sort");
-        return l.attendre(260).then(function () {
-          e.textContent = cible.textContent;
-          e.classList.remove("efface");
+        return l.attendre(240).then(function () {
+          squelette();
           out.classList.remove("sort");
-          return l.mots(".app-out", texte);
+          cr.classList.add("traduit");
+          return l.attendre(900);
+        }).then(function () {
+          cr.classList.remove("traduit");
+          return l.mots(".cr-out", texte);
+        });
+      };
+    }
+    function alternative(n, total) {
+      return function () {
+        var alt = l.q(".cr-alt"), e = l.q(".cr-alt-e");
+        alt.classList.add("sort");
+        e.classList.remove("on");
+        return l.attendre(230).then(function () {
+          l.q(".cr-pgn").textContent = (n + 1) + " / " + total;
+          e.textContent = d.out.en.alt[n].e;
+          e.classList.add("on");
+          return l.mots(".cr-alt", d.out.en.alt[n].t);
         });
       };
     }
     var etapes = [
-      function () { return l.attendre(700); },
-      function () { l.q('.app-h[data-k="' + k + '"]').classList.add("on"); return l.attendre(600); },
-      function () { src.classList.add("rempli", "tape"); return l.taper(".app-txt", d.src, 62); },
-      function () { return l.attendre(500); },
-      function () { src.classList.remove("tape"); l.q(".app-send").classList.add("press"); return l.attendre(170); },
-      function () { l.q(".app-send").classList.remove("press"); app.classList.add("envoye"); return l.attendre(1250); },
-      function () { return l.mots(".app-out", d.out.en.main); },
-      function () { return l.attendre(1800); },
-      function () { app.classList.add("alts"); return l.attendre(900); },
-      moteur(1, d.out.en.alt[0].t),
-      function () { return l.attendre(2400); },
-      moteur(2, d.out.en.alt[1].t),
-      function () { return l.attendre(2400); },
-      moteur(0, d.out.en.main),
-      function () { return l.attendre(1400); }
+      function () { return l.attendre(800); },
+      function () {
+        entree.classList.add("rempli", "tape");
+        return l.taper(".cr-txt", d.src, 58, function (i) {
+          cnt.textContent = i + " / 10000";
+          if (i > 22) l.q(".cr-src").classList.add("detecte");
+        });
+      },
+      /* traduction à la saisie, sans bouton */
+      function () { entree.classList.remove("tape"); cr.classList.add("traduit"); return l.attendre(1100); },
+      function () { cr.classList.remove("traduit"); return l.mots(".cr-out", d.out.en.main); },
+      function () { return l.attendre(1700); },
+      /* alternatives attribuées à leur moteur */
+      function () { return appui(".cr-spark"); },
+      function () { cr.classList.add("alts"); return l.attendre(1100); },
+      alternative(0, d.out.en.alt.length),
+      function () { return l.attendre(2300); },
+      function () { return appui(".cr-dn"); },
+      alternative(1, d.out.en.alt.length),
+      function () { return l.attendre(2300); },
+      function () { return appui(".cr-ax"); },
+      function () { cr.classList.remove("alts"); return l.attendre(900); },
+      /* moteur hébergé à l'étranger : Highly sensitive coupé, avis affiché */
+      function () { return appui(".cr-sw"); },
+      function () { l.q(".cr-sw").classList.remove("on"); return l.attendre(700); },
+      choisir(tiers.e),
+      function () {
+        cr.style.setProperty("--h-avis", (l.q(".cr-notice").offsetHeight + 12) + "px");
+        cr.classList.add("avis");
+        return l.attendre(400);
+      },
+      retraduire(tiers.t),
+      function () { return l.attendre(2800); },
+      choisir("LexMachina"),
+      function () { cr.classList.remove("avis"); return l.attendre(300); },
+      retraduire(d.out.en.main),
+      function () { return appui(".cr-sw"); },
+      function () { l.q(".cr-sw").classList.add("on"); return l.attendre(1000); }
     ];
+    /* Fast Lookup : le terme surligné ouvre CHnell */
     if (d.lookup && terme && d.src.indexOf(terme) >= 0) {
       etapes = etapes.concat([
         function () {
-          var el = l.q(".app-txt"), i = d.src.indexOf(terme), m = document.createElement("mark");
+          var el = l.q(".cr-txt"), i = d.src.indexOf(terme), m = document.createElement("mark");
           m.textContent = terme;
           el.textContent = "";
           el.appendChild(document.createTextNode(d.src.slice(0, i)));
@@ -354,14 +420,17 @@
           void m.offsetWidth;
           m.classList.add("on");
           remplirLookup(l, d.lookup);
-          return l.attendre(900);
+          return l.attendre(750);
         },
-        function () { app.classList.add("lk"); return l.attendre(5000); },
-        function () { app.classList.remove("lk"); return l.attendre(900); }
+        function () { cr.classList.add("lkb"); return l.attendre(800); },
+        function () { return appui(".cr-lkb"); },
+        function () { cr.classList.add("modal"); return l.attendre(5200); },
+        function () { return appui(".cr-btn"); },
+        function () { cr.classList.remove("modal"); cr.classList.remove("lkb"); return l.attendre(900); }
       ]);
     }
-    etapes.push(function () { return l.attendre(1200); });
-    etapes.push(function () { if (!reduit) app.classList.add("fin"); return l.attendre(480); });
+    etapes.push(function () { return l.attendre(1000); });
+    etapes.push(function () { if (!reduit) cr.classList.add("fin"); return l.attendre(480); });
     return suite(etapes);
   };
 
