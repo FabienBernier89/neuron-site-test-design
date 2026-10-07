@@ -159,6 +159,22 @@ ul{padding:0;list-style:none}
 .mx-avis.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .mx-avis b{display:block;margin-bottom:6px;font:600 13px/19.5px var(--ui)}
 
+/* Scène « quatre caractères » (S4) */
+.q4{gap:12px}
+.q4 .mx-g{flex:1}
+.q4 .mx-p p{font-size:15px;line-height:24px}
+.q4-src{flex:0 0 auto}
+.q4 mark{background:transparent;color:inherit;border-radius:3px;padding:0 2px;transition:background .5s}
+.q4 mark.vu{background:rgba(49,123,255,.2)}
+.q4 mark.oth.vu{background:rgba(151,163,184,.32)}
+
+/* Cartes à puces et valeurs clés */
+.puces{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.cd-sp{margin-top:8px}
+.cd .kv{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:24px;border-radius:8px;background-color:#E3E9F3;background-image:radial-gradient(55% 55% at 18% 12%,rgba(49,123,255,.14),transparent 60%),radial-gradient(55% 55% at 6% 90%,rgba(255,255,255,.55),transparent 60%)}
+.cd .kv i{display:block;font:400 12px/16px var(--sans);font-style:normal;color:#5b6880}
+.cd .kv b{display:block;margin-top:4px;font:500 18px/24px var(--num);color:#06122e}
+
 /* Bande des distinctions (C9) */
 .dist .i{margin-bottom:24px;text-align:center;font:400 14px/20px var(--sans);color:var(--ink)}
 .dist ul{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px}
