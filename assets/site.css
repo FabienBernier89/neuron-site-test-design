@@ -13,9 +13,9 @@
   --wrap:1216px;--gut:20px;
   color-scheme:light;
 }
-:root[data-theme="sombre"]{--page:#001233;--ink:#ffffff;--btn:#ffffff;--btn-ink:#001B4C;--text:#d5e2fb;--muted:#96BCFF;--mid:#5f7bb0;--line:#0c2f7a;--tile:#06246b;--accent:#7FB0FF;--accent-d:#96BCFF;color-scheme:dark}
+:root[data-theme="sombre"]{--page:#001233;--ink:#ffffff;--btn:#ffffff;--btn-ink:#001B4C;--text:#d5e2fb;--muted:#96BCFF;--mid:#7390c4;--line:#0c2f7a;--tile:#06246b;--accent:#7FB0FF;--accent-d:#96BCFF;color-scheme:dark}
 @media (prefers-color-scheme:dark){
-  :root[data-theme="systeme"]{--page:#001233;--ink:#ffffff;--btn:#ffffff;--btn-ink:#001B4C;--text:#d5e2fb;--muted:#96BCFF;--mid:#5f7bb0;--line:#0c2f7a;--tile:#06246b;--accent:#7FB0FF;--accent-d:#96BCFF;color-scheme:dark}
+  :root[data-theme="systeme"]{--page:#001233;--ink:#ffffff;--btn:#ffffff;--btn-ink:#001B4C;--text:#d5e2fb;--muted:#96BCFF;--mid:#7390c4;--line:#0c2f7a;--tile:#06246b;--accent:#7FB0FF;--accent-d:#96BCFF;color-scheme:dark}
   :root[data-theme="systeme"] .logo-c{display:none}
   :root[data-theme="systeme"] .logo-s{display:block}
 }
@@ -149,7 +149,7 @@ ul{padding:0;list-style:none}
 .mx-chip.sombre{background:#06122e;border-color:#06122e;color:#fff}
 .mx-g{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;min-height:0}
 .mx-p{border:1px solid rgba(0,0,0,.08);border-radius:10px;padding:12px 14px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden}
-.mx-p small{display:block;margin-bottom:6px;font:500 11px/16.5px var(--ui);letter-spacing:.22px;color:var(--mid)}
+.mx-p small{display:block;margin-bottom:6px;font:500 11px/16.5px var(--ui);letter-spacing:.22px;color:#6b778c}
 .mx-p p{font:400 13px/21.45px var(--ui);color:#404040}
 .mx-l{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .mx-l li{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid rgba(0,0,0,.06);border-radius:8px;background:var(--ui-bg);font:400 13px/19.5px var(--ui);transition:opacity .25s,background .2s}
@@ -192,9 +192,11 @@ ul{padding:0;list-style:none}
 /* Bande des distinctions (C9) */
 .dist .i{margin-bottom:24px;text-align:center;font:400 14px/20px var(--sans);color:var(--ink)}
 .dist ul{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px}
-.dist li{height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:24px 12px;border-radius:8px;background:var(--tile);text-align:center}
+.dist ul.d6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.dist ul.d7{grid-template-columns:repeat(7,minmax(0,1fr))}
+.dist li{min-height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:24px 12px;border-radius:8px;background:var(--tile);text-align:center}
 .dist li b{font:600 13px/16px var(--sans);color:var(--muted)}
-.dist li span{font:400 11px/14px var(--sans);color:var(--mid)}
+.dist li span{font:400 11px/14px var(--sans);color:var(--muted)}
 
 /* Tuiles (C8) */
 .tl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
@@ -230,7 +232,7 @@ ul{padding:0;list-style:none}
 /* Témoignage (C10) */
 .qt{display:grid;grid-template-columns:490px minmax(0,1fr);gap:48px;align-items:center;padding:16px;border-radius:8px;background:var(--tile)}
 .qt-v{height:490px;overflow:hidden;padding:40px;border-radius:8px;background:#fff;color:#39455c}
-.qt-v small{display:block;margin-bottom:16px;font:500 11px/16.5px var(--ui);letter-spacing:.22px;color:#97A3B8}
+.qt-v small{display:block;margin-bottom:16px;font:500 11px/16.5px var(--ui);letter-spacing:.22px;color:#6b778c}
 .qt-v p{font:300 22px/32px var(--serif)}
 .qt blockquote p{font:300 30px/36px var(--serif);color:var(--ink)}
 .qt figcaption{margin-top:24px}
@@ -333,7 +335,7 @@ ul{padding:0;list-style:none}
 .bl-c .cat,.ar .cat{display:block;margin-top:15px;font:600 12px/18px var(--sans);text-transform:uppercase;color:var(--accent-d)}
 .bl-c h3{margin-top:4px;font:600 22px/25.3px var(--sans);color:var(--ink)}
 .bl-c .x{margin-top:10px;font:400 16px/25.6px var(--serif);color:var(--muted)}
-.meta{display:flex;align-items:center;gap:8px;margin-top:16px;font:400 12px/16.8px var(--sans);text-transform:uppercase;letter-spacing:.2px;color:var(--mid)}
+.meta{display:flex;align-items:center;gap:8px;margin-top:16px;font:400 12px/16.8px var(--sans);text-transform:uppercase;letter-spacing:.2px;color:var(--muted)}
 .meta img{width:30px;height:30px;border-radius:50%;background:var(--tile)}
 .ar{max-width:700px;margin:0 auto}
 .ar-h{padding:70px 0 0}
@@ -349,7 +351,7 @@ ul{padding:0;list-style:none}
 .ar-c h3{margin:32px 0 12px;font:600 24px/32px var(--sans);color:var(--ink)}
 .ar-c ul,.ar-c ol{margin:0 0 30px;padding-left:28px;list-style:disc}
 .ar-c ol{list-style:decimal}
-.ar-c blockquote,.ar-c .art-note,.ar-c .ar-brief{margin:0 0 30px;padding:4px 0 4px 24px;border-left:3px solid var(--ink)}
+.ar-c blockquote,.ar-c .art-note,.ar-c .ar-brief{margin:0 0 30px;padding:20px 24px;border-radius:8px;background:var(--tile)}
 .ar-c table{width:100%;margin:0 0 30px;border-collapse:collapse;font:400 16px/24px var(--sans)}
 .ar-c th,.ar-c td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 
@@ -403,7 +405,7 @@ ul{padding:0;list-style:none}
   .hero-g{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:64px}
   .ct{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px}
   .bl-f{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
-  .dist ul{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .dist ul,.dist ul[class]{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (max-width:1023px){
   .hd-nav,.mg,.mg-voile{display:none!important}
@@ -426,7 +428,10 @@ ul{padding:0;list-style:none}
   .bl-h .h1 .n{font-size:40px;line-height:44px}
 }
 @media (max-width:640px){
-  .bt,.tl.t4,.dist ul,.ct-l ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bt,.tl.t4,.dist ul,.dist ul[class],.ct-l ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tl.t2{grid-template-columns:minmax(0,1fr)}
+  .ar-c table{display:block;overflow-x:auto}
+  .ar-c{overflow-wrap:anywhere}
   .bt-g,.bt-l{grid-column:1/-1}
   .ct-f form{grid-template-columns:minmax(0,1fr)}
   .tl .n{font-size:40px;line-height:48px}
