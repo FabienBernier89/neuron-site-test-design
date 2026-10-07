@@ -10,7 +10,7 @@ lignes = []
 d = EX["ldip"]
 VIS = [  # contentieux : lot de pièces ; transactions : devis et relecture complète ; arbitrage : alternatives par moteur
     (764, 444, V.vue_fichiers(fichiers_demo("pdf", "fichier")), "lot", "Traduction d'un lot de fichiers"),
-    (764, 476, V.vue_devis("Darlehensvertrag_2026.docx", "DE → FR", NIVEAUX_RELECTURE, NIVEAUX_RELECTURE[1]), "devis", "Devis avec relecture complète par un traducteur juridique"),
+    (764, 496, V.vue_devis("Darlehensvertrag_2026.docx", "DE → FR", NIVEAUX_RELECTURE, NIVEAUX_RELECTURE[1]), "devis", "Devis avec relecture complète par un traducteur juridique"),
     (764, 476, V.vue_alternatives("ldip", esc(d["src"]), esc(d["out"]["en"]["main"]), esc(d["out"]["en"]["alt"][0]["t"]), d["out"]["en"]["alt"][0]["e"], len(d["out"]["en"]["alt"])), "alts", "Alternatives attribuées à leur moteur"),
 ]
 for i, (r, (w, h, ui, sim, lab)) in enumerate(zip(blocs(wh, "article", "sc-row"), VIS)):

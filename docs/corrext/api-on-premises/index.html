@@ -6,12 +6,75 @@
 <meta name="robots" content="noindex, nofollow">
 <title>API et on-premises · Corrext par Neur.on : intégrations</title>
 <meta name="description" content="Intégrer le moteur de traduction juridique suisse dans vos DMS, intranets et produits : API REST, déploiement on-premises, cadrage d'une intégration.">
+<link rel="canonical" href="https://neur-on.ai/fr/corrext/api-on-premises/">
+<link rel="alternate" hreflang="fr-CH" href="https://neur-on.ai/fr/corrext/api-on-premises/">
+<link rel="alternate" hreflang="de-CH" href="https://neur-on.ai/de/corrext/api-on-premises/">
+<link rel="alternate" hreflang="it-CH" href="https://neur-on.ai/it/corrext/api-on-premises/">
+<link rel="alternate" hreflang="en" href="https://neur-on.ai/en/corrext/api-on-premises/">
+<link rel="alternate" hreflang="x-default" href="https://neur-on.ai/">
+<meta property="og:title" content="API et on-premises · Corrext par Neur.on : intégrations">
+<meta property="og:description" content="Intégrer le moteur de traduction juridique suisse dans vos DMS, intranets et produits : API REST, déploiement on-premises, cadrage d'une intégration.">
+<meta property="og:url" content="https://neur-on.ai/fr/corrext/api-on-premises/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://neur-on.ai/assets/img/og-neuron.jpg">
+<meta property="og:image:alt" content="Neur.on, traduction par IA pour le droit, la fiscalité et la finance">
+<meta property="og:site_name" content="Neur.on">
+<meta property="og:locale" content="fr_CH">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#001B4C">
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Proposez-vous une API pour intégrer la traduction dans nos outils ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Oui, une API REST permet d'appeler le moteur depuis vos propres systèmes : gestion documentaire, intranet, workflow métier. Nous ne publions pas de documentation technique en accès libre : le contrat d'interface, l'authentification et le périmètre des appels se fixent au moment du cadrage, avec votre DSI et notre équipe technique."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Peut-on déployer la solution dans notre propre infrastructure ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Un déploiement on-premises est possible pour les environnements les plus sensibles, c'est-à-dire lorsque vos règles internes imposent que rien ne sorte de votre réseau. C'est un projet d'intégration à part entière, cadré avec votre DSI : architecture, dimensionnement, mises à jour et exploitation sont définis avant tout engagement."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Nos droits d'accès peuvent-ils être repris de SharePoint ou d'Active Directory ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "C'est prévu dans le cadre d'un projet d'intégration : les droits d'accès peuvent être synchronisés avec votre annuaire et vos espaces documentaires, pour que chacun retrouve dans Corrext le périmètre qu'il a déjà chez vous. Cette synchronisation n'est pas un réglage libre-service de l'interface web : elle se met en place avec votre DSI."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Peut-on intégrer le moteur dans notre propre produit, en marque blanche ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "C'est le cas d'usage des LegalTechs et des éditeurs juridiques : la traduction devient une fonction de votre produit, appelée par API, sans que vos utilisateurs changent d'outil. Le périmètre fonctionnel, la marque affichée et les conditions se définissent contractuellement lors du cadrage."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Où les données sont-elles traitées lors d'un appel à l'API ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Les mêmes règles qu'en interface s'appliquent : le stockage a lieu sur des serveurs suisses dans tous les cas. Le traitement est exclusivement suisse avec LexMachina ou en mode Highly sensitive content, disponible pour l'anglais, le français, l'italien et l'allemand. Les moteurs tiers, DeepL Pro, Azure OpenAI GPT et Claude, sont hébergés à l'étranger et déclenchent l'avis de pseudonymisation défini par votre organisation. En déploiement on-premises, le périmètre de traitement est celui de votre propre infrastructure."
+   }
+  }
+ ]
+}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://neur-on.ai/fr/"}, {"@type": "ListItem", "position": 2, "name": "Corrext", "item": "https://neur-on.ai/fr/corrext/"}, {"@type": "ListItem", "position": 3, "name": "API et on-premises", "item": "https://neur-on.ai/fr/corrext/api-on-premises/"}]}</script>
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"systeme"}catch(e){}</script>
 <link rel="icon" href="../../assets/img/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;1,8..60,300&display=swap">
-<link rel="stylesheet" href="../../assets/site.css?v=91bce176">
+<link rel="stylesheet" href="../../assets/site.css?v=c3621118">
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
@@ -194,7 +257,7 @@
 <footer class="pied">
 <div class="wrap">
 <div class="fp-g">
-<div><p>Plateforme</p><ul>
+<div><p><a href="../../corrext/">Plateforme</a></p><ul>
 <li><a href="../../corrext/">Corrext, la plateforme</a></li>
 <li><a href="../../corrext/traduction-texte-et-document/">Traduction texte et document</a></li>
 <li><a href="../../corrext/gestion-de-projet/">Gestion de projet</a></li>
@@ -204,7 +267,7 @@
 <li><a href="../../corrext/api-on-premises/">API et on-premises</a></li>
 <li><a href="../../lexmachina/">LexMachina, le moteur</a></li>
 </ul></div>
-<div><p>Solutions</p><ul>
+<div><p><a href="../../solutions/">Solutions</a></p><ul>
 <li><a href="../../solutions/cabinets-avocats/">Cabinets d'avocats</a></li>
 <li><a href="../../solutions/banques-finance/">Banques et finance</a></li>
 <li><a href="../../solutions/directions-juridiques/">Directions juridiques</a></li>
@@ -213,7 +276,7 @@
 <li><a href="../../solutions/editeurs-legaltech/">LegalTechs et éditeurs</a></li>
 <li><a href="../../traduction/">Traduction par domaine</a></li>
 </ul></div>
-<div><p>Ressources</p><ul>
+<div><p><a href="../../ressources/">Ressources</a></p><ul>
 <li><a href="../../ressources/blog/">Blog</a></li>
 <li><a href="../../ressources/guides/">Guides</a></li>
 <li><a href="../../ressources/glossaire/">Glossaire juridique</a></li>
@@ -240,6 +303,6 @@
 <p class="fp-iso">ISO 27001 · Hébergement en Suisse (Infomaniak) · nLPD et RGPD</p>
 </div>
 </footer>
-<script src="../../assets/nav.js?v=91bce176" defer></script>
+<script src="../../assets/nav.js?v=c3621118" defer></script>
 </body>
 </html>

@@ -1,0 +1,238 @@
+/* Habillage de la démo Éditeur de relecture au niveau de rendu des écrans Corrext animés (.cr).
+   Portée : .cx-zone uniquement. Mouvements par transform et opacity, courbe de décélération commune.
+   Classes posées par la visite guidée (assets/visite-editeur-de-relecture.js) : press, edr-fin, edr-actif.
+   La scène est dessinée à 1176 px puis réduite : la mise en page de bureau s'applique à toute largeur d'écran,
+   d'où les règles qui neutralisent les variantes mobiles de la démo. */
+
+/* Palette et réglages locaux (redéclarés sur .cx, qui porte ses propres variables) */
+.cx-zone,
+.cx-zone .cx{
+  --cx-ink:#1e1f3b;--cx-text:#3a3c56;--cx-muted:#5d6180;--cx-dim:#5d6180;--cx-ph:#5d6180;
+  --cx-line:rgba(30,31,59,.09);--cx-bg:#f7f8fc;--cx-indigo:#3b34c9;--cx-indigo-d:#2f29a8;
+  --cx-indigo-soft:#efeefc;--cx-lav:#efeefc;--cx-hl:#fff2a8;--cx-piste:#eceef6;--cx-bord:#c9ccdc;
+  --cx-ease:cubic-bezier(.22,.8,.24,1);--cx-r:8px;--cx-r-ctl:6px;
+  --cx-ombre:0 1px 2px rgba(30,31,59,.06);
+  --cx-ombre-carte:0 1px 2px rgba(30,31,59,.06),0 8px 24px rgba(30,31,59,.04);
+  --cx-ombre-menu:0 8px 30px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);
+  --cx-anneau:0 0 0 3px rgba(59,52,201,.12)}
+.cx-zone{position:relative;background:#fff}
+.cx-zone .cx{display:flex;flex-direction:column;height:100%;font:400 13px/1.5 "Inter",var(--ui);color:var(--cx-text)}
+.cx-zone .cx button,.cx-zone .cx input{font-family:"Inter",var(--ui)}
+
+/* Fin de boucle : l'écran s'efface, la démo revient à son état initial, puis réapparaît */
+.cx-zone > .cx{transition:opacity .45s ease}
+.cx-zone.edr-fin > .cx{opacity:0}
+
+/* Barre de l'application */
+.cx-zone .cx-top{flex:0 0 auto;gap:18px;height:48px;padding:0 20px;border-bottom:1px solid var(--cx-line)}
+.cx-zone .cx-logo .cx-brand{height:24px}
+.cx-zone .cx-top .home{font:500 13px/19.5px "Inter",var(--ui);color:var(--cx-indigo)}
+.cx-zone .cx-top .bell{width:28px;height:28px;color:var(--cx-muted)}
+.cx-zone .cx-top .bell svg{width:16px;height:16px}
+.cx-zone .cx-avatar{width:28px;height:28px;background:var(--cx-indigo-soft);font:600 11px/1 "Inter",var(--ui);color:var(--cx-indigo)}
+
+/* Disposition : éditeur et panneau occupent toute la hauteur de la fenêtre */
+.cx-zone .cxe-app{flex:1 1 0;min-height:0;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr);align-items:stretch;gap:14px;padding:12px 16px 2px}
+.cx-zone .cxe-app.fold{grid-template-columns:minmax(0,1fr) auto}
+.cx-zone .cxe-ed,.cx-zone .cxe-side{min-height:0;border:1px solid var(--cx-line);border-radius:var(--cx-r);background:#fff;box-shadow:var(--cx-ombre-carte)}
+.cx-zone .cxe-ed{display:flex;flex-direction:column}
+.cx-zone .cxe-note{flex:0 0 auto;margin:0;padding:5px 18px 8px;font:400 12px/18px "Inter",var(--ui);color:var(--cx-muted)}
+
+/* Barre d'outils de l'éditeur */
+.cx-zone .cxe-tb{flex:0 0 auto;flex-wrap:nowrap;gap:8px;min-height:42px;padding:7px 12px}
+.cx-zone .cxe-back{gap:5px;margin-right:2px;font:600 12.5px/18px "Inter",var(--ui);color:var(--cx-indigo)}
+.cx-zone .cxe-tools{gap:5px}
+.cx-zone .cxe-tag{padding:2px 5px;border-radius:5px;background:var(--cx-bg);box-shadow:inset 0 0 0 1px var(--cx-line);font-size:11px;font-weight:600;line-height:1.4;color:var(--cx-text)}
+.cx-zone .cxe-f{width:16px;font-size:12.5px;color:var(--cx-muted)}
+.cx-zone .cxe-f.b{font-weight:600}
+.cx-zone .cxe-sep{height:18px;margin:0}
+.cx-zone .cxe-copy{width:32px;height:26px;border-radius:var(--cx-r-ctl);background:var(--cx-indigo-soft);color:var(--cx-indigo)}
+.cx-zone .cxe-copy:hover{background:#e3e1fa}
+.cx-zone .cxe-copy svg{width:15px;height:15px}
+.cx-zone .cxe-prog{gap:8px;font:600 12px/18px "Inter",var(--ui);color:var(--cx-ink)}
+.cx-zone .cxe-prog .bar{width:72px;height:6px;border-radius:999px;background:var(--cx-piste)}
+.cx-zone .cxe-prog .bar i{border-radius:inherit;transition:transform .45s var(--cx-ease)}
+.cx-zone #cxePNum{min-width:30px;text-align:right}
+
+/* Tableau des segments */
+.cx-zone .cxe-scroll{flex:1 1 0;min-height:0;max-height:none}
+.cx-zone .cxe-tab{min-width:0;font-size:12.5px;line-height:1.5}
+.cx-zone .cxe-tab colgroup{display:table-column-group}
+.cx-zone .cxe-tab col.c-id{width:36px}
+.cx-zone .cxe-tab col.c-ind{width:46px}
+.cx-zone .cxe-tab col.c-ok{width:38px}
+.cx-zone .cxe-tab thead tr{display:table-row;padding:0;border:0;background:transparent}
+.cx-zone .cxe-tab thead tr th{display:table-cell;position:sticky;top:0;padding:6px 5px;border-bottom:1px solid var(--cx-line);background:var(--cx-bg);font:500 12px/18px "Inter",var(--ui);color:var(--cx-muted)}
+.cx-zone .cxe-filter{gap:5px;padding:3px 4px 3px 8px;border:1px solid var(--cx-line);border-radius:var(--cx-r-ctl);background:#fff}
+.cx-zone .cxe-filter:focus-within{border-color:var(--cx-indigo);box-shadow:var(--cx-anneau)}
+.cx-zone .cxe-filter input{font-size:12px}
+.cx-zone .cxe-clr{border-radius:5px}
+.cx-zone .cxe-tab tbody tr[data-i]{display:table-row;border:0}
+.cx-zone .cxe-tab tbody tr[data-i] td{display:table-cell;padding:6px 8px;border-top:0;border-bottom:1px solid var(--cx-line);color:var(--cx-ink);isolation:isolate}
+.cx-zone .cxe-tab tbody tr[data-i] td.id{padding:6px 4px;font:500 12px/18px "Inter",var(--ui);color:var(--cx-muted);font-variant-numeric:tabular-nums}
+.cx-zone .cxe-tab tbody tr[data-i] td.cxe-src{color:var(--cx-text)}
+.cx-zone .cxe-tab tbody tr[data-i] td.ind{padding:6px 4px;background:var(--cx-bg)}
+.cx-zone .cxe-tab tbody tr[data-i] td.ok{padding:6px 4px}
+.cx-zone .cxe-tab tr.cxe-none{display:table-row}
+.cx-zone .cxe-tab tr.cxe-none td{display:table-cell;font-size:12.5px;color:var(--cx-muted)}
+/* Sélection d'un segment : voile lavande en fondu et filet indigo à gauche (transform) */
+.cx-zone .cxe-tab tr.sel td,.cx-zone .cxe-tab tr.sel td.ind{background:transparent}
+.cx-zone .cxe-tab tbody tr[data-i] td::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--cx-indigo-soft);opacity:0;transition:opacity .35s ease;pointer-events:none}
+.cx-zone .cxe-tab tbody tr[data-i] td.ind{background:var(--cx-bg)}
+.cx-zone .cxe-tab tbody tr[data-i]:hover td::before{opacity:.5}
+.cx-zone .cxe-tab tbody tr[data-i].press td::before{opacity:.7}
+.cx-zone .cxe-tab tbody tr[data-i].sel td::before{opacity:1}
+.cx-zone .cxe-tab tbody tr[data-i] td.id::after{content:"";position:absolute;left:0;top:7px;bottom:7px;width:2px;border-radius:2px;background:var(--cx-indigo);transform:scaleY(0);transition:transform .4s var(--cx-ease)}
+.cx-zone .cxe-tab tbody tr[data-i].sel td.id::after{transform:none}
+.cx-zone .cxe-rep{margin-top:3px}
+.cx-zone .cxe-rep svg{width:13px;height:13px}
+/* Origine de la traduction : MT avec jauge, ou TM avec taux de correspondance */
+.cx-zone .cxe-ind{gap:3px;font:600 12px/15px "Inter",var(--ui);color:var(--cx-text);letter-spacing:.02em}
+.cx-zone .cxe-gauge{width:22px;height:8px;border-color:rgba(30,31,59,.28);border-radius:999px}
+.cx-zone .cxe-sim{font:600 12px/15px "Inter",var(--ui);color:var(--cx-indigo)}
+/* Traduction éditable */
+.cx-zone .cxe-tgt{border-radius:5px}
+.cx-zone .cxe-tgt:hover{box-shadow:inset 0 0 0 1px var(--cx-bord)}
+.cx-zone .cxe-tgt:focus{box-shadow:inset 0 0 0 2px var(--cx-indigo),var(--cx-anneau);background:#fff}
+/* Traduction remplacée : le nouveau texte entre en fondu, un surlignage doux s'efface */
+.cx-zone .cxe-tab td.cxe-upd .cxe-tgt{animation:edr-texte .5s var(--cx-ease) both}
+.cx-zone .cxe-tab td.cxe-upd::after{animation:edr-surligne 1.9s cubic-bezier(.4,0,.2,1) both}
+
+/* Case de confirmation : coche qui s'inscrit (échelle et opacité) */
+.cx-zone .cxe-chk{-webkit-appearance:none;appearance:none;position:relative;display:inline-block;width:16px;height:16px;margin:0;border:1.5px solid var(--cx-bord);border-radius:4px;background:#fff;vertical-align:middle;cursor:pointer}
+.cx-zone .cxe-chk::before{content:"";position:absolute;inset:-1.5px;border-radius:4px;background:var(--cx-indigo);opacity:0;transform:scale(.55);transition:opacity .2s ease,transform .32s var(--cx-ease)}
+.cx-zone .cxe-chk::after{content:"";position:absolute;left:3.5px;top:.5px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;opacity:0;transform:rotate(45deg) scale(.3);transition:opacity .2s ease,transform .32s var(--cx-ease)}
+.cx-zone .cxe-chk:checked::before,.cx-zone .cxe-chk:indeterminate::before{opacity:1;transform:none}
+.cx-zone .cxe-chk:checked::after{opacity:1;transform:rotate(45deg)}
+.cx-zone .cxe-chk:indeterminate::after{left:2.5px;top:5.5px;width:8px;height:0;border-width:0 0 2px;opacity:1;transform:none}
+.cx-zone .cxe-chk:focus-visible{outline:2px solid var(--cx-indigo);outline-offset:2px}
+
+/* Panneau latéral */
+.cx-zone .cxe-side{grid-template-columns:minmax(0,1fr) 52px;grid-template-rows:auto minmax(0,1fr)}
+.cx-zone .cxe-head{grid-column:1 / -1;min-height:42px;padding:6px 8px 6px 14px;justify-content:space-between}
+.cx-zone .cxe-title{font:600 13.5px/20px "Inter",var(--ui);color:var(--cx-ink)}
+.cx-zone .cxe-fold{display:inline-flex;width:28px;height:28px;border-radius:var(--cx-r-ctl);color:var(--cx-muted)}
+.cx-zone .cxe-fold svg{width:16px;height:16px;transition:transform .35s var(--cx-ease)}
+.cx-zone .cxe-rail{grid-column:2;grid-row:2;flex-direction:column;justify-content:flex-start;align-items:center;gap:6px;padding:10px 0;overflow:visible;border-left:1px solid var(--cx-line);border-bottom:0}
+.cx-zone .cxe-rb{width:36px;height:36px;padding:0;border-radius:var(--cx-r);color:var(--cx-muted);white-space:normal}
+.cx-zone .cxe-rb:hover{background:var(--cx-bg);color:var(--cx-indigo)}
+.cx-zone .cxe-rb .l{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.cx-zone .cxe-rb svg{position:relative;z-index:1;width:18px;height:18px}
+/* Onglet actif : fond indigo en fondu (opacité et échelle) */
+.cx-zone .cxe-rb::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--cx-indigo);box-shadow:0 2px 6px rgba(59,52,201,.25);opacity:0;transform:scale(.8);transition:opacity .25s ease,transform .4s var(--cx-ease)}
+.cx-zone .cxe-rb[aria-selected="true"]{background:transparent;color:#fff}
+.cx-zone .cxe-rb[aria-selected="true"]::before{opacity:1;transform:none}
+.cx-zone .cxe-dot{z-index:2;top:4px;right:4px;width:8px;height:8px}
+.cx-zone .cxe-body{grid-column:1;grid-row:2;max-height:none;min-height:0;padding:12px 14px 14px;overflow:auto;scrollbar-width:thin}
+.cx-zone .cxe-app.fold .cxe-side{grid-template-columns:52px}
+.cx-zone .cxe-app.fold .cxe-title,.cx-zone .cxe-app.fold .cxe-body{display:none}
+.cx-zone .cxe-app.fold .cxe-head{justify-content:center;padding:6px 0}
+.cx-zone .cxe-app.fold .cxe-rail{grid-column:1;border-left:0}
+/* Un onglet, un sous-onglet ou un résultat qui apparaît : fondu et léger glissement */
+.cx-zone .cxe-pan,.cx-zone #cxeAiAP,.cx-zone #cxeAiRP,.cx-zone #cxeRNote{animation:edr-entre .4s var(--cx-ease) both}
+.cx-zone #cxeMem > *,.cx-zone #cxeAlt > *,.cx-zone #cxeLk > *,.cx-zone #cxeSync > *{animation:edr-entre .45s var(--cx-ease) both}
+.cx-zone #cxeMem > :nth-child(2),.cx-zone #cxeAlt > :nth-child(2),.cx-zone #cxeLk > :nth-child(2),.cx-zone #cxeSync > :nth-child(2){animation-delay:.06s}
+.cx-zone #cxeAlt > :nth-child(3),.cx-zone #cxeLk > :nth-child(3),.cx-zone #cxeSync > :nth-child(3){animation-delay:.12s}
+.cx-zone #cxeLk > :nth-child(4){animation-delay:.18s}
+.cx-zone #cxeLk > :nth-child(5){animation-delay:.24s}
+
+/* Boutons communs */
+.cx-zone .cx-btn{padding:7px 14px;border-radius:var(--cx-r-ctl);box-shadow:var(--cx-ombre);font:600 12.5px/18px "Inter",var(--ui)}
+.cx-zone .cx-btn:hover{background:var(--cx-indigo-d)}
+.cx-zone .cx-btn.ghost{padding:6px 13px;border:1px solid rgba(59,52,201,.35);background:#fff;color:var(--cx-indigo)}
+.cx-zone .cx-btn.ghost:hover{background:var(--cx-indigo-soft)}
+.cx-zone .cx-btn.cxe-sm{padding:5px 12px;font-size:12px}
+.cx-zone .cx-btn.ghost.cxe-sm{padding:4px 11px}
+.cx-zone .cx-note{font:400 12px/18px "Inter",var(--ui);color:var(--cx-muted)}
+
+/* Onglet Translation memories */
+.cx-zone .cxe-empty{padding:14px;border:1px solid var(--cx-line);border-radius:var(--cx-r);background:var(--cx-bg);font:italic 400 12.5px/1.5 "Inter",var(--ui);color:var(--cx-muted)}
+.cx-zone .cxe-match{padding:11px 12px 12px;border:1px solid var(--cx-line);border-radius:var(--cx-r);box-shadow:var(--cx-ombre)}
+.cx-zone .cxe-pan .cxe-ml{margin-bottom:6px;font:600 12px/17px "Inter",var(--ui);color:var(--cx-muted)}
+.cx-zone .cxe-ms{font-size:12.5px;line-height:1.5;color:var(--cx-text)}
+.cx-zone .cxe-pan .cxe-mt{margin-top:8px;padding-top:8px;border-top:1px dashed rgba(30,31,59,.14);font-size:12.5px;line-height:1.5;color:var(--cx-ink)}
+.cx-zone .cxe-ma{margin-top:10px}
+
+/* Onglet Fast Lookup */
+.cx-zone .cx .cxe-live{gap:8px;margin:0 0 10px;font:500 12px/18px "Inter",var(--ui);color:var(--cx-indigo)}
+.cx-zone .cx-switch i{width:30px;height:18px;border-radius:999px;background:var(--cx-indigo)}
+.cx-zone .cx-switch i::after{top:2px;left:2px;right:auto;width:14px;height:14px;box-shadow:0 1px 2px rgba(30,31,59,.25);transform:translateX(12px);transition:transform .4s var(--cx-ease)}
+.cx-zone .cx-switch.off i{background:#d5d7e4}
+.cx-zone .cx-switch.off i::after{left:2px;transform:none}
+.cx-zone .cxe-q{flex-wrap:nowrap;gap:8px}
+.cx-zone .cxe-qbox{border-radius:var(--cx-r-ctl);padding:0 4px 0 10px}
+.cx-zone .cxe-qbox:focus-within,.cx-zone .cxe-qbox.edr-actif{border-color:var(--cx-indigo);box-shadow:var(--cx-anneau)}
+.cx-zone .cxe-qbox input{padding:7px 0;font-size:12.5px}
+.cx-zone .cxe-q .cx-btn{flex:none;gap:6px;padding:7px 12px}
+.cx-zone .cxe-seg{gap:2px;max-width:220px;padding:3px;border-radius:var(--cx-r);background:var(--cx-bg)}
+.cx-zone .cxe-seg button{padding:4px 10px;border:0;border-radius:var(--cx-r-ctl);font:500 12px/18px "Inter",var(--ui);color:var(--cx-muted)}
+.cx-zone .cxe-seg button.on{background:#fff;color:var(--cx-indigo);box-shadow:0 1px 2px rgba(30,31,59,.08),0 0 0 1px rgba(30,31,59,.04)}
+.cx-zone .cxe-pan .cxe-h{margin:14px 0 6px;font:600 12.5px/18px "Inter",var(--ui);color:var(--cx-ink)}
+.cx-zone .cxe-nr{font-size:12.5px;color:var(--cx-muted)}
+.cx-zone .cxe-res{border-radius:var(--cx-r);box-shadow:var(--cx-ombre)}
+.cx-zone .cxe-rh span{padding:6px 10px;font:500 12px/17px "Inter",var(--ui);color:var(--cx-muted)}
+.cx-zone .cxe-pan .cxe-rr p{padding:8px 10px;font-size:12px;line-height:1.5;color:var(--cx-ink)}
+.cx-zone .cxe-pan .cxe-rr p + p{color:var(--cx-text)}
+.cx-zone .cxe-rr mark{border-radius:2px;background:var(--cx-hl)}
+.cx-zone .cxe-pan .cxe-rr .doc{padding:0 10px 8px;font:500 12px/17px "Inter",var(--ui);color:var(--cx-indigo)}
+
+/* Onglet AI Assistant : sous-onglets en contrôle segmenté */
+.cx-zone .cxe-ai{gap:2px;margin-bottom:10px;padding:3px;border:1px solid var(--cx-line);border-radius:var(--cx-r);background:var(--cx-bg)}
+.cx-zone .cxe-ai button{padding:5px 10px;border:0;border-radius:var(--cx-r-ctl);background:transparent;font:500 12px/18px "Inter",var(--ui);color:var(--cx-muted)}
+.cx-zone .cxe-ai button.on{background:#fff;color:var(--cx-indigo);box-shadow:0 1px 2px rgba(30,31,59,.08),0 0 0 1px rgba(30,31,59,.04)}
+.cx-zone .cxe-box{padding:10px 12px;border-radius:var(--cx-r);box-shadow:var(--cx-ombre)}
+.cx-zone .cxe-gen{gap:6px;font:600 12.5px/18px "Inter",var(--ui);color:var(--cx-indigo)}
+.cx-zone .cxe-gen:disabled{color:var(--cx-muted)}
+.cx-zone .cxe-pan .cxe-alt{padding:9px 0;font-size:12.5px;line-height:1.55;color:var(--cx-ink)}
+.cx-zone .cxe-alt .e{font-weight:500;color:var(--cx-indigo);white-space:nowrap}
+.cx-zone .cxe-rrow{margin-bottom:10px}
+.cx-zone .cxe-setb{gap:8px;height:32px;padding:0 12px;border-radius:var(--cx-r-ctl);box-shadow:var(--cx-ombre);font:500 12.5px/18px "Inter",var(--ui);color:var(--cx-ink)}
+.cx-zone .cxe-setb:hover{background:var(--cx-bg)}
+.cx-zone .cxe-setb svg{color:var(--cx-muted);transition:transform .35s var(--cx-ease)}
+/* Réglages de reformulation : menu qui s'ouvre en fondu et léger glissement */
+.cx-zone .cx .cxe-pop{margin:0 0 12px;padding:12px;border:1px solid var(--cx-line);border-radius:var(--cx-r);box-shadow:var(--cx-ombre-menu)}
+.cx-zone .cx .cxe-pop.on{animation:edr-menu .32s var(--cx-ease) both}
+.cx-zone .cxe-pop .cx-h5{margin:0 0 6px;font:500 12px/17px "Inter",var(--ui);color:var(--cx-muted)}
+.cx-zone .cxe-pop .cx-chips{gap:6px;margin-bottom:10px}
+.cx-zone .cx-chip{padding:4px 11px;border:1px solid var(--cx-line);border-radius:999px;background:#fff;font:500 12px/18px "Inter",var(--ui);color:var(--cx-text)}
+.cx-zone .cx-chip:hover{border-color:rgba(59,52,201,.3)}
+.cx-zone .cx-chip.on{border-color:rgba(59,52,201,.3);background:var(--cx-indigo-soft);color:var(--cx-indigo)}
+.cx-zone .cx-set-act{align-items:center;gap:10px;padding-top:10px;border-top:1px solid var(--cx-line)}
+.cx-zone .cx-set-act .rst{padding:4px 2px;font:500 12px/18px "Inter",var(--ui);color:var(--cx-muted)}
+.cx-zone .cx-set-act .rst:hover{color:var(--cx-ink)}
+.cx-zone .cx-set-act .cx-btn{padding:5px 12px;font-size:12px}
+.cx-zone .cxe-rout{font-size:13px;line-height:1.6;color:var(--cx-ink)}
+.cx-zone .cxe-rout u{text-decoration-thickness:1.5px;text-decoration-color:rgba(59,52,201,.55)}
+/* Nouvelle reformulation : le texte remplace le squelette en fondu */
+.cx-zone .cxe-rout:not(:has(.cx-shim)){animation:edr-texte .45s var(--cx-ease) both}
+.cx-zone .cxe-rout .cx-shim,.cx-zone #cxeAlt .cx-shim{border-radius:999px;animation:shim 1.3s infinite,edr-fondu .3s ease both}
+.cx-zone .cxe-rfoot{margin-top:10px}
+.cx-zone .cxe-icb{width:30px;height:30px;border-radius:var(--cx-r-ctl);box-shadow:var(--cx-ombre)}
+.cx-zone .cxe-rfoot .cx-btn{padding:5px 12px;font-size:12px}
+
+/* Onglet Sync */
+.cx-zone .cxe-pan .cxe-sh{font:600 12.5px/18px "Inter",var(--ui);color:var(--cx-ink)}
+.cx-zone .cxe-sync{border-radius:var(--cx-r);box-shadow:var(--cx-ombre)}
+.cx-zone .cxe-pan .cxe-sl{font:600 12px/17px "Inter",var(--ui);color:var(--cx-muted)}
+.cx-zone .cxe-ver{grid-template-columns:86px 1fr;gap:8px;font-size:12.5px}
+.cx-zone .cxe-ver.one{grid-template-columns:1fr}
+.cx-zone .cxe-ver b{font:600 12px/18px "Inter",var(--ui)}
+.cx-zone .cxe-okst{border-radius:var(--cx-r);background:var(--cx-bg);font-size:12.5px;color:var(--cx-muted)}
+
+/* Appui sur un contrôle (classe press posée par la visite) : enfoncement bref */
+.cx-zone :is(.cx-btn,.cxe-setb,.cx-chip,.cxe-ai button,.cxe-seg button,.rst,.cxe-copy,.cxe-gen,.cx-switch,.cxe-rb,.cxe-clr,.cxe-icb,.cxe-fold,.cxe-qbox,.cxe-filter){transition:transform .12s ease}
+.cx-zone .cxe-chk{transition:transform .12s ease}
+.cx-zone :is(.cx-btn,.cxe-setb,.cx-chip,.cxe-ai button,.cxe-seg button,.rst,.cxe-copy,.cxe-gen,.cx-switch).press{transform:scale(.96)}
+.cx-zone :is(.cxe-rb,.cxe-clr,.cxe-icb,.cxe-fold).press{transform:scale(.9)}
+.cx-zone .cxe-chk.press{transform:scale(.86)}
+.cx-zone :is(.cxe-qbox,.cxe-filter).press{transform:scale(.98)}
+
+@keyframes edr-entre{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes edr-menu{from{opacity:0;transform:translateY(-6px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes edr-texte{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes edr-fondu{from{opacity:0}to{opacity:1}}
+@keyframes edr-surligne{0%{opacity:0}14%{opacity:.9}100%{opacity:0}}
+
+@media (prefers-reduced-motion:reduce){
+  .cx-zone *,.cx-zone *::before,.cx-zone *::after,.cx-zone > .cx{transition:none!important;animation:none!important}
+}

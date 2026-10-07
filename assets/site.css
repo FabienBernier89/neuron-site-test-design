@@ -220,7 +220,7 @@ ul{padding:0;list-style:none}
 .cr-sk{display:block;position:relative;height:9px;margin:6px 0 11px;overflow:hidden;border-radius:5px;background:#eef0f7;opacity:0;transition:opacity .3s ease}
 .cr-sk:nth-child(1){width:92%}.cr-sk:nth-child(2){width:84%}.cr-sk:nth-child(3){width:58%}
 .cr.traduit .cr-sk{opacity:1}
-.cr-sk::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);animation:sk 1.15s ease-in-out infinite}
+.cr-sk::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent)}
 @keyframes sk{to{transform:translateX(100%)}}
 .cr .w{display:inline-block;opacity:0;transform:translateY(5px);transition:opacity .4s ease,transform .5s var(--ease);transition-delay:calc(var(--i) * 22ms)}
 .cr .vu .w{opacity:1;transform:none}
@@ -763,14 +763,17 @@ ul{padding:0;list-style:none}
 .vw-ext{transition:opacity .45s ease,transform .6s var(--ease)}
 .vw-devis.interne .vw-ext{opacity:0;transform:translateY(8px)}
 .vw-tab{border:1px solid var(--c-line);border-radius:10px;background:#fff}
-.vw-tr{display:grid;grid-template-columns:1.6fr .5fr .55fr 2.2fr;align-items:center;gap:10px;padding:9px 12px;font:400 11.5px/16px "Inter",var(--ui);color:var(--c-text)}
+.vw-tr{display:grid;grid-template-columns:2.2fr .7fr .7fr;align-items:center;gap:10px;padding:9px 12px;font:400 11.5px/16px "Inter",var(--ui);color:var(--c-text)}
 .vw-th{padding:7px 12px;border-bottom:1px solid var(--c-line);border-radius:10px 10px 0 0;background:var(--c-bg);font:500 11px/14px "Inter",var(--ui);color:var(--c-mut)}
 .vw-fn{display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:500;color:var(--c-ink)}
 .vw-fn svg{width:14px;height:14px;color:var(--c-ind)}
 .vw-tr > span{white-space:nowrap}
 .vw-niv{height:30px;padding:0 10px;border:1px solid var(--c-line);border-radius:8px;font-size:11px}
 .vw-niv .cr-v{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.vw-niv .cr-menu{top:34px;left:auto;right:0;width:250px}
+.vw-niv .cr-menu{top:34px;left:auto;right:0;width:280px}
+.vw-sub{display:flex;align-items:center;gap:12px;padding:0 12px 10px}
+.vw-lab{font:500 11px/16px "Inter",var(--ui);color:var(--c-mut);white-space:nowrap}
+.vw-sub .vw-niv{flex:0 1 300px;margin-left:auto}
 .vw-pied{display:flex;align-items:center;justify-content:space-between;margin-top:16px}
 .vw-ech{display:flex;align-items:center;gap:10px}
 .vw-ech > svg{box-sizing:content-box;width:16px;height:16px;padding:7px;border-radius:8px;background:var(--c-ind-soft);color:var(--c-ind)}
@@ -898,12 +901,15 @@ ul{padding:0;list-style:none}
 /* 3. Pilules : teinte pleine et losange du logo, au lieu du contour noir */
 .pill{gap:8px;border-color:transparent;background:rgba(49,123,255,.10)}
 .pill::before{content:"";flex:0 0 auto;width:5px;height:5px;border:1.5px solid var(--accent);border-radius:1px;transform:rotate(45deg)}
+.cr .pill{gap:0}
+.cr .pill::before,.cx-zone .pill::before{content:none}  /* les pastilles de l'écran Corrext restent celles de l'application */
 :root[data-theme="sombre"] .pill{background:rgba(127,176,255,.14)}
 @media (prefers-color-scheme:dark){:root[data-theme="systeme"] .pill{background:rgba(127,176,255,.14)}}
 .fp-g p a{color:inherit;text-decoration:none}
 .fp-g p a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 
 /* Squelette : le reflet ne tourne que pendant une traduction en cours */
-.cr-sk::after{animation:none}
 .cr.traduit .cr-sk::after{animation:sk 1.15s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){.cr.traduit .cr-sk::after{animation:none}}
+/* Liens des tableaux : cible de 24 px de haut au moins (WCAG 2.2, taille de cible) */
+main table a{display:inline-block;padding-block:3px}

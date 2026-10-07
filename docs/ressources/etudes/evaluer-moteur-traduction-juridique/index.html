@@ -6,12 +6,76 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Évaluer un moteur de traduction sur le droit suisse · Neur.on</title>
 <meta name="description" content="Six critères mesurables, un protocole en double aveugle et sept pièges qui faussent les comparaisons de moteurs sur des textes de droit suisse.">
+<link rel="canonical" href="https://neur-on.ai/fr/ressources/etudes/evaluer-moteur-traduction-juridique/">
+<link rel="alternate" hreflang="fr-CH" href="https://neur-on.ai/fr/ressources/etudes/evaluer-moteur-traduction-juridique/">
+<link rel="alternate" hreflang="de-CH" href="https://neur-on.ai/de/ressourcen/studien/uebersetzungsmotor-evaluieren/">
+<link rel="alternate" hreflang="it-CH" href="https://neur-on.ai/it/risorse/studi/valutare-motore-traduzione/">
+<link rel="alternate" hreflang="en" href="https://neur-on.ai/en/resources/studies/evaluating-translation-engines/">
+<link rel="alternate" hreflang="x-default" href="https://neur-on.ai/">
+<meta property="og:title" content="Évaluer un moteur de traduction sur le droit suisse · Neur.on">
+<meta property="og:description" content="Six critères mesurables, un protocole en double aveugle et sept pièges qui faussent les comparaisons de moteurs sur des textes de droit suisse.">
+<meta property="og:url" content="https://neur-on.ai/fr/ressources/etudes/evaluer-moteur-traduction-juridique/">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://neur-on.ai/assets/img/og-neuron.jpg">
+<meta property="og:image:alt" content="Neur.on, traduction par IA pour le droit, la fiscalité et la finance">
+<meta property="og:site_name" content="Neur.on">
+<meta property="og:locale" content="fr_CH">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#001B4C">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Comment évaluer un moteur de traduction sur le droit suisse", "description": "Une méthode d'évaluation de moteurs de traduction appliquée aux textes juridiques suisses : critères mesurables, constitution du corpus, protocole en double aveugle et pièges méthodologiques.", "datePublished": "2026-09-15", "dateModified": "2026-09-15", "inLanguage": "fr-CH", "author": {"@type": "Organization", "name": "Neur.on AI Solutions SA"}, "publisher": {"@type": "Organization", "name": "Neur.on AI Solutions SA"}, "image": "https://neur-on.ai/assets/img/og-neuron.jpg"}</script>
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Pourquoi les scores automatiques ne suffisent-ils pas pour un texte juridique ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Parce qu'ils mesurent une proximité de surface avec une traduction de référence, et non l'exactitude d'une référence légale. Une phrase qui cite le mauvais article ou la mauvaise juridiction peut obtenir un très bon score automatique : elle est fluide, proche de la référence, et juridiquement fausse. Sur du droit, l'évaluation doit être faite par des humains, sur des critères binaires définis à l'avance."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Combien de segments faut-il pour évaluer un moteur de traduction juridique ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Il n'existe pas de nombre universel : la taille dépend du nombre de critères, de la rareté des phénomènes observés et de la précision recherchée. La règle utile est ailleurs : le corpus doit couvrir chaque domaine, chaque sens de traduction et chaque type de document que vous traitez réellement, avec assez de segments par case pour qu'un écart ne tienne pas à une phrase. Un corpus déséquilibré donne un résultat faux quelle que soit sa taille."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Qu'est-ce qu'une évaluation en aveugle pour des moteurs de traduction ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "C'est une évaluation dans laquelle l'évaluateur ne sait pas quel moteur a produit la sortie qu'il note. Les sorties sont anonymisées, mélangées et présentées dans un ordre aléatoire. Sans cet aveugle, le nom du moteur influence la notation, dans les deux sens : indulgence envers celui que l'on connaît, sévérité envers celui que l'on soupçonne."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Faut-il évaluer une seule fois ou plusieurs fois le même segment ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Plusieurs fois, à des dates différentes. Une sortie peut varier d'une génération à l'autre, ou au contraire rester strictement identique. Lors d'une session d'observation, la régénération de la même phrase a produit des sorties strictement identiques pour certains segments, tandis que d'autres variaient. Une mesure faite une seule fois ne dit pas si l'écart observé est une différence de qualité ou une variation de génération."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Quels critères mesurer sur des textes de droit suisse ?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Six critères se notent de façon binaire et donc reproductible : l'exactitude de la référence légale, la conformité terminologique aux textes officiels, la cohérence à l'intérieur d'un même document, le traitement des noms de juridictions et d'autorités, la gestion des montants et des dates au format suisse, et l'intégrité du segment, c'est-à-dire l'absence d'omission, d'ajout et de caractère parasite."
+   }
+  }
+ ]
+}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://neur-on.ai/fr/"}, {"@type": "ListItem", "position": 2, "name": "Ressources", "item": "https://neur-on.ai/fr/ressources/"}, {"@type": "ListItem", "position": 3, "name": "Études et benchmarks", "item": "https://neur-on.ai/fr/ressources/etudes/"}, {"@type": "ListItem", "position": 4, "name": "Évaluer un moteur", "item": "https://neur-on.ai/fr/ressources/etudes/evaluer-moteur-traduction-juridique/"}]}</script>
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"systeme"}catch(e){}</script>
 <link rel="icon" href="../../../assets/img/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;1,8..60,300&display=swap">
-<link rel="stylesheet" href="../../../assets/site.css?v=91bce176">
+<link rel="stylesheet" href="../../../assets/site.css?v=c3621118">
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
@@ -333,7 +397,7 @@
 <footer class="pied">
 <div class="wrap">
 <div class="fp-g">
-<div><p>Plateforme</p><ul>
+<div><p><a href="../../../corrext/">Plateforme</a></p><ul>
 <li><a href="../../../corrext/">Corrext, la plateforme</a></li>
 <li><a href="../../../corrext/traduction-texte-et-document/">Traduction texte et document</a></li>
 <li><a href="../../../corrext/gestion-de-projet/">Gestion de projet</a></li>
@@ -343,7 +407,7 @@
 <li><a href="../../../corrext/api-on-premises/">API et on-premises</a></li>
 <li><a href="../../../lexmachina/">LexMachina, le moteur</a></li>
 </ul></div>
-<div><p>Solutions</p><ul>
+<div><p><a href="../../../solutions/">Solutions</a></p><ul>
 <li><a href="../../../solutions/cabinets-avocats/">Cabinets d'avocats</a></li>
 <li><a href="../../../solutions/banques-finance/">Banques et finance</a></li>
 <li><a href="../../../solutions/directions-juridiques/">Directions juridiques</a></li>
@@ -352,7 +416,7 @@
 <li><a href="../../../solutions/editeurs-legaltech/">LegalTechs et éditeurs</a></li>
 <li><a href="../../../traduction/">Traduction par domaine</a></li>
 </ul></div>
-<div><p>Ressources</p><ul>
+<div><p><a href="../../../ressources/">Ressources</a></p><ul>
 <li><a href="../../../ressources/blog/">Blog</a></li>
 <li><a href="../../../ressources/guides/">Guides</a></li>
 <li><a href="../../../ressources/glossaire/">Glossaire juridique</a></li>
@@ -379,6 +443,6 @@
 <p class="fp-iso">ISO 27001 · Hébergement en Suisse (Infomaniak) · nLPD et RGPD</p>
 </div>
 </footer>
-<script src="../../../assets/nav.js?v=91bce176" defer></script>
+<script src="../../../assets/nav.js?v=c3621118" defer></script>
 </body>
 </html>

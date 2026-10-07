@@ -62,8 +62,9 @@ def vue_devis(fichier, langues, niveaux, choisi):
             '<div class="vw-opts"><div class="vw-opt" data-o="0"><i></i><b>Relecture interne</b><span>Durée de la relecture interne : 1 à 2 heures</span></div>'
             '<div class="vw-opt on" data-o="1"><i></i><b>Parcours personnalisé</b><span>Relecture externe, échéance et ordre de priorité</span></div></div>'
             '<div class="vw-ext"><p class="vw-h5">Paramètres de la relecture externe</p>'
-            '<div class="vw-tab"><div class="vw-tr vw-th"><span>Fichier</span><span>Langues</span><span>Relecture</span><span>Niveau de relecture</span></div>'
-            f'<div class="vw-tr"><span class="vw-fn">{IC["fichier"]}{fichier}</span><span>{langues}</span><span><em class="vw-tag">Externe</em></span>'
+            '<div class="vw-tab"><div class="vw-tr vw-th"><span>Fichier</span><span>Langues</span><span>Relecture</span></div>'
+            f'<div class="vw-tr"><span class="vw-fn">{IC["fichier"]}{fichier}</span><span>{langues}</span><span><em class="vw-tag">Externe</em></span></div>'
+            f'<div class="vw-sub"><span class="vw-lab">Niveau de relecture</span>'
             f'<span class="cr-sel vw-niv"><span class="cr-v">{choisi}</span>{IC["chevron"]}<span class="cr-menu">{menu}</span></span></div></div>'
             f'<div class="vw-pied"><span class="vw-ech">{CAL}<span><b>Échéance</b><small>Contactez-nous pour une livraison plus rapide</small></span></span>'
             '<span class="cr-btn cr-btn-p vw-go">Créer le projet</span></div></div></div></div>')

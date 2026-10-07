@@ -1,0 +1,184 @@
+/* Habillage de la démo Gestion de projet au rendu des écrans Corrext animés (.cr) :
+   palette Corrext, Inter 12 à 14 px, rayons 8 / 6 / 999 px, ombres douces, mouvements par transform et opacity.
+   Toutes les règles sont limitées à la scène (.cx-zone) ; le DOM et les textes de la démo ne changent pas. */
+
+/* Palette et réglages communs, puis report sur les variables de la démo (.cx) */
+.cx-zone{--cx-encre:#1e1f3b;--cx-texte:#3a3c56;--cx-attenue:#5d6180;--cx-trait:rgba(30,31,59,.09);--cx-trait-fort:rgba(30,31,59,.15);--cx-doux:#f7f8fc;--cx-indigo:#3b34c9;--cx-lavande:#efeefc;--cx-surligne:#fff2a8;
+  --cx-courbe:cubic-bezier(.22,.8,.24,1);--cx-ombre:0 1px 2px rgba(30,31,59,.06);--cx-ombre-menu:0 8px 30px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);--cx-anneau:0 0 0 3px rgba(59,52,201,.12)}
+.cx-zone .cx{--cx-ink:var(--cx-encre);--cx-text:var(--cx-texte);--cx-muted:var(--cx-attenue);--cx-line:var(--cx-trait);--cx-bg:var(--cx-doux);--cx-indigo-soft:var(--cx-lavande);--cx-hl:var(--cx-surligne);
+  min-height:100%;font:400 13px/1.5 "Inter",var(--ui);color:var(--cx-texte);-webkit-font-smoothing:antialiased}
+
+/* Barre du haut, au gabarit de l'écran Corrext */
+.cx-zone .cx-top{height:48px;padding:0 18px;gap:18px}
+.cx-zone .cx-logo .cx-brand{height:24px}
+.cx-zone .cx-top .home{font:500 13px/1.5 "Inter",var(--ui)}
+.cx-zone .cx-top .bell{width:28px;height:28px;color:var(--cx-attenue)}
+.cx-zone .cx-top .bell svg{width:16px;height:16px}
+.cx-zone .cx-avatar{width:28px;height:28px;font:600 12px/1 "Inter",var(--ui)}
+
+/* Étapes : pastille qui s'allume, coche qui apparaît, trait qui se remplit */
+.cx-zone .cxp-stepper{padding:14px 18px 2px}
+.cx-zone .cxp-stepper li{position:relative;font:500 12.5px/1.5 "Inter",var(--ui);color:var(--cx-attenue)}
+.cx-zone .cxp-stepper li.on{color:var(--cx-indigo)}
+.cx-zone .cxp-stepper li.done{color:var(--cx-encre)}
+.cx-zone .cxp-stepper li+li::before{width:44px;margin:0 12px;background:var(--cx-trait-fort)}
+.cx-zone .cxp-stepper li.done+li::before{background:var(--cx-trait-fort)}
+.cx-zone .cxp-stepper li+li::after{content:"";position:absolute;left:12px;top:50%;width:44px;height:1px;margin-top:-.5px;background:var(--cx-indigo);transform:scaleX(0);transform-origin:0 50%;transition:transform .45s var(--cx-courbe)}
+.cx-zone .cxp-stepper li.done+li::after{transform:none}
+.cx-zone .cxp-stepper .n{width:24px;height:24px;border:1px solid var(--cx-trait-fort);font:600 12px/1 "Inter",var(--ui);box-shadow:var(--cx-ombre)}
+.cx-zone .cxp-stepper li.on .n{box-shadow:0 0 0 4px var(--cx-lavande);animation:cxp-pastille .45s var(--cx-courbe) backwards}
+.cx-zone .cxp-stepper li.done .n{background:var(--cx-lavande);border-color:transparent;box-shadow:none}
+.cx-zone .cxp-stepper li.done .n svg{width:12px;height:12px;animation:cxp-coche .4s var(--cx-courbe) backwards}
+
+/* Corps et changement d'étape : fondu et glissement */
+.cx-zone .cxp-body{padding:10px 18px 0}
+.cx-zone .cxp-step.on{animation:cxp-entree .42s var(--cx-courbe) backwards}
+.cx-zone .cxp-title{margin:0 0 2px;font:600 14px/1.5 "Inter",var(--ui);letter-spacing:-.005em;color:var(--cx-encre)}
+.cx-zone .cxp-sub{margin:0 0 14px;font:400 12.5px/1.5 "Inter",var(--ui);color:var(--cx-attenue)}
+.cx-zone .cxp-q{margin:14px 0 8px;font:500 12.5px/1.5 "Inter",var(--ui);color:var(--cx-encre)}
+.cx-zone .cxp-field-head label{font:500 12.5px/1.5 "Inter",var(--ui);color:var(--cx-encre)}
+.cx-zone .cxp-body .cx-h4{margin:0 0 10px;font:600 13px/1.5 "Inter",var(--ui);color:var(--cx-encre)}
+.cx-zone .cx-note{padding:8px 0 0;font:400 12px/1.5 "Inter",var(--ui);color:var(--cx-attenue)}
+
+/* Interrupteur « nom par défaut » : le bouton glisse */
+.cx-zone .cxp-switch{font:500 12px/1.5 "Inter",var(--ui);transition:transform .12s ease}
+.cx-zone .cxp-switch i{width:30px;height:18px}
+.cx-zone .cxp-switch i::after{top:2px;left:2px;right:auto;width:14px;height:14px;box-shadow:0 1px 2px rgba(30,31,59,.25);transform:translateX(12px);transition:transform .35s var(--cx-courbe)}
+.cx-zone .cxp-switch.off i{background:#d5d7e4}
+.cx-zone .cxp-switch.off i::after{transform:none}
+
+/* Champs et listes déroulantes */
+.cx-zone .cxp-input{padding:8px 12px;border:1px solid var(--cx-trait-fort);border-radius:6px;background:#fff;font:400 12.5px/1.5 "Inter",var(--ui);color:var(--cx-encre);box-shadow:var(--cx-ombre);transition:transform .12s ease}
+.cx-zone .cxp-input:read-only{background:var(--cx-doux);color:var(--cx-texte);box-shadow:none}
+.cx-zone .cxp-input:disabled{background:var(--cx-doux);color:var(--cx-attenue);box-shadow:none}
+.cx-zone .cxp-input::placeholder{color:var(--cx-attenue)}
+.cx-zone .cxp-input:focus,.cx-zone .cxp-input.saisie{outline:none;border-color:var(--cx-indigo);box-shadow:var(--cx-anneau)}
+.cx-zone .cxp-filemeta .cx-sel,.cx-zone .cxp-table .cx-sel{padding:6px 26px 6px 10px;border:1px solid var(--cx-trait-fort);border-radius:6px;background-color:#fff;background-position:right 8px center;font:500 12px/1.5 "Inter",var(--ui);color:var(--cx-encre);box-shadow:var(--cx-ombre);transition:transform .12s ease}
+.cx-zone .cxp-table .cx-sel{padding:6px 18px 6px 7px;background-position:right 4px center;font-weight:400}
+
+/* Cartes de confidentialité */
+.cx-zone .cxp-conf{grid-template-columns:1fr 1fr;gap:12px}
+.cx-zone .cxp-card{padding:12px 14px;border:1px solid var(--cx-trait-fort);border-radius:8px;box-shadow:var(--cx-ombre);transition:transform .12s ease}
+.cx-zone .cxp-card:hover{border-color:rgba(59,52,201,.35)}
+.cx-zone .cxp-card.on{border-color:var(--cx-indigo);box-shadow:0 0 0 3px var(--cx-lavande)}
+.cx-zone .cxp-card b{margin-bottom:4px;font:600 13px/1.5 "Inter",var(--ui);color:var(--cx-encre)}
+.cx-zone .cxp-card.on b{color:var(--cx-indigo)}
+.cx-zone .cxp-card b::before{border-color:var(--cx-trait-fort)}
+.cx-zone .cxp-card.on b::before{border:4px solid var(--cx-indigo);animation:cxp-pastille .35s var(--cx-courbe) backwards}
+.cx-zone .cxp-card span{font:400 12px/1.5 "Inter",var(--ui);color:var(--cx-texte)}
+
+/* Boutons */
+.cx-zone .cx-btn{padding:7px 16px;border:1px solid transparent;border-radius:6px;font:600 12.5px/1.5 "Inter",var(--ui);box-shadow:var(--cx-ombre);transition:transform .12s ease}
+.cx-zone .cx-btn.ghost{border-color:rgba(59,52,201,.3);background:#fff;color:var(--cx-indigo)}
+.cx-zone .cx-btn:disabled{border-color:transparent;background:#eceef5;color:var(--cx-attenue);box-shadow:none}
+.cx-zone .cx-btn.ghost:disabled{border-color:var(--cx-trait-fort);background:#fff;color:var(--cx-attenue)}
+.cx-zone .cxp-langbtn svg{width:13px;height:13px}
+
+/* Langues cibles : menu flottant sous le bouton, puces arrondies */
+.cx-zone .cxp-langwrap{position:relative}
+.cx-zone .cxp-langwrap .cx-chips{gap:6px;margin:0 0 10px}
+.cx-zone .cx-chip{padding:4px 11px;border:1px solid var(--cx-trait-fort);border-radius:999px;font:500 12px/1.5 "Inter",var(--ui);transition:transform .12s ease}
+.cx-zone .cx-chip.on{border-color:rgba(59,52,201,.3);background:var(--cx-lavande);color:var(--cx-indigo)}
+.cx-zone #cxpLangChips .cx-chip{animation:cxp-puce .38s var(--cx-courbe) backwards}
+.cx-zone .cxp-pop{position:absolute;z-index:6;top:calc(100% + 6px);left:0;width:300px;max-width:none;margin:0;padding:8px;border:1px solid var(--cx-trait);border-radius:8px;background:#fff;box-shadow:var(--cx-ombre-menu);transform-origin:0 0;animation:cxp-menu .3s var(--cx-courbe) backwards}
+.cx-zone .cxp-pop .cxp-input{padding:6px 10px}
+.cx-zone .cxp-langlist{max-height:124px;margin:6px 0 0}
+.cx-zone .cxp-langlist label{padding:6px 8px;border-radius:6px;font:400 12.5px/1.5 "Inter",var(--ui);color:var(--cx-encre);transition:transform .12s ease}
+.cx-zone .cxp-langlist li:not([hidden]){animation:cxp-fondu .25s ease backwards}
+
+/* Étape 2 : dépôt, fiche du fichier, valeurs détectées */
+.cx-zone .cx-drop{padding:22px 16px;border:1.5px dashed rgba(59,52,201,.24);border-radius:8px;background:var(--cx-doux);transition:transform .2s ease}
+.cx-zone .cx-drop:hover{background:var(--cx-lavande)}
+.cx-zone .cx-drop:disabled{opacity:.72}
+.cx-zone .cx-drop:disabled:hover{background:var(--cx-doux)}
+.cx-zone .cx-drop .ic{width:34px;height:34px;margin-bottom:10px;border-radius:10px;background:#fff;box-shadow:0 1px 3px rgba(30,31,59,.08)}
+.cx-zone .cx-drop .t{font:400 13px/1.5 "Inter",var(--ui);color:var(--cx-texte)}
+.cx-zone .cx-drop .t b{font-weight:600}
+.cx-zone .cx-drop .s{margin-top:4px;font:400 12px/1.5 "Inter",var(--ui);color:var(--cx-attenue)}
+.cx-zone .cxp-filecard{border:1px solid var(--cx-trait);border-radius:8px;background:#fff;box-shadow:0 1px 3px rgba(30,31,59,.04),0 8px 24px rgba(30,31,59,.05);animation:cxp-entree .45s var(--cx-courbe) backwards}
+.cx-zone .cxp-filecard .cx-file{gap:12px;padding:12px 14px}
+.cx-zone .cx-file .fi{width:32px;height:32px;border-radius:8px}
+.cx-zone .cx-file .fi svg{width:16px;height:16px}
+.cx-zone .cx-file .fn{font:500 12.5px/1.5 "Inter",var(--ui);color:var(--cx-encre)}
+.cx-zone .cx-file .fs{margin-top:0;font:400 12px/1.5 "Inter",var(--ui);color:var(--cx-attenue);animation:cxp-fondu .3s ease backwards}
+.cx-zone .cx-file .bar{height:4px;margin-top:6px;border-radius:2px;background:#eceef6}
+.cx-zone .cxp-ic{border-radius:6px;transition:transform .12s ease}
+.cx-zone .cxp-filemeta{gap:8px 22px;padding:10px 14px 12px 58px;border-top:1px solid var(--cx-trait)}
+.cx-zone .cxp-filemeta > *{animation:cxp-entree .4s var(--cx-courbe) backwards}
+.cx-zone .cxp-filemeta > :nth-child(2){animation-delay:.08s}
+.cx-zone .cxp-filemeta > :nth-child(3){animation-delay:.16s}
+.cx-zone .cxp-filemeta .pg{font:400 12.5px/1.5 "Inter",var(--ui);color:var(--cx-encre)}
+.cx-zone .cxp-filemeta .pg b{font-weight:600}
+.cx-zone .cxp-filemeta label{font:400 12px/1.5 "Inter",var(--ui);color:var(--cx-attenue)}
+
+/* Étape 3 : onglets de devis, panneaux, tableau, délai estimé */
+.cx-zone .cxp-qtabs{grid-template-columns:1fr 1fr;gap:12px;margin:0 0 14px}
+.cx-zone .cxp-qtab{padding:10px 14px;border:1px solid var(--cx-trait-fort);border-radius:8px;box-shadow:var(--cx-ombre);transition:transform .12s ease}
+.cx-zone .cxp-qtab:hover{border-color:rgba(59,52,201,.35)}
+.cx-zone .cxp-qtab.on{border-color:var(--cx-indigo);box-shadow:0 0 0 3px var(--cx-lavande)}
+.cx-zone .cxp-qtab b{font:600 13px/1.5 "Inter",var(--ui);color:var(--cx-encre)}
+.cx-zone .cxp-qtab.on b{color:var(--cx-indigo)}
+.cx-zone .cxp-qtab span{margin-top:0;font:400 12px/1.5 "Inter",var(--ui);color:var(--cx-attenue)}
+.cx-zone .cxp-qpanel{animation:cxp-entree .4s var(--cx-courbe) backwards}
+.cx-zone .cxp-qgrid{grid-template-columns:minmax(0,1fr) 172px;gap:10px}
+.cx-zone .cxp-block{padding:14px 16px;border:1px solid var(--cx-trait);border-radius:8px}
+.cx-zone .cxp-spec{gap:8px}
+.cx-zone .cxp-spec label,.cx-zone .cxp-lbl{font:400 12px/1.5 "Inter",var(--ui);color:var(--cx-attenue)}
+.cx-zone .cxp-spec label .cxp-input,.cx-zone .cxp-lbl .cxp-input{margin-top:4px}
+.cx-zone .cxp-link{margin-top:6px;font:500 12px/1.5 "Inter",var(--ui)}
+.cx-zone .cxp-block .cxp-q{margin:12px 0 8px}
+.cx-zone .cxp-yn{border:1px solid var(--cx-trait-fort);border-radius:6px;box-shadow:var(--cx-ombre)}
+.cx-zone .cxp-yn-btn{padding:5px 16px;font:500 12.5px/1.5 "Inter",var(--ui);transition:transform .12s ease}
+.cx-zone .cxp-yn-btn+.cxp-yn-btn{border-left-color:var(--cx-trait-fort)}
+.cx-zone .cxp-tablewrap{position:relative;margin-top:12px;padding:0;border:1px solid var(--cx-trait);border-radius:8px}
+.cx-zone .cxp-table{min-width:0;font:400 12px/1.5 "Inter",var(--ui)}
+.cx-zone .cxp-table th{padding:8px 6px;border-bottom-color:var(--cx-trait);font:500 12px/1.5 "Inter",var(--ui);color:var(--cx-attenue)}
+.cx-zone .cxp-table th:first-child{white-space:normal}
+.cx-zone .cxp-table th:first-child,.cx-zone .cxp-table td:first-child{padding-left:10px}
+.cx-zone .cxp-table td{padding:8px 6px;border-bottom-color:var(--cx-trait);color:var(--cx-encre)}
+.cx-zone .cxp-table .fn{font-weight:500}
+.cx-zone .cxp-infobtn{transition:transform .12s ease}
+.cx-zone .cxp-tablewrap .cx-note{padding:8px 12px}
+/* Définition des niveaux : panneau flottant au-dessus du tableau (il ne pousse plus le pied hors de l'écran) */
+.cx-zone .cxp-info{position:absolute;z-index:6;right:8px;bottom:calc(100% + 6px);width:600px;margin:0;padding:12px 14px;border:1px solid var(--cx-trait);border-radius:8px;background:#fff;box-shadow:var(--cx-ombre-menu);transform-origin:100% 100%;animation:cxp-monte .3s var(--cx-courbe) backwards}
+.cx-zone .cxp-info dl{gap:8px}
+.cx-zone .cxp-info dt{font:600 12px/1.5 "Inter",var(--ui);color:var(--cx-encre)}
+.cx-zone .cxp-info dd{margin:1px 0 0;font:400 12px/1.5 "Inter",var(--ui);color:var(--cx-texte)}
+.cx-zone .cxp-est{padding:14px 10px;border:1px solid var(--cx-trait);border-radius:8px;background:var(--cx-doux)}
+.cx-zone .cxp-est dl{margin:0 0 12px}
+.cx-zone .cxp-est dl div{gap:8px;padding:6px 0;border-bottom-color:var(--cx-trait);font:400 12px/1.5 "Inter",var(--ui);color:var(--cx-texte)}
+.cx-zone .cxp-est dl div.tot{font-weight:600;color:var(--cx-encre)}
+.cx-zone .cxp-est dd{color:var(--cx-encre);white-space:nowrap}
+/* Squelette de calcul : reflet qui glisse, comme sur l'écran Corrext */
+.cx-zone .cxp-est .cx-shim{position:relative;overflow:hidden;width:40px;height:9px;margin:0;border-radius:5px;background:#e2e5f0;animation:cxp-fondu .25s ease backwards}
+.cx-zone .cxp-est .cx-shim::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);animation:cxp-reflet 1.15s ease-in-out infinite}
+/* Valeur calculée : elle entre quand le squelette de chargement disparaît */
+.cx-zone .cxp-est dd:not(:has(.cx-shim)){animation:cxp-entree .35s var(--cx-courbe) backwards}
+.cx-zone .cxp-est div:nth-child(2) dd{animation-delay:.05s}
+.cx-zone .cxp-est div:nth-child(3) dd{animation-delay:.1s}
+.cx-zone .cxp-est div:nth-child(4) dd{animation-delay:.15s}
+.cx-zone .cxp-est .cx-note{padding:0 0 10px}
+.cx-zone .cxp-banner{margin:10px 0 0;padding:9px 12px;border-radius:6px;background:var(--cx-lavande);font:400 12px/1.5 "Inter",var(--ui);color:var(--cx-encre);animation:cxp-entree .4s var(--cx-courbe) backwards}
+
+/* Pied du tunnel */
+.cx-zone .cxp-foot{flex-wrap:nowrap;gap:10px;margin-top:14px;padding:10px 18px;border-top:1px solid var(--cx-trait)}
+.cx-zone .cxp-gear{width:32px;height:32px;border:1px solid var(--cx-trait-fort);border-radius:6px}
+
+/* Appui de la visite guidée (classe .press posée par le lecteur) : boutons 0,96, champs 0,98 */
+.cx-zone .press{transform:scale(.96)}
+.cx-zone .cxp-input.press,.cx-zone .cx-sel.press,.cx-zone .cxp-card.press,.cx-zone .cxp-qtab.press,.cx-zone .cxp-langlist label.press,.cx-zone .cx-drop.press{transform:scale(.98)}
+
+/* Entrées : fondu et glissement de 4 à 8 px */
+@keyframes cxp-entree{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes cxp-menu{from{opacity:0;transform:translateY(-4px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes cxp-monte{from{opacity:0;transform:translateY(4px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes cxp-puce{from{opacity:0;transform:translateY(4px) scale(.92)}to{opacity:1;transform:none}}
+@keyframes cxp-fondu{from{opacity:0}to{opacity:1}}
+@keyframes cxp-reflet{to{transform:translateX(100%)}}
+@keyframes cxp-pastille{from{transform:scale(.72)}to{transform:none}}
+@keyframes cxp-coche{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:none}}
+
+/* Mouvement réduit : aucune transition ni animation */
+@media (prefers-reduced-motion: reduce){
+  .cx-zone *,.cx-zone *::before,.cx-zone *::after{transition:none!important;animation:none!important}
+}
