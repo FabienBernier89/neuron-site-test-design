@@ -1,0 +1,73 @@
+# Généré par build.py : ne pas modifier à la main.
+ErrorDocument 404 /404.html
+RewriteEngine On
+# La langue n'est pas encore choisie côté serveur : la racine part vers le français (302, provisoire).
+RewriteRule ^$ /fr/ [R=302,L]
+# Anciennes adresses : avec ou sans barre finale, ancre conservée (NE).
+RewriteRule ^1273/?$ /fr/ressources/blog/actualites/#actu-108 [R=301,L,NE]
+RewriteRule ^1513/?$ /fr/ressources/blog/actualites/#actu-104 [R=301,L,NE]
+RewriteRule ^about/?$ /fr/a-propos/ [R=301,L,NE]
+RewriteRule ^author/s-lantin/?$ /fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^category/non-classifiee/?$ /fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^category/uncategorized/?$ /fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^category/unkategorisiert/?$ /fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^contact/?$ /fr/contact/ [R=301,L,NE]
+RewriteRule ^discover-our-criminal-law-engine/?$ /fr/ressources/blog/actualites/#actu-110 [R=301,L,NE]
+RewriteRule ^discover-our-paper-on-neural-machine-translation-2/?$ /fr/ressources/blog/actualites/#actu-108 [R=301,L,NE]
+RewriteRule ^discover-our-paper-on-neural-machine-translation/?$ /fr/ressources/blog/actualites/#actu-108 [R=301,L,NE]
+RewriteRule ^discover-our-swiss-criminal-law-engine/?$ /fr/ressources/blog/actualites/#actu-110 [R=301,L,NE]
+RewriteRule ^find-the-best-legal-translator-to-improve-last/?$ /fr/ressources/blog/actualites/#actu-111 [R=301,L,NE]
+RewriteRule ^find-the-best-legal-translator-to-improve/?$ /fr/ressources/blog/actualites/#annee-2020 [R=301,L,NE]
+RewriteRule ^find-the-best-legal-translator-to-review-your-machine-translation-2/?$ /fr/ressources/blog/actualites/#actu-111 [R=301,L,NE]
+RewriteRule ^find-the-best-legal-translator-to-review-your-machine-translation/?$ /fr/ressources/blog/actualites/#actu-111 [R=301,L,NE]
+RewriteRule ^fr/about/?$ /fr/a-propos/ [R=301,L,NE]
+RewriteRule ^fr/category/non-classifiee/?$ /fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^fr/category/uncategorized-fr/?$ /fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^fr/impressum/?$ /fr/mentions-legales/ [R=301,L,NE]
+RewriteRule ^fr/news/?$ /fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^fr/privacy-policy/?$ /fr/protection-des-donnees/ [R=301,L,NE]
+RewriteRule ^fr/schedule-a-demo/?$ /fr/contact/ [R=301,L,NE]
+RewriteRule ^fr/terms-of-use/?$ /fr/mentions-legales/#conditions-d-utilisation [R=301,L,NE]
+RewriteRule ^german-news/?$ /fr/ressources/blog/actualites/#actu-110 [R=301,L,NE]
+RewriteRule ^impressum/?$ /fr/mentions-legales/ [R=301,L,NE]
+RewriteRule ^interview-mit-language-box-den-schweizer-experten-fuer-uebersetzungsprozesse/?$ /fr/ressources/blog/actualites/#actu-105 [R=301,L,NE]
+RewriteRule ^interview-mit-language-box-den-schweizer-experten-fur-ubersetzungsprozesse/?$ /fr/ressources/blog/actualites/#actu-105 [R=301,L,NE]
+RewriteRule ^interview-mit-language-box-den-schweizer-experten-in-ubersetzungsprozessen/?$ /fr/ressources/blog/actualites/#actu-105 [R=301,L,NE]
+RewriteRule ^join-lexmachina-at-the-amta-2020-virtual-conference-2/?$ /fr/ressources/blog/actualites/#actu-109 [R=301,L,NE]
+RewriteRule ^join-lexmachina-at-the-amta-2020-virtual-conference-3/?$ /fr/ressources/blog/actualites/#actu-109 [R=301,L,NE]
+RewriteRule ^join-lexmachina-at-the-amta-2020-virtual-conference/?$ /fr/ressources/blog/actualites/#actu-109 [R=301,L,NE]
+RewriteRule ^lexmachina-becomes-a-member-of-the-swiss-legaltech-association-2/?$ /fr/ressources/blog/actualites/#actu-106 [R=301,L,NE]
+RewriteRule ^lexmachina-becomes-a-member-of-the-swiss-legaltech-association-3/?$ /fr/ressources/blog/actualites/#actu-106 [R=301,L,NE]
+RewriteRule ^lexmachina-becomes-a-member-of-the-swiss-legaltech-association/?$ /fr/ressources/blog/actualites/#actu-106 [R=301,L,NE]
+RewriteRule ^lexmachina-die-erste-uebersetzungsmaschine-die-pdfs-direkt-uebersetzt/?$ /fr/ressources/blog/actualites/#actu-103 [R=301,L,NE]
+RewriteRule ^lexmachina-le-premier-traducteur-automatique-qui-traite-directement-les-pdf/?$ /fr/ressources/blog/actualites/#actu-103 [R=301,L,NE]
+RewriteRule ^lexmachina-powered-by-heia-fr-and-innosuisse-2/?$ /fr/ressources/blog/actualites/#actu-104 [R=301,L,NE]
+RewriteRule ^lexmachina-powered-by-heia-fr-and-innosuisse/?$ /fr/ressources/blog/actualites/#actu-104 [R=301,L,NE]
+RewriteRule ^lexmachina-the-first-translation-engine-directly-processing-pdfs/?$ /fr/ressources/blog/actualites/#actu-103 [R=301,L,NE]
+RewriteRule ^news/?$ /fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^privacy-policy/?$ /fr/protection-des-donnees/ [R=301,L,NE]
+RewriteRule ^schedule-a-demo/?$ /fr/contact/ [R=301,L,NE]
+RewriteRule ^tag/news/?$ /fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^tag/translation/?$ /fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^terms-of-use/?$ /fr/mentions-legales/#conditions-d-utilisation [R=301,L,NE]
+RewriteRule ^test-page/?$ /fr/ [R=301,L,NE]
+RewriteRule ^vernissage-of-lexmachina-2/?$ /fr/ressources/blog/actualites/#annee-2020 [R=301,L,NE]
+RewriteRule ^vernissage-of-lexmachina/?$ /fr/ressources/blog/actualites/#annee-2020 [R=301,L,NE]
+RewriteRule ^wordbee-french-sample/?$ /fr/ressources/blog/actualites/#actu-112 [R=301,L,NE]
+RewriteRule ^wordbee-panel-discussion-on-nmt-2/?$ /fr/ressources/blog/actualites/#actu-112 [R=301,L,NE]
+RewriteRule ^wordbee-panel-discussion-on-nmt/?$ /fr/ressources/blog/actualites/#actu-112 [R=301,L,NE]
+RewriteRule ^you-missed-our-presentation-at-the-14th-amta-conference-2/?$ /fr/ressources/blog/actualites/#actu-107 [R=301,L,NE]
+RewriteRule ^you-missed-our-presentation-at-the-14th-amta-conference-3/?$ /fr/ressources/blog/actualites/#actu-107 [R=301,L,NE]
+RewriteRule ^you-missed-our-presentation-at-the-14th-amta-conference/?$ /fr/ressources/blog/actualites/#actu-107 [R=301,L,NE]
+# Cache d'un an. Sans mod_headers, rien n'est posé.
+<IfModule mod_headers.c>
+  # Polices (assets/fonts/) : remplacer une police impose de changer son nom de fichier, le navigateur ne la
+  # redemande pas pendant un an.
+  <FilesMatch "\.woff2$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Feuilles et scripts : les pages les appellent avec ?v=<empreinte>, une nouvelle version change l'URL.
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

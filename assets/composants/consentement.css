@@ -1,0 +1,20 @@
+/* Mesure d'audience (lot C) : bandeau de consentement fixé en bas d'écran, deux choix de même poids. */
+.cc{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:16px 0;border-top:1px solid var(--line);background:var(--page);box-shadow:0 -8px 24px rgba(6,18,46,.08)}
+.cc-in{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.cc p{max-width:760px;font:400 14px/20px var(--sans);color:var(--text)}
+.cc p a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.cc-b{display:flex;flex:0 0 auto;gap:8px}
+.cc-b .btn{min-width:112px}
+@media (max-width:640px){
+  .cc-in{flex-direction:column;align-items:stretch;gap:12px}
+  .cc-b .btn{flex:1 1 0;min-width:0}
+}
+/* Pied de page : « Préférences cookies », à côté du choix du thème */
+.fp-ck{margin-left:auto;min-height:24px;padding:0;border:0;background:none;font:inherit;color:var(--muted);text-decoration:underline;text-underline-offset:2px;white-space:nowrap;cursor:pointer}
+.fp-ck:hover{color:var(--ink)}
+@media (max-width:640px){
+  /* Mentions sur toute la largeur, puis le bouton à gauche et le choix du thème à droite */
+  .fp-b:has(.fp-ck:not([hidden])){flex-wrap:wrap;row-gap:16px}
+  .fp-b:has(.fp-ck:not([hidden])) > span{flex:1 0 100%}
+  .fp-ck{margin-left:0;margin-right:auto}
+}

@@ -1,10 +1,16 @@
-"""Page d'accueil du test de design, composée de blocs extraits mot pour mot de docs/fr/index.html."""
+"""Page d'accueil du test de design, composée de blocs extraits mot pour mot de docs/fr/index.html.
+
+Ordre de la trame (lot D, spec V2 § 7) : hero et bandeau des distinctions, problème, situation visée (plateforme,
+schéma « qui fait quoi » du lot B, chiffres, agents, piliers, niveaux, sécurité, comparaison), preuves, FAQ, appel.
+Toutes les sections existantes sont gardées ; seul leur ordre change."""
 import re
 from source import *
 from comp import *
 from app import app_corrext
 from commun import fichiers_demo
 import vues as V
+import schema_produits
+import trame
 
 
 def app_ecran():
@@ -20,27 +26,27 @@ def app_ecran():
 P = ""
 t = liens(charger(P), P)
 C = "{{ROOT}}contact/"
-out = []
+B = {}  # blocs existants, rangés dans l'ordre de la trame en fin de script
 
 # 1. Hero C3 et scène S1 (vraie démo Corrext)
 demo = bloc(t, "section", "demo")
 zone = '<div class="cx-zone">' + bloc(demo, "div", "cx-ex") + bloc(demo, "div", attr='id="cx"') + "</div>"
 micro = brut(bloc(bloc(t, "section", "final-cta"), "p", "micro"))
-out.append('<section class="hero hero-a">\n<div class="wrap">\n'
+B["hero"] = ('<section class="hero hero-a">\n<div class="wrap">\n'
            '<h1 class="h1"><span class="n">Votre solution de traduction par IA</span> <span class="s">pour le droit, la fiscalité et la finance</span></h1>\n'
-           f'<div class="hero-act"><a class="btn" href="{C}">Demander une démo</a><p class="note">{micro}</p></div>\n</div>\n'
+           f'<div class="hero-act"><a class="btn" href="{C}" data-suivi="cta-accueil-hero">Demander une démo</a><p class="note">{micro}</p></div>\n</div>\n'
            '<div class="wrap hero-st">' + scene(1176, 680, app_ecran(), sim="app", curseur=False, label="Démonstration de l'interface Corrext").replace('data-sim="app"', 'data-sim="app" data-tenue="0"', 1) + "</div>\n</section>\n")
 
 # 2. Distinctions (bandeau défilant du hero source)
 hl = [txt(x) for x in blocs(bloc(t, "div", "hero-logos"), "span", "hl") if "aria-hidden" not in x[:60]]
 items = [(x.split(" · ", 1)[0], x.split(" · ", 1)[1] if " · " in x else "") for x in hl]
-out.append(dist(txt(bloc(bloc(t, "section", "trust"), "h2")), items))
+B["distinctions"] = dist(txt(bloc(bloc(t, "section", "trust"), "h2")), items)
 
 # 3. Chiffres
 stats = []
 for s in blocs(bloc(t, "section", "stats"), "div", "stat"):
     stats.append((txt(bloc(s, "div", "num")).replace(" M+", " M+"), None, brut(bloc(s, "div", "desc"))))
-out.append(section(tuiles(stats, "tl t4")))
+B["chiffres"] = section(tuiles(stats, "tl t4"))
 
 # 4. Plateforme : une ligne C7 par produit, visuel = maquette du site actuel
 pr = bloc(t, "section", "products")
@@ -58,7 +64,7 @@ for i, f in enumerate(blocs(pr, "div", "feature")):
     vis = (scene(764, 444, V.vue_fichiers(fichiers_demo("fichier", "pdf")), sim="lot", curseur=False, label=pill)
            if "doc-body" in maq else scene(764, 515, maq, label=pill))
     lignes.append(ft(pill, titre, texte, vis, lien, inv=i % 2 == 1, liste=liste))
-out.append(section(h2(txt(bloc(tete, "h2")), "seule plateforme") + f'<p class="intro">{brut(bloc(tete, "p"))}</p>' + "".join(lignes)))
+B["plateforme"] = (section(h2(txt(bloc(tete, "h2")), "seule plateforme") + f'<p class="intro">{brut(bloc(tete, "p"))}</p>' + "".join(lignes)))
 
 # 5. Agents : bento, chiffres d'économies dans les petites tuiles
 ag = bloc(t, "section", "agents")
@@ -67,24 +73,24 @@ petites = []
 for i, s in enumerate(blocs(ag, "div", "astep")):
     pct = txt(bloc(s, "span", "pct")).replace("%", " %")
     petites.append((f'<span class="n">{pct}</span><b>{brut(bloc(s, "h3"))}</b>', brut(bloc(s, "span", "sl")), "bt-l" if i == 2 else ""))
-out.append(section(bento({"titre": h2(txt(bloc(tete, "h2")), "du devis à la livraison", "h3s"), "texte": brut(bloc(tete, "p"))}, petites)
+B["agents"] = (section(bento({"titre": h2(txt(bloc(tete, "h2")), "du devis à la livraison", "h3s"), "texte": brut(bloc(tete, "p"))}, petites)
                    + f'<p class="legende">{brut(bloc(ag, "p", "agents-note"))}</p>'))
 
 # 6. Piliers
 pi = bloc(t, "section", "pillars")
 tete = bloc(pi, "div", "sec-head")
-out.append(section(h2(txt(bloc(tete, "h2")), "le connaître") + f'<p class="intro">{brut(bloc(tete, "p"))}</p>'
+B["piliers"] = (section(h2(txt(bloc(tete, "h2")), "le connaître") + f'<p class="intro">{brut(bloc(tete, "p"))}</p>'
                    + tuiles([(None, brut(bloc(x, "h3")), brut(bloc(x, "p"))) for x in blocs(pi, "div", "pillar")], "tl txt")))
 
 # 7. Quatre niveaux
 lv = bloc(t, "section", "levels")
 tete = bloc(lv, "div", "sec-head")
 niv = [(str(i + 1), brut(bloc(x, "h3")), brut(bloc(x, "p"))) for i, x in enumerate(blocs(lv, "div", "lev"))]
-out.append(section(h2(txt(bloc(tete, "h2")), "Quatre niveaux") + f'<p class="intro">{brut(bloc(tete, "p"))}</p>' + tuiles(niv, "tl t4")))
+B["niveaux"] = (section(h2(txt(bloc(tete, "h2")), "Quatre niveaux") + f'<p class="intro">{brut(bloc(tete, "p"))}</p>' + tuiles(niv, "tl t4")))
 
 # 8. Comparaison
 cp = bloc(t, "section", "compare")
-out.append(section(h2(txt(bloc(cp, "h2")), "maîtrise le droit suisse") + f'<p class="intro">{brut(bloc(cp, "p", "compare-note"))}</p>'
+B["comparaison"] = (section(h2(txt(bloc(cp, "h2")), "maîtrise le droit suisse") + f'<p class="intro">{brut(bloc(cp, "p", "compare-note"))}</p>'
                    + '<div class="tb">' + sans_svg(bloc(cp, "table")) + "</div>"
                    + '<p class="legende cmp-leg">' + "".join("<span>" + interne(x) + "</span>" for x in blocs(bloc(cp, "div", "cmp-legend"), "span")[::2]) + "</p>"))
 
@@ -92,16 +98,23 @@ out.append(section(h2(txt(bloc(cp, "h2")), "maîtrise le droit suisse") + f'<p c
 se = bloc(t, "section", "security")
 tete = bloc(se, "div", "security-head")
 items = [(brut(bloc(x, "h3")), brut(bloc(x, "p")), "") for x in blocs(se, "div", "sec-item")[:4]]
-out.append(section(bento({"pill": "Sécurité et souveraineté", "titre": h2(txt(bloc(tete, "h2")), "restent en Suisse", "h3s"),
+B["securite"] = (section(bento({"pill": "Sécurité et souveraineté", "titre": h2(txt(bloc(tete, "h2")), "restent en Suisse", "h3s"),
                           "texte": brut(bloc(tete, "p")), "lien": ("Sécurité et souveraineté", "{{ROOT}}fr/securite-souverainete/")}, items)))
 
 # 10. FAQ
 fq = bloc(t, "section", "faq")
 qr = [(brut(bloc(d, "summary")), "".join(f"<p>{brut(p)}</p>" for p in blocs(d, "p"))) for d in blocs(fq, "details")]
-out.append(faq(txt(bloc(fq, "h2")), qr))
+B["faq"] = faq(txt(bloc(fq, "h2")), qr)
 
 # 11. Appel final
-out.append(cta("Prêt à voir Neur.on", "sur vos propres documents ?", ("Demander une démo", C)))
+B["appel"] = trame.appel(cta("Prêt à voir Neur.on", "sur vos propres documents ?", ("Demander une démo", C))
+                         .replace('<a class="btn"', '<a class="btn" data-suivi="cta-accueil-fin"', 1))
+
+# 12. Trame : hero, problème, situation visée, preuves, FAQ, appel (le schéma suit le bloc qui présente la plateforme)
+out = [B["hero"], B["distinctions"], trame.probleme("accueil"),
+       B["plateforme"], schema_produits.rendre(), B["chiffres"], B["agents"], B["piliers"], B["niveaux"], B["securite"], B["comparaison"],
+       trame.preuves("accueil", bandeau=B["distinctions"], exemple=False), B["faq"], B["appel"]]
+assert len(out) == len(B) + 3, "un bloc existant manque à la trame"
 
 ecrire(P, entete_existant(P), "".join(out))
 print("accueil écrite :", sum(len(x) for x in out), "caractères")

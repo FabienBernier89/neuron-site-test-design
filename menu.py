@@ -1,6 +1,10 @@
 """Lit le méga-menu et le pied de page du site Neur.on, puis les rend au gabarit du test de design."""
 import html as H
+import json
 import re
+from pathlib import Path
+
+AJOUTS = Path(__file__).resolve().parent / "src/data/menu-ajouts.json"  # entrées ajoutées par les lots de la V2
 
 CHEVRON = ('<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" '
            'stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>')
@@ -82,9 +86,61 @@ def lire_pied(pied):
     return {"colonnes": colonnes, "copyright": _txt(bas.group(1)), "legal": legal, "iso": iso}
 
 
-def rendre_entete(nav, actif="", minimal=False):
+def _inserer(liste, nouveau, apres, quoi, deja):
+    """Insère nouveau dans liste juste après l'élément dont le href est apres (en fin de liste si apres est vide).
+    Plusieurs ajouts après le même élément gardent l'ordre du fichier."""
+    if not apres:
+        liste.append(nouveau)
+        return
+    i = next((k for k, x in enumerate(liste) if x.get("href") == apres), None)
+    if i is None:
+        raise ValueError(f"{quoi} : « apres » introuvable : {apres}")
+    n = deja.get((id(liste), apres), 0)
+    liste.insert(i + 1 + n, nouveau)
+    deja[(id(liste), apres)] = n + 1
+
+
+def appliquer_ajouts(nav, pied, ajouts=None):
+    """Ajoute au menu lu (lire_menu) et au pied lu (lire_pied) les entrées de src/data/menu-ajouts.json, sur place.
+
+    - panneaux : {panneau: [{"colonne", "apres", "href", "titre", "desc"}]}. Le lien suit l'entrée « apres »
+      (un href), cherchée d'abord dans la colonne indiquée puis dans tout le panneau : il prend la colonne de cette
+      entrée. Sans « apres », il termine la colonne indiquée (0 par défaut).
+    - pied : {titre de colonne: [{"apres", "href", "texte"}]}, même règle d'insertion.
+    Une entrée mal adressée (panneau, colonne, « apres » ou titre inconnus) lève ValueError."""
+    if ajouts is None:
+        ajouts = json.loads(AJOUTS.read_text(encoding="utf-8"))
+    deja = {}
+    for cle, liens in ajouts.get("panneaux", {}).items():
+        if cle not in nav["panneaux"]:
+            raise ValueError(f"panneau inconnu : {cle}")
+        colonnes = nav["panneaux"][cle]["colonnes"]
+        for a in liens:
+            nouveau = {"href": a["href"], "titre": a["titre"], "desc": a.get("desc", "")}
+            n = a.get("colonne", 0)
+            if not a.get("apres"):
+                if not 0 <= n < len(colonnes):
+                    raise ValueError(f"panneau {cle} : colonne {n} inexistante ({len(colonnes)} colonnes)")
+                colonnes[n]["liens"].append(nouveau)
+                continue
+            ordre = ([colonnes[n]] if 0 <= n < len(colonnes) else []) + [c for k, c in enumerate(colonnes) if k != n]
+            cible = next((c for c in ordre if any(l["href"] == a["apres"] for l in c["liens"])), None)
+            if cible is None:
+                raise ValueError(f"panneau {cle} : « apres » introuvable : {a['apres']}")
+            _inserer(cible["liens"], nouveau, a["apres"], f"panneau {cle}", deja)
+    for titre, items in ajouts.get("pied", {}).items():
+        colonne = next((c for c in pied["colonnes"] if c["titre"] == titre), None)
+        if colonne is None:
+            raise ValueError(f"colonne de pied inconnue : {titre}")
+        for a in items:
+            _inserer(colonne["items"], {"href": a["href"], "texte": a["texte"]}, a.get("apres"), f"pied {titre}", deja)
+    return nav, pied
+
+
+def rendre_entete(nav, actif="", minimal=False, ruban=True):
+    """En-tête et menus. Le ruban d'aperçu n'est affiché que si ruban est vrai (réglage « apercu » du site)."""
     h = ['<a class="skip" href="#main">Aller au contenu</a>\n',
-         '<p class="ruban" data-libre>Version de test de design du site Neur.on, non indexée.</p>\n',
+         '<p class="ruban" data-libre>Aperçu du futur site Neur.on, non indexé.</p>\n' if ruban else "",
          '<header class="hd' + (" min" if minimal else "") + '" id="hd">\n<div class="wrap hd-in">\n',
          '<a class="hd-logo" href="{{ROOT}}" aria-label="Neur.on, retour à l\'accueil">'
          '<img class="logo-c" src="{{ROOT}}assets/img/neuron-logo.png" alt="Neur.on" width="92" height="28">'
@@ -98,7 +154,7 @@ def rendre_entete(nav, actif="", minimal=False):
                          f'data-mg>{_e(e["libelle"])}{CHEVRON}</button>\n')
             else:
                 h.append(f'<a class="{cls}" href="{_a(e["href"])}">{_e(e["libelle"])}</a>\n')
-        h.append('</nav>\n<div class="hd-cta"><a class="btn btn-s" href="{{ROOT}}contact/">Demander une démo</a>'
+        h.append('</nav>\n<div class="hd-cta"><a class="btn btn-s" href="{{ROOT}}contact/" data-suivi="cta-entete">Demander une démo</a>'
                  '<button type="button" class="hd-burger" id="hdBurger" aria-expanded="false" aria-controls="mm" '
                  'aria-label="Ouvrir le menu"><span></span><span></span><span></span></button></div>\n')
     h.append("</div>\n")
@@ -140,7 +196,7 @@ def rendre_mobile(nav):
         if p["promo"]:
             h.append(f'<a href="{_a(p["promo"]["href"])}">{_e(p["promo"]["lien"])}</a>\n')
         h.append("</div></div>\n")
-    h.append('<a class="btn mm-cta" href="{{ROOT}}contact/">Demander une démo</a>\n</div>\n</div>\n')
+    h.append('<a class="btn mm-cta" href="{{ROOT}}contact/" data-suivi="cta-entete-mobile">Demander une démo</a>\n</div>\n</div>\n')
     return "".join(h)
 
 

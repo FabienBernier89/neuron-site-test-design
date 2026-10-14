@@ -1,4 +1,5 @@
-"""Tous les textes viennent mot pour mot du site Neur.on publié (spec § 2, § 9 tests 9 et 10)."""
+"""Tous les textes viennent mot pour mot du site Neur.on publié (spec § 2, § 9 tests 9 et 10), ou des contenus
+nouveaux de src/data/contenus-v2 (spec V2 § 2)."""
 import html as H
 import re
 import subprocess
@@ -10,6 +11,7 @@ from pathlib import Path
 ICI = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ICI))
 import build  # noqa: E402
+from outils import contenus  # noqa: E402
 
 
 def norm(s):
@@ -71,6 +73,7 @@ class Textes(HTMLParser):
 def corpus_fr():
     m = [deux_variantes(f.read_text(encoding="utf-8")) for f in (build.NEURON / "docs/fr").rglob("*.html")]
     m += [deux_variantes(f.read_text(encoding="utf-8")) for f in (build.NEURON / "src/data").glob("*.json")]
+    m += [deux_variantes(e["texte"]) for e in contenus.toutes()]  # contenus nouveaux de la V2
     return "\n".join(m)
 
 
@@ -81,20 +84,25 @@ def corpus_ui():
     m += [deux_variantes(f.read_text(encoding="utf-8")) for f in (build.NEURON / "src/data").glob("*.json")]
     # Maquettes publiées (vignettes générées) : reproductions d'interface déjà en ligne
     m += [deux_variantes(f.read_text(encoding="utf-8")) for f in (build.NEURON / "docs/fr").rglob("*.html")]
+    m += [deux_variantes(e["texte"]) for e in contenus.toutes()]  # libellés d'écrans décrits dans les contenus nouveaux
     return "\n".join(m)
 
 
 class TestContenu(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        subprocess.run([sys.executable, str(ICI / "build.py")], check=True, cwd=ICI)
+        subprocess.run([sys.executable, str(ICI / "build.py")], check=True, cwd=ICI, stdout=subprocess.DEVNULL)
         cls.fr, cls.ui = corpus_fr(), corpus_ui()
         cls.lus, cls.sources = {}, {}
         for p in build.PAGES:
             x = Textes()
-            x.feed((build.DOCS / p / "index.html").read_text(encoding="utf-8"))
+            x.feed(build.chemin_page(p).read_text(encoding="utf-8"))
             cls.lus[p] = x
-            cls.sources[p] = deux_variantes((build.NEURON / "docs/fr" / p / "index.html").read_text(encoding="utf-8"))
+            # Source d'une page : sa page du site actuel (absente pour une page nouvelle) et ses contenus nouveaux
+            v1 = build.NEURON / "docs/fr" / p / "index.html"
+            sources = [deux_variantes(v1.read_text(encoding="utf-8"))] if v1.exists() else []
+            sources += [deux_variantes(e["texte"]) for e in contenus.toutes() if e["page"] in (p, "*")]  # « * » : commun à plusieurs pages
+            cls.sources[p] = "\n".join(sources)
 
     def test_textes_repris_mot_pour_mot(self):
         for p, x in self.lus.items():

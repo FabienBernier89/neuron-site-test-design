@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
-"""Site de test de design Neur.on : assemble les 11 pages modèles dans docs/.
+"""Site Neur.on V2 : assemble les pages de src/pages dans docs/ (docs/fr/<page>, comme les URL de production).
 
 Bibliothèque standard uniquement. Lit le site Neur.on (Sites/neuron) pour le méga-menu, le pied de
 page, la page 404 et les données de démonstration, sans jamais y écrire.
+
+Variables d'environnement :
+- SORTIE : dossier de sortie (par défaut docs/), pour construire sans écraser le site publié ;
+- NEURON_SRC : dossier du site Neur.on lu en lecture seule ;
+- BASE_PAGES : chemin de base de la page 404 (par défaut « / » en production, la clé « base » de
+  src/data/config.json sur l'aperçu).
 """
+import functools
 import hashlib
+import html as H
 import json
 import os
 import re
@@ -14,11 +22,15 @@ import sys
 from pathlib import Path
 
 import menu
+import redirections
+from outils import envoi, post
 
 ICI = Path(__file__).resolve().parent
 NEURON = Path(os.environ.get("NEURON_SRC", ICI.parent / "neuron")).resolve()
-SRC, DOCS, ASSETS = ICI / "src", ICI / "docs", ICI / "assets"
-BASE_PAGES = "/neuron-site-test-design/"  # chemin du site sur GitHub Pages (404 servie à toute profondeur)
+SRC, ASSETS = ICI / "src", ICI / "assets"
+DOCS = Path(os.environ.get("SORTIE") or ICI / "docs").resolve()  # dossier de sortie du build
+# Réglages du site : apercu (noindex, robots, ruban), base, identifiants, destinataire des formulaires
+CONFIG = json.loads((SRC / "data/config.json").read_text(encoding="utf-8"))
 
 # Toutes les pages présentes dans src/pages (chemin publié ; source : src/pages/<chemin>index.html), accueil en tête
 PAGES = sorted((("" if str(f.parent.relative_to(SRC / "pages")) == "." else str(f.parent.relative_to(SRC / "pages")) + "/")
@@ -35,18 +47,20 @@ TETE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>@TITRE@</title>
+@ROBOTS@<title>@TITRE@</title>
 <meta name="description" content="@DESC@">
 @SEO@<script>try{document.documentElement.dataset.theme=localStorage.getItem("theme")||"systeme"}catch(e){}</script>
 <link rel="icon" href="{{ROOT}}assets/img/favicon.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;1,8..60,300&display=swap">
-<link rel="stylesheet" href="{{ROOT}}assets/site.css?v=@V@">
+<link rel="preload" as="font" type="font/woff2" href="{{ROOT}}assets/fonts/source-serif-4-latin.woff2" crossorigin>
+@INTER@<link rel="stylesheet" href="{{ROOT}}assets/site.css?v=@V@">
 @CX@</head>
 <body>
 """
+
+# Inter 400 latin n'est préchargée que sur les pages qui s'en servent (@INTER@ dans TETE, rempli par assembler)
+PRECHARGE_INTER = '<link rel="preload" as="font" type="font/woff2" href="{{ROOT}}assets/fonts/inter-latin.woff2" crossorigin>\n'
+ECRAN_CORREXT = re.compile(r'class="(?:[^"]*\s)?c[rx](?:\s|")')  # jeton de classe exact « cr » ou « cx »
+CLASSES = re.compile(r'class="([^"]*)"')
 
 
 def modele(chemin):
@@ -72,9 +86,21 @@ def modele(chemin):
     return ""
 
 
-def relier(html, page):
-    """Remplace {{ROOT}} par le chemin relatif et envoie les liens sans page vers leur page modèle."""
-    racine = "../" * page.count("/")
+def chemin_page(page):
+    """Fichier écrit par le build pour une page (chemin publié, ex. « corrext/ ») : docs/fr/<page>/index.html."""
+    return DOCS / "fr" / page / "index.html"
+
+
+def relier(html, page, racine=None):
+    """Remplace {{ROOT}} par le chemin relatif vers la racine du site (docs/) et envoie les liens sans page vers
+    leur page modèle.
+
+    Les pages vivent sous fr/ : un lien de page s'écrit {{ROOT}}contact/ ou {{ROOT}}fr/contact/ et mène à
+    fr/contact/ depuis n'importe quelle profondeur, le logo ({{ROOT}}) mène à fr/. Hors lien de page,
+    {{ROOT}} désigne la racine du site : assets/, envoi.php. La page 404, servie depuis la racine, passe
+    racine="" pour que ses liens partent de la base."""
+    if racine is None:
+        racine = "../" * (page.count("/") + 1)
 
     def sub(m):
         chemin, suite = m.group(1), m.group(2) or ""
@@ -83,7 +109,7 @@ def relier(html, page):
         cible, attr = modele(chemin), ""
         if cible != chemin:
             suite, attr = "", f' data-modele="{chemin}"'
-        return f'href="{(racine + cible) or "./"}{suite}"{attr}'
+        return f'href="{racine}fr/{cible}{suite}"{attr}'
 
     return LIEN.sub(sub, html).replace("{{ROOT}}", racine)
 
@@ -106,9 +132,24 @@ def sim_data():
             "window.SIM_EX=" + js[debut:fin] + ";\n")
 
 
+def etendre_assets(sortie):
+    """Points d'extension des assets : les feuilles assets/composants/*.css sont ajoutées à la fin de site.css, les
+    scripts assets/global/*.js réunis dans global.js (un « ; » les sépare), chacun dans l'ordre alphabétique."""
+    css = sorted((ASSETS / "composants").glob("*.css"))
+    if css:
+        with (sortie / "site.css").open("a", encoding="utf-8") as s:
+            for f in css:
+                s.write(f"\n/* composants/{f.name} */\n{f.read_text(encoding='utf-8').rstrip()}\n")
+    js = sorted((ASSETS / "global").glob("*.js"))
+    if js:
+        (sortie / "global.js").write_text(
+            "".join(f"/* global/{f.name} */\n{f.read_text(encoding='utf-8').rstrip()}\n;\n" for f in js), encoding="utf-8")
+
+
 def copier_assets():
     sortie = DOCS / "assets"
-    shutil.copytree(ASSETS, sortie)
+    shutil.copytree(ASSETS, sortie, ignore=shutil.ignore_patterns("composants", "global"))
+    etendre_assets(sortie)
     (sortie / "sim-data.js").write_text(sim_data(), encoding="utf-8")
     shutil.copy2(NEURON / "assets/corrext-demo.js", sortie / "corrext-demo.js")
     (sortie / "img").mkdir(exist_ok=True)
@@ -117,8 +158,12 @@ def copier_assets():
 
 
 def copier_images(html):
-    """Recopie les images et documents du site Neur.on cités par une page (couvertures, illustrations, PDF)."""
-    for chemin in set(re.findall(r'\{\{ROOT\}\}(assets/(?:img|docs)/[^"\s?)#]+)', html)):
+    """Recopie les images et documents du site Neur.on cités par une page (couvertures, illustrations, PDF) : en chemin
+    {{ROOT}}assets/..., et les images citées par leur adresse de production https://neur-on.ai/assets/img/... (og:image,
+    données structurées), qui doivent exister une fois le site publié à cette adresse."""
+    relatifs = re.findall(r'\{\{ROOT\}\}(assets/(?:img|docs)/[^"\s?)#]+)', html)
+    absolus = re.findall(r'https://neur-on\.ai/(assets/img/[^"\'\s?)#<>\\]+)', html)
+    for chemin in set(relatifs + absolus):
         cible = DOCS / chemin
         if cible.exists() or not (NEURON / chemin).is_file():
             continue
@@ -135,18 +180,93 @@ def version():
 
 SEO_TETE = re.compile(r'<link rel="(?:canonical|alternate)"[^>]*>|<meta (?:property="og:[^"]+"|name="twitter:[^"]+"|name="theme-color")[^>]*>')
 DONNEES = re.compile(r'<script type="application/ld\+json">.*?</script>', re.S)
+PRODUCTION = "https://neur-on.ai/"  # adresse du site publié
+ALTERNATE = re.compile(r'<link rel="alternate" hreflang="[^"]+" href="([^"]+)">')
 
 
-def seo(page):
+@functools.lru_cache(maxsize=8)
+def _chemins_construits(docs, pages):
+    """Dossiers (relatifs à la sortie, « fr/corrext/ ») des pages que ce build écrit, à l'emplacement de chemin_page."""
+    return frozenset(chemin_page(p).parent.relative_to(docs).as_posix().rstrip("/") + "/" for p in pages)
+
+
+def adresse_construite(url):
+    """Vrai si une adresse de production désigne une page de la sortie : la page d'aiguillage de la racine, une page de
+    ce build (PAGES) ou une page déjà écrite dans le dossier de sortie. Rien n'est écrit en dur : un hreflang vers une
+    langue absente de la sortie est retiré, et revient de lui-même dès que les pages de cette langue sont construites."""
+    if not url.startswith(PRODUCTION):
+        return False
+    chemin = url[len(PRODUCTION):].split("#")[0].split("?")[0]
+    if chemin == "":
+        return True
+    return chemin in _chemins_construits(DOCS, tuple(PAGES)) or (DOCS / chemin / "index.html").is_file()
+
+
+def garder_alternate(balise):
+    """Faux pour un hreflang qui mène à une page absente de la sortie ; vrai pour toute autre balise."""
+    m = ALTERNATE.match(balise)
+    return not m or adresse_construite(m.group(1))
+
+
+def blocs_json(html):
+    """Données structurées (JSON-LD) d'une page, lues."""
+    return [json.loads(b[b.index(">") + 1:b.rindex("<")]) for b in DONNEES.findall(html)]
+
+
+def nom_fil(chemin):
+    """Libellé d'un niveau du fil d'Ariane : celui du site Neur.on actuel quand la page y existe, sinon son slug."""
+    f = NEURON / "docs/fr" / chemin / "index.html"
+    if f.is_file():
+        for d in blocs_json(f.read_text(encoding="utf-8")):
+            if isinstance(d, dict) and d.get("@type") == "BreadcrumbList":
+                return d["itemListElement"][-1]["name"]
+    return chemin.rstrip("/").split("/")[-1].replace("-", " ").capitalize()
+
+
+def seo_repli(page, meta):
+    """Référencement d'une page nouvelle, sans équivalent dans le site Neur.on actuel : canonique et hreflang fr-CH
+    vers son adresse de production, Open Graph tiré de sa méta, fil d'Ariane (BreadcrumbList) : Accueil, puis chaque
+    niveau du chemin, la page elle-même portant le début de son titre (avant « · »)."""
+    url = "https://neur-on.ai/fr/" + page
+    echappe = lambda s: H.escape(H.unescape(s), quote=True)
+    titre = meta.get("title", "")
+    segments = [s for s in page.split("/") if s]
+    fil = [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://neur-on.ai/fr/"}]
+    for i in range(len(segments)):
+        chemin = "/".join(segments[:i + 1]) + "/"
+        nom = H.unescape(titre).split(" · ")[0] if i == len(segments) - 1 else nom_fil(chemin)
+        fil.append({"@type": "ListItem", "position": i + 2, "name": nom, "item": "https://neur-on.ai/fr/" + chemin})
+    lignes = [x for x in [
+        f'<link rel="canonical" href="{url}">',
+        f'<link rel="alternate" hreflang="fr-CH" href="{url}">',
+        '<link rel="alternate" hreflang="x-default" href="https://neur-on.ai/">',
+        f'<meta property="og:title" content="{echappe(titre)}">',
+        f'<meta property="og:description" content="{echappe(meta.get("description", ""))}">',
+        f'<meta property="og:url" content="{url}">',
+        '<meta property="og:type" content="website">',
+        '<meta property="og:image" content="https://neur-on.ai/assets/img/og-neuron.jpg">',
+        '<meta property="og:image:alt" content="Neur.on, traduction par IA pour le droit, la fiscalité et la finance">',
+        '<meta property="og:site_name" content="Neur.on">',
+        '<meta property="og:locale" content="fr_CH">',
+        '<meta name="twitter:card" content="summary_large_image">',
+        '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "BreadcrumbList",
+                                                           "itemListElement": fil}, ensure_ascii=False).replace("</", "<\\/") + "</script>"]
+        if garder_alternate(x)]
+    return "".join(x + "\n" for x in lignes)
+
+
+def seo(page, meta=None):
     """Référencement de la page Neur.on correspondante, repris tel quel : canonique et hreflang vers les URL de
-    production, Open Graph, données structurées (la version retenue se publiera à ces adresses)."""
+    production, Open Graph, données structurées (la version retenue se publiera à ces adresses). Une page nouvelle,
+    sans équivalent dans le site actuel, reçoit un référencement de repli tiré de sa méta. Les hreflang ne gardent que
+    les langues dont la page existe dans la sortie (garder_alternate) : aujourd'hui fr-CH et x-default."""
     s = NEURON / "docs/fr" / page / "index.html"
     if not page.endswith("/") and page:
         return ""
     if not s.exists():
-        return ""
+        return seo_repli(page, meta or {})
     h = s.read_text(encoding="utf-8")
-    tete = SEO_TETE.findall(h[:h.find("</head>")])
+    tete = [x for x in SEO_TETE.findall(h[:h.find("</head>")]) if garder_alternate(x)]
     image = re.search(r'<meta property="og:image" content="([^"]+)"', h)
     return "".join(x + "\n" for x in tete + [completer(d, image.group(1) if image else None) for d in DONNEES.findall(h)])
 
@@ -234,19 +354,56 @@ def dimensionner(html):
     return html[:premiere] + suite
 
 
-def assembler(meta, corps, page, nav, pied, v):
+@functools.lru_cache(maxsize=8)
+def classes_num(css):
+    """Classes des sélecteurs de la feuille qui utilisent var(--num), la police des chiffres (Inter) : un tuple de
+    frozenset, un par sélecteur (toutes ses classes, hors :not). Un sélecteur sans classe donne un ensemble vide."""
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    selecteurs = []
+    for liste, declarations in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
+        if "var(--num)" in declarations:
+            for s in liste.split(","):
+                s = re.sub(r"\[[^\]]*\]", "", re.sub(r":not\([^)]*\)", "", s))
+                selecteurs.append(frozenset(re.findall(r"\.([A-Za-z_-][\w-]*)", s)))
+    return tuple(dict.fromkeys(selecteurs))
+
+
+def utilise_inter(html, css=None):
+    """Vrai si la page, dans son HTML final, montre un écran Corrext (classe « cr » ou « cx ») ou un élément dont un
+    sélecteur de la feuille pose var(--num). Pour un sélecteur, toutes ses classes doivent figurer dans la page :
+    c'est une condition nécessaire pour qu'il s'applique (jamais de faux négatif). css : feuille du site construit."""
+    if ECRAN_CORREXT.search(html):
+        return True
+    if css is None:
+        css = (DOCS / "assets/site.css").read_text(encoding="utf-8")
+    jetons = {j for valeur in CLASSES.findall(html) for j in valeur.split()}
+    return any(classes <= jetons for classes in classes_num(css))
+
+
+def assembler(meta, corps, page, nav, pied, v, racine=None):
     cx = 'id="cx"' in corps
     sim = "data-sim" in corps or "data-ech" in corps
     feuilles = (["cx.css"] if cx else []) + (["maq.css"] if 'class="maq' in corps else []) + meta.get("styles", "").split()
     lien_cx = "".join('<link rel="stylesheet" href="{{ROOT}}assets/' + f + "?v=" + v + '">\n' for f in feuilles)
-    html = (TETE.replace("@TITRE@", meta["title"]).replace("@DESC@", meta["description"]).replace("@SEO@", seo(page))
-            .replace("@V@", v).replace("@CX@", lien_cx))
-    html += menu.rendre_entete(nav, meta.get("menu", ""), minimal=meta.get("gabarit") == "contact")
+    robots = '<meta name="robots" content="noindex, nofollow">\n' if CONFIG["apercu"] else ""
+    html = (TETE.replace("@ROBOTS@", robots).replace("@TITRE@", meta["title"]).replace("@DESC@", meta["description"])
+            .replace("@SEO@", seo(page, meta)).replace("@V@", v).replace("@CX@", lien_cx))
+    html += menu.rendre_entete(nav, meta.get("menu", ""), minimal=meta.get("gabarit") == "contact", ruban=CONFIG["apercu"])
     html += '<main id="main">\n' + corps + "</main>\n" + menu.rendre_pied(pied)
     demo = 'id="cxSrc"' in corps
-    scripts = ["nav.js"] + (["corrext-demo.js"] if demo else []) + (["sim-data.js", "sim.js"] if sim or demo else []) + meta.get("scripts", "").split()
+    globaux = ["global.js"] if (DOCS / "assets/global.js").exists() else []
+    scripts = ["nav.js"] + globaux + (["corrext-demo.js"] if demo else []) + (["sim-data.js", "sim.js"] if sim or demo else []) + meta.get("scripts", "").split()
     html += "".join('<script src="{{ROOT}}assets/' + s + "?v=" + v + '" defer></script>\n' for s in scripts)
-    return relier(dimensionner(html + "</body>\n</html>\n"), page)
+    html = post.appliquer(html + "</body>\n</html>\n", page)  # post-traitements des lots, avant la résolution des liens
+    html = html.replace("@INTER@", PRECHARGE_INTER if utilise_inter(html) else "", 1)  # décidé sur le HTML final
+    copier_images(html)
+    return relier(dimensionner(html), page, racine)
+
+
+def base_pages():
+    """Chemin du site pour la page 404, servie à toute profondeur : la variable BASE_PAGES si elle est donnée ; sinon
+    « / » en production (site à la racine du domaine) et la clé « base » de la configuration sur l'aperçu."""
+    return os.environ.get("BASE_PAGES") or ("/" if not CONFIG["apercu"] else CONFIG["base"])
 
 
 def page_404(nav, pied, v):
@@ -256,30 +413,118 @@ def page_404(nav, pied, v):
     corps = ('<section class="hero"><div class="wrap hero-g"><h1 class="h1">' + h1 + "</h1>"
              '<div class="hero-d"><p>' + lead + '</p><a class="btn" href="{{ROOT}}">Neur.on</a></div></div></section>\n')
     meta = {"title": "Page introuvable · Neur.on", "description": "Page introuvable."}
-    html = assembler(meta, corps, "", nav, pied, v)
+    # servie depuis la racine du site, à toute profondeur, via <base> ; nommée 404.html pour les post-traitements
+    html = assembler(meta, corps, "404.html", nav, pied, v, racine="")
     html = DONNEES.sub("", SEO_TETE.sub("", html)).replace("\n\n", "\n")  # la page 404 n'a ni canonique ni données structurées
-    return html.replace("<head>\n", '<head>\n<base href="' + BASE_PAGES + '">\n', 1)
+    return html.replace("<head>\n", '<head>\n<base href="' + base_pages() + '">\n', 1)
+
+
+def page_racine():
+    """Page d'aiguillage de la racine : celle du site Neur.on, réduite à la seule langue du site, le français.
+    Elle choisit la langue côté navigateur ; elle reste non indexée, comme dans le site actuel."""
+    h = (NEURON / "docs/index.html").read_text(encoding="utf-8")
+    h, n = re.subn(r'var dispo=\[[^\]]*\],def="[a-z]+"', 'var dispo=["fr"],def="fr"', h)
+    h = h.replace('<html lang="en">', '<html lang="fr">', 1)
+    h = re.sub(r'<link rel="alternate" hreflang="(?:de|it|en)[^"]*" href="[^"]*">\n', "", h)
+    h = re.sub(r'<a href="(?:de|it|en)/" hreflang="[^"]*">[A-Z]+</a>(?: · )?', "", h)
+    h = re.sub(r" · (?=</p>)", "", h)
+    if n != 1 or len(re.findall(r'<a href="fr/" hreflang="fr-CH">FR</a>', h)) != 2 or "location.replace" not in h:
+        sys.exit("La page d'aiguillage du site Neur.on a changé de forme : adapter page_racine() dans build.py")
+    return h
+
+
+def plan_du_site():
+    """sitemap.xml de la production : l'adresse canonique de chaque page indexable écrite par ce build, lue dans son
+    HTML. Ni page noindex (remerciement), ni redirection, ni page d'aiguillage ; une page dont la canonique désigne une
+    autre adresse n'y figure pas."""
+    adresses = []
+    for page in PAGES:
+        tete = chemin_page(page).read_text(encoding="utf-8").split("</head>", 1)[0]
+        if re.search(r'<meta name="robots" content="[^"]*noindex', tete):
+            continue
+        canonique = re.search(r'<link rel="canonical" href="([^"]+)">', tete)
+        propre = PRODUCTION + chemin_page(page).parent.relative_to(DOCS).as_posix() + "/"
+        if canonique and H.unescape(canonique.group(1)) == propre and propre not in adresses:
+            adresses.append(propre)
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            + "".join(f"<url><loc>{H.escape(a, quote=False)}</loc></url>\n" for a in adresses) + "</urlset>\n")
+
+
+LIEN_LANGUE = re.compile(r"https://neur-on\.ai/(?:de|it|en)/[^)\s]*")
+
+
+def llms_txt(texte):
+    """llms.txt du site Neur.on réduit à la sortie : chaque ligne qui mène à une page /de/, /it/ ou /en/ absente de la
+    sortie est retirée (adresse_construite), et une section (« ## ») qui perd ainsi tous ses liens disparaît avec son
+    titre. Le reste est gardé mot pour mot ; une langue dont les pages sont construites revient d'elle-même."""
+    def gardee(ligne):
+        return all(adresse_construite(u) for u in LIEN_LANGUE.findall(ligne))
+
+    blocs = re.split(r"(?m)^(?=## )", texte)
+    sortie = [blocs[0]]
+    for bloc in blocs[1:]:
+        lignes = bloc.splitlines(keepends=True)
+        restantes = [l for l in lignes if gardee(l)]
+        avait = any("](https://" in l for l in lignes)
+        if avait and not any("](https://" in l for l in restantes):
+            continue
+        sortie.append("".join(restantes))
+    return re.sub(r"\n{3,}", "\n\n", "".join(sortie)).rstrip("\n") + "\n"
+
+
+def garde_sortie():
+    """Le build vide son dossier de sortie : refuse un dossier qui contient le dépôt, le site Neur.on ou le
+    dossier personnel, tout dossier situé à l'intérieur du site Neur.on (lu en lecture seule) et tout dossier situé à
+    l'intérieur du dépôt, sauf docs/ lui-même."""
+    for sensible in (ICI, NEURON, Path.home()):
+        if DOCS == sensible or DOCS in sensible.parents:
+            sys.exit(f"Dossier de sortie refusé (il contiendrait {sensible}) : {DOCS}")
+    if NEURON in DOCS.parents:
+        sys.exit(f"Dossier de sortie refusé (dans le site Neur.on, en lecture seule) : {DOCS}")
+    if ICI in DOCS.parents and DOCS != ICI / "docs":
+        sys.exit(f"Dossier de sortie refusé (dans le dépôt, où seul docs/ est une sortie) : {DOCS}")
+
+
+def ecrire_redirections():
+    """Anciennes adresses du site Neur.on : une page de redirection par adresse (aperçu) et un .htaccess de 301."""
+    redirs = redirections.lire(NEURON)
+    for ancien, cible in redirs.items():
+        sortie = DOCS / ancien / "index.html"
+        if sortie.exists():
+            sys.exit(f"Redirection {ancien} : la page existe déjà dans la sortie, elle serait écrasée")
+        sortie.parent.mkdir(parents=True, exist_ok=True)
+        sortie.write_text(redirections.page(ancien, cible), encoding="utf-8")
+    (DOCS / ".htaccess").write_text(redirections.htaccess(redirs), encoding="utf-8")
 
 
 def main():
+    garde_sortie()
     if DOCS.exists():
         shutil.rmtree(DOCS)
-    DOCS.mkdir()
+    DOCS.mkdir(parents=True)
     copier_assets()
     v = version()
     nav = menu.lire_menu((NEURON / "src/partials/nav.html").read_text(encoding="utf-8"))
     pied = menu.lire_pied((NEURON / "src/partials/footer.html").read_text(encoding="utf-8"))
+    menu.appliquer_ajouts(nav, pied)  # entrées de menu et de pied ajoutées par les lots (src/data/menu-ajouts.json)
     for page in PAGES:
         meta, corps = lire_page(page)
-        copier_images(corps)
-        sortie = DOCS / page / "index.html"
+        sortie = chemin_page(page)
         sortie.parent.mkdir(parents=True, exist_ok=True)
         sortie.write_text(assembler(meta, corps, page, nav, pied, v), encoding="utf-8")
     (DOCS / "404.html").write_text(page_404(nav, pied, v), encoding="utf-8")
-    (DOCS / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
-    if (NEURON / "docs/llms.txt").exists():  # résumé pour les moteurs IA, tel que publié avec le site Neur.on
-        shutil.copy2(NEURON / "docs/llms.txt", DOCS / "llms.txt")
+    (DOCS / "index.html").write_text(page_racine(), encoding="utf-8")
+    # Aperçu : aucun robot, aucun plan du site. Production : tout est ouvert, robots.txt annonce sitemap.xml
+    if CONFIG["apercu"]:
+        (DOCS / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
+    else:
+        (DOCS / "sitemap.xml").write_text(plan_du_site(), encoding="utf-8")
+        (DOCS / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {PRODUCTION}sitemap.xml\n", encoding="utf-8")
+    if (NEURON / "docs/llms.txt").exists():  # résumé pour les moteurs IA du site Neur.on, réduit aux pages de la sortie
+        (DOCS / "llms.txt").write_text(llms_txt((NEURON / "docs/llms.txt").read_text(encoding="utf-8")), encoding="utf-8")
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
+    ecrire_redirections()
+    envoi.ecrire(DOCS / "envoi.php", CONFIG)  # envoi des formulaires sur Hostpoint, réglé par la configuration
     print(f"{len(PAGES)} pages écrites dans {DOCS}")
 
 

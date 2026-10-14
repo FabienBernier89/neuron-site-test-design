@@ -1,0 +1,123 @@
+/* Plugin Word (lot A) : mentions reliées à la page du plugin, puis scène « word » (fenêtre Word, document bilingue,
+   panneau Corrext). La scène reste au niveau des écrans Corrext (.cr) : palette et police de l'application,
+   mouvements en transform et opacity avec la courbe commune, état final sans animation en mouvement réduit. */
+
+/* Mention existante devenue lien (outils/post/lien_plugin_word.py) */
+.pw-lien{color:var(--accent-d);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.pw-lien:hover{text-decoration-thickness:2px}
+.pw-suite{margin-top:24px}
+/* Garanties : sur mobile, les petites tuiles du bento gardent une largeur de texte lisible */
+@media (max-width:640px){.pw-garanties .bt-p{padding:24px 16px}}
+
+/* ---------- Scène « word » ---------- */
+.wd{--wd-mut:#5d6180;--wd-grille:#d9dce6;display:grid;grid-template-rows:auto minmax(0,1fr)}
+
+/* Ruban : onglets, puis le bouton Corrext qui affiche le panneau */
+.wd-rib{position:relative;z-index:2;background:#fff;border-bottom:1px solid var(--c-line)}
+.wd-tabs{display:flex;gap:2px;padding:4px 12px 0;border-bottom:1px solid var(--c-line)}
+.wd-tabs span{position:relative;padding:5px 10px 6px;font:500 12px/16px "Inter",var(--ui);color:var(--wd-mut)}
+.wd-tabs span.on{color:var(--c-ind)}
+.wd-tabs span.on::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2px;border-radius:2px;background:var(--c-ind)}
+.wd-bar{display:flex;align-items:center;height:42px;padding:0 12px;background:var(--c-bg)}
+.wd-btn{display:inline-flex;flex-direction:column;align-items:center;gap:1px;padding:3px 9px;border-radius:7px;font:500 11px/14px "Inter",var(--ui);color:var(--c-ink);transition:background-color .25s ease,transform .16s ease}
+.wd-btn svg{width:16px;height:16px;color:var(--c-ind)}
+.wd.ouvert .wd-btn{background:var(--c-ind-soft)}
+.wd-btn.press{transform:scale(.94);background:var(--c-ind-soft)}
+
+/* Zone de travail : document à gauche, panneau Corrext à droite */
+.wd-c{display:grid;grid-template-columns:minmax(0,1fr) 356px;min-height:0;background:#eceef4}
+
+/* Document bilingue exporté du projet : une ligne par segment */
+.wd-doc{display:flex;justify-content:center;min-height:0;overflow:hidden;padding-top:14px;background:#eceef4}
+.wd-page{position:relative;z-index:0;align-self:flex-start;width:500px;min-height:calc(100% + 24px);padding:20px 22px 24px;background:#fff;box-shadow:0 1px 3px rgba(30,31,59,.10),0 8px 22px rgba(30,31,59,.06)}
+.wd-l{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 40px;border:1px solid var(--wd-grille);border-top:0}
+.wd-l.wd-th{border-top:1px solid var(--wd-grille);background:var(--c-bg)}
+.wd-l > p{position:relative;margin:0;padding:6px 8px;font:400 11.5px/16px Georgia,"Times New Roman",serif;color:var(--c-ink)}
+.wd-l > p + p{border-left:1px solid var(--wd-grille)}
+.wd-th > p{font:600 11px/16px "Inter",var(--ui);color:var(--wd-mut)}
+/* Segment choisi : bande indigo à gauche, fond lavande, curseur de saisie dans la traduction */
+.wd-l::before{content:"";position:absolute;z-index:-1;top:-1px;bottom:-1px;left:-1px;right:-1px;border-left:3px solid var(--c-ind);background:rgba(59,52,201,.07);opacity:0;transition:opacity .35s ease}
+.wd-l.sel::before{opacity:1}
+.wd-l.sel .wd-t::after{content:"";display:inline-block;width:1.5px;height:13px;margin-left:2px;vertical-align:-2px;background:var(--c-ink);animation:caret 1s steps(1) infinite}
+/* Origine de la traduction : MT avec sa jauge de qualité, TM avec sa correspondance */
+.wd-o{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-left:1px solid var(--wd-grille)}
+.wd-o b{font:700 11px/1 "Inter",var(--ui);color:var(--c-ink)}
+.wd-g{display:flex;gap:2px}
+.wd-g i{width:6px;height:4px;border-radius:2px;background:#d5d7e4}
+.wd-g i.on{background:var(--c-ind)}
+.wd-sim{font:600 11px/1 "Inter",var(--ui);color:var(--c-ind)}
+/* Traduction remplacée par la mémoire : bref surlignage */
+.wd-t.maj::before{content:"";position:absolute;z-index:-1;inset:0;background:var(--c-hl);opacity:0;animation:wd-maj 1.6s ease}
+@keyframes wd-maj{18%{opacity:.75}100%{opacity:0}}
+/* Termes surlignés (le surlignage se déroule de gauche à droite) */
+.wd mark.wd-k{color:inherit;border-radius:2px;background:linear-gradient(var(--c-hl),var(--c-hl)) no-repeat 0 0/0% 100%;transition:background-size .7s var(--ease)}
+.wd mark.wd-k.on,.wd.harmonise mark.wd-kfr{background-size:100% 100%}
+.wd.harmonise mark.wd-kfr{transition-delay:.25s}
+
+/* Panneau Corrext editor */
+.wd-pan{display:flex;flex-direction:column;min-height:0;padding:0 14px 14px;border-left:1px solid var(--c-line);background:#fff;opacity:0;transform:translateX(18px);transition:opacity .45s ease,transform .6s var(--ease)}
+.wd.ouvert .wd-pan{opacity:1;transform:none}
+.wd-ph{display:flex;align-items:center;justify-content:space-between;flex:0 0 38px;font:600 13px/18px "Inter",var(--ui);color:var(--c-ink)}
+.wd-ph b{font-weight:600}
+.wd-x svg{width:14px;height:14px;color:var(--wd-mut)}
+.wd-pan .cr-tl{display:flex;margin-bottom:10px}
+.wd-pan .cr-tl span{flex:1 1 auto;padding:5px 8px;text-align:center;color:var(--wd-mut)}
+.wd-pan .cr-tl span.on{color:var(--c-ind)}
+.wd-vues{position:relative;flex:1;min-height:0}
+.wd-vues > .cr-vue{overflow:hidden}
+
+/* AI Assistant : alternatives par moteur, carte de l'assistant, terminologie */
+.wd-sub{display:flex;gap:16px;margin-bottom:8px;border-bottom:1px solid var(--c-line)}
+.wd-sub span{padding:0 0 7px;font:500 12px/16px "Inter",var(--ui);color:var(--wd-mut)}
+.wd-sub span.on{color:var(--c-ind);box-shadow:inset 0 -2px 0 var(--c-ind)}
+.wd-sub .wd-gen{display:inline-flex;align-items:center;gap:5px;margin-left:auto;font:500 11.5px/16px "Inter",var(--ui);color:var(--c-ind)}
+.wd-gen svg{width:13px;height:13px}
+.wd-alts{display:grid;gap:7px}
+.wd-alt{padding:8px 11px 9px;border:1px solid var(--c-line);border-radius:10px;background:#fff;box-shadow:0 1px 3px rgba(30,31,59,.04)}
+.wd-alt p{margin:0;font:400 12px/17px "Inter",var(--ui);color:var(--c-ink)}
+.wd-e{display:inline-block;margin-top:5px;padding:1px 8px;border-radius:999px;background:var(--c-bg);font:500 11px/16px "Inter",var(--ui);color:var(--wd-mut)}
+.wd-ia{position:absolute;left:0;right:0;bottom:60px;padding:10px 12px 11px;border-radius:10px;background:var(--c-ink);box-shadow:0 14px 32px rgba(30,31,59,.24),0 2px 6px rgba(30,31,59,.10);opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .6s var(--ease)}
+.wd-ia.vu{opacity:1;transform:none}
+.wd-ia.vu.fait{opacity:0;transform:translateY(-8px);transition-delay:.35s}
+.wd-ia-h{display:flex;align-items:center;gap:6px;margin:0 0 5px;font:600 12px/16px "Inter",var(--ui);color:#fff}
+.wd-ia-h svg{width:14px;height:14px;color:#c4c0ff}
+.wd-ia-t{margin:0;font:400 12px/17px "Inter",var(--ui);color:#e8e9f3}
+.wd-ia-t b{font-weight:600;color:#d2cfff}
+.wd-ia-a{display:flex;gap:8px;margin-top:10px}
+.wd-oui,.wd-non{padding:5px 12px;border-radius:7px;font:600 11.5px/16px "Inter",var(--ui);color:#fff;transition:transform .16s ease,background-color .2s ease}
+.wd-oui{background:var(--c-ind)}
+.wd-non{background:rgba(255,255,255,.13)}
+.wd-oui.press,.wd-non.press{transform:scale(.94)}
+.wd-oui.press{background:#2f29a8}
+.wd-tm{position:absolute;left:0;right:0;bottom:0}
+.wd-lab{margin:0 0 4px;font:500 11px/16px "Inter",var(--ui);color:var(--wd-mut)}
+.wd-terme{padding:7px 11px;border:1px solid var(--c-line);border-radius:8px;background:var(--c-bg);font:500 12px/16px "Inter",var(--ui);color:var(--c-ink)}
+
+/* Fast Lookup : recherche en direct, côté cible, résultats des mémoires et de CHnell */
+.wd-qr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.wd-live{display:inline-flex;align-items:center;gap:7px;font:500 11.5px/16px "Inter",var(--ui);color:var(--c-ink)}
+.wd-live i{position:relative;width:26px;height:15px;border-radius:999px;background:var(--c-ind)}
+.wd-live i::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:#fff;transform:translateX(11px)}
+.wd-qr .cr-box{flex:1;min-width:0;padding:6px 10px}
+.wd .wd-q{min-height:18px;font:600 12px/18px "Inter",var(--ui);color:var(--c-ink)}
+.wd-qr .cr-box.tape .wd-q::after{content:"";display:inline-block;width:1.5px;height:13px;margin-left:1px;vertical-align:-2px;background:var(--c-ink);animation:caret 1s steps(1) infinite}
+.wd-go{padding:6px 12px}
+.wd-seg{display:inline-flex;gap:2px;margin-bottom:6px;padding:2px;border:1px solid var(--c-line);border-radius:8px;background:var(--c-bg)}
+.wd-seg span{padding:2px 12px;border-radius:6px;font:500 11.5px/16px "Inter",var(--ui);color:var(--wd-mut)}
+.wd-seg span.on{background:#fff;color:var(--c-ind);box-shadow:0 1px 2px rgba(30,31,59,.08),0 0 0 1px rgba(30,31,59,.04)}
+.wd-rh{margin:6px 0 2px;font:600 11.5px/16px "Inter",var(--ui);color:var(--c-ink);opacity:0;transition:opacity .3s ease}
+.wd-r{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:10px;padding:6px 0 7px;border-top:1px solid var(--c-line);opacity:0;transform:translateY(6px);transition:opacity .4s ease,transform .55s var(--ease);transition-delay:calc(var(--i) * 130ms + 150ms)}
+.wd-res.vu .wd-rh,.wd-res.vu .wd-r{opacity:1;transform:none}
+.wd-r p{display:-webkit-box;margin:0;overflow:hidden;-webkit-line-clamp:3;-webkit-box-orient:vertical;font:400 11px/15px "Inter",var(--ui);color:var(--c-ink)}
+.wd-r p + p{color:var(--c-text)}
+.wd-r small{grid-column:1/-1;margin-top:3px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:400 11px/15px "Inter",var(--ui);color:var(--wd-mut)}
+.wd-r mark.wd-k{background-size:100% 100%}
+
+/* Matches : correspondance de la mémoire, reprise par Apply */
+.wd-sk{position:absolute;top:2px;left:0;right:0}
+.wd-mem{position:relative;padding:12px 13px;border:1px solid var(--c-line);border-radius:10px;background:#fff;box-shadow:0 1px 3px rgba(30,31,59,.04),0 8px 24px rgba(30,31,59,.05);opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .6s var(--ease)}
+.wd-mem.vu{opacity:1;transform:none}
+.wd-ml{margin:0 0 6px;font:600 11.5px/16px "Inter",var(--ui);color:var(--c-ink)}
+.wd-ms{margin:0;padding-bottom:8px;border-bottom:1px dashed rgba(30,31,59,.16);font:400 12px/17px "Inter",var(--ui);color:var(--c-text)}
+.wd-mt{margin:8px 0 0;font:400 12px/17px "Inter",var(--ui);color:var(--c-ink)}
+.wd-ma{display:flex;justify-content:flex-end;margin-top:10px}

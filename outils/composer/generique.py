@@ -10,6 +10,7 @@ from pathlib import Path
 
 from blocs_communs import *  # noqa: F401,F403 (source, comp, commun, app)
 from blog_commun import carte_blog, grille, COUV, AUTEUR
+import trame
 
 RACINE_TEST = Path(__file__).resolve().parents[2]
 SOURCE_FR = NEURON / "docs/fr"
@@ -489,6 +490,28 @@ def scripts_demo(P):
     return styles, scripts
 
 
+# Pages secteur (lot D, spec V2 § 7) : blocs existants rangés dans l'ordre de la trame, problème et preuves ajoutés,
+# boutons vers le formulaire avec le secteur. Les autres pages gardent l'ordre de la page publiée.
+ORDRE_SECTEUR = ("thero", "probleme", "who", "facts", "siblings", "gov", "preuves", "temo", "faq", "final-cta")
+
+
+def slug_secteur(P):
+    m = re.fullmatch(r"solutions/([a-z-]+)/", P)
+    return m.group(1) if m and m.group(1) in trame.SECTEURS else None
+
+
+def ranger_secteur(slug, rendus):
+    """rendus : (classe de la section publiée, HTML composé). Erreur si la page publiée a changé de forme."""
+    par = dict(rendus)
+    attendu = [c for c in ORDRE_SECTEUR if c not in ("probleme", "preuves")]
+    if len(par) != len(rendus) or sorted(par) != sorted(attendu):
+        raise ValueError(f"solutions/{slug}/ : sections inattendues pour la trame : {[c for c, _ in rendus]}")
+    par["probleme"], par["preuves"] = trame.probleme(slug), trame.preuves(slug, exemple="temo" in par)
+    par["thero"] = trame.boutons_secteur(par["thero"], slug, "hero")
+    par["final-cta"] = trame.appel(par["final-cta"], slug)
+    return "".join(par[c] for c in ORDRE_SECTEUR)
+
+
 def composer(P):
     t = liens(charger(P), P)
     secs = sections(t)
@@ -503,8 +526,9 @@ def composer(P):
         if not f:
             inconnus.append(cl)
             f = h_generique
-        out.append(f(sec, ctx))
-    corps = "".join(out)
+        out.append((cl, f(sec, ctx)))
+    slug = slug_secteur(P)
+    corps = ranger_secteur(slug, out) if slug else "".join(h for _, h in out)
     tete_ = entete(P)
     if ctx.get("demo"):
         st, sc = scripts_demo(P)

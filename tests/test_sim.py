@@ -13,7 +13,7 @@ import build  # noqa: E402
 class TestSim(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        subprocess.run([sys.executable, str(ICI / "build.py")], check=True, cwd=ICI)
+        subprocess.run([sys.executable, str(ICI / "build.py")], check=True, cwd=ICI, stdout=subprocess.DEVNULL)
 
     def test_donnees_identiques(self):
         js = (build.NEURON / "assets/corrext-demo.js").read_text(encoding="utf-8")

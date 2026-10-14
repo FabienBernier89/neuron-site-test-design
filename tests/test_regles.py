@@ -21,7 +21,7 @@ def fichiers():
 class TestRegles(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        subprocess.run([sys.executable, str(ICI / "build.py")], check=True, cwd=ICI)
+        subprocess.run([sys.executable, str(ICI / "build.py")], check=True, cwd=ICI, stdout=subprocess.DEVNULL)
 
     def test_pas_de_tirets_longs(self):
         for f in fichiers():

@@ -81,12 +81,15 @@
   });
   marquer();
 
-  /* Formulaire de démonstration : aucun envoi */
+  /* Formulaire de démonstration : aucun envoi. Un avis à data-avis est une région aria-live déjà présente : son texte,
+     injecté à l'envoi, est annoncé ; un avis masqué (hidden) est simplement affiché. */
   [].forEach.call(document.querySelectorAll("form[data-demo]"), function (f) {
     f.addEventListener("submit", function (e) {
       e.preventDefault();
       var avis = f.querySelector(".avis");
-      if (avis) avis.hidden = false;
+      if (!avis) return;
+      if (avis.hasAttribute("data-avis")) avis.textContent = avis.getAttribute("data-avis");
+      avis.hidden = false;
     });
   });
 })();

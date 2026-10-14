@@ -1,0 +1,15 @@
+/* Liste du blog en deux sections, Guides puis Actualités, et hub des guides (lot E) */
+.bl-guides,.bl-a{padding-bottom:0}
+.bl-guides .intro,.bl-a .intro{margin:-16px 0 0}
+.bl-f h3{font:600 32px/36.8px var(--sans);color:var(--ink)}
+.bl-guides .bl-f{padding-top:32px}
+.bl-guides .bl-plus{margin-bottom:0}
+.bl-a .bl-g{padding-top:32px}
+/* Hub des guides : deux cartes reliées */
+.cd-guides{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cd-guides b{font-weight:600}
+.cd-guides .lien{margin-top:auto;padding-top:12px}
+@media (max-width:1023px){
+  .bl-f h3{font-size:26px;line-height:30px}
+  .cd-guides{grid-template-columns:minmax(0,1fr)}
+}

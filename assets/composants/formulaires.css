@@ -1,0 +1,8 @@
+/* Formulaires vers envoi.php (lot C) : champ piège hors de l'écran, marge latérale de la page contact, page de
+   remerciement. */
+.piege{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
+/* .ct remplaçait le padding de .wrap : le formulaire touchait les bords sur mobile et sortait de l'alignement */
+.wrap.ct{padding-left:var(--gut);padding-right:var(--gut)}
+.mc .hero-d p a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.mc-et{padding-top:0}
+.mc-et .tl{grid-template-columns:minmax(0,1fr);max-width:760px}

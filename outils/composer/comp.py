@@ -6,9 +6,11 @@ PAUSE = ('<button type="button" class="sim-pause" aria-pressed="false" aria-labe
 
 
 def scene(w, h, contenu, sim=None, titre="Corrext", curseur=True, label=""):
-    """Scène C6 : panneau à dégradé, cadre, fenêtre. `sim` absent pour une scène statique."""
+    """Scène C6 : panneau à dégradé, cadre, fenêtre. `sim` absent pour une scène statique.
+    Nom accessible (`label`) : une scène statique est une image (role="img") ; une scène animée garde ses contenus
+    lisibles et son bouton pause, c'est un groupe nommé (role="group" : aria-label n'est pas admis sur un div sans rôle)."""
     attr_sim = f' data-sim="{sim}"' if sim else ""
-    aria = f' role="img" aria-label="{label}"' if label and not sim else (f' aria-label="{label}"' if label else "")
+    aria = f' role="{"group" if sim else "img"}" aria-label="{label}"' if label else ""
     cur = '<span class="sim-cur" aria-hidden="true"></span>' if sim and curseur else ""
     return (f'<div class="ech" data-ech="{w}x{h}">'
             f'<div class="st"{attr_sim}{aria} style="width:{w}px;height:{h}px">'

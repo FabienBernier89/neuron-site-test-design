@@ -1,0 +1,6 @@
+{"panneaux": {"corrext": [
+  {"colonne": 1, "apres": "corrext/editeur-de-relecture/", "href": "corrext/plugin-word/", "titre": "Plugin Word", "desc": "Le panneau de relecture Corrext, dans Microsoft Word"}
+ ]},
+ "pied": {"Plateforme": [
+  {"apres": "corrext/editeur-de-relecture/", "href": "corrext/plugin-word/", "texte": "Plugin Word"}
+ ]}}

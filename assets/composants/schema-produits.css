@@ -1,0 +1,158 @@
+/* Schéma « qui fait quoi » (lot B) : LexMachina à gauche, Corrext au centre, CHnell à droite, sur la scène Neur.on.
+   Le <dl> se lit sans cette feuille ; les illustrations (dd.sp-ui, attribut hidden) ne s'affichent qu'avec elle.
+   Mouvement en transform et opacity ; l'état de départ n'existe que sous .sp-pret, posée par schema-produits.js.
+   La scène reste claire dans les deux thèmes, comme les scènes .st. */
+.sp-sc{--ink:#06122e;--text:#39455c;--muted:#5b6880;--accent:#317BFF;--accent-d:#1f5fd6;color-scheme:light;
+  --c-ink:#1e1f3b;--c-text:#3a3c56;--c-mut:#5d6180;--c-dim:#a6aac0;--c-line:rgba(30,31,59,.09);--c-bg:#f7f8fc;--c-ind:#3b34c9;--c-ind-soft:#efeefc;--c-hl:#fff2a8;
+  --ease:cubic-bezier(.22,.8,.24,1);--sp-ui:216px;--sp-gap:64px;--sp-pad:10px;
+  position:relative;padding:40px 40px 26px;border-radius:8px;background-color:#e6edf8;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='11' cy='11' r='1.1' fill='%23001b4c' fill-opacity='.15'/%3E%3C/svg%3E"),
+    linear-gradient(155deg,rgba(49,123,255,.18),rgba(49,123,255,0) 46%),
+    linear-gradient(335deg,rgba(0,27,76,.09),rgba(0,27,76,0) 52%);
+  background-size:22px 22px,100% 100%,100% 100%;background-position:11px 11px,0 0,0 0}
+
+/* Définitions : un groupe par produit, illustration en tête */
+.sp-dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.32fr) minmax(0,1fr);column-gap:var(--sp-gap);margin:0}
+.sp-n{position:relative;display:flex;flex-direction:column;padding:var(--sp-pad) var(--sp-pad) 22px;border:1px solid rgba(30,31,59,.08);border-radius:14px;background:#fff;
+  box-shadow:0 1px 2px rgba(30,31,59,.05),0 14px 36px rgba(0,27,76,.10)}
+.sp-n dt{margin:18px 12px 0;font:600 20px/28px var(--sans);letter-spacing:-.01em;color:var(--ink)}
+.sp-n dd{margin:0 12px}
+.sp-n .sp-ui{display:block;order:-1;height:var(--sp-ui);margin:0;overflow:hidden;border:1px solid var(--c-line);border-radius:9px;background:var(--c-bg)}
+.sp-n .sp-d{margin-top:6px;font:400 15px/23px var(--sans);color:var(--text)}
+.sp-n .sp-x{margin-top:10px;font:400 14px/21px var(--sans);color:var(--muted)}
+.sp-n .sp-a{margin-top:auto;padding-top:14px}
+.sp-a .lien{font-size:15px;line-height:22px}
+.sp-a .lien[aria-current]{color:var(--muted)}
+.sp-a .lien[aria-current]::after{content:none}
+.sp-h{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:24px;font:500 14px/20px var(--sans);color:var(--ink);text-align:center}
+.sp-h svg{flex:0 0 auto;width:15px;height:15px;color:var(--accent-d)}
+
+/* Liaisons : pointillés entre Corrext et ses voisins, à mi-hauteur des illustrations */
+.sp-cx::before,.sp-cx::after{content:"";position:absolute;top:calc(var(--sp-pad) + var(--sp-ui) / 2 - 3px);width:var(--sp-gap);height:6px;pointer-events:none;
+  background:radial-gradient(circle,var(--c-ind) 0 2.5px,transparent 3px) 0 50%/6px 6px no-repeat,
+    radial-gradient(circle,var(--c-ind) 0 2.5px,transparent 3px) 100% 50%/6px 6px no-repeat,
+    repeating-linear-gradient(90deg,rgba(59,52,201,.55) 0 5px,transparent 5px 10px) 0 50%/100% 2px no-repeat;
+  transition:transform .7s var(--ease)}
+.sp-cx::before{right:100%;margin-right:1px;transform-origin:100% 50%}
+.sp-cx::after{left:100%;margin-left:1px;transform-origin:0 50%}
+/* Paquets : créés par le script pendant le flux (segment vers le moteur, terme vers CHnell) */
+.sp-pk{position:absolute;left:0;top:0;z-index:3;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--c-ind);box-shadow:0 0 0 4px rgba(59,52,201,.16);pointer-events:none}
+.sp-pk-l{background:#e2b100;box-shadow:0 0 0 4px rgba(226,177,0,.22)}
+
+/* Illustrations : écrans Corrext réduits (palette, police et libellés de l'application) */
+.sp-app{position:relative;display:flex;flex-direction:column;height:100%;font:400 12px/18px "Inter",var(--ui);color:var(--c-text)}
+.sp-app svg{display:block;flex:0 0 auto;width:12px;height:12px}
+.sp-app mark{border-radius:2px;background:var(--c-hl);color:inherit}
+.sp-top{display:flex;align-items:center;gap:10px;flex:0 0 34px;padding:0 12px;border-bottom:1px solid var(--c-line);background:#fff}
+.sp-top img{width:auto;height:17px}
+.sp-app-ch .sp-top img{height:20px}
+.sp-tab{padding:1px 8px;border-radius:6px;background:var(--c-ind-soft);font:500 11px/17px "Inter",var(--ui);color:var(--c-ind)}
+.sp-pw{font:400 11px/16px "Inter",var(--ui);color:var(--c-mut)}
+/* LexMachina : choix du moteur */
+.sp-app-lm{padding:16px 16px 0}
+.sp-lbl{font:500 11px/16px "Inter",var(--ui);color:var(--c-mut)}
+.sp-sel{display:flex;align-items:center;justify-content:space-between;height:34px;margin-top:6px;padding:0 12px;border:1px solid var(--c-line);border-radius:8px;background:#fff;font:500 12px/18px "Inter",var(--ui);color:var(--c-ink)}
+.sp-sel svg{color:var(--c-dim)}
+.sp-menu{display:block;margin-top:6px;padding:4px;border:1px solid var(--c-line);border-radius:10px;background:#fff;box-shadow:0 12px 32px rgba(30,31,59,.10),0 2px 6px rgba(30,31,59,.05)}
+.sp-menu > span{position:relative;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 10px;border-radius:7px;font:400 12px/18px "Inter",var(--ui);color:var(--c-text)}
+.sp-menu > .on{background:var(--c-ind-soft);font-weight:500;color:var(--c-ink)}
+.sp-menu small{padding:0 6px;border-radius:999px;background:#e9f6ef;font:600 11px/16px "Inter",var(--ui);color:#1d6b43}
+/* Corrext : Text translation */
+.sp-app-cx{background:#fff}
+.sp-bar{display:flex;align-items:center;gap:8px;flex:0 0 32px;min-width:0;padding:0 12px;border-bottom:1px solid var(--c-line);white-space:nowrap;font:500 11px/16px "Inter",var(--ui);color:var(--c-ink)}
+.sp-bar svg{color:var(--c-mut)}
+.sp-eng{margin-left:auto;padding:0 8px;border-radius:999px;background:var(--c-ind-soft);color:var(--c-ind)}
+.sp-panes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);flex:1;min-height:0}
+.sp-pane{position:relative;display:block;min-width:0;padding:10px 12px 36px;overflow:hidden}
+.sp-tgt{padding-bottom:10px;border-left:1px solid var(--c-line);background:#fcfcfe}
+.sp-txt,.sp-out{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:5;font:400 11.5px/17px "Inter",var(--ui);color:var(--c-ink)}
+.sp-out{-webkit-line-clamp:7;color:var(--c-text);transition:opacity .45s ease,transform .6s var(--ease)}
+.sp-lkb{position:absolute;right:10px;bottom:9px;display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;background:var(--c-ink);color:#fff;font:500 11px/16px "Inter",var(--ui);
+  box-shadow:0 6px 16px rgba(30,31,59,.22);transition:opacity .3s ease,transform .45s var(--ease)}
+.sp-lkb svg{width:11px;height:11px}
+.sp-sk{display:none}
+/* CHnell : recherche (terme, langues, compteur) et ligne alignée */
+.sp-app-ch{background:#fff}
+.sp-q{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;min-width:0;padding:8px 12px 0}
+.sp-box{display:inline-flex;flex:1;align-items:center;gap:6px;min-width:0;padding:4px 8px;border:1px solid var(--c-line);border-radius:7px;background:var(--c-bg)}
+.sp-box svg{color:var(--c-mut)}
+.sp-box b{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:600 11.5px/17px "Inter",var(--ui);color:var(--c-ink)}
+.sp-lg{padding:3px 6px;border:1px solid var(--c-line);border-radius:6px;font:500 11px/16px "Inter",var(--ui);color:var(--c-ink)}
+.sp-q > svg{color:var(--c-mut)}
+.sp-cnt{display:block;flex-basis:100%;font:500 11px/16px "Inter",var(--ui);color:var(--c-mut);transition:opacity .4s ease,transform .6s var(--ease)}
+.sp-res{display:block;margin:5px 12px 0;padding-top:5px;border-top:1px solid var(--c-line);transition:opacity .45s ease,transform .6s var(--ease)}
+.sp-dom{display:block;font:600 11px/16px "Inter",var(--ui);letter-spacing:.02em;color:var(--c-mut)}
+.sp-seg{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;margin-top:2px;font:400 11px/16px "Inter",var(--ui);color:var(--c-ink)}
+.sp-seg + .sp-seg{color:var(--c-text)}
+.sp-src{display:block;overflow:hidden;margin-top:3px;white-space:nowrap;text-overflow:ellipsis;font:400 11px/16px "Inter",var(--ui);color:var(--c-mut)}
+
+/* Animation : état de départ (.sp-pret), puis étapes .sp-e0 à .sp-e4 posées par le script */
+.sp-n .sp-ui{transition:opacity .5s ease,transform .7s var(--ease)}
+.sp-lm .sp-ui{transition-delay:.12s}
+.sp-ch .sp-ui{transition-delay:.24s}
+.sp-pret .sp-n .sp-ui{opacity:0;transform:translateY(12px)}
+.sp-pret .sp-cx::before,.sp-pret .sp-cx::after{transform:scaleX(0)}
+.sp-pret .sp-sk{position:absolute;left:12px;display:block;height:8px;border-radius:5px;background:#eef0f7;transition:opacity .3s ease}
+.sp-pret .sp-sk:nth-child(1){top:14px;width:84%}
+.sp-pret .sp-sk:nth-child(2){top:30px;width:76%}
+.sp-pret .sp-sk:nth-child(3){top:46px;width:52%}
+.sp-pret .sp-out,.sp-pret .sp-cnt{opacity:0;transform:translateY(5px)}
+.sp-pret .sp-res{opacity:0;transform:translateY(10px)}
+.sp-pret .sp-lkb{opacity:0;transform:translateY(6px) scale(.94)}
+.sp-pret .sp-menu > .on::after{content:"";position:absolute;inset:0;border-radius:7px;box-shadow:0 0 0 2px rgba(59,52,201,.4);opacity:0}
+.sp-pret.sp-e0 .sp-n .sp-ui{opacity:1;transform:none}
+.sp-pret.sp-e0 .sp-cx::before,.sp-pret.sp-e0 .sp-cx::after{transform:none;transition-delay:.35s}
+.sp-pret.sp-e1 .sp-menu > .on::after{animation:sp-pouls 1s var(--ease)}
+.sp-pret.sp-e2 .sp-sk{opacity:0}
+.sp-pret.sp-e2 .sp-out{opacity:1;transform:none}
+.sp-pret.sp-e3 .sp-lkb{opacity:1;transform:none}
+.sp-pret.sp-e4 .sp-lkb{animation:sp-appui .35s ease}
+.sp-pret.sp-e4 .sp-cnt,.sp-pret.sp-e4 .sp-res{opacity:1;transform:none}
+.sp-pret.sp-e4 .sp-res{transition-delay:.12s}
+@keyframes sp-pouls{0%{opacity:0;transform:scale(.97)}35%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.04)}}
+@keyframes sp-appui{50%{transform:scale(.92)}100%{transform:none}}
+
+/* Écrans intermédiaires : sortie sous le texte source, terme seul sur la première ligne de recherche */
+@media (max-width:1215px){
+  .sp-sc{padding:32px 24px 22px;--sp-gap:44px}
+  .sp-panes{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr)}
+  .sp-pane{padding:8px 12px}
+  .sp-txt,.sp-out{-webkit-line-clamp:3}
+  .sp-tgt{border-left:0;border-top:1px solid var(--c-line)}
+  .sp-pane:first-child{overflow:visible}
+  .sp-lkb{z-index:2;bottom:-11px}
+  .sp-q{padding-top:6px}
+  .sp-box{flex-basis:100%}
+  .sp-lg{padding:1px 6px}
+  .sp-cnt{flex-basis:auto;margin-left:auto}
+  .sp-res{margin-top:4px;padding-top:4px}
+}
+/* Tablettes et mobiles : blocs empilés, liaisons verticales */
+@media (max-width:1023px){
+  .sp-sc{padding:24px 16px 20px;--sp-gap:48px}
+  .sp-dl{grid-template-columns:minmax(0,1fr);row-gap:var(--sp-gap);max-width:520px;margin:0 auto}
+  .sp-n .sp-ui{height:auto}
+  .sp-app-lm{padding-bottom:16px}
+  .sp-panes{grid-template-rows:none}
+  .sp-pane{padding:10px 12px 12px}
+  .sp-txt,.sp-out{-webkit-line-clamp:4}
+  .sp-lkb{position:static;margin-top:8px}
+  .sp-app-ch{padding-bottom:12px}
+  .sp-q{padding-top:8px}
+  .sp-box{flex-basis:auto}
+  .sp-lg{padding:3px 6px}
+  .sp-cnt{flex-basis:100%;margin-left:0}
+  .sp-cx::before,.sp-cx::after{top:auto;right:auto;left:50%;width:6px;height:var(--sp-gap);margin:0 0 0 -3px;
+    background:radial-gradient(circle,var(--c-ind) 0 2.5px,transparent 3px) 50% 0/6px 6px no-repeat,
+      radial-gradient(circle,var(--c-ind) 0 2.5px,transparent 3px) 50% 100%/6px 6px no-repeat,
+      repeating-linear-gradient(180deg,rgba(59,52,201,.55) 0 5px,transparent 5px 10px) 50% 0/2px 100% no-repeat}
+  .sp-cx::before{bottom:100%;margin-bottom:1px;transform-origin:50% 100%}
+  .sp-cx::after{top:100%;margin-top:1px;transform-origin:50% 0}
+  .sp-pret .sp-cx::before,.sp-pret .sp-cx::after{transform:scaleY(0)}
+  .sp-n dt{margin-top:14px}
+}
+@media (max-width:640px){
+  .sp-bar{flex:0 0 auto;flex-wrap:wrap;row-gap:4px;padding:7px 12px}
+  .sp-h{justify-content:flex-start;align-items:flex-start;text-align:left}
+  .sp-h svg{margin-top:2px}
+}

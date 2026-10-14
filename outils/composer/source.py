@@ -3,12 +3,14 @@
 Les textes sont repris tels quels : on ne fait que découper et réhabiller.
 """
 import html as H
+import os
 import re
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
 RACINE = Path(__file__).resolve().parents[2]
-NEURON = RACINE.parent / "neuron"
+# Site Neur.on actuel, en lecture seule : NEURON_SRC comme pour build.py (indispensable depuis un worktree)
+NEURON = Path(os.environ.get("NEURON_SRC") or RACINE.parent / "neuron")
 
 
 def charger(p):
