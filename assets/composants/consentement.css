@@ -9,7 +9,7 @@
   .cc-in{flex-direction:column;align-items:stretch;gap:12px}
   .cc-b .btn{flex:1 1 0;min-width:0}
 }
-/* Pied de page : « Préférences cookies », à côté du choix du thème */
+/* Pied de page : « Préférences cookies », après les liens légaux de la barre basse */
 .fp-ck{min-height:24px;padding:0;border:0;background:none;font:inherit;color:var(--muted);text-decoration:underline;text-underline-offset:2px;white-space:nowrap;cursor:pointer}
 .fp-ck:hover{color:var(--ink)}
 @media (max-width:640px){

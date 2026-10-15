@@ -124,8 +124,7 @@
   /* Démos interactives : premier geste réel du visiteur, une fois par démo */
   [].forEach.call(document.querySelectorAll("[data-interactif]"), function (d) {
     function geste(e) {
-      /* Le bouton pause (souris ou clavier) n'est pas une interaction avec la démo : on attend le geste suivant */
-      if (!e.isTrusted || (e.target.closest && e.target.closest(".sim-pause"))) return;
+      if (!e.isTrusted) return;
       d.removeEventListener("pointerdown", geste);
       d.removeEventListener("keydown", geste);
       evenement("demo_interaction", { demo: d.getAttribute("data-sim") || "" });

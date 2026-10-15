@@ -67,7 +67,7 @@
     if (l.__ercVeille) return;
     l.__ercVeille = true;
     function nettoyer(e) {
-      if (!e.isTrusted || (e.target.closest && e.target.closest(".sim-pause"))) return;
+      if (!e.isTrusted) return;
       var q = l.q("#cxrQ");
       if (q) {
         q.classList.remove("saisie");

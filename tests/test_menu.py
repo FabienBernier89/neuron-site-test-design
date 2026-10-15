@@ -56,7 +56,10 @@ class TestMenu(unittest.TestCase):
         barre = re.search(r'<div class="fp-b">.*?</div>\n', pied, re.S).group(0)
         self.assertIn("Mentions légales et CGU", barre)
         self.assertIn("Protection des données", barre)
-        self.assertEqual(barre.count("data-theme-set="), 3)
+        self.assertNotIn('class="theme"', barre)
+        colonne = re.search(r'<p class="fp-h">Neur\.on</p>.*?</div>\n', pied, re.S).group(0)
+        self.assertEqual(colonne.count("data-theme-set="), 3)
+        self.assertLess(colonne.index("team@corrext.com"), colonne.index('class="theme"'))
 
 
 EDITEUR = "corrext/editeur-de-relecture/"  # dans la colonne « Les outils » du panneau Corrext et dans le pied « Plateforme »

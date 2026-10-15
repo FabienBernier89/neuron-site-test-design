@@ -127,10 +127,10 @@ ul{padding:0;list-style:none}
 .sim-cur{position:absolute;left:0;top:0;z-index:5;width:18px;height:18px;margin:-2px 0 0 -2px;pointer-events:none;transition:transform .7s cubic-bezier(.4,0,.2,1);background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M2 1.5l12.5 7.2-5.6 1.3-2.6 5.3z' fill='%2306122e' stroke='%23fff' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E")}
 .sim-cur.clic::after{content:"";position:absolute;left:-6px;top:-6px;width:24px;height:24px;border-radius:50%;background:rgba(49,123,255,.28);animation:clic .3s ease-out forwards}
 @keyframes clic{from{transform:scale(.4);opacity:1}to{transform:scale(1.5);opacity:0}}
-/* Bouton pause : 24 px à l'écran quelle que soit la réduction de la scène (--k, posé par sim.js) */
-.sim-pause{position:absolute;right:calc(16px / var(--k,1));bottom:calc(16px / var(--k,1));z-index:6;width:24px;height:24px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;transform:scale(calc(1 / var(--k,1)));transform-origin:100% 100%}
-.sim-pause svg{width:10px;height:10px}
-.sim-pause[aria-pressed="true"] .ic-p,.sim-pause[aria-pressed="false"] .ic-l{display:none}
+/* Jauge de déroulé : fine ligne au bas de la scène, épaisseur constante à l'écran quelle que soit la réduction (--k) */
+.sim-jauge{position:absolute;left:0;right:0;bottom:0;z-index:6;height:calc(3px / var(--k,1));background:rgba(0,27,76,.08);pointer-events:none;transition:opacity .4s}
+.sim-jauge i{display:block;height:100%;background:var(--accent);opacity:.7;transform:scaleX(0);transform-origin:0 50%}
+.sim-libre .sim-jauge{opacity:0}
 .ui-off{opacity:.38}
 .ui-barre{display:block;height:8px;border-radius:4px;background:#E9EDF4;margin:8px 0}
 
@@ -144,7 +144,7 @@ ul{padding:0;list-style:none}
 
 /* Écran Corrext « Text translation » (scène d'accueil) : structure et palette de l'application, rendu affiné.
    Mouvements par transform et opacity, courbe de décélération commune. */
-.cr{--ease:cubic-bezier(.22,.8,.24,1);--c-ink:#1e1f3b;--c-text:#3a3c56;--c-mut:#6c7089;--c-dim:#a6aac0;--c-line:rgba(30,31,59,.09);--c-bg:#f7f8fc;--c-ind:#3b34c9;--c-ind-soft:#efeefc;--c-hl:#fff2a8;
+.cr{--ease:cubic-bezier(.22,.8,.24,1);--c-ink:#1e1f3b;--c-text:#3a3c56;--c-mut:#6c7089;--c-dim:#a6aac0;--c-line:rgba(30,31,59,.09);--c-bg:#f7f8fc;--c-ind:#3b34c9;--c-ind-soft:#efeefc;--c-hl:#d6e4ff;
   position:relative;height:100%;overflow:hidden;background:#fff;font:400 13px/19.5px "Inter",var(--ui);color:var(--c-text);animation:app-in .5s var(--ease) both}
 .cr.fin{opacity:0;transition:opacity .45s ease}
 @keyframes app-in{from{opacity:0}to{opacity:1}}
@@ -404,7 +404,7 @@ ul{padding:0;list-style:none}
 .cd .kv-ab b{font:500 40px/48px var(--num);margin:0}
 .ck-l{display:grid;gap:10px}
 .mx-p.ck{display:grid;grid-template-columns:1fr 1fr;column-gap:16px}
-.mx-p.ck mark{background:#fff2a8;color:inherit;border-radius:2px;padding:0 1px}
+.mx-p.ck mark{background:#d6e4ff;color:inherit;border-radius:2px;padding:0 1px}
 .mx-p.ck small{grid-column:1/-1;margin:10px 0 0;font-size:10px;letter-spacing:.1px}
 @media (max-width:1023px){.cd.c4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
@@ -677,7 +677,7 @@ ul{padding:0;list-style:none}
 .fp-l{display:flex;flex-wrap:wrap;gap:8px 24px}
 .fp-l a{color:inherit}
 .fp-l a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-.pied .theme{background:var(--tile)}
+.pied .theme{margin-top:16px;background:var(--tile)}
 @media (max-width:940px){.fp-g{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 32px}.fp-a{grid-column:1/-1}}
 @media (max-width:560px){.fp-g{grid-template-columns:minmax(0,1fr)}}
 .theme{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px}
@@ -738,7 +738,7 @@ ul{padding:0;list-style:none}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important}
-  .sim-cur,.sim-pause{display:none}
+  .sim-cur,.sim-jauge{display:none}
 }
 
 /* ---------- Vues Corrext par fonction (blocs explicatifs) ---------- */

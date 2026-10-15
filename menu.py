@@ -222,7 +222,7 @@ LINKEDIN = ('<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height
 
 def rendre_pied(pied):
     """Pied de la V1 : colonne de présentation (logo, texte, ISO, LinkedIn), quatre colonnes de liens,
-    barre basse (copyright, liens légaux, sélecteur des trois thèmes)."""
+    barre basse (copyright, liens légaux) ; sélecteur des trois thèmes sous l'e-mail de contact."""
     h = ['<footer class="pied">\n<div class="wrap">\n<div class="fp-g">\n'
          '<div class="fp-a">'
          '<a class="fp-logo" href="{{ROOT}}" aria-label="Neur.on, retour à l\'accueil">'
@@ -243,8 +243,10 @@ def rendre_pied(pied):
                 h.append(f'<li><a href="{_a(i["href"])}">{_e(i["texte"])}</a></li>\n')
             else:
                 h.append(f'<li class="fp-c">{EPINGLE}<span>{_e(i["texte"])}</span></li>\n')
-        h.append("</ul></div>\n")
+        # Le choix du thème se place sous les coordonnées (colonne qui porte l'e-mail)
+        contact = any(i["href"].startswith("mailto:") for i in c["items"])
+        h.append("</ul>" + (THEME if contact else "") + "</div>\n")
     legal = "".join(f'<a href="{_a(l["href"])}">{_e(l["texte"])}</a>' for l in pied["legal"])
     h.append('</div>\n<div class="fp-b"><span>' + _e(pied["copyright"]) + '</span>'
-             '<div class="fp-l">' + legal + '</div>' + THEME + "</div>\n</div>\n</footer>\n")
+             '<div class="fp-l">' + legal + "</div></div>\n</div>\n</footer>\n")
     return "".join(h)

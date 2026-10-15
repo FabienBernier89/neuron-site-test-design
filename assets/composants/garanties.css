@@ -1,0 +1,13 @@
+/* Page sécurité : mosaïque « Ce que Neur.on garantit, précisément ». Tons clairs ; le thème sombre suit par les variables. */
+.gr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:48px;list-style:none}
+.gr-c{padding:24px;border:1px solid var(--line);border-radius:14px;background:var(--page)}
+.gr-c.gr-l{grid-column:span 2;padding:32px;background:var(--tile)}
+.gr-i{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:10px;background:var(--tile);color:var(--accent-d)}
+.gr-l .gr-i{background:var(--page)}
+.gr-i svg{width:20px;height:20px}
+.gr-c h3{margin:16px 0 8px;font:600 16px/24px var(--sans);color:var(--ink)}
+.gr-l h3{font-size:22px;line-height:30px}
+.gr-c p{font:400 14px/22px var(--sans);color:var(--muted)}
+.gr-l p{font-size:15px;line-height:24px}
+@media (max-width:1023px){.gr{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.gr{grid-template-columns:minmax(0,1fr)}.gr-c.gr-l{grid-column:auto;padding:24px}.gr-l h3{font-size:18px;line-height:26px}}

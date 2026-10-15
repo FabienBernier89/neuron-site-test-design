@@ -58,7 +58,7 @@
   /* Le visiteur prend la main (même règle que le lecteur) : le cadrage devient un défilement interne,
      sans saut visible, et les états propres à la visite sont retirés */
   function priseEnMain(l, z, e) {
-    if (!e.isTrusted || z.libre || (e.target.closest && e.target.closest(".sim-pause"))) return;
+    if (!e.isTrusted || z.libre) return;
     z.libre = true;
     var zone = z.zone, cx = l.q("#cx"), p = z.pan;
     var t = window.getComputedStyle(cx).transform;

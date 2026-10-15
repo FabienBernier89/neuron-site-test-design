@@ -3,7 +3,7 @@
    Mouvement en transform et opacity ; l'état de départ n'existe que sous .sp-pret, posée par schema-produits.js.
    La scène reste claire dans les deux thèmes, comme les scènes .st. */
 .sp-sc{--ink:#06122e;--text:#39455c;--muted:#5b6880;--accent:#317BFF;--accent-d:#1f5fd6;color-scheme:light;
-  --c-ink:#1e1f3b;--c-text:#3a3c56;--c-mut:#5d6180;--c-dim:#a6aac0;--c-line:rgba(30,31,59,.09);--c-bg:#f7f8fc;--c-ind:#3b34c9;--c-ind-soft:#efeefc;--c-hl:#fff2a8;
+  --c-ink:#1e1f3b;--c-text:#3a3c56;--c-mut:#5d6180;--c-dim:#a6aac0;--c-line:rgba(30,31,59,.09);--c-bg:#f7f8fc;--c-ind:#3b34c9;--c-ind-soft:#efeefc;--c-hl:#d6e4ff;
   --ease:cubic-bezier(.22,.8,.24,1);--sp-ui:216px;--sp-gap:64px;--sp-pad:10px;
   position:relative;padding:40px 40px 26px;border-radius:8px;background-color:#e6edf8;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='11' cy='11' r='1.1' fill='%23001b4c' fill-opacity='.15'/%3E%3C/svg%3E"),

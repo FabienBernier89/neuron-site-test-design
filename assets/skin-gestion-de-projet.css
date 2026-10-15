@@ -3,7 +3,7 @@
    Toutes les règles sont limitées à la scène (.cx-zone) ; le DOM et les textes de la démo ne changent pas. */
 
 /* Palette et réglages communs, puis report sur les variables de la démo (.cx) */
-.cx-zone{--cx-encre:#1e1f3b;--cx-texte:#3a3c56;--cx-attenue:#5d6180;--cx-trait:rgba(30,31,59,.09);--cx-trait-fort:rgba(30,31,59,.15);--cx-doux:#f7f8fc;--cx-indigo:#3b34c9;--cx-lavande:#efeefc;--cx-surligne:#fff2a8;
+.cx-zone{--cx-encre:#1e1f3b;--cx-texte:#3a3c56;--cx-attenue:#5d6180;--cx-trait:rgba(30,31,59,.09);--cx-trait-fort:rgba(30,31,59,.15);--cx-doux:#f7f8fc;--cx-indigo:#3b34c9;--cx-lavande:#efeefc;--cx-surligne:#d6e4ff;
   --cx-courbe:cubic-bezier(.22,.8,.24,1);--cx-ombre:0 1px 2px rgba(30,31,59,.06);--cx-ombre-menu:0 8px 30px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);--cx-anneau:0 0 0 3px rgba(59,52,201,.12)}
 .cx-zone .cx{--cx-ink:var(--cx-encre);--cx-text:var(--cx-texte);--cx-muted:var(--cx-attenue);--cx-line:var(--cx-trait);--cx-bg:var(--cx-doux);--cx-indigo-soft:var(--cx-lavande);--cx-hl:var(--cx-surligne);
   min-height:100%;font:400 13px/1.5 "Inter",var(--ui);color:var(--cx-texte);-webkit-font-smoothing:antialiased}

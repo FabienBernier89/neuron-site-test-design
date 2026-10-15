@@ -1,14 +1,13 @@
 """Composants du site de test de design (catalogue de la tâche 2 du plan), en chaînes HTML."""
 
-PAUSE = ('<button type="button" class="sim-pause" aria-pressed="false" aria-label="Mettre en pause la démonstration" data-libre>'
-         '<svg class="ic-p" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 1.5v7M7.5 1.5v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
-         '<svg class="ic-l" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.8v6.4L8.4 5z" fill="currentColor"/></svg></button>')
+# Jauge discrète en bas de la scène : déroulé du cycle de l'animation (remplie par sim.js)
+JAUGE = '<span class="sim-jauge" aria-hidden="true"><i></i></span>'
 
 
 def scene(w, h, contenu, sim=None, titre="Corrext", curseur=True, label=""):
     """Scène C6 : panneau à dégradé, cadre, fenêtre. `sim` absent pour une scène statique.
     Nom accessible (`label`) : une scène statique est une image (role="img") ; une scène animée garde ses contenus
-    lisibles et son bouton pause, c'est un groupe nommé (role="group" : aria-label n'est pas admis sur un div sans rôle)."""
+    lisibles, c'est un groupe nommé (role="group" : aria-label n'est pas admis sur un div sans rôle)."""
     attr_sim = f' data-sim="{sim}"' if sim else ""
     aria = f' role="{"group" if sim else "img"}" aria-label="{label}"' if label else ""
     cur = '<span class="sim-cur" aria-hidden="true"></span>' if sim and curseur else ""
@@ -17,7 +16,7 @@ def scene(w, h, contenu, sim=None, titre="Corrext", curseur=True, label=""):
             f'<div class="st-f"><div class="fen">'
             f'<div class="fen-b" aria-hidden="true"><i></i><i></i><i></i><span>{titre}</span></div>'
             f'<div class="fen-c" data-scene data-ui>{contenu}{cur}</div>'
-            f'</div></div>{PAUSE if sim else ""}</div></div>')
+            f'</div></div>{JAUGE if sim else ""}</div></div>')
 
 
 def hero(n, s, lead="", bouton=None):

@@ -7,7 +7,7 @@
 .cx-zone,
 .cx-zone .cx{
   --cx-ink:#1e1f3b;--cx-text:#3a3c56;--cx-muted:#6c7089;--cx-line:rgba(30,31,59,.09);--cx-bg:#f7f8fc;
-  --cx-indigo:#3b34c9;--cx-indigo-d:#2f29a8;--cx-indigo-soft:#efeefc;--cx-hl:#fff2a8;
+  --cx-indigo:#3b34c9;--cx-indigo-d:#2f29a8;--cx-indigo-soft:#efeefc;--cx-hl:#d6e4ff;
   --cx-ph:#6c7089;--cx-dim:rgba(30,31,59,.24);--cx-dim-2:rgba(30,31,59,.16);
   --cx-ease:cubic-bezier(.22,.8,.24,1);
   --cx-ombre:0 1px 2px rgba(30,31,59,.06);

@@ -98,7 +98,7 @@
     muette = true;
     live.setAttribute("aria-live", "off");
     function rendre(e) {
-      if (!e.isTrusted || (e.target.closest && e.target.closest(".sim-pause"))) return;
+      if (!e.isTrusted) return;
       live.setAttribute("aria-live", "polite");
       l.q(".cxe-qbox").classList.remove("edr-actif");
       racine.removeEventListener("pointerdown", rendre);

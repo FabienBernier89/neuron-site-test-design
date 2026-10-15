@@ -1,4 +1,4 @@
-/* Simulations de l'interface Corrext : scènes horodatées, lecture à la visibilité, pause accessible.
+/* Simulations de l'interface Corrext : scènes horodatées, lecture à la visibilité, jauge de progression.
    Aucun texte affiché n'est écrit ici : les textes viennent du HTML de la page ou de window.SIM_EX. */
 (function () {
   "use strict";
@@ -45,27 +45,41 @@
     this.r = racine;
     this.scene = racine.querySelector("[data-scene]");
     this.modele = this.scene.innerHTML;
-    this.visible = false; this.pause = false; this.survol = false;
-    var bouton = racine.querySelector(".sim-pause");
-    if (bouton) bouton.addEventListener("click", function () {
-      self.pause = !self.pause;
-      bouton.setAttribute("aria-pressed", String(self.pause));
-    });
-    racine.addEventListener("mouseenter", function () { self.survol = true; });
-    racine.addEventListener("mouseleave", function () { self.survol = false; });
+    this.visible = false;
+    /* Jauge : temps de lecture écoulé dans le cycle en cours, rapporté à la durée du cycle précédent */
+    this.jauge = racine.querySelector(".sim-jauge i");
+    this.ecoule = 0; this.duree = 0;
     /* Démo interactive : le premier geste réel du visiteur arrête la visite guidée */
     if (racine.hasAttribute("data-interactif")) {
       ["pointerdown", "keydown"].forEach(function (type) {
         racine.addEventListener(type, function (e) {
-          if (!e.isTrusted || (e.target.closest && e.target.closest(".sim-pause"))) return;
+          if (!e.isTrusted) return;
           self.arret = true;
+          racine.classList.add("sim-libre");
           /* un appui interrompu ne doit pas laisser de contrôle enfoncé */
           [].forEach.call(self.scene.querySelectorAll(".press"), function (x) { x.classList.remove("press"); });
         });
       });
     }
   }
-  Lecteur.prototype.actif = function () { return this.visible && !this.pause && !this.survol && !this.arret; };
+  Lecteur.prototype.actif = function () { return this.visible && !this.arret; };
+  /* Premier cycle : durée inconnue, la jauge avance en s'approchant de la fin sans l'atteindre */
+  Lecteur.prototype.progres = function () {
+    if (this.duree) return Math.min(0.995, this.ecoule / this.duree);
+    return 1 - Math.exp(-this.ecoule / 9000);
+  };
+  Lecteur.prototype.horloge = function () {
+    var self = this, avant = performance.now();
+    if (!this.jauge || reduit) return;
+    function tic(t) {
+      if (self.arret) return;
+      if (self.actif()) self.ecoule += t - avant;
+      avant = t;
+      self.jauge.style.transform = "scaleX(" + self.progres().toFixed(4) + ")";
+      requestAnimationFrame(tic);
+    }
+    requestAnimationFrame(tic);
+  };
   Lecteur.prototype.q = function (sel) { return sel ? this.scene.querySelector(sel) : this.scene; };
   Lecteur.prototype.qa = function (sel) { return [].slice.call(this.scene.querySelectorAll(sel)); };
   Lecteur.prototype.attendre = function (ms) {
@@ -187,7 +201,9 @@
     if (!fn) return;
     var tenue = +(this.r.getAttribute("data-tenue") || 2000);
     var reinit = this.r.getAttribute("data-reinit") !== "non";
+    this.horloge();
     (function boucle() {
+      if (self.ecoule) { self.duree = self.ecoule; self.ecoule = 0; }
       if (reinit) {
         self.scene.innerHTML = self.modele;
         poserPilules(self.scene);

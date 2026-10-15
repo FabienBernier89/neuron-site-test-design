@@ -1,5 +1,5 @@
 /* Démo Corrext : règles .cx reprises telles quelles du site Neur.on (assets/neuron.css). */
-.cx{--cx-ink:#1e1f3b;--cx-text:#3a3c56;--cx-muted:#6c7089;--cx-dim:#b1b4c7;--cx-dim-2:#cfd2e3;--cx-ph:#8b8fa8;--cx-indigo:#3b34c9;--cx-indigo-d:#2f29a8;--cx-indigo-soft:#ecebfb;--cx-lav:#b8c5f4;--cx-line:#e3e5f0;--cx-bg:#f6f7fc;--cx-hl:#fff2a8;
+.cx{--cx-ink:#1e1f3b;--cx-text:#3a3c56;--cx-muted:#6c7089;--cx-dim:#b1b4c7;--cx-dim-2:#cfd2e3;--cx-ph:#8b8fa8;--cx-indigo:#3b34c9;--cx-indigo-d:#2f29a8;--cx-indigo-soft:#ecebfb;--cx-lav:#b8c5f4;--cx-line:#e3e5f0;--cx-bg:#f6f7fc;--cx-hl:#d6e4ff;
   position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r-bloc);box-shadow:0 44px 92px -42px rgba(8,24,68,.34);overflow:hidden;color:var(--cx-text);font-family:'Inter',system-ui,sans-serif;font-size:13.5px;line-height:1.5;text-align:left}
 .cx *{box-sizing:border-box}
 .cx button{font-family:inherit}

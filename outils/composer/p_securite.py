@@ -31,12 +31,31 @@ out.append(section(h2(txt(bloc(cp, "h2")), "selon votre choix") + f'<p class="in
                    ident="ou-va-mon-document"))
 # Politique au moment du choix : bande
 out.append(trame.bouton_suivi(section(bande(txt(bloc(sq, "h2")), ("Demander une démo", C))), "securite", "milieu"))
-# Garanties : liste
+# Garanties : mosaïque (choix de Fabien du 2026-10-15). Les deux garanties de souveraineté en tuiles larges,
+# les huit autres en tuiles simples ; tons clairs, le thème sombre suit par les variables.
+S = 'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"'
+ICONES = {
+    "Entité suisse": '<path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/>',
+    "Infrastructure": '<rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M7 7.5h.01M7 16.5h.01"/>',
+    "ISO 27001": '<circle cx="12" cy="9" r="5"/><path d="M8.5 13 7 21l5-3 5 3-1.5-8"/>',
+    "nLPD et RGPD": '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+    "Hors CLOUD Act": '<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
+    "Aucun entraînement sur vos contenus": '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/><path d="M4 4l16 16"/>',
+    "Mémoire privée": '<rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
+    "Droits d'accès": '<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21 20c0-2.6-1.6-4.8-4-5.6"/>',
+    "On-premises": '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',
+    "API REST": '<path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>',
+}
+PHARES = ("Entité suisse", "Hors CLOUD Act")
 sf = bloc(t, "section", "svfacts")
 lead = bloc(sf, "div", "facts-lead")
-items = "".join(f'<li><span><b>{txt(bloc(f, "b"))}</b> {brut(bloc(f, "p"))}</span></li>' for f in blocs(sf, "div", "fact"))
+faits = [(txt(bloc(f, "b")), brut(bloc(f, "p"))) for f in blocs(sf, "div", "fact")]
+assert set(ICONES) == {titre for titre, _ in faits}, "garanties : un titre de la V1 a changé, mettre ICONES à jour"
+faits.sort(key=lambda x: (x[0] not in PHARES, PHARES.index(x[0]) if x[0] in PHARES else 0))
+tuiles = "".join(f'<li class="gr-c{" gr-l" if titre in PHARES else ""}"><span class="gr-i"><svg viewBox="0 0 24 24" {S} aria-hidden="true">{ICONES[titre]}</svg></span>'
+                 f'<h3>{titre}</h3><p>{texte}</p></li>' for titre, texte in faits)
 out.append(section(h2(txt(bloc(lead, "h2")), "précisément") + f'<p class="intro">{brut(bloc(lead, "p"))}</p>'
-                   + f'<div class="duo seul"><div class="oui"><ul>{items}</ul></div></div>'))
+                   + f'<ul class="gr">{tuiles}</ul>', ident="garanties"))
 wh = bloc(t, "section", "who")
 out.append(section(h2(txt(bloc(wh, "h2")), "trois manières") + cartes([(brut(bloc(r, "h3")), brut(bloc(r, "p")), None, "") for r in blocs(wh, "article", "sc-row")])))
 sb = bloc(t, "section", "siblings")

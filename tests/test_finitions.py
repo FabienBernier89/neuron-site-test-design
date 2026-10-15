@@ -48,13 +48,12 @@ class TestCiblesTactiles(unittest.TestCase):
     def setUpClass(cls):
         cls.css = (support.site_complet(apercu=True) / "assets/site.css").read_text(encoding="utf-8")
 
-    def test_bouton_pause_24_px_au_moins(self):
-        d = " ".join(regles(self.css, ".sim-pause"))
-        for prop in ("width", "height"):
-            valeurs = [int(v) for v in re.findall(r"(?:^|[;{\s])" + prop + r":(\d+)px", d)]
-            self.assertTrue(valeurs and valeurs[-1] >= 24, (prop, valeurs))
-        # dans une scène réduite (--k < 1, colonnes étroites et mobile), le bouton garde 24 px à l'écran
-        self.assertIn("transform:scale(calc(1 / var(--k,1)))", d)
+    def test_jauge_de_deroule_fine_et_constante(self):
+        """La jauge remplace le bouton pause : ligne fine au bas de la scène, épaisseur constante à l'écran."""
+        d = " ".join(regles(self.css, ".sim-jauge"))
+        self.assertIn("height:calc(3px / var(--k,1))", d)
+        self.assertIn("pointer-events:none", d)
+        self.assertEqual(regles(self.css, ".sim-pause"), [])
 
     def test_lien_telephone_des_pages_legales(self):
         """Le lien prend la hauteur de ligne de l'adresse (24 px) : bloc en ligne, texte inchangé."""
@@ -187,10 +186,33 @@ class TestSuiviDesAppels(unittest.TestCase):
             self.assertEqual(js[n], champs[n], n)
         self.assertIn("valeur.slice(0, LONGUEURS[nom])", self.js)
 
-    def test_pause_n_est_pas_une_interaction(self):
+    def test_geste_sans_exception_pour_un_bouton_pause(self):
         geste = re.search(r"function geste\(e\) \{(.*?)\n    \}", self.js, re.S).group(1)
-        self.assertIn('e.target.closest(".sim-pause")', geste)
-        self.assertLess(geste.index(".sim-pause"), geste.index("removeEventListener"))
+        self.assertNotIn("sim-pause", geste)
+        self.assertLess(geste.index("isTrusted"), geste.index("removeEventListener"))
+
+
+class TestAnimationsSansPause(unittest.TestCase):
+    """Les animations continuent au survol ; chaque scène animée porte une jauge de déroulé, aucune un bouton pause."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.sortie = support.site_complet(apercu=True)
+        cls.sim = (cls.sortie / "assets/sim.js").read_text(encoding="utf-8")
+
+    def test_le_survol_ne_met_pas_en_pause(self):
+        self.assertNotIn("mouseenter", self.sim)
+        self.assertIn("return this.visible && !this.arret;", self.sim)
+
+    def test_une_jauge_par_scene_animee(self):
+        for f in self.sortie.rglob("index.html"):
+            h = f.read_text(encoding="utf-8")
+            self.assertNotIn("sim-pause", h, f)
+            self.assertEqual(len(re.findall(r'<div class="st" data-sim=', h)), h.count('class="sim-jauge"'), f)
+
+    def test_surlignage_bleu(self):
+        for f in self.sortie.glob("assets/*.css"):
+            self.assertNotIn("#fff2a8", f.read_text(encoding="utf-8").lower(), f)
 
 
 if __name__ == "__main__":

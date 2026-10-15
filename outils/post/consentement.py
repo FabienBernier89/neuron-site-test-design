@@ -49,8 +49,6 @@ def traiter(html, page):
             html = re.sub(r"<body[^>]*>\n?", lambda m: m.group(0) + bandeau(), html, count=1)
     barre = html.find('<div class="fp-b">')
     if barre >= 0 and "data-cc-ouvrir" not in html:
-        theme = html.find('<div class="theme"', barre)
-        fin = html.find("</div>", barre)
-        position = theme if 0 <= theme < html.find("</footer>", barre) else fin
-        html = html[:position] + bouton() + html[position:]
+        fin = html.find("</div>\n", barre)  # fin de la barre basse, après les liens légaux
+        html = html[:fin] + bouton() + html[fin:]
     return html

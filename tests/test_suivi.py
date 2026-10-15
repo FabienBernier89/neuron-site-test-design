@@ -245,7 +245,7 @@ class TestConsentement(unittest.TestCase):
             barre = re.search(r'<div class="fp-b">.*?</div>\n', h, re.S).group(0)
             bouton = f'<button type="button" class="fp-ck" data-cc-ouvrir hidden>{contenus.texte("consentement.parametres")}</button>'
             self.assertIn(bouton, barre, c)
-            self.assertLess(barre.index("fp-ck"), barre.index('class="theme"'), c)
+            self.assertLess(barre.index("Protection des données"), barre.index("fp-ck"), c)
             self.assertEqual(h.count("data-cc-ouvrir"), 1, c)
 
     def test_idempotent(self):
