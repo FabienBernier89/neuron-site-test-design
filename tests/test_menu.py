@@ -40,10 +40,23 @@ class TestMenu(unittest.TestCase):
         self.assertEqual(titres[-1], "Agence de traduction ou plateforme")
         self.assertEqual([e["libelle"] for e in self.m["entrees"]], ["Corrext", "Solutions", "LexMachina", "Ressources"])
 
-    def test_pied_six_colonnes(self):
+    def test_pied_disposition_v1(self):
+        """Pied repris de la V1 : présentation, quatre colonnes, barre basse avec liens légaux et les trois thèmes."""
         html = build.chemin_page("").read_text(encoding="utf-8")
         pied = html[html.index('<footer class="pied">'):]
-        self.assertEqual(pied.count("<div><p>"), 6)
+        source = (build.NEURON / "src/partials/footer.html").read_text(encoding="utf-8")
+        apropos = re.search(r'<div class="footer-about">.*?<p>(.*?)</p>', source, re.S).group(1)
+        self.assertIn('<div class="fp-a">', pied)
+        self.assertIn(apropos, pied)
+        self.assertIn('href="https://www.linkedin.com/company/neur-on"', pied)
+        self.assertEqual([re.sub(r"<[^>]+>", "", t) for t in re.findall(r'<p class="fp-h">(.*?)</p>', pied)],
+                         ["Plateforme", "Solutions", "Ressources", "Neur.on"])
+        self.assertEqual(pied.count('<li class="fp-c">'), 2)
+        self.assertIn('href="mailto:team@corrext.com"', pied)
+        barre = re.search(r'<div class="fp-b">.*?</div>\n', pied, re.S).group(0)
+        self.assertIn("Mentions légales et CGU", barre)
+        self.assertIn("Protection des données", barre)
+        self.assertEqual(barre.count("data-theme-set="), 3)
 
 
 EDITEUR = "corrext/editeur-de-relecture/"  # dans la colonne « Les outils » du panneau Corrext et dans le pied « Plateforme »

@@ -83,7 +83,10 @@ def lire_pied(pied):
     bas = re.search(r'<div class="footer-bottom">\s*<span>(.*?)</span>(.*?)</div>\s*</div>', pied, re.S)
     legal = [{"href": _href(h), "texte": _txt(t)} for h, t in re.findall(r'<a href="([^"]+)">(.*?)</a>', bas.group(2))]
     iso = _txt(re.search(r'<p class="footer-iso">(.*?)</p>', pied, re.S).group(1))
-    return {"colonnes": colonnes, "copyright": _txt(bas.group(1)), "legal": legal, "iso": iso}
+    apropos = _txt(re.search(r'<div class="footer-about">.*?<p>(.*?)</p>', pied, re.S).group(1))
+    social = re.search(r'<a class="footer-social" href="([^"]+)"[^>]*aria-label="([^"]+)"', pied)
+    return {"colonnes": colonnes, "copyright": _txt(bas.group(1)), "legal": legal, "iso": iso,
+            "apropos": apropos, "social": {"href": social.group(1), "label": social.group(2)}}
 
 
 def _inserer(liste, nouveau, apres, quoi, deja):
@@ -204,26 +207,44 @@ def rendre_mobile(nav):
 HUBS_PIED = {"Plateforme": "corrext/", "Solutions": "solutions/", "Ressources": "ressources/"}
 
 
+# Icônes et logo LinkedIn du pied de la V1 (repris tels quels)
+EPINGLE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+           'stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>'
+           '<circle cx="12" cy="10" r="3"/></svg>')
+ENVELOPPE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+             'stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6'
+             'c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>')
+LINKEDIN = ('<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="3" fill="#0A66C2"/>'
+            '<path fill="#ffffff" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.71h.05c.53-.95 '
+            '1.83-1.95 3.77-1.95 4.03 0 4.78 2.45 4.78 5.64V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 '
+            '2.85V21H9z"/></svg>')
+
+
 def rendre_pied(pied):
-    cols = []
+    """Pied de la V1 : colonne de présentation (logo, texte, ISO, LinkedIn), quatre colonnes de liens,
+    barre basse (copyright, liens légaux, sélecteur des trois thèmes)."""
+    h = ['<footer class="pied">\n<div class="wrap">\n<div class="fp-g">\n'
+         '<div class="fp-a">'
+         '<a class="fp-logo" href="{{ROOT}}" aria-label="Neur.on, retour à l\'accueil">'
+         '<img class="logo-c" src="{{ROOT}}assets/img/neuron-logo.png" alt="Neur.on" width="112" height="34">'
+         '<img class="logo-s" src="{{ROOT}}assets/img/neuron-logo-blanc.png" alt="" width="112" height="34"></a>'
+         '<p>' + _e(pied["apropos"]) + '</p>'
+         '<p class="fp-iso">' + _e(pied["iso"]) + '</p>'
+         f'<a class="fp-so" href="{H.escape(pied["social"]["href"])}" target="_blank" rel="noopener" '
+         f'aria-label="{H.escape(pied["social"]["label"])}">' + LINKEDIN + '</a></div>\n']
     for c in pied["colonnes"]:
-        liens = [i for i in c["items"] if i["href"] and not i["href"].startswith("mailto:")]
-        autres = [i for i in c["items"] if i not in liens]
-        cols.append((c["titre"], liens))
-        if autres:
-            cols.append(("Contact", autres))
-    cols.append(("Légal", pied["legal"]))
-    h = ['<footer class="pied">\n<div class="wrap">\n<div class="fp-g">\n']
-    for titre, items in cols:
-        hub = HUBS_PIED.get(titre)
-        tete = f'<a href="{_a(hub)}">{_e(titre)}</a>' if hub else _e(titre)
-        h.append(f'<div><p>{tete}</p><ul>\n')
-        for i in items:
-            if i["href"]:
+        hub = HUBS_PIED.get(c["titre"])
+        tete = f'<a href="{_a(hub)}">{_e(c["titre"])}</a>' if hub else _e(c["titre"])
+        h.append(f'<div><p class="fp-h">{tete}</p><ul>\n')
+        for i in c["items"]:
+            if i["href"].startswith("mailto:"):
+                h.append(f'<li class="fp-c">{ENVELOPPE}<a href="{_a(i["href"])}">{_e(i["texte"])}</a></li>\n')
+            elif i["href"]:
                 h.append(f'<li><a href="{_a(i["href"])}">{_e(i["texte"])}</a></li>\n')
             else:
-                h.append(f'<li><span>{_e(i["texte"])}</span></li>\n')
+                h.append(f'<li class="fp-c">{EPINGLE}<span>{_e(i["texte"])}</span></li>\n')
         h.append("</ul></div>\n")
-    h.append('</div>\n<div class="fp-b"><span>' + _e(pied["copyright"]) + "</span>" + THEME + "</div>\n"
-             '<p class="fp-iso">' + _e(pied["iso"]) + "</p>\n</div>\n</footer>\n")
+    legal = "".join(f'<a href="{_a(l["href"])}">{_e(l["texte"])}</a>' for l in pied["legal"])
+    h.append('</div>\n<div class="fp-b"><span>' + _e(pied["copyright"]) + '</span>'
+             '<div class="fp-l">' + legal + '</div>' + THEME + "</div>\n</div>\n</footer>\n")
     return "".join(h)
