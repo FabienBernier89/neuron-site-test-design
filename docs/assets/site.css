@@ -106,6 +106,8 @@ ul{padding:0;list-style:none}
 .hero-act{margin-top:32px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
 .hero-act .note{font:400 14px/20px var(--sans);color:var(--muted)}
 .hero-st{padding-top:56px}
+/* Accueil : distinctions un peu plus près de l'animation du hero (128 → 96 px, retour de Fabien du 2026-10-15) */
+.hero-a + .dist{padding-top:32px}
 .h2{font:300 30px/36px var(--serif);color:var(--ink);margin-bottom:32px}
 .h2 em,.h3s em,.bd p em{font-style:italic;color:var(--accent)}
 .h3s{font:300 30px/36px var(--serif);color:var(--ink)}

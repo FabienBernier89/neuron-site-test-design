@@ -10,7 +10,7 @@ from tests import support  # noqa: E402
 from outils.post import fonctionnalites as F  # noqa: E402
 
 # Tous les libellés des mini-interfaces existent déjà dans les sources (V1 ou pages V2) : rien d'inventé
-SOURCES = [ICI.parent / "neuron/src/generators.py"] + sorted((ICI / "src/pages").rglob("index.html"))
+SOURCES = [ICI.parent / "neuron/src/generators.py", ICI.parent / "neuron/src/partials/footer.html", ICI.parent / "neuron/src/partials/nav.html"] + sorted((ICI / "src/pages").rglob("index.html"))
 
 
 class TestCartesFonctionnalites(unittest.TestCase):
