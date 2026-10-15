@@ -1,8 +1,8 @@
 """Trame problème, situation visée, preuve, appel à l'action (lot D, spec V2 § 7) : accueil et 6 pages secteur.
 
 Ordre attendu : hero, problème (tr-pb), situation visée (« Ce que Corrext change », existante), preuves (tr-pv),
-exemple de cas d'usage, FAQ, appel à l'action. L'accueil intègre le schéma « qui fait quoi » du lot B après la
-plateforme. Les appels à l'action des pages secteur portent le secteur et l'attribut de suivi du lot C."""
+exemple de cas d'usage, FAQ, appel à l'action. L'accueil place la souveraineté des données juste après le problème
+(décision de Fabien du 2026-10-15) et intègre le schéma « qui fait quoi » du lot B après la plateforme. Les appels à l'action des pages secteur portent le secteur et l'attribut de suivi du lot C."""
 import html as H
 import json
 import re
@@ -126,6 +126,10 @@ class TestTrame(unittest.TestCase):
         plateforme = next(i for i, (_, x) in enumerate(secs) if "Toute votre traduction juridique" in texte_brut(x))
         self.assertEqual(secs[plateforme + 1][0], "sp")
         self.assertLess(noms.index("tr-pb"), plateforme)
+        # Souveraineté juste après le problème, avant la plateforme (décision de Fabien du 2026-10-15)
+        souverainete = next(i for i, (_, x) in enumerate(secs) if "Vos documents les plus sensibles" in texte_brut(x))
+        self.assertEqual(souverainete, noms.index("tr-pb") + 1)
+        self.assertEqual(plateforme, souverainete + 1)
         # Aucune section existante supprimée (texte de <main> seulement : le menu reprend certains titres)
         h = self.h[""]
         lu = texte_brut(h[h.index('<main id="main">'):h.index("</main>")])

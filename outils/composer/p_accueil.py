@@ -1,7 +1,8 @@
 """Page d'accueil du test de design, composée de blocs extraits mot pour mot de docs/fr/index.html.
 
-Ordre de la trame (lot D, spec V2 § 7) : hero et bandeau des distinctions, problème, situation visée (plateforme,
-schéma « qui fait quoi » du lot B, chiffres, agents, piliers, niveaux, sécurité, comparaison), preuves, FAQ, appel.
+Ordre de la trame (lot D, spec V2 § 7) : hero et bandeau des distinctions, problème, sécurité et souveraineté (juste
+après le problème, décision de Fabien du 2026-10-15), situation visée (plateforme, schéma « qui fait quoi » du lot B,
+chiffres, agents, piliers, niveaux, comparaison), preuves, FAQ, appel.
 Toutes les sections existantes sont gardées ; seul leur ordre change."""
 import re
 from source import *
@@ -110,9 +111,10 @@ B["faq"] = faq(txt(bloc(fq, "h2")), qr)
 B["appel"] = trame.appel(cta("Prêt à voir Neur.on", "sur vos propres documents ?", ("Demander une démo", C))
                          .replace('<a class="btn"', '<a class="btn" data-suivi="cta-accueil-fin"', 1))
 
-# 12. Trame : hero, problème, situation visée, preuves, FAQ, appel (le schéma suit le bloc qui présente la plateforme)
-out = [B["hero"], B["distinctions"], trame.probleme("accueil"),
-       B["plateforme"], schema_produits.rendre(), B["chiffres"], B["agents"], B["piliers"], B["niveaux"], B["securite"], B["comparaison"],
+# 12. Trame : hero, problème, souveraineté, situation visée, preuves, FAQ, appel (le schéma suit le bloc qui présente
+# la plateforme ; la souveraineté, argument majeur, suit directement le problème : décision de Fabien du 2026-10-15)
+out = [B["hero"], B["distinctions"], trame.probleme("accueil"), B["securite"],
+       B["plateforme"], schema_produits.rendre(), B["chiffres"], B["agents"], B["piliers"], B["niveaux"], B["comparaison"],
        trame.preuves("accueil", bandeau=B["distinctions"], exemple=False), B["faq"], B["appel"]]
 assert len(out) == len(B) + 3, "un bloc existant manque à la trame"
 
