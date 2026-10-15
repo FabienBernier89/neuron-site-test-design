@@ -140,7 +140,7 @@ class TestBlog(unittest.TestCase):
 
 
 SUIVI = re.compile(r'<a\b[^>]*\sdata-suivi="([^"]*)"[^>]*>')
-CONVENTION = re.compile(r"^cta-(?:entete(?:-mobile)?|[a-z0-9]+(?:-[a-z0-9]+)*-(?:hero|fin))$")
+CONVENTION = re.compile(r"^cta-(?:entete(?:-mobile)?|[a-z0-9]+(?:-[a-z0-9]+)*-(?:hero|milieu|fin))$")
 
 
 class TestSuiviDesAppels(unittest.TestCase):
@@ -151,8 +151,8 @@ class TestSuiviDesAppels(unittest.TestCase):
         cls.js = (ICI / "assets/global/suivi.js").read_text(encoding="utf-8")
 
     def test_une_seule_convention(self):
-        """data-suivi = cta-<contexte>-<position> (hero ou fin) ; l'en-tête : cta-entete, et cta-entete-mobile dans le
-        menu mobile."""
+        """data-suivi = cta-<contexte>-<position> (hero, milieu ou fin ; milieu : bouton d'une bande en cours de page,
+        décision du 2026-10-15) ; l'en-tête : cta-entete, et cta-entete-mobile dans le menu mobile."""
         valeurs = {v for h in self.pages.values() for v in SUIVI.findall(h)}
         self.assertTrue(valeurs)
         for v in valeurs:
