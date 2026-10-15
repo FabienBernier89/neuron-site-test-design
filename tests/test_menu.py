@@ -40,6 +40,21 @@ class TestMenu(unittest.TestCase):
         self.assertEqual(titres[-1], "Agence de traduction ou plateforme")
         self.assertEqual([e["libelle"] for e in self.m["entrees"]], ["Corrext", "Solutions", "LexMachina", "Ressources"])
 
+    def test_bouton_connexion(self):
+        """Lien « Connexion » vers la page de connexion Corrext, à gauche du bouton de démo et dans le menu mobile."""
+        url = ("https://auth.corrext.com/realms/corrext/protocol/openid-connect/auth?client_id=corrext&amp;scope=openid%20email%20profile"
+               "&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Fcorrext.com%2Fapi%2Fauth%2Fcallback%2Fkeycloak")
+        sortie = build.chemin_page("").parent
+        pages = list(sortie.rglob("index.html"))
+        self.assertGreater(len(pages), 100)
+        avec = [f for f in pages if '<div class="hd-cta">' in f.read_text(encoding="utf-8")]
+        self.assertGreater(len(avec), 100)  # seules les pages à en-tête réduit (contact) n'ont pas ce bloc
+        for f in avec:
+            h = f.read_text(encoding="utf-8")
+            entete = h[h.index('<div class="hd-cta">'):]
+            self.assertTrue(entete.startswith(f'<div class="hd-cta"><a class="hd-cx" href="{url}">Connexion</a><a class="btn btn-s"'), f)
+            self.assertIn(f'<a class="mm-cx" href="{url}">Connexion</a><a class="btn mm-cta"', h, f)
+
     def test_pied_disposition_v1(self):
         """Pied repris de la V1 : présentation, quatre colonnes, barre basse avec liens légaux et les trois thèmes."""
         html = build.chemin_page("").read_text(encoding="utf-8")

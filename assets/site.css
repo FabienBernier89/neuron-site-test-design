@@ -46,6 +46,9 @@ ul{padding:0;list-style:none}
 .hd-i svg{width:14px;height:14px;transition:transform .2s}
 .hd-i[aria-expanded="true"] svg{transform:rotate(180deg)}
 .hd-cta{margin-left:auto;display:flex;align-items:center;gap:16px}
+/* Connexion à Corrext : lien texte à gauche du bouton de démo */
+.hd-cx{padding:8px 4px;font:500 14px/20px var(--sans);color:var(--ink);text-decoration:none}
+.hd-cx:hover{text-decoration:underline;text-underline-offset:3px}
 .hd-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:34px;padding:8px;margin-right:-8px;background:none;border:0;cursor:pointer}
 .hd-burger span{display:block;height:1.5px;background:var(--ink);border-radius:1px}
 .hd.min .hd-in{height:68px}
@@ -79,7 +82,8 @@ ul{padding:0;list-style:none}
 .mm-b{padding:0 0 16px}
 .mm-b p{margin:12px 0 4px;font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.3px;color:var(--muted)}
 .mm-b a{display:block;padding:8px 0;font:400 15px/22px var(--sans);color:var(--text)}
-.mm-cta{margin-top:24px;width:100%}
+.mm-cx{display:block;margin-top:24px;padding:11px 16px;border:1px solid var(--line);border-radius:8px;text-align:center;font:500 15px/20px var(--sans);color:var(--ink)}
+.mm-cta{margin-top:12px;width:100%}
 
 /* Boutons et liens */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border:0;border-radius:8px;background:var(--btn);color:var(--btn-ink);font:500 16px/24px var(--sans);cursor:pointer;transition:opacity .15s}
@@ -715,7 +719,7 @@ ul{padding:0;list-style:none}
 @media (max-width:1023px){
   .hd-nav,.mg,.mg-voile{display:none!important}
   .hd-burger{display:inline-flex}
-  .hd-cta .btn-s{display:none}
+  .hd-cta .btn-s,.hd-cx{display:none}
   .hero{padding:105px 0 48px}
   .hero-g,.ft,.ft.inv,.fq,.qt,.bl-f,.ct{grid-template-columns:minmax(0,1fr);row-gap:32px}
   .ft.inv .ft-t{order:0}

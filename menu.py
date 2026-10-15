@@ -15,6 +15,10 @@ SOLEIL = ('<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="
           'M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>')
 LUNE = ('<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3a5.5 5.5 0 1 0 6.5 6.5z" '
         'fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>')
+# Connexion à Corrext (adresse fournie par Fabien le 2026-10-15), en haut à droite et dans le menu mobile
+CONNEXION = ("https://auth.corrext.com/realms/corrext/protocol/openid-connect/auth?client_id=corrext"
+             "&scope=openid%20email%20profile&response_type=code"
+             "&redirect_uri=https%3A%2F%2Fcorrext.com%2Fapi%2Fauth%2Fcallback%2Fkeycloak")
 THEME = ('<div class="theme" role="group" aria-label="Thème d\'affichage">'
          '<button type="button" data-theme-set="systeme" aria-label="Thème du système">' + ECRAN + '</button>'
          '<button type="button" data-theme-set="clair" aria-label="Thème clair">' + SOLEIL + '</button>'
@@ -157,7 +161,8 @@ def rendre_entete(nav, actif="", minimal=False, ruban=True):
                          f'data-mg>{_e(e["libelle"])}{CHEVRON}</button>\n')
             else:
                 h.append(f'<a class="{cls}" href="{_a(e["href"])}">{_e(e["libelle"])}</a>\n')
-        h.append('</nav>\n<div class="hd-cta"><a class="btn btn-s" href="{{ROOT}}contact/" data-suivi="cta-entete">Demander une démo</a>'
+        h.append('</nav>\n<div class="hd-cta"><a class="hd-cx" href="' + H.escape(CONNEXION) + '">Connexion</a>'
+                 '<a class="btn btn-s" href="{{ROOT}}contact/" data-suivi="cta-entete">Demander une démo</a>'
                  '<button type="button" class="hd-burger" id="hdBurger" aria-expanded="false" aria-controls="mm" '
                  'aria-label="Ouvrir le menu"><span></span><span></span><span></span></button></div>\n')
     h.append("</div>\n")
@@ -199,7 +204,8 @@ def rendre_mobile(nav):
         if p["promo"]:
             h.append(f'<a href="{_a(p["promo"]["href"])}">{_e(p["promo"]["lien"])}</a>\n')
         h.append("</div></div>\n")
-    h.append('<a class="btn mm-cta" href="{{ROOT}}contact/" data-suivi="cta-entete-mobile">Demander une démo</a>\n</div>\n</div>\n')
+    h.append('<a class="mm-cx" href="' + H.escape(CONNEXION) + '">Connexion</a>'
+             '<a class="btn mm-cta" href="{{ROOT}}contact/" data-suivi="cta-entete-mobile">Demander une démo</a>\n</div>\n</div>\n')
     return "".join(h)
 
 
