@@ -105,7 +105,12 @@ def faq(titre, qr):
 
 
 def dist(intro, items):
-    lis = "".join(f"<li><b>{b}</b>" + (f"<span>{s}</span>" if s else "") + "</li>" for b, s in items)
+    """Bandeau des distinctions. Une distinction sans sous-titre passe sur deux lignes, coupée au dernier espace
+    (retour de Fabien du 2026-10-15 : aucune tuile sur une seule ligne)."""
+    def deux_lignes(b):
+        i = b.rfind(" ")
+        return b if i < 0 else b[:i] + "<br>" + b[i + 1:]
+    lis = "".join(f"<li><b>{b if s else deux_lignes(b)}</b>" + (f"<span>{s}</span>" if s else "") + "</li>" for b, s in items)
     return f'<section class="sec dist"><div class="wrap"><p class="i">{intro}</p><ul class="d{len(items)}">{lis}</ul></div></section>\n'
 
 
