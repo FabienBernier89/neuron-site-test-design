@@ -98,31 +98,36 @@
 })();
 ;
 /* global/schema-produits.js */
-/* Schéma « qui fait quoi » (lot B) : flux entre Corrext, LexMachina et CHnell, joués une fois quand le schéma devient
-   visible. Un segment part de Corrext vers LexMachina, la traduction revient, puis le Fast Lookup interroge CHnell.
-   Sans script, sans IntersectionObserver ou en mouvement réduit, rien n'est posé : le schéma reste dans son état final.
-   Mouvement en transform et opacity, courbe commune des écrans Corrext. Aucun texte affiché n'est écrit ici. */
+/* Schéma « qui fait quoi » (lot B) : flux en trois étapes entre Corrext, LexMachina et CHnell, rejoué tant que le
+   schéma reste à l'écran (proposition A retenue par Fabien le 2026-10-15).
+   1. Corrext envoie le texte au moteur : LexMachina s'éclaire.
+   2. La traduction revient : Corrext s'éclaire, la sortie s'affiche.
+   3. Le Fast Lookup interroge CHnell : CHnell s'éclaire, le résultat s'affiche.
+   L'étape en cours s'allume aussi dans la liste ol.sp-et. Sans script, sans IntersectionObserver ou en mouvement
+   réduit, rien n'est posé : le schéma reste dans son état final. Mouvement en transform et opacity. Aucun texte
+   affiché n'est écrit ici. */
 (function () {
   "use strict";
   var scenes = [].slice.call(document.querySelectorAll(".sp-sc"));
   if (!scenes.length || !("IntersectionObserver" in window) || !Element.prototype.animate) return;
   if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var COURBE = "cubic-bezier(.22,.8,.24,1)";
+  var ETATS = ["sp-e1", "sp-e2", "sp-e3", "sp-e4", "sp-a1", "sp-a2", "sp-a3"];
 
   function attendre(ms) {
     return new Promise(function (fin) { setTimeout(fin, ms); });
   }
 
-  /* Trajet d'un paquet, en coordonnées de la scène : à mi-hauteur de l'illustration quand les blocs sont côte à côte,
-     dans l'intervalle vertical quand ils sont empilés */
+  /* Trajet d'un paquet, en coordonnées de la scène : d'un visuel à l'autre, à mi-hauteur, quand les cartes sont côte à
+     côte ; dans l'intervalle vertical quand elles sont empilées */
   function trajet(sc, de, vers) {
-    var b = sc.getBoundingClientRect(), a = de.getBoundingClientRect(), c = vers.getBoundingClientRect();
+    var b = sc.getBoundingClientRect(), a = de.querySelector(".sp-ui").getBoundingClientRect(), c = vers.querySelector(".sp-ui").getBoundingClientRect();
     if (c.right <= a.left + 1 || c.left >= a.right - 1) {
-      var ui = de.querySelector(".sp-ui").getBoundingClientRect(), y = ui.top + ui.height / 2 - b.top;
+      var y = a.top + a.height / 2 - b.top;
       return c.right <= a.left + 1 ? [a.left - b.left, y, c.right - b.left, y] : [a.right - b.left, y, c.left - b.left, y];
     }
-    var x = a.left + a.width / 2 - b.left;
-    return c.bottom <= a.top + 1 ? [x, a.top - b.top, x, c.bottom - b.top] : [x, a.bottom - b.top, x, c.top - b.top];
+    var x = a.left + a.width / 2 - b.left, n = de.getBoundingClientRect(), m = vers.getBoundingClientRect();
+    return m.bottom <= n.top + 1 ? [x, n.top - b.top, x, m.bottom - b.top] : [x, n.bottom - b.top, x, m.top - b.top];
   }
 
   function position(t, k, echelle) {
@@ -135,7 +140,6 @@
     p.className = "sp-pk " + classe;
     p.setAttribute("aria-hidden", "true");
     sc.appendChild(p);
-    /* Apparition sur place, trajet à la courbe commune (décélération à l'arrivée), extinction sur place */
     var anim = p.animate([
       { transform: position(t, 0, 0.4), opacity: 0 },
       { transform: position(t, 0, 1), opacity: 1, offset: 0.14, easing: COURBE },
@@ -149,24 +153,41 @@
 
   function jouer(sc) {
     var lm = sc.querySelector(".sp-lm"), cx = sc.querySelector(".sp-cx"), ch = sc.querySelector(".sp-ch");
-    function etape(n) { return function () { sc.classList.add("sp-e" + n); }; }
-    etape(0)();                                                      // illustrations et liaisons
-    attendre(600)
-      .then(function () { return paquet(sc, cx, lm, "sp-pk-t"); })  // segment envoyé au moteur
-      .then(etape(1)).then(function () { return attendre(400); })   // LexMachina traduit
-      .then(function () { return paquet(sc, lm, cx, "sp-pk-t"); })  // la traduction revient
-      .then(etape(2)).then(function () { return attendre(500); })   // sortie affichée dans Corrext
-      .then(etape(3)).then(function () { return attendre(400); })   // bouton Fast Lookup
-      .then(function () { return paquet(sc, cx, ch, "sp-pk-l"); })  // terme envoyé à CHnell
-      .then(etape(4));                                               // résultat de CHnell
+    function poser() { var c = [].slice.call(arguments); return function () { c.forEach(function (x) { sc.classList.add(x); }); }; }
+    function oter() { var c = [].slice.call(arguments); return function () { c.forEach(function (x) { sc.classList.remove(x); }); }; }
+    function cycle() {
+      ETATS.forEach(function (x) { sc.classList.remove(x); });
+      return attendre(700)
+        .then(poser("sp-a1"))                                          // étape 1 : le texte part vers le moteur
+        .then(function () { return paquet(sc, cx, lm, "sp-pk-t"); })
+        .then(poser("sp-e1")).then(function () { return attendre(900); })
+        .then(oter("sp-a1")).then(poser("sp-a2"))                      // étape 2 : la traduction revient
+        .then(function () { return paquet(sc, lm, cx, "sp-pk-t"); })
+        .then(poser("sp-e2")).then(function () { return attendre(1100); })
+        .then(poser("sp-e3")).then(function () { return attendre(500); })
+        .then(oter("sp-a2")).then(poser("sp-a3"))                      // étape 3 : le Fast Lookup interroge CHnell
+        .then(function () { return paquet(sc, cx, ch, "sp-pk-l"); })
+        .then(poser("sp-e4")).then(function () { return attendre(3200); })
+        .then(oter("sp-a3")).then(function () { return attendre(1400); });
+    }
+    function boucle() {
+      cycle().then(function () {
+        if (sc.__visible) boucle(); else sc.__enAttente = true;    // reprise au prochain passage à l'écran
+      });
+    }
+    sc.classList.add("sp-e0");                                         // illustrations et liaisons
+    boucle();
   }
 
-  /* Départ quand un tiers du schéma est visible, ou la moitié de l'écran pour un schéma empilé plus haut que l'écran */
+  /* Premier départ quand un tiers du schéma est visible (la moitié de l'écran pour un schéma empilé plus haut que
+     l'écran) ; ensuite, le cycle suivant ne part que si le schéma est encore à l'écran */
   var io = new IntersectionObserver(function (entrees) {
     entrees.forEach(function (en) {
-      if (!en.isIntersecting || (en.intersectionRatio < 0.35 && en.intersectionRect.height < window.innerHeight * 0.5)) return;
-      io.unobserve(en.target);
-      jouer(en.target);
+      var sc = en.target, vu = en.isIntersecting && (en.intersectionRatio >= 0.35 || en.intersectionRect.height >= window.innerHeight * 0.5);
+      sc.__visible = en.isIntersecting;
+      if (!vu) return;
+      if (!sc.__parti) { sc.__parti = true; jouer(sc); }
+      else if (sc.__enAttente) { sc.__enAttente = false; jouer(sc); }
     });
   }, { threshold: [0, 0.1, 0.2, 0.35, 0.5] });
   scenes.forEach(function (sc) {

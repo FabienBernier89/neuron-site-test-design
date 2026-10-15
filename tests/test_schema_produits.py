@@ -34,6 +34,11 @@ def section_de(h):
     return re.search(r'<section class="sec sp".*?</section>', h, re.S).group(0)
 
 
+def _brut(cle):
+    """Texte de contenus-v2 tel que texte_brut() le lit : espaces insécables normalisées."""
+    return contenus.texte(cle).replace("\xa0", " ")
+
+
 class TestSchema(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -84,10 +89,10 @@ class TestSchema(unittest.TestCase):
             self.assertIn("data-ui", dd)
         lu = texte_brut(dl)
         for cle in ("schema.lexmachina.def", "schema.corrext.def", "schema.chnell.def"):
-            self.assertIn(contenus.texte(cle), lu, cle)
+            self.assertIn(_brut(cle), lu, cle)
         # Ordre de lecture : chaque nom suivi de sa définition
-        positions = [lu.index(x) for x in ("LexMachina", contenus.texte("schema.lexmachina.def"), "Corrext",
-                                           contenus.texte("schema.corrext.def"), "CHnell", contenus.texte("schema.chnell.def"))]
+        positions = [lu.index(x) for x in ("LexMachina", _brut("schema.lexmachina.def"), "Corrext",
+                                           _brut("schema.corrext.def"), "CHnell", _brut("schema.chnell.def"))]
         self.assertEqual(positions, sorted(positions))
 
     def test_liens_vers_les_trois_pages(self):
@@ -149,8 +154,10 @@ class TestAnimation(unittest.TestCase):
     def test_declenchee_a_la_visibilite_et_mouvement_reduit(self):
         self.assertIn("IntersectionObserver", self.js)
         self.assertIn("prefers-reduced-motion: reduce", self.js)
-        # Jouée une fois : le schéma cesse d'être observé dès son départ, aucune animation sans fin
-        self.assertIn("unobserve(", self.js)
+        # Rejouée tant que le schéma est à l'écran (proposition A, 2026-10-15) : le cycle suivant attend la visibilité,
+        # aucune animation CSS sans fin
+        self.assertIn("sc.__visible", self.js)
+        self.assertIn("__enAttente", self.js)
         self.assertNotIn("infinite", self.css)
         # En mouvement réduit, le script s'arrête avant de poser l'état de départ
         sortie = re.search(r'matchMedia\("\(prefers-reduced-motion: reduce\)"\)\.matches\)\s*return;', self.js)

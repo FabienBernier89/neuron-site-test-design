@@ -147,6 +147,8 @@ def rendre():
             + groupe("corrext", "Corrext", ui_corrext(d), texte("schema.corrext.role"))
             + groupe("chnell", "CHnell", ui_chnell(d), texte("schema.chnell.lookup"))
             + "</dl>"
+            # Les trois étapes du flux, dans l'ordre où le script les joue (retour de Fabien du 2026-10-15)
+            + '<ol class="sp-et">' + "".join(f"<li>{e(texte(f'schema.etape{i}'))}</li>" for i in (1, 2, 3)) + "</ol>"
             f'<p class="sp-h">{CADENAS}{e(texte("schema.hebergement"))}</p>'
             "</div>\n</div></section>\n")
 

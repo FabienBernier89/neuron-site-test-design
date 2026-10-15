@@ -1437,49 +1437,52 @@ main table a{display:inline-block;padding-block:3px}
 }
 
 /* composants/schema-produits.css */
-/* Schéma « qui fait quoi » (lot B) : LexMachina à gauche, Corrext au centre, CHnell à droite, sur la scène Neur.on.
+/* Schéma « qui fait quoi » (lot B) : LexMachina, Corrext, CHnell en trois cartes au format des cartes de
+   fonctionnalités (proposition A retenue par Fabien le 2026-10-15) ; un flux en trois étapes les relie.
    Le <dl> se lit sans cette feuille ; les illustrations (dd.sp-ui, attribut hidden) ne s'affichent qu'avec elle.
-   Mouvement en transform et opacity ; l'état de départ n'existe que sous .sp-pret, posée par schema-produits.js.
-   La scène reste claire dans les deux thèmes, comme les scènes .st. */
-.sp-sc{--ink:#06122e;--text:#39455c;--muted:#5b6880;--accent:#317BFF;--accent-d:#1f5fd6;color-scheme:light;
-  --c-ink:#1e1f3b;--c-text:#3a3c56;--c-mut:#5d6180;--c-dim:#a6aac0;--c-line:rgba(30,31,59,.09);--c-bg:#f7f8fc;--c-ind:#3b34c9;--c-ind-soft:#efeefc;--c-hl:#d6e4ff;
-  --ease:cubic-bezier(.22,.8,.24,1);--sp-ui:216px;--sp-gap:64px;--sp-pad:10px;
-  position:relative;padding:40px 40px 26px;border-radius:8px;background-color:#e6edf8;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='11' cy='11' r='1.1' fill='%23001b4c' fill-opacity='.15'/%3E%3C/svg%3E"),
-    linear-gradient(155deg,rgba(49,123,255,.18),rgba(49,123,255,0) 46%),
-    linear-gradient(335deg,rgba(0,27,76,.09),rgba(0,27,76,0) 52%);
-  background-size:22px 22px,100% 100%,100% 100%;background-position:11px 11px,0 0,0 0}
+   Mouvement en transform et opacity ; l'état de départ n'existe que sous .sp-pret, posée par schema-produits.js. */
+.sp-sc{--c-ink:#1e1f3b;--c-text:#3a3c56;--c-mut:#5d6180;--c-dim:#a6aac0;--c-line:rgba(30,31,59,.09);--c-bg:#f7f8fc;--c-ind:#3b34c9;--c-ind-soft:#efeefc;--c-hl:#d6e4ff;
+  --ease:cubic-bezier(.22,.8,.24,1);--sp-ui:300px;--sp-gap:8px;--sp-pad:16px;position:relative;margin-top:40px}
 
-/* Définitions : un groupe par produit, illustration en tête */
-.sp-dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.32fr) minmax(0,1fr);column-gap:var(--sp-gap);margin:0}
-.sp-n{position:relative;display:flex;flex-direction:column;padding:var(--sp-pad) var(--sp-pad) 22px;border:1px solid rgba(30,31,59,.08);border-radius:14px;background:#fff;
-  box-shadow:0 1px 2px rgba(30,31,59,.05),0 14px 36px rgba(0,27,76,.10)}
-.sp-n dt{margin:18px 12px 0;font:600 20px/28px var(--sans);letter-spacing:-.01em;color:var(--ink)}
-.sp-n dd{margin:0 12px}
-.sp-n .sp-ui{display:block;order:-1;height:var(--sp-ui);margin:0;overflow:hidden;border:1px solid var(--c-line);border-radius:9px;background:var(--c-bg)}
-.sp-n .sp-d{margin-top:6px;font:400 15px/23px var(--sans);color:var(--text)}
-.sp-n .sp-x{margin-top:10px;font:400 14px/21px var(--sans);color:var(--muted)}
-.sp-n .sp-a{margin-top:auto;padding-top:14px}
-.sp-a .lien{font-size:15px;line-height:22px}
+/* Définitions : une carte par produit, visuel en tête */
+.sp-dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--sp-gap);margin:0}
+.sp-n{position:relative;display:flex;flex-direction:column;padding:var(--sp-pad) var(--sp-pad) 24px;border-radius:8px;background:var(--tile)}
+.sp-n dt{margin:16px 8px 0;font:500 16px/24px var(--sans);color:var(--ink)}
+.sp-n dd{margin:0 8px}
+.sp-n .sp-ui{position:relative;display:grid;place-items:center;order:-1;height:var(--sp-ui);margin:0;overflow:hidden;border-radius:8px;background-color:#e6edf8;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='11' cy='11' r='1.1' fill='%23001b4c' fill-opacity='.12'/%3E%3C/svg%3E"),linear-gradient(155deg,rgba(49,123,255,.16),rgba(49,123,255,0) 50%)}
+/* Carte active pendant le flux : anneau d'accent sur le visuel (opacité seule) */
+.sp-pret .sp-n .sp-ui::after{content:"";position:absolute;inset:0;border-radius:8px;box-shadow:inset 0 0 0 2px rgba(59,52,201,.55);opacity:0;transition:opacity .4s ease}
+.sp-n .sp-d{margin-top:6px;font:400 15px/24px var(--sans);color:var(--muted)}
+.sp-n .sp-x{margin-top:8px;font:400 14px/22px var(--sans);color:var(--muted)}
+.sp-n .sp-a{margin-top:auto;padding-top:12px}
+.sp-a .lien{font-size:16px;line-height:24px}
 .sp-a .lien[aria-current]{color:var(--muted)}
 .sp-a .lien[aria-current]::after{content:none}
-.sp-h{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:24px;font:500 14px/20px var(--sans);color:var(--ink);text-align:center}
-.sp-h svg{flex:0 0 auto;width:15px;height:15px;color:var(--accent-d)}
 
-/* Liaisons : pointillés entre Corrext et ses voisins, à mi-hauteur des illustrations */
-.sp-cx::before,.sp-cx::after{content:"";position:absolute;top:calc(var(--sp-pad) + var(--sp-ui) / 2 - 3px);width:var(--sp-gap);height:6px;pointer-events:none;
+/* Étapes du flux, sous les cartes ; l'étape en cours s'allume */
+.sp-et{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp-gap);margin:16px 0 0;padding:0;list-style:none;counter-reset:sp}
+.sp-et li{position:relative;display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-radius:8px;font:400 14px/20px var(--sans);color:var(--muted);counter-increment:sp}
+.sp-et li::before{content:counter(sp);flex:0 0 auto;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--tile);font:600 11px/1 var(--sans);color:var(--accent-d)}
+.sp-pret .sp-et li::after{content:"";position:absolute;inset:0;border-radius:8px;background:var(--tile);opacity:0;z-index:-1;transition:opacity .4s ease}
+.sp-pret .sp-et li{isolation:isolate}
+.sp-h{display:flex;align-items:center;gap:8px;margin-top:16px;font:400 14px/20px var(--sans);color:var(--muted)}
+.sp-h svg{flex:0 0 auto;width:14px;height:14px;color:var(--accent-d)}
+
+/* Liaisons : pointillés entre les visuels, à mi-hauteur */
+.sp-cx::before,.sp-cx::after{content:"";position:absolute;z-index:2;top:calc(var(--sp-pad) + var(--sp-ui) / 2 - 3px);width:calc(var(--sp-gap) + 2 * var(--sp-pad));height:6px;pointer-events:none;
   background:radial-gradient(circle,var(--c-ind) 0 2.5px,transparent 3px) 0 50%/6px 6px no-repeat,
     radial-gradient(circle,var(--c-ind) 0 2.5px,transparent 3px) 100% 50%/6px 6px no-repeat,
-    repeating-linear-gradient(90deg,rgba(59,52,201,.55) 0 5px,transparent 5px 10px) 0 50%/100% 2px no-repeat;
+    repeating-linear-gradient(90deg,rgba(59,52,201,.55) 0 4px,transparent 4px 8px) 0 50%/100% 2px no-repeat;
   transition:transform .7s var(--ease)}
-.sp-cx::before{right:100%;margin-right:1px;transform-origin:100% 50%}
-.sp-cx::after{left:100%;margin-left:1px;transform-origin:0 50%}
+.sp-cx::before{right:calc(100% - var(--sp-pad));transform-origin:100% 50%}
+.sp-cx::after{left:calc(100% - var(--sp-pad));transform-origin:0 50%}
 /* Paquets : créés par le script pendant le flux (segment vers le moteur, terme vers CHnell) */
 .sp-pk{position:absolute;left:0;top:0;z-index:3;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--c-ind);box-shadow:0 0 0 4px rgba(59,52,201,.16);pointer-events:none}
-.sp-pk-l{background:#e2b100;box-shadow:0 0 0 4px rgba(226,177,0,.22)}
+.sp-pk-l{background:var(--accent);box-shadow:0 0 0 4px rgba(49,123,255,.18)}
 
 /* Illustrations : écrans Corrext réduits (palette, police et libellés de l'application) */
-.sp-app{position:relative;display:flex;flex-direction:column;height:100%;font:400 12px/18px "Inter",var(--ui);color:var(--c-text)}
+.sp-app{position:relative;display:flex;flex-direction:column;width:86%;height:240px;overflow:hidden;border-radius:10px;background:#fff;box-shadow:0 1px 2px rgba(0,27,76,.06),0 12px 28px -14px rgba(0,27,76,.28);font:400 12px/18px "Inter",var(--ui);color:var(--c-text)}
 .sp-app svg{display:block;flex:0 0 auto;width:12px;height:12px}
 .sp-app mark{border-radius:2px;background:var(--c-hl);color:inherit}
 .sp-top{display:flex;align-items:center;gap:10px;flex:0 0 34px;padding:0 12px;border-bottom:1px solid var(--c-line);background:#fff}
@@ -1488,7 +1491,7 @@ main table a{display:inline-block;padding-block:3px}
 .sp-tab{padding:1px 8px;border-radius:6px;background:var(--c-ind-soft);font:500 11px/17px "Inter",var(--ui);color:var(--c-ind)}
 .sp-pw{font:400 11px/16px "Inter",var(--ui);color:var(--c-mut)}
 /* LexMachina : choix du moteur */
-.sp-app-lm{padding:16px 16px 0}
+.sp-app-lm{height:auto;padding:16px}
 .sp-lbl{font:500 11px/16px "Inter",var(--ui);color:var(--c-mut)}
 .sp-sel{display:flex;align-items:center;justify-content:space-between;height:34px;margin-top:6px;padding:0 12px;border:1px solid var(--c-line);border-radius:8px;background:#fff;font:500 12px/18px "Inter",var(--ui);color:var(--c-ink)}
 .sp-sel svg{color:var(--c-dim)}
@@ -1497,8 +1500,9 @@ main table a{display:inline-block;padding-block:3px}
 .sp-menu > .on{background:var(--c-ind-soft);font-weight:500;color:var(--c-ink)}
 .sp-menu small{padding:0 6px;border-radius:999px;background:#e9f6ef;font:600 11px/16px "Inter",var(--ui);color:#1d6b43}
 /* Corrext : Text translation */
+.sp-app-cx,.sp-app-ch{width:94%}
 .sp-app-cx{background:#fff}
-.sp-bar{display:flex;align-items:center;gap:8px;flex:0 0 32px;min-width:0;padding:0 12px;border-bottom:1px solid var(--c-line);white-space:nowrap;font:500 11px/16px "Inter",var(--ui);color:var(--c-ink)}
+.sp-bar{display:flex;align-items:center;gap:6px;flex:0 0 32px;min-width:0;padding:0 12px;border-bottom:1px solid var(--c-line);white-space:nowrap;font:500 11px/16px "Inter",var(--ui);color:var(--c-ink)}
 .sp-bar svg{color:var(--c-mut)}
 .sp-eng{margin-left:auto;padding:0 8px;border-radius:999px;background:var(--c-ind-soft);color:var(--c-ind)}
 .sp-panes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);flex:1;min-height:0}
@@ -1542,6 +1546,10 @@ main table a{display:inline-block;padding-block:3px}
 .sp-pret.sp-e0 .sp-n .sp-ui{opacity:1;transform:none}
 .sp-pret.sp-e0 .sp-cx::before,.sp-pret.sp-e0 .sp-cx::after{transform:none;transition-delay:.35s}
 .sp-pret.sp-e1 .sp-menu > .on::after{animation:sp-pouls 1s var(--ease)}
+.sp-pret.sp-a1 .sp-lm .sp-ui::after,.sp-pret.sp-a2 .sp-cx .sp-ui::after,.sp-pret.sp-a3 .sp-ch .sp-ui::after{opacity:1}
+.sp-pret.sp-a1 .sp-et li:nth-child(1)::after,.sp-pret.sp-a2 .sp-et li:nth-child(2)::after,.sp-pret.sp-a3 .sp-et li:nth-child(3)::after{opacity:1}
+.sp-pret .sp-et li{transition:opacity .4s ease;opacity:.55}
+.sp-pret.sp-a1 .sp-et li:nth-child(1),.sp-pret.sp-a2 .sp-et li:nth-child(2),.sp-pret.sp-a3 .sp-et li:nth-child(3){opacity:1}
 .sp-pret.sp-e2 .sp-sk{opacity:0}
 .sp-pret.sp-e2 .sp-out{opacity:1;transform:none}
 .sp-pret.sp-e3 .sp-lkb{opacity:1;transform:none}
@@ -1551,49 +1559,34 @@ main table a{display:inline-block;padding-block:3px}
 @keyframes sp-pouls{0%{opacity:0;transform:scale(.97)}35%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.04)}}
 @keyframes sp-appui{50%{transform:scale(.92)}100%{transform:none}}
 
-/* Écrans intermédiaires : sortie sous le texte source, terme seul sur la première ligne de recherche */
+/* Écrans intermédiaires : sortie sous le texte source */
 @media (max-width:1215px){
-  .sp-sc{padding:32px 24px 22px;--sp-gap:44px}
   .sp-panes{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr)}
   .sp-pane{padding:8px 12px}
   .sp-txt,.sp-out{-webkit-line-clamp:3}
   .sp-tgt{border-left:0;border-top:1px solid var(--c-line)}
   .sp-pane:first-child{overflow:visible}
   .sp-lkb{z-index:2;bottom:-11px}
-  .sp-q{padding-top:6px}
   .sp-box{flex-basis:100%}
-  .sp-lg{padding:1px 6px}
   .sp-cnt{flex-basis:auto;margin-left:auto}
-  .sp-res{margin-top:4px;padding-top:4px}
 }
-/* Tablettes et mobiles : blocs empilés, liaisons verticales */
+/* Tablettes et mobiles : cartes empilées, liaisons verticales, étapes en liste */
 @media (max-width:1023px){
-  .sp-sc{padding:24px 16px 20px;--sp-gap:48px}
+  .sp-sc{--sp-gap:40px}
   .sp-dl{grid-template-columns:minmax(0,1fr);row-gap:var(--sp-gap);max-width:520px;margin:0 auto}
-  .sp-n .sp-ui{height:auto}
-  .sp-app-lm{padding-bottom:16px}
-  .sp-panes{grid-template-rows:none}
-  .sp-pane{padding:10px 12px 12px}
-  .sp-txt,.sp-out{-webkit-line-clamp:4}
-  .sp-lkb{position:static;margin-top:8px}
-  .sp-app-ch{padding-bottom:12px}
-  .sp-q{padding-top:8px}
-  .sp-box{flex-basis:auto}
-  .sp-lg{padding:3px 6px}
-  .sp-cnt{flex-basis:100%;margin-left:0}
+  .sp-et{grid-template-columns:minmax(0,1fr);gap:4px;max-width:520px;margin:16px auto 0}
+  .sp-h{max-width:520px;margin:16px auto 0}
   .sp-cx::before,.sp-cx::after{top:auto;right:auto;left:50%;width:6px;height:var(--sp-gap);margin:0 0 0 -3px;
     background:radial-gradient(circle,var(--c-ind) 0 2.5px,transparent 3px) 50% 0/6px 6px no-repeat,
       radial-gradient(circle,var(--c-ind) 0 2.5px,transparent 3px) 50% 100%/6px 6px no-repeat,
-      repeating-linear-gradient(180deg,rgba(59,52,201,.55) 0 5px,transparent 5px 10px) 50% 0/2px 100% no-repeat}
-  .sp-cx::before{bottom:100%;margin-bottom:1px;transform-origin:50% 100%}
-  .sp-cx::after{top:100%;margin-top:1px;transform-origin:50% 0}
+      repeating-linear-gradient(180deg,rgba(59,52,201,.55) 0 4px,transparent 4px 8px) 50% 0/2px 100% no-repeat}
+  .sp-cx::before{bottom:100%;transform-origin:50% 100%}
+  .sp-cx::after{top:100%;transform-origin:50% 0}
   .sp-pret .sp-cx::before,.sp-pret .sp-cx::after{transform:scaleY(0)}
-  .sp-n dt{margin-top:14px}
 }
 @media (max-width:640px){
+  .sp-sc{--sp-ui:260px}
   .sp-bar{flex:0 0 auto;flex-wrap:wrap;row-gap:4px;padding:7px 12px}
-  .sp-h{justify-content:flex-start;align-items:flex-start;text-align:left}
-  .sp-h svg{margin-top:2px}
 }
 
 /* composants/securite.css */
