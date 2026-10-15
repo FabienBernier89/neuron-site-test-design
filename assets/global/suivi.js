@@ -5,9 +5,9 @@
    generate_lead (demande de démo) et sign_up (newsletter) à l'arrivée sur la page de remerciement après un envoi
    réussi, cta_click sur [data-suivi], demo_interaction au premier geste réel dans une démo [data-interactif] (le bouton
    pause n'en est pas un), outbound_click sur un lien vers un autre site.
-   Convention des data-suivi : cta-<contexte>-<position>, position « hero » ou « fin » (cta-accueil-hero,
-   cta-plugin-word-fin, cta-secteur-<slug>-hero) ; le bouton de l'en-tête : cta-entete, et cta-entete-mobile dans le
-   menu mobile.
+   Convention des data-suivi : cta-<contexte>-<position>, position « hero », « milieu » (bouton d'une bande en cours de
+   page) ou « fin » (cta-accueil-hero, cta-securite-milieu, cta-plugin-word-fin, cta-secteur-<slug>-hero) ; le bouton
+   de l'en-tête : cta-entete, et cta-entete-mobile dans le menu mobile.
    Les champs cachés sont tronqués à la longueur maximale qu'accepte envoi.php (CHAMPS), sinon l'envoi serait refusé.
    Chaque accès au stockage est protégé : stockage bloqué, le formulaire reçoit au moins ce que porte la page affichée. */
 (function () {

@@ -32,8 +32,8 @@ ANCIENNE_1 = ("Les informations générées par les cookies sont envoyées sous 
 NOUVELLE_1 = ANCIENNE_1.replace("sous forme anonymisée", "sous forme pseudonymisée")
 ANCIENNE_2 = "Grâce à l'anonymisation, il est impossible de relier ces données à la personne concernée."
 NOUVELLE_2 = "Grâce à la pseudonymisation, ces données ne permettent pas, à elles seules, d'identifier la personne concernée."
-CONSERVATION = ("Les données liées aux utilisateurs et aux événements sont conservées deux mois dans Google Analytics, "
-                "puis supprimées automatiquement.")
+CONSERVATION = ("Les données au niveau de l'utilisateur et de l'événement sont conservées deux mois dans Google Analytics, "
+                "puis supprimées automatiquement. Les rapports agrégés ne sont pas concernés.")
 SUITE_V1 = "Google utilise ces informations pour analyser votre utilisation de notre site"
 
 
@@ -96,7 +96,8 @@ class TestProtectionDesDonnees(unittest.TestCase):
             self.assertIn(DECISION, e[cle]["source"], cle)
             self.assertEqual(e[cle].get("remplace"), ancien, cle)
         self.assertIn("formulation juridiquement exacte de la pseudonymisation", e["protection-des-donnees.analytics.pseudonymisation"]["source"])
-        self.assertIn("GA4 : 2 mois", e["protection-des-donnees.analytics.conservation"]["source"])
+        self.assertIn("Décision de Fabien du 2026-10-15 : données d'événement et données utilisateur réglées à 2 mois dans GA4",
+                      e["protection-des-donnees.analytics.conservation"]["source"])
         self.assertEqual(e["protection-des-donnees.analytics.conservation"]["insere_avant"], SUITE_V1)
         self.assertEqual(contenus.texte("protection-des-donnees.analytics.conservation"), CONSERVATION)
 
@@ -173,9 +174,44 @@ class TestPageSecurite(unittest.TestCase):
         self.assertNotIn(contenus.texte("trame.pv.note"), lu)
 
     def test_preuves_sans_redite_des_garanties(self):
-        """Le bloc Preuves ne reprend aucune suite de 5 mots de la liste « Ce que Neur.on garantit, précisément »."""
+        """Aucun texte du bloc Preuves (introduction, nom, détail, nature) ne reprend une suite de 5 mots de la liste « Ce
+        que Neur.on garantit, précisément ». Chaque texte est pris seul : une suite à cheval sur le nom et le détail
+        d'une preuve n'est pas une phrase répétée (« Stockage hors US CLOUD Act » puis « Société suisse, infrastructure
+        suisse », formule de la V1 retenue au tour de correction 1)."""
         garanties = next(x for _, x in self.secs if GARANTIES in texte_brut(x))
-        self.assertEqual(suites(self.par_nom["tr-pv"]) & suites(garanties), set())
+        textes = [t for t in re.findall(r">([^<>]+)<", self.par_nom["tr-pv"]) if t.strip()]
+        self.assertEqual(set().union(*(suites(t) for t in textes)) & suites(garanties), set())
+
+    def test_corrections_du_tour_1(self):
+        """Formulations demandées au tour de correction 1 (2026-10-15)."""
+        attendus = {
+            f"trame.pb.{CLE}.1.texte": "Un outil de traduction générique traite les données chez un opérateur étranger. "
+                                        "Le paragraphe qu'on y colle quitte le périmètre national.",
+            f"trame.pb.{CLE}.2.texte": "Le US CLOUD Act vise les fournisseurs soumis à la juridiction américaine, quel que soit "
+                                        "le pays où ils stockent les données. Un hébergement en Suisse chez un tel fournisseur "
+                                        "n'y change rien.",
+            f"trame.pb.{CLE}.3.texte": "Le secret de l'avocat et le secret bancaire sont protégés pénalement. Avant d'envoyer une "
+                                        "pièce couverte, il faut savoir où le texte sera traité.",
+            f"trame.pv.{CLE}.intro": "L'essentiel pour votre dossier fournisseur.",
+            "trame.pv.traitement.type": "Lieu de traitement",
+            "trame.pv.cloudact.nom": "Stockage hors US CLOUD Act",
+            "trame.pv.cloudact.detail": "Société suisse, infrastructure suisse",
+        }
+        for cle, texte in attendus.items():
+            self.assertEqual(contenus.texte(cle), texte, cle)
+        pb1 = contenus.texte(f"trame.pb.{CLE}.1.texte")
+        self.assertNotIn("héberge", pb1)
+        self.assertNotIn("hors de Suisse", pb1)  # déjà dans le titre de la difficulté
+        lu = texte_brut(self.main)
+        for texte in attendus.values():
+            self.assertIn(texte, lu)
+
+    def test_convention_de_suivi_documentee(self):
+        """Le commentaire de assets/global/suivi.js cite la position « milieu » et l'exemple de la page."""
+        js = (ICI / "assets/global/suivi.js").read_text(encoding="utf-8")
+        entete = js[:js.index("*/")]
+        self.assertIn("« milieu »", entete)
+        self.assertIn("cta-securite-milieu", entete)
 
     def test_appels_a_l_action_suivis(self):
         boutons = re.findall(r'<a class="btn"[^>]*>', self.main)
