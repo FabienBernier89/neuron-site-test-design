@@ -1,5 +1,6 @@
 """Tous les textes viennent mot pour mot du site Neur.on publié (spec § 2, § 9 tests 9 et 10), ou des contenus
-nouveaux de src/data/contenus-v2 (spec V2 § 2)."""
+nouveaux de src/data/contenus-v2 (spec V2 § 2). Une entrée qui corrige une phrase de la V1 (champ « remplace » ou
+« insere_avant », voir le README du dossier) vaut pour sa page : la page de la V1 ainsi corrigée sert de source."""
 import html as H
 import re
 import subprocess
@@ -70,6 +71,18 @@ class Textes(HTMLParser):
         (self.ui if self.pile[-1][1] == "ui" else self.textes).append(t)
 
 
+def corrigee(t, entrees):
+    """HTML d'une page de la V1 avec les corrections déclarées par les contenus nouveaux de cette page."""
+    for e in entrees:
+        nouveau = H.escape(e["texte"], quote=False)
+        if "remplace" in e:
+            t = t.replace(H.escape(e["remplace"], quote=False), nouveau)
+        else:
+            ancre = H.escape(e["insere_avant"], quote=False)
+            t = t.replace(ancre, f"{nouveau} {ancre}")
+    return t
+
+
 def corpus_fr():
     m = [deux_variantes(f.read_text(encoding="utf-8")) for f in (build.NEURON / "docs/fr").rglob("*.html")]
     m += [deux_variantes(f.read_text(encoding="utf-8")) for f in (build.NEURON / "src/data").glob("*.json")]
@@ -101,6 +114,9 @@ class TestContenu(unittest.TestCase):
             # Source d'une page : sa page du site actuel (absente pour une page nouvelle) et ses contenus nouveaux
             v1 = build.NEURON / "docs/fr" / p / "index.html"
             sources = [deux_variantes(v1.read_text(encoding="utf-8"))] if v1.exists() else []
+            corrections = [e for e in contenus.toutes() if e["page"] == p and ("remplace" in e or "insere_avant" in e)]
+            if corrections and v1.exists():
+                sources.append(deux_variantes(corrigee(v1.read_text(encoding="utf-8"), corrections)))
             sources += [deux_variantes(e["texte"]) for e in contenus.toutes() if e["page"] in (p, "*")]  # « * » : commun à plusieurs pages
             cls.sources[p] = "\n".join(sources)
 

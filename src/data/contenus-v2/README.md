@@ -19,6 +19,9 @@ Un fichier par lot : `A-plugin-word.json`, `B-schema.json`, etc.
 - `texte` : le texte exact affiché, sans balise.
 - `statut` : `a_relire` à l'écriture, `valide` quand Fabien a relu.
 - `source` : d'où vient le fait ou la formulation (demande de Fabien et date, page du site actuel, base de connaissances).
+- `remplace` ou `insere_avant` (facultatifs) : pour corriger une phrase reprise de la V1, la phrase exacte de la V1 que
+  le texte remplace, ou le texte de la V1 devant lequel il s'insère. Un post-traitement ciblé applique la correction
+  (exemple : `outils/post/pseudonymisation.py`) et `tests/test_contenu.py` accepte la page de la V1 ainsi corrigée.
 
 ## Règles
 

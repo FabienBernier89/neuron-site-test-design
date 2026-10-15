@@ -1,0 +1,29 @@
+{
+ "lot": "F",
+ "entrees": [
+  {
+   "cle": "protection-des-donnees.analytics.pseudonymisee",
+   "page": "protection-des-donnees/",
+   "texte": "Les informations générées par les cookies sont envoyées sous forme pseudonymisée à un serveur de Google aux États-Unis, où elles sont stockées.",
+   "remplace": "Les informations générées par les cookies sont envoyées sous forme anonymisée à un serveur de Google aux États-Unis, où elles sont stockées.",
+   "statut": "a_relire",
+   "source": "Décision de Fabien du 2026-10-15 ; formulation juridiquement exacte de la pseudonymisation. Phrase de la V1 fr/protection-des-donnees/ (§ « Outils de suivi web », paragraphe Google Analytics), « anonymisée » remplacé par « pseudonymisée »."
+  },
+  {
+   "cle": "protection-des-donnees.analytics.pseudonymisation",
+   "page": "protection-des-donnees/",
+   "texte": "Grâce à la pseudonymisation, ces données ne permettent pas, à elles seules, d'identifier la personne concernée.",
+   "remplace": "Grâce à l'anonymisation, il est impossible de relier ces données à la personne concernée.",
+   "statut": "a_relire",
+   "source": "Décision de Fabien du 2026-10-15 ; formulation juridiquement exacte de la pseudonymisation (des données pseudonymisées restent attribuables à une personne avec des informations supplémentaires : « impossible de relier » ne vaut plus)."
+  },
+  {
+   "cle": "protection-des-donnees.analytics.conservation",
+   "page": "protection-des-donnees/",
+   "texte": "Les données liées aux utilisateurs et aux événements sont conservées deux mois dans Google Analytics, puis supprimées automatiquement.",
+   "insere_avant": "Google utilise ces informations pour analyser votre utilisation de notre site",
+   "statut": "a_relire",
+   "source": "Décision de Fabien du 2026-10-15 (réglage de conservation de la propriété GA4 : 2 mois). Cohérent avec l'aide Google Analytics « Conservation des données » (support.google.com/analytics/answer/7667196) : suppression automatique des données utilisateur et d'événement à l'expiration de la durée choisie."
+  }
+ ]
+}
