@@ -21,12 +21,14 @@ cp = bloc(t, "section", "compare")
 sq = bloc(t, "section", "svq")
 carte = bloc(sq, "figure", "svq-card")
 avis = f'<b>{txt(bloc(carte, "div", "h"))}</b><p lang="en">{brut(bloc(carte, "blockquote"))}</p>'
-leg = "".join("<span>" + interne(x) + "</span>" for x in blocs(bloc(cp, "div", "cmp-legend"), "span")[::2])
 out.append(section(h2(txt(bloc(cp, "h2")), "selon votre choix") + f'<p class="intro">{brut(bloc(cp, "p", "compare-note"))}</p>'
                    + scene(1176, 520, A.ecran_securite(*textes_demo()["notice"], esc(EX["co"]["src"]), esc(EX["co"]["out"]["en"]["main"])), sim="avis", curseur=False, titre="Corrext", label="Choix du moteur et avis Attorney-Client privilege")
                    + f'<p class="legende">{brut(bloc(carte, "figcaption"))}</p>'
-                   + '<div class="tb tb-m">' + sans_svg(bloc(cp, "table")) + "</div>"
-                   + f'<p class="legende cmp-leg">{leg}</p><p class="legende">{brut(bloc(cp, "p", "cmp-note"))}</p>', ident="ou-va-mon-document"))
+                   # Tableau des trois modes : titre propre, à distance du bloc animé ; légende des pastilles et
+                   # note sur l'interrupteur retirées (retour de Fabien du 2026-10-15)
+                   + f'<h3 class="sv-tb-t" id="trois-modes">{trame.texte("securite.tableau.titre")}</h3>'
+                   + '<div class="tb tb-m">' + sans_svg(bloc(cp, "table")).replace("<table", '<table aria-labelledby="trois-modes"', 1) + "</div>",
+                   ident="ou-va-mon-document"))
 # Politique au moment du choix : bande
 out.append(trame.bouton_suivi(section(bande(txt(bloc(sq, "h2")), ("Demander une démo", C))), "securite", "milieu"))
 # Garanties : liste

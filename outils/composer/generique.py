@@ -6,11 +6,13 @@ Usage : python3 generique.py [chemin/ ...]   (sans argument : toutes les pages p
 """
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 from blocs_communs import *  # noqa: F401,F403 (source, comp, commun, app)
 from blog_commun import carte_blog, grille, COUV, AUTEUR
 import trame
+from trame import texte as texte_v2  # textes nouveaux (contenus-v2)
 
 RACINE_TEST = Path(__file__).resolve().parents[2]
 SOURCE_FR = NEURON / "docs/fr"
@@ -408,9 +410,41 @@ def h_lf_all(sec, ctx):
                    + "".join(f'<p class="para">{brut(p)}</p>' for p in reste) + f'<div class="lf-g">{"".join(items)}</div>')
 
 
+def ancre_titre(texte_titre):
+    """Ancre lisible tirée d'un intertitre : minuscules, sans accents, mots reliés par des traits d'union."""
+    s = unicodedata.normalize("NFKD", texte_titre).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"[^a-z0-9]+", "-", s).strip("-") or "section"
+
+
 def h_legal(sec, ctx):
-    corps = (blocs(sec, "div", "container") or [sec])[0]
-    return f'<section class="ar-s"><div class="wrap"><div class="ar ar-c">{sans_svg(interne(corps))}</div></div></section>\n'
+    """Page légale : sommaire collant à gauche (un lien par intertitre), texte courant à droite.
+
+    Les intertitres sans ancre en reçoivent une, tirée de leur texte ; le texte lui-même n'est pas modifié.
+    """
+    corps = sans_svg(interne((blocs(sec, "div", "container") or [sec])[0]))
+    deja = set(re.findall(r'\bid="([^"]+)"', corps))
+    entrees = []
+
+    def poser_ancre(m):
+        attrs, contenu = m.group(1), m.group(2)
+        existante = re.search(r'\bid="([^"]+)"', attrs)
+        if existante:
+            ident = existante.group(1)
+        else:
+            base = ident = ancre_titre(brut(contenu))
+            n = 2
+            while ident in deja:
+                ident, n = f"{base}-{n}", n + 1
+            deja.add(ident)
+            attrs += f' id="{ident}"'
+        entrees.append((ident, brut(contenu)))
+        return f"<h2{attrs}>{contenu}</h2>"
+
+    corps = re.sub(r"<h2\b([^>]*)>(.*?)</h2>", poser_ancre, corps, flags=re.S)
+    liens = "".join(f'<li><a href="#{i}">{t_}</a></li>' for i, t_ in entrees)
+    return (f'<section class="sec lg-s"><div class="wrap lg-g">'
+            f'<nav class="lg-toc" aria-label="Sommaire"><p class="lg-toc-t">{texte_v2("legal.sommaire")}</p><ol>{liens}</ol></nav>'
+            f'<div class="lg-c">{corps}</div></div></section>\n')
 
 
 def h_generique(sec, ctx):

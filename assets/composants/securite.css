@@ -1,0 +1,4 @@
+/* Page Sécurité et souveraineté : titre du tableau des trois modes, à distance du bloc animé */
+.sv-tb-t{margin:64px 0 16px;font:600 20px/28px var(--sans);color:var(--ink)}
+.sv-tb-t + .tb{margin-top:0}
+@media (max-width:767px){.sv-tb-t{margin-top:48px;font-size:18px;line-height:26px}}

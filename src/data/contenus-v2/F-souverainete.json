@@ -1,169 +1,176 @@
 {
- "lot": "F",
- "entrees": [
-  {
-   "cle": "protection-des-donnees.analytics.pseudonymisee",
-   "page": "protection-des-donnees/",
-   "texte": "Les informations générées par les cookies sont envoyées sous forme pseudonymisée à un serveur de Google aux États-Unis, où elles sont stockées.",
-   "remplace": "Les informations générées par les cookies sont envoyées sous forme anonymisée à un serveur de Google aux États-Unis, où elles sont stockées.",
-   "statut": "a_relire",
-   "source": "Décision de Fabien du 2026-10-15 ; formulation juridiquement exacte de la pseudonymisation. Phrase de la V1 fr/protection-des-donnees/ (§ « Outils de suivi web », paragraphe Google Analytics), « anonymisée » remplacé par « pseudonymisée »."
-  },
-  {
-   "cle": "protection-des-donnees.analytics.pseudonymisation",
-   "page": "protection-des-donnees/",
-   "texte": "Grâce à la pseudonymisation, ces données ne permettent pas, à elles seules, d'identifier la personne concernée.",
-   "remplace": "Grâce à l'anonymisation, il est impossible de relier ces données à la personne concernée.",
-   "statut": "a_relire",
-   "source": "Décision de Fabien du 2026-10-15 ; formulation juridiquement exacte de la pseudonymisation (des données pseudonymisées restent attribuables à une personne avec des informations supplémentaires : « impossible de relier » ne vaut plus)."
-  },
-  {
-   "cle": "protection-des-donnees.analytics.conservation",
-   "page": "protection-des-donnees/",
-   "texte": "Les données au niveau de l'utilisateur et de l'événement sont conservées deux mois dans Google Analytics, puis supprimées automatiquement. Les rapports agrégés ne sont pas concernés.",
-   "insere_avant": "Google utilise ces informations pour analyser votre utilisation de notre site",
-   "statut": "a_relire",
-   "source": "Décision de Fabien du 2026-10-15 : données d'événement et données utilisateur réglées à 2 mois dans GA4. Aide Google Analytics « Conservation des données » (support.google.com/analytics/answer/7667196) : suppression automatique à l'expiration de la durée ; « le paramètre de conservation des données n'a aucune incidence sur les rapports agrégés standards »."
-  },
-  {
-   "cle": "trame.pb.securite-souverainete.titre",
-   "page": "securite-souverainete/",
-   "texte": "Ce qui expose un document confidentiel",
-   "statut": "a_relire",
-   "source": "Brief du 2026-10-15 (décisions de Fabien) : bloc « Le problème » de la page Sécurité et souveraineté, sur le modèle des pages secteur ; titre construit comme ceux de la trame (D-trame.json, « Ce qui ... »)"
-  },
-  {
-   "cle": "trame.pb.securite-souverainete.1.label",
-   "page": "securite-souverainete/",
-   "texte": "Outil générique",
-   "statut": "a_relire",
-   "source": "V1 fr/ (FAQ « Quelle différence avec DeepL ou un LLM généraliste ? » : « Les outils génériques traduisent du texte [...] »)"
-  },
-  {
-   "cle": "trame.pb.securite-souverainete.1.titre",
-   "page": "securite-souverainete/",
-   "texte": "Un outil en ligne qui traite le texte hors de Suisse",
-   "statut": "a_relire",
-   "source": "Brief du 2026-10-15 (décisions de Fabien) (« un outil de traduction en ligne générique qui traite les données hors de Suisse ») ; V1 fr/solutions/cabinets-avocats/, FAQ (« Un cabinet peut-il confier un dossier à un outil de traduction en ligne ? »)"
-  },
-  {
-   "cle": "trame.pb.securite-souverainete.1.texte",
-   "page": "securite-souverainete/",
-   "texte": "Un outil de traduction générique traite les données chez un opérateur étranger. Le paragraphe qu'on y colle quitte le périmètre national.",
-   "statut": "a_relire",
-   "source": "V1 fr/ressources/blog/secret-professionnel-outils-traduction/ (« Le texte sort du périmètre national. Il est transmis à un opérateur soumis à un autre droit ») ; V1 fr/, FAQ (« Les outils génériques [...] hébergent vos données hors de Suisse. ») ; V1 fr/solutions/cabinets-avocats/ (« chaque fois qu'un collaborateur colle un paragraphe dans un service grand public ») ; Tour de correction 1 du 2026-10-15 : « traite » au lieu de « héberge » (distinction stockage / traitement), « hors de Suisse » laissé au seul titre"
-  },
-  {
-   "cle": "trame.pb.securite-souverainete.2.label",
-   "page": "securite-souverainete/",
-   "texte": "Droit américain",
-   "statut": "a_relire",
-   "source": "Brief du 2026-10-15 (décisions de Fabien) (« le droit américain qui s'applique aux prestataires américains »)"
-  },
-  {
-   "cle": "trame.pb.securite-souverainete.2.titre",
-   "page": "securite-souverainete/",
-   "texte": "Le CLOUD Act suit le prestataire, pas le serveur",
-   "statut": "a_relire",
-   "source": "Brief du 2026-10-15 (décisions de Fabien) (« le droit américain qui s'applique aux prestataires américains, quel que soit le lieu de stockage (US CLOUD Act) »)"
-  },
-  {
-   "cle": "trame.pb.securite-souverainete.2.texte",
-   "page": "securite-souverainete/",
-   "texte": "Le US CLOUD Act vise les fournisseurs soumis à la juridiction américaine, quel que soit le pays où ils stockent les données. Un hébergement en Suisse chez un tel fournisseur n'y change rien.",
-   "statut": "a_relire",
-   "source": "Brief du 2026-10-15 (décisions de Fabien) ; V1 fr/securite-souverainete/, FAQ (« le US CLOUD Act, qui vise les fournisseurs soumis à la juridiction américaine ») ; 18 U.S.C. § 2713 (« regardless of whether such communication, record, or other information is located within or outside of the United States », texte vérifié sur law.cornell.edu le 2026-10-15) ; Tour de correction 1 du 2026-10-15 : le critère est la juridiction du fournisseur, pas sa nationalité"
-  },
-  {
-   "cle": "trame.pb.securite-souverainete.3.label",
-   "page": "securite-souverainete/",
-   "texte": "Secret professionnel",
-   "statut": "a_relire",
-   "source": "V1 fr/solutions/cabinets-avocats/ (« Secret professionnel : mode Highly sensitive content »)"
-  },
-  {
-   "cle": "trame.pb.securite-souverainete.3.titre",
-   "page": "securite-souverainete/",
-   "texte": "Un secret qui interdit d'exposer le dossier",
-   "statut": "a_relire",
-   "source": "Brief du 2026-10-15 (décisions de Fabien) (« le secret professionnel ou bancaire qui interdit d'exposer un dossier »)"
-  },
-  {
-   "cle": "trame.pb.securite-souverainete.3.texte",
-   "page": "securite-souverainete/",
-   "texte": "Le secret de l'avocat et le secret bancaire sont protégés pénalement. Avant d'envoyer une pièce couverte, il faut savoir où le texte sera traité.",
-   "statut": "a_relire",
-   "source": "V1 fr/securite-souverainete/ (« La révélation d'un secret confié à un établissement est pénalement sanctionnée par l'art. 47 LB ») ; V1 fr/ressources/blog/secret-professionnel-outils-traduction/ (« le secret professionnel de l'avocat relève quant à lui du droit pénal fédéral » ; « La question qui engage réellement le secret professionnel est celle du lieu où le texte est lu et calculé ») ; V1 fr/solutions/cabinets-avocats/, FAQ (« Oui, à condition de maîtriser où le texte est traité. ») ; Tour de correction 1 du 2026-10-15 : première phrase plus proche de la V1"
-  },
-  {
-   "cle": "trame.pv.securite-souverainete.intro",
-   "page": "securite-souverainete/",
-   "texte": "L'essentiel pour votre dossier fournisseur.",
-   "statut": "a_relire",
-   "source": "Brief du 2026-10-15 (décisions de Fabien), bloc « Preuves » : cinq faits publiés sur le site ; V1 fr/securite-souverainete/ (« pour votre dossier fournisseur ») ; Tour de correction 1 du 2026-10-15"
-  },
-  {
-   "cle": "trame.pv.traitement.nom",
-   "page": "securite-souverainete/",
-   "texte": "Traitement en Suisse",
-   "statut": "a_relire",
-   "source": "V1 llms.txt (« traitement en Suisse avec LexMachina ou en mode Highly sensitive content ») ; V1 fr/securite-souverainete/, FAQ (« Le traitement l'est exclusivement lorsque le mode Highly sensitive content est activé, ou lorsque vous traduisez avec LexMachina. »)"
-  },
-  {
-   "cle": "trame.pv.traitement.detail",
-   "page": "securite-souverainete/",
-   "texte": "Avec le moteur LexMachina ou le mode Highly sensitive content",
-   "statut": "a_relire",
-   "source": "V1 fr/securite-souverainete/ (« En Suisse avec LexMachina ou en mode Highly sensitive » ; FAQ « Mes données sont-elles traitées en Suisse ? »)"
-  },
-  {
-   "cle": "trame.pv.traitement.type",
-   "page": "securite-souverainete/",
-   "texte": "Lieu de traitement",
-   "statut": "a_relire",
-   "source": "V1 fr/securite-souverainete/ (tableau : « Traitement du texte par le moteur » ; FAQ « Mes données sont-elles traitées en Suisse ? ») ; Tour de correction 1 du 2026-10-15 : « Lieu de traitement » au lieu de « Traitement », redondant avec le nom"
-  },
-  {
-   "cle": "trame.pv.nlpd.nom",
-   "page": "securite-souverainete/",
-   "texte": "nLPD et RGPD",
-   "statut": "a_relire",
-   "source": "V1 fr/securite-souverainete/ (« nLPD et RGPD : Traitements conformes à la loi fédérale sur la protection des données et au règlement européen ») ; V1 llms.txt (« conformité nLPD et RGPD »)"
-  },
-  {
-   "cle": "trame.pv.nlpd.detail",
-   "page": "securite-souverainete/",
-   "texte": "Droit suisse et européen de la protection des données",
-   "statut": "a_relire",
-   "source": "V1 fr/securite-souverainete/ (« Traitements conformes à la loi fédérale sur la protection des données et au règlement européen »)"
-  },
-  {
-   "cle": "trame.pv.nlpd.type",
-   "page": "securite-souverainete/",
-   "texte": "Conformité",
-   "statut": "a_relire",
-   "source": "V1 llms.txt (« conformité nLPD et RGPD »)"
-  },
-  {
-   "cle": "trame.pv.cloudact.nom",
-   "page": "securite-souverainete/",
-   "texte": "Stockage hors US CLOUD Act",
-   "statut": "a_relire",
-   "source": "V1 fr/securite-souverainete/ (« Hors CLOUD Act : Société suisse, infrastructure suisse : le stockage de vos projets ne relève pas du US CLOUD Act. ») ; V1 llms.txt (« hors US CLOUD Act ») ; Tour de correction 1 du 2026-10-15 : le fait porte sur le stockage, cohérent avec le problème n° 2"
-  },
-  {
-   "cle": "trame.pv.cloudact.detail",
-   "page": "securite-souverainete/",
-   "texte": "Société suisse, infrastructure suisse",
-   "statut": "a_relire",
-   "source": "V1 fr/securite-souverainete/ (« Société suisse, infrastructure suisse : le stockage de vos projets ne relève pas du US CLOUD Act. »), formule de la V1 ; Tour de correction 1 du 2026-10-15"
-  },
-  {
-   "cle": "trame.pv.cloudact.type",
-   "page": "securite-souverainete/",
-   "texte": "Juridiction",
-   "statut": "a_relire",
-   "source": "V1 fr/securite-souverainete/, FAQ (« le US CLOUD Act, qui vise les fournisseurs soumis à la juridiction américaine, ne s'y applique pas »)"
-  }
- ]
+  "lot": "F",
+  "entrees": [
+    {
+      "cle": "protection-des-donnees.analytics.pseudonymisee",
+      "page": "protection-des-donnees/",
+      "texte": "Les informations générées par les cookies sont envoyées sous forme pseudonymisée à un serveur de Google aux États-Unis, où elles sont stockées.",
+      "remplace": "Les informations générées par les cookies sont envoyées sous forme anonymisée à un serveur de Google aux États-Unis, où elles sont stockées.",
+      "statut": "a_relire",
+      "source": "Décision de Fabien du 2026-10-15 ; formulation juridiquement exacte de la pseudonymisation. Phrase de la V1 fr/protection-des-donnees/ (§ « Outils de suivi web », paragraphe Google Analytics), « anonymisée » remplacé par « pseudonymisée »."
+    },
+    {
+      "cle": "protection-des-donnees.analytics.pseudonymisation",
+      "page": "protection-des-donnees/",
+      "texte": "Grâce à la pseudonymisation, ces données ne permettent pas, à elles seules, d'identifier la personne concernée.",
+      "remplace": "Grâce à l'anonymisation, il est impossible de relier ces données à la personne concernée.",
+      "statut": "a_relire",
+      "source": "Décision de Fabien du 2026-10-15 ; formulation juridiquement exacte de la pseudonymisation (des données pseudonymisées restent attribuables à une personne avec des informations supplémentaires : « impossible de relier » ne vaut plus)."
+    },
+    {
+      "cle": "protection-des-donnees.analytics.conservation",
+      "page": "protection-des-donnees/",
+      "texte": "Les données au niveau de l'utilisateur et de l'événement sont conservées deux mois dans Google Analytics, puis supprimées automatiquement. Les rapports agrégés ne sont pas concernés.",
+      "insere_avant": "Google utilise ces informations pour analyser votre utilisation de notre site",
+      "statut": "a_relire",
+      "source": "Décision de Fabien du 2026-10-15 : données d'événement et données utilisateur réglées à 2 mois dans GA4. Aide Google Analytics « Conservation des données » (support.google.com/analytics/answer/7667196) : suppression automatique à l'expiration de la durée ; « le paramètre de conservation des données n'a aucune incidence sur les rapports agrégés standards »."
+    },
+    {
+      "cle": "trame.pb.securite-souverainete.titre",
+      "page": "securite-souverainete/",
+      "texte": "Ce qui expose un document confidentiel",
+      "statut": "a_relire",
+      "source": "Brief du 2026-10-15 (décisions de Fabien) : bloc « Le problème » de la page Sécurité et souveraineté, sur le modèle des pages secteur ; titre construit comme ceux de la trame (D-trame.json, « Ce qui ... »)"
+    },
+    {
+      "cle": "trame.pb.securite-souverainete.1.label",
+      "page": "securite-souverainete/",
+      "texte": "Outil générique",
+      "statut": "a_relire",
+      "source": "V1 fr/ (FAQ « Quelle différence avec DeepL ou un LLM généraliste ? » : « Les outils génériques traduisent du texte [...] »)"
+    },
+    {
+      "cle": "trame.pb.securite-souverainete.1.titre",
+      "page": "securite-souverainete/",
+      "texte": "Un outil en ligne qui traite le texte hors de Suisse",
+      "statut": "a_relire",
+      "source": "Brief du 2026-10-15 (décisions de Fabien) (« un outil de traduction en ligne générique qui traite les données hors de Suisse ») ; V1 fr/solutions/cabinets-avocats/, FAQ (« Un cabinet peut-il confier un dossier à un outil de traduction en ligne ? »)"
+    },
+    {
+      "cle": "trame.pb.securite-souverainete.1.texte",
+      "page": "securite-souverainete/",
+      "texte": "Un outil de traduction générique traite les données chez un opérateur étranger. Le paragraphe qu'on y colle quitte le périmètre national.",
+      "statut": "a_relire",
+      "source": "V1 fr/ressources/blog/secret-professionnel-outils-traduction/ (« Le texte sort du périmètre national. Il est transmis à un opérateur soumis à un autre droit ») ; V1 fr/, FAQ (« Les outils génériques [...] hébergent vos données hors de Suisse. ») ; V1 fr/solutions/cabinets-avocats/ (« chaque fois qu'un collaborateur colle un paragraphe dans un service grand public ») ; Tour de correction 1 du 2026-10-15 : « traite » au lieu de « héberge » (distinction stockage / traitement), « hors de Suisse » laissé au seul titre"
+    },
+    {
+      "cle": "trame.pb.securite-souverainete.2.label",
+      "page": "securite-souverainete/",
+      "texte": "Droit américain",
+      "statut": "a_relire",
+      "source": "Brief du 2026-10-15 (décisions de Fabien) (« le droit américain qui s'applique aux prestataires américains »)"
+    },
+    {
+      "cle": "trame.pb.securite-souverainete.2.titre",
+      "page": "securite-souverainete/",
+      "texte": "Le CLOUD Act suit le prestataire, pas le serveur",
+      "statut": "a_relire",
+      "source": "Brief du 2026-10-15 (décisions de Fabien) (« le droit américain qui s'applique aux prestataires américains, quel que soit le lieu de stockage (US CLOUD Act) »)"
+    },
+    {
+      "cle": "trame.pb.securite-souverainete.2.texte",
+      "page": "securite-souverainete/",
+      "texte": "Le US CLOUD Act vise les fournisseurs soumis à la juridiction américaine, quel que soit le pays où ils stockent les données. Un hébergement en Suisse chez un tel fournisseur n'y change rien.",
+      "statut": "a_relire",
+      "source": "Brief du 2026-10-15 (décisions de Fabien) ; V1 fr/securite-souverainete/, FAQ (« le US CLOUD Act, qui vise les fournisseurs soumis à la juridiction américaine ») ; 18 U.S.C. § 2713 (« regardless of whether such communication, record, or other information is located within or outside of the United States », texte vérifié sur law.cornell.edu le 2026-10-15) ; Tour de correction 1 du 2026-10-15 : le critère est la juridiction du fournisseur, pas sa nationalité"
+    },
+    {
+      "cle": "trame.pb.securite-souverainete.3.label",
+      "page": "securite-souverainete/",
+      "texte": "Secret professionnel",
+      "statut": "a_relire",
+      "source": "V1 fr/solutions/cabinets-avocats/ (« Secret professionnel : mode Highly sensitive content »)"
+    },
+    {
+      "cle": "trame.pb.securite-souverainete.3.titre",
+      "page": "securite-souverainete/",
+      "texte": "Un secret qui interdit d'exposer le dossier",
+      "statut": "a_relire",
+      "source": "Brief du 2026-10-15 (décisions de Fabien) (« le secret professionnel ou bancaire qui interdit d'exposer un dossier »)"
+    },
+    {
+      "cle": "trame.pb.securite-souverainete.3.texte",
+      "page": "securite-souverainete/",
+      "texte": "Le secret de l'avocat et le secret bancaire sont protégés pénalement. Avant d'envoyer une pièce couverte, il faut savoir où le texte sera traité.",
+      "statut": "a_relire",
+      "source": "V1 fr/securite-souverainete/ (« La révélation d'un secret confié à un établissement est pénalement sanctionnée par l'art. 47 LB ») ; V1 fr/ressources/blog/secret-professionnel-outils-traduction/ (« le secret professionnel de l'avocat relève quant à lui du droit pénal fédéral » ; « La question qui engage réellement le secret professionnel est celle du lieu où le texte est lu et calculé ») ; V1 fr/solutions/cabinets-avocats/, FAQ (« Oui, à condition de maîtriser où le texte est traité. ») ; Tour de correction 1 du 2026-10-15 : première phrase plus proche de la V1"
+    },
+    {
+      "cle": "trame.pv.securite-souverainete.intro",
+      "page": "securite-souverainete/",
+      "texte": "L'essentiel pour votre dossier fournisseur.",
+      "statut": "a_relire",
+      "source": "Brief du 2026-10-15 (décisions de Fabien), bloc « Preuves » : cinq faits publiés sur le site ; V1 fr/securite-souverainete/ (« pour votre dossier fournisseur ») ; Tour de correction 1 du 2026-10-15"
+    },
+    {
+      "cle": "trame.pv.traitement.nom",
+      "page": "securite-souverainete/",
+      "texte": "Traitement en Suisse",
+      "statut": "a_relire",
+      "source": "V1 llms.txt (« traitement en Suisse avec LexMachina ou en mode Highly sensitive content ») ; V1 fr/securite-souverainete/, FAQ (« Le traitement l'est exclusivement lorsque le mode Highly sensitive content est activé, ou lorsque vous traduisez avec LexMachina. »)"
+    },
+    {
+      "cle": "trame.pv.traitement.detail",
+      "page": "securite-souverainete/",
+      "texte": "Avec le moteur LexMachina ou le mode Highly sensitive content",
+      "statut": "a_relire",
+      "source": "V1 fr/securite-souverainete/ (« En Suisse avec LexMachina ou en mode Highly sensitive » ; FAQ « Mes données sont-elles traitées en Suisse ? »)"
+    },
+    {
+      "cle": "trame.pv.traitement.type",
+      "page": "securite-souverainete/",
+      "texte": "Lieu de traitement",
+      "statut": "a_relire",
+      "source": "V1 fr/securite-souverainete/ (tableau : « Traitement du texte par le moteur » ; FAQ « Mes données sont-elles traitées en Suisse ? ») ; Tour de correction 1 du 2026-10-15 : « Lieu de traitement » au lieu de « Traitement », redondant avec le nom"
+    },
+    {
+      "cle": "trame.pv.nlpd.nom",
+      "page": "securite-souverainete/",
+      "texte": "nLPD et RGPD",
+      "statut": "a_relire",
+      "source": "V1 fr/securite-souverainete/ (« nLPD et RGPD : Traitements conformes à la loi fédérale sur la protection des données et au règlement européen ») ; V1 llms.txt (« conformité nLPD et RGPD »)"
+    },
+    {
+      "cle": "trame.pv.nlpd.detail",
+      "page": "securite-souverainete/",
+      "texte": "Droit suisse et européen de la protection des données",
+      "statut": "a_relire",
+      "source": "V1 fr/securite-souverainete/ (« Traitements conformes à la loi fédérale sur la protection des données et au règlement européen »)"
+    },
+    {
+      "cle": "trame.pv.nlpd.type",
+      "page": "securite-souverainete/",
+      "texte": "Conformité",
+      "statut": "a_relire",
+      "source": "V1 llms.txt (« conformité nLPD et RGPD »)"
+    },
+    {
+      "cle": "trame.pv.cloudact.nom",
+      "page": "securite-souverainete/",
+      "texte": "Stockage hors US CLOUD Act",
+      "statut": "a_relire",
+      "source": "V1 fr/securite-souverainete/ (« Hors CLOUD Act : Société suisse, infrastructure suisse : le stockage de vos projets ne relève pas du US CLOUD Act. ») ; V1 llms.txt (« hors US CLOUD Act ») ; Tour de correction 1 du 2026-10-15 : le fait porte sur le stockage, cohérent avec le problème n° 2"
+    },
+    {
+      "cle": "trame.pv.cloudact.detail",
+      "page": "securite-souverainete/",
+      "texte": "Société suisse, infrastructure suisse",
+      "statut": "a_relire",
+      "source": "V1 fr/securite-souverainete/ (« Société suisse, infrastructure suisse : le stockage de vos projets ne relève pas du US CLOUD Act. »), formule de la V1 ; Tour de correction 1 du 2026-10-15"
+    },
+    {
+      "cle": "trame.pv.cloudact.type",
+      "page": "securite-souverainete/",
+      "texte": "Juridiction",
+      "statut": "a_relire",
+      "source": "V1 fr/securite-souverainete/, FAQ (« le US CLOUD Act, qui vise les fournisseurs soumis à la juridiction américaine, ne s'y applique pas »)"
+    },
+    {
+      "cle": "securite.tableau.titre",
+      "page": "securite-souverainete/",
+      "texte": "Les trois modes, comparés point par point",
+      "statut": "a_relire",
+      "source": "Retour de Fabien du 2026-10-15 : ajouter un titre au tableau ; titre factuel tiré des en-têtes du tableau (trois modes, cinq critères)"
+    }
+  ]
 }
