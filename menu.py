@@ -5,6 +5,17 @@ import re
 from pathlib import Path
 
 AJOUTS = Path(__file__).resolve().parent / "src/data/menu-ajouts.json"  # entrées ajoutées par les lots de la V2
+PAGES = Path(__file__).resolve().parent / "src/pages"
+
+
+def sous_titre_de_page(href):
+    """Sous-titre d'un lien du méga-menu qui n'en a pas : la seconde ligne du titre de sa page (h1 > span.s), lue telle
+    quelle dans la source (retour de Fabien du 2026-10-15). Chaîne vide si la page n'en a pas."""
+    f = PAGES / href.split("#")[0] / "index.html"
+    if not f.exists():
+        return ""
+    m = re.search(r'<h1[^>]*>.*?<span class="s">(.*?)</span>', f.read_text(encoding="utf-8"), re.S)
+    return _txt(m.group(1)) if m else ""
 
 CHEVRON = ('<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" '
            'stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>')
@@ -189,7 +200,8 @@ def rendre_entete(nav, actif="", minimal=False):
             for col in p["colonnes"]:
                 h.append(f'<div class="mg-col"><p class="mg-h">{_e(col["titre"])}</p>\n')
                 for l in col["liens"]:
-                    em = f'<em>{_e(l["desc"])}</em>' if l["desc"] else ""
+                    desc = l["desc"] or sous_titre_de_page(l["href"])
+                    em = f'<em>{_e(desc)}</em>' if desc else ""
                     h.append(f'<a class="mg-a" href="{_a(l["href"])}"><b>{_e(l["titre"])}</b>{em}</a>\n')
                 h.append("</div>\n")
             pr = p["promo"]

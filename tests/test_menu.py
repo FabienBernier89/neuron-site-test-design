@@ -40,6 +40,15 @@ class TestMenu(unittest.TestCase):
         self.assertEqual(titres[-1], "Agence de traduction ou plateforme")
         self.assertEqual([e["libelle"] for e in self.m["entrees"]], ["Corrext", "Solutions", "LexMachina", "Ressources"])
 
+    def test_chaque_lien_du_mega_menu_a_un_sous_titre(self):
+        """Tout lien du méga-menu porte un sous-titre ; ceux de la V1 qui n'en avaient pas reprennent le sous-titre de leur page."""
+        h = build.chemin_page("").read_text(encoding="utf-8")
+        liens = re.findall(r'<a class="mg-a" href="[^"]+">(.*?)</a>', h, re.S)
+        self.assertGreater(len(liens), 30)
+        for l in liens:
+            self.assertRegex(l, r"^<b>[^<]+</b><em>[^<]+</em>$")
+        self.assertIn("<b>Cabinets d&#x27;avocats</b><em>Traduire un dossier sans jamais le sortir de Suisse</em>".replace("&#x27;", "'"), h)
+
     def test_bouton_connexion(self):
         """Lien « Connexion » vers la page de connexion Corrext, à gauche du bouton de démo et dans le menu mobile."""
         url = ("https://auth.corrext.com/realms/corrext/protocol/openid-connect/auth?client_id=corrext&amp;scope=openid%20email%20profile"
