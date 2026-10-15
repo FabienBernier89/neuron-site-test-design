@@ -58,14 +58,14 @@ ul{padding:0;list-style:none}
 .mg-a{display:block;padding:8px 12px;border-radius:6px;transition:background .15s}
 .mg-a:hover,.mg-a:focus-visible{background:var(--tile)}
 .mg-a b{display:block;font:500 14px/20px var(--sans);color:var(--ink)}
-.mg-a em{display:block;margin-top:4px;font:400 14px/20px var(--sans);font-style:normal;color:var(--muted)}
+.mg-a em{display:block;margin-top:4px;font:400 13px/18px var(--sans);font-style:normal;color:var(--muted)}
 .mg-card{display:block;padding:12px;margin:-12px -12px 0 0;border-radius:6px;transition:background .15s}
 .mg-card:hover{background:var(--tile)}
 .mg-mini{display:block;position:relative;aspect-ratio:371/247;border-radius:6px;overflow:hidden;border:1px solid var(--line);background-color:#E3E9F3;background-image:radial-gradient(55% 55% at 18% 12%,rgba(49,123,255,.14),transparent 60%),radial-gradient(50% 50% at 88% 20%,rgba(49,123,255,.12),transparent 55%),radial-gradient(55% 55% at 6% 90%,rgba(255,255,255,.55),transparent 60%)}
 .mg-mw{position:absolute;left:12%;right:12%;top:16%;bottom:-8%;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:6px;box-shadow:0 8px 30px rgba(0,0,0,.12);display:flex;gap:4px;padding:8px}
 .mg-mw i{width:6px;height:6px;border-radius:50%;background:#d9dee8}
 .mg-card b{display:block;margin-top:12px;font:500 14px/20px var(--sans);color:var(--ink)}
-.mg-t{display:block;margin-top:4px;font:400 14px/20px var(--sans);color:var(--muted)}
+.mg-t{display:block;margin-top:4px;font:400 13px/18px var(--sans);color:var(--muted)}
 .mg-card .lien{margin-top:8px;font-size:14px;line-height:20px}
 .mg-voile{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:40}
 
