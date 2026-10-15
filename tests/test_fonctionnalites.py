@@ -19,6 +19,12 @@ class TestCartesFonctionnalites(unittest.TestCase):
         cls.sortie = support.site_complet(apercu=True)
         cls.pages = {str(f.relative_to(cls.sortie)): f.read_text(encoding="utf-8") for f in cls.sortie.rglob("index.html")}
 
+    def test_toujours_trois_cartes(self):
+        for c, h in self.pages.items():
+            for bloc in re.findall(r'<div class="fx-g">(.*?)</div>\s*</div></section>', h, re.S):
+                self.assertEqual(bloc.count('<a class="fx"'), 3, c)
+        self.assertNotIn("fx-n", (self.sortie / "assets/site.css").read_text(encoding="utf-8"))
+
     def test_blocs_convertis(self):
         n = sum(h.count('<div class="fx-g') for h in self.pages.values())
         self.assertGreaterEqual(n, 15)  # 9 blocs « autres outils / pour aller plus loin » + 6 pages Solutions

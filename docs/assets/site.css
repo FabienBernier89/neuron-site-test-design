@@ -982,7 +982,6 @@ main table a{display:inline-block;padding-block:3px}
    texte, lien. Chaque élément est stylé dans son ÉTAT FINAL ; les animations (cycle de 8 s) rejouent le parcours qui y
    mène. Sans animation (mouvement réduit), la mini-interface reste donc lisible et juste. */
 .fx-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:40px}
-.fx-g.fx-n2,.fx-g.fx-n4{grid-template-columns:repeat(2,minmax(0,1fr))}
 .fx{display:flex;flex-direction:column;padding:16px;border-radius:8px;background:var(--tile);color:inherit;text-decoration:none}
 .fx-v{position:relative;height:300px;margin-bottom:16px;border-radius:8px;overflow:hidden;display:grid;place-items:center;background-color:#e6edf8;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Ccircle cx='11' cy='11' r='1.1' fill='%23001b4c' fill-opacity='.12'/%3E%3C/svg%3E"),linear-gradient(155deg,rgba(49,123,255,.16),rgba(49,123,255,0) 50%)}
@@ -996,8 +995,8 @@ main table a{display:inline-block;padding-block:3px}
 .fx-l svg{width:16px;height:16px;transition:transform .2s}
 .fx:hover .fx-l svg{transform:translateX(3px)}
 .fx:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-@media (max-width:1023px){.fx-g,.fx-g.fx-n4{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:640px){.fx-g,.fx-g.fx-n2,.fx-g.fx-n4{grid-template-columns:minmax(0,1fr)}.fx-v{height:260px}}
+@media (max-width:899px){.fx-g{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.fx-v{height:260px}}
 
 /* Éléments communs de la peau Corrext */
 .fx-w svg{display:block}

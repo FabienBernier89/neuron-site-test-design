@@ -100,6 +100,11 @@ def _fin_div(html, debut):
     raise ValueError("div non fermé")
 
 
+def _insecables(t):
+    """Espace insécable avant ; : ? ! (typographie française : la ponctuation haute ne commence jamais une ligne)."""
+    return re.sub(r" ([;:?!])", "\u00a0\\1", t)
+
+
 def _carte(a):
     href = CIBLE.search(a).group(1)
     corps = a[a.index(">") + 1:a.rindex("</a>")]
@@ -112,7 +117,7 @@ def _carte(a):
     lien = re.search(r'<span class="lien">(.*?)</span>', corps, re.S)
     libelle = lien.group(1) if lien else "En savoir plus"
     return (f'<a class="fx" href="{{{{ROOT}}}}{href}"><div class="fx-v" aria-hidden="true"><div class="fx-w">{VISUELS[href]}</div></div>'
-            f'<b class="fx-t">{titre}</b>' + (f'<p class="fx-p">{texte.group(1)}</p>' if texte else "")
+            f'<b class="fx-t">{titre}</b>' + (f'<p class="fx-p">{_insecables(texte.group(1))}</p>' if texte else "")
             + f'<span class="fx-l">{libelle} {FLECHE}</span></a>')
 
 
@@ -129,7 +134,8 @@ def traiter(html, page):
         if not cartes or reste or not all(c and c.group(1) in VISUELS for c in cibles):
             continue
         sortie.append(html[pos:m.start()])
-        sortie.append(f'<div class="fx-g fx-n{len(cartes)}">' + "".join(_carte(c) for c in cartes) + "</div>")
+        # Toujours trois cartes de même taille, sur une ligne (retour de Fabien du 2026-10-15 : pas de 2 x 2)
+        sortie.append('<div class="fx-g">' + "".join(_carte(c) for c in cartes[:3]) + "</div>")
         pos = fin
     if not sortie:
         return html
