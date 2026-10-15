@@ -43,6 +43,13 @@ class TestCartesFonctionnalites(unittest.TestCase):
                     self.assertIn(partie, carte, c)
                 self.assertNotIn("<b>", re.search(r'<b class="fx-t">(.*?)</b>', carte, re.S).group(1), c)
 
+    def test_libelles_du_mega_menu_issus_des_sources(self):
+        import menu
+        corpus = " ".join(p.read_text(encoding="utf-8") for p in SOURCES if p.exists()).replace("&amp;", "&")
+        for href, html in menu._visuels_mega().items():
+            for t in re.findall(r">([^<>]{3,})<", html):
+                self.assertIn(t.strip(), corpus, (href, t))
+
     def test_libelles_issus_des_sources(self):
         corpus = " ".join(p.read_text(encoding="utf-8") for p in SOURCES if p.exists()).replace("&amp;", "&")
         for href, html in F.VISUELS.items():

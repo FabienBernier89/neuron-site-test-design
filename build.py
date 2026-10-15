@@ -29,7 +29,7 @@ ICI = Path(__file__).resolve().parent
 NEURON = Path(os.environ.get("NEURON_SRC", ICI.parent / "neuron")).resolve()
 SRC, ASSETS = ICI / "src", ICI / "assets"
 DOCS = Path(os.environ.get("SORTIE") or ICI / "docs").resolve()  # dossier de sortie du build
-# Réglages du site : apercu (noindex, robots, ruban), base, identifiants, destinataire des formulaires
+# Réglages du site : apercu (noindex, robots), base, identifiants, destinataire des formulaires
 CONFIG = json.loads((SRC / "data/config.json").read_text(encoding="utf-8"))
 
 # Toutes les pages présentes dans src/pages (chemin publié ; source : src/pages/<chemin>index.html), accueil en tête
@@ -388,7 +388,7 @@ def assembler(meta, corps, page, nav, pied, v, racine=None):
     robots = '<meta name="robots" content="noindex, nofollow">\n' if CONFIG["apercu"] else ""
     html = (TETE.replace("@ROBOTS@", robots).replace("@TITRE@", meta["title"]).replace("@DESC@", meta["description"])
             .replace("@SEO@", seo(page, meta)).replace("@V@", v).replace("@CX@", lien_cx))
-    html += menu.rendre_entete(nav, meta.get("menu", ""), minimal=meta.get("gabarit") == "contact", ruban=CONFIG["apercu"])
+    html += menu.rendre_entete(nav, meta.get("menu", ""), minimal=meta.get("gabarit") == "contact")
     html += '<main id="main">\n' + corps + "</main>\n" + menu.rendre_pied(pied)
     demo = 'id="cxSrc"' in corps
     globaux = ["global.js"] if (DOCS / "assets/global.js").exists() else []

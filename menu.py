@@ -19,6 +19,24 @@ LUNE = ('<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 9.5A5.5 5.5 0 
 CONNEXION = ("https://auth.corrext.com/realms/corrext/protocol/openid-connect/auth?client_id=corrext"
              "&scope=openid%20email%20profile&response_type=code"
              "&redirect_uri=https%3A%2F%2Fcorrext.com%2Fapi%2Fauth%2Fcallback%2Fkeycloak")
+# Carte mise en avant de chaque panneau du méga-menu : mini-interface qui montre où mène le lien (peau des cartes de
+# fonctionnalités, assets/composants/fonctionnalites.css). Libellés repris du site : démo, titres des comparatifs,
+# distinctions du bandeau de l'accueil. Retour de Fabien du 2026-10-15 : plus de fenêtre vide.
+def _visuels_mega():
+    from outils.post.fonctionnalites import VISUELS
+    return {
+        "corrext/traduction-texte-et-document/#demo": VISUELS["fr/corrext/traduction-texte-et-document/"],
+        "comparatif/": ('<div class="u-lbl">Comparatifs</div><div class="u-list u-niv">'
+                        '<div class="u-it u-n1"><i></i>Corrext et DeepL</div>'
+                        '<div class="u-it u-n2"><i></i>Corrext et les LLM généralistes</div>'
+                        '<div class="u-it u-n3"><i></i>Agence de traduction ou plateforme</div></div>'),
+        "a-propos/": ('<div class="u-lbl">À propos et distinctions</div><div class="u-list u-dl">'
+                      '<div class="u-it"><span>Swiss FinTech Awards 2024</span><small>Lauréat Early Stage</small></div>'
+                      '<div class="u-it"><span>BILANZ</span><small>Entreprises les plus innovantes 2024</small></div>'
+                      '<div class="u-it"><span>Hébergement 100% suisse</span><small>Infomaniak</small></div></div>'),
+    }
+
+
 THEME = ('<div class="theme" role="group" aria-label="Thème d\'affichage">'
          '<button type="button" data-theme-set="systeme" aria-label="Thème du système">' + ECRAN + '</button>'
          '<button type="button" data-theme-set="clair" aria-label="Thème clair">' + SOLEIL + '</button>'
@@ -144,10 +162,9 @@ def appliquer_ajouts(nav, pied, ajouts=None):
     return nav, pied
 
 
-def rendre_entete(nav, actif="", minimal=False, ruban=True):
-    """En-tête et menus. Le ruban d'aperçu n'est affiché que si ruban est vrai (réglage « apercu » du site)."""
+def rendre_entete(nav, actif="", minimal=False):
+    """En-tête et menus. Le ruban d'aperçu a été retiré le 2026-10-15 (demande de Fabien) ; le noindex reste."""
     h = ['<a class="skip" href="#main">Aller au contenu</a>\n',
-         '<p class="ruban" data-libre>Aperçu du futur site Neur.on, non indexé.</p>\n' if ruban else "",
          '<header class="hd' + (" min" if minimal else "") + '" id="hd">\n<div class="wrap hd-in">\n',
          '<a class="hd-logo" href="{{ROOT}}" aria-label="Neur.on, retour à l\'accueil">'
          '<img class="logo-c" src="{{ROOT}}assets/img/neuron-logo.png" alt="Neur.on" width="92" height="28">'
@@ -177,8 +194,9 @@ def rendre_entete(nav, actif="", minimal=False, ruban=True):
                 h.append("</div>\n")
             pr = p["promo"]
             if pr:
-                h.append(f'<a class="mg-card" href="{_a(pr["href"])}"><span class="mg-mini" aria-hidden="true">'
-                         '<span class="mg-mw"><i></i><i></i><i></i></span></span>'
+                vis = _visuels_mega().get(pr["href"])
+                fond = f'<span class="fx-w mg-w">{vis}</span>' if vis else '<span class="mg-mw"><i></i><i></i><i></i></span>'
+                h.append(f'<a class="mg-card" href="{_a(pr["href"])}"><span class="mg-mini" aria-hidden="true">{fond}</span>'
                          f'<b>{_e(pr["titre"])}</b><span class="mg-t">{_e(pr["texte"])}</span>'
                          f'<span class="lien">{_e(pr["lien"])}</span></a>\n')
             h.append("</div>\n</div>\n")

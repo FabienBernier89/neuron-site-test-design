@@ -32,7 +32,6 @@ ul{padding:0;list-style:none}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
 .skip{position:absolute;left:-9999px}
 .skip:focus{left:16px;top:8px;z-index:100;background:var(--page);padding:8px 12px;border-radius:8px}
-.ruban{background:var(--tile);color:var(--muted);font:400 12px/16px var(--sans);text-align:center;padding:8px var(--gut)}
 
 /* En-tête (68 px, collant) */
 .hd{position:sticky;top:0;z-index:50;background:var(--page)}
@@ -102,6 +101,8 @@ ul{padding:0;list-style:none}
 .h1 .s{display:block;font:300 40px/48px var(--serif)}
 .hero-d p{color:var(--text);margin-bottom:24px}
 .hero-a .h1{max-width:932px}
+/* Baseline sous le titre de l'accueil (contenus-v2 H-accueil.json) */
+.hero-bl{max-width:640px;margin-top:20px;font:400 18px/28px var(--sans);color:var(--text);text-wrap:pretty}
 .hero-act{margin-top:32px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
 .hero-act .note{font:400 14px/20px var(--sans);color:var(--muted)}
 .hero-st{padding-top:56px}

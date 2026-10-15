@@ -51,10 +51,11 @@ class TestBuild(unittest.TestCase):
         self.assertEqual((self.docs / "robots.txt").read_text(encoding="utf-8"), "User-agent: *\nDisallow: /\n")
         self.assertTrue((self.docs / ".nojekyll").exists())
 
-    def test_noindex_et_ruban_partout(self):
+    def test_noindex_partout_sans_ruban(self):
+        """Le ruban d'aperçu est retiré (2026-10-15) ; le site d'aperçu reste non indexé."""
         for p, h in self.pages.items():
             self.assertIn('<meta name="robots" content="noindex, nofollow">', h, p)
-            self.assertIn("Aperçu du futur site Neur.on, non indexé.", h, p)
+            self.assertNotIn("Aperçu du futur site", h, p)
         self.assertIn('<meta name="robots" content="noindex, nofollow">',
                       (self.docs / "404.html").read_text(encoding="utf-8"))
 
@@ -128,7 +129,7 @@ class TestBuild(unittest.TestCase):
         self.assertIn('<base href="/">', (production / "404.html").read_text(encoding="utf-8"))
 
     def test_modes_apercu_et_production(self):
-        """apercu vrai : noindex, ruban, robots Disallow, pas de plan du site. apercu faux : rien de tout cela, robots
+        """apercu vrai : noindex, robots Disallow, pas de plan du site (plus de ruban depuis le 2026-10-15). apercu faux : rien de tout cela, robots
         ouvert qui annonce sitemap.xml."""
         def construire(apercu):
             return support.construire(self.enterContext(tempfile.TemporaryDirectory()), ["", "contact/", "corrext/"],
@@ -139,7 +140,7 @@ class TestBuild(unittest.TestCase):
         for chemin in ("fr/index.html", "fr/contact/index.html", "fr/corrext/index.html", "404.html"):
             h = (apercu / chemin).read_text(encoding="utf-8")
             self.assertIn('<meta name="robots" content="noindex, nofollow">', h, chemin)
-            self.assertIn('class="ruban"', h, chemin)
+            self.assertNotIn('class="ruban"', h, chemin)
             h = (production / chemin).read_text(encoding="utf-8")
             self.assertNotIn("noindex", h, chemin)
             self.assertNotIn('class="ruban"', h, chemin)

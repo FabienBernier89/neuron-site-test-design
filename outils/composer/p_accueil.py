@@ -35,6 +35,7 @@ zone = '<div class="cx-zone">' + bloc(demo, "div", "cx-ex") + bloc(demo, "div", 
 micro = brut(bloc(bloc(t, "section", "final-cta"), "p", "micro"))
 B["hero"] = ('<section class="hero hero-a">\n<div class="wrap">\n'
            '<h1 class="h1"><span class="n">Votre solution de traduction par IA</span> <span class="s">pour le droit, la fiscalité et la finance</span></h1>\n'
+           f'<p class="hero-bl">{trame.texte("accueil.baseline")}</p>\n'
            f'<div class="hero-act"><a class="btn" href="{C}" data-suivi="cta-accueil-hero">Demander une démo</a><p class="note">{micro}</p></div>\n</div>\n'
            '<div class="wrap hero-st">' + scene(1176, 680, app_ecran(), sim="app", curseur=False, label="Démonstration de l'interface Corrext").replace('data-sim="app"', 'data-sim="app" data-tenue="0"', 1) + "</div>\n</section>\n")
 
