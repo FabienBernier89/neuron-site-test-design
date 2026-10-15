@@ -53,9 +53,10 @@
     if (racine.hasAttribute("data-interactif")) {
       ["pointerdown", "keydown"].forEach(function (type) {
         racine.addEventListener(type, function (e) {
-          if (!e.isTrusted) return;
+          if (!e.isTrusted || self.libre) return;
           self.arret = true;
           racine.classList.add("sim-libre");
+          if (racine.hasAttribute("data-une-fois")) self.passerLibre();
           /* un appui interrompu ne doit pas laisser de contrôle enfoncé */
           [].forEach.call(self.scene.querySelectorAll(".press"), function (x) { x.classList.remove("press"); });
         });
@@ -209,9 +210,40 @@
         poserPilules(self.scene);
         compter(self.scene);
       }
-      fn(self).then(function () { if (!reduit && !self.arret) return self.attendre(tenue).then(boucle); });
+      fn(self).then(function () {
+        if (self.r.hasAttribute("data-une-fois")) { if (!self.arret) self.passerLibre(); return; }
+        if (!reduit && !self.arret) return self.attendre(tenue).then(boucle);
+      });
     })();
   };
+
+  /* Mode libre : la visite guidée est finie (ou interrompue par un geste) ; la scène revient à un état stable et ses
+     commandes répondent au visiteur. Chaque scène qui le propose s'inscrit dans LIBRE (SIM.libre). */
+  var LIBRE = {};
+  Lecteur.prototype.passerLibre = function () {
+    var fn = LIBRE[this.r.getAttribute("data-sim")];
+    if (this.libre || !fn) return;
+    this.libre = true;
+    this.arret = false;                       /* les attentes du mode libre avancent de nouveau (la visite reste close) */
+    this.r.classList.add("sim-libre");
+    this.scene.innerHTML = this.modele;
+    poserPilules(this.scene);
+    compter(this.scene);
+    var main = this.r.querySelector(".sim-main");
+    if (main) main.hidden = false;
+    fn(this);
+  };
+  /* Rend un élément de la scène activable à la souris et au clavier */
+  function commande(el, action, libelle) {
+    if (!el) return;
+    el.setAttribute("role", "button");
+    el.setAttribute("tabindex", "0");
+    if (libelle) el.setAttribute("aria-label", libelle);
+    el.addEventListener("click", function (e) { e.stopPropagation(); action(e); });
+    el.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); action(e); }
+    });
+  }
 
   function suite(etapes) {
     return etapes.reduce(function (p, f) { return p.then(f); }, Promise.resolve());
@@ -347,7 +379,82 @@
   SCENES.app = function (l) {
     l.cle = extrait(l);
     var d = EX[l.cle], cr = l.q(".cr");
-    return jouer(l, etapesTraduction(l, d, cr, 2).concat(etapesMoteurTiers(l, d, cr), etapesLookup(l, d, cr), finir(cr)));
+    /* jouée une seule fois (data-une-fois) : pas de fondu final, la scène passe en mode libre (LIBRE.app) */
+    return jouer(l, etapesTraduction(l, d, cr, 2).concat(etapesMoteurTiers(l, d, cr), etapesLookup(l, d, cr), l.r.hasAttribute("data-une-fois") ? [] : finir(cr)));
+  };
+
+  /* Accueil, mode libre : texte traduit par LexMachina, Highly sensitive content activé, terme surligné ; le visiteur
+     change de moteur (sortie réelle de ce moteur, avertissement pour un moteur tiers), coupe ou active l'interrupteur,
+     parcourt les alternatives et ouvre le Fast Lookup. */
+  LIBRE.app = function (l) {
+    var d = EX[l.cle || "co"] || EX.co, cr = l.q(".cr"), eng = l.q(".cr-eng"), sw = l.q(".cr-sw");
+    var moteur = "LexMachina", alt = 0;
+    l.cle = l.cle || "co";
+    l.q(".cr-in").classList.add("rempli");
+    l.q(".cr-txt").textContent = d.src;
+    l.q(".cr-cnt").textContent = d.src.length + " / 10000";
+    l.q(".cr-src").classList.add("detecte");
+    var sortie = l.q(".cr-out");
+    sortie.textContent = d.out.en.main;
+    sortie.classList.add("vu");
+    sw.classList.add("on");
+    var terme = cr.getAttribute("data-terme-" + l.cle);
+    if (d.lookup && terme && d.src.indexOf(terme) >= 0) {
+      surligner(l, d, terme);
+      remplirLookup(l, d.lookup);
+      cr.classList.add("lkb");
+    }
+    function texteDe(m) {
+      if (m === "LexMachina") return d.out.en.main;
+      var a = d.out.en.alt.filter(function (x) { return x.e === m; })[0];
+      return a ? a.t : d.out.en.main;
+    }
+    function choisir(m) {
+      if (m === moteur) return;
+      moteur = m;
+      eng.querySelector(".cr-v").textContent = m;
+      [].forEach.call(eng.querySelectorAll(".cr-menu span"), function (x) { x.classList.toggle("on", x.getAttribute("data-v") === m); });
+      if (m === "LexMachina") {
+        cr.classList.remove("avis");
+      } else {
+        sw.classList.remove("on");
+        cr.style.setProperty("--h-avis", (l.q(".cr-notice").offsetHeight + 12) + "px");
+        cr.classList.add("avis");
+      }
+      l.retraduire(texteDe(m));
+    }
+    commande(eng, function (e) {
+      var item = e.target.closest && e.target.closest(".cr-menu span");
+      if (item && eng.classList.contains("ouvert")) { eng.classList.remove("ouvert"); choisir(item.getAttribute("data-v")); return; }
+      eng.classList.toggle("ouvert");
+    }, null);
+    document.addEventListener("click", function () { eng.classList.remove("ouvert"); });
+    commande(sw, function () {
+      if (sw.classList.contains("on")) { sw.classList.remove("on"); return; }
+      sw.classList.add("on");
+      choisir("LexMachina");
+    }, null);
+    function montrerAlt(n) {
+      alt = (n + d.out.en.alt.length) % d.out.en.alt.length;
+      l.q(".cr-pgn").textContent = (alt + 1) + " / " + d.out.en.alt.length;
+      var e = l.q(".cr-alt-e");
+      e.textContent = d.out.en.alt[alt].e;
+      e.classList.add("on");
+      l.mots(".cr-alt", d.out.en.alt[alt].t);
+    }
+    commande(l.q(".cr-spark"), function () {
+      if (cr.classList.contains("alts")) { cr.classList.remove("alts"); return; }
+      cr.classList.add("alts");
+      montrerAlt(alt);
+    }, null);
+    commande(l.q(".cr-up"), function () { montrerAlt(alt - 1); }, null);
+    commande(l.q(".cr-dn"), function () { montrerAlt(alt + 1); }, null);
+    var fermer = l.qa(".cr-pg .cr-ic").pop();
+    if (fermer && fermer !== l.q(".cr-dn")) commande(fermer, function () { cr.classList.remove("alts"); }, null);
+    function ouvrirLookup() { cr.classList.add("modal"); }
+    commande(l.q(".cr-lkb"), ouvrirLookup, null);
+    commande(l.q(".cr-txt mark"), ouvrirLookup, null);
+    commande(l.q(".cr-btn"), function () { cr.classList.remove("modal"); }, null);
   };
 
   /* Page outil : Text translation, puis Rephrasing, File translation et PDF to Word */
@@ -589,7 +696,8 @@
   };
 
   /* Registre public : une page peut ajouter sa scène (scripts chargés après sim.js) */
-  window.SIM = { enregistrer: function (nom, fn) { SCENES[nom] = fn; }, suite: suite, fixe: fixe, jouer: jouer, reduit: reduit };
+  window.SIM = { enregistrer: function (nom, fn) { SCENES[nom] = fn; }, libre: function (nom, fn) { LIBRE[nom] = fn; },
+                 suite: suite, fixe: fixe, jouer: jouer, reduit: reduit };
 
   function demarrer() {
   var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {

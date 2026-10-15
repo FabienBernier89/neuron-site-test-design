@@ -218,6 +218,18 @@ class TestAnimationsSansPause(unittest.TestCase):
             self.assertNotIn("sim-pause", h, f)
             self.assertEqual(len(re.findall(r'<div class="st" data-sim=', h)), h.count('class="sim-jauge"'), f)
 
+    def test_hero_joue_une_fois_puis_libre(self):
+        """Accueil : la visite du hero se joue une fois, puis la démo devient cliquable (retour de Fabien du 2026-10-15)."""
+        h = (self.sortie / "fr/index.html").read_text(encoding="utf-8")
+        self.assertRegex(h, r'data-sim="app" data-tenue="0" data-interactif data-une-fois')
+        self.assertRegex(h, r'<p class="sim-main" hidden>[^<]+</p><span class="sim-jauge"')
+        self.assertIn("LIBRE.app = function", self.sim)
+        self.assertIn('if (self.r.hasAttribute("data-une-fois")) { if (!self.arret) self.passerLibre(); return; }', self.sim)
+        # en mode libre, un geste du visiteur ne coupe plus les animations de la démo
+        self.assertIn("if (!e.isTrusted || self.libre) return;", self.sim)
+        # les commandes du mode libre se pilotent aussi au clavier
+        self.assertIn('el.setAttribute("tabindex", "0")', self.sim)
+
     def test_surlignage_bleu(self):
         for f in self.sortie.glob("assets/*.css"):
             self.assertNotIn("#fff2a8", f.read_text(encoding="utf-8").lower(), f)
