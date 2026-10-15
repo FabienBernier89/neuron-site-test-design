@@ -1,16 +1,21 @@
+"""Page Sécurité et souveraineté, sur le modèle des pages secteur (trame.py, décisions de Fabien du 2026-10-15).
+
+Ordre : hero, problème (tr-pb), où va votre document, bande, garanties, trois régimes, pour aller plus loin, preuves
+(tr-pv), FAQ, appel. Le bento « Le parcours d'un document » du hero de la V1 est retiré : ses quatre tuiles (stockage,
+traitement, norme, cadre) sont les faits du bloc Preuves, qu'elles auraient répétés. Boutons suivis :
+cta-securite-hero, cta-securite-milieu (bande), cta-securite-fin. Textes nouveaux : F-souverainete.json."""
 from commun import *
+import trame
+
 P = "securite-souverainete/"
+CLE = "securite-souverainete"
 t = liens(charger(P), P)
 out = []
 th = bloc(t, "section", "thero")
-out.append(hero("Souveraineté des données.", "Où va votre document, exactement, et qui peut le lire", brut(bloc(th, "p", "lead")), ("Demander une démo", C)))
-# Bento : le parcours d'un document
-spec = bloc(th, "div", "law-spec")
-rangs = {txt(bloc(r, "i")): txt(bloc(r, "b")) for r in blocs(spec, "div", "sr")}
-petites = [(rangs[k], k, "") for k in ("Stockage", "Traitement", "Norme", "Cadre")]
-out.append(section(bento({"titre": f'<h2 class="h3s">{txt(bloc(bloc(spec, "div", "sh"), "b"))}</h2>',
-                          "texte": txt(bloc(spec, "div", "sf")),
-                          "lien": ("Voir le tableau", "{{ROOT}}fr/securite-souverainete/#ou-va-mon-document")}, petites)))
+out.append(trame.bouton_suivi(hero("Souveraineté des données.", "Où va votre document, exactement, et qui peut le lire",
+                                   brut(bloc(th, "p", "lead")), ("Demander une démo", C)), "securite", "hero"))
+# Le problème, juste après le hero
+out.append(trame.probleme(CLE))
 # Où va votre document : scène S5 (avis réel), puis le tableau
 cp = bloc(t, "section", "compare")
 sq = bloc(t, "section", "svq")
@@ -23,7 +28,7 @@ out.append(section(h2(txt(bloc(cp, "h2")), "selon votre choix") + f'<p class="in
                    + '<div class="tb tb-m">' + sans_svg(bloc(cp, "table")) + "</div>"
                    + f'<p class="legende cmp-leg">{leg}</p><p class="legende">{brut(bloc(cp, "p", "cmp-note"))}</p>', ident="ou-va-mon-document"))
 # Politique au moment du choix : bande
-out.append(section(bande(txt(bloc(sq, "h2")), ("Demander une démo", C))))
+out.append(trame.bouton_suivi(section(bande(txt(bloc(sq, "h2")), ("Demander une démo", C))), "securite", "milieu"))
 # Garanties : liste
 sf = bloc(t, "section", "svfacts")
 lead = bloc(sf, "div", "facts-lead")
@@ -34,7 +39,9 @@ wh = bloc(t, "section", "who")
 out.append(section(h2(txt(bloc(wh, "h2")), "trois manières") + cartes([(brut(bloc(r, "h3")), brut(bloc(r, "p")), None, "") for r in blocs(wh, "article", "sc-row")])))
 sb = bloc(t, "section", "siblings")
 out.append(section(h2(txt(bloc(sb, "h2"))) + cartes([(brut(bloc(x, "b")), brut(bloc(x, "span")), (None, re.search(r'href="([^"]+)"', x).group(1)), "") for x in blocs(sb, "a")])))
+# Preuves, juste avant la FAQ
+out.append(trame.preuves(CLE, exemple=False))
 out.append(faq_section(t))
-out.append(cta_section(t, "Faites examiner ce document"))
+out.append(trame.bouton_suivi(trame.appel(cta_section(t, "Faites examiner ce document")), "securite", "fin"))
 ecrire(P, entete_existant(P), "".join(out))
 print("sécurité écrite")

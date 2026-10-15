@@ -1,4 +1,5 @@
-"""Trame problème, situation visée, preuve, appel à l'action (lot D, spec V2 § 7) : accueil et 6 pages secteur.
+"""Trame problème, situation visée, preuve, appel à l'action (lot D, spec V2 § 7) : accueil et 6 pages secteur, puis
+la page Sécurité et souveraineté (décision de Fabien du 2026-10-15), qui reprend le problème et les preuves.
 
 Ordre des blocs : hero, problème, situation visée (existante), preuves, exemple de cas d'usage, FAQ, appel à l'action.
 Ce module fournit les deux blocs nouveaux et l'habillage des appels à l'action ; chaque composeur garde ses blocs
@@ -11,8 +12,11 @@ existants et les range dans cet ordre (p_accueil.py, p_metier.py, generique.py).
 - appel(section, slug) : appel final en « sec cta » ; sur une page secteur, boutons vers le formulaire avec le secteur.
 - boutons_secteur(html, slug, position) : liens « Demander une démo » vers contact/?secteur=<slug>, avec
   data-suivi="cta-secteur-<slug>-<position>" (lot C), position « hero » ou « fin ».
+- bouton_suivi(html, contexte, position) : attribut data-suivi="cta-<contexte>-<position>" sur le bouton « Demander
+  une démo » d'un bloc, lien inchangé (page sans secteur, comme la page Sécurité et souveraineté).
 
-Textes : src/data/contenus-v2/D-trame.json (statut à relire, une source par entrée). Styles : assets/composants/trame.css.
+Textes : src/data/contenus-v2/D-trame.json (statut à relire, une source par entrée) ; pour la page Sécurité et
+souveraineté, F-souverainete.json. Styles : assets/composants/trame.css.
 """
 import html as _h
 import re
@@ -34,7 +38,7 @@ SECTEURS = ("cabinets-avocats", "banques-finance", "directions-juridiques", "fid
 ACCENTS = {"accueil": "traduction juridique", "cabinets-avocats": "dossier multilingue",
            "banques-finance": "établissement financier", "directions-juridiques": "direction juridique",
            "fiduciaires-conseil": "document d'entreprise", "autorites-administration": "secteur public",
-           "editeurs-legaltech": "produit juridique"}
+           "editeurs-legaltech": "produit juridique", "securite-souverainete": "document confidentiel"}
 # Preuves admises (spec V2 § 7), de la plus utile à la moins utile pour chaque page
 ORDRE = {
     "accueil": ("iso", "infomaniak", "segments", "innosuisse", "sfa", "dshap", "kickstart"),
@@ -44,10 +48,16 @@ ORDRE = {
     "fiduciaires-conseil": ("iso", "infomaniak", "sfa", "kickstart", "segments", "innosuisse", "dshap"),
     "autorites-administration": ("iso", "infomaniak", "innosuisse", "segments", "sfa", "dshap", "kickstart"),
     "editeurs-legaltech": ("segments", "innosuisse", "iso", "infomaniak", "sfa", "kickstart", "dshap"),
+    # Page Sécurité et souveraineté : les cinq faits de la souveraineté, sans les distinctions (brief du 2026-10-15)
+    "securite-souverainete": ("iso", "infomaniak", "traitement", "nlpd", "cloudact"),
 }
+# Pages qui présentent leurs preuves avec leur propre introduction, sans la phrase de discrétion ni la note sur les
+# références clients (elles concernent les distinctions et les clients, pas les faits de sécurité)
+INTRO_PROPRE = {"securite-souverainete": "trame.pv.securite-souverainete.intro"}
 # Repère de chaque preuve dans le texte du bandeau des distinctions (comp.dist)
 REPERES = {"iso": "ISO 27001", "infomaniak": "Infomaniak", "innosuisse": "Innosuisse", "segments": "15 millions",
-           "sfa": "Swiss FinTech Awards", "dshap": "Digital Shapers", "kickstart": "Kickstart Innovation"}
+           "sfa": "Swiss FinTech Awards", "dshap": "Digital Shapers", "kickstart": "Kickstart Innovation",
+           "traitement": "Traitement en Suisse", "nlpd": "nLPD", "cloudact": "CLOUD Act"}
 CONTACT = re.compile(r'<a class="btn" href="\{\{ROOT\}\}(?:fr/)?contact/"')
 
 
@@ -78,7 +88,8 @@ def preuves(cle, bandeau="", exemple=True):
 
     bandeau : HTML du bandeau des distinctions de la page, s'il y en a un ; ses preuves ne sont pas répétées, et
     l'introduction qui les énumère disparaît. exemple : la page montre un exemple de cas d'usage ; la phrase de
-    discrétion n'y paraît pas, pour ne pas contredire l'exemple."""
+    discrétion n'y paraît pas, pour ne pas contredire l'exemple. Une page de INTRO_PROPRE garde sa seule introduction,
+    sans note."""
     deja = _brut(bandeau)
     ids = [i for i in ORDRE[cle] if REPERES[i] not in deja]
     if not ids:
@@ -86,11 +97,15 @@ def preuves(cle, bandeau="", exemple=True):
     lignes = "".join(f'<li><span class="tr-pv-n"><b>{e(texte(f"trame.pv.{i}.nom"))}</b>'
                      f'<span>{e(texte(f"trame.pv.{i}.detail"))}</span></span>'
                      f'<span class="pill tr-pv-ty">{e(texte(f"trame.pv.{i}.type"))}</span></li>' for i in ids)
-    intro = ([] if exemple else [texte("trame.pv.discretion")]) + ([] if deja.strip() else [texte("trame.pv.intro")])
+    if cle in INTRO_PROPRE:
+        intro, note = [texte(INTRO_PROPRE[cle])], ""
+    else:
+        intro = ([] if exemple else [texte("trame.pv.discretion")]) + ([] if deja.strip() else [texte("trame.pv.intro")])
+        note = f'<p class="legende">{e(texte("trame.pv.note"))}</p>'
     p_intro = f'<p class="intro">{e(" ".join(intro))}</p>' if intro else ""
     return ('<section class="sec tr-pv" aria-labelledby="tr-pv-titre"><div class="wrap tr-pv-g">\n'
             '<div class="tr-pv-t">' + _titre("trame.pv.titre", "vérifier", "tr-pv-titre")
-            + f'{p_intro}<p class="legende">{e(texte("trame.pv.note"))}</p></div>'
+            + f'{p_intro}{note}</div>'
             + f'<ul class="tr-pv-l">{lignes}</ul>\n</div></section>\n')
 
 
@@ -102,6 +117,16 @@ def boutons_secteur(html, slug, position):
     if position not in ("hero", "fin"):
         raise ValueError(f"position de bouton inconnue : {position}")
     return CONTACT.sub(f'<a class="btn" href="{{{{ROOT}}}}contact/?secteur={slug}" data-suivi="cta-secteur-{slug}-{position}"', html)
+
+
+def bouton_suivi(html, contexte, position):
+    """Attribut de suivi du seul bouton « Demander une démo » (lien vers contact/) d'un bloc :
+    data-suivi="cta-<contexte>-<position>", convention du lot C. ValueError s'il n'y a pas exactement un bouton."""
+    if position not in ("hero", "milieu", "fin"):
+        raise ValueError(f"position de bouton inconnue : {position}")
+    if len(CONTACT.findall(html)) != 1:
+        raise ValueError(f"cta-{contexte}-{position} : un seul bouton vers contact/ attendu dans le bloc")
+    return CONTACT.sub(lambda m: m.group(0) + f' data-suivi="cta-{contexte}-{position}"', html)
 
 
 def appel(section, slug=None):

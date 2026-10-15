@@ -2,7 +2,10 @@
 
 - Page Protection des données : dans le paragraphe Google Analytics, les données sont « pseudonymisées » et non plus
   « anonymisées », et leur durée de conservation est indiquée (post-traitement outils/post/pseudonymisation.py).
-- Page Sécurité et souveraineté : voir TestPageSecurite.
+- Page Sécurité et souveraineté, sur le modèle des pages secteur (trame.py) : bloc « Le problème » juste après le hero,
+  bento « Le parcours d'un document » retiré (ses quatre tuiles reprenaient les preuves), bloc « Preuves » de cinq
+  faits juste avant la FAQ, sans redite de la liste « Ce que Neur.on garantit, précisément », et appels à l'action
+  suivis (cta-securite-hero, cta-securite-milieu, cta-securite-fin).
 Textes nouveaux : src/data/contenus-v2/F-souverainete.json (statut à relire, une source par entrée)."""
 import importlib
 import json
@@ -16,6 +19,7 @@ ICI = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ICI))
 import build  # noqa: E402
 from outils import contenus  # noqa: E402
+from tests.test_trame import sections, suites, texte_brut  # noqa: E402
 
 JSON_F = ICI / "src/data/contenus-v2/F-souverainete.json"
 DECISION = "Décision de Fabien du 2026-10-15"
@@ -95,6 +99,107 @@ class TestProtectionDesDonnees(unittest.TestCase):
         self.assertIn("GA4 : 2 mois", e["protection-des-donnees.analytics.conservation"]["source"])
         self.assertEqual(e["protection-des-donnees.analytics.conservation"]["insere_avant"], SUITE_V1)
         self.assertEqual(contenus.texte("protection-des-donnees.analytics.conservation"), CONSERVATION)
+
+
+# Page Sécurité et souveraineté
+SECURITE = "securite-souverainete/"
+CLE = "securite-souverainete"
+# Cinq faits du bloc Preuves, dans l'ordre du brief, et un repère attendu dans le nom affiché
+PREUVES = {"iso": "ISO 27001", "infomaniak": "Infomaniak", "traitement": "Traitement en Suisse", "nlpd": "nLPD et RGPD",
+           "cloudact": "CLOUD Act"}
+GARANTIES = "Ce que Neur.on garantit, précisément"
+
+
+class TestPageSecurite(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        subprocess.run([sys.executable, str(ICI / "build.py")], check=True, cwd=ICI, stdout=subprocess.DEVNULL)
+        cls.h = build.chemin_page(SECURITE).read_text(encoding="utf-8")
+        cls.main = cls.h[cls.h.index('<main id="main">'):cls.h.index("</main>")]
+        cls.secs = sections(cls.h)
+        cls.noms = [n for n, _ in cls.secs]
+        cls.par_nom = dict(cls.secs)
+
+    def test_ordre_hero_probleme_preuves_faq_appel(self):
+        self.assertEqual(self.noms[:2], ["hero", "tr-pb"])
+        self.assertEqual(self.noms.index("tr-pv") + 1, self.noms.index("faq"))
+        self.assertEqual(self.noms[-1], "cta")
+        for n in ("hero", "tr-pb", "tr-pv", "faq", "cta"):
+            self.assertEqual(self.noms.count(n), 1, n)
+
+    def test_bento_du_parcours_retire(self):
+        lu = texte_brut(self.main)
+        self.assertNotIn("Le parcours d'un document", lu)
+        self.assertNotIn('<div class="bt"', self.main)  # plus aucune tuile qui reprendrait une preuve
+        self.assertNotIn('<div class="tl', self.main)
+        # Les autres sections existantes sont gardées
+        for x in ("Où va votre document, selon votre choix", "Votre politique s'applique au moment du choix", GARANTIES,
+                  "Trois régimes de confidentialité", "Pour aller plus loin", "Questions fréquentes sur la sécurité",
+                  "Faites examiner ce document"):
+            self.assertEqual(lu.count(x), 1, x)
+
+    def test_probleme_trois_difficultes_tirees_du_json(self):
+        pb = self.par_nom["tr-pb"]
+        self.assertEqual(texte_brut(re.search(r"<h2[^>]*>(.*?)</h2>", pb, re.S).group(1)), contenus.texte(f"trame.pb.{CLE}.titre"))
+        items = re.findall(r"<li\b.*?</li>", pb, re.S)
+        self.assertEqual(len(items), 3)
+        for n, li in enumerate(items, 1):
+            for partie in ("label", "titre", "texte"):
+                self.assertIn(contenus.texte(f"trame.pb.{CLE}.{n}.{partie}"), texte_brut(li), (n, partie))
+            self.assertRegex(li, r"<h3[ >]", n)
+        lu = texte_brut(pb)
+        for repere in ("hors de Suisse", "CLOUD Act", "quel que soit", "secret"):
+            self.assertIn(repere, lu)
+
+    def test_probleme_sans_redite_du_hero_ni_de_la_section_suivante(self):
+        i = self.noms.index("tr-pb")
+        voisins = [self.par_nom["hero"], self.secs[i + 1][1]]
+        self.assertEqual(suites(self.secs[i][1]) & set().union(*(suites(x) for x in voisins)), set())
+
+    def test_preuves_cinq_faits(self):
+        pv = self.par_nom["tr-pv"]
+        lignes = re.findall(r"<li\b.*?</li>", pv, re.S)
+        self.assertEqual(len(lignes), len(PREUVES))
+        for li, (i, repere) in zip(lignes, PREUVES.items()):
+            nom = contenus.texte(f"trame.pv.{i}.nom")
+            self.assertIn(repere, nom, i)
+            self.assertIn(f"<b>{nom}</b>", li, i)
+            for x in ("detail", "type"):
+                self.assertIn(contenus.texte(f"trame.pv.{i}.{x}"), texte_brut(li), (i, x))
+        lu = texte_brut(pv)
+        self.assertIn(contenus.texte(f"trame.pv.{CLE}.intro"), lu)
+        # Ni la phrase de discrétion, ni la note sur les références clients : elles concernent les distinctions
+        self.assertNotIn(contenus.texte("trame.pv.discretion"), lu)
+        self.assertNotIn(contenus.texte("trame.pv.note"), lu)
+
+    def test_preuves_sans_redite_des_garanties(self):
+        """Le bloc Preuves ne reprend aucune suite de 5 mots de la liste « Ce que Neur.on garantit, précisément »."""
+        garanties = next(x for _, x in self.secs if GARANTIES in texte_brut(x))
+        self.assertEqual(suites(self.par_nom["tr-pv"]) & suites(garanties), set())
+
+    def test_appels_a_l_action_suivis(self):
+        boutons = re.findall(r'<a class="btn"[^>]*>', self.main)
+        self.assertEqual(len(boutons), 3)  # hero, bande du milieu, appel final
+        for b in boutons:
+            self.assertRegex(b, r'href="(\.\./)+fr/contact/"')
+        self.assertRegex(self.par_nom["hero"], r'<a class="btn"[^>]*data-suivi="cta-securite-hero"')
+        bande = next(x for _, x in self.secs if "Votre politique s'applique au moment du choix" in texte_brut(x))
+        self.assertRegex(bande, r'<a class="btn"[^>]*data-suivi="cta-securite-milieu"')
+        self.assertRegex(self.par_nom["cta"], r'<a class="btn"[^>]*data-suivi="cta-securite-fin"')
+
+    def test_textes_dans_le_json(self):
+        e = entrees_f()
+        cles = [f"trame.pb.{CLE}.titre"] + [f"trame.pb.{CLE}.{n}.{x}" for n in (1, 2, 3) for x in ("label", "titre", "texte")]
+        cles += [f"trame.pv.{CLE}.intro"] + [f"trame.pv.{i}.{x}" for i in ("traitement", "nlpd", "cloudact")
+                                             for x in ("nom", "detail", "type")]
+        for cle in cles:
+            self.assertEqual(e[cle]["page"], SECURITE, cle)
+            self.assertEqual(e[cle]["statut"], "a_relire", cle)
+            self.assertTrue(e[cle]["source"].strip(), cle)
+        # Chaque preuve cite le site publié (V1) comme source
+        for i in ("traitement", "nlpd", "cloudact"):
+            self.assertIn("V1 ", e[f"trame.pv.{i}.nom"]["source"], i)
+        self.assertIn("18 U.S.C. § 2713", e[f"trame.pb.{CLE}.2.texte"]["source"])
 
 
 if __name__ == "__main__":
