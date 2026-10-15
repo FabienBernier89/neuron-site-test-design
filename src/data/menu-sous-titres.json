@@ -1,0 +1,119 @@
+{
+ "lot": "H",
+ "entrees": [
+  {
+   "titre": "Traduction texte et document",
+   "texte": "Texte, fichiers, PDF vers Word, réécriture, avec le moteur de votre choix",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre V1 et l'accroche de la page (« avec le moteur de votre choix »)."
+  },
+  {
+   "titre": "Extraits du registre",
+   "texte": "Traduction certifiée, notariée, apostillée, commandée entièrement en ligne",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre V1 et l'accroche de la page (« la commande se fait entièrement en ligne »)."
+  },
+  {
+   "titre": "Centre d'aide",
+   "texte": "Comment faire, étape par étape, vérifié dans l'application",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre V1 et l'accroche du centre d'aide (« vérifiées dans l'application »)."
+  },
+  {
+   "titre": "Directions juridiques et Legal Ops",
+   "texte": "Une traduction mesurable : demande, devis et relecture au même endroit",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« réunit la demande, le devis, la relecture [...] dans un seul environnement »)."
+  },
+  {
+   "titre": "Autorités et administration",
+   "texte": "Rien ne quitte la Suisse, avec la terminologie des textes publiés",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« la terminologie des textes publiés »)."
+  },
+  {
+   "titre": "LegalTechs et éditeurs",
+   "texte": "Notre moteur et le concordancier CHnell dans votre produit",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« LexMachina et le concordancier CHnell s'intègrent à votre produit »)."
+  },
+  {
+   "titre": "Droit des sociétés",
+   "texte": "Statuts et procès-verbaux traduits avec les termes du Code des obligations",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« les termes du Code des obligations »)."
+  },
+  {
+   "titre": "Fusions et acquisitions",
+   "texte": "Lire la data room vite, puis traduire au mot près les documents engageants",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« lire vite, puis rendre au mot près quelques documents engageants »)."
+  },
+  {
+   "titre": "Contentieux et arbitrage",
+   "texte": "Ce que lira un juge ou un arbitre : des traductions citables",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« produire des traductions citables »)."
+  },
+  {
+   "titre": "Banque et finance",
+   "texte": "Du contrat de crédit au prospectus, sous le secret bancaire",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« sous le secret bancaire »)."
+  },
+  {
+   "titre": "Compliance et FINMA",
+   "texte": "Écrire dans la langue de l'autorité, avec les termes des lois",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« avec les termes des lois »)."
+  },
+  {
+   "titre": "Allemand vers français",
+   "texte": "Le droit suisse d'une rive à l'autre, avec le mot du même texte de loi",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« retrouver le mot français du même texte de loi »)."
+  },
+  {
+   "titre": "Français vers allemand",
+   "texte": "Écrire pour un lecteur alémanique, avec les mots des lois fédérales",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« employer les mots des lois fédérales »)."
+  },
+  {
+   "titre": "Allemand vers anglais",
+   "texte": "Rendre le droit suisse intelligible, sans inventer un droit qui n'existe pas",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« explique sans inventer un droit qui n'existe pas »)."
+  },
+  {
+   "titre": "Français vers anglais",
+   "texte": "Le dossier romand à l'international, le droit suisse rendu compréhensible",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« rend le droit suisse compréhensible »)."
+  },
+  {
+   "titre": "Anglais vers allemand",
+   "texte": "Ramener le contrat au droit suisse, chaque clause rattachée au CO",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre de la page et son accroche (« rattache chaque clause à une notion du Code des obligations »)."
+  },
+  {
+   "titre": "Études et benchmarks",
+   "texte": "Nos mesures sur corpus de droit suisse, méthode et critères publiés",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre V1 et l'accroche de la page (« les critères, le protocole et les pièges, avant les résultats »)."
+  },
+  {
+   "titre": "Centre d'aide Corrext",
+   "texte": "Prise en main et réponses pratiques, vérifiées dans l'application",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre V1 et l'accroche du centre d'aide (« vérifiées dans l'application »)."
+  },
+  {
+   "titre": "Questions fréquentes",
+   "texte": "Corrext, LexMachina, relecture, prix : les réponses essentielles",
+   "statut": "a_relire",
+   "source": "Retour de Fabien du 2026-10-15 (méga-menu : tous les sous-titres sur deux lignes, en les allongeant légèrement). Allongé depuis le sous-titre V1 (« Corrext, LexMachina, relecture, prix »)."
+  }
+ ]
+}

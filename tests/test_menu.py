@@ -49,11 +49,21 @@ class TestMenu(unittest.TestCase):
             self.assertRegex(l, r"^<b>[^<]+</b><em>[^<]+</em>$")
         self.assertIn("<b>Cabinets d&#x27;avocats</b><em>Traduire un dossier sans jamais le sortir de Suisse</em>".replace("&#x27;", "'"), h)
 
+    def test_sous_titres_allonges_sources_et_utilises(self):
+        """menu-sous-titres.json : chaque sous-titre allongé (deux lignes) est sourcé, à relire, et affiché sous son titre."""
+        d = json.loads((ICI / "src/data/menu-sous-titres.json").read_text(encoding="utf-8"))
+        h = build.chemin_page("").read_text(encoding="utf-8").replace("&#x27;", "'")
+        self.assertEqual(len(d["entrees"]), 19)
+        for e in d["entrees"]:
+            self.assertEqual(e["statut"], "a_relire", e["titre"])
+            self.assertTrue(e["source"].strip(), e["titre"])
+            self.assertIn(f"<b>{e['titre']}</b><em>{e['texte']}</em>", h, e["titre"])
+
     def test_sous_titres_sur_deux_lignes(self):
         """Sous-titres du méga-menu à hauteur fixe de deux lignes : les titres s'alignent d'une colonne à l'autre."""
         css = (build.DOCS / "assets/site.css").read_text(encoding="utf-8") if hasattr(build, "DOCS") else ""
         css = css or (build.chemin_page("").parents[1] / "assets/site.css").read_text(encoding="utf-8")
-        self.assertIn(".mg-a em{display:block;min-height:36px;margin-top:4px;font:400 13px/18px", css)
+        self.assertIn(".mg-a em{display:block;max-width:248px;min-height:36px;margin-top:4px;font:400 13px/18px", css)
 
     def test_bouton_connexion(self):
         """Lien « Connexion » vers la page de connexion Corrext, à gauche du bouton de démo et dans le menu mobile."""

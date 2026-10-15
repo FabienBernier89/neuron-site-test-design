@@ -55,12 +55,15 @@ ul{padding:0;list-style:none}
 /* Méga-menu */
 .mg{position:absolute;left:0;right:0;top:100%;background:var(--page);border-top:1px solid var(--line);padding:32px 0 48px}
 .mg-in{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 300px;gap:32px}
+/* Sous-titres sur une largeur fixe (248 px) : mêmes coupures de ligne à toutes les largeurs. Sous 1280 px, la carte
+   mise en avant cède sa place pour que chaque colonne garde ces 248 px */
+@media (max-width:1279px){.mg-in{grid-template-columns:repeat(3,minmax(0,1fr))}.mg-card{display:none}}
 .mg-col{margin-left:-12px}
 .mg-h{font:400 12px/16px var(--sans);text-transform:uppercase;letter-spacing:.3px;color:var(--muted);padding:0 12px;margin-bottom:8px}
 .mg-a{display:block;padding:8px 12px;border-radius:6px;transition:background .15s}
 .mg-a:hover,.mg-a:focus-visible{background:var(--tile)}
 .mg-a b{display:block;font:500 14px/20px var(--sans);color:var(--ink)}
-.mg-a em{display:block;min-height:36px;margin-top:4px;font:400 13px/18px var(--sans);font-style:normal;color:var(--muted)}  /* toujours deux lignes : titres alignés d'une colonne à l'autre */
+.mg-a em{display:block;max-width:248px;min-height:36px;margin-top:4px;font:400 13px/18px var(--sans);font-style:normal;color:var(--muted)}  /* toujours deux lignes : titres alignés d'une colonne à l'autre */
 .mg-card{display:block;padding:12px;margin:-12px -12px 0 0;border-radius:6px;transition:background .15s}
 .mg-card:hover{background:var(--tile)}
 .mg-mini{display:block;position:relative;aspect-ratio:371/247;border-radius:6px;overflow:hidden;border:1px solid var(--line);background-color:#E3E9F3;background-image:radial-gradient(55% 55% at 18% 12%,rgba(49,123,255,.14),transparent 60%),radial-gradient(50% 50% at 88% 20%,rgba(49,123,255,.12),transparent 55%),radial-gradient(55% 55% at 6% 90%,rgba(255,255,255,.55),transparent 60%)}

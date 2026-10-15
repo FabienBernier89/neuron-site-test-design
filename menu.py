@@ -6,6 +6,8 @@ from pathlib import Path
 
 AJOUTS = Path(__file__).resolve().parent / "src/data/menu-ajouts.json"  # entrées ajoutées par les lots de la V2
 PAGES = Path(__file__).resolve().parent / "src/pages"
+SOUS_TITRES = {e["titre"]: e["texte"] for e in json.loads(
+    (Path(__file__).resolve().parent / "src/data/menu-sous-titres.json").read_text(encoding="utf-8"))["entrees"]}  # deux lignes chacun
 
 
 def sous_titre_de_page(href):
@@ -200,7 +202,7 @@ def rendre_entete(nav, actif="", minimal=False):
             for col in p["colonnes"]:
                 h.append(f'<div class="mg-col"><p class="mg-h">{_e(col["titre"])}</p>\n')
                 for l in col["liens"]:
-                    desc = l["desc"] or sous_titre_de_page(l["href"])
+                    desc = SOUS_TITRES.get(l["titre"]) or l["desc"] or sous_titre_de_page(l["href"])
                     em = f'<em>{_e(desc)}</em>' if desc else ""
                     h.append(f'<a class="mg-a" href="{_a(l["href"])}"><b>{_e(l["titre"])}</b>{em}</a>\n')
                 h.append("</div>\n")
