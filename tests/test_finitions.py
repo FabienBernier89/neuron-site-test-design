@@ -48,6 +48,14 @@ class TestCiblesTactiles(unittest.TestCase):
     def setUpClass(cls):
         cls.css = (support.site_complet(apercu=True) / "assets/site.css").read_text(encoding="utf-8")
 
+    def test_cartes_texte_seul_aerees(self):
+        """Option A : marge 28 px, écart 16 px, texte 15/25 adouci, réservé aux cartes sans visuel ni lien."""
+        sel = ".cd:not(:has(.v,.kv,a,.cd-meta))"
+        # sélecteur avec virgules internes (:has) : lu tel quel, regles() découperait la liste
+        self.assertIn(sel + "{gap:16px}", self.css)
+        self.assertIn(sel + " > *{padding:28px}", self.css)
+        self.assertIn(sel + " p{margin-top:12px;font-size:15px;line-height:25px;color:var(--muted)}", self.css)
+
     def test_jauge_de_deroule_fine_et_constante(self):
         """La jauge remplace le bouton pause : ligne fine au bas de la scène, épaisseur constante à l'écran."""
         d = " ".join(regles(self.css, ".sim-jauge"))

@@ -464,6 +464,12 @@ ul{padding:0;list-style:none}
 .cd b{font:500 16px/24px var(--sans);color:var(--ink)}
 .cd p{margin-top:4px;font:400 14px/20px var(--sans);color:var(--text)}
 .cd .lien{margin-top:auto;padding-top:8px}
+/* Cartes à texte seul (ni visuel, ni lien, ni chiffres) : plus aérées, texte adouci (retour de Fabien du 2026-10-15) */
+.cd:not(:has(.v,.kv,a,.cd-meta)){gap:16px}
+.cd:not(:has(.v,.kv,a,.cd-meta)) > *{padding:28px}
+.cd:not(:has(.v,.kv,a,.cd-meta)) b{font-weight:600;font-size:17px}
+.cd:not(:has(.v,.kv,a,.cd-meta)) p{margin-top:12px;font-size:15px;line-height:25px;color:var(--muted)}
+@media (max-width:640px){.cd:not(:has(.v,.kv,a,.cd-meta)) > *{padding:24px}}
 
 /* Bande d'appel intermédiaire (C13) */
 .bd{display:flex;align-items:center;justify-content:space-between;gap:32px;padding:48px;border-radius:8px;background:var(--tile)}
