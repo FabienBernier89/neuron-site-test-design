@@ -49,6 +49,12 @@ class TestMenu(unittest.TestCase):
             self.assertRegex(l, r"^<b>[^<]+</b><em>[^<]+</em>$")
         self.assertIn("<b>Cabinets d&#x27;avocats</b><em>Traduire un dossier sans jamais le sortir de Suisse</em>".replace("&#x27;", "'"), h)
 
+    def test_sous_titres_sur_deux_lignes(self):
+        """Sous-titres du méga-menu à hauteur fixe de deux lignes : les titres s'alignent d'une colonne à l'autre."""
+        css = (build.DOCS / "assets/site.css").read_text(encoding="utf-8") if hasattr(build, "DOCS") else ""
+        css = css or (build.chemin_page("").parents[1] / "assets/site.css").read_text(encoding="utf-8")
+        self.assertIn(".mg-a em{display:block;min-height:36px;margin-top:4px;font:400 13px/18px", css)
+
     def test_bouton_connexion(self):
         """Lien « Connexion » vers la page de connexion Corrext, à gauche du bouton de démo et dans le menu mobile."""
         url = ("https://auth.corrext.com/realms/corrext/protocol/openid-connect/auth?client_id=corrext&amp;scope=openid%20email%20profile"
