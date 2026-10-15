@@ -144,6 +144,7 @@ ul{padding:0;list-style:none}
 @keyframes sim-main{from{opacity:0;transform:translate(-50%,6px)}to{opacity:1;transform:translateX(-50%)}}
 .sim-libre [role="button"]{cursor:pointer}
 .sim-libre [role="button"]:focus-visible{outline:2px solid #317BFF;outline-offset:2px}
+.sim-libre .cr-txt{position:relative;z-index:3}  /* le terme surligné reste cliquable au-dessus des calques du panneau */
 .sim-libre .cr-txt mark[role="button"]:hover{filter:brightness(.96)}
 @media (max-width:640px){.sim-main{display:none}}  /* scène trop réduite : la consigne en masquerait le centre */
 .ui-off{opacity:.38}
@@ -263,7 +264,11 @@ ul{padding:0;list-style:none}
 .cr-alt-e{display:inline-block;margin-top:6px;padding:2px 8px;border-radius:999px;background:var(--c-bg);font:500 11px/16px "Inter",var(--ui);color:var(--c-mut);opacity:0;transition:opacity .3s ease}
 .cr-alt-e.on{opacity:1}
 .cr-modal{position:absolute;inset:0;z-index:8;display:grid;place-items:center;background:rgba(30,31,59,.18);opacity:0;transition:opacity .35s ease}
-.cr.modal .cr-modal{opacity:1}
+/* Calques qui apparaissent et disparaissent (fenêtre CHnell, avertissement, alternatives, bouton Fast Lookup) :
+   invisibles ET traversables tant qu'ils sont masqués, sinon ils captent les clics de la démo en mode libre */
+.cr-modal,.cr-notice,.cr-alts,.cr-lkb{pointer-events:none}
+.cr.modal .cr-modal{opacity:1;pointer-events:auto}
+.cr.avis .cr-notice,.cr.alts .cr-alts,.cr.lkb .cr-lkb{pointer-events:auto}
 .cr-ch{width:620px;padding:18px 20px 16px;border-radius:14px;background:#fff;box-shadow:0 24px 60px rgba(30,31,59,.22),0 2px 8px rgba(30,31,59,.08);transform:translateY(14px) scale(.98);transition:transform .6s var(--ease)}
 .cr.modal .cr-ch{transform:none}
 .cr-ch-h{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--c-line)}
@@ -1474,8 +1479,6 @@ main table a{display:inline-block;padding-block:3px}
 .sp-et li::before{content:counter(sp);flex:0 0 auto;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--tile);font:600 11px/1 var(--sans);color:var(--accent-d)}
 .sp-pret .sp-et li::after{content:"";position:absolute;inset:0;border-radius:8px;background:var(--tile);opacity:0;z-index:-1;transition:opacity .4s ease}
 .sp-pret .sp-et li{isolation:isolate}
-.sp-h{display:flex;align-items:center;gap:8px;margin-top:16px;font:400 14px/20px var(--sans);color:var(--muted)}
-.sp-h svg{flex:0 0 auto;width:14px;height:14px;color:var(--accent-d)}
 
 /* Liaisons : pointillés entre les visuels, à mi-hauteur */
 .sp-cx::before,.sp-cx::after{content:"";position:absolute;z-index:2;top:calc(var(--sp-pad) + var(--sp-ui) / 2 - 3px);width:calc(var(--sp-gap) + 2 * var(--sp-pad));height:6px;pointer-events:none;
@@ -1583,8 +1586,7 @@ main table a{display:inline-block;padding-block:3px}
   .sp-sc{--sp-gap:40px}
   .sp-dl{grid-template-columns:minmax(0,1fr);row-gap:var(--sp-gap);max-width:520px;margin:0 auto}
   .sp-et{grid-template-columns:minmax(0,1fr);gap:4px;max-width:520px;margin:16px auto 0}
-  .sp-h{max-width:520px;margin:16px auto 0}
-  .sp-cx::before,.sp-cx::after{top:auto;right:auto;left:50%;width:6px;height:var(--sp-gap);margin:0 0 0 -3px;
+    .sp-cx::before,.sp-cx::after{top:auto;right:auto;left:50%;width:6px;height:var(--sp-gap);margin:0 0 0 -3px;
     background:radial-gradient(circle,var(--c-ind) 0 2.5px,transparent 3px) 50% 0/6px 6px no-repeat,
       radial-gradient(circle,var(--c-ind) 0 2.5px,transparent 3px) 50% 100%/6px 6px no-repeat,
       repeating-linear-gradient(180deg,rgba(59,52,201,.55) 0 4px,transparent 4px 8px) 50% 0/2px 100% no-repeat}

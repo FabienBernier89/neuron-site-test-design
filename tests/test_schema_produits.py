@@ -104,13 +104,11 @@ class TestSchema(unittest.TestCase):
             self.assertEqual(len(courants), 1, p)
             self.assertIn(f'href="{"../" * (p.count("/") + 1)}fr/{p}"', courants[0], p)
 
-    def test_hebergement_suisse_et_moteurs_tiers_au_choix(self):
+    def test_moteurs_tiers_au_choix_sans_legende_d_hebergement(self):
         lu = texte_brut(self.section)
-        hebergement = contenus.texte("schema.hebergement")
-        self.assertIn(hebergement, lu)
-        self.assertIn("Infomaniak", hebergement)
-        # Formulation publiée par la V1, mot pour mot (résumé pour les moteurs IA) ; seul le point final est ajouté
-        self.assertIn(hebergement.rstrip("."), (build.NEURON / "docs/llms.txt").read_text(encoding="utf-8"))
+        # légende d'hébergement retirée sous l'animation (demande de Fabien du 2026-10-15)
+        self.assertNotIn(contenus.texte("schema.hebergement"), lu)
+        self.assertNotIn('class="sp-h"', self.section)
         tiers = contenus.texte("schema.lexmachina.tiers")
         self.assertIn(tiers, lu)
         self.assertIn("au choix", tiers)

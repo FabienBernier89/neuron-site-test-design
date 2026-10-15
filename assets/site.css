@@ -144,6 +144,7 @@ ul{padding:0;list-style:none}
 @keyframes sim-main{from{opacity:0;transform:translate(-50%,6px)}to{opacity:1;transform:translateX(-50%)}}
 .sim-libre [role="button"]{cursor:pointer}
 .sim-libre [role="button"]:focus-visible{outline:2px solid #317BFF;outline-offset:2px}
+.sim-libre .cr-txt{position:relative;z-index:3}  /* le terme surligné reste cliquable au-dessus des calques du panneau */
 .sim-libre .cr-txt mark[role="button"]:hover{filter:brightness(.96)}
 @media (max-width:640px){.sim-main{display:none}}  /* scène trop réduite : la consigne en masquerait le centre */
 .ui-off{opacity:.38}
@@ -263,7 +264,11 @@ ul{padding:0;list-style:none}
 .cr-alt-e{display:inline-block;margin-top:6px;padding:2px 8px;border-radius:999px;background:var(--c-bg);font:500 11px/16px "Inter",var(--ui);color:var(--c-mut);opacity:0;transition:opacity .3s ease}
 .cr-alt-e.on{opacity:1}
 .cr-modal{position:absolute;inset:0;z-index:8;display:grid;place-items:center;background:rgba(30,31,59,.18);opacity:0;transition:opacity .35s ease}
-.cr.modal .cr-modal{opacity:1}
+/* Calques qui apparaissent et disparaissent (fenêtre CHnell, avertissement, alternatives, bouton Fast Lookup) :
+   invisibles ET traversables tant qu'ils sont masqués, sinon ils captent les clics de la démo en mode libre */
+.cr-modal,.cr-notice,.cr-alts,.cr-lkb{pointer-events:none}
+.cr.modal .cr-modal{opacity:1;pointer-events:auto}
+.cr.avis .cr-notice,.cr.alts .cr-alts,.cr.lkb .cr-lkb{pointer-events:auto}
 .cr-ch{width:620px;padding:18px 20px 16px;border-radius:14px;background:#fff;box-shadow:0 24px 60px rgba(30,31,59,.22),0 2px 8px rgba(30,31,59,.08);transform:translateY(14px) scale(.98);transition:transform .6s var(--ease)}
 .cr.modal .cr-ch{transform:none}
 .cr-ch-h{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--c-line)}

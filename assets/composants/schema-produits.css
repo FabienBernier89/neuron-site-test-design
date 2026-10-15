@@ -27,8 +27,6 @@
 .sp-et li::before{content:counter(sp);flex:0 0 auto;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--tile);font:600 11px/1 var(--sans);color:var(--accent-d)}
 .sp-pret .sp-et li::after{content:"";position:absolute;inset:0;border-radius:8px;background:var(--tile);opacity:0;z-index:-1;transition:opacity .4s ease}
 .sp-pret .sp-et li{isolation:isolate}
-.sp-h{display:flex;align-items:center;gap:8px;margin-top:16px;font:400 14px/20px var(--sans);color:var(--muted)}
-.sp-h svg{flex:0 0 auto;width:14px;height:14px;color:var(--accent-d)}
 
 /* Liaisons : pointillés entre les visuels, à mi-hauteur */
 .sp-cx::before,.sp-cx::after{content:"";position:absolute;z-index:2;top:calc(var(--sp-pad) + var(--sp-ui) / 2 - 3px);width:calc(var(--sp-gap) + 2 * var(--sp-pad));height:6px;pointer-events:none;
@@ -136,8 +134,7 @@
   .sp-sc{--sp-gap:40px}
   .sp-dl{grid-template-columns:minmax(0,1fr);row-gap:var(--sp-gap);max-width:520px;margin:0 auto}
   .sp-et{grid-template-columns:minmax(0,1fr);gap:4px;max-width:520px;margin:16px auto 0}
-  .sp-h{max-width:520px;margin:16px auto 0}
-  .sp-cx::before,.sp-cx::after{top:auto;right:auto;left:50%;width:6px;height:var(--sp-gap);margin:0 0 0 -3px;
+    .sp-cx::before,.sp-cx::after{top:auto;right:auto;left:50%;width:6px;height:var(--sp-gap);margin:0 0 0 -3px;
     background:radial-gradient(circle,var(--c-ind) 0 2.5px,transparent 3px) 50% 0/6px 6px no-repeat,
       radial-gradient(circle,var(--c-ind) 0 2.5px,transparent 3px) 50% 100%/6px 6px no-repeat,
       repeating-linear-gradient(180deg,rgba(59,52,201,.55) 0 4px,transparent 4px 8px) 50% 0/2px 100% no-repeat}

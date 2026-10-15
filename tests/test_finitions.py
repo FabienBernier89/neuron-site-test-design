@@ -230,6 +230,14 @@ class TestAnimationsSansPause(unittest.TestCase):
         # les commandes du mode libre se pilotent aussi au clavier
         self.assertIn('el.setAttribute("tabindex", "0")', self.sim)
 
+    def test_calques_masques_traversables(self):
+        """Un calque masqué (opacité nulle) ne doit pas capter les clics de la démo libre : fenêtre CHnell,
+        avertissement, alternatives, bouton Fast Lookup. Défaut trouvé le 2026-10-15 avec de vrais clics de souris."""
+        css = (self.sortie / "assets/site.css").read_text(encoding="utf-8")
+        self.assertIn(".cr-modal,.cr-notice,.cr-alts,.cr-lkb{pointer-events:none}", css)
+        self.assertIn(".cr.modal .cr-modal{opacity:1;pointer-events:auto}", css)
+        self.assertIn(".cr.avis .cr-notice,.cr.alts .cr-alts,.cr.lkb .cr-lkb{pointer-events:auto}", css)
+
     def test_surlignage_bleu(self):
         for f in self.sortie.glob("assets/*.css"):
             self.assertNotIn("#fff2a8", f.read_text(encoding="utf-8").lower(), f)
