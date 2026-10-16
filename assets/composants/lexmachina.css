@@ -1,5 +1,8 @@
 /* Page LexMachina (outils/composer/p_lexmachina.py), retours de Fabien du 2026-10-16 */
 
+/* Hero : titre aligné en haut sur le texte de droite */
+.hero-g.lm-hg{align-items:start}
+
 /* Tableau de lecture sous la comparaison (proposition 1-B) */
 .lm-tb{width:100%;margin-top:32px;border-collapse:collapse;font:400 15px/22px var(--sans);color:var(--text)}
 .lm-tb thead th{padding:12px 16px;text-align:left;font:500 13px/18px var(--sans);color:var(--muted);border-bottom:1px solid var(--line)}
@@ -8,12 +11,20 @@
 .lm-tb td b{font-weight:600;color:var(--ink)}
 .lm-tb small{display:block;margin-top:2px;font:400 13px/20px var(--sans);color:var(--muted)}
 .lm-ok{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;background:rgba(16,140,90,.12);font:600 12px/18px var(--sans);color:#0b6e47;vertical-align:1px}
-.lm-conc{max-width:760px;margin-top:28px;font:400 24px/32px var(--serif);color:var(--ink)}
-.lm-conc + .legende{margin-top:16px}
+.lm-conc{font:400 26px/34px var(--serif);color:var(--ink);text-wrap:balance}
+/* Conclusion et note de méthode : une carte en deux colonnes sous le tableau */
+.lm-cc{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;margin-top:32px;padding:36px;border-radius:8px;background:var(--tile)}
+.lm-cc-g{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:24px}
+.lm-cc-d{padding-left:40px;border-left:1px solid var(--line)}
+.lm-cc-t{margin-bottom:14px;font:600 13px/18px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.lm-cc ul{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.lm-cc li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font:400 14px/22px var(--sans);color:var(--text)}
+.lm-cc li svg{width:16px;height:16px;margin-top:3px;color:var(--accent-d)}
 
 /* Ce qu'est LexMachina : chiffres à gauche, environnement à droite (proposition 2-B) */
 .lm-id{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;margin-top:32px}
 .lm-id ul{display:grid;gap:20px;align-content:start;margin:0;padding:0;list-style:none}
+.lm-id .lm-ch{align-content:space-between;padding:8px 0 20px}  /* chiffres répartis sur toute la hauteur des trois cartes de droite (Fabien, 2026-10-16) */
 .lm-ch li{display:grid;grid-template-columns:112px minmax(0,1fr);gap:16px;align-items:baseline}
 .lm-ch .n{font:500 32px/36px var(--num);color:var(--ink);white-space:nowrap}
 .lm-id li b{display:block;font:600 15px/22px var(--sans);color:var(--ink)}
@@ -21,7 +32,11 @@
 .lm-gr li{padding:20px;border-radius:8px;background:var(--tile)}
 .lm-gr .puces{margin-top:10px}
 
-@media (max-width:1023px){.lm-id{grid-template-columns:minmax(0,1fr);gap:32px}}
+@media (max-width:1023px){
+  .lm-id .lm-ch{padding:0}
+  .lm-id,.lm-cc{grid-template-columns:minmax(0,1fr);gap:32px}
+  .lm-cc-d{padding:24px 0 0;border-left:0;border-top:1px solid var(--line)}
+}
 @media (max-width:640px){
   .lm-tb thead{display:none}
   .lm-tb tr{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
@@ -32,5 +47,6 @@
   .lm-tb td:nth-of-type(2)::before{content:"DeepL Pro"}
   .lm-ch li{grid-template-columns:88px minmax(0,1fr)}
   .lm-ch .n{font-size:26px}
-  .lm-conc{font-size:20px;line-height:28px}
+  .lm-conc{font-size:21px;line-height:29px}
+  .lm-cc{padding:24px}
 }

@@ -8,12 +8,12 @@ P = "lexmachina/"
 t = liens(charger(P), P)
 out = []
 th = bloc(t, "section", "thero")
-out.append(hero("LexMachina.", "Le moteur qui connaît les lois qu'il traduit", brut(bloc(th, "p", "lead")), ("Demander une démo", C)))
+out.append(hero("LexMachina.", "Le moteur qui connaît les lois qu'il traduit", brut(bloc(th, "p", "lead")), ("Demander une démo", C)).replace('class="wrap hero-g"', 'class="wrap hero-g lm-hg"', 1))  # titre aligné en haut sur le texte de droite (Fabien, 2026-10-16)
 def k(cle):
     return _H.escape(texte(f"lexmachina.{cle}"), quote=False)
 
 
-def lecture(sorties):
+def lecture(sorties, note):
     """Tableau de lecture sous la comparaison (proposition 1-B retenue par Fabien le 2026-10-16) : la loi citée et la
     juridiction, telles que chaque moteur les écrit ; formes reprises des sorties réelles affichées dans l'animation."""
     lm, dp = (re.sub(r"<[^>]+>", "", x) for x in sorties)
@@ -26,7 +26,22 @@ def lecture(sorties):
               f'<tr><th scope="row">{k("lecture.juridiction")}</th>{cel("Federal Tribunal")}{cel("Federal Supreme Court", "lecture.fsc", True)}</tr>')
     return (f'<table class="lm-tb"><thead><tr><th scope="col">{k("lecture.col")}</th><th scope="col">LexMachina</th>'
             f'<th scope="col">DeepL Pro</th></tr></thead><tbody>{lignes}</tbody></table>'
-            f'<p class="lm-conc">{k("lecture.conclusion")}</p>')
+            + conclusion(note))
+
+
+OK_IC = ('<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+         'stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>')
+
+
+def conclusion(note):
+    """Conclusion et note de méthode réunies dans une carte (retour de Fabien du 2026-10-16) : à gauche la conclusion
+    et le lien vers la démo, à droite les trois phrases de la note de la V1, une par ligne."""
+    phrases = [x.strip() for x in re.split(r"(?<=\.) (?=[A-Z])", note) if x.strip()]
+    assert len(phrases) == 3, phrases
+    return (f'<div class="lm-cc"><div class="lm-cc-g"><p class="lm-conc">{k("lecture.conclusion")}</p>'
+            f'<a class="lien" href="{{{{ROOT}}}}corrext/traduction-texte-et-document/#demo">{k("lecture.demo")}</a></div>'
+            f'<div class="lm-cc-d"><p class="lm-cc-t">{k("lecture.exemple")}</p><ul>'
+            + "".join(f"<li>{OK_IC}<span>{x}</span></li>" for x in phrases) + "</ul></div></div>")
 
 
 # Comparaison « quatre caractères » animée (S4)
@@ -47,7 +62,7 @@ ui = (f'<div class="mx q4"><div class="mx-p q4-src"><small>{lb}</small><p>{phras
 titre_fen = txt(bloc(nl, "span", "nlex-tag"))
 out.append(section(h2(h, "quatre caractères") + f'<p class="intro">{p}</p>'
                    + scene(1176, 440, ecran, sim="quatre", titre=titre_fen, curseur=False, label="Comparaison des sorties LexMachina et DeepL Pro")
-                   + lecture(sorties) + f'<p class="legende">{brut(bloc(nl, "p", "nlex-cap"))}</p>'))
+                   + lecture(sorties, brut(bloc(nl, "p", "nlex-cap")))))
 # Ce qu'est LexMachina (proposition 2-B retenue par Fabien le 2026-10-16) : les quatre chiffres en liste à gauche,
 # l'environnement du moteur (matières, Corrext, autres moteurs) en trois groupes à pastilles à droite
 sp = bloc(t, "section", "nlspec")
@@ -61,8 +76,8 @@ for i, x in enumerate(blocs(sp, "div", "nls-t")):
     puces = "".join(f'<span class="pill">{txt(y)}</span>' for y in blocs(bloc(x, "div", "nls-chips"), "span"))
     groupes.append(f'<li><b>{titre}</b><div class="puces">{puces}</div></li>')
 out.append(section(h2(h, "exactement") + f'<p class="intro">{p}</p>'
-                   + f'<div class="lm-id"><ul class="lm-ch">{chiffres}</ul><ul class="lm-gr">{"".join(groupes)}</ul></div>'
-                   + f'<p class="legende">{brut(bloc(sp, "p", "nls-foot"))}</p>'))
+                   + f'<div class="lm-id"><ul class="lm-ch">{chiffres}</ul><ul class="lm-gr">{"".join(groupes)}</ul></div>'))
+# Note « Recherche : Innosuisse… » retirée (Fabien, 2026-10-16)
 # Piliers
 pi = bloc(t, "section", "pillars")
 h, p = tete(pi)
