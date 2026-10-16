@@ -57,7 +57,7 @@ stats = [(stats[0][0], None, H.escape(trame.texte("accueil.chiffres.segments.tex
          (_u("30", "langues"), None, H.escape(trame.texte("accueil.chiffres.langues.texte"), quote=False)),
          (_u("4", "moteurs"), None, H.escape(trame.texte("accueil.chiffres.moteurs.texte"), quote=False)),
          (H.escape(trame.texte("accueil.chiffres.suisse.chiffre"), quote=False), None, H.escape(trame.texte("accueil.chiffres.suisse.texte"), quote=False))]
-B["chiffres"] = section(tuiles(stats, "tl t4"))
+B["chiffres"] = section(tuiles(stats, "tl t4 tl-haut"))  # petits textes alignés à la même hauteur
 
 # 4. Plateforme : une ligne C7 par produit, visuel = maquette du site actuel
 pr = bloc(t, "section", "products")
