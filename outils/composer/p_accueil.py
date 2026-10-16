@@ -49,14 +49,14 @@ B["distinctions"] = dist(txt(bloc(bloc(t, "section", "trust"), "h2")), items)
 stats = []
 for s in blocs(bloc(t, "section", "stats"), "div", "stat"):
     stats.append((txt(bloc(s, "div", "num")).replace(" M+", " M+"), None, brut(bloc(s, "div", "desc"))))
-# Retour de Fabien du 2026-10-16 : aucun chiffre seul en titre (unité accolée), et la tuile « 1 · Mode Highly sensitive »
-# devient « 20 000+ documents » (CHnell). Textes : H-accueil.json.
+# Retours de Fabien du 2026-10-16 : titres sur une seule ligne (« 30 langues », « 4 moteurs »), « segments » passe dans le
+# texte, et la 4e tuile devient « 100 % » suisse (le nombre de documents de CHnell était jugé trop faible). H-accueil.json.
 def _u(n, cle):
     return f'{n} <span class="u">{H.escape(trame.texte(f"accueil.chiffres.{cle}.unite"), quote=False)}</span>'
-stats = [(_u(stats[0][0], "segments"), None, H.escape(trame.texte("accueil.chiffres.segments.texte"), quote=False)),
+stats = [(stats[0][0], None, H.escape(trame.texte("accueil.chiffres.segments.texte"), quote=False)),
          (_u("30", "langues"), None, H.escape(trame.texte("accueil.chiffres.langues.texte"), quote=False)),
          (_u("4", "moteurs"), None, H.escape(trame.texte("accueil.chiffres.moteurs.texte"), quote=False)),
-         (_u(trame.texte("accueil.chiffres.documents.chiffre"), "documents"), None, H.escape(trame.texte("accueil.chiffres.documents.texte"), quote=False))]
+         (H.escape(trame.texte("accueil.chiffres.suisse.chiffre"), quote=False), None, H.escape(trame.texte("accueil.chiffres.suisse.texte"), quote=False))]
 B["chiffres"] = section(tuiles(stats, "tl t4"))
 
 # 4. Plateforme : une ligne C7 par produit, visuel = maquette du site actuel
@@ -77,15 +77,14 @@ for i, f in enumerate(blocs(pr, "div", "feature")):
     lignes.append(ft(pill, titre, texte, vis, lien, inv=i % 2 == 1, liste=liste))
 B["plateforme"] = (section(h2(txt(bloc(tete, "h2")), "seule plateforme") + f'<p class="intro">{brut(bloc(tete, "p"))}</p>' + "".join(lignes)))
 
-# 5. Agents : bento, chiffres d'économies dans les petites tuiles
-ag = bloc(t, "section", "agents")
-tete = bloc(ag, "div", "sec-head")
-petites = []
-for i, s in enumerate(blocs(ag, "div", "astep")):
-    pct = txt(bloc(s, "span", "pct")).replace("%", " %")
-    petites.append((f'<span class="n">{pct}</span><b>{brut(bloc(s, "h3"))}</b>', brut(bloc(s, "span", "sl")), "bt-l" if i == 2 else ""))
-B["agents"] = (section(bento({"titre": h2(txt(bloc(tete, "h2")), "du devis à la livraison", "h3s"), "texte": brut(bloc(tete, "p"))}, petites)
-                   + f'<p class="legende">{brut(bloc(ag, "p", "agents-note"))}</p>'))
+# 5. Usage de Corrext et de LexMachina (retour de Fabien du 2026-10-16) : Corrext n'a pas d'agents IA ; les chiffres
+# d'économies du discours « agentique » sont remplacés par des chiffres d'usage publiés sur les pages produit
+def _x(cle):
+    return H.escape(trame.texte(f"accueil.usage.{cle}"), quote=False)
+petites = [(f'<span class="n">{_x(k + ".chiffre")} <span class="u">{_x(k + ".unite")}</span></span><b>{_x(k + ".titre")}</b>', _x(k + ".texte"), "bt-l" if k == "alternatives" else "")
+           for k in ("caracteres", "fichiers", "alternatives")]
+B["agents"] = (section(bento({"titre": h2(_x("titre"), "pilotée par vos juristes", "h3s"), "texte": _x("texte")}, petites).replace('<div class="bt">', '<div class="bt bt-us">', 1)
+                   + f'<p class="legende"><a href="{{{{ROOT}}}}langues-et-formats/">{_x("legende")}</a></p>'))
 
 # 6. Piliers
 pi = bloc(t, "section", "pillars")
@@ -97,7 +96,8 @@ B["piliers"] = (section(h2(txt(bloc(tete, "h2")), "le connaître") + f'<p class=
 lv = bloc(t, "section", "levels")
 tete = bloc(lv, "div", "sec-head")
 niv = [(str(i + 1), brut(bloc(x, "h3")), brut(bloc(x, "p"))) for i, x in enumerate(blocs(lv, "div", "lev"))]
-B["niveaux"] = (section(h2(txt(bloc(tete, "h2")), "Quatre niveaux") + f'<p class="intro">{brut(bloc(tete, "p"))}</p>' + tuiles(niv, "tl t4")))
+# Retour de Fabien du 2026-10-16 : introduction sur une ligne, titres des quatre tuiles alignés
+B["niveaux"] = (section(h2(txt(bloc(tete, "h2")), "Quatre niveaux") + f'<p class="intro intro-l">{brut(bloc(tete, "p"))}</p>' + tuiles(niv, "tl t4 tl-haut")))
 
 # 8. Comparaison
 cp = bloc(t, "section", "compare")

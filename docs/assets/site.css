@@ -446,8 +446,10 @@ ul{padding:0;list-style:none}
 .tl.t2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .tl > *{display:flex;flex-direction:column;justify-content:space-between;gap:64px;min-height:228px;padding:16px;border-radius:8px;background:var(--tile)}
 .tl.txt > *{justify-content:flex-start;gap:4px;min-height:0}
+.tl.tl-haut > *{justify-content:flex-start}  /* texte calé sous le chiffre : titres alignés d'une tuile à l'autre */
+.intro.intro-l{max-width:none}
 .tl .n{font:500 48px/60px var(--num);color:var(--ink);letter-spacing:-.01em}
-.tl .n .u{display:block;margin-top:2px;font-size:22px;line-height:28px;font-weight:500;letter-spacing:0}  /* unité sous le chiffre (« 30 langues »), dans les quatre tuiles */
+.tl .n .u{font-size:28px;font-weight:500;letter-spacing:0;white-space:nowrap}  /* unité accolée au chiffre, sur la même ligne (« 30 langues ») */
 .tl b{display:block;font:500 16px/24px var(--sans);color:var(--ink)}
 .tl p{color:var(--text)}
 
@@ -459,6 +461,8 @@ ul{padding:0;list-style:none}
 .bt-p{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px;text-align:center}
 .bt-p b{font:500 16px/24px var(--sans);color:var(--ink)}
 .bt-p p{font:400 14px/20px var(--sans);color:var(--text)}
+.bt-us .bt-p p{white-space:nowrap}  /* bloc d'usage de l'accueil : petit texte sur une seule ligne */
+.bt-p .n .u{display:block;margin-top:2px;font-size:20px;line-height:26px;font-weight:500}
 .bt-p .ic{width:34px;height:34px;color:var(--ink)}
 .bt-l{grid-column:span 2}
 

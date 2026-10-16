@@ -28,7 +28,7 @@ PREUVES = {"iso": "ISO 27001", "infomaniak": "Infomaniak", "innosuisse": "Innosu
 HORS_LISTE = ("Entreprises les plus innovantes", "13e rang", "UBS", "Forum des 100", "Le Temps")
 # Sections existantes de l'accueil, toutes gardées (titres ou textes repérables)
 ACCUEIL_EXISTANT = ["Adopté par les professionnels du droit et de la finance suisses", "15 M+",
-                    "Toute votre traduction juridique, sur une", "Des agents IA spécialisés",
+                    "Toute votre traduction juridique, sur une", "Une seule plateforme, pilotée par vos juristes",
                     "Traduire le droit suisse suppose de le", "Quatre niveaux de qualité",
                     "Ces solutions traduisent.", "Vos documents les plus sensibles", "Tout ce qu'il faut savoir",
                     "Prêt à voir Neur.on"]
