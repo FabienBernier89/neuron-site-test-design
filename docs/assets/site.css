@@ -556,9 +556,9 @@ ul{padding:0;list-style:none}
 .ct-ecr a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 /* Preuve sociale : distinctions du bandeau de l'accueil, en tête de la colonne de gauche */
 .ct-pv ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none}
-.ct-pv li{display:grid;align-content:center;gap:2px;min-height:68px;padding:12px 14px;border-radius:8px;background:var(--tile)}
-.ct-pv b{font:600 13px/18px var(--sans);color:var(--text)}
-.ct-pv span{font:400 12px/16px var(--sans);color:var(--muted)}
+.ct-pv li{display:grid;align-content:center;justify-items:center;gap:2px;min-height:72px;padding:12px 14px;border-radius:8px;background:var(--tile);text-align:center;text-wrap:balance}
+.ct-pv b{font:600 14px/20px var(--sans);color:var(--text)}
+.ct-pv span{font:400 13px/18px var(--sans);color:var(--muted)}
 .ct-opt{grid-column:1/-1;margin-top:4px;padding-top:20px;border-top:1px solid var(--line)}
 .ct-og{font:600 15px/22px var(--sans);color:var(--ink)}
 .ct-on{margin-top:4px;font:400 13px/20px var(--sans);color:var(--muted)}
