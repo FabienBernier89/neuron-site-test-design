@@ -9,6 +9,7 @@ import html as H
 from source import *
 from comp import *
 from app import app_corrext
+import app as A
 from commun import fichiers_demo, EX
 import vues as V
 import schema_produits
@@ -83,10 +84,19 @@ B["plateforme"] = (section(h2(txt(bloc(tete, "h2")), "seule plateforme") + f'<p 
 def _a(cle):
     return H.escape(trame.texte(f"accueil.axes.{cle}"), quote=False)
 co = EX["co"]
+# Visuel LexMachina (retour de Fabien du 2026-10-16) : un moteur spécialisé face à un moteur généraliste, sur un texte
+# bancaire suisse. Sorties RÉELLES de la démo Corrext (exemple « lb », vers l'allemand) ; le terme « beaufsichtigte » est
+# celui de l'art. 3 LFINMA (Fedlex : « Assujettis » / « Beaufsichtigte »), DeepL Pro traduit mot à mot (« unterstellte »).
+lb = EX["lb"]
+_sortie = lb["out"]["de"]["main"].replace("beaufsichtigte", "<mark>beaufsichtigte</mark>", 1)
+_alt = next(x for x in lb["out"]["de"]["alt"] if x["e"] == "DeepL Pro")["t"].replace("unterstellte", '<mark class="oth">unterstellte</mark>', 1)
+assert "<mark>" in _sortie and "<mark " in _alt, "la démo Corrext a changé : revoir l'exemple bancaire de l'axe LexMachina"
+_ecran = ('<div class="cr cr-frag cr-q4 cr-q4-de">' + A.travail(detecte=True, cible="German", src=H.escape(lb["src"], quote=False), out="")
+          .replace('<p class="cr-out">', f'<p class="cr-out" data-html="{H.escape(_sortie)}">', 1)
+          + '<div class="cr-bas">' + A.alternatives().replace('<p class="cr-alt">', f'<p class="cr-alt" data-html="{H.escape(_alt)}">', 1)
+          .replace('<span class="cr-alt-e">', '<span class="cr-alt-e" data-v="DeepL Pro">', 1) + "</div></div>")
 AXES = [("lexmachina", "LexMachina", "{{ROOT}}lexmachina/",
-         scene(764, 556, V.vue_alternatives("co", H.escape(co["src"], quote=False), H.escape(co["out"]["en"]["main"], quote=False),
-                                            H.escape(co["out"]["en"]["alt"][0]["t"], quote=False), co["out"]["en"]["alt"][0]["e"],
-                                            len(co["out"]["en"]["alt"]), tabs=True), sim="alts", curseur=False, label="LexMachina")),
+         scene(764, 556, _ecran, sim="quatre", curseur=False, label="LexMachina face à DeepL Pro sur un texte bancaire suisse")),
         ("corrext", "Corrext", "{{ROOT}}corrext/",
          scene(764, 444, V.vue_fichiers(fichiers_demo("fichier", "pdf")), sim="lot", curseur=False, label="Corrext")),
         ("chnell", "CHnell", "{{ROOT}}corrext/chnell/",
@@ -138,7 +148,9 @@ B["comparaison"] = (section(h2(txt(bloc(cp, "h2")), "maîtrise le droit suisse")
 se = bloc(t, "section", "security")
 tete = bloc(se, "div", "security-head")
 items = [(brut(bloc(x, "h3")), brut(bloc(x, "p")), "") for x in blocs(se, "div", "sec-item")[:4]]
-B["securite"] = (section(bento({"pill": "Sécurité et souveraineté", "titre": h2(txt(bloc(tete, "h2")), "restent en Suisse", "h3s"),
+# Titre et sous-titre de section au-dessus du bloc (retour de Fabien du 2026-10-16)
+B["securite"] = (section(h2(H.escape(trame.texte("accueil.securite.titre"), quote=False), "entièrement suisse")
+                         + f'<p class="intro">{H.escape(trame.texte("accueil.securite.intro"), quote=False)}</p>' + bento({"pill": "Sécurité et souveraineté", "titre": h2(txt(bloc(tete, "h2")), "restent en Suisse", "h3s"),
                           "texte": brut(bloc(tete, "p")), "lien": ("Sécurité et souveraineté", "{{ROOT}}fr/securite-souverainete/")}, items)))
 
 # 10. FAQ

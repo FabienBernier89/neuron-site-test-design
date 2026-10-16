@@ -404,6 +404,7 @@ ul{padding:0;list-style:none}
 .cr-frag .cr-menu span{white-space:nowrap}
 .cr-frag .cr-pane{height:170px}
 .cr-q4 .cr-pane{height:150px}
+.cr-q4-de .cr-pane{height:206px}  /* axe LexMachina de l'accueil : texte bancaire allemand plus long */
 .cr-q4 .cr-bas{height:auto}
 .cr-q4 .cr-alts{position:relative}
 .cr-q4 mark{border-radius:2px;background:transparent;color:inherit;transition:background-color .5s ease}
