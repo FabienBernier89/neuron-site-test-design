@@ -29,7 +29,7 @@ HORS_LISTE = ("Entreprises les plus innovantes", "13e rang", "UBS", "Forum des 1
 # Sections existantes de l'accueil, toutes gardées (titres ou textes repérables)
 ACCUEIL_EXISTANT = ["Adopté par les professionnels du droit et de la finance suisses", "15 M+",
                     "Toute votre traduction juridique, sur une", "Une seule plateforme, pilotée par vos juristes",
-                    "Traduire le droit suisse suppose de le", "Quatre niveaux de qualité",
+                    "Un moteur, une plateforme, un concordancier", "Quatre niveaux de qualité",
                     "Ces solutions traduisent.", "Vos documents les plus sensibles", "Tout ce qu'il faut savoir",
                     "Prêt à voir Neur.on"]
 
@@ -121,15 +121,15 @@ class TestTrame(unittest.TestCase):
         self.assertEqual([n for n in noms[1:noms.index("tr-pb")] if n != "dist"], [])
         self.assertLess(noms.index("tr-pv"), noms.index("faq"))
         self.assertEqual(noms[-1], "cta")
-        # Schéma du lot B juste après le bloc qui présente la plateforme
+        # Restructuration validée par Fabien le 2026-10-16 : les trois axes (LexMachina, Corrext, CHnell) suivent
+        # directement le problème, le schéma du lot B suit les axes, puis la souveraineté
         secs = sections(self.h[""])
-        plateforme = next(i for i, (_, x) in enumerate(secs) if "Toute votre traduction juridique" in texte_brut(x))
-        self.assertEqual(secs[plateforme + 1][0], "sp")
-        self.assertLess(noms.index("tr-pb"), plateforme)
-        # Souveraineté juste après le problème, avant la plateforme (décision de Fabien du 2026-10-15)
+        axes = next(i for i, (_, x) in enumerate(secs) if "Un moteur, une plateforme, un concordancier" in texte_brut(x))
+        self.assertEqual(axes, noms.index("tr-pb") + 1)
+        self.assertEqual(secs[axes + 1][0], "sp")
         souverainete = next(i for i, (_, x) in enumerate(secs) if "Vos documents les plus sensibles" in texte_brut(x))
-        self.assertEqual(souverainete, noms.index("tr-pb") + 1)
-        self.assertEqual(plateforme, souverainete + 1)
+        self.assertEqual(souverainete, axes + 2)
+        self.assertEqual(texte_brut(secs[axes][1]).count("Toute votre traduction juridique, sur une seule plateforme"), 1)
         # Aucune section existante supprimée (texte de <main> seulement : le menu reprend certains titres)
         h = self.h[""]
         lu = texte_brut(h[h.index('<main id="main">'):h.index("</main>")])
@@ -169,13 +169,11 @@ class TestTrame(unittest.TestCase):
 
     def test_probleme_sans_redite_du_hero_ni_de_la_section_suivante(self):
         """Aucune suite de 5 mots du problème ne figure dans le hero ni dans la section qui le suit ; sur l'accueil,
-        ni dans les piliers (« Traduire le droit suisse suppose de le connaître »)."""
+        les trois axes (section suivante depuis le 2026-10-16) remplacent les piliers."""
         for p in PAGES:
             secs = sections(self.h[p])
             i = [n for n, _ in secs].index("tr-pb")
             voisins = [x for n, x in secs if n == "hero"] + [secs[i + 1][1]]
-            if p == "":
-                voisins.append(next(x for _, x in secs if "Traduire le droit suisse suppose" in texte_brut(x)))
             communes = suites(secs[i][1]) & set().union(*(suites(x) for x in voisins))
             self.assertEqual(communes, set(), p or "accueil")
 

@@ -9,7 +9,7 @@ import html as H
 from source import *
 from comp import *
 from app import app_corrext
-from commun import fichiers_demo
+from commun import fichiers_demo, EX
 import vues as V
 import schema_produits
 import trame
@@ -77,6 +77,24 @@ for i, f in enumerate(blocs(pr, "div", "feature")):
     lignes.append(ft(pill, titre, texte, vis, lien, inv=i % 2 == 1, liste=liste))
 B["plateforme"] = (section(h2(txt(bloc(tete, "h2")), "seule plateforme") + f'<p class="intro">{brut(bloc(tete, "p"))}</p>' + "".join(lignes)))
 
+# 4 bis. Les trois axes (restructuration validée par Fabien le 2026-10-16) : LexMachina, Corrext, CHnell, en rangées au
+# composant des fonctionnalités (visuel animé, texte, points forts, lien). Remplace la section plateforme et les piliers,
+# dont le contenu est repris ici ; les fonctionnalités détaillées restent sur les pages outils.
+def _a(cle):
+    return H.escape(trame.texte(f"accueil.axes.{cle}"), quote=False)
+co = EX["co"]
+AXES = [("lexmachina", "LexMachina", "{{ROOT}}lexmachina/",
+         scene(764, 556, V.vue_alternatives("co", H.escape(co["src"], quote=False), H.escape(co["out"]["en"]["main"], quote=False),
+                                            H.escape(co["out"]["en"]["alt"][0]["t"], quote=False), co["out"]["en"]["alt"][0]["e"],
+                                            len(co["out"]["en"]["alt"]), tabs=True), sim="alts", curseur=False, label="LexMachina")),
+        ("corrext", "Corrext", "{{ROOT}}corrext/",
+         scene(764, 444, V.vue_fichiers(fichiers_demo("fichier", "pdf")), sim="lot", curseur=False, label="Corrext")),
+        ("chnell", "CHnell", "{{ROOT}}corrext/chnell/",
+         scene(764, 470, V.vue_chnell(co["lookup"]), curseur=False, label="CHnell"))]
+axes = "".join(ft(pill, _a(f"{k}.titre"), _a(f"{k}.texte"), vis, (_a(f"{k}.lien"), lien), inv=i % 2 == 1,
+                  liste=[_a(f"{k}.l{n}") for n in (1, 2, 3)]) for i, (k, pill, lien, vis) in enumerate(AXES))
+B["axes"] = section(h2(_a("titre"), "un concordancier") + f'<p class="intro">{_a("intro")}</p>' + axes)
+
 # 5. Usage de Corrext et de LexMachina (retour de Fabien du 2026-10-16) : Corrext n'a pas d'agents IA ; les chiffres
 # d'économies du discours « agentique » sont remplacés par des chiffres d'usage publiés sur les pages produit
 def _x(cle):
@@ -134,10 +152,12 @@ B["appel"] = trame.appel(cta("Prêt à voir Neur.on", "sur vos propres documents
 
 # 12. Trame : hero, problème, souveraineté, situation visée, preuves, FAQ, appel (le schéma suit le bloc qui présente
 # la plateforme ; la souveraineté, argument majeur, suit directement le problème : décision de Fabien du 2026-10-15)
-out = [B["hero"], B["distinctions"], trame.probleme("accueil"), B["securite"],
-       B["plateforme"], schema_produits.rendre(), B["chiffres"], B["agents"], B["piliers"], B["niveaux"], B["comparaison"],
+# Restructuration du 2026-10-16 : les trois axes répondent au problème, le schéma montre comment ils s'enchaînent, puis la
+# souveraineté ; « plateforme » et « piliers » sont remplacés par les axes (contenu repris, détail sur les pages outils)
+out = [B["hero"], B["distinctions"], trame.probleme("accueil"), B["axes"], schema_produits.rendre(), B["securite"],
+       B["chiffres"], B["agents"], B["niveaux"], B["comparaison"],
        trame.preuves("accueil", bandeau=B["distinctions"], exemple=False), B["faq"], B["appel"]]
-assert len(out) == len(B) + 3, "un bloc existant manque à la trame"
+assert len(out) == len(B) + 3 - 2, "un bloc existant manque à la trame (plateforme et piliers remplacés par les axes)"
 
 ecrire(P, entete_existant(P), "".join(out))
 print("accueil écrite :", sum(len(x) for x in out), "caractères")
