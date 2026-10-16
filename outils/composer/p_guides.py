@@ -27,7 +27,5 @@ try:
 except ValueError:
     ancien = bloc(page, "div", "tl")  # tuiles de la composition générique
 page = page.replace(ancien, cartes_guides, 1)
-# Hero : titre aligné en haut sur le texte de droite, comme sur les pages Tarifs et LexMachina (Fabien, 2026-10-16)
-page = page.replace('class="wrap hero-g"', 'class="wrap hero-g hero-haut"', 1)
 fichier.write_text(page, encoding="utf-8")
 print("hub des guides écrit")

@@ -58,7 +58,7 @@ stats = [(stats[0][0], None, H.escape(trame.texte("accueil.chiffres.segments.tex
          (_u("30", "langues"), None, H.escape(trame.texte("accueil.chiffres.langues.texte"), quote=False)),
          (_u("4", "moteurs"), None, H.escape(trame.texte("accueil.chiffres.moteurs.texte"), quote=False)),
          (H.escape(trame.texte("accueil.chiffres.suisse.chiffre"), quote=False), None, H.escape(trame.texte("accueil.chiffres.suisse.texte"), quote=False))]
-B["chiffres"] = section(tuiles(stats, "tl t4 tl-haut"))  # petits textes alignés à la même hauteur
+B["chiffres"] = section(tuiles(stats, "tl t4"))  # petits textes alignés à la même hauteur (règle commune des tuiles chiffrées)
 
 # 4. Plateforme : une ligne C7 par produit, visuel = maquette du site actuel
 pr = bloc(t, "section", "products")
@@ -121,7 +121,7 @@ lv = bloc(t, "section", "levels")
 tete = bloc(lv, "div", "sec-head")
 niv = [(str(i + 1), brut(bloc(x, "h3")), brut(bloc(x, "p"))) for i, x in enumerate(blocs(lv, "div", "lev"))]
 # Retour de Fabien du 2026-10-16 : introduction sur une ligne, titres des quatre tuiles alignés
-B["niveaux"] = (section(h2(txt(bloc(tete, "h2")), "Quatre niveaux") + f'<p class="intro intro-l">{brut(bloc(tete, "p"))}</p>' + tuiles(niv, "tl t4 tl-haut")))
+B["niveaux"] = (section(h2(txt(bloc(tete, "h2")), "Quatre niveaux") + f'<p class="intro intro-l">{brut(bloc(tete, "p"))}</p>' + tuiles(niv, "tl t4")))
 
 # 8. Comparaison
 cp = bloc(t, "section", "compare")

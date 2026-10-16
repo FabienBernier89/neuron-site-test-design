@@ -8,7 +8,7 @@ P = "lexmachina/"
 t = liens(charger(P), P)
 out = []
 th = bloc(t, "section", "thero")
-out.append(hero("LexMachina.", "Le moteur qui connaît les lois qu'il traduit", brut(bloc(th, "p", "lead")), ("Demander une démo", C)).replace('class="wrap hero-g"', 'class="wrap hero-g lm-hg"', 1))  # titre aligné en haut sur le texte de droite (Fabien, 2026-10-16)
+out.append(hero("LexMachina.", "Le moteur qui connaît les lois qu'il traduit", brut(bloc(th, "p", "lead")), ("Demander une démo", C)))
 def k(cle):
     return _H.escape(texte(f"lexmachina.{cle}"), quote=False)
 
@@ -99,7 +99,7 @@ out.append(section(h2(h, "exactement") + f'<p class="intro">{p}</p>'
 pi = bloc(t, "section", "pillars")
 h, p = tete(pi)
 out.append(section(h2(h, "un modèle spécialisé") + f'<p class="intro">{p}</p>'
-                   + tuiles([(None, txt(blocs(bloc(x, "h3"), "span")[-1]), brut(bloc(x, "p"))) for x in blocs(pi, "div", "pillar")], "tl txt tl-lm")))  # textes un peu plus petits (Fabien, 2026-10-16)
+                   + tuiles([(None, txt(blocs(bloc(x, "h3"), "span")[-1]), brut(bloc(x, "p"))) for x in blocs(pi, "div", "pillar")], "tl txt")))
 # Pour aller plus loin : cartes avec valeurs clés
 vn = bloc(t, "section", "vn")
 cs = []

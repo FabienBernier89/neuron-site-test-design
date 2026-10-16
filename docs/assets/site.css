@@ -98,7 +98,7 @@ ul{padding:0;list-style:none}
 /* Sections et titres */
 .sec{padding:64px 0}
 .hero{padding:128px 0 64px}
-.hero-g{display:grid;grid-template-columns:576px minmax(0,1fr);column-gap:120px;align-items:end}
+.hero-g{display:grid;grid-template-columns:576px minmax(0,1fr);column-gap:120px;align-items:start}  /* RÈGLE COMMUNE : titre calé en haut sur le texte de droite (Fabien, 2026-10-16) */
 .h1{font:600 40px/48px var(--sans);color:var(--ink)}
 .h1 .n{display:block}
 .h1 .s{display:block;font:300 40px/48px var(--serif)}
@@ -448,17 +448,15 @@ ul{padding:0;list-style:none}
 .tl.t2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .tl > *{display:flex;flex-direction:column;justify-content:space-between;gap:64px;min-height:228px;padding:16px;border-radius:8px;background:var(--tile)}
 .tl.txt > *{justify-content:flex-start;gap:4px;min-height:0}
-.tl.tl-haut > *{justify-content:flex-start}
+.tl.txt p{margin-top:8px;font-size:14px;line-height:22px}  /* RÈGLE COMMUNE : espace sous le titre, texte plus petit que le titre (validé sur LexMachina, 2026-10-16) */
+.tl > *:has(> .n){justify-content:flex-start}  /* RÈGLE COMMUNE : textes des tuiles chiffrées alignés au pixel (validé sur l'accueil, 2026-10-16) */
 /* Piliers de l'accueil : titre un peu plus grand sur une ligne, texte un peu plus petit */
 .tl.tl-pil > *{gap:8px;padding:20px}
 .tl.tl-pil b{font-size:18px;line-height:26px;white-space:nowrap}
 .tl.tl-pil p{font-size:15px;line-height:23px}
-.tl.tl-lm p{margin-top:8px;font-size:14px;line-height:22px}  /* page LexMachina, « Pourquoi un modèle spécialisé » : textes un peu plus petits que les titres */  /* texte calé sous le chiffre : titres alignés d'une tuile à l'autre */
 .intro.intro-l{max-width:none}
-.hero-g.hero-haut{align-items:start}  /* titre du hero aligné en haut sur le texte de droite (Fabien, 2026-10-16) */
-.tl .n{font:500 48px/60px var(--num);color:var(--ink);letter-spacing:-.01em}
+.tl .n{display:block;height:60px;white-space:nowrap;font:500 48px/60px var(--num);color:var(--ink);letter-spacing:-.01em}  /* RÈGLE COMMUNE : chiffre sur une ligne de hauteur fixe, unité accolée (« 30 Langues ») */
 .tl .n .u{font-size:clamp(30px,2.8vw,40px);line-height:1;font-weight:500;letter-spacing:0;white-space:nowrap}
-.tl.tl-haut .n{display:block;height:60px;white-space:nowrap}  /* ligne du titre de hauteur fixe : textes alignés au pixel */  /* unité accolée au chiffre, sur la même ligne (« 30 langues ») */
 .tl b{display:block;font:500 16px/24px var(--sans);color:var(--ink)}
 .tl p{color:var(--text)}
 
@@ -1322,9 +1320,6 @@ main table a{display:inline-block;padding-block:3px}
 
 /* composants/lexmachina.css */
 /* Page LexMachina (outils/composer/p_lexmachina.py), retours de Fabien du 2026-10-16 */
-
-/* Hero : titre aligné en haut sur le texte de droite */
-.hero-g.lm-hg{align-items:start}
 
 /* Scène « le texte qui se corrige » (sim « corrige ») : termes de l'IA généraliste surlignés en rouge, termes officiels
    de LexMachina en vert, puis leurs sources (retour de Fabien du 2026-10-16) ; scène plus haute, moins compacte */

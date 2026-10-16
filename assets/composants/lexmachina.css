@@ -1,8 +1,5 @@
 /* Page LexMachina (outils/composer/p_lexmachina.py), retours de Fabien du 2026-10-16 */
 
-/* Hero : titre aligné en haut sur le texte de droite */
-.hero-g.lm-hg{align-items:start}
-
 /* Scène « le texte qui se corrige » (sim « corrige ») : termes de l'IA généraliste surlignés en rouge, termes officiels
    de LexMachina en vert, puis leurs sources (retour de Fabien du 2026-10-16) ; scène plus haute, moins compacte */
 .cr-cg .cr-pane{height:236px}
