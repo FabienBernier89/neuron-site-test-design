@@ -16,7 +16,7 @@ import build  # noqa: E402
 import schema_produits  # noqa: E402
 from outils import contenus  # noqa: E402
 
-PAGES = ("corrext/", "lexmachina/", "corrext/chnell/")
+PAGES = ("corrext/", "corrext/chnell/")  # plus sur la page LexMachina (Fabien, 2026-10-16)
 LIENS = {"LexMachina": "lexmachina/", "Corrext": "corrext/", "CHnell": "corrext/chnell/"}
 JSON_B = ICI / "src/data/contenus-v2/B-schema.json"
 CSS = ICI / "assets/composants/schema-produits.css"

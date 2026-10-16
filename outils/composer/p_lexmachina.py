@@ -39,7 +39,7 @@ out.append(section(h2(h, "exactement") + f'<p class="intro">{p}</p>' + tuiles(kp
 pi = bloc(t, "section", "pillars")
 h, p = tete(pi)
 out.append(section(h2(h, "un modèle spécialisé") + f'<p class="intro">{p}</p>'
-                   + tuiles([(None, txt(blocs(bloc(x, "h3"), "span")[-1]), brut(bloc(x, "p"))) for x in blocs(pi, "div", "pillar")], "tl txt")))
+                   + tuiles([(None, txt(blocs(bloc(x, "h3"), "span")[-1]), brut(bloc(x, "p"))) for x in blocs(pi, "div", "pillar")], "tl txt tl-lm")))  # textes un peu plus petits (Fabien, 2026-10-16)
 # Pour aller plus loin : cartes avec valeurs clés
 vn = bloc(t, "section", "vn")
 cs = []

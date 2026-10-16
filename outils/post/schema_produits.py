@@ -1,11 +1,11 @@
-"""Lot B : insère le schéma « qui fait quoi » (outils/composer/schema_produits.py) sur les pages Corrext, LexMachina et
-CHnell, après la première section qui porte une scène (sinon après le hero). Le lien du schéma vers la page affichée
+"""Lot B : insère le schéma « qui fait quoi » (outils/composer/schema_produits.py) sur les pages Corrext et CHnell
+(plus sur la page LexMachina depuis le 2026-10-16), après la première section qui porte une scène (sinon après le hero). Le lien du schéma vers la page affichée
 reçoit aria-current="page". Les autres pages ne changent pas ; l'accueil intègre le schéma par son composeur (lot D)."""
 import importlib.util
 import re
 from pathlib import Path
 
-PAGES = ("corrext/", "lexmachina/", "corrext/chnell/")
+PAGES = ("corrext/", "corrext/chnell/")  # retiré de la page LexMachina, qui parle du moteur (Fabien, 2026-10-16)
 COMPOSEUR = Path(__file__).resolve().parents[1] / "composer/schema_produits.py"
 SECTION = re.compile(r"<section\b[^>]*>.*?</section>\n?", re.S)
 _section = []
