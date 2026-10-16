@@ -4,6 +4,7 @@ Seul le rendu est affiné. Les textes viennent de la démo Corrext publiée (pas
 par sim.js) ; aucun libellé n'est inventé.
 """
 import html as _h
+import re
 
 
 def _ic(d, extra=""):
@@ -120,8 +121,12 @@ def lignes_chnell(lookup):
     """Lignes alignées de CHnell, terme recherché surligné (rendu statique)."""
     q = e(lookup["q"])
     out = []
+    # Terme surligné des deux côtés (retour de Fabien du 2026-10-16) : formes de la langue cible listées dans lookup["mark"]
+    cibles = [e(m) for m in lookup.get("mark", []) if m != lookup["q"]]
+    pat = re.compile("|".join(re.escape(m) for m in sorted(cibles, key=len, reverse=True))) if cibles else None
     for i, r in enumerate(lookup["rows"]):
-        out.append(f'<div style="--i:{i}"><p>{e(r["a"]).replace(q, "<mark>" + q + "</mark>")}</p><p>{e(r["b"])}</p><small>{e(r["src"])}</small></div>')
+        b = pat.sub(lambda m: "<mark>" + m.group(0) + "</mark>", e(r["b"])) if pat else e(r["b"])
+        out.append(f'<div style="--i:{i}"><p>{e(r["a"]).replace(q, "<mark>" + q + "</mark>")}</p><p>{b}</p><small>{e(r["src"])}</small></div>')
     return "".join(out)
 
 
