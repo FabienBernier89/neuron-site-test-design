@@ -123,7 +123,7 @@ class TestAjoutsDeMenu(unittest.TestCase):
 
     def test_fichier_par_defaut_vide(self):
         brut = json.loads((ICI / "src/data/menu-ajouts.json").read_text(encoding="utf-8"))
-        self.assertEqual(set(brut), {"panneaux", "pied"})
+        self.assertEqual(set(brut), {"panneaux", "pied", "entrees"})
         nav, pied = self.frais()
         menu.appliquer_ajouts(nav, pied, {"panneaux": {}, "pied": {}})
         self.assertEqual((nav, pied), (self.nav_v1, self.pied_v1))

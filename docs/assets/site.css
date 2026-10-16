@@ -1608,6 +1608,39 @@ main table a{display:inline-block;padding-block:3px}
 .sv-tb-t + .tb{margin-top:0}
 @media (max-width:767px){.sv-tb-t{margin-top:48px;font-size:18px;line-height:26px}}
 
+/* composants/tarifs.css */
+/* Page Tarifs (outils/composer/p_tarifs.py) et bouton secondaire du site */
+.btn-2{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.btn-2:hover{opacity:1;box-shadow:inset 0 0 0 1px var(--mid)}
+.tf-act{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.hero-d .tf-act + .note{margin-top:12px;font:400 14px/20px var(--sans);color:var(--muted)}
+
+/* Une offre par organisation : trois cartes, bouton en pied */
+.tf-pg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:40px}
+.tf-p{display:flex;flex-direction:column;min-height:300px;padding:28px;border-radius:8px;background:var(--tile)}
+.tf-k{font:500 14px/20px var(--sans);color:var(--muted)}
+.tf-p h3{margin-top:4px;font:600 26px/32px var(--sans);letter-spacing:-.01em;color:var(--ink)}
+.tf-d{margin-top:16px;font:400 15px/25px var(--sans);color:var(--muted)}
+.tf-pa{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:auto;padding-top:28px}
+.tf-pa .btn-2{background:var(--page)}
+
+/* Comment se forme votre prix : trois facteurs, l'étape « Devis » de l'application à côté */
+.tf-x{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:40px}
+.tf-f{display:grid;gap:28px;margin:0;padding:0;list-style:none}
+.tf-f li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px}
+.tf-n{font:300 28px/32px var(--serif);color:var(--accent-d)}
+.tf-f h3{font:600 17px/24px var(--sans);color:var(--ink)}
+.tf-f p{margin-top:6px;font:400 15px/25px var(--sans);color:var(--muted)}
+.tf-v{height:340px;margin:0}
+.tf-suite{margin-top:24px}
+
+@media (max-width:1023px){
+  .tf-pg{grid-template-columns:minmax(0,1fr)}
+  .tf-p{min-height:0}
+  .tf-x{grid-template-columns:minmax(0,1fr);gap:32px}
+}
+@media (max-width:640px){.tf-v{height:280px}}
+
 /* composants/trame.css */
 /* Trame problème, situation visée, preuve, appel à l'action (lot D, spec V2 § 7).
    Problème (.tr-pb) : trois difficultés en colonnes, chacune sous un filet, numérotées par la liste.

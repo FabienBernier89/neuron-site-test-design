@@ -145,6 +145,7 @@ def appliquer_ajouts(nav, pied, ajouts=None):
       (un href), cherchée d'abord dans la colonne indiquée puis dans tout le panneau : il prend la colonne de cette
       entrée. Sans « apres », il termine la colonne indiquée (0 par défaut).
     - pied : {titre de colonne: [{"apres", "href", "texte"}]}, même règle d'insertion.
+    - entrees : [{"avant", "cle", "libelle", "href"}] : lien du menu principal, placé avant l'entrée de clé « avant ».
     Une entrée mal adressée (panneau, colonne, « apres » ou titre inconnus) lève ValueError."""
     if ajouts is None:
         ajouts = json.loads(AJOUTS.read_text(encoding="utf-8"))
@@ -166,6 +167,11 @@ def appliquer_ajouts(nav, pied, ajouts=None):
             if cible is None:
                 raise ValueError(f"panneau {cle} : « apres » introuvable : {a['apres']}")
             _inserer(cible["liens"], nouveau, a["apres"], f"panneau {cle}", deja)
+    for a in ajouts.get("entrees", []):
+        i = next((k for k, x in enumerate(nav["entrees"]) if x["cle"] == a["avant"]), None)
+        if i is None:
+            raise ValueError(f"entrée de menu : « avant » introuvable : {a['avant']}")
+        nav["entrees"].insert(i, {"cle": a["cle"], "libelle": a["libelle"], "href": a["href"]})
     for titre, items in ajouts.get("pied", {}).items():
         colonne = next((c for c in pied["colonnes"] if c["titre"] == titre), None)
         if colonne is None:
