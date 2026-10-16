@@ -1,0 +1,5 @@
+{"lot": "L", "entrees": [
+  {"cle": "visuel.etudes.corpus", "page": "*", "texte": "Corpus décrit", "statut": "a_relire", "source": "Demande de Fabien du 2026-10-16 : mettre en valeur les guides et illustrer les cartes de ressources. Page Études (« Tant que le corpus n'est pas décrit, aucun chiffre n'est publié »)."},
+  {"cle": "visuel.etudes.double", "page": "*", "texte": "Double lecture", "statut": "a_relire", "source": "Demande de Fabien du 2026-10-16 : mettre en valeur les guides et illustrer les cartes de ressources. Page Études (« le protocole d'évaluation à double lecture »)."},
+  {"cle": "visuel.etudes.versions", "page": "*", "texte": "Versions datées", "statut": "a_relire", "source": "Demande de Fabien du 2026-10-16 : mettre en valeur les guides et illustrer les cartes de ressources. Page Études (« les versions datées »)."}
+]}

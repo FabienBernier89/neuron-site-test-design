@@ -7,7 +7,8 @@ de l'entrée `.h1`. Ce post-traitement remplace, sans toucher aux URL :
 - sur la page elle-même : le H1 (pour un guide, le texte du <span class="s">, le repère « Guide. » reste), le <title>,
   l'og:title et le headline du JSON-LD Article ou BlogPosting ;
 - partout ailleurs où le titre d'origine servait de titre : les cartes (<h2> et <h3>) qui renvoient vers l'article, les
-  headline des JSON-LD de la liste du blog, et le nom du guide dans la page qui les liste (<b>) ;
+  headline des JSON-LD de la liste du blog, et le nom du guide dans la page qui les liste (<b>, ou <b class="fx-t">
+  d'une carte illustrée) ;
 - dans les blocs « À lire ensuite », le titre de chaque carte qui renvoie vers une page retitrée (son libellé court
   d'origine devient le nouveau H1).
 Les menus ne changent pas.
@@ -121,4 +122,6 @@ def traiter(html, page):
         html = re.sub(r"(<h[23]\b[^>]*>)" + ancien + r"(</h[23]>)", lambda m: m.group(1) + nouveau + m.group(2), html)
         if page == q.rstrip("/").rpartition("/")[0] + "/":  # liste des guides : le nom de chaque guide
             html = html.replace(f"<b>{texte_html(x['ancien'])}</b>", f"<b>{nouveau}</b>")
+            # carte illustrée (outils/post/fonctionnalites.py passe avant : <b class="fx-t">)
+            html = html.replace('<b class="fx-t">' + texte_html(x["ancien"]) + "</b>", f'<b class="fx-t">{nouveau}</b>')
     return lire_ensuite(html, reg)

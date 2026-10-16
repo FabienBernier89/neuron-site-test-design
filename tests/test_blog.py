@@ -112,9 +112,12 @@ class TestTitres(unittest.TestCase):
 
     def test_hub_des_guides_relie_et_titre_chaque_guide(self):
         hub = lire("ressources/guides/")
+        # Cartes illustrées depuis le 2026-10-16 (outils/post/fonctionnalites.py) : le titre est un <b class="fx-t">
         for p in GUIDES:
-            self.assertIn(f"<b>{self.t[p]['h1']}</b>", hub, p)
-            self.assertIn(f'<a href="../../../fr/{p}"><b>{self.t[p]["h1"]}</b>', hub, f"{p} : carte du hub non reliée")
+            self.assertIn(f'<b class="fx-t">{self.t[p]["h1"]}</b>', hub, p)
+            carte = re.search(r'<a class="fx" href="../../../fr/' + re.escape(p) + r'">.*?</a>', hub, re.S)
+            self.assertIsNotNone(carte, f"{p} : carte du hub non reliée")
+            self.assertIn(f'<b class="fx-t">{self.t[p]["h1"]}</b>', carte.group(0), f"{p} : titre absent de sa carte")
 
     def test_titres_nouveaux_a_relire_avec_source(self):
         for e in contenus.toutes():

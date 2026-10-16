@@ -85,7 +85,43 @@ VISUELS = {
         '<span class="l3">  <em>"source_language"</em>: "de",</span>\n<span class="l4">  <em>"target_language"</em>: "fr",</span>\n'
         '<span class="l5">  <em>"engine"</em>: "lexmachina",</span>\n<span class="l6">  <em>"domain"</em>: "banking"</span>\n'
         '<span class="l7">}</span></pre><div class="u-note">Illustration · le contrat d\'interface est remis au cadrage</div>'),
+    # Blog : les trois derniers articles de fond, catégorie et titre (page Blog), apparaissent l'un après l'autre
+    "fr/ressources/blog/": (
+        '<div class="u-lbl">Blog</div><div class="u-list u-art">'
+        '<div class="u-it u-a1"><span class="u-chip">Droit suisse</span><span>Traduire un contrat en droit suisse : comment ne pas s\'écarter du texte de loi</span></div>'
+        '<div class="u-it u-a2"><span class="u-chip">Bonnes pratiques</span><span>Deux devis de traduction juridique pour le même contrat : pourquoi l\'écart ?</span></div>'
+        '<div class="u-it u-a3"><span class="u-chip">Confidentialité</span><span>Secret professionnel et outils de traduction : stockés en Suisse, mais traités où ?</span></div></div>'),
+    # Études : la publication (page Études) et les règles du protocole, cochées l'une après l'autre
+    "fr/ressources/etudes/": lambda: (
+        '<div class="u-lbl">Méthode · 15 septembre 2026</div>'
+        '<div class="u-fort u-tit">Comment évaluer un moteur de traduction sur le droit suisse</div>'
+        '<div class="u-list u-chk">' + "".join(f'<div class="u-it u-c{i}"><span>{_c(c)}</span>{COCHE}</div>'
+                                               for i, c in enumerate(("corpus", "double", "versions"), 1)) + '</div>'),
+    # Guide « organiser la traduction dans un cabinet » : les trois rôles (§ 3), puis les six indicateurs (§ 7)
+    "fr/ressources/guides/organiser-traduction-cabinet/": (
+        '<div class="u-lbl">Qui décide quoi</div><div class="u-list u-chk">'
+        '<div class="u-it u-c1"><span>L\'associé ou le juriste responsable du dossier</span>' + COCHE + '</div>'
+        '<div class="u-it u-c2"><span>Le secrétariat ou l\'assistante de dossier</span>' + COCHE + '</div>'
+        '<div class="u-it u-c3"><span>Le référent traduction</span>' + COCHE + '</div></div>'
+        '<div class="u-lbl u-sep">Mesurer, en six indicateurs</div>'
+        '<div class="u-six"><i></i><i></i><i></i><i></i><i></i><i></i></div>'),
+    # Guide « rapport annuel multilingue » : on part de la publication et on remonte, jalon par jalon (§ 1 à 7)
+    "fr/ressources/guides/rapport-annuel-multilingue/": (
+        '<div class="u-lbl">Partir de la publication et remonter</div>'
+        '<div class="u-chips u-lng"><span>DE</span><span>FR</span><span>IT</span><span>EN</span></div>'
+        '<div class="u-list u-chk u-jal">'
+        '<div class="u-it u-c1"><span>Mise en page, formats et publication</span>' + COCHE + '</div>'
+        '<div class="u-it u-c2"><span>Relecture et validation</span>' + COCHE + '</div>'
+        '<div class="u-it u-c3"><span>Figer la terminologie avant la première phrase traduite</span>' + COCHE + '</div>'
+        '<div class="u-it u-c4"><span>Geler le texte source</span>' + COCHE + '</div></div>'),
 }
+
+
+def _c(cle):
+    """Libellé nouveau d'un visuel (contenus-v2/L-ressources.json)."""
+    from outils import contenus
+    return contenus.texte(f"visuel.etudes.{cle}")
+
 
 CIBLE = re.compile(r'href="\{\{ROOT\}\}(fr/[^"#?]*)"')
 
@@ -105,6 +141,11 @@ def _insecables(t):
     return re.sub(r" ([;:?!])", "\u00a0\\1", t)
 
 
+def _visuel(href):
+    v = VISUELS[href]
+    return v() if callable(v) else v
+
+
 def _carte(a):
     href = CIBLE.search(a).group(1)
     corps = a[a.index(">") + 1:a.rindex("</a>")]
@@ -116,14 +157,14 @@ def _carte(a):
     texte = re.search(r"<p>(.*?)</p>", corps, re.S) or re.search(r'<span(?! class="lien")[^>]*>(.*?)</span>', corps, re.S)
     lien = re.search(r'<span class="lien">(.*?)</span>', corps, re.S)
     libelle = lien.group(1) if lien else "En savoir plus"
-    return (f'<a class="fx" href="{{{{ROOT}}}}{href}"><div class="fx-v" aria-hidden="true"><div class="fx-w">{VISUELS[href]}</div></div>'
+    return (f'<a class="fx" href="{{{{ROOT}}}}{href}"><div class="fx-v" aria-hidden="true"><div class="fx-w">{_visuel(href)}</div></div>'
             f'<b class="fx-t">{titre}</b>' + (f'<p class="fx-p">{_insecables(texte.group(1))}</p>' if texte else "")
             + f'<span class="fx-l">{libelle} {FLECHE}</span></a>')
 
 
 def traiter(html, page):
     sortie, pos = [], 0
-    for m in re.finditer(r'<div class="cd">', html):
+    for m in re.finditer(r'<div class="cd(?: cd-guides)?">', html):
         if m.start() < pos:
             continue
         fin = _fin_div(html, m.start())
@@ -135,7 +176,8 @@ def traiter(html, page):
             continue
         sortie.append(html[pos:m.start()])
         # Toujours trois cartes de même taille, sur une ligne (retour de Fabien du 2026-10-15 : pas de 2 x 2)
-        sortie.append('<div class="fx-g">' + "".join(_carte(c) for c in cartes[:3]) + "</div>")
+        grille = "fx-g fx-g2" if len(cartes) == 2 else "fx-g"  # deux cartes (les guides) : deux grandes colonnes
+        sortie.append(f'<div class="{grille}">' + "".join(_carte(c) for c in cartes[:3]) + "</div>")
         pos = fin
     if not sortie:
         return html

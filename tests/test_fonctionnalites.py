@@ -51,8 +51,12 @@ class TestCartesFonctionnalites(unittest.TestCase):
                 self.assertIn(t.strip(), corpus, (href, t))
 
     def test_libelles_issus_des_sources(self):
+        # Sources : pages du site et contenus nouveaux relus (titres retouchés du blog, libellés des visuels de ressources)
+        from outils import contenus
         corpus = " ".join(p.read_text(encoding="utf-8") for p in SOURCES if p.exists()).replace("&amp;", "&")
+        corpus += " ".join(e["texte"] for e in contenus.toutes())
         for href, html in F.VISUELS.items():
+            html = F._visuel(href)
             for t in re.findall(r">([^<>]{3,})<", html):
                 t = t.strip().replace("&amp;", "&")
                 if t and not t.startswith(("{", "}", "/")):

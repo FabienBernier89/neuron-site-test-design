@@ -162,3 +162,46 @@
 @keyframes u-dl{0%,4%{opacity:0;transform:translateY(4px)}12%,100%{opacity:1;transform:none}}
 .u-dl .u-it span{font-weight:500}
 .u-dl .u-it:nth-child(2){animation-delay:.3s}.u-dl .u-it:nth-child(3){animation-delay:.6s}
+
+/* Deux cartes (hub des guides, 2026-10-16) : deux grandes colonnes, visuel et titre plus grands */
+.fx-g.fx-g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fx-g2 .fx-v{height:340px}
+.fx-g2 .fx-w{max-width:380px}
+.fx-g2 .fx-t{font-size:19px;line-height:27px;font-weight:600}
+@media (max-width:899px){.fx-g.fx-g2{grid-template-columns:minmax(0,1fr)}}
+
+/* Ressources et guides : titres d'articles, règles et jalons cochés un à un, six indicateurs */
+.u-art .u-it,.u-chk .u-it{justify-content:flex-start}
+.u-art .u-it{display:grid;gap:4px;justify-items:start;padding:8px 9px}  /* catégorie au-dessus du titre de l'article */
+.u-art .u-it > span:not(.u-chip){width:100%}
+.u-it > span:not(.u-chip){min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.u-art .u-chip{flex:0 0 auto}
+.u-chk .u-it{justify-content:space-between}
+.u-tit{margin-top:2px;font-size:13px;line-height:19px}
+.u-lng{margin-top:4px}
+.u-six{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.u-six i{height:22px;border-radius:5px;background:var(--u-soft);box-shadow:inset 0 0 0 1px var(--u-line)}
+.u-six i{animation:u-six 8s infinite}
+.u-six i:nth-child(2){animation-delay:.25s}.u-six i:nth-child(3){animation-delay:.5s}.u-six i:nth-child(4){animation-delay:.75s}
+.u-six i:nth-child(5){animation-delay:1s}.u-six i:nth-child(6){animation-delay:1.25s}
+@keyframes u-six{0%,50%{background:#fff}58%,100%{background:var(--u-soft)}}
+/* apparition des articles */
+.u-a1{animation:u-ap1 8s infinite}.u-a2{animation:u-ap2 8s infinite}.u-a3{animation:u-ap3 8s infinite}
+@keyframes u-ap1{0%,8%{opacity:0;transform:translateY(6px)}16%,100%{opacity:1;transform:none}}
+@keyframes u-ap2{0%,20%{opacity:0;transform:translateY(6px)}28%,100%{opacity:1;transform:none}}
+@keyframes u-ap3{0%,32%{opacity:0;transform:translateY(6px)}40%,100%{opacity:1;transform:none}}
+/* coches successives (règles, rôles, jalons) */
+.u-chk .u-it{background:var(--u-soft)}
+.u-chk .u-ck{flex:0 0 auto}
+.u-c1{animation:u-k1 8s infinite}.u-c1 .u-ck{animation:u-v1 8s infinite}
+.u-c2{animation:u-k2 8s infinite}.u-c2 .u-ck{animation:u-v2 8s infinite}
+.u-c3{animation:u-k3 8s infinite}.u-c3 .u-ck{animation:u-v3 8s infinite}
+.u-c4{animation:u-k4 8s infinite}.u-c4 .u-ck{animation:u-v4 8s infinite}
+@keyframes u-k1{0%,8%{background:transparent}14%,100%{background:var(--u-soft)}}
+@keyframes u-k2{0%,20%{background:transparent}26%,100%{background:var(--u-soft)}}
+@keyframes u-k3{0%,32%{background:transparent}38%,100%{background:var(--u-soft)}}
+@keyframes u-k4{0%,44%{background:transparent}50%,100%{background:var(--u-soft)}}
+@keyframes u-v1{0%,8%{opacity:0}14%,100%{opacity:1}}
+@keyframes u-v2{0%,20%{opacity:0}26%,100%{opacity:1}}
+@keyframes u-v3{0%,32%{opacity:0}38%,100%{opacity:1}}
+@keyframes u-v4{0%,44%{opacity:0}50%,100%{opacity:1}}

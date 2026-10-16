@@ -455,6 +455,7 @@ ul{padding:0;list-style:none}
 .tl.tl-pil p{font-size:15px;line-height:23px}
 .tl.tl-lm p{margin-top:8px;font-size:14px;line-height:22px}  /* page LexMachina, « Pourquoi un modèle spécialisé » : textes un peu plus petits que les titres */  /* texte calé sous le chiffre : titres alignés d'une tuile à l'autre */
 .intro.intro-l{max-width:none}
+.hero-g.hero-haut{align-items:start}  /* titre du hero aligné en haut sur le texte de droite (Fabien, 2026-10-16) */
 .tl .n{font:500 48px/60px var(--num);color:var(--ink);letter-spacing:-.01em}
 .tl .n .u{font-size:clamp(30px,2.8vw,40px);line-height:1;font-weight:500;letter-spacing:0;white-space:nowrap}
 .tl.tl-haut .n{display:block;height:60px;white-space:nowrap}  /* ligne du titre de hauteur fixe : textes alignés au pixel */  /* unité accolée au chiffre, sur la même ligne (« 30 langues ») */
