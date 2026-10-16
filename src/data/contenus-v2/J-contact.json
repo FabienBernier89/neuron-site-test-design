@@ -1,0 +1,5 @@
+{"lot": "J", "entrees": [
+  {"cle": "contact.facultatif.titre", "page": "contact/", "texte": "Pour préparer votre démonstration", "statut": "a_relire", "source": "Demande de Fabien du 2026-10-16 : page contact pensée pour la conversion (skill cro). Titre du groupe des champs facultatifs."},
+  {"cle": "contact.facultatif.note", "page": "contact/", "texte": "Facultatif : ces précisions nous aident à choisir les pièces, le moteur et la terminologie de la séance.", "statut": "a_relire", "source": "Demande de Fabien du 2026-10-16 : page contact pensée pour la conversion (skill cro). Reprend l'étape 2 de la page (« Corrext ouvert sur des pièces représentatives de votre pratique, avec le moteur, le mode et la terminologie qui correspondent à votre cas »)."},
+  {"cle": "contact.bouton", "page": "contact/", "texte": "Demander ma démonstration", "statut": "a_relire", "source": "Demande de Fabien du 2026-10-16 : page contact pensée pour la conversion (skill cro). Libellé de bouton orienté résultat (au lieu de « Envoyer ma demande »)."}
+]}

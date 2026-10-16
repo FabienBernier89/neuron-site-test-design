@@ -119,10 +119,15 @@ class TestFormulaireDemo(unittest.TestCase):
             self.assertIn(f'solutions/{slug}/">{libelle}</a></li>', pied)
         self.assertEqual(list(z_formulaires.SECTEURS), SECTEURS)
 
-    def test_secteur_apres_organisation(self):
+    def test_obligatoires_d_abord_puis_secteur_dans_le_groupe_facultatif(self):
+        """Page contact pensée pour la conversion (2026-10-16) : les cinq champs obligatoires d'abord, puis le groupe
+        facultatif, qui commence par le secteur."""
         f = self.f_apercu
-        self.assertLess(f.index('name="organisation"'), f.index('name="secteur"'))
-        self.assertLess(f.index('name="secteur"'), f.index('name="fonction"'))
+        ordre = [f.index(f'name="{n}"') for n in ("prenom", "nom", "email", "organisation", "fonction")]
+        self.assertEqual(ordre, sorted(ordre))
+        self.assertLess(f.index('name="fonction"'), f.index('class="ct-opt"'))
+        self.assertLess(f.index('class="ct-opt"'), f.index('name="secteur"'))
+        self.assertEqual(f.count('name="secteur"'), 1)
 
     def test_champs_caches_piege_et_type(self):
         for f in (self.f_apercu, self.f_production):
