@@ -462,7 +462,15 @@ ul{padding:0;list-style:none}
 .bt-p{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px;text-align:center}
 .bt-p b{font:500 16px/24px var(--sans);color:var(--ink)}
 .bt-p p{font:400 14px/20px var(--sans);color:var(--text)}
-.bt-us .bt-p p{white-space:nowrap}  /* bloc d'usage de l'accueil : petit texte sur une seule ligne */
+.bt-us .bt-p p{white-space:nowrap}
+/* Grand bloc « pilotée par vos juristes » : ce que vous décidez, et quand, calé en bas du bloc */
+.bt-dec{width:100%;margin-top:auto;padding-top:24px;border-top:1px solid var(--line)}
+.bt-dt{margin-bottom:12px;font:600 13px/18px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.bt-dec ul{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.bt-dec li{display:grid;grid-template-columns:36px minmax(0,1fr);gap:14px;align-items:center;font:400 15px/22px var(--sans);color:var(--text)}
+.bt-dec li b{font-weight:600;color:var(--ink)}
+.bt-ic{display:grid;place-items:center;width:36px;height:36px;border-radius:8px;background:var(--page);color:var(--accent-d)}
+.bt-ic svg{width:18px;height:18px}  /* bloc d'usage de l'accueil : petit texte sur une seule ligne */
 .bt-p .n .u{display:block;margin-top:2px;font-size:20px;line-height:26px;font-weight:500}
 .bt-p .ic{width:34px;height:34px;color:var(--ink)}
 .bt-l{grid-column:span 2}
