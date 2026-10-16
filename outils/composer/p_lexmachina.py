@@ -31,11 +31,18 @@ def ecran_corrige():
     gen = marquer(texte("lexmachina.compare.deepl").replace(" %", "\u00a0%"), [g for g, _ in ECARTS], "gen")  # « 35 % » insécable
     lm = marquer(texte("accueil.axes.lexmachina.demo.out"), [o for _, o in ECARTS])
     puces = "".join(f'<span>{k("compare.chip." + c)}</span>' for c in ("impot", "assujetti"))
-    return ('<div class="cr cr-frag cr-cg">'
+    ecran = ('<div class="cr cr-frag cr-cg">'
             + A.travail(detecte=True, cible="French", moteur=k("compare.moteur"), src=_H.escape(texte("accueil.axes.lexmachina.demo.src"), quote=False), out="")
             .replace("Detected language (French)", _H.escape(texte("accueil.axes.lexmachina.demo.langue"), quote=False), 1)
             .replace('<p class="cr-out">', f'<p class="cr-out" data-gen="{_H.escape(gen)}" data-html="{_H.escape(lm)}">', 1)
             + f'<div class="cg-src">{puces}</div></div>')
+    # Menu des moteurs de la scène : l'IA généraliste et LexMachina seulement, aucun moteur tiers nommé (Fabien, 2026-10-16)
+    nom = k("compare.moteur")
+    ecran = re.sub(r'(<span class="cr-sel cr-eng">.*?<span class="cr-menu">).*?(</span></span>)',
+                   lambda m: m.group(1) + f'<span class="on" data-v="{nom}">{nom}</span><span data-v="LexMachina">LexMachina</span>' + m.group(2),
+                   ecran, count=1, flags=re.S)
+    assert "DeepL" not in ecran and "Azure" not in ecran
+    return ecran
 
 
 def lecture():
@@ -70,8 +77,8 @@ def conclusion(note):
 
 nl = bloc(t, "section", "nlex")
 out.append(section(h2(k("compare.titre"), "le terme officiel") + f'<p class="intro">{k("compare.intro")}</p>'
-                   + scene(1176, 356, ecran_corrige(), sim="corrige", titre=k("compare.fenetre"), curseur=False,
-                           label="DeepL puis LexMachina sur un texte fiscal suisse : les termes officiels remplacent les termes génériques")
+                   + scene(1176, 440, ecran_corrige(), sim="corrige", titre=k("compare.fenetre"), curseur=False,
+                           label="Une IA généraliste puis LexMachina sur un texte fiscal suisse : les termes officiels remplacent les termes génériques")
                    + lecture() + conclusion(brut(bloc(nl, "p", "nlex-cap")))))
 # Ce qu'est LexMachina (proposition 2-B retenue par Fabien le 2026-10-16) : les quatre chiffres en liste à gauche,
 # l'environnement du moteur (matières, Corrext, autres moteurs) en trois groupes à pastilles à droite

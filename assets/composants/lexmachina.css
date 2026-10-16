@@ -3,16 +3,16 @@
 /* Hero : titre aligné en haut sur le texte de droite */
 .hero-g.lm-hg{align-items:start}
 
-/* Scène « le texte qui se corrige » (sim « corrige ») : termes génériques soulignés, termes officiels surlignés, sources */
-.cr-cg .cr-pane{height:178px}
+/* Scène « le texte qui se corrige » (sim « corrige ») : termes de l'IA généraliste surlignés en rouge, termes officiels
+   de LexMachina en vert, puis leurs sources (retour de Fabien du 2026-10-16) ; scène plus haute, moins compacte */
+.cr-cg .cr-pane{height:236px}
 .cr-cg .cr-out .w{display:inline}  /* pas de coupure entre l'élision et le terme marqué */
-.cr-cg mark{border-radius:2px;background:transparent;color:inherit;transition:background-color .5s ease,text-decoration-color .5s ease}
-.cr-cg mark.vu{background:var(--c-hl)}
-.cr-cg mark.gen{text-decoration:underline wavy transparent;text-decoration-thickness:1.5px;text-underline-offset:3px}
-.cr-cg mark.gen.vu{background:#fdf1dc;text-decoration-color:#c2780c}
-.cg-src{display:flex;gap:8px;justify-content:flex-end;padding:10px 16px 0;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}
+.cr-cg mark{border-radius:3px;padding:0 2px;background:transparent;color:inherit;transition:background-color .5s ease,color .5s ease}
+.cr-cg mark.vu{background:#d3f2e0;color:#08583a}
+.cr-cg mark.gen.vu{background:#fbdcdc;color:#9b1c1c}
+.cg-src{display:flex;gap:8px;justify-content:flex-end;padding:14px 16px 4px;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}
 .cr.sources .cg-src{opacity:1;transform:none}
-.cg-src span{padding:4px 10px;border-radius:999px;background:#e8f0ff;font:500 11px/16px "Inter",var(--ui);color:var(--c-ink)}
+.cg-src span{padding:4px 10px;border-radius:999px;background:#e3f6ec;font:500 11px/16px "Inter",var(--ui);color:#08583a}
 
 /* Tableau de lecture sous la comparaison (proposition 1-B) */
 .lm-tb{width:100%;margin-top:32px;border-collapse:collapse;font:400 15px/22px var(--sans);color:var(--text)}
@@ -21,7 +21,9 @@
 .lm-tb tbody th{width:22%;font:500 15px/22px var(--sans);color:var(--ink)}
 .lm-tb td b{font-weight:600;color:var(--ink)}
 .lm-tb small{display:block;margin-top:2px;font:400 13px/20px var(--sans);color:var(--muted)}
-.lm-ok{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;background:rgba(16,140,90,.12);font:600 12px/18px var(--sans);color:#0b6e47;vertical-align:1px}
+.lm-ok{--ok:#0b6e47;--ok-bg:rgba(16,140,90,.12);display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;background:var(--ok-bg);font:600 12px/18px var(--sans);color:var(--ok);vertical-align:1px}
+:root[data-theme="sombre"] .lm-ok{--ok:#8ee6b4;--ok-bg:rgba(110,231,168,.14)}  /* pastille lisible en mode sombre */
+@media (prefers-color-scheme:dark){:root[data-theme="systeme"] .lm-ok{--ok:#8ee6b4;--ok-bg:rgba(110,231,168,.14)}}
 .lm-conc{font:400 26px/34px var(--serif);color:var(--ink);text-wrap:balance}
 /* Conclusion et note de méthode : une carte en deux colonnes sous le tableau */
 .lm-cc{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;margin-top:32px;padding:36px;border-radius:8px;background:var(--tile)}
