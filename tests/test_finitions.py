@@ -112,7 +112,7 @@ class TestEncartNewsletter(unittest.TestCase):
                 vus += 1
                 self.assertNotIn('role="status"', encart, p)
                 self.assertRegex(encart, r'<p class="avis" aria-live="polite" data-libre data-avis="[^"]+"></p>', p)
-        self.assertGreater(vus, 100)
+        self.assertGreater(vus, 80)  # pages de lecture seulement depuis le 2026-10-16 (95 pages)
 
 
 class TestBlog(unittest.TestCase):

@@ -13,6 +13,7 @@ Le test `tests/test_regles_blocs.py` vérifie les règles ci-dessous.
 | Cartes de liens vers une page outil ou ressource | Grand visuel animé, titre, texte, lien ; trois cartes au plus sur une ligne, jamais de 2 x 2 ; deux cartes : deux grandes colonnes | `outils/post/fonctionnalites.py` |
 | Cartes de texte seul (`.cd`) | Aérées, sans trait d'accent en tête de bloc | `site.css`, `.cd` |
 | Scènes animées | Aucune pause au survol, jauge de déroulé discrète en bas | `assets/sim.js` |
+| Encart newsletter (`.nl-s`) | Sur les pages de lecture seulement (tout `ressources/`) ; ailleurs, l'appel « Demander une démo » reste seul en fin de page | `outils/post/newsletter.py` |
 | Surlignage dans les scènes | Bleu pour un terme mis en avant ; rouge et vert seulement pour une comparaison juste / faux | `site.css`, composants |
 
 ## Règles de rédaction des blocs

@@ -204,8 +204,11 @@ class TestEncartNewsletter(unittest.TestCase):
         self.assertEqual("data-demo" in newsletter.encart(), newsletter.en_apercu())
         self.assertEqual((ICI / "src/data/config.json").read_bytes(), avant)
 
-    def test_encart_sur_la_liste_les_billets_les_guides_et_les_autres_pages(self):
-        pages = ["ressources/blog/", "ressources/guides/"] + BILLETS + GUIDES + ["", "corrext/", "solutions/cabinets-avocats/", "ressources/blog/actualites/"]
+    def test_encart_sur_les_pages_de_lecture_seulement(self):
+        # Décision de Fabien du 2026-10-16 : pages de lecture (ressources/) seulement
+        for p in ("", "corrext/", "solutions/cabinets-avocats/", "tarifs/", "lexmachina/", "aide/", "mentions-legales/"):
+            self.assertNotIn('class="nl-s"', lire(p), p)
+        pages = ["ressources/", "ressources/blog/", "ressources/guides/", "ressources/etudes/", "ressources/glossaire/"] + BILLETS + GUIDES + ["ressources/blog/actualites/"]
         for p in pages:
             h = lire(p)
             self.assertEqual(h.count('name="type" value="newsletter"'), 1, p)
@@ -213,7 +216,7 @@ class TestEncartNewsletter(unittest.TestCase):
             self.assertIn('action="/envoi.php"', h, p)
 
     def test_encart_juste_avant_le_pied_de_page(self):
-        for p in ("ressources/blog/", BILLETS[2], GUIDES[0], "", "corrext/"):
+        for p in ("ressources/blog/", BILLETS[2], GUIDES[0], "ressources/", "ressources/etudes/"):
             h = lire(p)
             fin = ENCART.search(h).end()
             self.assertIn(h[fin:h.index('<footer class="pied">')].strip(), ("", "</main>"), p)
@@ -225,7 +228,7 @@ class TestEncartNewsletter(unittest.TestCase):
     def test_formulaire_actif_hors_apercu(self):
         with tempfile.TemporaryDirectory() as tmp:
             sortie = support.construire(tmp, pages=("", "ressources/blog/"), config={"apercu": False})
-            for p in ("", "ressources/blog/"):
+            for p in ("ressources/blog/",):
                 h = (sortie / "fr" / p / "index.html").read_text(encoding="utf-8")
                 self.assertEqual(h.count('name="type" value="newsletter"'), 1, p)
                 self.assertNotIn("data-demo", ENCART.search(h).group(0), p)

@@ -1,9 +1,9 @@
 """Insère l'encart d'inscription à la lettre d'information juste avant le pied de page (lot E).
 
-Une seule fois par page : la liste du blog, la fin de chaque billet et de chaque guide, puis toutes les autres pages,
-l'encart se place entre </main> et <footer class="pied">. Le pied de page lui-même n'est pas modifié.
-Exceptions : la page de contact (déjà un formulaire, en-tête réduit), la page de remerciement qui lui fait suite
-et la 404.
+Une seule fois par page, entre </main> et <footer class="pied"> ; le pied de page lui-même n'est pas modifié.
+Pages de lecture seulement (décision de Fabien du 2026-10-16) : tout ce qui est sous ressources/ (hub, blog et ses
+billets, actualités, guides, études, glossaire). Ailleurs (accueil, produits, solutions, tarifs, aide, pages légales,
+contact, 404), l'appel « Demander une démo » reste seul en fin de page, sans second appel qui l'affaiblisse.
 """
 import sys
 
@@ -14,7 +14,8 @@ DEJA = 'class="nl-s"'
 
 
 def exclue(page):
-    return page == "404.html" or page.startswith("contact/")
+    """Vrai hors des pages de lecture."""
+    return not page.startswith("ressources/")
 
 
 def config_du_build():
