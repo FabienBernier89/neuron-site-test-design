@@ -76,7 +76,7 @@ def conclusion(note):
 
 
 nl = bloc(t, "section", "nlex")
-out.append(section(h2(k("compare.titre"), "le terme officiel") + f'<p class="intro">{k("compare.intro")}</p>'
+out.append(section(h2(k("compare.titre"), "le terme officiel") + f'<p class="intro intro-l">{k("compare.intro")}</p>'  # sur une ligne (Fabien, 2026-10-16)
                    + scene(1176, 440, ecran_corrige(), sim="corrige", titre=k("compare.fenetre"), curseur=False,
                            label="Une IA généraliste puis LexMachina sur un texte fiscal suisse : les termes officiels remplacent les termes génériques")
                    + lecture() + conclusion(brut(bloc(nl, "p", "nlex-cap")))))
