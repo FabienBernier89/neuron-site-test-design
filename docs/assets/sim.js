@@ -608,6 +608,22 @@
     return jouer(l, etapes.concat([fixe(4200)], finir(cr)));
   };
 
+  /* Accueil, axe CHnell (retour de Fabien du 2026-10-16 : visuel animé) : le terme se tape, la recherche part, le
+     nombre de résultats puis les lignes alignées apparaissent une à une, le terme se surligne dans chaque contexte */
+  SCENES.chnell = function (l) {
+    var cr = l.q(".cr"), q = l.q(".lk-q"), terme = q.textContent, c = l.q(".lk-c"), rangs = l.qa(".lk-r > div");
+    var etapes = [
+      function () { cr.classList.add("cherche"); q.textContent = ""; return l.attendre(900); },
+      function () { return l.taper(".lk-q", terme, 12); },
+      fixe(450),
+      function () { return l.appui(".cr-box"); },
+      function () { c.classList.add("vu"); return l.attendre(450); }
+    ];
+    rangs.forEach(function (r) { etapes.push(function () { r.classList.add("vu"); return l.attendre(380); }); });
+    etapes.push(fixe(500), function () { l.qa(".lk-r mark").forEach(function (m) { m.classList.add("vu"); }); return l.attendre(4200); });
+    return jouer(l, etapes.concat(finir(cr)));
+  };
+
   /* Hub : le tableau de bord parcourt ses onglets */
   SCENES.tableau = function (l) {
     var cr = l.q(".cr"), n = l.qa(".cr-tl span").length, etapes = [fixe(2600)];

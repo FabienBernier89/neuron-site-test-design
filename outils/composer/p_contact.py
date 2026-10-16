@@ -61,6 +61,7 @@ groupe = (f'<div class="ct-opt"><p class="ct-og">{e(texte("contact.facultatif.ti
           f'<p class="ct-on">{e(texte("contact.facultatif.note"))}</p></div>')
 form = (f'<form data-demo novalidate>{"".join(obligatoires)}{groupe}{"".join(facultatifs)}{cons}'
         f'<button type="submit" class="btn">{e(texte("contact.bouton"))}</button>'
+        f'<p class="delai">{e(texte("contact.delai"))}</p>'  # délai de réponse, près du bouton (Fabien, 2026-10-16)
         f'<p class="avis" data-libre hidden>Formulaire de démonstration : aucun envoi.</p>'
         f'<p class="usage">{brut(bloc(fo, "p", "cf-usage"))}</p></form>')
 droite = f'<div class="ct-f"><h2>{txt(bloc(fo, "h2"))}</h2><p>{brut(bloc(fo, "p", "cf-intro"))}</p>{form}</div>'

@@ -468,15 +468,6 @@ ul{padding:0;list-style:none}
 .bt-p{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px;text-align:center}
 .bt-p b{font:500 16px/24px var(--sans);color:var(--ink)}
 .bt-p p{font:400 14px/20px var(--sans);color:var(--text)}
-.bt-us .bt-p p{white-space:nowrap}
-/* Grand bloc « pilotée par vos juristes » : ce que vous décidez, et quand, calé en bas du bloc */
-.bt-dec{width:100%;margin-top:auto;padding-top:24px;border-top:1px solid var(--line)}
-.bt-dt{margin-bottom:12px;font:600 13px/18px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.bt-dec ul{display:grid;gap:14px;margin:0;padding:0;list-style:none}
-.bt-dec li{display:grid;grid-template-columns:36px minmax(0,1fr);gap:14px;align-items:center;font:400 15px/22px var(--sans);color:var(--text)}
-.bt-dec li b{font-weight:600;color:var(--ink)}
-.bt-ic{display:grid;place-items:center;width:36px;height:36px;border-radius:8px;background:var(--page);color:var(--accent-d)}
-.bt-ic svg{width:18px;height:18px}  /* bloc d'usage de l'accueil : petit texte sur une seule ligne */
 .bt-p .n .u{display:block;margin-top:2px;font-size:20px;line-height:26px;font-weight:500}
 .bt-p .ic{width:34px;height:34px;color:var(--ink)}
 .bt-l{grid-column:span 2}
@@ -596,6 +587,7 @@ ul{padding:0;list-style:none}
 .ct-f .cs input{width:16px;height:16px;flex:0 0 16px;margin-top:2px}
 .ct-f .btn{width:100%}
 .ct-f .avis{text-align:center;font:400 14px/20px var(--sans);color:var(--muted)}
+.ct-f .delai{grid-column:1/-1;margin-top:-6px;text-align:center;font:500 14px/20px var(--sans);color:var(--text)}
 
 /* Contact : compléments */
 .ct-f .req{margin-left:2px;color:var(--muted)}
@@ -970,6 +962,13 @@ ul{padding:0;list-style:none}
 .vw-ch{display:block;padding:18px 22px;background:#fff}
 .vw-ch .cr-ch{width:auto;padding:0;border-radius:0;box-shadow:none}
 .vw-ch .lk-r > div{padding-right:0}
+/* Axe CHnell de l'accueil, scène « chnell » : résultats masqués puis révélés un à un (sans script, tout reste visible) */
+.vw-ch.cherche .lk-c{opacity:0;transition:opacity .4s ease}
+.vw-ch.cherche .lk-c.vu{opacity:1}
+.vw-ch.cherche .lk-r > div{opacity:0;transform:translateY(8px)}
+.vw-ch.cherche .lk-r > div.vu{opacity:1;transform:none}
+.vw-ch.cherche .lk-r mark{background:transparent;transition:background-color .5s ease}
+.vw-ch.cherche .lk-r mark.vu{background:var(--c-hl)}
 .vw-hr .vw-soc small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vw-hr .vw-soc > span{min-width:0}
 .vw-hr .vw-s{margin-bottom:10px}

@@ -26,9 +26,10 @@ PREUVES = {"iso": "ISO 27001", "infomaniak": "Infomaniak", "innosuisse": "Innosu
 # Distinctions présentes sur le site mais hors de la liste admise : jamais dans le bloc preuves (BILANZ y figure
 # seulement comme organisateur de Digital Shapers, selon le registre du site actuel)
 HORS_LISTE = ("Entreprises les plus innovantes", "13e rang", "UBS", "Forum des 100", "Le Temps")
-# Sections existantes de l'accueil, toutes gardées (titres ou textes repérables)
+# Sections existantes de l'accueil, toutes gardées (titres ou textes repérables) ; le bloc d'usage « pilotée par vos
+# juristes » est supprimé (Fabien, 2026-10-16)
 ACCUEIL_EXISTANT = ["Adopté par les professionnels du droit et de la finance suisses", "15 M+",
-                    "Toute votre traduction juridique, sur une", "Une seule plateforme, pilotée par vos juristes",
+                    "Toute votre traduction juridique, sur une",
                     "Un moteur, une plateforme, un concordancier", "Quatre niveaux de qualité",
                     "Ces solutions traduisent.", "Vos documents les plus sensibles", "Tout ce qu'il faut savoir",
                     "Prêt à voir Neur.on"]

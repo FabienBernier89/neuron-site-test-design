@@ -101,30 +101,14 @@ AXES = [("lexmachina", "LexMachina", "{{ROOT}}lexmachina/",
         ("corrext", "Corrext", "{{ROOT}}corrext/",
          scene(764, 444, V.vue_fichiers(fichiers_demo("fichier", "pdf")), sim="lot", curseur=False, label="Corrext")),
         ("chnell", "CHnell", "{{ROOT}}corrext/chnell/",
-         scene(764, 470, V.vue_chnell(co["lookup"]), curseur=False, label="CHnell"))]
+         scene(764, 470, V.vue_chnell(co["lookup"]), sim="chnell", curseur=False, label="CHnell"))]
+PUCES = {"lexmachina": (1, 2, 3, 4)}  # 4e puce « +30 langues disponibles » (Fabien, 2026-10-16)
 axes = "".join(ft(pill, _a(f"{k}.titre"), _a(f"{k}.texte"), vis, (_a(f"{k}.lien"), lien), inv=i % 2 == 1,
-                  liste=[_a(f"{k}.l{n}") for n in (1, 2, 3)]) for i, (k, pill, lien, vis) in enumerate(AXES))
+                  liste=[_a(f"{k}.l{n}") for n in PUCES.get(k, (1, 2, 3))]) for i, (k, pill, lien, vis) in enumerate(AXES))
 B["axes"] = section(h2(_a("titre"), "un concordancier") + f'<p class="intro">{_a("intro")}</p>' + axes)
 
-# 5. Usage de Corrext et de LexMachina (retour de Fabien du 2026-10-16) : Corrext n'a pas d'agents IA ; les chiffres
-# d'économies du discours « agentique » sont remplacés par des chiffres d'usage publiés sur les pages produit
-def _x(cle):
-    return H.escape(trame.texte(f"accueil.usage.{cle}"), quote=False)
-petites = [(f'<span class="n">{_x(k + ".chiffre")} <span class="u">{_x(k + ".unite")}</span></span><b>{_x(k + ".titre")}</b>', _x(k + ".texte"), "bt-l" if k == "alternatives" else "")
-           for k in ("caracteres", "fichiers", "alternatives")]
-# Ce que le juriste décide, et quand (retour de Fabien du 2026-10-16 : remplir le grand bloc sans redondance)
-S = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"'
-PICTOS = {"moteur": f'<svg {S}><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>',
-          "mode": f'<svg {S}><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',
-          "relecture": f'<svg {S}><path d="M4 20h4l10-10-4-4L4 16z"/><path d="m13 7 4 4"/></svg>',
-          "terminologie": f'<svg {S}><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M9 8h7M9 12h5"/></svg>'}
-decide = (f'<div class="bt-dec"><p class="bt-dt">{_x("decide.titre")}</p><ul>'
-          + "".join(f'<li><span class="bt-ic">{PICTOS[k]}</span><span><b>{_x(f"decide.{k}.titre")}</b> {_x(f"decide.{k}.texte")}</span></li>'
-                    for k in ("moteur", "mode", "relecture", "terminologie")) + "</ul></div>")
-grand = bento({"titre": h2(_x("titre"), "pilotée par vos juristes", "h3s"), "texte": _x("texte")}, petites).replace('<div class="bt">', '<div class="bt bt-us">', 1)
-grand = grand.replace(f'<p>{_x("texte")}</p></div>', f'<p>{_x("texte")}</p>{decide}</div>', 1)
-B["agents"] = (section(grand
-                   + f'<p class="legende"><a href="{{{{ROOT}}}}langues-et-formats/">{_x("legende")}</a></p>'))
+# 5. Bloc d'usage « Une seule plateforme, pilotée par vos juristes » supprimé (décision de Fabien du 2026-10-16 :
+# redondant avec les trois axes et le schéma)
 
 # 6. Piliers
 pi = bloc(t, "section", "pillars")
@@ -168,9 +152,9 @@ B["appel"] = trame.appel(cta("Prêt à voir Neur.on", "sur vos propres documents
 # Restructuration du 2026-10-16 : les trois axes répondent au problème, le schéma montre comment ils s'enchaînent, puis la
 # souveraineté ; « plateforme » et « piliers » sont remplacés par les axes (contenu repris, détail sur les pages outils)
 out = [B["hero"], B["distinctions"], trame.probleme("accueil"), B["axes"], schema_produits.rendre(), B["securite"],
-       B["chiffres"], B["agents"], B["niveaux"], B["comparaison"],
+       B["chiffres"], B["niveaux"], B["comparaison"],
        trame.preuves("accueil", bandeau=B["distinctions"], exemple=False), B["faq"], B["appel"]]
-assert len(out) == len(B) + 3 - 2, "un bloc existant manque à la trame (plateforme et piliers remplacés par les axes)"
+assert len(out) == len(B) + 3 - 2, "un bloc existant manque à la trame (plateforme et piliers remplacés par les axes, bloc d'usage supprimé)"
 
 ecrire(P, entete_existant(P), "".join(out))
 print("accueil écrite :", sum(len(x) for x in out), "caractères")

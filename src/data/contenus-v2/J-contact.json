@@ -1,5 +1,6 @@
 {"lot": "J", "entrees": [
   {"cle": "contact.facultatif.titre", "page": "contact/", "texte": "Pour préparer votre démonstration", "statut": "a_relire", "source": "Demande de Fabien du 2026-10-16 : page contact pensée pour la conversion (skill cro). Titre du groupe des champs facultatifs."},
   {"cle": "contact.facultatif.note", "page": "contact/", "texte": "Facultatif : ces précisions nous aident à choisir les pièces, le moteur et la terminologie de la séance.", "statut": "a_relire", "source": "Demande de Fabien du 2026-10-16 : page contact pensée pour la conversion (skill cro). Reprend l'étape 2 de la page (« Corrext ouvert sur des pièces représentatives de votre pratique, avec le moteur, le mode et la terminologie qui correspondent à votre cas »)."},
-  {"cle": "contact.bouton", "page": "contact/", "texte": "Demander ma démonstration", "statut": "a_relire", "source": "Demande de Fabien du 2026-10-16 : page contact pensée pour la conversion (skill cro). Libellé de bouton orienté résultat (au lieu de « Envoyer ma demande »)."}
+  {"cle": "contact.bouton", "page": "contact/", "texte": "Demander ma démonstration", "statut": "a_relire", "source": "Demande de Fabien du 2026-10-16 : page contact pensée pour la conversion (skill cro). Libellé de bouton orienté résultat (au lieu de « Envoyer ma demande »)."},
+  {"cle": "contact.delai", "page": "contact/", "texte": "Nous vous répondons sous 24 h.", "statut": "a_relire", "source": "Décision de Fabien du 2026-10-16 : délai de réponse affiché « en 24H », sous le bouton d'envoi."}
 ]}
