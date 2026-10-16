@@ -592,6 +592,22 @@
     ].concat(finir(cr)));
   };
 
+  /* Accueil, axe LexMachina : une seule traduction, puis les termes du droit suisse se surlignent un à un */
+  SCENES.suisse = function (l) {
+    var cr = l.q(".cr"), out = l.q(".cr-out");
+    var etapes = [
+      function () { cr.classList.add("traduit"); return l.attendre(1000); },
+      function () { cr.classList.remove("traduit"); return l.mots(out, out.getAttribute("data-html"), true); },
+      fixe(700)
+    ];
+    etapes.push(function () {
+      return l.qa("mark").reduce(function (p, m) {
+        return p.then(function () { m.classList.add("vu"); return l.attendre(650); });
+      }, Promise.resolve());
+    });
+    return jouer(l, etapes.concat([fixe(4200)], finir(cr)));
+  };
+
   /* Hub : le tableau de bord parcourt ses onglets */
   SCENES.tableau = function (l) {
     var cr = l.q(".cr"), n = l.qa(".cr-tl span").length, etapes = [fixe(2600)];

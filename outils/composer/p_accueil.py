@@ -84,19 +84,20 @@ B["plateforme"] = (section(h2(txt(bloc(tete, "h2")), "seule plateforme") + f'<p 
 def _a(cle):
     return H.escape(trame.texte(f"accueil.axes.{cle}"), quote=False)
 co = EX["co"]
-# Visuel LexMachina (retour de Fabien du 2026-10-16) : un moteur spécialisé face à un moteur généraliste, sur un texte
-# bancaire suisse. Sorties RÉELLES de la démo Corrext (exemple « lb », vers l'allemand) ; le terme « beaufsichtigte » est
-# celui de l'art. 3 LFINMA (Fedlex : « Assujettis » / « Beaufsichtigte »), DeepL Pro traduit mot à mot (« unterstellte »).
-lb = EX["lb"]
-_sortie = lb["out"]["de"]["main"].replace("beaufsichtigte", "<mark>beaufsichtigte</mark>", 1)
-_alt = next(x for x in lb["out"]["de"]["alt"] if x["e"] == "DeepL Pro")["t"].replace("unterstellte", '<mark class="oth">unterstellte</mark>', 1)
-assert "<mark>" in _sortie and "<mark " in _alt, "la démo Corrext a changé : revoir l'exemple bancaire de l'axe LexMachina"
-_ecran = ('<div class="cr cr-frag cr-q4 cr-q4-de">' + A.travail(detecte=True, cible="German", src=H.escape(lb["src"], quote=False), out="")
-          .replace('<p class="cr-out">', f'<p class="cr-out" data-html="{H.escape(_sortie)}">', 1)
-          + '<div class="cr-bas">' + A.alternatives().replace('<p class="cr-alt">', f'<p class="cr-alt" data-html="{H.escape(_alt)}">', 1)
-          .replace('<span class="cr-alt-e">', '<span class="cr-alt-e" data-v="DeepL Pro">', 1) + "</div></div>")
+# Visuel LexMachina (retours de Fabien du 2026-10-16) : une seule traduction, sans alternatives, d'un texte financier
+# anglais vers le français. Sortie RÉELLE de LexMachina relevée dans Corrext ; les termes surlignés sont ceux du droit
+# suisse, vérifiés dans CHnell (impôt anticipé, Administration fédérale des contributions, droit de timbre d'émission,
+# assujetti : art. 3 LFINMA). Source et notes : H-accueil.json.
+TERMES_SUISSES = ("impôt anticipé", "Administration fédérale des contributions", "droit de timbre d’émission", "assujetti")
+_sortie = H.escape(trame.texte("accueil.axes.lexmachina.demo.out"), quote=False)
+for _t in TERMES_SUISSES:
+    assert _t in _sortie, f"terme suisse absent de la sortie LexMachina : {_t}"
+    _sortie = _sortie.replace(_t, f"<mark>{_t}</mark>", 1)
+_ecran = ('<div class="cr cr-frag cr-q4 cr-q4-fr">' + A.travail(detecte=True, cible="French", src=_a("lexmachina.demo.src"), out="")
+          .replace("Detected language (French)", _a("lexmachina.demo.langue"), 1)
+          .replace('<p class="cr-out">', f'<p class="cr-out" data-html="{H.escape(_sortie)}">', 1) + "</div>")
 AXES = [("lexmachina", "LexMachina", "{{ROOT}}lexmachina/",
-         scene(764, 556, _ecran, sim="quatre", curseur=False, label="LexMachina face à DeepL Pro sur un texte bancaire suisse")),
+         scene(764, 420, _ecran, sim="suisse", curseur=False, label="LexMachina traduit un texte fiscal suisse de l’anglais vers le français")),
         ("corrext", "Corrext", "{{ROOT}}corrext/",
          scene(764, 444, V.vue_fichiers(fichiers_demo("fichier", "pdf")), sim="lot", curseur=False, label="Corrext")),
         ("chnell", "CHnell", "{{ROOT}}corrext/chnell/",
