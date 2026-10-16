@@ -34,13 +34,18 @@ class TestTarifs(unittest.TestCase):
         for attendu in ('<span class="n">Tarifs.</span>', 'data-suivi="cta-tarifs-hero"', 'class="btn btn-2" href="../../fr/corrext/traduction-texte-et-document/#demo"',
                         'class="tf-pg"', 'class="fx-g"', 'data-suivi="cta-tarifs-fin"', "Prêt à essayer ?"):
             self.assertIn(attendu, self.h)
-        self.assertEqual(self.main.count('class="tf-p"'), 3)
+        self.assertEqual(self.main.count('class="tf-p"'), 6)  # un profil par page Solutions
+
+    def test_ni_prix_non_publics_ni_devis_de_l_application(self):
+        texte = re.sub(r"<[^>]+>", " ", self.main)
+        self.assertNotIn("pas publics", texte)
+        self.assertNotRegex(texte, r"(?i)devis|pages? standard")
 
     def test_faq_structuree(self):
         ld = [json.loads(x) for x in re.findall(r'<script type="application/ld\+json">(.*?)</script>', self.h, re.S)]
         faq = [d for d in ld if d.get("@type") == "FAQPage"]
         self.assertEqual(len(faq), 1)
-        self.assertEqual(len(faq[0]["mainEntity"]), 6)
+        self.assertEqual(len(faq[0]["mainEntity"]), 5)
 
 
 if __name__ == "__main__":

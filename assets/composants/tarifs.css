@@ -13,19 +13,19 @@
 .tf-pa{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:auto;padding-top:28px}
 .tf-pa .btn-2{background:var(--page)}
 
-/* Comment se forme votre prix : trois facteurs, l'étape « Devis » de l'application à côté */
-.tf-x{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:40px}
-.tf-f{display:grid;gap:28px;margin:0;padding:0;list-style:none}
-.tf-f li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px}
-.tf-n{font:300 28px/32px var(--serif);color:var(--accent-d)}
-.tf-f h3{font:600 17px/24px var(--sans);color:var(--ink)}
-.tf-f p{margin-top:6px;font:400 15px/25px var(--sans);color:var(--muted)}
-.tf-v{height:340px;margin:0}
-.tf-suite{margin-top:24px}
+/* Hero de la page : titre aligné en haut sur le bloc de droite (retour de Fabien du 2026-10-16) */
+.hero-g.tf-hg{align-items:start}
 
+/* Comment obtenir votre offre : trois étapes numérotées */
+.tf-et{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin:40px 0 0;padding:0;list-style:none}
+.tf-et li{padding-top:20px;border-top:1px solid var(--line)}
+.tf-n{display:block;font:300 28px/32px var(--serif);color:var(--accent-d)}
+.tf-et h3{margin-top:16px;font:600 17px/24px var(--sans);color:var(--ink)}
+.tf-et p{margin-top:8px;font:400 15px/25px var(--sans);color:var(--muted)}
+
+@media (max-width:640px){.tf-pg{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:1023px){
-  .tf-pg{grid-template-columns:minmax(0,1fr)}
+  .tf-pg{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tf-p{min-height:0}
-  .tf-x{grid-template-columns:minmax(0,1fr);gap:32px}
+  .tf-et{grid-template-columns:minmax(0,1fr);gap:28px}
 }
-@media (max-width:640px){.tf-v{height:280px}}
