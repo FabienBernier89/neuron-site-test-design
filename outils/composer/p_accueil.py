@@ -101,7 +101,7 @@ B["agents"] = (section(grand
 pi = bloc(t, "section", "pillars")
 tete = bloc(pi, "div", "sec-head")
 B["piliers"] = (section(h2(txt(bloc(tete, "h2")), "le connaître") + f'<p class="intro">{brut(bloc(tete, "p"))}</p>'
-                   + tuiles([(None, brut(bloc(x, "h3")), brut(bloc(x, "p"))) for x in blocs(pi, "div", "pillar")], "tl txt")))
+                   + tuiles([(None, brut(bloc(x, "h3")), brut(bloc(x, "p"))) for x in blocs(pi, "div", "pillar")], "tl txt tl-pil")))  # titres plus grands, textes plus petits (2026-10-16)
 
 # 7. Quatre niveaux
 lv = bloc(t, "section", "levels")
