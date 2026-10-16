@@ -37,8 +37,8 @@
 /* Ce qu'est LexMachina : chiffres à gauche, environnement à droite (proposition 2-B) */
 .lm-id{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;margin-top:32px}
 .lm-id ul{display:grid;gap:20px;align-content:start;margin:0;padding:0;list-style:none}
-.lm-id .lm-ch{align-content:space-between;padding:8px 0 20px}  /* chiffres répartis sur toute la hauteur des trois cartes de droite (Fabien, 2026-10-16) */
-.lm-ch li{display:grid;grid-template-columns:112px minmax(0,1fr);gap:16px;align-items:baseline}
+.lm-id .lm-ch{align-content:space-between;padding:20px 0}  /* chiffres répartis sur toute la hauteur des trois cartes de droite (Fabien, 2026-10-16) */
+.lm-ch li{display:grid;grid-template-columns:112px minmax(0,1fr);gap:16px;align-items:center}  /* chiffre centré sur son texte (Fabien, 2026-10-16) */
 .lm-ch .n{font:500 32px/36px var(--num);color:var(--ink);white-space:nowrap}
 .lm-id li b{display:block;font:600 15px/22px var(--sans);color:var(--ink)}
 .lm-ch li p{font:400 14px/22px var(--sans);color:var(--text)}

@@ -109,6 +109,7 @@ for a in blocs(vn, "a", "vn-card"):
                f'<span class="kv">{kv}</span>'))
 out.append(section(h2(txt(bloc(vn, "h2"))) + cartes(cs)))
 out.append(faq_section(t))
-out.append(cta_section(t, "Jugez le moteur"))
+l1, l2 = k("cta.titre").split(" sur ", 1)  # « Testez LexMachina » au lieu de « Jugez le moteur » (Fabien, 2026-10-16)
+out.append(cta(l1, "sur " + l2, ("Demander une démo", C)))
 ecrire(P, entete_existant(P), "".join(out))
 print("lexmachina écrite")
