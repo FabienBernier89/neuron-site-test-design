@@ -1276,6 +1276,44 @@ main table a{display:inline-block;padding-block:3px}
 }
 @media (prefers-reduced-motion:reduce){.lg-toc a{transition:none}}
 
+/* composants/lexmachina.css */
+/* Page LexMachina (outils/composer/p_lexmachina.py), retours de Fabien du 2026-10-16 */
+
+/* Tableau de lecture sous la comparaison (proposition 1-B) */
+.lm-tb{width:100%;margin-top:32px;border-collapse:collapse;font:400 15px/22px var(--sans);color:var(--text)}
+.lm-tb thead th{padding:12px 16px;text-align:left;font:500 13px/18px var(--sans);color:var(--muted);border-bottom:1px solid var(--line)}
+.lm-tb tbody th,.lm-tb td{padding:16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.lm-tb tbody th{width:22%;font:500 15px/22px var(--sans);color:var(--ink)}
+.lm-tb td b{font-weight:600;color:var(--ink)}
+.lm-tb small{display:block;margin-top:2px;font:400 13px/20px var(--sans);color:var(--muted)}
+.lm-ok{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;background:rgba(16,140,90,.12);font:600 12px/18px var(--sans);color:#0b6e47;vertical-align:1px}
+.lm-conc{max-width:760px;margin-top:28px;font:400 24px/32px var(--serif);color:var(--ink)}
+.lm-conc + .legende{margin-top:16px}
+
+/* Ce qu'est LexMachina : chiffres à gauche, environnement à droite (proposition 2-B) */
+.lm-id{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;margin-top:32px}
+.lm-id ul{display:grid;gap:20px;align-content:start;margin:0;padding:0;list-style:none}
+.lm-ch li{display:grid;grid-template-columns:112px minmax(0,1fr);gap:16px;align-items:baseline}
+.lm-ch .n{font:500 32px/36px var(--num);color:var(--ink);white-space:nowrap}
+.lm-id li b{display:block;font:600 15px/22px var(--sans);color:var(--ink)}
+.lm-ch li p{font:400 14px/22px var(--sans);color:var(--text)}
+.lm-gr li{padding:20px;border-radius:8px;background:var(--tile)}
+.lm-gr .puces{margin-top:10px}
+
+@media (max-width:1023px){.lm-id{grid-template-columns:minmax(0,1fr);gap:32px}}
+@media (max-width:640px){
+  .lm-tb thead{display:none}
+  .lm-tb tr{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+  .lm-tb tbody th{grid-column:1/-1;width:auto;padding:16px 0 4px;border:0}
+  .lm-tb td{padding:4px 12px 16px 0;border:0}
+  .lm-tb td::before{display:block;font:500 12px/18px var(--sans);color:var(--muted)}
+  .lm-tb td:nth-of-type(1)::before{content:"LexMachina"}
+  .lm-tb td:nth-of-type(2)::before{content:"DeepL Pro"}
+  .lm-ch li{grid-template-columns:88px minmax(0,1fr)}
+  .lm-ch .n{font-size:26px}
+  .lm-conc{font-size:20px;line-height:28px}
+}
+
 /* composants/newsletter.css */
 /* Encart d'inscription à la lettre d'information (lot E) : une carte « tuile » avant le pied de page */
 .nl-s{padding:48px 0}

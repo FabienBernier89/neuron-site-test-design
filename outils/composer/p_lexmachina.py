@@ -1,9 +1,34 @@
 from commun import *
+import html as _H
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from outils.contenus import texte  # noqa: E402
 P = "lexmachina/"
 t = liens(charger(P), P)
 out = []
 th = bloc(t, "section", "thero")
 out.append(hero("LexMachina.", "Le moteur qui connaît les lois qu'il traduit", brut(bloc(th, "p", "lead")), ("Demander une démo", C)))
+def k(cle):
+    return _H.escape(texte(f"lexmachina.{cle}"), quote=False)
+
+
+def lecture(sorties):
+    """Tableau de lecture sous la comparaison (proposition 1-B retenue par Fabien le 2026-10-16) : la loi citée et la
+    juridiction, telles que chaque moteur les écrit ; formes reprises des sorties réelles affichées dans l'animation."""
+    lm, dp = (re.sub(r"<[^>]+>", "", x) for x in sorties)
+    for terme, sortie in (("PILA", lm), ("Federal Tribunal", lm), ("LDIP", dp), ("Federal Supreme Court", dp)):
+        assert terme in sortie, f"sortie de la comparaison modifiée : {terme} absent"
+    ok = f'<span class="lm-ok">{k("lecture.officiel")}</span>'
+    def cel(terme, note="", officiel=False):
+        return f'<td><b>{terme}</b>{ok if officiel else ""}' + (f"<small>{k(note)}</small>" if note else "") + "</td>"
+    lignes = (f'<tr><th scope="row">{k("lecture.loi")}</th>{cel("PILA", "lecture.pila", True)}{cel("LDIP", "lecture.ldip")}</tr>'
+              f'<tr><th scope="row">{k("lecture.juridiction")}</th>{cel("Federal Tribunal")}{cel("Federal Supreme Court", "lecture.fsc", True)}</tr>')
+    return (f'<table class="lm-tb"><thead><tr><th scope="col">{k("lecture.col")}</th><th scope="col">LexMachina</th>'
+            f'<th scope="col">DeepL Pro</th></tr></thead><tbody>{lignes}</tbody></table>'
+            f'<p class="lm-conc">{k("lecture.conclusion")}</p>')
+
+
 # Comparaison « quatre caractères » animée (S4)
 nl = bloc(t, "section", "nlex")
 h, p = tete(nl)
@@ -22,18 +47,21 @@ ui = (f'<div class="mx q4"><div class="mx-p q4-src"><small>{lb}</small><p>{phras
 titre_fen = txt(bloc(nl, "span", "nlex-tag"))
 out.append(section(h2(h, "quatre caractères") + f'<p class="intro">{p}</p>'
                    + scene(1176, 440, ecran, sim="quatre", titre=titre_fen, curseur=False, label="Comparaison des sorties LexMachina et DeepL Pro")
-                   + f'<p class="legende">{brut(bloc(nl, "p", "nlex-note"))}</p><p class="legende">{brut(bloc(nl, "p", "nlex-cap"))}</p>'))
-# Ce qu'est LexMachina : tuiles chiffres, puis cartes à puces
+                   + lecture(sorties) + f'<p class="legende">{brut(bloc(nl, "p", "nlex-cap"))}</p>'))
+# Ce qu'est LexMachina (proposition 2-B retenue par Fabien le 2026-10-16) : les quatre chiffres en liste à gauche,
+# l'environnement du moteur (matières, Corrext, autres moteurs) en trois groupes à pastilles à droite
 sp = bloc(t, "section", "nlspec")
 h, p = tete(sp)
-kpi = [(txt(bloc(k, "b")), txt(bloc(k, "span")), brut(bloc(k, "p"))) for k in blocs(sp, "div", "nls-k")]
-ct = []
-for k in blocs(sp, "div", "nls-t"):
-    titre = txt(blocs(bloc(k, "h3"), "span")[-1])
-    puces = "".join(f'<span class="pill">{txt(s)}</span>' for s in blocs(bloc(k, "div", "nls-chips"), "span"))
-    ct.append(f'<div><b>{titre}</b><p>{brut(bloc(k, "p"))}</p><div class="puces">{puces}</div></div>')
-out.append(section(h2(h, "exactement") + f'<p class="intro">{p}</p>' + tuiles(kpi, "tl t4")
-                   + '<div class="cd cd-sp">' + "".join(ct) + "</div>"
+COURTS = ("segments", "langues", "suisse", "alternatives")
+chiffres = "".join(f'<li><span class="n">{txt(bloc(x, "b"))}</span><div><b>{txt(bloc(x, "span"))}</b><p>{k("spec." + c)}</p></div></li>'
+                   for x, c in zip(blocs(sp, "div", "nls-k"), COURTS))
+groupes = []
+for i, x in enumerate(blocs(sp, "div", "nls-t")):
+    titre = k("spec.corrext") if i == 1 else txt(blocs(bloc(x, "h3"), "span")[-1])
+    puces = "".join(f'<span class="pill">{txt(y)}</span>' for y in blocs(bloc(x, "div", "nls-chips"), "span"))
+    groupes.append(f'<li><b>{titre}</b><div class="puces">{puces}</div></li>')
+out.append(section(h2(h, "exactement") + f'<p class="intro">{p}</p>'
+                   + f'<div class="lm-id"><ul class="lm-ch">{chiffres}</ul><ul class="lm-gr">{"".join(groupes)}</ul></div>'
                    + f'<p class="legende">{brut(bloc(sp, "p", "nls-foot"))}</p>'))
 # Piliers
 pi = bloc(t, "section", "pillars")
