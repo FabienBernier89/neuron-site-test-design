@@ -5,6 +5,7 @@ après le problème, décision de Fabien du 2026-10-15), situation visée (plate
 chiffres, agents, piliers, niveaux, comparaison), preuves, FAQ, appel.
 Toutes les sections existantes sont gardées ; seul leur ordre change."""
 import re
+import html as H
 from source import *
 from comp import *
 from app import app_corrext
@@ -48,6 +49,14 @@ B["distinctions"] = dist(txt(bloc(bloc(t, "section", "trust"), "h2")), items)
 stats = []
 for s in blocs(bloc(t, "section", "stats"), "div", "stat"):
     stats.append((txt(bloc(s, "div", "num")).replace(" M+", " M+"), None, brut(bloc(s, "div", "desc"))))
+# Retour de Fabien du 2026-10-16 : aucun chiffre seul en titre (unité accolée), et la tuile « 1 · Mode Highly sensitive »
+# devient « 20 000+ documents » (CHnell). Textes : H-accueil.json.
+def _u(n, cle):
+    return f'{n} <span class="u">{H.escape(trame.texte(f"accueil.chiffres.{cle}.unite"), quote=False)}</span>'
+stats = [(_u(stats[0][0], "segments"), None, H.escape(trame.texte("accueil.chiffres.segments.texte"), quote=False)),
+         (_u("30", "langues"), None, H.escape(trame.texte("accueil.chiffres.langues.texte"), quote=False)),
+         (_u("4", "moteurs"), None, H.escape(trame.texte("accueil.chiffres.moteurs.texte"), quote=False)),
+         (_u(trame.texte("accueil.chiffres.documents.chiffre"), "documents"), None, H.escape(trame.texte("accueil.chiffres.documents.texte"), quote=False))]
 B["chiffres"] = section(tuiles(stats, "tl t4"))
 
 # 4. Plateforme : une ligne C7 par produit, visuel = maquette du site actuel
