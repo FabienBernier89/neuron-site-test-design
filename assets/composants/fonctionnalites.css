@@ -205,3 +205,29 @@
 @keyframes u-v2{0%,20%{opacity:0}26%,100%{opacity:1}}
 @keyframes u-v3{0%,32%{opacity:0}38%,100%{opacity:1}}
 @keyframes u-v4{0%,44%{opacity:0}50%,100%{opacity:1}}
+
+/* Une seule carte (publication des études, 2026-10-16) : visuel à gauche, texte à droite ; méta au-dessus du titre */
+.fx-m{padding:0 8px 4px;font:500 13px/20px var(--sans);color:var(--muted)}
+.fx-g.fx-g1{grid-template-columns:minmax(0,1fr)}
+.fx-g1 .fx{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-rows:1fr auto auto auto auto 1fr;column-gap:40px}
+.fx-g1 .fx-v{grid-column:1;grid-row:1/-1;height:360px;margin:0}
+.fx-g1 .fx-w{max-width:400px}
+.fx-g1 .fx > :not(.fx-v){grid-column:2;padding-right:24px}
+.fx-g1 .fx-m{grid-row:2}.fx-g1 .fx-t{grid-row:3;font-size:22px;line-height:30px;font-weight:600}.fx-g1 .fx-p{grid-row:4}.fx-g1 .fx-l{grid-row:5;margin-top:8px}
+@media (max-width:899px){
+  .fx-g1 .fx{display:flex;flex-direction:column}
+  .fx-g1 .fx-v{height:340px;margin-bottom:16px}
+  .fx-g1 .fx > :not(.fx-v){padding-right:0}
+}
+/* six critères, quatre langues */
+.u-c5{animation:u-k5 8s infinite}.u-c5 .u-ck{animation:u-v5 8s infinite}
+.u-c6{animation:u-k6 8s infinite}.u-c6 .u-ck{animation:u-v6 8s infinite}
+@keyframes u-k5{0%,56%{background:transparent}62%,100%{background:var(--u-soft)}}
+@keyframes u-k6{0%,68%{background:transparent}74%,100%{background:var(--u-soft)}}
+@keyframes u-v5{0%,56%{opacity:0}62%,100%{opacity:1}}
+@keyframes u-v6{0%,68%{opacity:0}74%,100%{opacity:1}}
+.u-a4{animation:u-ap4 8s infinite}
+@keyframes u-ap4{0%,44%{opacity:0;transform:translateY(6px)}52%,100%{opacity:1;transform:none}}
+.u-lbl em{font-style:normal}  /* balisage repris de la page source, sans italique */
+.u-lg4 .u-it{justify-content:flex-start;gap:12px}
+.u-lg4 .u-it small{flex:0 0 62px}

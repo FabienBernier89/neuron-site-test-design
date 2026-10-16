@@ -97,6 +97,27 @@ VISUELS = {
         '<div class="u-fort u-tit">Comment évaluer un moteur de traduction sur le droit suisse</div>'
         '<div class="u-list u-chk">' + "".join(f'<div class="u-it u-c{i}"><span>{_c(c)}</span>{COCHE}</div>'
                                                for i, c in enumerate(("corpus", "double", "versions"), 1)) + '</div>'),
+    # Étude « évaluer un moteur » : les six critères mesurables (§ 2), cochés un à un
+    "fr/ressources/etudes/evaluer-moteur-traduction-juridique/": (
+        '<div class="u-lbl">Six critères mesurables</div><div class="u-list u-chk">'
+        + "".join(f'<div class="u-it u-c{i}"><span>{c}</span>' + COCHE + '</div>' for i, c in enumerate((
+            "Exactitude de la référence légale", "Conformité terminologique aux textes officiels",
+            "Cohérence à l'intérieur du document", "Noms de juridictions et d'autorités",
+            "Montants, dates et unités au format suisse", "Intégrité du segment"), 1)) + '</div>'),
+    # Hub des comparatifs : les trois comparaisons (titres de la page), l'une après l'autre
+    "fr/comparatif/": (
+        '<div class="u-lbl">Trois comparaisons, trois <em>questions différentes</em></div><div class="u-list u-art">'
+        '<div class="u-it u-a1"><span>Corrext et DeepL</span></div>'
+        '<div class="u-it u-a2"><span>Corrext et les LLM généralistes</span></div>'
+        '<div class="u-it u-a3"><span>Agence de traduction ou plateforme</span></div></div>'),
+    # Glossaire : la fiche « Konventionalstrafe », le terme dans les quatre langues et sa source (art. 160 CO)
+    "fr/ressources/glossaire/": (
+        f'<div class="u-q">{LOUPE}<b>Konventionalstrafe</b><span>art. 160 CO</span></div>'
+        '<div class="u-list u-lg4">'
+        '<div class="u-it u-a1"><small>Allemand</small><span>Konventionalstrafe</span></div>'
+        '<div class="u-it u-a2"><small>Français</small><span>clause pénale</span></div>'
+        '<div class="u-it u-a3"><small>Italien</small><span>pena convenzionale</span></div>'
+        '<div class="u-it u-a4"><small>Anglais</small><span>contractual penalty</span></div></div>'),
     # Guide « organiser la traduction dans un cabinet » : les trois rôles (§ 3), puis les six indicateurs (§ 7)
     "fr/ressources/guides/organiser-traduction-cabinet/": (
         '<div class="u-lbl">Qui décide quoi</div><div class="u-list u-chk">'
@@ -156,9 +177,11 @@ def _carte(a):
     titre = re.sub(r"</?b>", "", re.search(r"<b>(.*?</b>)\s*(?=<p>|<span|$)", corps, re.S).group(1))
     texte = re.search(r"<p>(.*?)</p>", corps, re.S) or re.search(r'<span(?! class="lien")[^>]*>(.*?)</span>', corps, re.S)
     lien = re.search(r'<span class="lien">(.*?)</span>', corps, re.S)
+    meta = re.search(r'<p class="cd-meta">(.*?)</p>', corps, re.S)
     libelle = lien.group(1) if lien else "En savoir plus"
     return (f'<a class="fx" href="{{{{ROOT}}}}{href}"><div class="fx-v" aria-hidden="true"><div class="fx-w">{_visuel(href)}</div></div>'
-            f'<b class="fx-t">{titre}</b>' + (f'<p class="fx-p">{_insecables(texte.group(1))}</p>' if texte else "")
+            + (f'<p class="fx-m">{meta.group(1)}</p>' if meta else "")
+            + f'<b class="fx-t">{titre}</b>' + (f'<p class="fx-p">{_insecables(texte.group(1))}</p>' if texte else "")
             + f'<span class="fx-l">{libelle} {FLECHE}</span></a>')
 
 
@@ -176,7 +199,8 @@ def traiter(html, page):
             continue
         sortie.append(html[pos:m.start()])
         # Toujours trois cartes de même taille, sur une ligne (retour de Fabien du 2026-10-15 : pas de 2 x 2)
-        grille = "fx-g fx-g2" if len(cartes) == 2 else "fx-g"  # deux cartes (les guides) : deux grandes colonnes
+        # deux cartes (les guides) : deux grandes colonnes ; une seule (la publication des études) : visuel et texte côte à côte
+        grille = {1: "fx-g fx-g1", 2: "fx-g fx-g2"}.get(len(cartes), "fx-g")
         sortie.append(f'<div class="{grille}">' + "".join(_carte(c) for c in cartes[:3]) + "</div>")
         pos = fin
     if not sortie:
