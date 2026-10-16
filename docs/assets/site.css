@@ -1626,7 +1626,8 @@ main table a{display:inline-block;padding-block:3px}
 
 /* Hero de la page : titre aligné en haut sur le bloc de droite (retour de Fabien du 2026-10-16) */
 .hero-g.tf-hg{align-items:start}
-.tf-hg .h1{margin-top:-32px}  /* titre un peu plus haut que le bloc de droite, qui ne bouge pas */
+.tf-hg .h1{margin-top:-32px}
+.hero:has(.tf-hg) + .sec{padding-top:24px}  /* moins de vide entre le hero et « Une offre pour chaque organisation » */  /* titre un peu plus haut que le bloc de droite, qui ne bouge pas */
 @media (max-width:1023px){.tf-hg .h1{margin-top:0}}
 
 /* Comment obtenir votre offre : trois étapes numérotées */
