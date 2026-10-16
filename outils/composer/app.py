@@ -183,14 +183,6 @@ def ecran_securite(notice_titre, notice_texte, src, out):
             + '</div></div>')
 
 
-def ecran_comparaison(src, sortie_html, alt_html, alt_moteur):
-    """LexMachina : sortie du moteur et alternative DeepL Pro, écarts surlignés (textes de la section « quatre caractères »)."""
-    return ('<div class="cr cr-frag cr-q4">' + travail(detecte=True, src=src, out="")
-            .replace('<p class="cr-out">', f'<p class="cr-out" data-html="{_h.escape(sortie_html)}">', 1)
-            + '<div class="cr-bas">' + alternatives().replace('<p class="cr-alt">', f'<p class="cr-alt" data-html="{_h.escape(alt_html)}">', 1)
-            .replace('<span class="cr-alt-e">', f'<span class="cr-alt-e" data-v="{alt_moteur}">', 1) + '</div></div>')
-
-
 def fragment_travail(src="", out="", detecte=False, cible="English", moteur="LexMachina", suisse=False, classe=""):
     """Espace de traduction seul (boucles par fonctionnalité, panneaux statiques)."""
     return (f'<div class="cr cr-frag {classe}">'

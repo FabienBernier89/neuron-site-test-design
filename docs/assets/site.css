@@ -1282,6 +1282,17 @@ main table a{display:inline-block;padding-block:3px}
 /* Hero : titre aligné en haut sur le texte de droite */
 .hero-g.lm-hg{align-items:start}
 
+/* Scène « le texte qui se corrige » (sim « corrige ») : termes génériques soulignés, termes officiels surlignés, sources */
+.cr-cg .cr-pane{height:178px}
+.cr-cg .cr-out .w{display:inline}  /* pas de coupure entre l'élision et le terme marqué */
+.cr-cg mark{border-radius:2px;background:transparent;color:inherit;transition:background-color .5s ease,text-decoration-color .5s ease}
+.cr-cg mark.vu{background:var(--c-hl)}
+.cr-cg mark.gen{text-decoration:underline wavy transparent;text-decoration-thickness:1.5px;text-underline-offset:3px}
+.cr-cg mark.gen.vu{background:#fdf1dc;text-decoration-color:#c2780c}
+.cg-src{display:flex;gap:8px;justify-content:flex-end;padding:10px 16px 0;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .45s ease}
+.cr.sources .cg-src{opacity:1;transform:none}
+.cg-src span{padding:4px 10px;border-radius:999px;background:#e8f0ff;font:500 11px/16px "Inter",var(--ui);color:var(--c-ink)}
+
 /* Tableau de lecture sous la comparaison (proposition 1-B) */
 .lm-tb{width:100%;margin-top:32px;border-collapse:collapse;font:400 15px/22px var(--sans);color:var(--text)}
 .lm-tb thead th{padding:12px 16px;text-align:left;font:500 13px/18px var(--sans);color:var(--muted);border-bottom:1px solid var(--line)}
@@ -1321,9 +1332,7 @@ main table a{display:inline-block;padding-block:3px}
   .lm-tb tr{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
   .lm-tb tbody th{grid-column:1/-1;width:auto;padding:16px 0 4px;border:0}
   .lm-tb td{padding:4px 12px 16px 0;border:0}
-  .lm-tb td::before{display:block;font:500 12px/18px var(--sans);color:var(--muted)}
-  .lm-tb td:nth-of-type(1)::before{content:"LexMachina"}
-  .lm-tb td:nth-of-type(2)::before{content:"DeepL Pro"}
+  .lm-tb td::before{content:attr(data-m);display:block;font:500 12px/18px var(--sans);color:var(--muted)}
   .lm-ch li{grid-template-columns:88px minmax(0,1fr)}
   .lm-ch .n{font-size:26px}
   .lm-conc{font-size:21px;line-height:29px}

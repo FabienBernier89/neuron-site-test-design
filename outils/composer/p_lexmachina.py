@@ -13,20 +13,43 @@ def k(cle):
     return _H.escape(texte(f"lexmachina.{cle}"), quote=False)
 
 
-def lecture(sorties, note):
-    """Tableau de lecture sous la comparaison (proposition 1-B retenue par Fabien le 2026-10-16) : la loi citée et la
-    juridiction, telles que chaque moteur les écrit ; formes reprises des sorties réelles affichées dans l'animation."""
-    lm, dp = (re.sub(r"<[^>]+>", "", x) for x in sorties)
-    for terme, sortie in (("PILA", lm), ("Federal Tribunal", lm), ("LDIP", dp), ("Federal Supreme Court", dp)):
-        assert terme in sortie, f"sortie de la comparaison modifiée : {terme} absent"
+# Comparaison (idée A retenue par Fabien le 2026-10-16, « le texte qui se corrige ») : la sortie de DeepL s'écrit, ses
+# deux termes génériques se signalent, puis LexMachina retraduit et les termes officiels se surlignent. Deux sorties
+# RÉELLES du même texte (celui de l'axe LexMachina de l'accueil) ; seuls les écarts réels sont marqués.
+ECARTS = (("retenue à la source", "impôt anticipé"), ("établissement soumis à surveillance", "assujetti"))
+
+
+def marquer(sortie, termes, cls=""):
+    h = _H.escape(sortie, quote=False)
+    for t_ in termes:
+        assert t_ in h, f"sortie modifiée : « {t_} » absent"
+        h = h.replace(t_, f'<mark{" class=" + chr(34) + cls + chr(34) if cls else ""}>{t_}</mark>', 1)
+    return h
+
+
+def ecran_corrige():
+    gen = marquer(texte("lexmachina.compare.deepl").replace(" %", "\u00a0%"), [g for g, _ in ECARTS], "gen")  # « 35 % » insécable
+    lm = marquer(texte("accueil.axes.lexmachina.demo.out"), [o for _, o in ECARTS])
+    puces = "".join(f'<span>{k("compare.chip." + c)}</span>' for c in ("impot", "assujetti"))
+    return ('<div class="cr cr-frag cr-cg">'
+            + A.travail(detecte=True, cible="French", moteur=k("compare.moteur"), src=_H.escape(texte("accueil.axes.lexmachina.demo.src"), quote=False), out="")
+            .replace("Detected language (French)", _H.escape(texte("accueil.axes.lexmachina.demo.langue"), quote=False), 1)
+            .replace('<p class="cr-out">', f'<p class="cr-out" data-gen="{_H.escape(gen)}" data-html="{_H.escape(lm)}">', 1)
+            + f'<div class="cg-src">{puces}</div></div>')
+
+
+def lecture():
+    """Tableau de lecture sous la comparaison (mise en page 1-B retenue par Fabien le 2026-10-16) : les deux écarts
+    réels, tels que chaque moteur les écrit."""
     ok = f'<span class="lm-ok">{k("lecture.officiel")}</span>'
-    def cel(terme, note="", officiel=False):
-        return f'<td><b>{terme}</b>{ok if officiel else ""}' + (f"<small>{k(note)}</small>" if note else "") + "</td>"
-    lignes = (f'<tr><th scope="row">{k("lecture.loi")}</th>{cel("PILA", "lecture.pila", True)}{cel("LDIP", "lecture.ldip")}</tr>'
-              f'<tr><th scope="row">{k("lecture.juridiction")}</th>{cel("Federal Tribunal")}{cel("Federal Supreme Court", "lecture.fsc", True)}</tr>')
+    def cel(terme, note, moteur, officiel=False):  # data-m : nom du moteur, affiché au-dessus de la cellule sur mobile
+        return f'<td data-m="{moteur}"><b>{terme}</b>{ok if officiel else ""}<small>{k(note)}</small></td>'
+    (g1, o1), (g2, o2) = ECARTS
+    gen = k("compare.moteur")
+    lignes = (f'<tr><th scope="row">{k("lecture.impot")}</th>{cel(o1, "lecture.lia", "LexMachina", True)}{cel(g1, "lecture.generique", gen)}</tr>'
+              f'<tr><th scope="row">{k("lecture.statut")}</th>{cel(o2, "lecture.lfinma", "LexMachina", True)}{cel(g2, "lecture.periphrase", gen)}</tr>')
     return (f'<table class="lm-tb"><thead><tr><th scope="col">{k("lecture.col")}</th><th scope="col">LexMachina</th>'
-            f'<th scope="col">DeepL Pro</th></tr></thead><tbody>{lignes}</tbody></table>'
-            + conclusion(note))
+            f'<th scope="col">{k("compare.moteur")}</th></tr></thead><tbody>{lignes}</tbody></table>')
 
 
 OK_IC = ('<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
@@ -35,34 +58,21 @@ OK_IC = ('<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-widt
 
 def conclusion(note):
     """Conclusion et note de méthode réunies dans une carte (retour de Fabien du 2026-10-16) : à gauche la conclusion
-    et le lien vers la démo, à droite les trois phrases de la note de la V1, une par ligne."""
-    phrases = [x.strip() for x in re.split(r"(?<=\.) (?=[A-Z])", note) if x.strip()]
-    assert len(phrases) == 3, phrases
+    et le lien vers la démo, à droite la note, une phrase par ligne (la dernière reprise de la V1)."""
+    derniere = [x.strip() for x in re.split(r"(?<=\.) (?=[A-Z])", note) if x.strip()][-1]
+    assert derniere.startswith("Les sorties d'un moteur varient"), derniere
+    phrases = [k("lecture.note1"), k("lecture.note2"), derniere]
     return (f'<div class="lm-cc"><div class="lm-cc-g"><p class="lm-conc">{k("lecture.conclusion")}</p>'
             f'<a class="lien" href="{{{{ROOT}}}}corrext/traduction-texte-et-document/#demo">{k("lecture.demo")}</a></div>'
             f'<div class="lm-cc-d"><p class="lm-cc-t">{k("lecture.exemple")}</p><ul>'
             + "".join(f"<li>{OK_IC}<span>{x}</span></li>" for x in phrases) + "</ul></div></div>")
 
 
-# Comparaison « quatre caractères » animée (S4)
 nl = bloc(t, "section", "nlex")
-h, p = tete(nl)
-srcp = bloc(bloc(nl, "div", "nlex-src"), "p")
-lb = txt(bloc(srcp, "span", "src-lb"))
-phrase = brut(re.sub(r'<span class="src-lb">.*?</span>', "", srcp, flags=re.S))
-cartes_ = []
-for i, c in enumerate(blocs(nl, "div", "nlex-card")):
-    eng = txt(bloc(c, "div", "eng"))
-    pp = bloc(c, "p")
-    cartes_.append(f'<div class="mx-p"><small>{eng}</small><p class="q4-out" data-q4="{i}" lang="en">{interne(pp).strip()}</p></div>')
-sorties = [interne(bloc(c, "p")).strip() for c in blocs(nl, "div", "nlex-card")]
-ecran = A.ecran_comparaison(phrase, sorties[0], sorties[1], "DeepL Pro")
-ui = (f'<div class="mx q4"><div class="mx-p q4-src"><small>{lb}</small><p>{phrase}</p></div>'
-      f'<div class="mx-g">{"".join(cartes_)}</div></div>')
-titre_fen = txt(bloc(nl, "span", "nlex-tag"))
-out.append(section(h2(h, "quatre caractères") + f'<p class="intro">{p}</p>'
-                   + scene(1176, 440, ecran, sim="quatre", titre=titre_fen, curseur=False, label="Comparaison des sorties LexMachina et DeepL Pro")
-                   + lecture(sorties, brut(bloc(nl, "p", "nlex-cap")))))
+out.append(section(h2(k("compare.titre"), "le terme officiel") + f'<p class="intro">{k("compare.intro")}</p>'
+                   + scene(1176, 356, ecran_corrige(), sim="corrige", titre=k("compare.fenetre"), curseur=False,
+                           label="DeepL puis LexMachina sur un texte fiscal suisse : les termes officiels remplacent les termes génériques")
+                   + lecture() + conclusion(brut(bloc(nl, "p", "nlex-cap")))))
 # Ce qu'est LexMachina (proposition 2-B retenue par Fabien le 2026-10-16) : les quatre chiffres en liste à gauche,
 # l'environnement du moteur (matières, Corrext, autres moteurs) en trois groupes à pastilles à droite
 sp = bloc(t, "section", "nlspec")

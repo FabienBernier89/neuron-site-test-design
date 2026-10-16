@@ -577,18 +577,38 @@
     return jouer(l, [fixe(1000)].concat(etapesMoteurTiers(l, d, cr), finir(cr)));
   };
 
-  /* LexMachina : sortie du moteur, alternative DeepL Pro, puis les écarts se surlignent */
-  SCENES.quatre = function (l) {
-    var cr = l.q(".cr"), out = l.q(".cr-out"), alt = l.q(".cr-alt"), e = l.q(".cr-alt-e");
+  /* Page LexMachina, « le texte qui se corrige » (idée A retenue par Fabien le 2026-10-16) : la sortie réelle de DeepL
+     s'écrit et ses termes génériques se signalent ; LexMachina est choisi, retraduit (sortie réelle), les termes
+     officiels se surlignent un à un, puis leurs sources s'affichent */
+  SCENES.corrige = function (l) {
+    var cr = l.q(".cr"), out = l.q(".cr-out");
+    function marques(cls) {
+      return function () {
+        return l.qa(".cr-out mark").reduce(function (p, m) {
+          return p.then(function () { m.classList.add(cls); return l.attendre(650); });
+        }, Promise.resolve());
+      };
+    }
     return jouer(l, [
       function () { cr.classList.add("traduit"); return l.attendre(1000); },
-      function () { cr.classList.remove("traduit"); return l.mots(out, out.getAttribute("data-html"), true); },
-      fixe(900),
-      function () { return l.appui(".cr-spark"); },
-      function () { cr.classList.add("alts"); return l.attendre(900); },
-      function () { e.textContent = e.getAttribute("data-v"); e.classList.add("on"); return l.mots(alt, alt.getAttribute("data-html"), true); },
+      function () { cr.classList.remove("traduit"); return l.mots(out, out.getAttribute("data-gen"), true); },
       fixe(700),
-      function () { l.qa("mark").forEach(function (m) { m.classList.add("vu"); }); return l.attendre(4200); }
+      marques("vu"),
+      fixe(1400),
+      function () { return l.selection(".cr-eng", "LexMachina"); },
+      function () {
+        out.classList.add("sort");
+        return l.attendre(240).then(function () {
+          out.classList.remove("vu", "sort");
+          out.innerHTML = '<span class="cr-sk"></span><span class="cr-sk"></span><span class="cr-sk"></span>';
+          cr.classList.add("traduit");
+          return l.attendre(900);
+        });
+      },
+      function () { cr.classList.remove("traduit"); return l.mots(out, out.getAttribute("data-html"), true); },
+      fixe(600),
+      marques("vu"),
+      function () { cr.classList.add("sources"); return l.attendre(4600); }
     ].concat(finir(cr)));
   };
 
