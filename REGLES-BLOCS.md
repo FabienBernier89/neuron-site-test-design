@@ -21,7 +21,8 @@ Le test `tests/test_regles_blocs.py` vérifie les règles ci-dessous.
 - Titres et sous-titres sur une ligne quand la largeur le permet ; sinon une coupure nette, jamais un mot seul.
 - Une légende sous une scène tient en deux lignes. Au-delà, elle devient un tableau de lecture ou une carte
   conclusion et note (modèle : page LexMachina).
-- Une comparaison de qualité ne nomme pas le moteur tiers : « IA généraliste ».
+- Pages qui présentent des fonctionnalités : pas de focus sur DeepL. Ce n'est pas une interdiction de le nommer
+  (la comparaison de la page LexMachina affiche « IA généraliste » par choix propre à ce bloc).
 - Un visuel ne montre que des libellés réels (pages du site, sorties de moteur relevées, contenus relus de
   `src/data/contenus-v2/`).
 
