@@ -162,7 +162,7 @@ def composer(P):
     assert len(etapes) == 3, len(etapes)
     out.append(section(f'<div class="cp-gv"><div>{h2(titre_g, "un cabinet" if "un cabinet" in titre_g else None)}<p>{para}</p>'
                        f'<p class="cp-gv-l"><a class="lien" href="{re.search(r"href=\"([^\"]+)\"", lien).group(1)}">{txt(lien)}</a></p></div>'
-                       + scene(1176, 520, demo, sim="avis", curseur=False, titre="Corrext", label="Choix du moteur et avis Attorney-Client privilege") + "</div>"
+                       + scene(900, 780, demo, sim="avis", curseur=False, titre="Corrext", label="Choix du moteur et avis Attorney-Client privilege") + "</div>"
                        + tuiles([(None, b, p) for b, p in etapes], "tl txt")))
 
     # Les autres comparatifs : cartes reliées (outils/post/fonctionnalites.py les illustre)
