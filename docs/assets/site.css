@@ -1117,7 +1117,44 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 .cp-gv p{font:400 16px/26px var(--sans);color:var(--text)}
 .cp-gv .cp-gv-l{margin-top:16px}
 
-@media (max-width:1023px){.cp-eb,.cp-gv{grid-template-columns:minmax(0,1fr);gap:32px}}
+/* Réponse seule (page agence) : la phrase en grand, la suite à côté */
+.cp-eb.cp-eb1{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end;padding:32px;border-radius:10px;background:var(--tile)}
+.cp-eb1 .cp-s{margin-top:0}
+.cp-eb1 > div{display:contents}
+
+/* Trois modèles (page agence) : force, puis revers ou pari */
+.cp-mg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.cp-md{display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:10px;background:var(--tile)}
+.cp-md h3{margin-top:6px;font:600 18px/26px var(--sans);color:var(--ink)}
+.cp-md-s{font:400 16px/24px var(--serif);color:var(--ink)}
+.cp-md p{font:400 14px/22px var(--sans);color:var(--text)}
+.cp-md p a{color:var(--accent-d);text-decoration:underline;text-underline-offset:3px}
+.cp-md .cp-md-t{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font:500 13px/20px var(--sans);color:var(--muted)}
+
+/* Tableau à trois solutions (page agence) */
+.cp-t3 tbody th[scope="row"]{width:22%}
+
+/* Exemple statique (page IA génératives) : la source, puis les deux sorties côte à côte */
+.cp-xs{margin-bottom:12px;padding:18px 20px;border-radius:10px;background:var(--tile)}
+.cp-xe{margin-bottom:6px;font:500 12px/16px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.cp-xs p:not(.cp-xe),.cp-xc p:not(.cp-xe){font:400 15px/24px var(--sans);color:var(--ink)}
+.cp-xg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.cp-xc{padding:18px 20px;border:1px solid var(--line);border-radius:10px;background:var(--page)}
+.cp-xg mark{border-radius:3px;padding:0 2px;color:inherit}
+.cp-xg mark.cp-faux{background:#fbdcdc;color:#9b1c1c}
+.cp-xg mark.cp-juste{background:#d3f2e0;color:#08583a}
+.cp-xg + .lm-cc{margin-top:24px}
+
+/* Niveaux de relecture externe (page agence) */
+.cp-lvg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.cp-lv{padding:24px;border-radius:10px;background:var(--tile)}
+.cp-lv-n{display:grid;place-items:center;width:32px;height:32px;margin-bottom:14px;border-radius:50%;background:var(--ink);color:var(--page);font:600 14px/1 var(--sans)}
+.cp-lv h3{font:600 17px/24px var(--sans);color:var(--ink)}
+.cp-lv-s{margin-top:2px;font:500 13px/18px var(--sans);color:var(--muted)}
+.cp-lv p:last-child{margin-top:10px;font:400 14px/22px var(--sans);color:var(--text)}
+
+@media (max-width:1023px){.cp-eb,.cp-gv,.cp-eb.cp-eb1{grid-template-columns:minmax(0,1fr);gap:24px}.cp-mg,.cp-lvg{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.cp-xg{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){
   .cp-fb{grid-template-columns:minmax(0,1fr)}.cp-q{font-size:22px;line-height:30px}
   /* tableau empilé : le critère, puis chaque réponse sous le nom de sa solution */

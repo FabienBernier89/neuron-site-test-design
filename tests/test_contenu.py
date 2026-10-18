@@ -114,7 +114,8 @@ class TestContenu(unittest.TestCase):
             # Source d'une page : sa page du site actuel (absente pour une page nouvelle) et ses contenus nouveaux
             v1 = build.NEURON / "docs/fr" / p / "index.html"
             sources = [deux_variantes(v1.read_text(encoding="utf-8"))] if v1.exists() else []
-            corrections = [e for e in contenus.toutes() if e["page"] == p and ("remplace" in e or "insere_avant" in e)]
+            # corrections de la page, et renommages communs à tout le site (page « * », outils/post/renommages.py)
+            corrections = [e for e in contenus.toutes() if e["page"] in (p, "*") and ("remplace" in e or "insere_avant" in e)]
             if corrections and v1.exists():
                 sources.append(deux_variantes(corrigee(v1.read_text(encoding="utf-8"), corrections)))
             sources += [deux_variantes(e["texte"]) for e in contenus.toutes() if e["page"] in (p, "*")]  # « * » : commun à plusieurs pages
