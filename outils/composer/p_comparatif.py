@@ -18,6 +18,7 @@ from pathlib import Path
 from commun import *
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from outils import contenus  # noqa: E402
 from outils.contenus import texte  # noqa: E402
 
 OK = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" '
@@ -53,8 +54,9 @@ PAGES = {
         # trois différences : points de « Ce qu'ils ne peuvent pas prouver seuls » (V1), ce que Corrext apporte
         "differences": [(0, "terme"), (1, "reference"), (2, "relecture")],
         "groupes": [("qualite", (0, 4, 5, 6)), ("confidentialite", (1, 2, 3, 11)), ("relecture", (7, 8, 9, 10))],
-        # exemple de la V1 où LexMachina se trompe : présenté sans animation (question posée à Fabien le 2026-10-18)
-        "exemple": {"type": "statique"},
+        # erreur de terminologie de ChatGPT que LexMachina évite, et sa preuve dans CHnell (Fabien, 2026-10-18) ;
+        # remplace l'exemple de la V1 où LexMachina se trompait
+        "exemple": {"type": "preuve"},
         "gouvernance": "avis",
         "cta": "Mettez les moteurs face",
     },
@@ -225,6 +227,26 @@ def exemple_statique(t, cfg, k):
                    + carte_conclusion(note[0], [cap[0], note[1], cap[-1]], k), ident="exemple")
 
 
+def exemple_preuve(t, cfg, k):
+    """Page IA génératives : la sortie de ChatGPT (abréviation française gardée), celle de LexMachina (abréviation des
+    textes fédéraux), puis la preuve dans CHnell (segments officiels alignés, scène « chnell »), et la carte conclusion."""
+    def marque(texte_, terme, cls):
+        return re.sub(r"\b" + re.escape(terme) + r"\b", f'<mark class="{cls}">{terme}</mark>', texte_)
+    cartes = (f'<div class="cp-xc cp-xc-f"><p class="cp-xe">{k("cmp.ex.gpt.label")}</p><p lang="it">{marque(k("cmp.ex.gpt"), "LB", "cp-faux")}</p></div>'
+              f'<div class="cp-xc"><p class="cp-xe">{k("cmp.ex.lm.label")}</p><p lang="it">{marque(k("cmp.ex.lm"), "LBCR", "cp-juste")}</p></div>')
+    lookup = {"q": "LBCR", "l1": "Italian", "l2": "French", "count": texte(f"{cfg['cle']}.cmp.ex.chnell.count"),
+              "rows": [{"a": texte(f"{cfg['cle']}.cmp.ex.chnell.a1"), "b": texte(f"{cfg['cle']}.cmp.ex.chnell.b1"),
+                        "src": texte(f"{cfg['cle']}.cmp.ex.chnell.src1")}], "mark": ["LBCR", "LB"]}
+    preuve = scene(1176, 340, V.vue_chnell(lookup), sim="chnell", curseur=False, titre="CHnell",
+                   label="CHnell : LBCR et LB alignés dans les textes officiels")
+    notes = [k("cmp.ex.note.releve"), k("cmp.ex.note.chnell"), k("cmp.ex.note.ponctuel")]
+    return section(h2(k("cmp.ex.titre"), "la source qui tranche") + f'<p class="intro">{k("cmp.ex.intro")}</p>'
+                   f'<div class="cp-xs"><p class="cp-xe">{k("cmp.ex.source.label")}</p><p>{k("cmp.ex.source")}</p></div>'
+                   f'<div class="cp-xg">{cartes}</div>'
+                   f'<h3 class="cp-pv">{k("cmp.ex.preuve.titre")}</h3>' + preuve
+                   + carte_conclusion(k("cmp.ex.conclusion"), notes, k), ident="exemple")
+
+
 def niveaux(t):
     """Page agence : les trois niveaux de relecture externe, tels que l'application les affiche (V1)."""
     sec = bloc(t, "section", "cp-lev")
@@ -277,7 +299,7 @@ def exemple(t, cfg, k):
     typ = cfg["exemple"]["type"]
     if typ == "niveaux":
         return niveaux(t)
-    return {"scene": exemple_scene, "statique": exemple_statique}[typ](t, cfg, k)
+    return {"scene": exemple_scene, "statique": exemple_statique, "preuve": exemple_preuve}[typ](t, cfg, k)
 
 
 def composer(P):
@@ -295,7 +317,14 @@ def composer(P):
            autres(t),
            faq_section(t),
            cta_section(t, cfg["cta"])]
-    ecrire(P, entete_existant(P), "".join(out))
+    corps = "".join(out)
+    # corrections déclarées pour cette page (contenus-v2, champ « remplace ») : une phrase de la V1 remplacée mot pour mot
+    for e in contenus.toutes():
+        if e["page"] == P and "remplace" in e:
+            ancien = esc(e["remplace"])
+            assert corps.count(ancien) == 1, f"{P} : phrase à remplacer introuvable : {ancien[:60]}"
+            corps = corps.replace(ancien, esc(e["texte"]))
+    ecrire(P, entete_existant(P), corps)
     print(f"{P} écrite")
 
 

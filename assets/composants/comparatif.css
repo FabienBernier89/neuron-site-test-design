@@ -80,6 +80,8 @@
 .cp-xg mark.cp-faux{background:#fbdcdc;color:#9b1c1c}
 .cp-xg mark.cp-juste{background:#d3f2e0;color:#08583a}
 .cp-xg + .lm-cc{margin-top:24px}
+.cp-pv{margin:40px 0 16px;font:600 17px/24px var(--sans);color:var(--ink)}  /* « La preuve, dans CHnell » */
+.cp-pv + .ech + .lm-cc{margin-top:24px}
 
 /* Niveaux de relecture externe (page agence) */
 .cp-lvg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
