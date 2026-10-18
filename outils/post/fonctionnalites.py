@@ -118,6 +118,22 @@ VISUELS = {
         '<div class="u-it u-a2"><small>Français</small><span>clause pénale</span></div>'
         '<div class="u-it u-a3"><small>Italien</small><span>pena convenzionale</span></div>'
         '<div class="u-it u-a4"><small>Anglais</small><span>contractual penalty</span></div></div>'),
+    # Comparatifs (titres des pages et premières lignes de leurs tableaux) : critères cochés un à un
+    "fr/comparatif/deepl-traduction-juridique/": (
+        '<div class="u-lbl">Onze critères, vérifiables des <em>deux côtés</em></div><div class="u-list u-chk">'
+        '<div class="u-it u-c1"><span>Lieu de stockage des documents</span>' + COCHE + '</div>'
+        '<div class="u-it u-c2"><span>Lieu de traitement du texte</span>' + COCHE + '</div>'
+        '<div class="u-it u-c3"><span>Terminologie du droit suisse en contexte</span>' + COCHE + '</div></div>'),
+    "fr/comparatif/chatgpt-traduction-juridique/": (
+        '<div class="u-lbl">Douze critères, sur le travail réel <em>d\'un dossier</em></div><div class="u-list u-chk">'
+        '<div class="u-it u-c1"><span>Reformuler, résumer, expliquer un passage</span>' + COCHE + '</div>'
+        '<div class="u-it u-c2"><span>Lieu de traitement du texte</span>' + COCHE + '</div>'
+        '<div class="u-it u-c3"><span>Terminologie du droit suisse en contexte</span>' + COCHE + '</div></div>'),
+    "fr/comparatif/agence-ou-plateforme/": (
+        '<div class="u-lbl">Trois modèles, trois <em>forces réelles</em></div><div class="u-list u-art">'
+        '<div class="u-it u-a1"><span>Agence externe seule</span></div>'
+        '<div class="u-it u-a2"><span>Outil générique seul</span></div>'
+        '<div class="u-it u-a3"><span>Corrext</span></div></div>'),
     # Guide « organiser la traduction dans un cabinet » : les trois rôles (§ 3), puis les six indicateurs (§ 7)
     "fr/ressources/guides/organiser-traduction-cabinet/": (
         '<div class="u-lbl">Qui décide quoi</div><div class="u-list u-chk">'

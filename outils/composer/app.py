@@ -183,6 +183,30 @@ def ecran_securite(notice_titre, notice_texte, src, out):
             + '</div></div>')
 
 
+def ecran_corrige(src, gen_html, lm_html, puces_html, moteur_gen, cible="French", detecte="", classe=""):
+    """Scène « le texte qui se corrige » (sim « corrige ») : la sortie du moteur généraliste (gen_html, termes en
+    <mark class="gen">), puis celle de LexMachina (lm_html, termes officiels en <mark>), puis les sources (puces_html).
+    Le menu des moteurs ne montre que le moteur généraliste et LexMachina."""
+    ecran = (f'<div class="cr cr-frag cr-cg{classe}">'
+             + travail(detecte=True, cible=cible, moteur=moteur_gen, src=src, out="")
+             .replace('<p class="cr-out">', f'<p class="cr-out" data-gen="{_h.escape(gen_html)}" data-html="{_h.escape(lm_html)}">', 1)
+             + f'<div class="cg-src">{puces_html}</div></div>')
+    if detecte:
+        ecran = ecran.replace("Detected language (French)", detecte, 1)
+    return re.sub(r'(<span class="cr-sel cr-eng">.*?<span class="cr-menu">).*?(</span></span>)',
+                  lambda m: m.group(1) + f'<span class="on" data-v="{moteur_gen}">{moteur_gen}</span><span data-v="LexMachina">LexMachina</span>' + m.group(2),
+                  ecran, count=1, flags=re.S)
+
+
+def marquer(sortie, termes, cls=""):
+    """Texte échappé, chaque terme entouré d'un <mark> (classe facultative) ; erreur si un terme manque."""
+    h = _h.escape(sortie, quote=False)
+    for t_ in termes:
+        assert t_ in h, f"sortie modifiée : « {t_} » absent"
+        h = h.replace(t_, f'<mark{" class=" + chr(34) + cls + chr(34) if cls else ""}>{t_}</mark>', 1)
+    return h
+
+
 def fragment_travail(src="", out="", detecte=False, cible="English", moteur="LexMachina", suisse=False, classe=""):
     """Espace de traduction seul (boucles par fonctionnalité, panneaux statiques)."""
     return (f'<div class="cr cr-frag {classe}">'

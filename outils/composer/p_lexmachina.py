@@ -19,28 +19,13 @@ def k(cle):
 ECARTS = (("retenue à la source", "impôt anticipé"), ("établissement soumis à surveillance", "assujetti"))
 
 
-def marquer(sortie, termes, cls=""):
-    h = _H.escape(sortie, quote=False)
-    for t_ in termes:
-        assert t_ in h, f"sortie modifiée : « {t_} » absent"
-        h = h.replace(t_, f'<mark{" class=" + chr(34) + cls + chr(34) if cls else ""}>{t_}</mark>', 1)
-    return h
-
-
 def ecran_corrige():
-    gen = marquer(texte("lexmachina.compare.deepl").replace(" %", "\u00a0%"), [g for g, _ in ECARTS], "gen")  # « 35 % » insécable
-    lm = marquer(texte("accueil.axes.lexmachina.demo.out"), [o for _, o in ECARTS])
+    gen = A.marquer(texte("lexmachina.compare.deepl").replace(" %", "\u00a0%"), [g for g, _ in ECARTS], "gen")  # « 35 % » insécable
+    lm = A.marquer(texte("accueil.axes.lexmachina.demo.out"), [o for _, o in ECARTS])
     puces = "".join(f'<span>{k("compare.chip." + c)}</span>' for c in ("impot", "assujetti"))
-    ecran = ('<div class="cr cr-frag cr-cg">'
-            + A.travail(detecte=True, cible="French", moteur=k("compare.moteur"), src=_H.escape(texte("accueil.axes.lexmachina.demo.src"), quote=False), out="")
-            .replace("Detected language (French)", _H.escape(texte("accueil.axes.lexmachina.demo.langue"), quote=False), 1)
-            .replace('<p class="cr-out">', f'<p class="cr-out" data-gen="{_H.escape(gen)}" data-html="{_H.escape(lm)}">', 1)
-            + f'<div class="cg-src">{puces}</div></div>')
-    # Menu des moteurs de la scène : l'IA généraliste et LexMachina seulement, aucun moteur tiers nommé (Fabien, 2026-10-16)
-    nom = k("compare.moteur")
-    ecran = re.sub(r'(<span class="cr-sel cr-eng">.*?<span class="cr-menu">).*?(</span></span>)',
-                   lambda m: m.group(1) + f'<span class="on" data-v="{nom}">{nom}</span><span data-v="LexMachina">LexMachina</span>' + m.group(2),
-                   ecran, count=1, flags=re.S)
+    # Moteur généraliste anonymisé : « IA généraliste », aucun moteur tiers nommé dans cette comparaison (Fabien, 2026-10-16)
+    ecran = A.ecran_corrige(_H.escape(texte("accueil.axes.lexmachina.demo.src"), quote=False), gen, lm, puces, k("compare.moteur"),
+                            detecte=_H.escape(texte("accueil.axes.lexmachina.demo.langue"), quote=False))
     assert "DeepL" not in ecran and "Azure" not in ecran
     return ecran
 
