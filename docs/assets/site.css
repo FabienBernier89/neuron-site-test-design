@@ -1027,11 +1027,12 @@ main table a{display:inline-block;padding-block:3px}
 .hc-vide{padding:12px;font:400 14px/21px var(--sans);color:var(--text)}
 
 .hc-g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.hc-c{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;align-items:center;padding:18px 20px;border:1px solid var(--line);border-radius:10px;background:var(--page);color:inherit;transition:border-color .2s,box-shadow .2s}
+.hc-c{display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;align-items:center;padding:18px 20px;border:1px solid var(--line);border-radius:10px;background:var(--page);color:inherit;transition:border-color .2s,box-shadow .2s}
 .hc-c:hover{border-color:var(--mid);box-shadow:0 8px 24px -18px rgba(0,27,76,.45)}
 .hc-c:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.hc-ic{display:grid;place-items:center;width:44px;height:44px;border-radius:10px;background:var(--tile);color:var(--accent-d)}
-.hc-ic svg{width:20px;height:20px}
+/* Icônes des rubriques : tuile en dégradé de marque, pictogramme blanc (style A retenu par Fabien le 2026-10-18) */
+.hc-ic{display:grid;place-items:center;width:48px;height:48px;border-radius:12px;color:#fff;background:linear-gradient(140deg,#4f8dff 0%,#2c4fd8 55%,#1b2f8f 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 6px 14px -6px rgba(44,79,216,.55)}
+.hc-ic svg{width:22px;height:22px;stroke-width:2}
 .hc-c b{display:block;font:600 16px/24px var(--sans);color:var(--ink)}
 .hc-c em{font:400 14px/20px var(--sans);font-style:normal;color:var(--muted)}
 
