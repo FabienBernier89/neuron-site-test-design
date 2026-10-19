@@ -19,11 +19,15 @@
 
 /* Ce qui se convertit : l'exemple en grand en tête de carte */
 .pa-cv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.pa-cv > div{padding:22px 20px;border-radius:10px;background:var(--tile)}
-.pa-ex{display:flex;align-items:center;gap:10px;margin-bottom:18px;font:600 26px/32px var(--num);letter-spacing:-.01em;color:var(--muted)}
+.pa-cv > div{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0;padding:22px 20px;border-radius:10px;background:var(--tile)}  /* titres alignés d'une carte à l'autre */
+.pa-ex{display:flex;align-items:center;gap:10px;align-self:end;margin-bottom:18px;font:600 26px/32px var(--num);letter-spacing:-.01em;color:var(--muted)}
 .pa-ex i{display:inline-grid;color:var(--muted)}
 .pa-ex i svg{width:18px;height:18px}
 .pa-ex span{color:#0b6e47}
+.pa-ex s{color:#9b1c1c;text-decoration-thickness:2px}  /* piège : la forme à ne pas employer */
+.pa-ex{flex-wrap:wrap}
+.pa-ex.pa-ex-l{font-size:19px;line-height:26px}  /* exemple long (company limited by shares) */
+.pa-cv.pa-cv3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .pa-cv h3,.pa-gr h3{font:600 15px/22px var(--sans);color:var(--ink)}
 .pa-cv p:not(.pa-ex),.pa-gr p{margin-top:6px;font:400 14px/22px var(--sans);color:var(--text)}
 
@@ -47,6 +51,7 @@
 .pa-si p:last-child{margin-top:8px;font:400 14px/22px var(--sans);color:var(--text)}
 
 :root[data-theme="sombre"] .pa-ex span{color:#8ee6b4}
+:root[data-theme="sombre"] .pa-ex s{color:#f3a5a5}
 @media (prefers-color-scheme:dark){:root[data-theme="systeme"] .pa-ex span{color:#8ee6b4}}
 
 @media (max-width:1023px){.pa-cv{grid-template-columns:repeat(2,minmax(0,1fr))}.pa-gr,.pa-sg{grid-template-columns:minmax(0,1fr)}.pa-gr > div,.pa-gr > div + div{padding:16px 0;border-left:0}.pa-gr > div + div{border-top:1px solid var(--line)}.pa-pr{grid-template-columns:minmax(0,1fr);gap:16px}}

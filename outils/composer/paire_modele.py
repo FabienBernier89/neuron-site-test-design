@@ -37,6 +37,12 @@ def icone(nom):
             f'stroke-linejoin="round" aria-hidden="true">{ICONES[nom]}</svg></span>')
 
 
+def lookup(slug, q, l1, l2, marque):
+    """Recherche CHnell relevée pour la paire (contenus-v2/O-paires.json) : un segment officiel aligné."""
+    k = lambda c: texte(f"{slug}.chnell.{c}")
+    return {"q": q, "l1": l1, "l2": l2, "count": k("count"), "rows": [{"a": k("a"), "b": k("b"), "src": k("src")}], "mark": [q, marque]}
+
+
 def chnell(P, cfg):
     """CHnell en contexte : titre, phrase propre à la paire, scène animée (sim « chnell »)."""
     cle = P.split("/")[1]
@@ -74,13 +80,19 @@ def pratique(t, cfg, accent):
     encart = f'<div class="pa-pr"><p class="pa-pq">{cfg["principe"]}</p><p>{faits[cfg["principe"]]}</p></div>'
 
     def exemple(ex):
+        """(avant, après) : conversion ; (None, terme) : forme juste seule ; (terme, None) : piège, barré."""
         a, b = ex
-        return (f'<p class="pa-ex">{a}<i aria-hidden="true">{FLECHE}</i><span>{b}</span></p>' if a else f'<p class="pa-ex"><span>{b}</span></p>')
+        long = " pa-ex-l" if a and b and len(a + b) > 16 else ""  # conversion longue : police réduite
+        if a and b:
+            return f'<p class="pa-ex{long}">{a}<i aria-hidden="true">{FLECHE}</i><span>{b}</span></p>'
+        if b:
+            return f'<p class="pa-ex{long}"><span>{b}</span></p>'
+        return f'<p class="pa-ex{long}"><s>{a}</s></p>'
     conv = "".join(f'<div>{exemple(ex)}<h3>{n}</h3><p>{faits[n]}</p></div>' for n, ex in cfg["conversions"])
     # garanties en bandeau de réassurance (coche, séparateurs), distinct des cartes de situations (Fabien, 2026-10-19)
     gar = "".join(f'<div><span class="pa-ck">{COCHE}</span><div><h3>{n}</h3><p>{faits[n]}</p></div></div>' for n, _ in cfg["garanties"])
     return section(h2(txt(bloc(lead, "h2")), accent) + f'<p class="intro">{brut(bloc(lead, "p"))}</p>' + encart
-                   + f'<p class="pa-st">{esc(texte("paire.convertit"))}</p><div class="pa-cv">{conv}</div>'
+                   + f'<p class="pa-st">{esc(texte("paire.convertit"))}</p><div class="pa-cv pa-cv{len(cfg["conversions"])}">{conv}</div>'
                    + f'<p class="pa-st">{esc(texte("paire.garantit"))}</p><div class="pa-gr">{gar}</div>')
 
 
