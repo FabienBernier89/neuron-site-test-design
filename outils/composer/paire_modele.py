@@ -19,6 +19,8 @@ from outils.contenus import texte  # noqa: E402
 
 FLECHE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
           'stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>')
+COCHE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" '
+         'stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>')
 ICONES = {
     "moteur": '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M9 8h7M9 12h5"/>',
     "cadenas": '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
@@ -75,7 +77,8 @@ def pratique(t, cfg, accent):
         a, b = ex
         return (f'<p class="pa-ex">{a}<i aria-hidden="true">{FLECHE}</i><span>{b}</span></p>' if a else f'<p class="pa-ex"><span>{b}</span></p>')
     conv = "".join(f'<div>{exemple(ex)}<h3>{n}</h3><p>{faits[n]}</p></div>' for n, ex in cfg["conversions"])
-    gar = "".join(f'<div>{icone(ic)}<div><h3>{n}</h3><p>{faits[n]}</p></div></div>' for n, ic in cfg["garanties"])
+    # garanties en bandeau de réassurance (coche, séparateurs), distinct des cartes de situations (Fabien, 2026-10-19)
+    gar = "".join(f'<div><span class="pa-ck">{COCHE}</span><div><h3>{n}</h3><p>{faits[n]}</p></div></div>' for n, _ in cfg["garanties"])
     return section(h2(txt(bloc(lead, "h2")), accent) + f'<p class="intro">{brut(bloc(lead, "p"))}</p>' + encart
                    + f'<p class="pa-st">{esc(texte("paire.convertit"))}</p><div class="pa-cv">{conv}</div>'
                    + f'<p class="pa-st">{esc(texte("paire.garantit"))}</p><div class="pa-gr">{gar}</div>')
