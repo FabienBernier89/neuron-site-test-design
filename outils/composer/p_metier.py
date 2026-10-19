@@ -16,9 +16,9 @@ hero_ = lien_demo(hero_, "{{ROOT}}fr/corrext/traduction-texte-et-document/#demo"
 sb = bloc(t, "section", "siblings")
 v1 = {txt(bloc(a.replace(bloc(a, "div", "jv-win"), ""), "b")): (brut(bloc(a.replace(bloc(a, "div", "jv-win"), ""), "span")), re.search(r'href="([^"]+)"', a).group(1))
       for a in blocs(sb, "a", "jv-tool")}
-ECRANS = {
-    "Traduction texte et document": scene(764, 444, V.vue_fichiers(fichiers_demo("pdf", "fichier")), sim="lot", curseur=False, label="Traduction d'un lot de fichiers"),
-    "Gestion de projet": scene(764, 496, V.vue_devis("Darlehensvertrag_2026.docx", "DE → FR", NIVEAUX_RELECTURE, NIVEAUX_RELECTURE[1]), sim="devis", curseur=False,
+ECRANS = {  # même taille pour les trois écrans (Fabien, 2026-10-19)
+    "Traduction texte et document": scene(764, 500, V.vue_fichiers(fichiers_demo("pdf", "fichier")), sim="lot", curseur=False, label="Traduction d'un lot de fichiers"),
+    "Gestion de projet": scene(764, 500, V.vue_devis("Darlehensvertrag_2026.docx", "DE → FR", NIVEAUX_RELECTURE, NIVEAUX_RELECTURE[1]), sim="devis", curseur=False,
                                label="Devis avec relecture complète par un traducteur juridique"),
     "Fast lookup CHnell": scene(764, 500, V.vue_chnell(lookup("contentieux-arbitrage", "sentence arbitrale", "French", "German", "Schiedsspruch")), sim="chnell",
                                 curseur=False, titre="CHnell", label="Fast lookup CHnell"),

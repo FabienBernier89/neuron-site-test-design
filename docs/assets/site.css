@@ -1616,14 +1616,8 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 .mt-demo{margin-left:20px;font-size:15px}
 .mt-l{font:600 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 
-/* Gains chiffrés : trois chiffres en ligne */
-.mt-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:32px;border-top:1px solid var(--line)}
-.mt-g > div{padding:32px 32px 8px 0}
-.mt-g > div + div{padding-left:32px;border-left:1px solid var(--line)}
-.mt-n{font:400 56px/60px var(--serif);color:var(--accent-d);white-space:nowrap}
-.mt-g .mt-l{margin-top:16px}
-.mt-g > div > p:last-child{margin-top:8px;font:400 15px/24px var(--sans);color:var(--text)}
-.mt-note{margin-top:20px;font:400 13px/20px var(--sans);color:var(--muted)}
+/* Gains chiffrés : tuiles chiffrées du site (.tl .n), la note des maxima dessous */
+.mt-note{margin-top:16px;font:400 13px/20px var(--sans);color:var(--muted)}
 
 /* Avis client : citation centrée */
 .mt-av{max-width:880px;margin:0 auto;text-align:center}
@@ -1667,10 +1661,6 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 @media (prefers-color-scheme:dark){:root[data-theme="systeme"] .mt-fict{background:rgba(255,214,120,.16);color:#ffd88a}}
 @media (max-width:1023px){.mt-ou{grid-template-columns:minmax(0,1fr);gap:24px}}
 @media (max-width:767px){
-  .mt-g{grid-template-columns:minmax(0,1fr)}
-  .mt-g > div,.mt-g > div + div{padding:24px 0 4px;border-left:0}
-  .mt-g > div + div{border-top:1px solid var(--line)}
-  .mt-n{font-size:44px;line-height:50px}
   .mt-av blockquote{font-size:24px;line-height:34px}
   .mt-sa > div{grid-template-columns:minmax(0,1fr)}
   .mt-sah{display:none !important}

@@ -46,10 +46,13 @@ class TestMetier(unittest.TestCase):
             slug = p.split("/")[1]
             m = texte_brut(self.main(p))
             self.assertIn(contenus.texte("metier.gains.note"), m)
-            pourcents = [contenus.texte(f"{slug}.gains.{i}.n") for i in (1, 2, 3)]
-            for n in pourcents:
-                # un pourcentage d'économies n'est jamais une moyenne : « jusqu'à », sauf le 100 % du traitement en Suisse
-                self.assertTrue(n.startswith("jusqu'à") or n == "100 %", n)
+            for i in (1, 2, 3):
+                n, t = contenus.texte(f"{slug}.gains.{i}.n"), contenus.texte(f"{slug}.gains.{i}.t")
+                # chiffre seul dans la tuile (Fabien, 2026-10-19) ; un pourcentage d'économies n'est jamais une moyenne :
+                # le texte dit « au maximum », sauf pour le 100 % du traitement en Suisse
+                self.assertRegex(n, r"^\d+ %$")
+                self.assertTrue(n == "100 %" or "au maximum" in t, (n, t))
+            self.assertIn('<div class="tl">', self.main(p))
 
     def test_avis_fictif_toujours_signale(self):
         """Tant qu'un avis est fictif (statut a_remplacer), il porte la mention et l'attribut data-avis-fictif."""

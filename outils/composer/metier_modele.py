@@ -20,11 +20,11 @@ def lien_demo(hero_html, href):
 
 
 def gains(slug):
-    """A1 : trois chiffres en ligne, la note des maxima dessous."""
+    """Trois tuiles chiffrées, même composant que les chiffres de l'accueil (.tl, .n) ; la note des maxima dessous."""
     k = lambda c: esc(texte(f"{slug}.gains.{c}"))
-    cases = "".join(f'<div><p class="mt-n">{k(f"{i}.n")}</p><p class="mt-l">{k(f"{i}.l")}</p><p>{k(f"{i}.t")}</p></div>' for i in (1, 2, 3))
     titre = texte("metier.gains.titre")
-    return section(h2(titre, " ".join(titre.split()[-3:])) + f'<div class="mt-g">{cases}</div><p class="mt-note">{esc(texte("metier.gains.note"))}</p>')
+    return section(h2(titre, " ".join(titre.split()[-3:])) + tuiles([(k(f"{i}.n"), None, k(f"{i}.t")) for i in (1, 2, 3)], "tl")
+                   + f'<p class="mt-note">{esc(texte("metier.gains.note"))}</p>')
 
 
 def avis(slug):
