@@ -60,7 +60,7 @@
   .pa-t thead{display:none}
   .pa-t tr{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
   .pa-t tbody th,.pa-t td{padding:6px 12px 6px 0;border:0}
-  .pa-t tbody th{padding-top:14px}
+  .pa-t tbody th,.pa-t tbody th + td{padding-top:14px}  /* première ligne de la carte alignée */
   .pa-t .pa-c{padding-left:8px;border-radius:6px}
   .pa-t tbody th::before,.pa-t td::before{content:attr(data-m);display:block;font:500 11px/16px var(--sans);color:var(--muted)}
   .pa-t td.pa-r{grid-column:1/-1;padding-bottom:14px}

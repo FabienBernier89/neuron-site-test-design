@@ -55,15 +55,17 @@ def equivalences(t, cfg, accent):
     tt = bloc(t, "section", "tterms")
     tab = bloc(tt, "table")
     entetes = [txt(x) for x in re.findall(r"<th[^>]*>(.*?)</th>", bloc(tab, "thead"), re.S)]
-    role = {cfg["source"]: "pa-s", cfg["cible"]: "pa-c"}
-    tete = "".join(f'<th scope="col" class="{role.get(e, "pa-m")}">{e}</th>' for e in entetes)
+    # page de paire : la paire en avant, le reste en retrait ; page de domaine (pas de sens) : la première langue en gras
+    role = {cfg["source"]: "pa-s", cfg["cible"]: "pa-c"} if cfg.get("source") else {entetes[0]: "pa-s"}
+    autre = "pa-m" if cfg.get("source") else "pa-n"
+    tete = "".join(f'<th scope="col" class="{role.get(e, autre)}">{e}</th>' for e in entetes)
     lignes = ""
     for tr in blocs(bloc(tab, "tbody"), "tr"):
         cellules = [brut(c).strip() for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", tr, re.S)]
         lignes += "<tr>" + "".join(
-            (f'<th scope="row" class="{role.get(e, "pa-m")}" data-m="{e}">{v}</th>' if j == 0 else
+            (f'<th scope="row" class="{role.get(e, autre)}" data-m="{e}">{v}</th>' if j == 0 else
              f'<td class="pa-r" data-m="{e}"><span class="pa-ref">{v}</span></td>' if e == "Référence" else
-             f'<td class="{role.get(e, "pa-m")}" data-m="{e}">{v}</td>') for j, (e, v) in enumerate(zip(entetes, cellules))) + "</tr>"
+             f'<td class="{role.get(e, autre)}" data-m="{e}">{v}</td>') for j, (e, v) in enumerate(zip(entetes, cellules))) + "</tr>"
     ps = [p for p in blocs(tt, "p") if "class=" not in p[:12]]
     notes = "".join(f'<p class="legende">{brut(p)}</p>' for p in blocs(tt, "p") if 'class="' in p[:20])
     return section(h2(txt(bloc(tt, "h2")), accent) + (f'<p class="intro">{brut(ps[0])}</p>' if ps else "")

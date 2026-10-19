@@ -1208,6 +1208,39 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
   .fp-ck{margin-left:0;margin-right:auto}
 }
 
+/* composants/domaine.css */
+/* Pages de domaine du droit (outils/composer/domaine_modele.py), modèle choisi par Fabien le 2026-10-19 (1-B, 2-B) */
+
+/* Équivalences sans langue mise en avant */
+.pa-t td.pa-n{color:var(--text)}
+
+/* Textes de référence : registre */
+.dm-reg{border-top:1px solid var(--line)}
+.dm-reg > div{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,1.6fr);gap:32px;align-items:start;padding:24px 0;border-bottom:1px solid var(--line)}
+.dm-ab{font:400 34px/40px var(--serif);color:var(--accent-d)}
+.dm-reg h3{font:600 15px/22px var(--sans);color:var(--ink)}
+.dm-reg > div > p:last-child{font:400 14px/22px var(--sans);color:var(--text)}
+.dm-tr::after{content:"."}  /* fin « ; OR en allemand… » sortie en étiquettes */
+.dm-lgs{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.dm-lg{display:inline-flex;align-items:center;gap:6px;font:500 13px/18px var(--sans);color:var(--text)}
+.dm-lg i{padding:0 5px;border:1px solid var(--line);border-radius:4px;font:600 10px/16px var(--sans);font-style:normal;letter-spacing:.06em;color:var(--muted)}
+
+/* Concrètement : les actes à gauche, les apports de Corrext en encart à droite */
+.dm-2c{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:48px;align-items:start}
+.dm-2c .pa-st{margin-top:0}
+.dm-num{margin:0;padding:0;list-style:none;counter-reset:acte}
+.dm-num li{display:grid;grid-template-columns:40px minmax(0,1fr);padding:18px 0;border-top:1px solid var(--line);counter-increment:acte}
+.dm-num li::before{content:counter(acte,decimal-leading-zero);grid-row:span 2;font:400 22px/22px var(--serif);color:var(--accent-d)}
+.dm-num h3,.dm-ck h3{font:600 15px/22px var(--sans);color:var(--ink)}
+.dm-num p,.dm-ck p{margin-top:6px;font:400 14px/22px var(--sans);color:var(--text)}
+.dm-in{padding:28px 32px 8px;border-radius:12px;background:var(--tile)}
+.dm-ck > div{display:grid;grid-template-columns:24px minmax(0,1fr);gap:12px;padding:20px 0;border-bottom:1px solid var(--line)}
+.dm-ck > div:first-child{padding-top:4px}
+.dm-ck > div:last-child{border-bottom:0}
+
+@media (max-width:1023px){.dm-2c{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:767px){.dm-reg > div{grid-template-columns:minmax(0,1fr);gap:8px}.dm-ab{font-size:28px;line-height:34px}.dm-in{padding:22px 20px 4px}}
+
 /* composants/fonctionnalites.css */
 /* Cartes de fonctionnalités (outils/post/fonctionnalites.py) : grand visuel, mini-interface Corrext animée, titre,
    texte, lien. Chaque élément est stylé dans son ÉTAT FINAL ; les animations (cycle de 8 s) rejouent le parcours qui y
@@ -1665,7 +1698,7 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
   .pa-t thead{display:none}
   .pa-t tr{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
   .pa-t tbody th,.pa-t td{padding:6px 12px 6px 0;border:0}
-  .pa-t tbody th{padding-top:14px}
+  .pa-t tbody th,.pa-t tbody th + td{padding-top:14px}  /* première ligne de la carte alignée */
   .pa-t .pa-c{padding-left:8px;border-radius:6px}
   .pa-t tbody th::before,.pa-t td::before{content:attr(data-m);display:block;font:500 11px/16px var(--sans);color:var(--muted)}
   .pa-t td.pa-r{grid-column:1/-1;padding-bottom:14px}
