@@ -29,3 +29,5 @@ Le test `tests/test_regles_blocs.py` vérifie les règles ci-dessous.
 ## Corrections propres à une page (exceptions assumées)
 
 - Tarifs : titre du hero légèrement au-dessus du texte de droite (`.tf-hg`), demande de Fabien du 2026-10-16.
+- Pages de paires : forme cible des exemples en vert, piège en rouge barré (`paire.css`, `.pa-ex`), validé par Fabien
+  le 2026-10-19 bien qu'il ne s'agisse pas d'une comparaison juste / faux.
