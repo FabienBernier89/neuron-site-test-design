@@ -48,7 +48,7 @@ def lookup(slug, q, l1, l2, marque):
         except KeyError:
             break
         n += 1
-    return {"q": q, "l1": l1, "l2": l2, "count": k("count"), "rows": rows, "mark": [q, marque]}
+    return {"q": q, "l1": l1, "l2": l2, "count": k("count"), "rows": rows, "mark": [q] + (list(marque) if isinstance(marque, (list, tuple)) else [marque])}
 
 
 def chnell(P, cfg):

@@ -30,12 +30,20 @@ def textes_reference(t):
                    + f'<div class="dm-reg">{lignes}</div>')
 
 
+def intertitre_actes(slug):
+    """Intertitre de la colonne de gauche : propre au domaine ({slug}.actes) sinon commun (domaine.actes)."""
+    try:
+        return texte(f"{slug}.actes")
+    except KeyError:
+        return texte("domaine.actes")
+
+
 def mots_fin(titre, n=2):
     m = titre.rstrip(" .?!").split(" ")
     return " ".join(m[-n:])
 
 
-def concretement(t, actes, accent):
+def concretement(t, actes, accent, slug=None):
     """Deux colonnes : les actes numérotés (besoin), les apports de Corrext en encart (réponse)."""
     fa = bloc(t, "section", "facts")
     lead = bloc(fa, "div", "facts-lead")
@@ -45,5 +53,5 @@ def concretement(t, actes, accent):
     gauche = "".join(f'<li><h3>{k}</h3><p>{faits_[k]}</p></li>' for k in actes)
     droite = "".join(f'<div><span class="pa-ck">{COCHE}</span><div><h3>{k}</h3><p>{faits_[k]}</p></div></div>' for k in apports)
     return section(h2(txt(bloc(lead, "h2")), accent) + f'<p class="intro">{brut(bloc(lead, "p"))}</p>'
-                   + f'<div class="dm-2c"><div><p class="pa-st">{esc(texte("domaine.actes"))}</p><ol class="dm-num">{gauche}</ol></div>'
+                   + f'<div class="dm-2c"><div><p class="pa-st">{esc(intertitre_actes(slug))}</p><ol class="dm-num">{gauche}</ol></div>'
                    + f'<div class="dm-in"><p class="pa-st">{esc(texte("domaine.apporte"))}</p><div class="dm-ck">{droite}</div></div></div>')

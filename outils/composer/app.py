@@ -126,7 +126,7 @@ def lignes_chnell(lookup):
     pat = re.compile("|".join(re.escape(m) for m in sorted(cibles, key=len, reverse=True))) if cibles else None
     for i, r in enumerate(lookup["rows"]):
         b = pat.sub(lambda m: "<mark>" + m.group(0) + "</mark>", e(r["b"])) if pat else e(r["b"])
-        out.append(f'<div style="--i:{i}"><p>{e(r["a"]).replace(q, "<mark>" + q + "</mark>")}</p><p>{b}</p><small>{e(r["src"])}</small></div>')
+        out.append(f'<div style="--i:{i}"><p>{re.sub(re.escape(q), lambda m: "<mark>" + m.group(0) + "</mark>", e(r["a"]), flags=re.I)}</p><p>{b}</p><small>{e(r["src"])}</small></div>')
     return "".join(out)
 
 
