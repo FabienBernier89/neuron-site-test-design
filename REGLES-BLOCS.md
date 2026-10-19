@@ -14,6 +14,8 @@ Le test `tests/test_regles_blocs.py` vérifie les règles ci-dessous.
 | Cartes de texte seul (`.cd`) | Aérées, sans trait d'accent en tête de bloc | `site.css`, `.cd` |
 | Scènes animées | Aucune pause au survol, jauge de déroulé discrète en bas | `assets/sim.js` |
 | Encart newsletter (`.nl-s`) | Sur les pages de lecture seulement (tout `ressources/`) ; ailleurs, l'appel « Demander une démo » reste seul en fin de page | `outils/post/newsletter.py` |
+| Cartes à visuel de termes (`.cd .kv`, « Autres domaines ») | Visuels de même hauteur sur une ligne, termes centrés | `site.css`, sous-grille `.cd:has(> * > .v > .kv)` |
+| Scène CHnell (paires, domaines) | Trois résultats réels relevés dans CHnell (filtre fedlex.admin.ch), la fenêtre est remplie sur toute sa hauteur | `paire_modele.py`, clés `a`, `a2`, `a3` des contenus |
 | Surlignage dans les scènes | Bleu pour un terme mis en avant ; rouge et vert seulement pour une comparaison juste / faux | `site.css`, composants |
 
 ## Règles de rédaction des blocs
