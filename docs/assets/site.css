@@ -425,6 +425,11 @@ ul{padding:0;list-style:none}
 
 /* Cartes à quatre colonnes, abréviations, recherche CHnell */
 .cd.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+/* Cartes à visuel de termes : visuels de même hauteur sur une ligne (sous-grille), termes centrés (Fabien, 2026-10-19) */
+.cd:has(> * > .v > .kv) > *{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0}
+.cd:has(> * > .v > .kv) .v{display:grid}
+.cd:has(> * > .v > .kv) .lien{align-self:end}
+.cd .kv{align-content:center}
 .cd .kv-ab{display:flex;align-items:center;justify-content:center;height:120px}
 .cd .kv-ab b{font:500 40px/48px var(--num);margin:0}
 .ck-l{display:grid;gap:10px}

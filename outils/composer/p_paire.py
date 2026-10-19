@@ -5,7 +5,9 @@ from paire_modele import *
 P = "traduction/allemand-francais/"
 CFG = {
     "source": "Allemand", "cible": "Français",
-    "lookup": EX["co"]["lookup"],  # Verzugszins, allemand vers français (démo CHnell publiée)
+    # Verzugszins, allemand vers français (démo CHnell publiée), plus une ligne Fedlex pour remplir la scène (Fabien, 2026-10-19)
+    "lookup": dict(EX["co"]["lookup"], rows=EX["co"]["lookup"]["rows"] + [
+        {c: texte(f"allemand-francais.chnell.{c}3") for c in ("a", "b", "src")}]),
     "principe": "Trois versions, même valeur",
     # ce qui se convertit : fait de la V1 et son exemple, pris dans le texte du fait
     "conversions": [("Abréviations à convertir", ("OR", "CO")), ("Jurisprudence fédérale", ("BGE", "ATF")),

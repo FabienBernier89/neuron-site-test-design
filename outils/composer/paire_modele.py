@@ -38,16 +38,24 @@ def icone(nom):
 
 
 def lookup(slug, q, l1, l2, marque):
-    """Recherche CHnell relevée pour la paire (contenus-v2/O-paires.json) : un segment officiel aligné."""
+    """Recherche CHnell relevée pour la page (contenus-v2) : segments officiels alignés, clés a/b/src puis a2/b2/src2…"""
     k = lambda c: texte(f"{slug}.chnell.{c}")
-    return {"q": q, "l1": l1, "l2": l2, "count": k("count"), "rows": [{"a": k("a"), "b": k("b"), "src": k("src")}], "mark": [q, marque]}
+    rows, n = [], 1
+    while True:
+        suf = "" if n == 1 else str(n)
+        try:
+            rows.append({"a": k("a" + suf), "b": k("b" + suf), "src": k("src" + suf)})
+        except KeyError:
+            break
+        n += 1
+    return {"q": q, "l1": l1, "l2": l2, "count": k("count"), "rows": rows, "mark": [q, marque]}
 
 
 def chnell(P, cfg):
     """CHnell en contexte : titre, phrase propre à la paire, scène animée (sim « chnell »)."""
     cle = P.split("/")[1]
     return section(h2(esc(texte("paire.chnell.titre")), "dans le texte officiel") + f'<p class="intro intro-l">{esc(texte(f"{cle}.chnell.intro"))}</p>'
-                   + scene(1176, 470, V.vue_chnell(cfg["lookup"]), sim="chnell", curseur=False, titre="CHnell", label="Fast lookup CHnell"))
+                   + scene(1176, 510, V.vue_chnell(cfg["lookup"]), sim="chnell", curseur=False, titre="CHnell", label="Fast lookup CHnell"))
 
 
 def equivalences(t, cfg, accent):
