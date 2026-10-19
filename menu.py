@@ -208,6 +208,10 @@ def rendre_entete(nav, actif="", minimal=False):
             for col in p["colonnes"]:
                 h.append(f'<div class="mg-col"><p class="mg-h">{_e(col["titre"])}</p>\n')
                 for l in col["liens"]:
+                    if l["titre"].startswith("Tous les "):
+                        # lien vers le hub de la colonne : simple lien fléché, comme « Voir les comparatifs » (Fabien, 2026-10-19)
+                        h.append(f'<a class="mg-tous" href="{_a(l["href"])}"><span class="lien">Voir {_e(l["titre"][0].lower() + l["titre"][1:])}</span></a>\n')
+                        continue
                     desc = SOUS_TITRES.get(l["titre"]) or l["desc"] or sous_titre_de_page(l["href"])
                     em = f'<em>{_e(desc)}</em>' if desc else ""
                     h.append(f'<a class="mg-a" href="{_a(l["href"])}"><b>{_e(l["titre"])}</b>{em}</a>\n')

@@ -32,7 +32,9 @@ class TestMenu(unittest.TestCase):
         self.assertEqual(lu, attendu)
         html = build.chemin_page("").read_text(encoding="utf-8")
         ajoutes = sum(len(v) for v in self.ajouts["panneaux"].values())  # entrées ajoutées par les lots de la V2
-        self.assertEqual(html.count('class="mg-a"') + html.count('class="mg-card"'), attendu + ajoutes)
+        # « Tous les domaines » est rendu en simple lien fléché (mg-tous), sans sous-titre (Fabien, 2026-10-19)
+        self.assertEqual(html.count('class="mg-a"') + html.count('class="mg-card"') + html.count('class="mg-tous"'), attendu + ajoutes)
+        self.assertIn('<span class="lien">Voir tous les domaines</span>', html)
 
     def test_memes_libelles_dans_le_meme_ordre(self):
         titres = [l["titre"] for p in self.m["panneaux"].values() for c in p["colonnes"] for l in c["liens"]]

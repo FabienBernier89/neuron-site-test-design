@@ -72,6 +72,8 @@ ul{padding:0;list-style:none}
 .mg-card b{display:block;margin-top:12px;font:500 14px/20px var(--sans);color:var(--ink)}
 .mg-t{display:block;margin-top:4px;font:400 13px/18px var(--sans);color:var(--muted)}
 .mg-card .lien{margin-top:8px;font-size:14px;line-height:20px}
+.mg-tous{display:block;padding:8px 12px}
+.mg-tous .lien{font-size:14px;line-height:20px}
 .mg-voile{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:40}
 
 /* Menu mobile */
