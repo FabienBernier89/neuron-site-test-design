@@ -134,6 +134,31 @@ VISUELS = {
         '<div class="u-it u-a1"><span>Agence externe seule</span></div>'
         '<div class="u-it u-a2"><span>Outil générique seul</span></div>'
         '<div class="u-it u-a3"><span>Corrext</span></div></div>'),
+    # Pages de paires : le terme de la carte « Autres paires » de la V1, dans ses deux langues (recherche puis équivalent)
+    "fr/traduction/francais-allemand/": (
+        f'<div class="u-q">{LOUPE}<b>société anonyme</b></div>'
+        '<div class="u-list u-art"><div class="u-it u-a1"><small>FR</small><span>société anonyme</span></div>'
+        '<div class="u-it u-a2 u-eq"><small>DE</small><span>Aktiengesellschaft</span></div></div>'),
+    "fr/traduction/allemand-anglais/": (
+        f'<div class="u-q">{LOUPE}<b>Bankgeheimnis</b></div>'
+        '<div class="u-list u-art"><div class="u-it u-a1"><small>DE</small><span>Bankgeheimnis</span></div>'
+        '<div class="u-it u-a2 u-eq"><small>EN</small><span>banking secrecy</span></div></div>'),
+    "fr/traduction/italien-francais/": (
+        f'<div class="u-q">{LOUPE}<b>ricorso</b></div>'
+        '<div class="u-list u-art"><div class="u-it u-a1"><small>IT</small><span>ricorso</span></div>'
+        '<div class="u-it u-a2 u-eq"><small>FR</small><span>recours</span></div></div>'),
+    "fr/traduction/allemand-francais/": (
+        f'<div class="u-q">{LOUPE}<b>Verzugszins</b></div>'
+        '<div class="u-list u-art"><div class="u-it u-a1"><small>DE</small><span>Verzugszins</span></div>'
+        '<div class="u-it u-a2 u-eq"><small>FR</small><span>intérêt moratoire</span></div></div>'),
+    "fr/traduction/francais-anglais/": (
+        f'<div class="u-q">{LOUPE}<b>tribunal arbitral</b></div>'
+        '<div class="u-list u-art"><div class="u-it u-a1"><small>FR</small><span>tribunal arbitral</span></div>'
+        '<div class="u-it u-a2 u-eq"><small>EN</small><span>arbitral tribunal</span></div></div>'),
+    "fr/traduction/anglais-allemand/": (
+        f'<div class="u-q">{LOUPE}<b>arbitral tribunal</b></div>'
+        '<div class="u-list u-art"><div class="u-it u-a1"><small>EN</small><span>arbitral tribunal</span></div>'
+        '<div class="u-it u-a2 u-eq"><small>DE</small><span>Schiedsgericht</span></div></div>'),
     # Guide « organiser la traduction dans un cabinet » : les trois rôles (§ 3), puis les six indicateurs (§ 7)
     "fr/ressources/guides/organiser-traduction-cabinet/": (
         '<div class="u-lbl">Qui décide quoi</div><div class="u-list u-chk">'
@@ -217,7 +242,10 @@ def traiter(html, page):
         # Toujours trois cartes de même taille, sur une ligne (retour de Fabien du 2026-10-15 : pas de 2 x 2)
         # deux cartes (les guides) : deux grandes colonnes ; une seule (la publication des études) : visuel et texte côte à côte
         grille = {1: "fx-g fx-g1", 2: "fx-g fx-g2"}.get(len(cartes), "fx-g")
-        sortie.append(f'<div class="{grille}">' + "".join(_carte(c) for c in cartes[:3]) + "</div>")
+        # trois cartes par rangée ; quatre ou cinq cartes : les trois premières (jamais de 2 x 2) ; un multiple de
+        # trois (index des paires, 6 cartes) : toutes, sur plusieurs rangées, pour ne perdre aucun lien
+        garde = cartes if len(cartes) > 3 and len(cartes) % 3 == 0 else cartes[:3]
+        sortie.append(f'<div class="{grille}">' + "".join(_carte(c) for c in garde) + "</div>")
         pos = fin
     if not sortie:
         return html

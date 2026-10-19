@@ -1,0 +1,6 @@
+{"lot": "O", "entrees": [
+  {"cle": "paire.chnell.titre", "page": "*", "texte": "Chaque terme, dans le texte officiel", "statut": "a_relire", "source": "Modèle des pages de paires validé par Fabien le 2026-10-19 (page Allemand vers français d'abord). Titre du bloc CHnell des pages de paires."},
+  {"cle": "paire.convertit", "page": "*", "texte": "Ce qui se convertit", "statut": "a_relire", "source": "Modèle des pages de paires validé par Fabien le 2026-10-19 (page Allemand vers français d'abord). Intertitre du bloc « en pratique »."},
+  {"cle": "paire.garantit", "page": "*", "texte": "Ce que Corrext garantit sur cette paire", "statut": "a_relire", "source": "Modèle des pages de paires validé par Fabien le 2026-10-19 (page Allemand vers français d'abord). Intertitre du bloc « en pratique »."},
+  {"cle": "allemand-francais.chnell.intro", "page": "traduction/allemand-francais/", "texte": "Surlignez un mot allemand : CHnell affiche la version française du même texte fédéral, avec sa source.", "statut": "a_relire", "source": "Modèle des pages de paires validé par Fabien le 2026-10-19 (page Allemand vers français d'abord). Démo CHnell publiée (Verzugszins, allemand vers français, sources Feuille fédérale et fedlex.admin.ch)."}
+]}

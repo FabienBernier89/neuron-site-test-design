@@ -231,3 +231,7 @@
 .u-lbl em{font-style:normal}  /* balisage repris de la page source, sans italique */
 .u-lg4 .u-it{justify-content:flex-start;gap:12px}
 .u-lg4 .u-it small{flex:0 0 62px}
+
+/* Cartes des paires de langues : le terme, puis son équivalent mis en avant */
+.u-it.u-eq{background:var(--u-soft)}
+.u-art .u-it small{font-size:11px;color:var(--u-mut)}

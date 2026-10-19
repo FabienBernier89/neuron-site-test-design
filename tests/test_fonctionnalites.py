@@ -22,7 +22,9 @@ class TestCartesFonctionnalites(unittest.TestCase):
     def test_toujours_trois_cartes(self):
         for c, h in self.pages.items():
             for bloc in re.findall(r'<div class="fx-g">(.*?)</div>\s*</div></section>', h, re.S):
-                self.assertEqual(bloc.count('<a class="fx"'), 3, c)
+                # trois cartes par rangée, jamais de 2 x 2 : 3, ou un multiple de 3 (index des paires : 6, aucun lien perdu)
+                n = bloc.count('<a class="fx"')
+                self.assertTrue(n >= 3 and n % 3 == 0, (c, n))
         self.assertNotIn("fx-n", (self.sortie / "assets/site.css").read_text(encoding="utf-8"))
 
     def test_blocs_convertis(self):

@@ -1,0 +1,57 @@
+/* Pages de paires de langues (outils/composer/paire_modele.py), modèle validé par Fabien le 2026-10-19 */
+
+/* Équivalences : la paire de la page en avant, les autres langues en retrait */
+.pa-tw{overflow-x:auto}
+.pa-t{width:100%;border-collapse:collapse;font:400 14px/21px var(--sans)}
+.pa-t thead th{padding:12px 16px;text-align:left;border-bottom:2px solid var(--ink);font:600 13px/18px var(--sans);color:var(--ink)}
+.pa-t thead th.pa-m{font-weight:500;color:var(--muted)}
+.pa-t tbody th,.pa-t td{padding:14px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.pa-t .pa-s{font:600 15px/22px var(--sans);color:var(--ink)}
+.pa-t .pa-c{background:rgba(49,123,255,.06);font:600 15px/22px var(--sans);color:var(--ink)}
+.pa-t td.pa-m{color:var(--muted)}
+.pa-ref{display:inline-block;padding:2px 9px;border-radius:999px;background:var(--tile);font:500 12px/18px var(--sans);color:var(--ink);white-space:nowrap}
+
+/* En pratique : le principe en encart */
+.pa-pr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:40px;align-items:center;padding:28px 32px;border-radius:10px;background:var(--tile)}
+.pa-pq{font:400 26px/34px var(--serif);color:var(--ink)}
+.pa-pr p:not(.pa-pq){font:400 15px/24px var(--sans);color:var(--text)}
+.pa-st{margin:40px 0 14px;font:600 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* Ce qui se convertit : l'exemple en grand en tête de carte */
+.pa-cv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.pa-cv > div{padding:22px 20px;border-radius:10px;background:var(--tile)}
+.pa-ex{display:flex;align-items:center;gap:10px;margin-bottom:18px;font:600 26px/32px var(--num);letter-spacing:-.01em;color:var(--muted)}
+.pa-ex i{display:inline-grid;color:var(--muted)}
+.pa-ex i svg{width:18px;height:18px}
+.pa-ex span{color:#0b6e47}
+.pa-cv h3,.pa-gr h3{font:600 15px/22px var(--sans);color:var(--ink)}
+.pa-cv p:not(.pa-ex),.pa-gr p{margin-top:6px;font:400 14px/22px var(--sans);color:var(--text)}
+
+/* Ce que Corrext garantit : tuiles à icône */
+.pa-gr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pa-gr > div{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;padding:20px;border:1px solid var(--line);border-radius:10px}
+.pa-ic{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;color:#fff;background:linear-gradient(140deg,#4f8dff 0%,#2c4fd8 55%,#1b2f8f 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.pa-ic svg{width:20px;height:20px}
+
+/* Situations : icône et contexte de la V1 */
+.pa-sg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pa-si{padding:24px;border-radius:10px;background:var(--tile)}
+.pa-sc{display:flex;align-items:center;gap:12px;margin-bottom:16px;font:500 13px/18px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.pa-ic-l{width:36px;height:36px}.pa-ic-l svg{width:18px;height:18px}
+.pa-si h3{font:600 17px/24px var(--sans);color:var(--ink)}
+.pa-si p:last-child{margin-top:8px;font:400 14px/22px var(--sans);color:var(--text)}
+
+:root[data-theme="sombre"] .pa-ex span{color:#8ee6b4}
+@media (prefers-color-scheme:dark){:root[data-theme="systeme"] .pa-ex span{color:#8ee6b4}}
+
+@media (max-width:1023px){.pa-cv{grid-template-columns:repeat(2,minmax(0,1fr))}.pa-gr,.pa-sg{grid-template-columns:minmax(0,1fr)}.pa-pr{grid-template-columns:minmax(0,1fr);gap:16px}}
+@media (max-width:640px){
+  .pa-cv{grid-template-columns:minmax(0,1fr)}
+  .pa-t thead{display:none}
+  .pa-t tr{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+  .pa-t tbody th,.pa-t td{padding:6px 12px 6px 0;border:0}
+  .pa-t tbody th{padding-top:14px}
+  .pa-t .pa-c{padding-left:8px;border-radius:6px}
+  .pa-t tbody th::before,.pa-t td::before{content:attr(data-m);display:block;font:500 11px/16px var(--sans);color:var(--muted)}
+  .pa-t td.pa-r{grid-column:1/-1;padding-bottom:14px}
+}
