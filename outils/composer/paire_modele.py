@@ -40,7 +40,7 @@ def icone(nom):
 def chnell(P, cfg):
     """CHnell en contexte : titre, phrase propre à la paire, scène animée (sim « chnell »)."""
     cle = P.split("/")[1]
-    return section(h2(esc(texte("paire.chnell.titre")), "dans le texte officiel") + f'<p class="intro">{esc(texte(f"{cle}.chnell.intro"))}</p>'
+    return section(h2(esc(texte("paire.chnell.titre")), "dans le texte officiel") + f'<p class="intro intro-l">{esc(texte(f"{cle}.chnell.intro"))}</p>'
                    + scene(1176, 470, V.vue_chnell(cfg["lookup"]), sim="chnell", curseur=False, titre="CHnell", label="Fast lookup CHnell"))
 
 
