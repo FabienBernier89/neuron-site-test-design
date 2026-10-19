@@ -1,0 +1,78 @@
+"""Modèle des pages métier (outils/composer/metier_modele.py), choisi par Fabien le 2026-10-19 sur Cabinets d'avocats :
+ordre des blocs, gains présentés comme des maxima, avis fictif toujours signalé, onglets des outils accessibles."""
+import re
+import subprocess
+import sys
+import unittest
+from pathlib import Path
+
+ICI = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ICI))
+import build  # noqa: E402
+from outils import contenus  # noqa: E402
+
+PAGES = ["solutions/cabinets-avocats/"]
+
+
+def texte_brut(h):
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", h)).replace("&#x27;", "'").replace("&amp;", "&").strip()
+
+
+class TestMetier(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        subprocess.run([sys.executable, str(ICI / "build.py")], check=True, cwd=ICI, stdout=subprocess.DEVNULL)
+        cls.h = {p: build.chemin_page(p).read_text(encoding="utf-8") for p in PAGES}
+
+    def main(self, p):
+        h = self.h[p]
+        return h[h.index('<main id="main">'):h.index("</main>")]
+
+    def test_ordre_des_blocs(self):
+        reperes = ["Demander une démo", "Adopté par les professionnels", contenus.texte("metier.gains.titre"), contenus.texte("metier.avis.fictif"),
+                   contenus.texte("metier.sa.titre"), 'role="tablist"', "Du document qu'on lit", "Sécurité et souveraineté des données",
+                   contenus.texte("metier.deploiement.titre"), "Questions fréquentes", 'class="sec cta"']
+        for p in PAGES:
+            m = self.main(p).replace("&#x27;", "'").replace("<em>", "").replace("</em>", "")
+            pos = [m.find(r) for r in reperes]
+            self.assertNotIn(-1, pos, (p, [r for r, x in zip(reperes, pos) if x < 0]))
+            self.assertEqual(pos, sorted(pos), p)
+            # l'ancienne trame (problème, preuves, exemple de cas d'usage) a disparu
+            for ancien in ('class="sec tr-pb"', 'class="sec tr-pv"', "temo-ex", "Exemple de cas d'usage"):
+                self.assertNotIn(ancien, m, (p, ancien))
+
+    def test_gains_en_maxima(self):
+        for p in PAGES:
+            slug = p.split("/")[1]
+            m = texte_brut(self.main(p))
+            self.assertIn(contenus.texte("metier.gains.note"), m)
+            pourcents = [contenus.texte(f"{slug}.gains.{i}.n") for i in (1, 2, 3)]
+            for n in pourcents:
+                # un pourcentage d'économies n'est jamais une moyenne : « jusqu'à », sauf le 100 % du traitement en Suisse
+                self.assertTrue(n.startswith("jusqu'à") or n == "100 %", n)
+
+    def test_avis_fictif_toujours_signale(self):
+        """Tant qu'un avis est fictif (statut a_remplacer), il porte la mention et l'attribut data-avis-fictif."""
+        for p in PAGES:
+            slug = p.split("/")[1]
+            m = self.main(p)
+            fictif = [contenus.entree(f"{slug}.avis.{c}")["statut"] == "a_remplacer" for c in ("texte", "nom", "fonction")]
+            if any(fictif):
+                self.assertIn("data-avis-fictif", m, p)
+                self.assertIn(contenus.texte("metier.avis.fictif"), texte_brut(m), p)
+
+    def test_onglets_accessibles(self):
+        for p in PAGES:
+            m = self.main(p)
+            tabs = re.findall(r'<button type="button" role="tab" id="([^"]+)" aria-controls="([^"]+)" aria-selected="(true|false)"', m)
+            self.assertEqual(len(tabs), 3, p)
+            self.assertEqual([s for _, _, s in tabs].count("true"), 1, p)
+            for t, c, s in tabs:
+                self.assertRegex(m, rf'role="tabpanel" id="{c}" aria-labelledby="{t}"' + ("" if s == "true" else " hidden"), (p, c))
+        js = (ICI / "assets/global/metier.js").read_text(encoding="utf-8")
+        for x in ("aria-selected", "ArrowDown", "hidden"):
+            self.assertIn(x, js)
+
+
+if __name__ == "__main__":
+    unittest.main()

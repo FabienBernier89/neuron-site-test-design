@@ -1611,6 +1611,73 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
   .lm-cc{padding:24px}
 }
 
+/* composants/metier.css */
+/* Pages métier (outils/composer/metier_modele.py), modèle choisi par Fabien le 2026-10-19 (A1, B1, C1, D2) */
+.mt-demo{margin-left:20px;font-size:15px}
+.mt-l{font:600 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* Gains chiffrés : trois chiffres en ligne */
+.mt-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:32px;border-top:1px solid var(--line)}
+.mt-g > div{padding:32px 32px 8px 0}
+.mt-g > div + div{padding-left:32px;border-left:1px solid var(--line)}
+.mt-n{font:400 56px/60px var(--serif);color:var(--accent-d);white-space:nowrap}
+.mt-g .mt-l{margin-top:16px}
+.mt-g > div > p:last-child{margin-top:8px;font:400 15px/24px var(--sans);color:var(--text)}
+.mt-note{margin-top:20px;font:400 13px/20px var(--sans);color:var(--muted)}
+
+/* Avis client : citation centrée */
+.mt-av{max-width:880px;margin:0 auto;text-align:center}
+.mt-fict{display:inline-block;padding:2px 10px;border-radius:999px;background:#fff4d6;color:#7a5200;font:600 12px/18px var(--sans)}
+.mt-av blockquote::before{content:"« "}
+.mt-av blockquote::after{content:" »"}
+.mt-av blockquote{margin-top:20px;font:400 34px/46px var(--serif);color:var(--ink)}
+.mt-av figcaption{display:inline-flex;align-items:center;gap:14px;margin-top:28px;text-align:left;font:400 14px/20px var(--sans);color:var(--muted)}
+.mt-av b{display:block;font:600 15px/22px var(--sans);color:var(--ink)}
+.mt-ph{flex:none;width:48px;height:48px;border-radius:50%;background:var(--tile);border:1px solid var(--line)}
+
+/* Sans Corrext, avec Corrext : tableau face à face */
+.mt-sa{margin-top:32px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.mt-sa > div{display:grid;grid-template-columns:1fr 1fr}
+.mt-sa > div + div{border-top:1px solid var(--line)}
+.mt-sah span{padding:14px 24px;font:600 13px/18px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.mt-sah span + span{color:#0b6e47;background:rgba(16,140,90,.06)}
+.mt-sa p{display:flex;gap:12px;padding:18px 24px;font:400 15px/23px var(--sans)}
+.mt-sans{color:var(--muted)}
+.mt-avec{background:rgba(16,140,90,.06);color:var(--ink);font-weight:500 !important}
+.mt-sa i{display:grid;flex:none;place-items:center;width:22px;height:22px;margin-top:1px;border-radius:50%}
+.mt-sa i svg{width:12px;height:12px}
+.mt-sans i{background:rgba(155,28,28,.1);color:#9b1c1c}
+.mt-avec i{background:rgba(16,140,90,.14);color:#0b6e47}
+
+/* Les outils : onglets à gauche, grand écran animé à droite */
+.mt-ou{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:center;margin-top:40px}
+.mt-o{border-left:3px solid var(--line)}
+.mt-o.on{border-left-color:var(--accent-d);background:var(--tile)}
+.mt-o button{display:block;width:100%;padding:20px 24px 0;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.mt-o:not(.on) button{padding-bottom:20px}
+.mt-ot{display:block;margin-top:8px;font:400 22px/30px var(--serif);color:var(--muted)}
+.mt-o.on .mt-ot{font-size:28px;line-height:36px;color:var(--ink)}
+.mt-od{display:none;padding:0 24px 22px}
+.mt-o.on .mt-od{display:block}
+.mt-od p{margin-top:12px;font:400 16px/26px var(--sans);color:var(--text)}
+.mt-od .lien{margin-top:14px}
+.mt-o button:focus-visible{outline:2px solid var(--accent-d);outline-offset:-2px}
+
+:root[data-theme="sombre"] .mt-fict{background:rgba(255,214,120,.16);color:#ffd88a}
+@media (prefers-color-scheme:dark){:root[data-theme="systeme"] .mt-fict{background:rgba(255,214,120,.16);color:#ffd88a}}
+@media (max-width:1023px){.mt-ou{grid-template-columns:minmax(0,1fr);gap:24px}}
+@media (max-width:767px){
+  .mt-g{grid-template-columns:minmax(0,1fr)}
+  .mt-g > div,.mt-g > div + div{padding:24px 0 4px;border-left:0}
+  .mt-g > div + div{border-top:1px solid var(--line)}
+  .mt-n{font-size:44px;line-height:50px}
+  .mt-av blockquote{font-size:24px;line-height:34px}
+  .mt-sa > div{grid-template-columns:minmax(0,1fr)}
+  .mt-sah{display:none !important}
+  .mt-sa p{padding:14px 18px}
+  .mt-demo{display:inline-flex;margin:16px 0 0}
+}
+
 /* composants/newsletter.css */
 /* Encart d'inscription à la lettre d'information (lot E) : une carte « tuile » avant le pied de page */
 .nl-s{padding:48px 0}

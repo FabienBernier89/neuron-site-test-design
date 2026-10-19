@@ -26,3 +26,11 @@ def texte(cle, dossier=None):
         if e["cle"] == cle:
             return e["texte"]
     raise KeyError(cle)
+
+
+def entree(cle, dossier=None):
+    """Entrée complète (texte, statut, source…). KeyError si la clé n'existe pas."""
+    for e in toutes(dossier):
+        if e["cle"] == cle:
+            return e
+    raise KeyError(cle)

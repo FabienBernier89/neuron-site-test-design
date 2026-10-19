@@ -17,6 +17,11 @@ import build  # noqa: E402
 from outils import contenus  # noqa: E402
 
 SECTEURS = ["cabinets-avocats", "banques-finance", "directions-juridiques", "fiduciaires-conseil", "autorites-administration", "editeurs-legaltech"]
+# Pages métier passées au nouveau modèle (Fabien, 2026-10-19, tests/test_metier.py) : hors de la trame du lot D, sauf
+# les appels à l'action (secteur et suivi), vérifiés ici pour toutes les pages secteur
+MODELE_METIER = ["cabinets-avocats"]
+SECTEURS_TOUS = SECTEURS
+SECTEURS = [s for s in SECTEURS if s not in MODELE_METIER]
 PAGES = [""] + [f"solutions/{s}/" for s in SECTEURS]
 JSON_D = ICI / "src/data/contenus-v2/D-trame.json"
 CSS = ICI / "assets/composants/trame.css"
@@ -80,7 +85,7 @@ class TestTrame(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         subprocess.run([sys.executable, str(ICI / "build.py")], check=True, cwd=ICI, stdout=subprocess.DEVNULL)
-        cls.h = {p: build.chemin_page(p).read_text(encoding="utf-8") for p in PAGES}
+        cls.h = {p: build.chemin_page(p).read_text(encoding="utf-8") for p in PAGES + [f"solutions/{s}/" for s in MODELE_METIER]}
 
     # Test du plan (tâche D, étape 1)
     def ordre(self, h):
@@ -139,7 +144,7 @@ class TestTrame(unittest.TestCase):
 
     # Appels à l'action des pages secteur (lot C : ?secteur= et data-suivi)
     def test_appels_a_l_action_des_pages_secteur(self):
-        for s in SECTEURS:
+        for s in SECTEURS_TOUS:
             h = self.h[f"solutions/{s}/"]
             main = h[h.index('<main id="main">'):h.index("</main>")]
             boutons = re.findall(r'<a class="btn"[^>]*>', main)
@@ -205,7 +210,7 @@ class TestTrame(unittest.TestCase):
             for x in HORS_LISTE:
                 self.assertNotIn(x, lu, p)
             self.assertNotRegex(pv, r"<img\b")  # aucun logo : aucune marque de distinction dans assets/img
-        self.assertEqual(avec_bandeau, ["", "solutions/cabinets-avocats/"])
+        self.assertEqual(avec_bandeau, [""])
         for p in avec_bandeau:
             lu = texte_brut(dict(sections(self.h[p]))["tr-pv"])
             for nom in ("15 millions", "Kickstart Innovation 2024"):

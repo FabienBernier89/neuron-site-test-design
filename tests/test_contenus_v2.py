@@ -22,7 +22,7 @@ class TestContenusV2(unittest.TestCase):
         self.assertEqual(len(cles), len(set(cles)))
         for x in self.e:
             self.assertTrue(x["texte"].strip(), x["cle"])
-            self.assertIn(x["statut"], ("a_relire", "valide"), x["cle"])
+            self.assertIn(x["statut"], ("a_relire", "valide", "a_remplacer"), x["cle"])  # a_remplacer : emplacement fictif (avis client)
             self.assertTrue(x.get("source"), x["cle"])
 
     def test_regles_de_marque(self):
