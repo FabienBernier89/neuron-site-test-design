@@ -25,7 +25,7 @@ OK = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="
       'stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>')
 TRAIT = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" '
          'aria-hidden="true"><path d="M7 12h10"/></svg>')
-STATUTS = {"cmp-y": ("y", OK), "cmp-p": ("p", "½"), "cmp-n": ("n", TRAIT)}
+STATUTS = {"cmp-y": ("y", OK), "cmp-p": ("p", "½"), "cmp-n": ("n", TRAIT), "cmp-na": ("na", "")}  # na : critère non comparé
 ICONES = {
     "lieu": '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
     "terme": '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M9 8h7M9 12h5"/>',
@@ -144,14 +144,17 @@ def tableau(t, cfg, k):
     for tr in blocs(bloc(tab, "tbody"), "tr"):
         cellules = []
         for td in blocs(tr, "td"):
-            cls, ic = STATUTS[re.search(r'class="(cmp-[ynp])"', td).group(1)]
-            cellules.append((cls, ic, brut(re.sub(r'<span class="cmp-[ynp]"[^>]*></span>', "", interne(td)).strip())))
+            st = re.search(r'class="(cmp-(?:na|[ynp]))"', td)
+            cls, ic = STATUTS[st.group(1)] if st else STATUTS["cmp-na"]
+            cellules.append((cls, ic, brut(re.sub(r'<span class="cmp-(?:na|[ynp])"[^>]*></span>', "", interne(td)).strip())))
         lignes.append((txt(bloc(tr, "th")), cellules))
-    assert sorted(i for _, idx in cfg["groupes"] for i in idx) == list(range(len(lignes))), "chaque critère dans un seul thème"
+    groupes = cfg["groupes"] or [(None, tuple(range(len(lignes))))]
+    assert sorted(i for _, idx in groupes for i in idx) == list(range(len(lignes))), "chaque critère dans un seul thème"
     derniere = len(noms) - 1  # Corrext, colonne teintée
     corps = ""
-    for g, idx in cfg["groupes"]:
-        corps += f'<tr class="cp-g"><th colspan="{len(noms) + 1}" scope="colgroup">{k("cmp.groupe." + g)}</th></tr>'
+    for g, idx in groupes:
+        if g:
+            corps += f'<tr class="cp-g"><th colspan="{len(noms) + 1}" scope="colgroup">{k("cmp.groupe." + g)}</th></tr>'
         for i in idx:
             crit, cel = lignes[i]
             corps += f'<tr><th scope="row">{crit}</th>' + "".join(
@@ -162,9 +165,13 @@ def tableau(t, cfg, k):
     leg = "".join(f'<span><span class="cp-st {STATUTS[c][0]}">{STATUTS[c][1]}</span>{txt(x)}</span>'
                   for c, x in re.findall(r'<span><span class="(cmp-[ynp])"[^>]*></span>(.*?)</span>', bloc(cp, "div", "cmp-legend"), re.S))
     titre = txt(bloc(cp, "h2"))
-    return section(h2(titre, accent(titre, ("deux côtés", "d'un dossier", "document signé"))) + f'<p class="intro">{brut(bloc(cp, "p", "compare-note"))}</p>'
+    note = blocs(cp, "p", "compare-note") or blocs(bloc(cp, "div", "sec-head"), "p")
+    liens_t = blocs(cp, "div", "cmp-links")
+    suite = ('<p class="cp-tl">' + "".join(f'<a class="lien" href="{re.search(r"href=\"([^\"]+)\"", a).group(1)}">{txt(a)}</a>'
+                                            for a in blocs(liens_t[0], "a")) + "</p>") if liens_t else ""
+    return section(h2(titre, accent(titre, ("deux côtés", "d'un dossier", "document signé", "un tableau"))) + f'<p class="intro">{brut(note[0])}</p>'
                    f'<div class="cp-tw"><table class="cp-t cp-t{len(noms)}"><thead><tr><th></th>{tete}</tr></thead>'
-                   f'<tbody>{corps}</tbody></table></div><p class="cp-leg">{leg}</p>'
+                   f'<tbody>{corps}</tbody></table></div><p class="cp-leg">{leg}</p>{suite}'
                    f'<p class="legende">{brut(bloc(cp, "p", "cmp-mention"))}</p>', ident="tableau")
 
 
@@ -328,6 +335,70 @@ def composer(P):
     print(f"{P} écrite")
 
 
+# Page générale des comparatifs (comparatif/), adaptée au même modèle (demande de Fabien du 2026-10-19)
+HUB = {"cle": "comparatif", "groupes": None}
+METHODE_IC = ["comparons", "pas", "autres", "corrext", "exemples", "date"]
+ICONES.update({
+    "comparons": '<path d="M20 6 9 17l-5-5"/>',
+    "pas": '<circle cx="12" cy="12" r="9"/><path d="M8 12h8"/>',
+    "autres": '<path d="M12 3v18M5 7h14M7 7l-3 7h6zM17 7l-3 7h6z"/>',
+    "corrext": '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>',
+    "exemples": '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
+    "date": '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/>',
+})
+
+
+def composer_hub():
+    P = "comparatif/"
+    k = lambda c: esc(texte(f"comparatif.{c}"))
+    t = liens(charger(P), P)
+    th = bloc(t, "section", "thero")
+    h1 = bloc(th, "h1")
+    out = [hero(txt(bloc(h1, "em")), txt(re.sub(r"<em>.*?</em>", "", h1, flags=re.S)), brut(bloc(th, "p", "lead")), ("Demander une démo", C))]
+    # Trois comparaisons : cartes reliées, illustrées par outils/post/fonctionnalites.py
+    ft_ = bloc(t, "section", "cph-feats")
+    tete = bloc(ft_, "div", "sec-head")
+    cartes = []
+    for f in blocs(ft_, "div", "feature"):
+        lien = bloc(f, "a", "feat-link")
+        href = re.search(r'href="\{\{ROOT\}\}([^"]+)"', lien).group(1)
+        h3 = bloc(f, "h3")
+        cartes.append(f'<a href="{{{{ROOT}}}}{href}"><b>{txt(bloc(h3, "span", "pn")).rstrip(".")}</b><p>{brut(blocs(bloc(f, "div", "feat-txt"), "p")[0])}</p>'
+                      '<span class="lien">Lire le comparatif</span></a>')  # libellé court et identique (cartes « Les autres comparatifs » de la V1)
+    titre = txt(bloc(tete, "h2"))
+    out.append(section(h2(titre, accent(titre, ("questions différentes",))) + f'<p class="intro">{brut(bloc(tete, "p"))}</p>'
+                       '<div class="cd">' + "".join(cartes) + "</div>"))
+    # Notre méthode : la promesse et les liens à gauche, les six engagements en liste à icônes à droite
+    m = bloc(t, "section", "cph-method")
+    lead = bloc(m, "div", "facts-lead")
+    faits = blocs(m, "div", "fact")
+    assert len(faits) == len(METHODE_IC), len(faits)
+    liste = "".join(f'<li>{icone(ic)}<div><b>{txt(bloc(x, "b"))}</b><p>{brut(re.sub(r"<small>.*?</small>", "", bloc(x, "p"), flags=re.S))}</p>'
+                    + "".join(f"<small>{txt(sm)}</small>" for sm in blocs(x, "small")) + "</div></li>" for x, ic in zip(faits, METHODE_IC))
+    liens_m = "".join(f'<a class="lien" href="{re.search(r"href=\"([^\"]+)\"", a).group(1)}">{txt(a)}</a>' for a in blocs(bloc(lead, "div", "links"), "a"))
+    out.append(section(f'<div class="cp-mt"><div class="cp-mt-g">{h2(txt(bloc(lead, "h2")))}<p>{brut(bloc(lead, "p"))}</p>'
+                       f'<p class="cp-mt-l">{liens_m}</p></div><ul class="cp-mt-d">{liste}</ul></div>', ident="methode"))
+    # Le tableau de synthèse, au style des pages comparatives
+    out.append(tableau(t, HUB, k).replace('id="tableau"', 'id="synthese"', 1))
+    out.append(autres_pour_aller_plus_loin(t))
+    out.append(faq_section(t))
+    out.append(cta_section(t, "La meilleure comparaison"))
+    ecrire(P, entete_existant(P), "".join(out))
+    print(f"{P} écrite")
+
+
+def autres_pour_aller_plus_loin(t):
+    """« Pour aller plus loin » de la page générale : cartes reliées aux pages outils (illustrées par le post)."""
+    vn = bloc(t, "section", "vn")
+    cartes = []
+    for a in blocs(vn, "a", "vn-card"):
+        href = re.search(r'href="\{\{ROOT\}\}([^"]+)"', a).group(1)
+        cartes.append(f'<a href="{{{{ROOT}}}}{href}"><b>{txt(bloc(a, "b", "vn-t"))}</b><p>{brut(bloc(a, "span", "vn-d"))}</p>'
+                      f'<span class="lien">{txt(re.sub(r"<svg.*?</svg>", "", bloc(a, "em"), flags=re.S))}</span></a>')
+    return section(h2(txt(bloc(vn, "h2"))) + '<div class="cd">' + "".join(cartes) + "</div>")
+
+
 if __name__ == "__main__":
     for p in PAGES:
         composer(p)
+    composer_hub()

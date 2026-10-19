@@ -53,6 +53,22 @@
 .cp-gv p{font:400 16px/26px var(--sans);color:var(--text)}
 .cp-gv .cp-gv-l{margin-top:16px}
 
+/* Page générale : critère non comparé, liens vers les tableaux complets */
+.cp-st.na{display:none}
+.cp-t td:has(.cp-st.na){color:var(--muted);font-style:italic}
+.cp-tl{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:20px}
+
+/* Page générale : la méthode, promesse et liens à gauche, six engagements à droite */
+.cp-mt{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:64px;align-items:start}
+.cp-mt-g{position:sticky;top:96px}
+.cp-mt-g p{font:400 16px/26px var(--sans);color:var(--text)}
+.cp-mt-l{display:grid;gap:10px;margin-top:20px}
+.cp-mt-d{display:grid;gap:22px;margin:0;padding:0;list-style:none}
+.cp-mt-d li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px}
+.cp-mt-d b{display:block;font:600 16px/24px var(--sans);color:var(--ink)}
+.cp-mt-d p{margin-top:4px;font:400 14px/22px var(--sans);color:var(--text)}
+.cp-mt-d small{display:block;margin-top:6px;font:500 13px/18px var(--sans);color:var(--muted)}
+
 /* Réponse seule (page agence) : la phrase en grand, la suite à côté */
 .cp-eb.cp-eb1{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end;padding:32px;border-radius:10px;background:var(--tile)}
 .cp-eb1 .cp-s{margin-top:0}
@@ -91,7 +107,7 @@
 .cp-lv-s{margin-top:2px;font:500 13px/18px var(--sans);color:var(--muted)}
 .cp-lv p:last-child{margin-top:10px;font:400 14px/22px var(--sans);color:var(--text)}
 
-@media (max-width:1023px){.cp-eb,.cp-gv,.cp-eb.cp-eb1{grid-template-columns:minmax(0,1fr);gap:24px}.cp-mg,.cp-lvg{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:1023px){.cp-mt{grid-template-columns:minmax(0,1fr);gap:32px}.cp-mt-g{position:static}.cp-eb,.cp-gv,.cp-eb.cp-eb1{grid-template-columns:minmax(0,1fr);gap:24px}.cp-mg,.cp-lvg{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){.cp-xg{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){
   .cp-fb{grid-template-columns:minmax(0,1fr)}.cp-q{font-size:22px;line-height:30px}
