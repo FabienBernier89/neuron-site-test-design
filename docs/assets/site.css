@@ -1512,6 +1512,47 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 @media (max-width:1023px){.gr{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.gr{grid-template-columns:minmax(0,1fr)}.gr-c.gr-l{grid-column:auto;padding:24px}.gr-l h3{font-size:18px;line-height:26px}}
 
+/* composants/langues.css */
+/* Page Langues et formats (outils/composer/p_langues.py), refonte validée par Fabien le 2026-10-20 */
+
+/* Les langues : quatre natives en évidence, les autres en liste compacte */
+.lf-ns{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:28px}
+.lf-n{padding:22px 20px;border-radius:10px;background:var(--tile);border-top:3px solid var(--accent-d)}
+.lf-nb b{display:block;font:400 24px/30px var(--serif);color:var(--ink)}
+.lf-nb span{display:block;margin-top:2px;font:600 12px/16px var(--sans);letter-spacing:.04em;color:var(--accent-d)}
+.lf-n > p:last-child{margin-top:12px;font:400 14px/22px var(--sans);color:var(--text)}
+.lf-i{max-width:720px;font:400 15px/24px var(--sans);color:var(--text)}
+.lf-l{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 40px;margin:20px 0 0;padding:0;list-style:none}
+.lf-l li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font:500 14px/20px var(--sans);color:var(--ink)}
+.lf-l li span{font-weight:400;color:var(--muted);text-align:right}
+.lf-note{max-width:720px;margin-top:20px;font:400 13px/20px var(--sans);color:var(--muted)}
+
+/* Les conventions suisses : trois règles en rangées, puis le tableau des sigles */
+.lf-r{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:32px}
+.lf-r > div{padding-top:18px;border-top:2px solid var(--accent-d)}
+.lf-r h3{font:400 22px/28px var(--serif);color:var(--ink)}
+.lf-r p{margin-top:10px;font:400 14.5px/23px var(--sans);color:var(--text)}
+.lf-s{margin-top:48px}
+.lf-sh{font:400 24px/32px var(--serif);color:var(--ink)}
+.lf-s .lf-i{margin-top:8px}
+.lf-s .pa-tw{margin-top:20px}
+.lf-lien{margin-top:24px}
+
+/* Les formats : chiffres en tuiles, l'écran du dépôt et la mise en page conservée, les faits restants */
+.lf-m{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:40px}
+.lf-m h3{font:400 26px/34px var(--serif);color:var(--ink)}
+.lf-m h3 + p{margin-top:12px;font:400 15px/24px var(--sans);color:var(--text)}
+.lf-ck{display:grid;gap:10px;margin:18px 0 0;padding:0;list-style:none}
+.lf-ck li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;font:400 14.5px/22px var(--sans);color:var(--ink)}
+.lf-m .lien{margin-top:18px}
+.lf-f{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:40px}
+.lf-f > div{padding:22px 20px;border-radius:10px;background:var(--tile)}
+.lf-f h3{font:600 15px/22px var(--sans);color:var(--ink)}
+.lf-f p{margin-top:8px;font:400 14px/22px var(--sans);color:var(--text)}
+
+@media (max-width:1023px){.lf-ns{grid-template-columns:repeat(2,minmax(0,1fr))}.lf-l{grid-template-columns:repeat(2,minmax(0,1fr))}.lf-m{grid-template-columns:minmax(0,1fr);gap:28px}.lf-f{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:767px){.lf-ns,.lf-r{grid-template-columns:minmax(0,1fr)}.lf-r{gap:24px}.lf-l{grid-template-columns:minmax(0,1fr)}}
+
 /* composants/legal.css */
 /* Pages légales : sommaire collant à gauche, texte courant en 16 px, espace sous l'en-tête.
    Mesures relevées sur une page légale de référence (sommaire 256 px, colonne de 768 px, 64 px d'écart), couleurs Neur.on. */
