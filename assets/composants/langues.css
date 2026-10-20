@@ -16,7 +16,7 @@
 .lf-r > div{padding-top:18px;border-top:2px solid var(--accent-d)}
 .lf-r h3{font:400 22px/28px var(--serif);color:var(--ink)}
 .lf-r p{margin-top:10px;font:400 14.5px/23px var(--sans);color:var(--text)}
-.lf-s{margin-top:48px}
+.lf-s{margin-top:96px}  /* espace avant les sigles (Fabien, 2026-10-20) */
 .lf-sh{font:400 24px/32px var(--serif);color:var(--ink)}
 .lf-s .lf-i{margin-top:8px}
 .lf-s .pa-tw{margin-top:20px}
