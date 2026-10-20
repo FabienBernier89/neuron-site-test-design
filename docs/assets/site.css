@@ -1732,6 +1732,52 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
   .nl-f .btn{width:100%}
 }
 
+/* composants/niveaux.css */
+/* Page Niveaux de qualité (outils/composer/p_niveaux.py), refonte validée par Fabien le 2026-10-20 */
+
+/* Les quatre niveaux en escalier : la barre monte d'un niveau à l'autre (intervention humaine, délai, coût) */
+.nq-prog{display:flex;align-items:center;gap:12px;margin-top:28px;font:600 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.nq-prog::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,rgba(49,123,255,.15),var(--accent-d))}
+.nq-esc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:8px;margin-top:16px}
+.nq-h{display:flex;flex-direction:column;justify-content:flex-end;padding:0 20px 16px;border-radius:10px 10px 0 0;background:var(--tile)}
+.nq-bar{display:block;height:calc(var(--n) * 18px + 6px);margin:0 -20px 18px;border-radius:10px 10px 0 0;
+  background:linear-gradient(180deg,var(--accent-d),rgba(49,123,255,.35));opacity:calc(.35 + var(--n) * .16)}
+.nq-n{font:600 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--accent-d)}
+.nq-h h3{margin-top:6px;font:400 22px/28px var(--serif);color:var(--ink)}
+.nq-u{padding:0 20px 18px;background:var(--tile);font:400 14px/22px var(--sans);color:var(--text)}
+.nq-c{padding:16px 20px;border-top:1px solid var(--line);background:var(--tile)}
+.nq-c[style*="row:4"]{border-radius:0 0 10px 10px}
+.nq-l{font:600 12px/16px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.nq-c p:last-child{margin-top:6px;font:400 13.5px/21px var(--sans);color:var(--text)}
+.nq-gr{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:32px}
+
+/* Dans l'application : écran de devis, et les trois libellés exacts de l'étape Quotes */
+.nq-app{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;align-items:start;margin-top:32px}
+.nq-sc{position:sticky;top:96px}
+.nq-d + .nq-d{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+.nq-dl{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--tile);border:1px solid var(--line);font:600 13px/20px var(--sans);color:var(--ink)}
+.nq-d blockquote{margin-top:10px;padding-left:12px;border-left:2px solid var(--line);font:400 12.5px/19px var(--sans);font-style:italic;color:var(--muted)}
+.nq-d p:last-child{margin-top:10px;font:400 14.5px/23px var(--sans);color:var(--text)}
+
+/* Quel niveau pour quel document : pastille du niveau, mention principale puis précision */
+.nq-pill{display:inline-grid;place-items:center;min-width:26px;height:22px;margin-right:8px;padding:0 7px;border-radius:999px;background:var(--navy);
+  color:#fff;font:600 11.5px/1 var(--num);white-space:nowrap;vertical-align:1px}
+.nq-x b{display:block;font-weight:600;color:var(--ink)}
+.nq-x span{display:block;margin-top:2px;color:var(--muted)}
+
+@media (max-width:1023px){
+  .nq-esc{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:8px}
+  .nq-esc > *{grid-column:auto !important;grid-row:auto !important}
+  .nq-app{grid-template-columns:minmax(0,1fr);gap:28px}
+  .nq-sc{position:static}
+}
+@media (max-width:767px){
+  .nq-esc{display:block}
+  .nq-h{margin-top:12px;padding-top:0}
+  .nq-c[style*="row:4"]{border-radius:0}
+  .nq-gr{grid-template-columns:minmax(0,1fr)}
+}
+
 /* composants/paire.css */
 /* Pages de paires de langues (outils/composer/paire_modele.py), modèle validé par Fabien le 2026-10-19 */
 
