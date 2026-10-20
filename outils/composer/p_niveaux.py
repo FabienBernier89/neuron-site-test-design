@@ -1,6 +1,5 @@
 """Page Niveaux de qualité, refonte validée par Fabien le 2026-10-20 (audit du même jour) :
-hero ; les quatre niveaux en escalier (usage, qui intervient, où il se commande et ce qui est livré : les tuiles et les
-neuf faits « où / qui » de la V1 réunis) ; dans l'application (écran de devis animé et les trois libellés exacts de
+hero ; les quatre niveaux en escalier épuré (nom, usage, qui, où : proposition A du 2026-10-20) ; dans l'application (écran de devis animé et les trois libellés exacts de
 l'étape Quotes) ; le tableau « quel niveau pour quel document » réparé ; devis, délai et confidentialité en bandeau ;
 pour aller plus loin ; FAQ ; appel. Textes de la V1 mot pour mot ; nouveau libellé dans contenus-v2/R-niveaux.json.
 
@@ -14,26 +13,20 @@ t = liens(charger(P), P)
 
 
 def escalier():
+    """Les quatre niveaux en escalier épuré (proposition A, Fabien, 2026-10-20) : nom, usage en une ligne, et deux
+    repères courts, qui intervient et où il se commande. Le détail reste dans le tableau et la FAQ."""
     lv = bloc(t, "section", "levels")
-    niv = [(brut(bloc(x, "h3")), brut(bloc(x, "p"))) for x in blocs(lv, "div", "lev")]
+    noms = [brut(bloc(x, "h3")) for x in blocs(lv, "div", "lev")]
+    k = lambda c: esc(texte(f"niveaux.{c}"))
+    marches = "".join(
+        f'<div><span class="nq-bar" style="--n:{i}"></span><div class="nq-b"><p class="nq-n">Niveau {i}</p><h3>{nom}</h3>'
+        f'<p class="nq-u">{k(f"{i}.usage")}</p><dl><dt>{k("libelle.qui")}</dt><dd>{k(f"{i}.qui")}</dd>'
+        f'<dt>{k("libelle.ou")}</dt><dd>{k(f"{i}.ou")}</dd></dl></div></div>' for i, nom in enumerate(noms, 1))
     fa = bloc(t, "section", "facts")
     F = {txt(bloc(f, "b")): brut(bloc(f, "p")) for f in blocs(fa, "div", "fact")}
-    # (libellé de la V1, colonne de départ, nombre de colonnes, ligne de la grille)
-    cellules = [("Niveau 1 · qui", 1, 1, 3), ("Niveau 2 · qui", 2, 1, 3), ("Niveau 3 · qui", 3, 1, 3), ("Niveau 4 · qui", 4, 1, 3),
-                ("Niveau 1 · où", 1, 1, 4), ("Niveaux 2 et 3 · où", 2, 2, 4), ("Niveau 4 · où", 4, 1, 4)]
-    utilises = {c for c, *_ in cellules} | {"Devis et délai", "Confidentialité"}
-    assert utilises == set(F), f"faits de la V1 non rangés : {set(F) ^ utilises}"
-    g = ""
-    for i, (titre, texte_) in enumerate(niv, 1):
-        g += (f'<div class="nq-h" style="grid-column:{i};grid-row:1"><span class="nq-bar" style="--n:{i}"></span>'
-              f'<p class="nq-n">Niveau {i}</p><h3>{titre}</h3></div>'
-              f'<p class="nq-u" style="grid-column:{i};grid-row:2">{texte_}</p>')
-        for lib, col, span, row in cellules:
-            if col == i:
-                g += f'<div class="nq-c" style="grid-column:{col} / span {span};grid-row:{row}"><p class="nq-l">{lib}</p><p>{F[lib]}</p></div>'
-    gr = "".join(f'<div><span class="pa-ck">{COCHE}</span><div><h3>{k}</h3><p>{F[k]}</p></div></div>' for k in ("Devis et délai", "Confidentialité"))
+    gr = "".join(f'<div><span class="pa-ck">{COCHE}</span><div><h3>{c}</h3><p>{F[c]}</p></div></div>' for c in ("Devis et délai", "Confidentialité"))
     return section(h2(txt(bloc(lv, "h2")), "une autorité") + f'<p class="intro">{brut(bloc(bloc(lv, "div", "sec-head"), "p"))}</p>'
-                   + f'<p class="nq-prog">{esc(texte("niveaux.progression"))}</p><div class="nq-esc">{g}</div>'
+                   + f'<p class="nq-prog">{k("progression")}</p><div class="nq-esc">{marches}</div>'
                    + f'<div class="pa-gr nq-gr">{gr}</div>')
 
 
