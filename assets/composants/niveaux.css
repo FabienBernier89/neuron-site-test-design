@@ -14,7 +14,12 @@
 .nq-b dt{font:600 11px/20px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .nq-b dd{margin:0;color:var(--ink)}
 .nq-l{font:600 12px/16px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
-.nq-gr{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:32px}
+/* Devis et délai, confidentialité : promesse en titre au-dessus du texte de la V1 (proposition C) */
+.nq-pr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px;margin-top:48px}
+.nq-pr > div{padding-top:20px;border-top:2px solid var(--accent-d)}
+.nq-pk{font:600 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--accent-d)}
+.nq-pr h3{margin-top:10px;font:400 28px/36px var(--serif);color:var(--ink)}
+.nq-pr p:last-child{margin-top:12px;font:400 15px/24px var(--sans);color:var(--text)}
 
 /* Dans l'application : écran de devis, et les trois libellés exacts de l'étape Quotes */
 .nq-app{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;align-items:start;margin-top:32px}
@@ -37,5 +42,6 @@
 }
 @media (max-width:767px){
   .nq-esc{grid-template-columns:minmax(0,1fr)}
-  .nq-gr{grid-template-columns:minmax(0,1fr)}
+  .nq-pr{grid-template-columns:minmax(0,1fr);gap:32px}
+  .nq-pr h3{font-size:24px;line-height:32px}
 }

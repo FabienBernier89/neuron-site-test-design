@@ -24,10 +24,12 @@ def escalier():
         f'<dt>{k("libelle.ou")}</dt><dd>{k(f"{i}.ou")}</dd></dl></div></div>' for i, nom in enumerate(noms, 1))
     fa = bloc(t, "section", "facts")
     F = {txt(bloc(f, "b")): brut(bloc(f, "p")) for f in blocs(fa, "div", "fact")}
-    gr = "".join(f'<div><span class="pa-ck">{COCHE}</span><div><h3>{c}</h3><p>{F[c]}</p></div></div>' for c in ("Devis et délai", "Confidentialité"))
+    # promesse en titre (proposition C, Fabien, 2026-10-20) : nom du fait, promesse courte, texte de la V1
+    gr = "".join(f'<div><p class="nq-pk">{c}</p><h3>{k(f"promesse.{cle}")}</h3><p>{F[c]}</p></div>'
+                 for c, cle in (("Devis et délai", "devis"), ("Confidentialité", "confidentialite")))
     return section(h2(txt(bloc(lv, "h2")), "une autorité") + f'<p class="intro">{brut(bloc(bloc(lv, "div", "sec-head"), "p"))}</p>'
                    + f'<p class="nq-prog">{k("progression")}</p><div class="nq-esc">{marches}</div>'
-                   + f'<div class="pa-gr nq-gr">{gr}</div>')
+                   + f'<div class="nq-pr">{gr}</div>')
 
 
 def application():
