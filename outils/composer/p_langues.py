@@ -1,5 +1,5 @@
 """Page Langues et formats, refonte validée par Fabien le 2026-10-20 (audit du même jour) :
-hero ; les langues en un bloc (les quatre natives en évidence, les autres en liste compacte, la note sur les moteurs) ;
+hero ; les langues en un bloc (les quatre natives en évidence, les autres en liste compacte) ;
 les conventions suisses (« Pourquoi traduire en Suisse » et le tableau des sigles réunis, sans doublon) ; les formats
 (chiffres en tuiles, écran animé du dépôt et « la mise en page revient comme elle est partie », faits courts) ;
 pour aller plus loin ; FAQ ; appel. Textes de la V1 mot pour mot ; chiffres des tuiles dans contenus-v2/R-niveaux.json.
@@ -27,8 +27,8 @@ def langues():
                      for li in blocs(al, "li") if 'class="nat"' not in li)
     return section(h2(txt(bloc(na, "h2")), "son droit") + f'<p class="intro">{brut(bloc(bloc(na, "div", "sec-head"), "p"))}</p>'
                    + f'<div class="lf-ns">{nat}</div>'
-                   + f'<p class="pa-st">{txt(bloc(al, "h2"))}</p><p class="lf-i">{brut(ps[0])}</p><ul class="lf-l">{autres}</ul>'
-                   + f'<p class="lf-note">{brut(ps[1])}</p>')
+                   + f'<p class="pa-st">{txt(bloc(al, "h2"))}</p><p class="lf-i">{brut(ps[0])}</p><ul class="lf-l">{autres}</ul>')
+    # note sur les moteurs hors des langues natives : retirée à la demande de Fabien (2026-10-20)
 
 
 def conventions():

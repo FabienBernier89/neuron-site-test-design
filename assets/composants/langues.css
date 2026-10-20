@@ -10,7 +10,6 @@
 .lf-l{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 40px;margin:20px 0 0;padding:0;list-style:none}
 .lf-l li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font:500 14px/20px var(--sans);color:var(--ink)}
 .lf-l li span{font-weight:400;color:var(--muted);text-align:right}
-.lf-note{max-width:720px;margin-top:20px;font:400 13px/20px var(--sans);color:var(--muted)}
 
 /* Les conventions suisses : trois règles en rangées, puis le tableau des sigles */
 .lf-r{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:32px}
