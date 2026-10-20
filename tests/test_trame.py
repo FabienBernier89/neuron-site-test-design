@@ -19,7 +19,7 @@ from outils import contenus  # noqa: E402
 SECTEURS = ["cabinets-avocats", "banques-finance", "directions-juridiques", "fiduciaires-conseil", "autorites-administration", "editeurs-legaltech"]
 # Pages métier passées au nouveau modèle (Fabien, 2026-10-19, tests/test_metier.py) : hors de la trame du lot D, sauf
 # les appels à l'action (secteur et suivi), vérifiés ici pour toutes les pages secteur
-MODELE_METIER = ["cabinets-avocats"]
+MODELE_METIER = ["cabinets-avocats", "banques-finance", "directions-juridiques", "fiduciaires-conseil", "autorites-administration", "editeurs-legaltech"]
 SECTEURS_TOUS = SECTEURS
 SECTEURS = [s for s in SECTEURS if s not in MODELE_METIER]
 PAGES = [""] + [f"solutions/{s}/" for s in SECTEURS]

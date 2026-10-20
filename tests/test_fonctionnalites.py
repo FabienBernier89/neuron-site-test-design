@@ -10,7 +10,10 @@ from tests import support  # noqa: E402
 from outils.post import fonctionnalites as F  # noqa: E402
 
 # Tous les libellés des mini-interfaces existent déjà dans les sources (V1 ou pages V2) : rien d'inventé
-SOURCES = [ICI.parent / "neuron/src/generators.py", ICI.parent / "neuron/src/partials/footer.html", ICI.parent / "neuron/src/partials/nav.html"] + sorted((ICI / "src/pages").rglob("index.html"))
+# Pages métier de la V1 publiée : leurs vignettes d'outils (libellés repris par les visuels) ne figurent plus dans les
+# pages métier de la V2 depuis leur nouveau modèle (Fabien, 2026-10-19)
+SOURCES = ([ICI.parent / "neuron/src/generators.py", ICI.parent / "neuron/src/partials/footer.html", ICI.parent / "neuron/src/partials/nav.html"]
+           + sorted((ICI / "src/pages").rglob("index.html")) + sorted((ICI.parent / "neuron/docs/fr/solutions").rglob("index.html")))
 
 
 class TestCartesFonctionnalites(unittest.TestCase):

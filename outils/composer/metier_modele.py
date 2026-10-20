@@ -22,9 +22,17 @@ def lien_demo(hero_html, href):
 def gains(slug):
     """Trois tuiles chiffrées, même composant que les chiffres de l'accueil (.tl, .n) ; la note des maxima dessous."""
     k = lambda c: esc(texte(f"{slug}.gains.{c}"))
-    titre = texte("metier.gains.titre")
-    return section(h2(titre, " ".join(titre.split()[-3:])) + tuiles([(k(f"{i}.n"), None, k(f"{i}.t")) for i in (1, 2, 3)], "tl")
-                   + f'<p class="mt-note">{esc(texte("metier.gains.note"))}</p>')
+    try:
+        titre = texte(f"{slug}.gains.titre")  # titre propre à la page (Éditeurs : des chiffres du moteur, pas des économies)
+    except KeyError:
+        titre = texte("metier.gains.titre")
+    note = any(texte(f"{slug}.gains.{i}.n").endswith("%") and texte(f"{slug}.gains.{i}.n") != "100 %" for i in (1, 2, 3))
+
+    def chiffre(n):  # « 30 Langues » : unité accolée en petit, comme les chiffres de l'accueil
+        m = re.fullmatch(r"([\d.,]+(?: M\+)?) ([A-Za-zÀ-ÿ]+)", n)
+        return f'{m.group(1)} <span class="u">{m.group(2)}</span>' if m else n
+    return section(h2(titre, " ".join(titre.split()[-3:])) + tuiles([(chiffre(k(f"{i}.n")), None, k(f"{i}.t")) for i in (1, 2, 3)], "tl")
+                   + (f'<p class="mt-note">{esc(texte("metier.gains.note"))}</p>' if note else ""))
 
 
 def avis(slug):
@@ -45,15 +53,16 @@ def sans_avec(slug, n=5):
 
 
 def outils(slug, items, accent):
-    """D2 : onglets à gauche (usage, outil, texte, lien), grand écran animé à droite. items : (titre, texte, href, scène)."""
+    """D2 : onglets à gauche (usage, outil, texte, lien), grand écran animé à droite.
+    items : (titre, texte, href, scène, libellé du lien)."""
     titre = texte(f"{slug}.outils.titre")
     onglets, panneaux = "", ""
-    for i, (nom, txt_, href, sc) in enumerate(items, 1):
+    for i, (nom, txt_, href, sc, lien_) in enumerate(items, 1):
         actif = i == 1
         onglets += (f'<div class="mt-o{" on" if actif else ""}"><button type="button" role="tab" id="mt-t{i}" aria-controls="mt-p{i}" '
                     f'aria-selected="{"true" if actif else "false"}"><span class="mt-l">{esc(texte(f"{slug}.outils.{i}.usage"))}</span>'
                     f'<span class="mt-ot">{nom}</span></button><div class="mt-od"><p>{txt_}</p>'
-                    f'<a class="lien" href="{href}">Découvrir l\'outil</a></div></div>')
+                    f'<a class="lien" href="{href}">{lien_}</a></div></div>')
         panneaux += f'<div class="mt-p" role="tabpanel" id="mt-p{i}" aria-labelledby="mt-t{i}"{"" if actif else " hidden"}>{sc}</div>'
     return section(h2(titre, accent) + f'<div class="mt-ou" data-onglets><div class="mt-os" role="tablist">{onglets}</div>'
                    f'<div class="mt-ps">{panneaux}</div></div>')
@@ -73,3 +82,18 @@ def deploiement(items):
     """Cartes reliées : démo, centre d'aide, API (libellés et sous-titres du méga-menu)."""
     titre = texte("metier.deploiement.titre")
     return section(h2(titre, "sans complexité") + cartes([(b, p, (lien_, href), "") for b, p, lien_, href in items]))
+
+
+ETAPES_SECURITE = "autorites-administration"  # page de la V1 dont le bloc de gouvernance porte les trois faits de sécurité
+
+
+def securite(slug, accent, texte_v1):
+    """Bloc sécurité d'une page dont la V1 n'en a pas : titre propre à la page (contenus), texte de la V1 de la page,
+    les trois faits de sécurité du site (hébergement, traitement en Suisse, sur site) et le lien vers la page Sécurité."""
+    P = f"solutions/{ETAPES_SECURITE}/"
+    gv = bloc(liens(charger(P), P), "section", "gov")
+    pas = [(brut(bloc(x, "b")), brut(re.sub(r"<b>.*?</b>", "", interne(x), flags=re.S)), "") for x in blocs(bloc(gv, "div", "gov-steps"), "span") if "<b>" in x[:12]]
+    pas[-1] = (pas[-1][0], pas[-1][1], "bt-l")
+    a = blocs(bloc(gv, "div", "gov-box"), "a", "feat-link")[0]
+    g = {"titre": h2(texte(f"{slug}.securite.titre"), accent, "h3s"), "texte": texte_v1, "lien": (txt(a), re.search(r'href="([^"]+)"', a).group(1))}
+    return section(bento(g, pas))
