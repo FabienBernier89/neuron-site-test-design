@@ -25,7 +25,7 @@ class TestTarifs(unittest.TestCase):
     def test_tarifs_avant_ressources_dans_le_menu(self):
         nav = re.search(r'<nav class="hd-nav".*?</nav>', self.h, re.S).group(0)
         libelles = [re.sub(r"<[^>]+>", "", x).strip() for x in re.findall(r'class="hd-i[^"]*"[^>]*>(.*?)</(?:a|button)>', nav, re.S)]
-        self.assertEqual(libelles, ["Corrext", "Solutions", "LexMachina", "Tarifs", "Ressources"])
+        self.assertEqual(libelles, ["Produit", "Solutions", "LexMachina", "Tarifs", "Ressources"])  # « Corrext » renommé « Produit » (2026-10-20)
         self.assertIn('class="hd-i actif" href="../../fr/tarifs/">Tarifs</a>', self.h)
         mobile = self.h[self.h.index('id="mm"'):]
         self.assertLess(mobile.index(">Tarifs</a>"), mobile.index(">Ressources"))

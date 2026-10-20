@@ -1821,6 +1821,19 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
   .nq-pr h3{font-size:24px;line-height:32px}
 }
 
+/* composants/outils.css */
+/* Pages outils (outils/composer/outil_modele.py) : onglets compacts groupés, à peu près à la hauteur de l'écran */
+.ot-cp{align-items:start}
+.ot-gh{margin:0 0 6px;padding-top:4px;font:600 11.5px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ot-gh ~ .ot-gh{margin-top:18px}
+.ot-cp .mt-o button{padding:9px 20px}
+.ot-cp .mt-o.on button{padding:16px 20px 0}
+.ot-cp .mt-ot{margin-top:0;font-size:18px;line-height:26px}
+.ot-cp .mt-o.on .mt-ot{font-size:22px;line-height:30px}
+.ot-cp .mt-od p{margin-top:8px;font-size:14.5px;line-height:23px}
+.ot-cp .mt-od .lien{margin-top:10px}
+.ot-ch{margin-top:48px}
+
 /* composants/paire.css */
 /* Pages de paires de langues (outils/composer/paire_modele.py), modèle validé par Fabien le 2026-10-19 */
 

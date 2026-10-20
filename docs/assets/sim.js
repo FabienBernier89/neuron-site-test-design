@@ -714,6 +714,23 @@
     return jouer(l, etapes.concat(finir(cr)));
   };
 
+  /* Rephrasing seul (page Traduction texte et document) : réécriture par défaut, puis style Simplified */
+  SCENES.reph = function (l) {
+    var cr = l.q(".cr"), out = l.q(".cr-rout"), set = l.q(".cr-set"), chip = l.q(".cr-chip.on");
+    var def = out.getAttribute("data-def"), retenue = out.innerHTML;
+    return jouer(l, [
+      function () { set.classList.remove("regle", "ouvert"); chip.classList.remove("on"); out.innerHTML = ""; return l.attendre(900); },
+      function () { return l.mots(out, def, true); },
+      fixe(1800),
+      function () { return l.appui(set).then(function () { set.classList.add("ouvert"); return l.attendre(700); }); },
+      function () { chip.classList.add("on"); return l.attendre(700); },
+      function () { return l.appui(l.q(".cr-btn-p")); },
+      function () { set.classList.remove("ouvert"); set.classList.add("regle"); out.classList.add("sort"); return l.attendre(450); },
+      function () { return l.mots(out, retenue, true); },
+      fixe(2800)
+    ].concat(finir(cr)));
+  };
+
   /* Intégration par API (page Éditeurs) : le paragraphe est sélectionné, l'appel part, la réponse arrive, la traduction
      s'insère dans le document, puis l'alternative d'un autre moteur s'affiche en commentaire, l'écart surligné */
   SCENES.api = function (l) {

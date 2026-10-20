@@ -146,6 +146,7 @@ def appliquer_ajouts(nav, pied, ajouts=None):
       entrée. Sans « apres », il termine la colonne indiquée (0 par défaut).
     - pied : {titre de colonne: [{"apres", "href", "texte"}]}, même règle d'insertion.
     - entrees : [{"avant", "cle", "libelle", "href"}] : lien du menu principal, placé avant l'entrée de clé « avant ».
+    - libelles : {clé d'entrée: nouveau libellé} : renomme une entrée du menu principal (ordinateur et mobile).
     Une entrée mal adressée (panneau, colonne, « apres » ou titre inconnus) lève ValueError."""
     if ajouts is None:
         ajouts = json.loads(AJOUTS.read_text(encoding="utf-8"))
@@ -172,6 +173,11 @@ def appliquer_ajouts(nav, pied, ajouts=None):
         if i is None:
             raise ValueError(f"entrée de menu : « avant » introuvable : {a['avant']}")
         nav["entrees"].insert(i, {"cle": a["cle"], "libelle": a["libelle"], "href": a["href"]})
+    for cle, libelle in ajouts.get("libelles", {}).items():
+        e = next((x for x in nav["entrees"] if x["cle"] == cle), None)
+        if e is None:
+            raise ValueError(f"entrée de menu à renommer introuvable : {cle}")
+        e["libelle"] = libelle
     for titre, items in ajouts.get("pied", {}).items():
         colonne = next((c for c in pied["colonnes"] if c["titre"] == titre), None)
         if colonne is None:

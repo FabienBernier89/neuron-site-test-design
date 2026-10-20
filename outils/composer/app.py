@@ -153,6 +153,21 @@ def ecran_outil(notice_titre, notice_texte, hint_ill, hint_titre, hint_texte, fi
                 f'<span class="bar"><i></i></span></span><span class="cr-st"><span class="s0">{d["run"]}</span><span class="s1">{d["fin"]}</span></span></div>')
     cfg = ('<div class="cr-cfg"><div><label>Translation engine</label>' + selecteur("LexMachina") + '</div>'
            '<div><label>Translation target language</label>' + selecteur("French") + '</div></div>')
+    work_reph = vue_reph(reph)
+    vues = ('<div class="cr-vues">'
+            '<div class="cr-vue on" data-t="0">' + travail() + '<div class="cr-bas">' + encart(hint_ill, hint_titre, hint_texte) + alternatives() + '</div></div>'
+            '<div class="cr-vue cr-upl" data-t="1">' + cfg + depot(fichier) + '</div>'
+            '<div class="cr-vue cr-upl" data-t="2">' + depot(pdf) + '</div>'
+            f'<div class="cr-vue" data-t="3">{work_reph}</div>'
+            '</div>')
+    return ('<div class="cr cr-outil" data-terme-co="intérêts moratoires" data-terme-lb="secret bancaire">'
+            + barre_haut() + avis(notice_titre, notice_texte)
+            + '<div class="cr-corps">' + onglets() + vues + '</div></div>')
+
+
+def vue_reph(reph, src="", sortie="", style=""):
+    """Espace Rephrasing de la démo publiée : réglages (styles, options), source et réécriture ; vide par défaut,
+    rempli pour un écran seul (src, sortie en HTML avec <u>, style retenu)."""
     chips = "".join(f'<span class="cr-chip" data-s="{s}">{s}</span>' for s in reph["styles"])
     opts = "".join(f'<span class="cr-chip">{s}</span>' for s in reph["options"])
     pop = (f'<div class="cr-pop"><p class="cr-h5">Styles</p><div class="cr-chips">{chips}</div>'
@@ -165,15 +180,22 @@ def ecran_outil(notice_titre, notice_texte, hint_ill, hint_titre, hint_texte, fi
                   f'<div class="cr-pane cr-in" data-ph="{reph["ph"]}"><p class="cr-txt cr-rtxt"></p>'
                   f'<div class="cr-foot">{pied}<span class="cr-cnt cr-rcnt">0 / 5000</span></div></div>'
                   f'<div class="cr-pane cr-tgt"><p class="cr-out cr-rout"></p><span class="cr-ic cr-cp">{IC["copier"]}</span><div class="cr-foot">{pied}</div></div></div>')
-    vues = ('<div class="cr-vues">'
-            '<div class="cr-vue on" data-t="0">' + travail() + '<div class="cr-bas">' + encart(hint_ill, hint_titre, hint_texte) + alternatives() + '</div></div>'
-            '<div class="cr-vue cr-upl" data-t="1">' + cfg + depot(fichier) + '</div>'
-            '<div class="cr-vue cr-upl" data-t="2">' + depot(pdf) + '</div>'
-            f'<div class="cr-vue" data-t="3"><div class="cr-work">{barre_reph}{panes_reph}</div></div>'
-            '</div>')
-    return ('<div class="cr cr-outil" data-terme-co="intérêts moratoires" data-terme-lb="secret bancaire">'
-            + barre_haut() + avis(notice_titre, notice_texte)
-            + '<div class="cr-corps">' + onglets() + vues + '</div></div>')
+    if src:
+        panes_reph = (panes_reph.replace('<div class="cr-pane cr-in"', '<div class="cr-pane cr-in rempli"', 1)
+                      .replace('<p class="cr-txt cr-rtxt"></p>', f'<p class="cr-txt cr-rtxt">{e(src)}</p>', 1)
+                      # compteur laissé à « 0 / 5000 » : assets/sim.js le recalcule pour un panneau rempli
+                      .replace('<p class="cr-out cr-rout"></p>', f'<p class="cr-out cr-rout">{sortie}</p>', 1))
+    if style:
+        barre_reph = (barre_reph.replace(f'<span class="cr-chip" data-s="{style}">', f'<span class="cr-chip on" data-s="{style}">', 1)
+                      .replace('<span class="cr-sel cr-set">', '<span class="cr-sel cr-set regle">', 1))
+    return f'<div class="cr-work">{barre_reph}{panes_reph}</div>'
+
+
+def fragment_reph(reph, src, defaut, sortie, style):
+    """Onglet Rephrasing seul (page Traduction texte et document) : texte réécrit dans le style retenu ; la
+    réécriture par défaut (data-def) sert à l'animation (assets/sim.js, SCENES.reph)."""
+    vue = vue_reph(reph, src, sortie, style).replace('<p class="cr-out cr-rout">', f'<p class="cr-out cr-rout" data-def="{_h.escape(defaut)}">', 1)
+    return f'<div class="cr cr-frag cr-reph">{onglets(3, interrupteur=False)}{vue}</div>'
 
 
 def ecran_securite(notice_titre, notice_texte, src, out):

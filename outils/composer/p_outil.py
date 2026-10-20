@@ -1,4 +1,4 @@
-from commun import *
+from outil_modele import *
 P = "corrext/traduction-texte-et-document/"
 t = liens(charger(P), P)
 out = []
@@ -12,16 +12,29 @@ out.append(section(scene(1176, 680, ecran, sim="outil", curseur=False, label="D�
 fa = bloc(t, "section", "facts")
 lead = bloc(fa, "div", "facts-lead")
 faits = {txt(bloc(f, "b")): brut(bloc(f, "p")) for f in blocs(fa, "div", "fact")}
-SC = [("Text translation", "traduire", A.fragment_travail(), "Corrext"),
-      ("Moteurs", "sensible", A.fragment_moteurs(esc(EX["co"]["src"]), esc(EX["co"]["out"]["en"]["main"])), "Corrext"),
-      ("Alternatives", "alts", V.vue_alternatives("ldip", esc(EX["ldip"]["src"]), esc(EX["ldip"]["out"]["en"]["main"]), esc(EX["ldip"]["out"]["en"]["alt"][0]["t"]), EX["ldip"]["out"]["en"]["alt"][0]["e"], len(EX["ldip"]["out"]["en"]["alt"])), "Corrext"),
-      ("Langues", "langues", A.fragment_travail(esc(EX["lb"]["src"]), esc(EX["lb"]["out"]["en"]["main"])), "Corrext")]
-lignes = []
-for i, (cle, sim, ui, titre) in enumerate(SC):
-    lignes.append(ft(None, cle, faits.pop(cle), scene(764, 476 if sim == "alts" else 400, ui, sim=sim, titre=titre, curseur=False, label=cle), inv=i % 2 == 1))
-liens_lead = "".join(f'<a class="lien" href="{re.search(r"href=\"([^\"]+)\"", a).group(1)}">{txt(a)}</a> ' for a in blocs(lead, "a", "feat-link"))
-out.append(section(h2(txt(bloc(lead, "h2")), "exactement") + f'<p class="intro">{brut(bloc(lead, "p"))}</p>' + "".join(lignes)))
-out.append(section(tuiles([(None, k, v) for k, v in faits.items()], "tl txt t2")))
+# « Ce que fait… » : onglets compacts groupés, un écran animé de même taille par fonction, les faits chiffrables en
+# tuiles (proposition A retenue par Fabien le 2026-10-20, outils/composer/outil_modele.py)
+d = EX["ldip"]
+def sc(ui, sim, label):
+    return scene(764, 500, ui, sim=sim, titre="Corrext", curseur=False, label=label)
+groupes = [
+    (texte("outil.groupe.onglets"), [
+        ("Text translation", faits["Text translation"], sc(A.fragment_travail(), "traduire", "Text translation")),
+        ("File translation", faits["File translation"], sc(V.vue_fichiers(fichiers_demo("pdf", "fichier")), "lot", "File translation")),
+        ("PDF to Word", faits["PDF to Word"], sc(V.vue_fichiers(fichiers_demo("pdf")), "lot", "PDF to Word")),
+        ("Rephrasing", faits["Rephrasing"], sc(A.fragment_reph(T["reph"], EX["co"]["src"], EX["co"]["reph"]["def"], EX["co"]["reph"]["simp"], "Simplified"), "reph", "Rephrasing")),
+    ]),
+    (texte("outil.groupe.partout"), [
+        ("Alternatives", faits["Alternatives"], sc(V.vue_alternatives("ldip", esc(d["src"]), esc(d["out"]["en"]["main"]), esc(d["out"]["en"]["alt"][0]["t"]),
+                                                                       d["out"]["en"]["alt"][0]["e"], len(d["out"]["en"]["alt"])), "alts", "Alternatives")),
+        ("Fast Lookup", faits["Fast Lookup"], sc(V.vue_chnell(EX["co"]["lookup"]), "chnell", "Fast Lookup")),
+    ]),
+]
+k = lambda c: texte(f"traduction-texte-et-document.chiffre.{c}")
+ch = chiffres([(k("langues"), faits["Langues"]), (k("moteurs"), faits["Moteurs"]), (k("suisse"), faits["Confidentialité"])])
+assert {n for _, it in groupes for n, *_ in it} | {"Langues", "Moteurs", "Confidentialité"} == set(faits), "fait de la V1 non rangé"
+out.append(section(h2(txt(bloc(lead, "h2")), "exactement") + f'<p class="intro">{brut(bloc(lead, "p"))}</p>' + onglets_groupes(groupes)
+                   + f'<div class="ot-ch">{ch}</div>'))
 wh = bloc(t, "section", "who")
 out.append(section(h2(txt(bloc(wh, "h2")), "change la journée") + cartes([(brut(bloc(r, "h3")), brut(bloc(r, "p")), None, "") for r in blocs(wh, "article", "sc-row")])))
 gv = bloc(t, "section", "gov")
