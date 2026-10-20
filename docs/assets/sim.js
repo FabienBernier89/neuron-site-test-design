@@ -714,6 +714,21 @@
     return jouer(l, etapes.concat(finir(cr)));
   };
 
+  /* Intégration par API (page Éditeurs) : le paragraphe est sélectionné, l'appel part, la réponse arrive, la traduction
+     s'insère dans le document, puis l'alternative d'un autre moteur s'affiche en commentaire, l'écart surligné */
+  SCENES.api = function (l) {
+    var cr = l.q(".cr");
+    return jouer(l, [
+      function () { cr.classList.remove("sel", "envoye", "recu", "insere", "com"); return l.attendre(900); },
+      function () { cr.classList.add("sel"); return l.attendre(900); },
+      function () { cr.classList.add("envoye"); return l.attendre(1500); },
+      function () { cr.classList.add("recu"); return l.attendre(700); },
+      function () { cr.classList.add("insere"); return l.mots(".ap-out", l.q(".ap-out").innerHTML, true); },
+      fixe(900),
+      function () { cr.classList.add("com"); return l.attendre(4600); }
+    ].concat(finir(cr)));
+  };
+
   /* Analyse d'un fichier : dépôt, analyse, puis pages standard, langue et catégorie détectées */
   SCENES.analyse = function (l) {
     var cr = l.q(".cr"), c = l.q(".vw-carte");

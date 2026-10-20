@@ -97,3 +97,30 @@ def securite(slug, accent, texte_v1):
     a = blocs(bloc(gv, "div", "gov-box"), "a", "feat-link")[0]
     g = {"titre": h2(texte(f"{slug}.securite.titre"), accent, "h3s"), "texte": texte_v1, "lien": (txt(a), re.search(r'href="([^"]+)"', a).group(1))}
     return section(bento(g, pas))
+
+
+def ecran_api():
+    """Intégration par API (page Éditeurs, demande de Fabien du 2026-10-20) : un paragraphe d'un document Word part en
+    appel d'API, la traduction LexMachina s'insère dans le document et un commentaire propose l'alternative d'un autre
+    moteur, l'écart surligné. Appel : champs de l'illustration de la page API et on-premises de la V1 (« Illustration,
+    pas documentation ») ; traduction et alternative : sorties réelles relevées dans Corrext (exemple « lb »). L'écart entre
+    les deux sorties est surligné en bleu des deux côtés : aucune des deux n'est présentée comme fausse."""
+    d = EX["lb"]
+    sortie, alt = d["out"]["de"]["main"], d["out"]["de"]["alt"][0]
+    ecart_lm, ecart_alt = "beaufsichtigte Institut", "unterstellte Institut"
+    assert ecart_lm in sortie and ecart_alt in alt["t"]
+    champs = [("source_language", "fr"), ("target_language", "de"), ("engine", "lexmachina"), ("domain", "banking")]
+    req = "".join(f'<span class="ap-l" style="--i:{i}"><i>"{k}"</i>: <b>"{v}"</b>{"," if i < len(champs) - 1 else ""}</span>' for i, (k, v) in enumerate(champs))
+    # état final dans le HTML (mouvement réduit) ; assets/sim.js (SCENES.api) retire puis rejoue les étapes
+    return ('<div class="cr ap sel envoye recu insere com">'
+            '<div class="ap-rib"><span>Accueil</span><span>Insertion</span><span>Révision</span></div>'
+            '<div class="ap-c"><div class="ap-doc"><div class="ap-page">'
+            f'<p class="ap-src">{esc(d["src"])}</p>'
+            f'<p class="ap-out" lang="de">{A.marquer(sortie, [ecart_lm])}</p>'
+            f'<div class="ap-com"><p class="ap-ch">Alternatives<span>{esc(alt["e"])}</span></p>'
+            f'<p lang="de">{A.marquer(alt["t"], [ecart_alt])}</p></div>'
+            '</div></div>'
+            f'<div class="ap-api"><p class="ap-h"><b>POST</b> /v1/translate</p><div class="ap-req">{{{req}}}</div>'
+            f'<p class="ap-st"><i></i>{esc(texte("metier.api.statut"))}</p>'
+            '<p class="ap-note">Illustration, pas documentation.</p></div>'
+            '</div></div>')

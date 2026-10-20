@@ -1668,6 +1668,39 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
   .mt-demo{display:inline-flex;margin:16px 0 0}
 }
 
+/* Écran « intégration par API » (page Éditeurs) : document Word, appel d'API, traduction insérée, alternative en
+   commentaire. États pilotés par assets/sim.js (SCENES.api) : sel, envoye, recu, insere, com. */
+.ap{display:grid;grid-template-rows:auto minmax(0,1fr);height:100%;background:#f3f2f1;font:400 12.5px/18px var(--sans);color:#201f1e}
+.ap-rib{display:flex;gap:18px;padding:8px 16px;background:#fff;border-bottom:1px solid #e1dfdd;font-size:12px;color:#605e5c}
+.ap-c{display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0}
+.ap-doc{position:relative;min-height:0;padding:12px 22px 0;overflow:hidden}
+.ap-page{position:relative;height:100%;padding:18px 222px 18px 30px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.ap-src{padding:2px 3px;border-radius:2px;transition:background .3s}
+.ap.sel .ap-src{background:rgba(49,123,255,.14)}
+.ap-out{margin-top:10px;padding:0 3px;transition:opacity .4s}
+.ap mark{padding:0 2px;border-radius:2px;background:rgba(49,123,255,.16);color:inherit;transition:background .4s}
+.ap-com{position:absolute;top:18px;right:14px;width:192px;padding:10px 12px;border-left:3px solid var(--accent-d);border-radius:4px;background:#fff;
+  box-shadow:0 2px 8px rgba(0,0,0,.14);font-size:12px;line-height:18px;transition:opacity .4s,transform .4s}
+.ap-ch{display:flex;justify-content:space-between;gap:6px;margin-bottom:6px;font-weight:600;color:#201f1e}
+.ap-ch span{font-weight:500;color:#605e5c}
+.ap-api{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"h st" "req st" "req note";gap:2px 32px;padding:9px 22px 10px;
+  background:#0b1e46;color:#d9e2f5;font:400 11.5px/16px ui-monospace,SFMono-Regular,Menlo,monospace}
+.ap-h{grid-area:h}
+.ap-h b{margin-right:6px;padding:1px 6px;border-radius:3px;background:rgba(110,231,168,.18);color:#8ee6b4;font-weight:600}
+.ap-req{grid-area:req;display:flex;flex-direction:column;white-space:pre}
+.ap-l{padding-left:12px;transition:opacity .3s,transform .3s;transition-delay:calc(var(--i) * 160ms)}
+.ap-l i{font-style:normal;color:#9db7ff}
+.ap-l b{font-weight:400;color:#ffd88a}
+.ap-st{grid-area:st;display:flex;align-items:center;gap:8px;align-self:center;transition:opacity .3s}
+.ap-st i{width:8px;height:8px;border-radius:50%;background:#8ee6b4}
+.ap-note{grid-area:note;align-self:end;justify-self:end;font:400 11px/16px var(--sans);color:#8fa0c4}
+/* états de l'animation */
+.ap:not(.envoye) .ap-l{opacity:0;transform:translateY(4px)}
+.ap:not(.recu) .ap-st{opacity:0}
+.ap:not(.insere) .ap-out{opacity:0}
+.ap:not(.com) .ap-com{opacity:0;transform:translateX(10px)}
+.ap:not(.com) mark{background:transparent}
+
 /* composants/newsletter.css */
 /* Encart d'inscription à la lettre d'information (lot E) : une carte « tuile » avant le pied de page */
 .nl-s{padding:48px 0}

@@ -26,6 +26,7 @@ def ecrans():
                          curseur=False, label="Commande d'un extrait du registre du commerce certifié"),
         "alts": scene(764, 500, V.vue_alternatives("ldip", esc(d["src"]), esc(d["out"]["en"]["main"]), esc(d["out"]["en"]["alt"][0]["t"]), d["out"]["en"]["alt"][0]["e"],
                                                    len(d["out"]["en"]["alt"])), sim="alts", curseur=False, label="Alternatives attribuées à leur moteur"),
+        "api": scene(764, 500, ecran_api(), sim="api", titre="Microsoft Word", curseur=False, label="Traduction d'un paragraphe Word par appel d'API"),
         "lexmachina": scene(764, 500, ecran_corrige(), sim="corrige", titre=k_lm("compare.fenetre"), curseur=False, label=k_lm("compare.fenetre")),
     }
 
@@ -67,11 +68,11 @@ METIERS = {
         "accent_outils": "de l'administration", "gov": "traduction en ligne", "cta": "Voyez Corrext",
     },
     "editeurs-legaltech": {
-        "outils": [("LexMachina", "lexmachina"), ("Fast lookup CHnell", ("contrats", "clause pénale", "Konventionalstrafe")), ("Traduction texte et document", "alts")],
+        "outils": [("LexMachina", "lexmachina"), ("Fast lookup CHnell", ("contrats", "clause pénale", "Konventionalstrafe")), ("API et on-premises", "api")],
         "accent_outils": "vous intégrez", "gov": "moteur généraliste", "cta": "Cadrons",
         "securite": ("rester en Suisse", "Traitement en Suisse"),
-        # onglet « Plusieurs moteurs » : le texte du fait « Agnostique » de la V1 de la page
-        "textes": {"Traduction texte et document": "Agnostique"},
+        # onglet de l'intégration par API (Fabien, 2026-10-20) : le texte du fait « API REST » de la V1 de la page
+        "textes": {"API et on-premises": "API REST"},
     },
 }
 
