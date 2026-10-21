@@ -33,3 +33,29 @@
 .et-note b{color:var(--ink)}
 @media (max-width:1023px){.et-p{grid-template-columns:minmax(0,1fr);gap:24px}}
 @media (max-width:640px){.et-bar{grid-template-columns:minmax(0,1fr)}.et-bar button{padding:11px 14px;font-size:15px}}
+
+/* Fonctions par famille (outil_modele.familles) : barre des familles, fonctions sur deux colonnes */
+.et-bar button .pa-ic{width:28px;height:28px;border-radius:7px}
+.et-bar button .pa-ic svg{width:15px;height:15px}
+.fa-p[hidden]{display:none}
+.fa-p{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 40px;margin-top:28px}
+.fa-p > div{padding-top:14px;border-top:1px solid var(--line)}
+.fa-p h3{font:600 15px/22px var(--sans);color:var(--ink)}
+.fa-p p{margin-top:6px;font:400 14px/22px var(--sans);color:var(--text)}
+
+/* Parcours en frise compacte (outil_modele.frise) */
+.fr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 24px;margin:32px 0 0;padding:0;list-style:none}
+.fr li{padding-top:16px;border-top:2px solid var(--line)}
+.fr li.fr-p{border-top-color:var(--accent-d)}
+.fr-n{font:600 13px/16px var(--num);color:var(--accent-d)}
+.fr-ph{margin-left:8px;padding:1px 8px;border-radius:999px;background:var(--tile);font:600 10.5px/16px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.fr h3{margin-top:8px;font:600 15px/22px var(--sans);color:var(--ink)}
+.fr p{margin-top:4px;font:400 13px/20px var(--sans);color:var(--text)}
+
+/* Travailler dans Word : texte et lien vers la page Plugin Word, écran Word à côté */
+.ow{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:44px;align-items:center;margin-top:56px;padding:28px;border-radius:12px;background:var(--tile)}
+.ow h3{font:400 26px/34px var(--serif);color:var(--ink)}
+.ow p{margin-top:10px;font:400 14.5px/23px var(--sans);color:var(--text)}
+.ow .lien{margin-top:14px}
+@media (max-width:1023px){.fa-p{grid-template-columns:minmax(0,1fr)}.fr{grid-template-columns:repeat(2,minmax(0,1fr))}.ow{grid-template-columns:minmax(0,1fr);gap:24px}}
+@media (max-width:640px){.fr{grid-template-columns:minmax(0,1fr)}}

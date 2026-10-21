@@ -48,10 +48,11 @@ class TestPluginWord(unittest.TestCase):
         # une seule mention reliée par page : la seconde du hub (FAQ) reste du texte
         self.assertEqual(len(re.findall(r">[Pp]lugin MS Word natif</a>", hub)), 1)
         self.assertIn("Par un plugin MS Word natif ou une application", hub)
-        # page de l'éditeur de relecture : la première mention du complément Corrext, section « Travailler dans Word »
+        # page de l'éditeur de relecture : la carte « Travailler dans Word » (proposition D, Fabien, 2026-10-21) porte
+        # le lien vers la page du plugin ; la mention « complément Corrext » reste alors du texte
         editeur = build.chemin_page("corrext/editeur-de-relecture/").read_text(encoding="utf-8")
-        self.assertRegex(editeur, r'Ouvrez-le dans Word avec le <a class="pw-lien" href="(\.\./)+fr/corrext/plugin-word/">'
-                                  r'complément Corrext</a> :')
+        self.assertRegex(editeur, r'<a class="lien" href="(\.\./)+fr/corrext/plugin-word/">Voir le plugin Word</a>')
+        self.assertIn("Ouvrez-le dans Word avec le complément Corrext :", editeur)
         principal = editeur[editeur.index("<main"):editeur.index("</main>")]
         self.assertEqual(len(re.findall(r'href="(?:\.\./)+fr/corrext/plugin-word/"', principal)), 1)
 
