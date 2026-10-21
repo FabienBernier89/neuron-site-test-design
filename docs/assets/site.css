@@ -1905,6 +1905,16 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 @media (prefers-color-scheme:dark){:root[data-theme="systeme"] .pst-l span{background:transparent}}
 @media (max-width:767px){.dc{grid-template-columns:minmax(0,1fr);gap:24px}}
 
+/* Niveaux de certification en colonnes (Extraits du registre) */
+.nv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.nv-c{padding:24px;border:1px solid var(--line);border-radius:12px}
+.nv-n,.nv-l{font:600 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.nv-c h3{margin-top:6px;font:600 17px/24px var(--sans);color:var(--ink)}
+.nv-c p:not(.nv-n){font:400 14px/22px var(--sans);color:var(--text)}
+.nv-c .nv-l{margin-top:16px}
+.cta .cta-2{margin-left:24px}
+@media (max-width:767px){.nv{grid-template-columns:minmax(0,1fr)}.cta .cta-2{display:flex;width:max-content;margin:20px auto 0}}
+
 /* composants/paire.css */
 /* Pages de paires de langues (outils/composer/paire_modele.py), modèle validé par Fabien le 2026-10-19 */
 
