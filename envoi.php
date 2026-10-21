@@ -81,6 +81,8 @@ const PARCOURS = ['page_entree', 'page_origine', 'utm_source', 'utm_medium', 'ut
 // Champs obligatoires par type de formulaire.
 const OBLIGATOIRES = [
     'demo' => ['prenom', 'nom', 'email', 'organisation', 'fonction', 'consentement'],
+    // demande de documentation API (bouton de la page API et on-premises) : le formulaire de démo, autre objet
+    'documentation' => ['prenom', 'nom', 'email', 'organisation', 'fonction', 'consentement'],
     'newsletter' => ['email', 'consentement'],
 ];
 // Champs qui entrent dans un en-tête de l'e-mail (Reply-To) : aucun retour à la ligne admis.
@@ -89,7 +91,7 @@ const ENTETES = ['prenom', 'nom', 'email'];
 // ils permettraient d'écrire un nom affiché ou une seconde adresse dans l'en-tête Reply-To.
 const EMAIL_INTERDITS = '"<>,;';
 // Objet de l'e-mail par type de formulaire.
-const OBJETS = ['demo' => 'Demande de démo', 'newsletter' => 'Inscription newsletter'];
+const OBJETS = ['demo' => 'Demande de démo', 'documentation' => 'Demande de documentation API', 'newsletter' => 'Inscription newsletter'];
 // Cases « Langues concernées » : au plus autant de valeurs.
 const LANGUES_MAX = 10;
 
@@ -114,7 +116,7 @@ function nettoyer_entete(string $valeur): ?string
 
 /**
  * Contrôle d'une demande. $post : champs reçus ($_POST).
- * Renvoie ['ok' => bool, 'motif' => string, 'type' => 'demo'|'newsletter', 'donnees' => [nom => valeur]].
+ * Renvoie ['ok' => bool, 'motif' => string, 'type' => 'demo'|'documentation'|'newsletter', 'donnees' => [nom => valeur]].
  * Motifs d'échec : piege (champ piège rempli), type (type inconnu), delai (duree mal formée ou inférieure à
  * DELAI_MINIMAL ; duree absente ou vide, sans JavaScript, est admise), champ:<nom> (champ manquant, trop long, mal
  * formé ou contenant un retour à la ligne interdit ; e-mail contenant un caractère de EMAIL_INTERDITS).

@@ -36,6 +36,9 @@ $lettre = ['type' => 'newsletter', 'email' => 'anne.muster@exemple.ch', 'consent
 $r = valider($demande);
 verifier($r['ok'] && $r['type'] === 'demo' && $r['donnees']['organisation'] === 'Étude Muster', 'demande de démo complète acceptée');
 verifier(motif($lettre) === 'ok', 'inscription newsletter acceptée');
+$r = valider(['type' => 'documentation'] + $demande);
+verifier($r['ok'] && $r['type'] === 'documentation', 'demande de documentation API acceptée (mêmes champs que la démo)');
+verifier(motif(['type' => 'documentation', 'fonction' => ''] + $demande) === 'champ:fonction', 'fonction obligatoire aussi pour la documentation API');
 $r = valider(['langues' => ['allemand', 'francais'], 'secteur' => 'banques-finance'] + $demande);
 verifier($r['ok'] && $r['donnees']['langues'] === 'allemand, francais', 'langues cochées réunies');
 $r = valider(['message' => "Ligne 1\r\nLigne 2"] + $demande);
@@ -226,6 +229,8 @@ $r = valider(['message' => "Bonjour,\nune démo ?", 'utm_source' => 'linkedin', 
 $c = composer('demo', $r['donnees'], 'noreply@neur-on.ai');
 verifier(mb_decode_mimeheader($c['objet']) === 'Demande de démo', 'objet décodé : « Demande de démo »');
 verifier(mb_decode_mimeheader(composer('newsletter', valider($lettre)['donnees'], 'noreply@neur-on.ai')['objet']) === 'Inscription newsletter', 'objet décodé : « Inscription newsletter »');
+verifier(mb_decode_mimeheader(composer('documentation', valider(['type' => 'documentation'] + $demande)['donnees'], 'noreply@neur-on.ai')['objet']) === 'Demande de documentation API', 'objet décodé : « Demande de documentation API »');
+verifier(adresse_retour('documentation', 'ok') === '/fr/contact/merci/', 'retour documentation API : la page de remerciement par défaut');
 verifier(strpbrk(composer('newsletter', valider($lettre)['donnees'], 'noreply@neur-on.ai')['objet'], ' ') === false, 'objet entièrement encodé, même en ASCII');
 verifier(nom_sans_clair(reply_to($c['entetes']), 'Anne Muster') && strpos($c['entetes'], "\r\n <anne.muster@exemple.ch>") !== false, 'Reply-To : nom ASCII encodé lui aussi, e-mail du visiteur seul en clair');
 verifier(strpos($c['entetes'], 'From: =?UTF-8?B?' . base64_encode('Site Neur.on') . '?= <noreply@neur-on.ai>') !== false, 'From : nom encodé, expéditeur donné');

@@ -367,6 +367,14 @@ class TestEnvoiPhp(unittest.TestCase):
         self.assertNotIn("$_POST['t0']", self.source)  # plus de comparaison entre l'horloge du visiteur et celle du serveur
         self.assertNotRegex(self.source, r"\$/[a-z]*'")  # fin de chaîne par \z dans les expressions de validation
 
+    def test_type_documentation_api(self):
+        """Demande de documentation API (page API et on-premises, 2026-10-21) : mêmes champs obligatoires que la démo,
+        objet d'e-mail distinct."""
+        obl = re.search(r"const OBLIGATOIRES = \[(.*?)\];", self.source, re.S).group(1)
+        champs = dict(re.findall(r"'(\w+)' => (\[[^\]]*\])", obl))
+        self.assertEqual(champs["documentation"], champs["demo"])
+        self.assertIn("'documentation' => 'Demande de documentation API'", self.source)
+
     def test_une_adresse_n_epuise_pas_le_plafond_global(self):
         """Sur la fenêtre globale, une adresse obtient au plus PLAFOND_IP_HEURE envois : bien moins que PLAFOND_GLOBAL."""
         c = {n: int(v) for n, v in re.findall(r"^const (PLAFOND_\w+|FENETRE_\w+) = (\d+);", self.source, re.M)}

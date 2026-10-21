@@ -51,7 +51,8 @@ def disponible(sec, ctx):
     table = section(h2(txt(bloc(lead, "h2")), "quelle forme") + f'<p class="intro">{esc(k("intro"))}</p>'
                     f'<div class="pa-tw"><table class="pa-t ad-t"><thead><tr>{tete}</tr></thead><tbody>{lignes}</tbody></table></div>' + souv)
     doc = trame.bouton_suivi(f'<div class="ad-doc"><div><h2>{esc(k("doc.titre"))}</h2><p>{esc(k("doc.texte"))}</p></div>'
-                             f'<a class="btn" href="{C}">{esc(k("doc.bouton"))}</a></div>', "api-documentation", "milieu")
+                             f'<a class="btn" href="{C}">{esc(k("doc.bouton"))}</a></div>', "api-documentation", "milieu").replace(
+        f'href="{C}"', f'href="{C}?demande=documentation-api"', 1)  # suivi.js en fait une demande de documentation
     return table + section(doc)
 
 

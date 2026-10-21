@@ -157,6 +157,14 @@ class TestSuiviDesAppels(unittest.TestCase):
         cls.pages = {p: support.chemin(cls.docs, p).read_text(encoding="utf-8") for p in build.PAGES}
         cls.js = (ICI / "assets/global/suivi.js").read_text(encoding="utf-8")
 
+    def test_documentation_api(self):
+        """Le bouton de la page API mène au formulaire avec ?demande=documentation-api ; suivi.js passe alors le type
+        du formulaire de démo à « documentation » (objet d'e-mail distinct dans envoi.php)."""
+        h = self.pages["corrext/api-on-premises/"]
+        self.assertRegex(h, r'<a class="btn" href="[^"]*contact/\?demande=documentation-api" data-suivi="cta-api-documentation-milieu">')
+        self.assertIn('parametre("demande") === "documentation-api"', self.js)
+        self.assertIn('type.value = "documentation"', self.js)
+
     def test_une_seule_convention(self):
         """data-suivi = cta-<contexte>-<position> (hero, milieu ou fin ; milieu : bouton d'une bande en cours de page,
         décision du 2026-10-15) ; l'en-tête : cta-entete, et cta-entete-mobile dans le menu mobile."""

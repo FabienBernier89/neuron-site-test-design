@@ -398,6 +398,14 @@
     poser(f, "page_origine", origine());
     poser(f, "t0", t0);
     UTM.forEach(function (k) { poser(f, k, (etat.utm && etat.utm[k]) || parametre(k).slice(0, 200)); });
+    /* ?demande=documentation-api (bouton de la page API et on-premises) : le formulaire de démo devient une demande
+       de documentation API, objet d'e-mail distinct dans envoi.php ; le message est prérempli s'il est vide */
+    var type = f.querySelector('input[type="hidden"][name="type"]');
+    if (type && type.value === "demo" && parametre("demande") === "documentation-api") {
+      type.value = "documentation";
+      var m = f.querySelector('textarea[name="message"]');
+      if (m && !m.value) m.value = "Je souhaite recevoir la documentation technique de l'API.";
+    }
     var s = f.querySelector('select[name="secteur"]');
     /* ?secteur= d'abord, sinon la dernière page secteur visitée ; une valeur hors liste est ignorée */
     [parametre("secteur"), etat.secteur].some(function (voulu) {

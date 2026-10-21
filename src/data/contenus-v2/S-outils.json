@@ -33,5 +33,6 @@
   {"cle": "api.forme.word", "page": "corrext/api-on-premises/", "texte": "Avec le complément Corrext pour Word, présenté sur la page Plugin Word.", "statut": "a_relire", "source": "Page API et on-premises, tableau B retenu par Fabien le 2026-10-21 : tout est disponible aujourd'hui. Remplace « À cadrer dans un projet d'intégration »."},
   {"cle": "api.doc.titre", "page": "corrext/api-on-premises/", "texte": "La documentation de l'API, sur demande", "statut": "a_relire", "source": "Bloc demandé par Fabien le 2026-10-21 : la documentation API s'envoie sur demande."},
   {"cle": "api.doc.texte", "page": "corrext/api-on-premises/", "texte": "La documentation technique de l'API vous est transmise sur demande, avec le contrat d'interface.", "statut": "a_relire", "source": "Bloc demandé par Fabien le 2026-10-21."},
-  {"cle": "api.doc.bouton", "page": "corrext/api-on-premises/", "texte": "Demander la documentation API", "statut": "a_relire", "source": "Bloc demandé par Fabien le 2026-10-21."}
+  {"cle": "api.doc.bouton", "page": "corrext/api-on-premises/", "texte": "Demander la documentation API", "statut": "a_relire", "source": "Bloc demandé par Fabien le 2026-10-21."},
+  {"cle": "api.faq.droits", "page": "corrext/api-on-premises/", "texte": "C'est possible dans le cadre d'un projet d'intégration", "remplace": "C'est prévu dans le cadre d'un projet d'intégration", "statut": "a_relire", "source": "FAQ alignée sur le tableau « Disponible aujourd'hui » (Fabien, 2026-10-21)."}
 ]}
