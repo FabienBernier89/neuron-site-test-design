@@ -1834,6 +1834,30 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 .ot-cp .mt-od .lien{margin-top:10px}
 .ot-ch{margin-top:48px}
 
+/* Écran de l'étape Set-up (vues.vue_setup) : nom du projet, confidentialité, langues cibles */
+.vw-nom{display:grid;grid-template-columns:1fr auto;gap:6px 10px;margin-bottom:16px}
+.vw-def{font:500 11px/16px "Inter",var(--ui);color:var(--c-mut)}
+.vw-in{grid-column:1/-1;padding:8px 11px;border:1px solid var(--c-line);border-radius:8px;background:#fff;font:400 12px/18px "Inter",var(--ui);color:var(--c-ink)}
+.vw-setup .vw-opts{margin-bottom:14px}
+.vw-lg{display:inline-block}
+
+/* Parcours en étapes (outil_modele.etapes) : barre des étapes, faits de l'étape à gauche, écran à droite */
+.et-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;margin-top:32px}
+.et-bar button{display:flex;align-items:center;gap:12px;width:100%;padding:14px 18px;border:0;border-radius:10px;background:var(--tile);
+  font:500 16px/22px var(--sans);color:var(--muted);text-align:left;cursor:pointer;transition:background .2s,color .2s}
+.et-bar .on button{background:var(--navy);color:#fff}
+.et-bar button:focus-visible{outline:2px solid var(--accent-d);outline-offset:2px}
+.et-bar i{display:grid;flex:none;place-items:center;width:28px;height:28px;border:1px solid currentColor;border-radius:50%;font:600 13px/1 var(--num);font-style:normal}
+.et-p[hidden]{display:none}
+.et-p{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:40px;align-items:start;margin-top:24px}
+.et-l > div + div{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.et-l h3{font:600 15px/22px var(--sans);color:var(--ink)}
+.et-l p{margin-top:4px;font:400 13.5px/21px var(--sans);color:var(--text)}
+.et-note{max-width:820px;margin-top:32px;padding:16px 20px;border-left:3px solid var(--accent-d);background:var(--tile);font:400 14px/22px var(--sans);color:var(--text)}
+.et-note b{color:var(--ink)}
+@media (max-width:1023px){.et-p{grid-template-columns:minmax(0,1fr);gap:24px}}
+@media (max-width:640px){.et-bar{grid-template-columns:minmax(0,1fr)}.et-bar button{padding:11px 14px;font-size:15px}}
+
 /* composants/paire.css */
 /* Pages de paires de langues (outils/composer/paire_modele.py), modèle validé par Fabien le 2026-10-19 */
 

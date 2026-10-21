@@ -70,6 +70,18 @@ def vue_devis(fichier, langues, niveaux, choisi):
             '<span class="cr-btn cr-btn-p vw-go">Créer le projet</span></div></div></div></div>')
 
 
+def vue_setup(T, choisi=1):
+    """Étape Set-up (démo « Gestion de projet ») : nom du projet, niveau de confidentialité, langues cibles."""
+    cartes = "".join(f'<div class="vw-opt{" on" if i == choisi else ""}" data-o="{i}"><i></i><b>{b}</b><span>{p}</span></div>' for i, (b, p) in enumerate(T["cartes"]))
+    return ('<div class="cr cr-frag cr-vw vw-setup fini">'
+            + _etapes(["Créer un projet", "Fichiers", "Devis"], 0)
+            + f'<div class="vw-c"><p class="vw-h">{T["titre"]}</p><p class="vw-s">{T["sous"]}</p>'
+            f'<div class="vw-nom"><span class="vw-lab">{T["nom_l"]}</span><span class="vw-def">{T["defaut"]}</span>'
+            f'<span class="vw-in">{T["nom_v"]}</span></div>'
+            f'<p class="vw-h5">{T["conf_q"]}</p><div class="vw-opts">{cartes}</div>'
+            f'<p class="vw-h5">{T["langues_q"]}</p><span class="cr-btn vw-lg">{T["langues_b"]}</span></div></div>')
+
+
 # ---------- Alternatives par moteur ----------
 
 def vue_alternatives(cle, src, sortie, alt, alt_moteur, total, tabs=False):

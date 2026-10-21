@@ -69,6 +69,17 @@ def fichiers_demo(*cles):
     return [dict(T[c], run=T["fichier"]["run"], fin=T["fichier"]["fin"]) for c in cles]
 
 
+def textes_setup():
+    """Libellés de l'étape Set-up de la démo « Gestion de projet » publiée (titre, nom du projet, confidentialité, langues)."""
+    from source import charger as _ch
+    st = bloc(_ch("corrext/gestion-de-projet/"), "div", attr='id="cxpStep1"')
+    cartes = [(txt(bloc(b, "b")), txt(bloc(b, "span"))) for b in blocs(st, "button", "cxp-card")]
+    return {"titre": txt(bloc(st, "p", "cxp-title")), "sous": txt(bloc(st, "p", "cxp-sub")),
+            "nom_l": txt(bloc(st, "label")), "nom_v": re.search(r'<input[^>]*value="([^"]+)"', st).group(1),
+            "defaut": txt(bloc(st, "button", "cxp-switch")), "conf_q": txt(blocs(st, "p", "cxp-q")[0]), "cartes": cartes,
+            "langues_q": txt(blocs(st, "p", "cxp-q")[1]), "langues_b": txt(bloc(st, "button", "cxp-langbtn"))}
+
+
 def textes_extrait():
     """Libellés de la démo « Extraits du registre du commerce » (étapes, niveaux, récapitulatif)."""
     from source import charger as _ch

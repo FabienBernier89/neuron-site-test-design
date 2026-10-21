@@ -714,6 +714,16 @@
     return jouer(l, etapes.concat(finir(cr)));
   };
 
+  /* Étape Set-up (page Gestion de projet) : la confidentialité passe de Standard à Contenu hautement sensible */
+  SCENES.setup = function (l) {
+    var cr = l.q(".cr"), o = l.qa(".vw-opt");
+    return jouer(l, [
+      function () { o[1].classList.remove("on"); o[0].classList.add("on"); return l.attendre(1800); },
+      function () { return l.appui(o[1]); },
+      function () { o[0].classList.remove("on"); o[1].classList.add("on"); return l.attendre(3600); }
+    ].concat(finir(cr)));
+  };
+
   /* Rephrasing seul (page Traduction texte et document) : réécriture par défaut, puis style Simplified */
   SCENES.reph = function (l) {
     var cr = l.q(".cr"), out = l.q(".cr-rout"), set = l.q(".cr-set"), chip = l.q(".cr-chip.on");

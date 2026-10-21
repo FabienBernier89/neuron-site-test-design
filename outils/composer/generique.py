@@ -546,7 +546,8 @@ def ranger_secteur(slug, rendus):
     return "".join(par[c] for c in ORDRE_SECTEUR)
 
 
-def composer(P):
+def composer(P, remplacer=None):
+    """remplacer : {classe de section de la V1: fonction(sec, ctx)} pour recomposer un bloc d'une page (pages outils)."""
     t = liens(charger(P), P)
     secs = sections(t)
     ctx = {"P": P, "t": t}
@@ -556,7 +557,7 @@ def composer(P):
     out, inconnus = [], []
     for sec in secs:
         cl = classes(sec)[0]
-        f = GESTION.get(cl)
+        f = (remplacer or {}).get(cl) or GESTION.get(cl)
         if not f:
             inconnus.append(cl)
             f = h_generique
