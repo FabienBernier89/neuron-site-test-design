@@ -66,3 +66,17 @@
 .rg h3{font:400 21px/28px var(--serif);color:var(--ink)}
 .rg p{margin-top:8px;font:400 14.5px/23px var(--sans);color:var(--text)}
 .rg-lien{margin-top:24px}
+
+/* Faits en deux colonnes titrées et liste en pastilles (CHnell) */
+.dc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px;margin-top:28px}
+.dc .pa-st{margin-top:0}
+.dc-i{padding:14px 0;border-top:1px solid var(--line)}
+.dc-i h3{font:600 15px/22px var(--sans);color:var(--ink)}
+.dc-i p{margin-top:4px;font:400 14px/22px var(--sans);color:var(--text)}
+.pst{margin-top:36px;padding:24px 26px;border-radius:12px;background:var(--tile)}
+.pst-t{font:600 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.pst-l{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.pst-l span{padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--white,#fff);font:500 13px/18px var(--sans);color:var(--ink)}
+:root[data-theme="sombre"] .pst-l span{background:transparent}
+@media (prefers-color-scheme:dark){:root[data-theme="systeme"] .pst-l span{background:transparent}}
+@media (max-width:767px){.dc{grid-template-columns:minmax(0,1fr);gap:24px}}

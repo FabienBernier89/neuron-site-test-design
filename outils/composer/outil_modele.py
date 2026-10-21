@@ -94,3 +94,15 @@ def gov_rangees(t, accent):
     corps = h2(txt(bloc(box, "h2")), accent) + f'<p class="intro">{brut(bloc(box, "p"))}</p>' + '<div class="rg">' \
         + "".join(f'<div><h3>{t_}</h3><p>{p}</p></div>' for t_, p in items) + '</div>'
     return section(corps + (f'<p class="rg-lien"><a class="lien" href="{lien[1]}">{lien[0]}</a></p>' if lien else ""))
+
+
+def deux_colonnes(groupes):
+    """Faits en deux colonnes titrées (proposition A retenue par Fabien le 2026-10-21 pour CHnell) :
+    groupes = [(intertitre, [(titre, texte)])]."""
+    return '<div class="dc">' + "".join(f'<div><p class="pa-st">{esc(g)}</p>' + "".join(f'<div class="dc-i"><h3>{t_}</h3><p>{p}</p></div>' for t_, p in items) + '</div>'
+                                        for g, items in groupes) + '</div>'
+
+
+def pastilles(titre, items):
+    """Liste en pastilles dans un encart (les domaines de CHnell)."""
+    return f'<div class="pst"><p class="pst-t">{esc(titre)}</p><div class="pst-l">' + "".join(f'<span>{esc(x)}</span>' for x in items) + '</div></div>'
