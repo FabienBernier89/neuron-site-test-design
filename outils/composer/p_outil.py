@@ -37,18 +37,7 @@ out.append(section(h2(txt(bloc(lead, "h2")), "exactement") + f'<p class="intro">
                    + f'<div class="ot-ch">{ch}</div>'))
 wh = bloc(t, "section", "who")
 out.append(section(h2(txt(bloc(wh, "h2")), "change la journée") + cartes([(brut(bloc(r, "h3")), brut(bloc(r, "p")), None, "") for r in blocs(wh, "article", "sc-row")])))
-gv = bloc(t, "section", "gov")
-box = bloc(gv, "div", "gov-box")
-a = blocs(box, "a", "feat-link")[0]
-pas = []
-for i, s in enumerate(blocs(bloc(gv, "div", "gov-steps"), "span")):
-    if 'class=' in s[:20]:
-        continue
-    b = brut(bloc(s, "b")); reste = brut(re.sub(r"<b>.*?</b>", "", interne(s), flags=re.S))
-    pas.append((b, reste, ""))
-pas[-1] = (pas[-1][0], pas[-1][1], "bt-l")
-out.append(section(bento({"titre": h2(txt(bloc(box, "h2")), "hébergé à l'étranger", "h3s"), "texte": brut(bloc(box, "p")),
-                          "lien": (txt(a), re.search(r'href="([^"]+)"', a).group(1))}, pas)))
+out.append(gov_rangees(t, "hébergé à l'étranger"))  # rangées au lieu du bento (audit des pages outils)
 sb = bloc(t, "section", "siblings")
 cs = [(brut(bloc(x, "b")), brut(bloc(x, "span")), (None, re.search(r'href="([^"]+)"', x).group(1)), "") for x in blocs(sb, "a")]
 out.append(section(h2(txt(bloc(sb, "h2")), "outils de Corrext") + cartes(cs)))

@@ -7,6 +7,7 @@ onglets). Le HTML porte l'état final de la scène ; assets/visite-word.js rejou
 
     cd outils/composer && NEURON_SRC=<site Neur.on> python3 p_plugin_word.py
 """
+from outil_modele import frise, rangees
 import html as H
 import json
 import os
@@ -178,14 +179,15 @@ def composer():
                        + tuiles(fonctions, "tl txt")
                        + f'<p class="pw-suite"><a class="lien" href="{{{{ROOT}}}}corrext/editeur-de-relecture/">{t("plugin-word.fonctions.lien")}</a></p>'))
 
-    etapes = [(f"0{i}", t(f"plugin-word.poste.etape{i}.titre"), t(f"plugin-word.poste.etape{i}.texte")) for i in range(1, 5)]
+    # étapes en frise compacte et garanties en rangées (audit des pages outils, Fabien, 2026-10-21)
+    etapes = [(f"0{i}", t(f"plugin-word.poste.etape{i}.titre"), t(f"plugin-word.poste.etape{i}.texte"), "") for i in range(1, 5)]
     out.append(section(h2(t("plugin-word.poste.titre"), "relié à votre projet") + f'<p class="intro">{t("plugin-word.poste.texte")}</p>'
-                       + tuiles(etapes, "tl t4 tl-ledger")))
+                       + frise(etapes)))
 
     petites = [(t(f"plugin-word.garanties.{k}.titre"), t(f"plugin-word.garanties.{k}.texte"), "")
                for k in ("suisse", "sensible", "acces", "iso")]
-    out.append(section(bento({"titre": h2(t("plugin-word.garanties.titre"), "que Corrext", "h3s"), "texte": t("plugin-word.garanties.texte"),
-                              "lien": (t("plugin-word.garanties.lien"), "{{ROOT}}securite-souverainete/")}, petites), "sec pw-garanties"))
+    out.append(section(rangees(h2(t("plugin-word.garanties.titre"), "que Corrext"), t("plugin-word.garanties.texte"),
+                               (t("plugin-word.garanties.lien"), "{{ROOT}}securite-souverainete/"), [(x, y) for x, y, _ in petites]), "sec pw-garanties"))
 
     qr = [(texte(f"plugin-word.faq.q{i}"), texte(f"plugin-word.faq.r{i}")) for i in range(1, 5)]
     out.append(faq(t("plugin-word.faq.titre"), [(e(q), f"<p>{e(r)}</p>") for q, r in qr]))

@@ -66,6 +66,31 @@ def familles(liste):
 
 def frise(rangs):
     """Parcours en frise compacte (Éditeur de relecture, proposition D) : rangs = [(numéro, titre, texte, étiquette)] ;
-    les étapes faites à la création du projet sont soulignées en bleu."""
-    return '<ol class="fr">' + "".join(f'<li class="{"fr-p" if ph == "Projet" else ""}"><span class="fr-n">{n}</span><span class="fr-ph">{ph}</span>'
-                                       f'<h3>{ti}</h3><p>{tx}</p></li>' for n, ti, tx, ph in rangs) + '</ol>'
+    les étapes faites à la création du projet sont soulignées en bleu ; sans étiquette, toutes les étapes le sont."""
+    def etape(n, ti, tx, ph):
+        tag = f'<span class="fr-ph">{ph}</span>' if ph else ""
+        return f'<li class="{"fr-p" if ph in ("Projet", "") else ""}"><span class="fr-n">{n}</span>{tag}<h3>{ti}</h3><p>{tx}</p></li>'
+    return '<ol class="fr">' + "".join(etape(*r) for r in rangs) + '</ol>'
+
+
+def rangees(titre_h2, texte_, lien, items):
+    """Garanties en rangées lisibles, à la place d'un bento à texte centré (pages outils, audit du 2026-10-20) :
+    titre, texte et lien, puis une rangée de faits (titre, texte) soulignés d'un filet bleu. lien : (libellé, href)."""
+    return (titre_h2 + f'<p class="intro">{texte_}</p>' + '<div class="rg">' + "".join(f'<div><h3>{t_}</h3><p>{p}</p></div>' for t_, p in items)
+            + f'</div><p class="rg-lien"><a class="lien" href="{lien[1]}">{lien[0]}</a></p>')
+
+
+def gov_rangees(t, accent):
+    """Le bloc de gouvernance de la V1 (titre, texte, lien, petites étapes) rendu en rangées au lieu du bento."""
+    gv = bloc(t, "section", "gov")  # t : la page ou la section elle-même
+    box = bloc(gv, "div", "gov-box")
+    a = blocs(box, "a", "feat-link")
+    items = []
+    for x in blocs(bloc(gv, "div", "gov-steps"), "span"):
+        if "<b>" not in x[:12]:
+            continue
+        items.append((txt(bloc(x, "b")).strip().rstrip("."), brut(re.sub(r"<b>.*?</b>", "", interne(x), flags=re.S))))
+    lien = (txt(a[0]), re.search(r'href="([^"]+)"', a[0]).group(1)) if a else None
+    corps = h2(txt(bloc(box, "h2")), accent) + f'<p class="intro">{brut(bloc(box, "p"))}</p>' + '<div class="rg">' \
+        + "".join(f'<div><h3>{t_}</h3><p>{p}</p></div>' for t_, p in items) + '</div>'
+    return section(corps + (f'<p class="rg-lien"><a class="lien" href="{lien[1]}">{lien[0]}</a></p>' if lien else ""))

@@ -1884,6 +1884,13 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 @media (max-width:1023px){.fa-p{grid-template-columns:minmax(0,1fr)}.fr{grid-template-columns:repeat(2,minmax(0,1fr))}.ow{grid-template-columns:minmax(0,1fr);gap:24px}}
 @media (max-width:640px){.fr{grid-template-columns:minmax(0,1fr)}}
 
+/* Garanties en rangées (outil_modele.rangees) */
+.rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;margin-top:32px}
+.rg > div{padding-top:18px;border-top:2px solid var(--accent-d)}
+.rg h3{font:400 21px/28px var(--serif);color:var(--ink)}
+.rg p{margin-top:8px;font:400 14.5px/23px var(--sans);color:var(--text)}
+.rg-lien{margin-top:24px}
+
 /* composants/paire.css */
 /* Pages de paires de langues (outils/composer/paire_modele.py), modèle validé par Fabien le 2026-10-19 */
 

@@ -36,4 +36,4 @@ def parcours(sec, ctx):
     return section(h2(txt(bloc(lead, "h2")), "document validé") + f'<p class="intro">{brut(bloc(lead, "p"))}</p>' + frise(rangs) + word)
 
 
-print(P, generique.composer(P, remplacer={"facts": fonctions, "trust": parcours, "cxe-word": lambda sec, ctx: ""}) or "écrite")
+print(P, generique.composer(P, remplacer={"facts": fonctions, "gov": lambda sec, ctx: gov_rangees(sec, generique.mots_accent(sec)), "trust": parcours, "cxe-word": lambda sec, ctx: ""}) or "écrite")
