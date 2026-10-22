@@ -134,14 +134,14 @@
 .ee-b + .ee-b{border-top:1px solid var(--line)}  /* sans fond (Fabien, 2026-10-22) : un filet sépare les étapes */
 .ee-inv{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}
 .ee-inv .ee-t{order:2}
-.ee-n{display:flex;align-items:center;gap:12px;font:400 28px/36px var(--serif);color:var(--ink)}
+.ee-n{display:flex;align-items:center;gap:12px;font:300 30px/36px var(--serif);color:var(--ink)}  /* polices des blocs .ft de l'accueil (Fabien, 2026-10-22) */
 .ee-n i{display:grid;flex:none;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;font:600 15px/1 var(--num);font-style:normal}
 .ee-f{margin-top:20px}
 .ee-f > div + div{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
-.ee-f h4{margin:0;font:600 15px/22px var(--sans);color:var(--ink)}
-.ee-f p{margin:4px 0 0;font:400 14px/22px var(--sans);color:var(--text)}
+.ee-f h4{margin:0;font:600 16px/24px var(--sans);color:var(--ink)}
+.ee-f p{margin:4px 0 0;font:400 16px/24px var(--sans);color:var(--muted)}
 .enc{max-width:880px;margin:0 auto;padding:48px 56px;border-radius:16px;background:var(--tile);text-align:center}
 .enc h2{font:400 32px/40px var(--serif);color:var(--ink)}
 .enc p{max-width:680px;margin:14px auto 0;font:400 17px/28px var(--sans);color:var(--text)}
 @media (max-width:1023px){.ee-b,.ee-inv{grid-template-columns:minmax(0,1fr);gap:28px;padding:32px 0}.ee-inv .ee-t{order:0}}
-@media (max-width:767px){.ee-b{padding:28px 0}.enc{padding:32px 24px}.enc h2{font-size:26px;line-height:34px}}
+@media (max-width:767px){.ee-n{font-size:24px;line-height:28.8px}.ee-b{padding:28px 0}.enc{padding:32px 24px}.enc h2{font-size:26px;line-height:34px}}
