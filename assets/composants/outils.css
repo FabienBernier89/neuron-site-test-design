@@ -129,8 +129,9 @@
 @media (prefers-reduced-motion:reduce){.et-o,.et-o button{transition:none}.fa-p:not([hidden]){animation:none}}
 
 /* Gestion de projet : une étape par bloc, l'un sous l'autre (faits et écran, côtés alternés), puis l'encart centré */
-.ee{display:grid;gap:20px;margin-top:36px}
-.ee-b{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:center;padding:40px;border-radius:16px;background:var(--tile)}
+.ee{display:grid;margin-top:20px}
+.ee-b{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:center;padding:40px 0}
+.ee-b + .ee-b{border-top:1px solid var(--line)}  /* sans fond (Fabien, 2026-10-22) : un filet sépare les étapes */
 .ee-inv{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}
 .ee-inv .ee-t{order:2}
 .ee-n{display:flex;align-items:center;gap:12px;font:400 28px/36px var(--serif);color:var(--ink)}
@@ -142,5 +143,5 @@
 .enc{max-width:880px;margin:0 auto;padding:48px 56px;border-radius:16px;background:var(--tile);text-align:center}
 .enc h2{font:400 32px/40px var(--serif);color:var(--ink)}
 .enc p{max-width:680px;margin:14px auto 0;font:400 17px/28px var(--sans);color:var(--text)}
-@media (max-width:1023px){.ee-b,.ee-inv{grid-template-columns:minmax(0,1fr);gap:28px;padding:32px}.ee-inv .ee-t{order:0}}
-@media (max-width:767px){.ee-b{padding:24px 20px}.enc{padding:32px 24px}.enc h2{font-size:26px;line-height:34px}}
+@media (max-width:1023px){.ee-b,.ee-inv{grid-template-columns:minmax(0,1fr);gap:28px;padding:32px 0}.ee-inv .ee-t{order:0}}
+@media (max-width:767px){.ee-b{padding:28px 0}.enc{padding:32px 24px}.enc h2{font-size:26px;line-height:34px}}
