@@ -1970,6 +1970,12 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 @media (max-width:1023px){.sr-r{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:12px 32px}.sr-p{grid-column:1/-1}}
 @media (max-width:767px){.sr-r{grid-template-columns:minmax(0,1fr);gap:10px;padding:22px 0}.sr-r h3{font-size:22px;line-height:30px}}
 
+/* Changement d'onglet fluide aussi pour les étapes (Gestion de projet) et les familles (Éditeur de relecture) :
+   le panneau ouvert apparaît en fondu, l'onglet change d'état sans saut (Fabien, 2026-10-22) */
+.et-o,.et-o button{transition:color .32s ease,background-color .32s ease,border-color .32s ease,box-shadow .32s ease}
+.et-p:not([hidden]),.fa-p:not([hidden]){animation:mt-ap .36s ease both}
+@media (prefers-reduced-motion:reduce){.et-o,.et-o button{transition:none}.et-p:not([hidden]),.fa-p:not([hidden]){animation:none}}
+
 /* composants/paire.css */
 /* Pages de paires de langues (outils/composer/paire_modele.py), modèle validé par Fabien le 2026-10-19 */
 

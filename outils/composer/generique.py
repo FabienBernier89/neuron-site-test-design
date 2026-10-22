@@ -328,7 +328,7 @@ def h_hc(sec, ctx):
             + f'<div class="fq-l">{"".join(qr)}</div>{reste_txt}</div></div></section>\n')
 
 
-HAUTEUR_DEMO = {"chnell": 760, "gestion-de-projet": 760, "editeur-de-relecture": 760, "extraits-registre-commerce": 760}
+HAUTEUR_DEMO = {"chnell": 760, "gestion-de-projet": 760, "editeur-de-relecture": 760, "extraits-registre-commerce": 700}  # 700 : vide en bas mesuré (Fabien, 2026-10-22)
 
 
 def h_tdemo(sec, ctx):

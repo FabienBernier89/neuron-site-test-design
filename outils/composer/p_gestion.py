@@ -26,4 +26,4 @@ def parcours(sec, ctx):
                    + etapes(liste, f'<b>Mémoire de traduction.</b> {F["Mémoire de traduction"]}'))
 
 
-print(P, generique.composer(P, remplacer={"facts": parcours, "gov": lambda sec, ctx: gov_rangees(sec, generique.mots_accent(sec))}) or "écrite")
+print(P, generique.composer(P, remplacer={"who": lambda sec, ctx: situations_rangees(sec, generique.mots_accent(sec)), "facts": parcours, "gov": lambda sec, ctx: gov_rangees(sec, generique.mots_accent(sec))}) or "écrite")

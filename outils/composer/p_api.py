@@ -11,6 +11,7 @@
 import generique
 import trame
 from metier_modele import *
+from outil_modele import situations_rangees
 
 P = "corrext/api-on-premises/"
 k = lambda c: texte(f"api.{c}")
@@ -66,4 +67,4 @@ def questions(sec, ctx):
                    f'<p class="rg-lien"><a class="lien" href="{href}">{txt(a)}</a></p></div><ol class="qa-l">{qs}</ol></div>')
 
 
-print(P, generique.composer(P, remplacer={"api-int": appel_api, "facts": disponible, "gov": questions}) or "écrite")
+print(P, generique.composer(P, remplacer={"who": lambda sec, ctx: situations_rangees(sec, generique.mots_accent(sec)), "api-int": appel_api, "facts": disponible, "gov": questions}) or "écrite")

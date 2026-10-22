@@ -69,4 +69,4 @@ def appel(sec, ctx):
         "</a></div></section>", f'</a><a class="lien cta-2" href="{C}">Demander une démo</a></div></section>', 1)
 
 
-print(P, generique.composer(P, remplacer={"facts": niveaux_etapes, "gov": qui_traduit, "final-cta": appel}) or "écrite")
+print(P, generique.composer(P, remplacer={"who": lambda sec, ctx: situations_rangees(sec, generique.mots_accent(sec)), "facts": niveaux_etapes, "gov": qui_traduit, "final-cta": appel}) or "écrite")

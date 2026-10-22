@@ -26,4 +26,4 @@ def fonctions(sec, ctx):
                    + pastilles(k("domaines"), doms))
 
 
-print(P, generique.composer(P, remplacer={"facts": fonctions, "gov": lambda sec, ctx: gov_rangees(sec, generique.mots_accent(sec))}) or "écrite")
+print(P, generique.composer(P, remplacer={"who": lambda sec, ctx: situations_rangees(sec, generique.mots_accent(sec)), "facts": fonctions, "gov": lambda sec, ctx: gov_rangees(sec, generique.mots_accent(sec))}) or "écrite")
