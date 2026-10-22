@@ -28,20 +28,22 @@ def chiffres(items, cls="tl"):
     return tuiles([(chiffre(esc(n)), None, t_) for n, t_ in items], cls)
 
 
-def etapes(liste, note=""):
-    """Parcours en étapes (proposition B retenue par Fabien le 2026-10-21 pour Gestion de projet) : barre des étapes
-    comme l'indicateur de l'application ; l'étape ouverte montre tous ses faits à gauche et son écran à droite.
-    liste : [(nom de l'étape, [(titre, texte)], écran)] ; note : paragraphe sous le parcours (HTML)."""
-    barre, panneaux = "", ""
+def etapes_empilees(liste):
+    """Parcours en étapes empilées (Gestion de projet, demande de Fabien du 2026-10-22) : un bloc par étape, l'un sous
+    l'autre, le numéro, le nom de l'étape et ses faits d'un côté, son écran animé de l'autre (côtés alternés).
+    liste : [(nom de l'étape, [(titre, texte)], écran)]."""
+    blocs_ = ""
     for i, (nom, faits_, ecran) in enumerate(liste, 1):
-        on = i == 1
-        barre += (f'<span class="et-o{" on" if on else ""}"><button type="button" role="tab" id="et-t{i}" aria-controls="et-p{i}" '
-                  f'aria-selected="{"true" if on else "false"}"><i>{i}</i>{nom}</button></span>')
-        gauche = "".join(f'<div><h3>{t_}</h3><p>{p}</p></div>' for t_, p in faits_)
-        panneaux += (f'<div class="et-p" role="tabpanel" id="et-p{i}" aria-labelledby="et-t{i}"{"" if on else " hidden"}>'
-                     f'<div class="et-l">{gauche}</div><div>{ecran}</div></div>')
-    return (f'<div class="et" data-onglets><div class="et-bar" role="tablist">{barre}</div>{panneaux}</div>'
-            + (f'<p class="et-note">{note}</p>' if note else ""))
+        # un fait qui porte le nom de l'étape n'en répète pas le titre
+        faits_html = "".join(f'<div>{"" if t_ == nom else f"<h4>{t_}</h4>"}<p>{p}</p></div>' for t_, p in faits_)
+        blocs_ += (f'<div class="ee-b{" ee-inv" if i % 2 == 0 else ""}"><div class="ee-t"><h3 class="ee-n"><i>{i}</i>{nom}</h3>'
+                   f'<div class="ee-f">{faits_html}</div></div><div class="ee-e">{ecran}</div></div>')
+    return f'<div class="ee">{blocs_}</div>'
+
+
+def bandeau(titre, texte_):
+    """Encart centré, à la manière des bandeaux d'appel (Gestion de projet : la mémoire de traduction)."""
+    return section(f'<div class="enc"><h2>{titre}</h2><p>{texte_}</p></div>')
 
 
 ICONES_FAMILLE = {"relire": '<path d="M4 5h7v14H4zM13 5h7v14h-7z"/>', "verifier": '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',

@@ -1,6 +1,6 @@
 """Page Gestion de projet : composée par generique.py, sauf « Ce que fait Gestion de projet, exactement », qui devient
-le parcours en trois étapes de l'application (proposition B retenue par Fabien le 2026-10-21) : chaque étape montre ses
-faits de la V1 à gauche et son écran animé à droite ; la mémoire de traduction passe en note.
+le parcours en trois étapes de l'application : un bloc par étape, l'un sous l'autre, faits de la V1 et écran animé
+(Fabien, 2026-10-22) ; la mémoire de traduction passe dans un encart centré à la suite.
 
     cd outils/composer && python3 p_gestion.py
 """
@@ -22,8 +22,8 @@ def parcours(sec, ctx):
               sc(V.vue_analyse("Contrat_assurance.docx", "2,5", "pages standard", "Français", "Assurance privée"), "analyse", "File overview : analyse du fichier"),
               sc(V.vue_devis("Darlehensvertrag_2026.docx", "DE → FR", NIVEAUX_RELECTURE, NIVEAUX_RELECTURE[1]), "devis", "Quotes : relecture et devis")]
     liste = [(nom, [(k, F[k]) for k in ks], ecrans[i]) for i, (nom, ks) in enumerate(ETAPES)]
-    return section(h2(txt(bloc(lead, "h2")), "projet, exactement") + f'<p class="intro">{brut(bloc(lead, "p"))}</p>'
-                   + etapes(liste, f'<b>Mémoire de traduction.</b> {F["Mémoire de traduction"]}'))
+    return (section(h2(txt(bloc(lead, "h2")), "projet, exactement") + f'<p class="intro">{brut(bloc(lead, "p"))}</p>' + etapes_empilees(liste))
+            + bandeau("Mémoire de traduction", F["Mémoire de traduction"]))
 
 
 print(P, generique.composer(P, remplacer={"who": lambda sec, ctx: situations_rangees(sec, generique.mots_accent(sec)), "facts": parcours, "gov": lambda sec, ctx: gov_rangees(sec, generique.mots_accent(sec))}) or "écrite")
