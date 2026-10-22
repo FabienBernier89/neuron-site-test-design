@@ -1970,9 +1970,6 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 @media (max-width:1023px){.sr-r{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:12px 32px}.sr-p{grid-column:1/-1}}
 @media (max-width:767px){.sr-r{grid-template-columns:minmax(0,1fr);gap:10px;padding:22px 0}.sr-r h3{font-size:22px;line-height:30px}}
 
-/* Démonstration du haut de page un peu plus près du bloc suivant (Fabien, 2026-10-22 : Traduction texte et document) */
-.sec.sec-serre{padding-bottom:36px}
-
 /* composants/paire.css */
 /* Pages de paires de langues (outils/composer/paire_modele.py), modèle validé par Fabien le 2026-10-19 */
 
