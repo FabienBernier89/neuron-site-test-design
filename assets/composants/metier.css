@@ -37,11 +37,27 @@
 .mt-o:not(.on) button{padding-bottom:20px}
 .mt-ot{display:block;margin-top:8px;font:400 22px/30px var(--serif);color:var(--muted)}
 .mt-o.on .mt-ot{font-size:28px;line-height:36px;color:var(--ink)}
-.mt-od{display:none;padding:0 24px 22px}
-.mt-o.on .mt-od{display:block}
 .mt-od p{margin-top:12px;font:400 16px/26px var(--sans);color:var(--text)}
 .mt-od .lien{margin-top:14px}
 .mt-o button:focus-visible{outline:2px solid var(--accent-d);outline-offset:-2px}
+/* Changement d'onglet (Fabien, 2026-10-22) : la description se déploie en hauteur pendant que l'autre se replie,
+   le libellé grandit sans saut, l'écran passe en fondu enchaîné (l'ancien s'efface par-dessus le nouveau, metier.js) */
+.mt-o{transition:border-color .32s ease,background-color .32s ease}
+.mt-o button{transition:padding .32s cubic-bezier(.2,.7,.2,1)}
+.mt-ot{transition:font-size .32s cubic-bezier(.2,.7,.2,1),line-height .32s cubic-bezier(.2,.7,.2,1),color .32s ease}
+.mt-od{display:grid;grid-template-rows:0fr;padding:0;transition:grid-template-rows .36s cubic-bezier(.2,.7,.2,1)}
+.mt-o.on .mt-od{grid-template-rows:1fr}
+.mt-od>div{min-height:0;overflow:hidden;padding:0 24px;opacity:0;visibility:hidden;transition:opacity .2s ease,padding .36s cubic-bezier(.2,.7,.2,1),visibility 0s linear .36s}
+.mt-o.on .mt-od>div{padding-bottom:22px;opacity:1;visibility:visible;transition:opacity .3s ease .08s,padding .36s cubic-bezier(.2,.7,.2,1),visibility 0s}
+.mt-ps{position:relative}
+.mt-p:not([hidden]){animation:mt-ap .36s ease both}
+.mt-p.mt-sort{display:block;position:absolute;inset:0;z-index:1;pointer-events:none;animation:mt-dp .36s ease both}
+@keyframes mt-ap{from{opacity:0}to{opacity:1}}
+@keyframes mt-dp{from{opacity:1}to{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+.mt-o,.mt-o button,.mt-ot,.mt-od,.mt-od>div{transition:none}
+.mt-p:not([hidden]),.mt-p.mt-sort{animation:none}
+}
 
 :root[data-theme="sombre"] .mt-fict{background:rgba(255,214,120,.16);color:#ffd88a}
 @media (prefers-color-scheme:dark){:root[data-theme="systeme"] .mt-fict{background:rgba(255,214,120,.16);color:#ffd88a}}

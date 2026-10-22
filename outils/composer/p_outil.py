@@ -14,7 +14,6 @@ lead = bloc(fa, "div", "facts-lead")
 faits = {txt(bloc(f, "b")): brut(bloc(f, "p")) for f in blocs(fa, "div", "fact")}
 # « Ce que fait… » : onglets compacts groupés, un écran animé de même taille par fonction, les faits chiffrables en
 # tuiles (proposition A retenue par Fabien le 2026-10-20, outils/composer/outil_modele.py)
-d = EX["ldip"]
 def sc(ui, sim, label):
     return scene(764, 500, ui, sim=sim, titre="Corrext", curseur=False, label=label)
 groupes = [
@@ -24,15 +23,11 @@ groupes = [
         ("PDF to Word", faits["PDF to Word"], sc(V.vue_fichiers(fichiers_demo("pdf")), "lot", "PDF to Word")),
         ("Rephrasing", faits["Rephrasing"], sc(A.fragment_reph(T["reph"], EX["co"]["src"], EX["co"]["reph"]["def"], EX["co"]["reph"]["simp"], "Simplified"), "reph", "Rephrasing")),
     ]),
-    (texte("outil.groupe.partout"), [
-        ("Alternatives", faits["Alternatives"], sc(V.vue_alternatives("ldip", esc(d["src"]), esc(d["out"]["en"]["main"]), esc(d["out"]["en"]["alt"][0]["t"]),
-                                                                       d["out"]["en"]["alt"][0]["e"], len(d["out"]["en"]["alt"])), "alts", "Alternatives")),
-        ("Fast Lookup", faits["Fast Lookup"], sc(V.vue_chnell(EX["co"]["lookup"]), "chnell", "Fast Lookup")),
-    ]),
 ]
 k = lambda c: texte(f"traduction-texte-et-document.chiffre.{c}")
 ch = chiffres([(k("langues"), faits["Langues"]), (k("moteurs"), faits["Moteurs"]), (k("suisse"), faits["Confidentialité"])])
-assert {n for _, it in groupes for n, *_ in it} | {"Langues", "Moteurs", "Confidentialité"} == set(faits), "fait de la V1 non rangé"
+retires = {"Alternatives", "Fast Lookup"}  # onglets retirés de la page (Fabien, 2026-10-22)
+assert {n for _, it in groupes for n, *_ in it} | {"Langues", "Moteurs", "Confidentialité"} | retires == set(faits), "fait de la V1 non rangé"
 out.append(section(h2(txt(bloc(lead, "h2")), "exactement") + f'<p class="intro">{brut(bloc(lead, "p"))}</p>' + onglets_groupes(groupes)
                    + f'<div class="ot-ch">{ch}</div>'))
 wh = bloc(t, "section", "who")

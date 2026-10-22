@@ -15,7 +15,7 @@ def onglets_groupes(groupes):
             on = i == 1
             tabs += (f'<div class="mt-o{" on" if on else ""}"><button type="button" role="tab" id="ot-t{i}" aria-controls="ot-p{i}" '
                      f'aria-selected="{"true" if on else "false"}"><span class="mt-ot">{nom}</span></button>'
-                     f'<div class="mt-od"><p>{texte_}</p></div></div>')
+                     f'<div class="mt-od"><div><p>{texte_}</p></div></div></div>')
             panneaux += f'<div class="mt-p" role="tabpanel" id="ot-p{i}" aria-labelledby="ot-t{i}"{"" if on else " hidden"}>{ecran}</div>'
     return f'<div class="mt-ou ot-cp" data-onglets><div class="mt-os" role="tablist">{tabs}</div><div class="mt-ps">{panneaux}</div></div>'
 

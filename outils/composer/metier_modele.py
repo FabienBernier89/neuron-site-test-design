@@ -61,8 +61,8 @@ def outils(slug, items, accent):
         actif = i == 1
         onglets += (f'<div class="mt-o{" on" if actif else ""}"><button type="button" role="tab" id="mt-t{i}" aria-controls="mt-p{i}" '
                     f'aria-selected="{"true" if actif else "false"}"><span class="mt-l">{esc(texte(f"{slug}.outils.{i}.usage"))}</span>'
-                    f'<span class="mt-ot">{nom}</span></button><div class="mt-od"><p>{txt_}</p>'
-                    f'<a class="lien" href="{href}">{lien_}</a></div></div>')
+                    f'<span class="mt-ot">{nom}</span></button><div class="mt-od"><div><p>{txt_}</p>'
+                    f'<a class="lien" href="{href}">{lien_}</a></div></div></div>')
         panneaux += f'<div class="mt-p" role="tabpanel" id="mt-p{i}" aria-labelledby="mt-t{i}"{"" if actif else " hidden"}>{sc}</div>'
     return section(h2(titre, accent) + f'<div class="mt-ou" data-onglets><div class="mt-os" role="tablist">{onglets}</div>'
                    f'<div class="mt-ps">{panneaux}</div></div>')
