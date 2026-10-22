@@ -118,3 +118,14 @@
 @media (max-width:767px){.ad-doc{flex-direction:column;align-items:flex-start;padding:28px 24px}.ad-doc h2{font-size:26px;line-height:32px}}
 .ad-f a{color:var(--accent-d);text-decoration:underline;text-underline-offset:2px}
 @media (max-width:767px){.pa-t.ad-t tr{grid-template-columns:minmax(0,1fr)}.pa-t.ad-t tbody th,.pa-t.ad-t td{padding:4px 0}.pa-t.ad-t tbody th{padding-top:16px}.pa-t.ad-t td:last-child{padding-bottom:16px}.pa-t.ad-t tbody th + td{padding-top:4px}}
+
+/* Situations en rangées éditoriales : métier et icône, titre, texte (Traduction texte et document) */
+.sr{margin-top:32px;border-top:1px solid var(--line)}
+.sr-r{display:grid;grid-template-columns:240px minmax(0,1fr) minmax(0,1.4fr);gap:40px;align-items:baseline;padding:28px 0;border-bottom:1px solid var(--line)}
+.sr-p{display:flex;align-items:center;gap:10px;font:600 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.sr-ic{display:grid;flex:none;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--tile);color:var(--accent-d)}
+.sr-ic svg{width:18px;height:18px}
+.sr-r h3{font:400 26px/34px var(--serif);color:var(--ink)}
+.sr-t{font:400 15px/25px var(--sans);color:var(--text)}
+@media (max-width:1023px){.sr-r{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:12px 32px}.sr-p{grid-column:1/-1}}
+@media (max-width:767px){.sr-r{grid-template-columns:minmax(0,1fr);gap:10px;padding:22px 0}.sr-r h3{font-size:22px;line-height:30px}}

@@ -31,7 +31,7 @@ assert {n for _, it in groupes for n, *_ in it} | {"Langues", "Moteurs", "Confid
 out.append(section(h2(txt(bloc(lead, "h2")), "exactement") + f'<p class="intro">{brut(bloc(lead, "p"))}</p>' + onglets_groupes(groupes)
                    + f'<div class="ot-ch">{ch}</div>'))
 wh = bloc(t, "section", "who")
-out.append(section(h2(txt(bloc(wh, "h2")), "change la journée") + cartes([(brut(bloc(r, "h3")), brut(bloc(r, "p")), None, "") for r in blocs(wh, "article", "sc-row")])))
+out.append(situations_rangees(wh, "change la journée"))  # rangées éditoriales (Fabien, 2026-10-22)
 out.append(gov_rangees(t, "hébergé à l'étranger"))  # rangées au lieu du bento (audit des pages outils)
 sb = bloc(t, "section", "siblings")
 cs = [(brut(bloc(x, "b")), brut(bloc(x, "span")), (None, re.search(r'href="([^"]+)"', x).group(1)), "") for x in blocs(sb, "a")]
