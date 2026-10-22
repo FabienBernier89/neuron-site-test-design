@@ -8,7 +8,7 @@ td = bloc(t, "section", "tdemo")
 zone = '<div class="cx-zone">' + bloc(td, "div", "cx-ex") + bloc(td, "div", attr='id="cx"') + "</div>"
 T = textes_demo()
 ecran = A.ecran_outil(*T["notice"], *T["hint"], T["fichier"], T["pdf"], T["reph"])
-out.append(section(scene(1176, 620, ecran, sim="outil", curseur=False, label="Démonstration de Traduction texte et document").replace('data-sim="outil"', 'data-sim="outil" data-tenue="0"', 1), "sec sec-st", "demo"))
+out.append(section(scene(1176, 620, ecran, sim="outil", curseur=False, label="Démonstration de Traduction texte et document").replace('data-sim="outil"', 'data-sim="outil" data-tenue="0"', 1), "sec sec-st sec-serre", "demo"))
 fa = bloc(t, "section", "facts")
 lead = bloc(fa, "div", "facts-lead")
 faits = {txt(bloc(f, "b")): brut(bloc(f, "p")) for f in blocs(fa, "div", "fact")}
