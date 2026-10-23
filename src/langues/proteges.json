@@ -1,0 +1,51 @@
+{
+  "marques": [
+    "Neur.on",
+    "Corrext",
+    "LexMachina",
+    "CHnell",
+    "Fast lookup CHnell",
+    "Highly sensitive content",
+    "Infomaniak",
+    "Neur.on AI Solutions SA"
+  ],
+  "libelles_application": [
+    "Text translation",
+    "File translation",
+    "PDF to Word",
+    "Rephrasing",
+    "Fast Lookup",
+    "Translation engine",
+    "Detect language",
+    "Show more results",
+    "Close",
+    "Download",
+    "Generate more",
+    "Alternatives",
+    "Light review",
+    "Full review",
+    "Double review & certified translation",
+    "Attorney-Client privilege",
+    "Project manager",
+    "Admin",
+    "Member",
+    "Formal legal",
+    "Financial",
+    "Simplified",
+    "Formal",
+    "Informal",
+    "Shorten"
+  ],
+  "invariants_exacts": [
+    "Place de la Gare 15, 1700 Fribourg",
+    "team@corrext.com"
+  ],
+  "interdits": [
+    "Neur.on LLM",
+    "Exoscale",
+    "Legal 230",
+    "Legal230",
+    "Lexa",
+    "Silex"
+  ]
+}
