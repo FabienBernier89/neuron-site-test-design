@@ -1,7 +1,8 @@
 """Page Extraits du registre du commerce : composée par generique.py, avec une structure propre (proposition C retenue
-par Fabien le 2026-10-21) : le choix du niveau de certification d'abord, les trois niveaux en colonnes (un seul exposé
-des niveaux, au lieu des cartes et du bento de la V1), puis la commande en quatre étapes en frise, « Qui traduit, et
-où » en rangées et l'appel final « Commander un extrait » vers le service en ligne auszug-hr.ch.
+par Fabien le 2026-10-21, audit design du 2026-10-23) : « Commander un extrait » en bouton principal du haut de page ;
+la démo de commande et sa légende, les quatre étapes en frise ; le choix du niveau de certification, les trois
+niveaux en colonnes ; « Qui traduit, et où » en encart centré ; l'appel final « Commander un extrait » vers le service
+en ligne auszug-hr.ch.
 
     cd outils/composer && python3 p_extraits.py
 """
@@ -43,22 +44,31 @@ def niveaux_etapes(sec, ctx):
                  f'<p class="nv-l">{esc(k("pour"))}</p><p>{pour}</p></div>')
     niveaux = section(h2(txt(bloc(box, "h2")), "quel usage") + f'<p class="intro">{brut(bloc(box, "p"))}</p><div class="nv">{cols}</div>'
                       + f'<p class="rg-lien"><a class="lien" href="{href}">{txt(a)}</a></p>')
-    etapes_ = [("1", esc(k("etape1")), f'{sans_note(F["Recherche"])} {sans_note(F["Langues"])}', APP[0]),
+    return niveaux
+
+
+def demo_et_etapes(sec, ctx):
+    """La démo de commande, puis sa légende : les quatre étapes en frise, à la taille de texte standard (audit design
+    du 2026-10-23 ; étape 1 en version concise, contenus extraits.etape1.texte)."""
+    fa, F = faits(ctx["t"])
+    def gras(t_, mots):  # mots clés en gras, comme dans la V1
+        for m in mots:
+            t_ = t_.replace(m, f'<strong class="kf">{m}</strong>', 1)
+        return t_
+    etapes_ = [("1", esc(k("etape1")), gras(esc(k("etape1.texte")), ["nom de société", "IDE", "plus de 30 langues"]), APP[0]),
                ("2", esc(k("etape2")), esc(k("etape2.texte")), APP[1]),
                ("3", "Livraison", sans_note(F["Livraison"]), APP[2]),
                ("4", "Délai", sans_note(F["Délai"]), APP[3])]
     titre = k("etapes")
-    return niveaux + section(h2(titre, " ".join(titre.split()[-2:])) + frise(etapes_))
+    return generique.h_tdemo(sec, ctx) + section(h2(titre, " ".join(titre.split()[-2:])) + frise(etapes_).replace('<ol class="fr">', '<ol class="fr fr-l">', 1))
 
 
 def qui_traduit(sec, ctx):
-    """À la place du bloc de gouvernance (repris plus haut) : qui traduit et la confidentialité, en rangées."""
+    """À la place du bloc de gouvernance (repris plus haut) : encart centré à fond teinté avec les deux garanties
+    (audit design du 2026-10-23 : sans l'intro, qui répétait le haut de page, ni le lien, qui doublait l'appel final)."""
     fa, F = faits(ctx["t"])
-    lead = bloc(fa, "div", "facts-lead")
-    a = [x for x in blocs(lead, "a", "feat-link") if SERVICE in x][0]
-    titre = k("qui")
-    return section(rangees(h2(titre, titre.split(", ")[1]), brut(bloc(lead, "p")), (txt(a), SERVICE),
-                           [("Qui traduit", sans_note(F["Qui traduit"])), ("Confidentialité", sans_note(F["Confidentialité"]))]))
+    g = "".join(f'<div><h3>{n}</h3><p>{sans_note(F[n])}</p></div>' for n in ("Qui traduit", "Confidentialité"))
+    return section(f'<div class="enc enc-2"><h2>{esc(k("qui"))}</h2><div class="enc-g">{g}</div></div>')
 
 
 def appel(sec, ctx):
@@ -69,4 +79,13 @@ def appel(sec, ctx):
         "</a></div></section>", f'</a><a class="lien cta-2" href="{C}">Demander une démo</a></div></section>', 1)
 
 
-print(P, generique.composer(P, remplacer={"who": lambda sec, ctx: situations_rangees(sec, generique.mots_accent(sec)), "facts": niveaux_etapes, "gov": qui_traduit, "final-cta": appel}) or "écrite")
+def haut(sec, ctx):
+    """Haut de page : « Commander un extrait » en bouton principal, la démo en lien secondaire (comme l'appel final)."""
+    n, s_ = generique.couper_h1(bloc(sec, "h1"))
+    lead = blocs(sec, "p", "lead")
+    return hero(n, s_, brut(lead[0]) if lead else "", (esc(k("commander")), SERVICE)).replace(
+        f'href="{SERVICE}">', f'href="{SERVICE}" rel="noopener">', 1).replace(
+        "</a></div>", f'</a><a class="lien mt-demo" href="{C}">Demander une démo</a></div>', 1)
+
+
+print(P, generique.composer(P, remplacer={"thero": haut, "tdemo": demo_et_etapes, "who": lambda sec, ctx: situations_rangees(sec, generique.mots_accent(sec)), "facts": niveaux_etapes, "gov": qui_traduit, "final-cta": appel}) or "écrite")

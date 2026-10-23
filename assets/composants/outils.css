@@ -149,3 +149,15 @@
 
 /* CHnell ouvert par le Fast Lookup dans un écran de fonction (page CHnell, étape 3) : la fenêtre tient dans l'écran */
 .cr-fl .cr-ch{width:calc(100% - 40px)}
+
+/* Extraits du registre (audit design du 2026-10-23) : frise à la taille de texte standard, niveaux en 16 px, encart
+   « Qui traduit, et où » avec deux garanties côte à côte */
+.fr-l h3{font-size:17px;line-height:24px}
+.fr-l p{font-size:16px;line-height:24px;color:var(--muted)}
+.fr-l .fr-ph{font-size:12px}
+.nv-c p:not(.nv-n):not(.nv-l){font-size:16px;line-height:24px}
+.enc-2{max-width:none}
+.enc-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 48px;max-width:880px;margin:28px auto 0;text-align:left}
+.enc-g h3{font:600 17px/24px var(--sans);color:var(--ink)}
+.enc .enc-g p{max-width:none;margin:6px 0 0;font:400 16px/24px var(--sans);color:var(--muted)}
+@media (max-width:767px){.enc-g{grid-template-columns:minmax(0,1fr)}}
