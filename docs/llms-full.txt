@@ -150,27 +150,27 @@ Suisse : entité, infrastructure et moteur LexMachina
 
 Vous choisissez le niveau de finition adapté à l'enjeu, et vous ne payez que ce dont vous avez besoin.
 
-1
+- 1
 
-Traduction machine
+### Traduction machine
 
 Pour comprendre vite : revue de pièces, discovery, lecture interne. Le moteur LexMachina, sans relecture.
 
-2
+- 2
 
-Post-édition
+### Post-édition
 
 Light ou full : contrats, CGV, correspondance. Relus par un juriste-linguiste pour un rendu publiable.
 
-3
+- 3
 
-Relecture juridique
+### Relecture juridique
 
 Relecture experte pour les enjeux forts : avis de droit, publication, documents engageants.
 
-4
+- 4
 
-Certification & apostille
+### Certification & apostille
 
 Traduction assermentée et légalisée, via un réseau de traducteurs experts, pour les dossiers officiels.
 
@@ -3124,27 +3124,27 @@ Voir la plateforme Corrext
 
 La part d'humain se choisit document par document. C'est la forme la plus concrète que prend notre principe.
 
-1
+- 1
 
-Traduction machine
+### Traduction machine
 
 Pour comprendre vite : revue de pièces, lecture interne, tri d'un dossier. Le moteur seul, sans relecture, et vous le savez.
 
-2
+- 2
 
-Post-édition
+### Post-édition
 
 Light ou full : contrats, conditions générales, correspondance. Un juriste-linguiste relit pour un rendu publiable.
 
-3
+- 3
 
-Relecture juridique
+### Relecture juridique
 
 Pour les enjeux forts : avis de droit, publication, documents engageants. La relecture est experte et assumée.
 
-4
+- 4
 
-Certification et apostille
+### Certification et apostille
 
 Traduction assermentée et légalisée, via un réseau de traducteurs experts, pour les dossiers officiels.
 
