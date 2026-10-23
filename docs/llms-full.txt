@@ -216,7 +216,7 @@ LexMachina, notre moteur, est entraîné sur plus de 15 millions de segments jur
 
 Mes données restent-elles souveraines ?
 
-Vous choisissez, projet par projet. En mode Standard, vos données sont stockées sur les serveurs suisses de Corrext et traitées par le moteur que vous sélectionnez : LexMachina en Suisse ; DeepL Pro, Azure OpenAI GPT ou Claude à l'étranger, avec un avertissement de pseudonymisation. En mode Highly sensitive, stockage et traitement restent exclusivement en Suisse, sans réutilisation en mémoire. Le tout certifié ISO 27001, conforme nLPD et RGPD.
+Vous choisissez, projet par projet. En mode Standard, vos données sont stockées sur les serveurs suisses de Corrext et traitées par le moteur que vous sélectionnez : LexMachina en Suisse ; DeepL Pro, Azure OpenAI GPT ou Claude à l'étranger, avec l'avis Attorney-Client privilege, qui rappelle la politique de votre organisation. En mode Highly sensitive, stockage et traitement restent exclusivement en Suisse, sans réutilisation en mémoire. Le tout certifié ISO 27001, conforme nLPD et RGPD.
 
 Quelles langues et quels domaines sont couverts ?
 
@@ -412,7 +412,7 @@ Réécriture d'un texte jusqu'à 5'000 caractères. Styles Formal legal, Financi
 
 4 Moteurs
 
-LexMachina (suisse, par défaut), DeepL Pro, Azure OpenAI GPT et Claude, choisis à chaque envoi. Les moteurs hébergés à l'étranger déclenchent l'avis Attorney-Client privilege de votre organisation.
+LexMachina (suisse, par défaut), DeepL Pro, Azure OpenAI GPT et Claude, choisis à chaque envoi. Les moteurs hébergés à l'étranger déclenchent l'avis Attorney-Client privilege, qui rappelle la politique de votre organisation.
 
 100 %
 
@@ -440,13 +440,13 @@ Vos équipes ont un outil approuvé, gouverné par la politique de moteurs de l'
 
 ## Que se passe-t-il quand vous choisissez un moteur hébergé à l'étranger ?
 
-Corrext ne vous l'interdit pas : il applique la politique de votre organisation. Dès que DeepL Pro, Azure OpenAI GPT ou Claude est sélectionné, l'avis Attorney-Client privilege rappelle que seuls des documents entièrement pseudonymisés peuvent leur être confiés, et que les dossiers sensibles leur sont interdits. Avec LexMachina ou en mode Highly sensitive content, tout reste en Suisse.
+Corrext ne vous l'interdit pas : il vous rappelle la politique de votre organisation. Dès que DeepL Pro, Azure OpenAI GPT ou Claude est sélectionné, l'avis Attorney-Client privilege s'affiche. Selon cette politique, seuls des documents entièrement pseudonymisés peuvent leur être confiés, et jamais un dossier sensible. Avec LexMachina ou en mode Highly sensitive content, tout reste en Suisse.
 
 ### Avis affiché dans l'outil
 
 Le texte de la politique s'affiche au moment du choix, pas dans une charte oubliée.
 
-### Pseudonymisation exigée
+### Pseudonymisation selon votre politique
 
 Noms de clients, parties et objet du dossier retirés avant tout envoi à un moteur étranger.
 
@@ -1440,7 +1440,7 @@ C'est le cas d'usage des LegalTechs et des éditeurs juridiques : la traduction 
 
 Où les données sont-elles traitées lors d'un appel à l'API ?
 
-Les mêmes règles qu'en interface s'appliquent : le stockage a lieu sur des serveurs suisses dans tous les cas. Le traitement est exclusivement suisse avec LexMachina ou en mode Highly sensitive content, disponible pour l'anglais, le français, l'italien et l'allemand. Les moteurs tiers, DeepL Pro, Azure OpenAI GPT et Claude, sont hébergés à l'étranger et déclenchent l'avis de pseudonymisation défini par votre organisation. En déploiement on-premises, le périmètre de traitement est celui de votre propre infrastructure.
+Les mêmes règles qu'en interface s'appliquent : le stockage a lieu sur des serveurs suisses dans tous les cas. Le traitement est exclusivement suisse avec LexMachina ou en mode Highly sensitive content, disponible pour l'anglais, le français, l'italien et l'allemand. Les moteurs tiers, DeepL Pro, Azure OpenAI GPT et Claude, sont hébergés à l'étranger et déclenchent l'avis Attorney-Client privilege, qui rappelle la politique de votre organisation. En déploiement on-premises, le périmètre de traitement est celui de votre propre infrastructure.
 
 ## Cadrons votre intégration
 
@@ -1564,7 +1564,7 @@ L'allemand, le français, l'italien et l'anglais, en natif et dans toutes les pa
 
 Où le modèle s'exécute-t-il ?
 
-En Suisse, sur l'infrastructure suisse de Neur.on. Choisir LexMachina suffit à garder le traitement en Suisse, même sans activer le mode Highly sensitive content, et aucun avis de pseudonymisation ne s'affiche puisque rien ne part à l'étranger.
+En Suisse, sur l'infrastructure suisse de Neur.on. Choisir LexMachina suffit à garder le traitement en Suisse, même sans activer le mode Highly sensitive content, et l'avis Attorney-Client privilege ne s'affiche pas, puisque rien ne part à l'étranger.
 
 Mes documents servent-ils à entraîner le modèle ?
 
@@ -1572,7 +1572,7 @@ Non. LexMachina apprend de corpus juridiques et financiers suisses publics, pas 
 
 Puis-je utiliser d'autres moteurs que LexMachina ?
 
-Oui. Corrext est model-agnostic : DeepL Pro, Azure OpenAI GPT et Claude sont disponibles dans la même interface, et le moteur se choisit à chaque envoi. Les moteurs hébergés à l'étranger déclenchent l'avis Attorney-Client privilege de votre organisation.
+Oui. Corrext est model-agnostic : DeepL Pro, Azure OpenAI GPT et Claude sont disponibles dans la même interface, et le moteur se choisit à chaque envoi. Les moteurs hébergés à l'étranger déclenchent l'avis Attorney-Client privilege, qui rappelle la politique de votre organisation.
 
 Comment comparer les moteurs sur mes propres textes ?
 
@@ -1736,7 +1736,7 @@ Le stockage l'est dans tous les cas. Le traitement l'est exclusivement lorsque l
 
 Puis-je utiliser DeepL ou ChatGPT pour un dossier couvert par le secret professionnel ?
 
-Corrext ne vous l'interdit pas techniquement : il applique la politique de votre organisation au moment où vous choisissez le moteur. L'avis Attorney-Client privilege s'affiche alors et rappelle que seuls des documents entièrement pseudonymisés peuvent être confiés à un moteur hébergé à l'étranger, et que leur usage est strictement interdit pour les dossiers sensibles ou à enjeu financier. Pour une pièce couverte par le secret professionnel, le choix sûr est LexMachina ou le mode Highly sensitive content.
+Corrext ne vous l'interdit pas techniquement : il vous rappelle la politique de votre organisation au moment où vous choisissez le moteur. L'avis Attorney-Client privilege s'affiche alors. Selon cette politique, seuls des documents entièrement pseudonymisés peuvent être confiés à un moteur hébergé à l'étranger, et jamais un dossier sensible ou à enjeu financier. Pour une pièce couverte par le secret professionnel, le choix sûr est LexMachina ou le mode Highly sensitive content.
 
 Mes documents servent-ils à entraîner un modèle ?
 
@@ -2548,7 +2548,7 @@ Non, et nous préférons le dire : ils sont écrits par Neur.on, éditeur de Cor
 
 Corrext peut-il utiliser DeepL Pro, Azure OpenAI GPT ou Claude ?
 
-Oui. Ces moteurs sont disponibles dans Corrext, aux côtés de LexMachina, et se choisissent à chaque envoi. Comme ils sont hébergés à l'étranger, leur sélection déclenche l'avis Attorney-Client privilege de votre organisation, qui exige une pseudonymisation complète du document. Notre proposition n'est donc pas de renoncer à ces moteurs, mais de les utiliser dans un cadre qui protège votre secret professionnel.
+Oui. Ces moteurs sont disponibles dans Corrext, aux côtés de LexMachina, et se choisissent à chaque envoi. Comme ils sont hébergés à l'étranger, leur sélection déclenche l'avis Attorney-Client privilege, qui rappelle la politique de votre organisation : pseudonymisation complète du document. Notre proposition n'est donc pas de renoncer à ces moteurs, mais de les utiliser dans un cadre qui protège votre secret professionnel.
 
 Sur quoi reposent ces comparaisons ?
 
@@ -2668,7 +2668,7 @@ Comparer les moteurs sur vos textes dans la démo
 
 ## Faut-il renoncer à DeepL dans un cabinet ?
 
-Non, et l'interdire ne marche pas : les traductions sauvages reprennent le lendemain, dans un onglet que personne ne voit. Corrext part de l'inverse. DeepL Pro reste disponible, aux côtés de LexMachina, d'Azure OpenAI GPT et de Claude, mais son choix applique la politique de votre organisation : pseudonymisation exigée, dossiers sensibles exclus, avis affiché au moment de l'envoi. Vos équipes gardent l'outil qu'elles apprécient, votre secret professionnel garde son cadre.
+Non, et l'interdire ne marche pas : les traductions sauvages reprennent le lendemain, dans un onglet que personne ne voit. Corrext part de l'inverse. DeepL Pro reste disponible, aux côtés de LexMachina, d'Azure OpenAI GPT et de Claude, mais son choix affiche l'avis Attorney-Client privilege au moment de l'envoi. Cet avis rappelle la politique de votre organisation : pseudonymisation du document, dossiers sensibles exclus. Vos équipes gardent l'outil qu'elles apprécient, votre secret professionnel garde son cadre.
 
 Sécurité et souveraineté des données
 
@@ -2676,7 +2676,7 @@ L'avis s'affiche dans l'outil
 
 Le texte de la politique apparaît au choix du moteur, pas dans un document annexe.
 
-Pseudonymisation exigée
+Pseudonymisation selon votre politique
 
 Noms de clients, parties et objet du dossier retirés avant tout envoi à un moteur étranger.
 
@@ -2700,11 +2700,11 @@ Lire le comparatif
 
 Puis-je utiliser DeepL pour un document couvert par le secret professionnel ?
 
-La question n'est pas la qualité du moteur, c'est le transfert du document hors de Suisse. Dans Corrext, choisir DeepL Pro déclenche l'avis Attorney-Client privilege : l'organisation exige que le document soit entièrement pseudonymisé, et interdit ces moteurs pour les dossiers sensibles. Pour un document non pseudonymisé, choisissez LexMachina ou le mode Highly sensitive content, qui imposent un traitement exclusivement en Suisse. La règle qui vous lie reste celle de votre étude et de votre autorité de surveillance.
+La question n'est pas la qualité du moteur, c'est le transfert du document hors de Suisse. Dans Corrext, choisir DeepL Pro déclenche l'avis Attorney-Client privilege, qui rappelle la politique de votre organisation : document entièrement pseudonymisé, aucun usage de ces moteurs pour les dossiers sensibles. Pour un document non pseudonymisé, choisissez LexMachina ou le mode Highly sensitive content, qui imposent un traitement exclusivement en Suisse. La règle qui vous lie reste celle de votre étude et de votre autorité de surveillance.
 
 DeepL traite-t-il mes données en Suisse ?
 
-Non. DeepL est un éditeur allemand et son infrastructure se situe hors de Suisse. Dans Corrext, DeepL Pro est donc classé parmi les moteurs tiers hébergés à l'étranger et déclenche l'avis de pseudonymisation. Pour un stockage et un traitement exclusivement en Suisse, il faut choisir LexMachina ou activer le mode Highly sensitive content, disponible en allemand, français, italien et anglais.
+Non. DeepL est un éditeur allemand et son infrastructure se situe hors de Suisse. Dans Corrext, DeepL Pro est donc classé parmi les moteurs tiers hébergés à l'étranger et déclenche l'avis Attorney-Client privilege. Pour un stockage et un traitement exclusivement en Suisse, il faut choisir LexMachina ou activer le mode Highly sensitive content, disponible en allemand, français, italien et anglais.
 
 Corrext remplace-t-il DeepL ?
 
@@ -2844,7 +2844,7 @@ Comparer les moteurs sur vos textes dans la démo
 
 ## Faut-il interdire ChatGPT au cabinet ?
 
-Interdire ne produit rien d'autre qu'une utilisation invisible : le collaborateur pressé ouvre un onglet, colle un extrait, et personne n'en saura jamais rien. Corrext prend le problème autrement. Azure OpenAI GPT et Claude sont proposés en interne, à côté de LexMachina et de DeepL Pro. Leur choix affiche l'avis Attorney-Client privilege de votre organisation : pseudonymisation complète exigée, dossiers à forte notoriété ou sensibles au prix exclus. Vos équipes gardent la puissance de ces modèles, vous gardez la trace et la règle.
+Interdire ne produit rien d'autre qu'une utilisation invisible : le collaborateur pressé ouvre un onglet, colle un extrait, et personne n'en saura jamais rien. Corrext prend le problème autrement. Azure OpenAI GPT et Claude sont proposés en interne, à côté de LexMachina et de DeepL Pro. Leur choix affiche l'avis Attorney-Client privilege, qui rappelle la politique de votre organisation : pseudonymisation complète, dossiers à forte notoriété ou sensibles au prix exclus. Vos équipes gardent la puissance de ces modèles, vous gardez la trace et la règle.
 
 Sécurité et souveraineté des données
 
@@ -2854,7 +2854,7 @@ Le choix du moteur se fait à chaque envoi, sans quitter la plateforme.
 
 L'avis s'affiche avant l'envoi
 
-Pseudonymisation exigée, dossiers sensibles exclus, texte de votre organisation.
+Rappel de la politique de votre organisation : pseudonymisation, dossiers sensibles exclus.
 
 Le mode sensible existe à côté
 
@@ -2884,7 +2884,7 @@ Ne demandez pas au moteur qui vient de la produire : demandez à une source. Dan
 
 Corrext utilise-t-il des LLM généralistes ?
 
-Oui. Azure OpenAI GPT et Claude sont disponibles dans Corrext, aux côtés de LexMachina et de DeepL Pro, et se choisissent à chaque envoi. Comme ils sont hébergés à l'étranger, leur sélection déclenche l'avis Attorney-Client privilege de votre organisation, qui exige une pseudonymisation complète et interdit ces moteurs pour les dossiers sensibles. Le panneau Alternatives permet de comparer leurs propositions à celle du moteur suisse sur la même phrase.
+Oui. Azure OpenAI GPT et Claude sont disponibles dans Corrext, aux côtés de LexMachina et de DeepL Pro, et se choisissent à chaque envoi. Comme ils sont hébergés à l'étranger, leur sélection déclenche l'avis Attorney-Client privilege, qui rappelle la politique de votre organisation : pseudonymisation complète, aucun dossier sensible. Le panneau Alternatives permet de comparer leurs propositions à celle du moteur suisse sur la même phrase.
 
 Un LLM généraliste invente-t-il des articles de loi ?
 
@@ -3166,7 +3166,7 @@ LexMachina est entraîné sur la donnée juridique et financière suisse : ATF/B
 
 Le traitement
 
-Exclusivement en Suisse avec LexMachina ou en mode Highly sensitive content. Les moteurs tiers, hébergés à l'étranger, restent disponibles mais déclenchent l'avis de pseudonymisation défini par votre organisation.
+Exclusivement en Suisse avec LexMachina ou en mode Highly sensitive content. Les moteurs tiers, hébergés à l'étranger, restent disponibles mais déclenchent l'avis Attorney-Client privilege, qui rappelle la politique de votre organisation.
 
 Le quadrilinguisme
 
