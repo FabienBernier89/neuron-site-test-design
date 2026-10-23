@@ -344,9 +344,20 @@ class TestSelecteurDansLeBuild(unittest.TestCase):
         self.assertIn('<div class="hd-cta"><nav class="hd-lang"', h)
         self.assertIn('<a href="../de/" hreflang="de-CH" lang="de" translate="no" aria-current="true">DE</a>', h)
 
-    def test_page_404_sans_selecteur(self):
-        """La 404 est une page française seule (assembler ne lui connaît que le français) : jamais de sélecteur."""
-        self.assertNotIn("hd-lang", (self.sortie / "404.html").read_text(encoding="utf-8"))
+    def test_page_404_avec_selecteur_vers_les_accueils(self):
+        """Depuis la tâche 1.5 la 404 connaît les langues construites : sélecteur vers les accueils (elle n'est dans
+        aucune table d'adresses), langue de la page marquée, sur la 404 française comme sur l'allemande."""
+        fr = (self.sortie / "404.html").read_text(encoding="utf-8")
+        self.assertIn('<a href="fr/" hreflang="fr-CH" lang="fr" translate="no" aria-current="true">FR</a>', fr)
+        self.assertIn('<a href="de/" hreflang="de-CH" lang="de" translate="no">DE</a>', fr)
+        de = (self.sortie / "de/404.html").read_text(encoding="utf-8")
+        self.assertIn('<a href="de/" hreflang="de-CH" lang="de" translate="no" aria-current="true">DE</a>', de)
+
+    def test_page_404_sans_selecteur_en_francais_seul(self):
+        """Le français seul construit : la 404 n'a pas de sélecteur (elle est identique à celle d'avant la traduction)."""
+        with tempfile.TemporaryDirectory() as tmp:
+            sortie = support.construire(tmp, pages=("",), langues=("fr",))
+            self.assertNotIn("hd-lang", (sortie / "404.html").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

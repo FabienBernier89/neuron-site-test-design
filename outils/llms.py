@@ -16,8 +16,12 @@ import html as H
 import re
 from html.parser import HTMLParser
 
+from .i18n.langues import route
+
 PRODUCTION = "https://neur-on.ai/"
 SUFFIXE = " · Neur.on"
+# Nom de chaque langue dans sa propre langue (jamais traduit) : libellé des liens de la section « Versions linguistiques »
+NOMS_LANGUES = {"fr": "Français", "de": "Deutsch", "it": "Italiano", "en": "English"}
 
 # (titre de section, règle d'appartenance) dans l'ordre du fichier ; une page prend la première section qui l'accepte
 SECTIONS = [
@@ -47,25 +51,50 @@ def titre(meta):
     return t[:-len(SUFFIXE)] if t.endswith(SUFFIXE) else t
 
 
-def adresse(page):
-    return PRODUCTION + "fr/" + page
+def adresse(page, langue="fr"):
+    """Adresse de production d'une page dans une langue (le français se déduit de la page, comme partout)."""
+    return PRODUCTION + ("fr/" + page if langue == "fr" else route(page, langue))
 
 
-def llms_txt(pages, date):
-    """pages : [(chemin publié, méta)] des pages indexables, dans l'ordre du build ; date : AAAA-MM-JJ."""
+def fichier(nom, langue="fr"):
+    """Adresse de production d'un fichier llms (« llms.txt ») : à la racine pour le français, sous /<l>/ sinon."""
+    return PRODUCTION + ("" if langue == "fr" else langue + "/") + nom
+
+
+# Libellés fixes, passés à t (traduction de la langue ; identité en français). Les phrases portent {date} et {url}.
+INTRO_INDEX = "Site en français (Suisse), mis à jour le {date}. Texte intégral des pages principales : {url}"
+INTRO_COMPLET = "Site en français (Suisse), mis à jour le {date}. Index de toutes les pages : {url}"
+TITRE_COMPLET = "Neur.on : texte intégral des pages principales"
+TITRE_VERSIONS = "Versions linguistiques"
+SOURCE = "Source"
+
+
+def remplir(phrase, date, url):
+    """Phrase d'introduction (éventuellement traduite) dont {date} et {url} sont remplacés."""
+    return phrase.replace("{date}", date).replace("{url}", url)
+
+
+def llms_txt(pages, date, langue="fr", t=lambda s: s, langues=("fr",)):
+    """pages : [(chemin publié, méta)] des pages indexables de la langue, dans l'ordre du build ; date : AAAA-MM-JJ.
+    langue : langue du fichier (adresses de cette langue) ; t : traduction des libellés fixes (titres de SECTIONS,
+    phrase d'introduction). langues : langues construites ; le fichier français, s'il y en a plusieurs, gagne une section
+    « Versions linguistiques » (les fichiers llms des autres langues), avant « Optional » qui reste la dernière."""
     metas = dict(pages)
     accueil = metas.get("", {})
     lignes = ["# Neur.on", "", "> " + H.unescape(accueil.get("description", "")).strip(), "",
-              f"Site en français (Suisse), mis à jour le {date}. Texte intégral des pages principales : "
-              f"{PRODUCTION}llms-full.txt", ""]
+              remplir(t(INTRO_INDEX), date, fichier("llms-full.txt", langue)), ""]
     ranges = {nom: [] for nom, _ in SECTIONS}
     for page, meta in pages:
         nom = next(n for n, regle in SECTIONS if regle(page))
         desc = H.unescape(meta.get("description", "")).strip()
-        ranges[nom].append(f"- [{titre(meta)}]({adresse(page)})" + (f": {desc}" if desc else ""))
-    for nom, _ in SECTIONS:
-        if ranges[nom]:
-            lignes += [f"## {nom}", ""] + ranges[nom] + [""]
+        ranges[nom].append(f"- [{titre(meta)}]({adresse(page, langue)})" + (f": {desc}" if desc else ""))
+    if langue == "fr" and len(langues) > 1:
+        ranges[TITRE_VERSIONS] = [f"- [{NOMS_LANGUES[l]}]({fichier('llms.txt', l)})" for l in langues if l != "fr"]
+    sections = [n for n, _ in SECTIONS]
+    sections.insert(sections.index("Optional"), TITRE_VERSIONS)  # « Optional » reste la dernière section du format
+    for nom in sections:
+        if ranges.get(nom):
+            lignes += [f"## {t(nom)}", ""] + ranges[nom] + [""]
     return "\n".join(lignes).rstrip("\n") + "\n"
 
 
@@ -170,16 +199,17 @@ def texte_principal(html):
     return lecteur.texte()
 
 
-def llms_full_txt(pages, lire_html, date):
-    """pages : [(chemin publié, méta)] des pages indexables ; lire_html(page) : HTML construit de la page."""
+def llms_full_txt(pages, lire_html, date, langue="fr", t=lambda s: s):
+    """pages : [(chemin publié, méta)] des pages indexables de la langue ; lire_html(page) : HTML construit de la page
+    dans cette langue. langue et t : voir llms_txt."""
     metas = dict(pages)
-    entete = ["# Neur.on : texte intégral des pages principales", "",
+    entete = ["# " + t(TITRE_COMPLET), "",
               "> " + H.unescape(metas.get("", {}).get("description", "")).strip(), "",
-              f"Site en français (Suisse), mis à jour le {date}. Index de toutes les pages : {PRODUCTION}llms.txt", ""]
+              remplir(t(INTRO_COMPLET), date, fichier("llms.txt", langue)), ""]
     parties = []
     for page in PAGES_COMPLETES:
         if page not in metas:
             continue
         corps = texte_principal(lire_html(page))
-        parties.append(f"---\n\nSource : {adresse(page)}\n\n{corps}\n")
+        parties.append(f"---\n\n{t(SOURCE)} : {adresse(page, langue)}\n\n{corps}\n")
     return "\n".join(entete) + "\n" + "\n".join(parties)

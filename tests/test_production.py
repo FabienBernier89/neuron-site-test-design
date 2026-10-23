@@ -184,5 +184,175 @@ class TestProductionSimulee(unittest.TestCase):
             self.assertRegex(h[:h.index("</head>")], r'<meta property="og:image" content="https://neur-on\.ai/assets/img/[^"]+">', p)
 
 
+PAGES_MULTI = ("", "contact/", "contact/merci/")
+NS_SITEMAP = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+NS_XHTML = "{http://www.w3.org/1999/xhtml}"
+
+
+class TestProductionMultilingue(unittest.TestCase):
+    """Production simulée en français et en allemand (tâche 1.5) : racine, 404, sitemaps, robots et llms.txt par langue.
+    La traduction n'est pas branchée : les pages « de » portent le texte français, seuls les adresses et le balisage comptent."""
+
+    @classmethod
+    def setUpClass(cls):
+        import tempfile
+        cls._tmp = tempfile.TemporaryDirectory()
+        cls.docs = support.construire(cls._tmp.name, pages=PAGES_MULTI, config={"apercu": False}, langues=("fr", "de"))
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._tmp.cleanup()
+
+    def lire(self, fichier):
+        return (self.docs / fichier).read_text(encoding="utf-8")
+
+    def urls(self, fichier):
+        import xml.etree.ElementTree as ET
+        racine = ET.parse(self.docs / fichier).getroot()
+        return racine, {u.find(NS_SITEMAP + "loc").text: u for u in racine.findall(NS_SITEMAP + "url")}
+
+    def test_racine_dispo(self):
+        h = self.lire("index.html")
+        self.assertIn('var dispo=["fr","de"],def="fr"', h)
+        self.assertIn('<link rel="alternate" hreflang="de-CH" href="https://neur-on.ai/de/">', h)
+        self.assertIn('<link rel="alternate" hreflang="fr-CH" href="https://neur-on.ai/fr/">', h)
+        self.assertNotIn("hreflang=\"it-CH\"", h)
+        self.assertNotIn("hreflang=\"en\"", h)
+        self.assertIn('<link rel="alternate" hreflang="x-default" href="https://neur-on.ai/fr/">', h)
+        self.assertIn('<a href="de/" hreflang="de-CH">DE</a> · <a href="fr/" hreflang="fr-CH">FR</a>', h)
+        self.assertNotIn('href="it/"', h)
+        self.assertNotIn(" · </p>", h)
+
+    def test_racine_sans_langue_construite_hors_fr(self):
+        """Une langue configurée dont la page d'accueil n'est pas construite n'est ni dans la liste, ni dans les liens."""
+        import tempfile
+        from unittest import mock
+        absente = mock.patch.object(build, "TRADUIRE", lambda html, page, langue: (html, ["segment manquant"]))
+        with tempfile.TemporaryDirectory() as tmp:
+            docs = support.construire(tmp, pages=PAGES_MULTI, config={"apercu": False}, langues=("fr", "de"), patches=[absente])
+            h = (docs / "index.html").read_text(encoding="utf-8")
+            self.assertIn('var dispo=["fr"],def="fr"', h)
+            self.assertNotIn("de-CH", h)
+            # ni sitemap par langue, ni index, ni 404 allemande, ni llms.txt allemand : le français seul, comme avant
+            self.assertFalse((docs / "de").exists())
+            self.assertIn("<urlset", (docs / "sitemap.xml").read_text(encoding="utf-8"))
+            self.assertNotIn("sitemap-", " ".join(f.name for f in docs.iterdir()))
+            self.assertNotIn("Versions linguistiques", (docs / "llms.txt").read_text(encoding="utf-8"))
+
+    def test_404_par_langue(self):
+        h = self.lire("de/404.html")
+        self.assertIn('<html lang="de" ', h)
+        self.assertIn('<base href="/">', h)
+        self.assertNotIn("noindex", h)
+        self.assertNotIn("{{", h)
+        self.assertNotIn("@LANG@", h)
+        self.assertIn("ErrorDocument 404 /de/404.html", self.lire("de/.htaccess"))
+        # la 404 française reste à la racine, en français
+        fr = self.lire("404.html")
+        self.assertIn('<html lang="fr" ', fr)
+        self.assertIn("ErrorDocument 404 /404.html", self.lire(".htaccess"))
+
+    def test_404_liens_dans_la_langue_et_selecteur(self):
+        """Les liens de la 404 allemande mènent aux pages allemandes construites ; le sélecteur renvoie vers les accueils."""
+        de = self.lire("de/404.html")
+        self.assertIn('href="de/kontakt/"', de)
+        self.assertIn('<a href="fr/" hreflang="fr-CH" lang="fr" translate="no">FR</a>', de)
+        self.assertIn('<a href="de/" hreflang="de-CH" lang="de" translate="no" aria-current="true">DE</a>', de)
+        self.assertIn('hreflang="de-CH" lang="de" translate="no">DE</a>', self.lire("404.html"))
+
+    def test_sitemap_index_et_par_langue(self):
+        import xml.etree.ElementTree as ET
+        index = ET.parse(self.docs / "sitemap.xml").getroot()
+        self.assertEqual(index.tag, NS_SITEMAP + "sitemapindex")
+        self.assertEqual([s.find(NS_SITEMAP + "loc").text for s in index.findall(NS_SITEMAP + "sitemap")],
+                         ["https://neur-on.ai/sitemap-fr.xml", "https://neur-on.ai/sitemap-de.xml"])
+        racine, urls = self.urls("sitemap-de.xml")
+        self.assertEqual(set(urls), {"https://neur-on.ai/de/", "https://neur-on.ai/de/kontakt/"})
+        liens = {l.get("hreflang"): l.get("href") for l in urls["https://neur-on.ai/de/kontakt/"].findall(NS_XHTML + "link")}
+        self.assertEqual(liens, {"fr-CH": "https://neur-on.ai/fr/contact/", "de-CH": "https://neur-on.ai/de/kontakt/",
+                                 "x-default": "https://neur-on.ai/fr/contact/"})
+        for l in urls["https://neur-on.ai/de/kontakt/"].findall(NS_XHTML + "link"):
+            self.assertEqual(l.get("rel"), "alternate")
+        _, fr = self.urls("sitemap-fr.xml")
+        self.assertEqual(set(fr), {"https://neur-on.ai/fr/", "https://neur-on.ai/fr/contact/"})
+        liens_fr = {l.get("hreflang") for l in fr["https://neur-on.ai/fr/"].findall(NS_XHTML + "link")}
+        self.assertEqual(liens_fr, {"fr-CH", "de-CH", "x-default"})
+        self.assertIn("lastmod", ET.tostring(urls["https://neur-on.ai/de/"], encoding="unicode"))
+
+    def test_merci_non_indexee_par_langue(self):
+        for fichier in ("sitemap-de.xml", "sitemap-fr.xml"):
+            self.assertNotIn("danke", self.lire(fichier))
+            self.assertNotIn("merci", self.lire(fichier))
+        self.assertTrue((self.docs / "de/kontakt/danke/index.html").is_file())
+
+    def test_robots_annonce_l_index(self):
+        self.assertEqual(self.lire("robots.txt"), "User-agent: *\nAllow: /\nSitemap: https://neur-on.ai/sitemap.xml\n")
+
+    def test_llms_par_langue(self):
+        de = self.lire("de/llms.txt")
+        adresses = re.findall(r"\]\((https://[^)]+)\)", de)
+        self.assertTrue(adresses)
+        for a in adresses:
+            self.assertTrue(a.startswith("https://neur-on.ai/de/"), a)
+        self.assertIn("(https://neur-on.ai/de/kontakt/)", de)
+        self.assertNotIn("danke", de)
+        self.assertIn("https://neur-on.ai/de/llms-full.txt", de)
+        full = self.lire("de/llms-full.txt")
+        self.assertIn("Source : https://neur-on.ai/de/kontakt/", full)
+        self.assertIn("https://neur-on.ai/de/llms.txt", full)
+        racine = self.lire("llms.txt")
+        self.assertIn("## Versions linguistiques", racine)
+        self.assertIn("https://neur-on.ai/de/llms.txt", racine)
+        self.assertIn("(https://neur-on.ai/fr/contact/)", racine)
+        self.assertLess(racine.index("## Versions linguistiques"), racine.index("## Optional") if "## Optional" in racine else len(racine))
+
+
+class TestLlmsParLangue(unittest.TestCase):
+    PAGES = [("", {"title": "Accueil · Neur.on", "description": "Résumé."}),
+             ("contact/", {"title": "Contact · Neur.on", "description": ""})]
+
+    def test_adresse(self):
+        from outils import llms
+        self.assertEqual(llms.adresse("contact/"), "https://neur-on.ai/fr/contact/")
+        self.assertEqual(llms.adresse("contact/", "de"), "https://neur-on.ai/de/kontakt/")
+        self.assertEqual(llms.adresse("", "en"), "https://neur-on.ai/en/")
+
+    def test_francais_par_defaut_inchange(self):
+        from outils import llms
+        self.assertEqual(llms.llms_txt(self.PAGES, "2026-10-23"), llms.llms_txt(self.PAGES, "2026-10-23", "fr", lambda s: s))
+        self.assertNotIn("Versions linguistiques", llms.llms_txt(self.PAGES, "2026-10-23"))
+        self.assertIn("Texte intégral des pages principales : https://neur-on.ai/llms-full.txt", llms.llms_txt(self.PAGES, "2026-10-23"))
+
+    def test_libelles_passent_par_t(self):
+        """t reçoit chaque libellé fixe (sections, phrase d'introduction) ; l'identité les laisse tels quels."""
+        from outils import llms
+        vus = []
+        llms.llms_txt(self.PAGES, "2026-10-23", "de", lambda s: vus.append(s) or s)
+        self.assertIn("Accueil", vus)
+        self.assertIn("Contact", vus)
+        self.assertTrue(any("Texte intégral" in s for s in vus))
+        txt = llms.llms_txt(self.PAGES, "2026-10-23", "de", lambda s: {"Contact": "Kontakt"}.get(s, s))
+        self.assertIn("## Kontakt", txt)
+        self.assertIn("(https://neur-on.ai/de/kontakt/)", txt)
+        self.assertIn("https://neur-on.ai/de/llms-full.txt", txt)
+
+
+class TestPageRacine(unittest.TestCase):
+    def test_liste_et_liens_des_seules_langues_donnees(self):
+        for dispo in (["fr"], ["fr", "de"], ["fr", "it", "en"], ["fr", "de", "it", "en"]):
+            h = build.page_racine(dispo)
+            self.assertIn("var dispo=" + str(dispo).replace("'", '"').replace(" ", "") + ',def="fr"', h)
+            codes = {"fr": "fr-CH", "de": "de-CH", "it": "it-CH", "en": "en"}
+            for langue, hreflang in codes.items():
+                presente = langue in dispo
+                self.assertEqual(f'hreflang="{hreflang}" href="https://neur-on.ai/{langue}/"' in h, presente, (dispo, langue))
+                self.assertEqual(f'<a href="{langue}/" hreflang="{hreflang}">' in h, presente, (dispo, langue))
+            self.assertNotIn(" · </p>", h)
+            self.assertIn('hreflang="x-default" href="https://neur-on.ai/fr/"', h)
+
+    def test_defaut_francais_seul(self):
+        self.assertEqual(build.page_racine(), build.page_racine(["fr"]))
+
+
 if __name__ == "__main__":
     unittest.main()

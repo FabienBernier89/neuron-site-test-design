@@ -489,9 +489,15 @@ def finaliser(html, page, langue, construites, racine=None):
     return relier(dimensionner(html), page, racine, langue)
 
 
-def assembler(meta, corps, page, nav, pied, v, racine=None):
-    """Page française complète et finalisée : assembler_fr puis finaliser (la 404 s'assemble ainsi)."""
-    return finaliser(assembler_fr(meta, corps, page, nav, pied, v), page, "fr", {"fr": set(PAGES)}, racine)
+def langues_construites(construites):
+    """Langues dont au moins une page est construite, dans l'ordre de langues.LANGUES (le français d'abord)."""
+    return [l for l in langues.LANGUES if construites.get(l)]
+
+
+def assembler(meta, corps, page, nav, pied, v, racine=None, langue="fr", construites=None):
+    """Page complète et finalisée dans une langue : assembler_fr puis finaliser (la 404 s'assemble ainsi). Sans
+    construites, seul le français est construit : la page est celle d'un site à une seule langue, sans sélecteur."""
+    return finaliser(assembler_fr(meta, corps, page, nav, pied, v), page, langue, construites or {"fr": set(PAGES)}, racine)
 
 
 def base_pages():
@@ -500,7 +506,10 @@ def base_pages():
     return os.environ.get("BASE_PAGES") or ("/" if not CONFIG["apercu"] else CONFIG["base"])
 
 
-def page_404(nav, pied, v):
+def page_404(nav, pied, v, langue="fr", construites=None):
+    """Page 404 d'une langue : DOCS/404.html en français, DOCS/<l>/404.html sinon (main écrit aussi DOCS/<l>/.htaccess, qui
+    la désigne). construites : voir assembler ; les liens et le sélecteur de langue en dépendent (aucun sélecteur tant
+    que le français est seul construit). Le texte reste celui du français : sa traduction n'est pas encore branchée."""
     src = (NEURON / "src/partials/404.html").read_text(encoding="utf-8")
     h1 = re.search(r'<h1 data-t="h1">(.*?)</h1>', src, re.S).group(1)
     lead = re.search(r'<p class="lead" data-t="lead">(.*?)</p>', src, re.S).group(1)
@@ -508,42 +517,66 @@ def page_404(nav, pied, v):
              '<div class="hero-d"><p>' + lead + '</p><a class="btn" href="{{ROOT}}">Neur.on</a></div></div></section>\n')
     meta = {"title": "Page introuvable · Neur.on", "description": "Page introuvable."}
     # servie depuis la racine du site, à toute profondeur, via <base> ; nommée 404.html pour les post-traitements
-    html = assembler(meta, corps, "404.html", nav, pied, v, racine="")
+    html = assembler(meta, corps, "404.html", nav, pied, v, racine="", langue=langue, construites=construites)
     html = DONNEES.sub("", SEO_TETE.sub("", html)).replace("\n\n", "\n")  # la page 404 n'a ni canonique ni données structurées
     return html.replace("<head>\n", '<head>\n<base href="' + base_pages() + '">\n', 1)
 
 
-def page_racine():
-    """Page d'aiguillage de la racine : celle du site Neur.on, réduite à la seule langue du site, le français.
-    Elle choisit la langue côté navigateur ; elle reste non indexée, comme dans le site actuel."""
+def page_racine(dispo=("fr",)):
+    """Page d'aiguillage de la racine : celle du site Neur.on, réduite aux langues construites (dispo : le français et les
+    langues dont la page d'accueil l'est). Elle choisit la langue côté navigateur, repli sur le français ; elle reste
+    non indexée, comme dans le site actuel. Redirection par Accept-Language et bascule de x-default vers l'anglais :
+    lot 10 (décision V7)."""
     h = (NEURON / "docs/index.html").read_text(encoding="utf-8")
-    h, n = re.subn(r'var dispo=\[[^\]]*\],def="[a-z]+"', 'var dispo=["fr"],def="fr"', h)
+    liste = json.dumps(list(dispo), separators=(",", ":"))
+    h, n = re.subn(r'var dispo=\[[^\]]*\],def="[a-z]+"', lambda m: f'var dispo={liste},def="fr"', h)
     h = h.replace('<html lang="en">', '<html lang="fr">', 1)
     h = X_DEFAULT.sub(f'<link rel="alternate" hreflang="x-default" href="{adresse_x_default("")}">', h)
-    h = re.sub(r'<link rel="alternate" hreflang="(?:de|it|en)[^"]*" href="[^"]*">\n', "", h)
-    h = re.sub(r'<a href="(?:de|it|en)/" hreflang="[^"]*">[A-Z]+</a>(?: · )?', "", h)
+    absentes = "|".join(l for l in ("de", "it", "en") if l not in dispo)
+    if absentes:
+        h = re.sub(rf'<link rel="alternate" hreflang="(?:{absentes})[^"]*" href="[^"]*">\n', "", h)
+        h = re.sub(rf'<a href="(?:{absentes})/" hreflang="[^"]*">[A-Z]+</a>(?: · )?', "", h)
     h = re.sub(r" · (?=</p>)", "", h)
     if n != 1 or len(re.findall(r'<a href="fr/" hreflang="fr-CH">FR</a>', h)) != 2 or "location.replace" not in h:
         sys.exit("La page d'aiguillage du site Neur.on a changé de forme : adapter page_racine() dans build.py")
     return h
 
 
-def plan_du_site():
-    """sitemap.xml de la production : l'adresse canonique de chaque page indexable écrite par ce build, lue dans son
+def plan_du_site(langue="fr", construites=None):
+    """Plan du site d'une langue : l'adresse canonique de chaque page indexable construite dans cette langue, lue dans son
     HTML, avec sa date de dernière modification (lastmod, date_page). Ni page noindex (remerciement), ni redirection,
-    ni page d'aiguillage ; une page dont la canonique désigne une autre adresse n'y figure pas."""
+    ni page d'aiguillage ; une page dont la canonique désigne une autre adresse n'y figure pas. Écrit dans sitemap.xml
+    quand le français est seul construit, sinon dans sitemap-<l>.xml (réuni par index_sitemaps) : chaque adresse y porte
+    alors ses xhtml:link (les mêmes alternates que sa tête : localiser.alternates). construites : voir assembler."""
+    construites = construites or {"fr": set(PAGES)}
+    multilingue = len(langues_construites(construites)) > 1
     adresses = {}
     for page in PAGES:
-        tete = chemin_page(page).read_text(encoding="utf-8").split("</head>", 1)[0]
+        if page not in construites.get(langue, ()):
+            continue
+        tete = chemin_page(page, langue).read_text(encoding="utf-8").split("</head>", 1)[0]
         if re.search(r'<meta name="robots" content="[^"]*noindex', tete):
             continue
         canonique = re.search(r'<link rel="canonical" href="([^"]+)">', tete)
-        propre = PRODUCTION + chemin_page(page).parent.relative_to(DOCS).as_posix() + "/"
+        propre = PRODUCTION + chemin_page(page, langue).parent.relative_to(DOCS).as_posix() + "/"
         if canonique and H.unescape(canonique.group(1)) == propre and propre not in adresses:
-            adresses[propre] = date_page(page)
-    return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-            + "".join(f"<url><loc>{H.escape(a, quote=False)}</loc><lastmod>{d}</lastmod></url>\n" for a, d in adresses.items())
-            + "</urlset>\n")
+            adresses[propre] = page
+
+    def entree(adresse, page):
+        liens = "".join(f'<xhtml:link rel="alternate" hreflang="{hl}" href="{H.escape(url)}"/>'
+                        for hl, url in localiser.alternates(page, construites)) if multilingue else ""
+        return f"<url><loc>{H.escape(adresse, quote=False)}</loc><lastmod>{date_page(page)}</lastmod>{liens}</url>\n"
+
+    xhtml = ' xmlns:xhtml="http://www.w3.org/1999/xhtml"' if multilingue else ""
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' + xhtml + ">\n"
+            + "".join(entree(a, p) for a, p in adresses.items()) + "</urlset>\n")
+
+
+def index_sitemaps(langues_presentes):
+    """sitemap.xml en index des plans par langue (sitemap-<l>.xml), pour le site à plusieurs langues construites."""
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            + "".join(f"<sitemap><loc>{PRODUCTION}sitemap-{l}.xml</loc></sitemap>\n" for l in langues_presentes)
+            + "</sitemapindex>\n")
 
 
 ROBOTS_APERCU = '<meta name="robots" content="noindex, nofollow">\n'
@@ -552,22 +585,38 @@ ROBOTS_APERCU = '<meta name="robots" content="noindex, nofollow">\n'
 NON_INDEXEES = ("contact/merci/",)
 
 
-def indexable(page):
-    """Vrai si la page est destinée aux moteurs en production : ni dans NON_INDEXEES, ni exclue par sa propre balise
-    robots (la balise noindex que l'aperçu pose sur toutes les pages ne compte pas)."""
+def indexable(page, langue="fr"):
+    """Vrai si la page, dans cette langue, est destinée aux moteurs en production : ni dans NON_INDEXEES (chemins
+    français, valables pour toutes les langues), ni exclue par sa propre balise robots (la balise noindex que l'aperçu
+    pose sur toutes les pages ne compte pas)."""
     if page in NON_INDEXEES:
         return False
-    tete = chemin_page(page).read_text(encoding="utf-8").split("</head>", 1)[0].replace(ROBOTS_APERCU, "", 1)
+    tete = chemin_page(page, langue).read_text(encoding="utf-8").split("</head>", 1)[0].replace(ROBOTS_APERCU, "", 1)
     return not re.search(r'<meta name="robots" content="[^"]*noindex', tete)
 
 
-def ecrire_llms(metas):
-    """llms.txt et llms-full.txt générés depuis les pages de la V2 (outils/llms.py), datés de la page la plus récente."""
-    pages = [(p, metas[p]) for p in PAGES if indexable(p)]
-    recente = max((date_page(p) for p, _ in pages), default=DATE_BUILD)
-    (DOCS / "llms.txt").write_text(llms.llms_txt(pages, recente), encoding="utf-8")
-    lire = lambda p: chemin_page(p).read_text(encoding="utf-8")
-    (DOCS / "llms-full.txt").write_text(llms.llms_full_txt(pages, lire, recente), encoding="utf-8")
+def meta_de_html(html):
+    """Titre et description d'une page construite, tels que la tête les porte (la méta d'une page traduite est celle de
+    sa traduction, pas celle du français)."""
+    titre = re.search(r"<title>(.*?)</title>", html, re.S)
+    desc = re.search(r'<meta name="description" content="([^"]*)">', html)
+    return {"title": titre.group(1) if titre else "", "description": desc.group(1) if desc else ""}
+
+
+def ecrire_llms(metas, construites=None):
+    """llms.txt et llms-full.txt générés depuis les pages de la V2 (outils/llms.py), datés de la page la plus récente :
+    à la racine en français, sous <l>/ pour chaque autre langue construite (métas lues dans ses pages). Le fichier racine
+    renvoie vers les autres quand plusieurs langues sont construites. construites : voir assembler."""
+    construites = construites or {"fr": set(PAGES)}
+    presentes = langues_construites(construites)
+    for langue in presentes:
+        pages = [(p, metas[p] if langue == "fr" else meta_de_html(chemin_page(p, langue).read_text(encoding="utf-8")))
+                 for p in PAGES if p in construites[langue] and indexable(p, langue)]
+        recente = max((date_page(p) for p, _ in pages), default=DATE_BUILD)
+        dossier = DOCS if langue == "fr" else DOCS / langue
+        (dossier / "llms.txt").write_text(llms.llms_txt(pages, recente, langue, langues=presentes), encoding="utf-8")
+        lire = lambda p, l=langue: chemin_page(p, l).read_text(encoding="utf-8")
+        (dossier / "llms-full.txt").write_text(llms.llms_full_txt(pages, lire, recente, langue), encoding="utf-8")
 
 
 def garde_sortie():
@@ -644,15 +693,28 @@ def main():
             sortie = chemin_page(page, langue)
             sortie.parent.mkdir(parents=True, exist_ok=True)
             sortie.write_text(finaliser(html, page, langue, construites), encoding="utf-8")
-    (DOCS / "404.html").write_text(page_404(nav, pied, v), encoding="utf-8")
-    (DOCS / "index.html").write_text(page_racine(), encoding="utf-8")
-    # Aperçu : aucun robot, aucun plan du site. Production : tout est ouvert, robots.txt annonce sitemap.xml
+    (DOCS / "404.html").write_text(page_404(nav, pied, v, "fr", construites), encoding="utf-8")
+    for langue in autres:  # une 404 par langue construite, désignée par le .htaccess de son dossier
+        if construites[langue]:
+            (DOCS / langue / "404.html").write_text(page_404(nav, pied, v, langue, construites), encoding="utf-8")
+            (DOCS / langue / ".htaccess").write_text(
+                f"# Généré par build.py : ne pas modifier à la main.\nErrorDocument 404 {base_pages()}{langue}/404.html\n", encoding="utf-8")
+    presentes = langues_construites(construites)
+    accueils = [l for l in langues.LANGUES if l == "fr" or "" in construites.get(l, ())]  # l/ doit exister pour être proposée
+    (DOCS / "index.html").write_text(page_racine(accueils), encoding="utf-8")
+    # Aperçu : aucun robot, aucun plan du site. Production : tout est ouvert, robots.txt annonce sitemap.xml (un plan
+    # par langue réunis en index dès que plusieurs langues sont construites)
     if CONFIG["apercu"]:
         (DOCS / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
     else:
-        (DOCS / "sitemap.xml").write_text(plan_du_site(), encoding="utf-8")
+        if len(presentes) > 1:
+            for langue in presentes:
+                (DOCS / f"sitemap-{langue}.xml").write_text(plan_du_site(langue, construites), encoding="utf-8")
+            (DOCS / "sitemap.xml").write_text(index_sitemaps(presentes), encoding="utf-8")
+        else:
+            (DOCS / "sitemap.xml").write_text(plan_du_site("fr", construites), encoding="utf-8")
         (DOCS / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {PRODUCTION}sitemap.xml\n", encoding="utf-8")
-    ecrire_llms(metas)  # résumé et texte intégral pour les moteurs IA, générés depuis les pages de la V2
+    ecrire_llms(metas, construites)  # résumé et texte intégral pour les moteurs IA, un jeu par langue construite
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
     ecrire_redirections()
     envoi.ecrire(DOCS / "envoi.php", CONFIG)  # envoi des formulaires sur Hostpoint, réglé par la configuration
