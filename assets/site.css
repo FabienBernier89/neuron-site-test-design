@@ -529,7 +529,7 @@ ul{padding:0;list-style:none}
 .cd:not(:has(.v,.kv,a,.cd-meta)){gap:16px}
 .cd:not(:has(.v,.kv,a,.cd-meta)) > *{padding:28px}
 .cd:not(:has(.v,.kv,a,.cd-meta)) b{font-weight:600;font-size:17px}
-.cd:not(:has(.v,.kv,a,.cd-meta)) p{margin-top:12px;font-size:15px;line-height:25px;color:var(--muted)}
+.cd:not(:has(.v,.kv,a,.cd-meta)) p{margin-top:12px;font-size:16px;line-height:24px;color:var(--muted)}
 @media (max-width:640px){.cd:not(:has(.v,.kv,a,.cd-meta)) > *{padding:24px}}
 
 /* Bande d'appel intermédiaire (C13) */

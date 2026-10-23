@@ -61,7 +61,7 @@ class TestAvisAttorney(unittest.TestCase):
                 self.assertNotIn(f.lower(), t.lower(), f"llms : « {f} »")
 
     def test_variantes_appliquees_et_limitees_a_leur_page(self):
-        self.assertEqual(len(self.entrees_x), 13)
+        self.assertEqual(len(self.entrees_x), 14)
         for e in self.entrees_x:
             self.assertEqual(e["statut"], "valide", e["cle"])
             self.assertIn("Décision de Fabien du 2026-10-23 (point 3, option A, variantes)", e["source"], e["cle"])
@@ -71,8 +71,9 @@ class TestAvisAttorney(unittest.TestCase):
             for c in (chr(0x2014), chr(0x2013)):
                 self.assertNotIn(c, e["texte"], e["cle"])
             # l'avis rappelle la politique de l'organisation, il n'impose, n'exige ni n'interdit rien
+            texte = e["texte"].replace("ne l'interdit pas", "")  # négation : Corrext n'interdit rien
             for v in ("impose", "exige", "interdit"):
-                self.assertNotIn(v, e["texte"], e["cle"])
+                self.assertNotIn(v, texte, e["cle"])
 
     def test_citation_de_l_application_inchangee(self):
         self.assertIn(CITATION, self.pages[BLOG])

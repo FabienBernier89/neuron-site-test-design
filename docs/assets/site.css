@@ -529,7 +529,7 @@ ul{padding:0;list-style:none}
 .cd:not(:has(.v,.kv,a,.cd-meta)){gap:16px}
 .cd:not(:has(.v,.kv,a,.cd-meta)) > *{padding:28px}
 .cd:not(:has(.v,.kv,a,.cd-meta)) b{font-weight:600;font-size:17px}
-.cd:not(:has(.v,.kv,a,.cd-meta)) p{margin-top:12px;font-size:15px;line-height:25px;color:var(--muted)}
+.cd:not(:has(.v,.kv,a,.cd-meta)) p{margin-top:12px;font-size:16px;line-height:24px;color:var(--muted)}
 @media (max-width:640px){.cd:not(:has(.v,.kv,a,.cd-meta)) > *{padding:24px}}
 
 /* Bande d'appel intermédiaire (C13) */
@@ -1898,9 +1898,9 @@ form [aria-invalid="true"]{border-color:var(--erreur)}
 .fr li{padding-top:16px;border-top:2px solid var(--line)}
 .fr li.fr-p{border-top-color:var(--accent-d)}
 .fr-n{font:600 13px/16px var(--num);color:var(--accent-d)}
-.fr-ph{margin-left:8px;padding:1px 8px;border-radius:999px;background:var(--tile);font:600 10.5px/16px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
-.fr h3{margin-top:8px;font:600 15px/22px var(--sans);color:var(--ink)}
-.fr p{margin-top:4px;font:400 13px/20px var(--sans);color:var(--text)}
+.fr-ph{margin-left:8px;padding:1px 8px;border-radius:999px;background:var(--tile);font:600 12px/16px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.fr h3{margin-top:8px;font:600 17px/24px var(--sans);color:var(--ink)}
+.fr p{margin-top:4px;font:400 16px/24px var(--sans);color:var(--muted)}
 
 /* Travailler dans Word : texte et lien vers la page Plugin Word, écran Word à côté */
 .ow{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:44px;align-items:center;margin-top:56px;padding:28px;border-radius:12px;background:var(--tile)}
@@ -1914,7 +1914,7 @@ form [aria-invalid="true"]{border-color:var(--erreur)}
 .rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;margin-top:32px}
 .rg > div{padding-top:18px;border-top:2px solid var(--accent-d)}
 .rg h3{font:400 21px/28px var(--serif);color:var(--ink)}
-.rg p{margin-top:8px;font:400 14.5px/23px var(--sans);color:var(--text)}
+.rg p{margin-top:8px;font:400 16px/24px var(--sans);color:var(--muted)}
 .rg-lien{margin-top:24px}
 
 /* Faits en deux colonnes titrées et liste en pastilles (CHnell) */
@@ -1975,7 +1975,7 @@ form [aria-invalid="true"]{border-color:var(--erreur)}
 .sr-ic{display:grid;flex:none;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--tile);color:var(--accent-d)}
 .sr-ic svg{width:18px;height:18px}
 .sr-r h3{font:400 26px/34px var(--serif);color:var(--ink)}
-.sr-t{font:400 15px/25px var(--sans);color:var(--text)}
+.sr-t{font:400 16px/24px var(--sans);color:var(--muted)}
 @media (max-width:1023px){.sr-r{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:12px 32px}.sr-p{grid-column:1/-1}}
 @media (max-width:767px){.sr-r{grid-template-columns:minmax(0,1fr);gap:10px;padding:22px 0}.sr-r h3{font-size:22px;line-height:30px}}
 
@@ -2010,7 +2010,7 @@ form [aria-invalid="true"]{border-color:var(--erreur)}
 .tf-c{font:600 11.5px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .tf-t h3{margin:2px 0 0;font:400 22px/30px var(--serif);color:var(--ink)}
 .tf-g h3{font-size:26px;line-height:34px}
-.tf-x{margin-top:14px;font:400 15px/23px var(--sans);color:var(--text)}
+.tf-x{margin-top:14px;font:400 16px/24px var(--sans);color:var(--muted)}
 @media (max-width:1023px){.tf{grid-template-columns:repeat(2,minmax(0,1fr))}.tf-g{grid-column:auto}}
 @media (max-width:767px){.tf{grid-template-columns:minmax(0,1fr)}.tf-t h3,.tf-g h3{font-size:21px;line-height:27px}}
 
@@ -2026,9 +2026,6 @@ form [aria-invalid="true"]{border-color:var(--erreur)}
 .cr-fl .cr-ch{width:calc(100% - 40px)}
 
 /* Extraits du registre (audit design du 2026-10-23) : frise à la taille de texte standard, niveaux en 16 px */
-.fr-l h3{font-size:17px;line-height:24px}
-.fr-l p{font-size:16px;line-height:24px;color:var(--muted)}
-.fr-l .fr-ph{font-size:12px}
 .nv-c p:not(.nv-n):not(.nv-l){font-size:16px;line-height:24px}
 /* « Qui traduit, et où » : deux cartes teintées, icône à gauche du texte (proposition B, 2026-10-23) */
 .gq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
@@ -2049,7 +2046,7 @@ form [aria-invalid="true"]{border-color:var(--erreur)}
 .gb-i{display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:var(--navy);color:#fff}
 .gb-i svg{width:24px;height:24px}
 .gb h3{margin-top:2px;font:600 17px/24px var(--sans);color:var(--ink)}
-.gb p{margin-top:6px;font:400 15px/23px var(--sans);color:var(--muted)}
+.gb p{margin-top:6px;font:400 16px/24px var(--sans);color:var(--muted)}
 @media (max-width:1023px){.gb{grid-template-columns:minmax(0,1fr);padding:8px 24px}.gb > div{padding:22px 0}.gb > div + div{border-left:0;border-top:1px solid var(--line)}}
 
 /* Page Presse (audit du 2026-10-23) : fiche signalétique, distinctions chronologiques, noms et orthographe */

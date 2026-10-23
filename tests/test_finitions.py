@@ -49,12 +49,12 @@ class TestCiblesTactiles(unittest.TestCase):
         cls.css = (support.site_complet(apercu=True) / "assets/site.css").read_text(encoding="utf-8")
 
     def test_cartes_texte_seul_aerees(self):
-        """Option A : marge 28 px, écart 16 px, texte 15/25 adouci, réservé aux cartes sans visuel ni lien."""
+        """Option A : marge 28 px, écart 16 px, texte 16/24 adouci (réglage commun du 2026-10-23), réservé aux cartes sans visuel ni lien."""
         sel = ".cd:not(:has(.v,.kv,a,.cd-meta))"
         # sélecteur avec virgules internes (:has) : lu tel quel, regles() découperait la liste
         self.assertIn(sel + "{gap:16px}", self.css)
         self.assertIn(sel + " > *{padding:28px}", self.css)
-        self.assertIn(sel + " p{margin-top:12px;font-size:15px;line-height:25px;color:var(--muted)}", self.css)
+        self.assertIn(sel + " p{margin-top:12px;font-size:16px;line-height:24px;color:var(--muted)}", self.css)
 
     def test_jauge_de_deroule_fine_et_constante(self):
         """Jauge de déroulé : ligne fine au bas de la scène, épaisseur constante à l'écran. Le bouton pause revenu avec
@@ -257,3 +257,17 @@ class TestAnimationsSansPause(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestTexteCourantCommun(unittest.TestCase):
+    """Arbitrages du 2026-10-23 (cas 1 à 5) : le texte courant des blocs validés suit un seul réglage, 16/24 gris."""
+
+    def test_composants_au_reglage_commun(self):
+        css = (ICI / "assets/composants/outils.css").read_text(encoding="utf-8")
+        for regle in (".fr p{margin-top:4px;font:400 16px/24px var(--sans);color:var(--muted)}",
+                      ".rg p{margin-top:8px;font:400 16px/24px var(--sans);color:var(--muted)}",
+                      ".sr-t{font:400 16px/24px var(--sans);color:var(--muted)}",
+                      ".tf-x{margin-top:14px;font:400 16px/24px var(--sans);color:var(--muted)}",
+                      ".gb p{margin-top:6px;font:400 16px/24px var(--sans);color:var(--muted)}"):
+            self.assertIn(regle, css)
+        self.assertIn(".fr h3{margin-top:8px;font:600 17px/24px var(--sans)", css)
