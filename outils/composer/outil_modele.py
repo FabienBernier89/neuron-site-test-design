@@ -46,24 +46,16 @@ def bandeau(titre, texte_):
     return section(f'<div class="enc"><h2>{titre}</h2><p>{texte_}</p></div>')
 
 
-ICONES_FAMILLE = {"relire": '<path d="M4 5h7v14H4zM13 5h7v14h-7z"/>', "verifier": '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
-                  "partager": '<circle cx="8" cy="9" r="3"/><circle cx="17" cy="9" r="3"/><path d="M3 19a5 5 0 0 1 10 0M12 19a5 5 0 0 1 10 0"/>'}
-
-
-def familles(liste):
-    """Fonctions rangées par famille, en onglets (proposition B retenue par Fabien le 2026-10-21 pour l'Éditeur de
-    relecture) : même barre que le parcours en étapes ; la famille ouverte montre ses fonctions sur deux colonnes.
-    liste : [(nom, clé d'icône, [(titre, texte)])]."""
-    barre, panneaux = "", ""
-    for i, (nom, cle, faits_) in enumerate(liste, 1):
-        on = i == 1
-        ic = (f'<span class="pa-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
-              f'stroke-linejoin="round" aria-hidden="true">{ICONES_FAMILLE[cle]}</svg></span>')
-        barre += (f'<span class="et-o{" on" if on else ""}"><button type="button" role="tab" id="fa-t{i}" aria-controls="fa-p{i}" '
-                  f'aria-selected="{"true" if on else "false"}">{ic}{nom}</button></span>')
-        panneaux += (f'<div class="fa-p" role="tabpanel" id="fa-p{i}" aria-labelledby="fa-t{i}"{"" if on else " hidden"}>'
-                     + "".join(f'<div><h3>{t_}</h3><p>{p}</p></div>' for t_, p in faits_) + '</div>')
-    return f'<div class="et" data-onglets><div class="et-bar" role="tablist">{barre}</div>{panneaux}</div>'
+def tuiles_fonctions(liste, grand=()):
+    """Une tuile par fonction (version B revue validée par Fabien le 2026-10-23 pour l'Éditeur de relecture) : icône à
+    gauche de la catégorie et du titre, à la hauteur de ces deux lignes, puis le texte. liste : [(catégorie, titre,
+    texte, tracé SVG de l'icône)] ; grand : titres des fonctions phares, sur deux colonnes de la grille."""
+    t_ = ""
+    for cat, titre, texte_, trace in liste:
+        t_ += (f'<div class="tf-t{" tf-g" if titre in grand else ""}"><div class="tf-h"><span class="tf-ic"><svg viewBox="0 0 24 24" fill="none" '
+               f'stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{trace}</svg></span>'
+               f'<div><p class="tf-c">{cat}</p><h3>{titre}</h3></div></div><p class="tf-x">{texte_}</p></div>')
+    return f'<div class="tf">{t_}</div>'
 
 
 def frise(rangs):

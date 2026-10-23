@@ -1858,24 +1858,6 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 .vw-setup .vw-opts{margin-bottom:14px}
 .vw-lg{display:inline-block}
 
-/* Parcours en étapes (outil_modele.etapes) : barre des étapes, faits de l'étape à gauche, écran à droite */
-.et-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;margin-top:32px}
-.et-bar button{display:flex;align-items:center;gap:12px;width:100%;padding:14px 18px;border:0;border-radius:10px;background:var(--tile);
-  font:500 16px/22px var(--sans);color:var(--muted);text-align:left;cursor:pointer;transition:background .2s,color .2s}
-.et-bar .on button{background:var(--navy);color:#fff}
-.et-bar button:focus-visible{outline:2px solid var(--accent-d);outline-offset:2px}
-.et-bar i{display:grid;flex:none;place-items:center;width:28px;height:28px;border:1px solid currentColor;border-radius:50%;font:600 13px/1 var(--num);font-style:normal}
-@media (max-width:640px){.et-bar{grid-template-columns:minmax(0,1fr)}.et-bar button{padding:11px 14px;font-size:15px}}
-
-/* Fonctions par famille (outil_modele.familles) : barre des familles, fonctions sur deux colonnes */
-.et-bar button .pa-ic{width:28px;height:28px;border-radius:7px}
-.et-bar button .pa-ic svg{width:15px;height:15px}
-.fa-p[hidden]{display:none}
-.fa-p{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 40px;margin-top:28px}
-.fa-p > div{padding-top:14px;border-top:1px solid var(--line)}
-.fa-p h3{font:600 15px/22px var(--sans);color:var(--ink)}
-.fa-p p{margin-top:6px;font:400 14px/22px var(--sans);color:var(--text)}
-
 /* Parcours en frise compacte (outil_modele.frise) */
 .fr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 24px;margin:32px 0 0;padding:0;list-style:none}
 .fr li{padding-top:16px;border-top:2px solid var(--line)}
@@ -1890,7 +1872,7 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 .ow h3{font:400 26px/34px var(--serif);color:var(--ink)}
 .ow p{margin-top:10px;font:400 14.5px/23px var(--sans);color:var(--text)}
 .ow .lien{margin-top:14px}
-@media (max-width:1023px){.fa-p{grid-template-columns:minmax(0,1fr)}.fr{grid-template-columns:repeat(2,minmax(0,1fr))}.ow{grid-template-columns:minmax(0,1fr);gap:24px}}
+@media (max-width:1023px){.fr{grid-template-columns:repeat(2,minmax(0,1fr))}.ow{grid-template-columns:minmax(0,1fr);gap:24px}}
 @media (max-width:640px){.fr{grid-template-columns:minmax(0,1fr)}}
 
 /* Garanties en rangées (outil_modele.rangees) */
@@ -1962,11 +1944,6 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 @media (max-width:1023px){.sr-r{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:12px 32px}.sr-p{grid-column:1/-1}}
 @media (max-width:767px){.sr-r{grid-template-columns:minmax(0,1fr);gap:10px;padding:22px 0}.sr-r h3{font-size:22px;line-height:30px}}
 
-/* Changement d'onglet fluide aussi pour les familles (Éditeur de relecture) :
-   le panneau ouvert apparaît en fondu, l'onglet change d'état sans saut (Fabien, 2026-10-22) */
-.et-o,.et-o button{transition:color .32s ease,background-color .32s ease,border-color .32s ease,box-shadow .32s ease}
-.fa-p:not([hidden]){animation:mt-ap .36s ease both}
-@media (prefers-reduced-motion:reduce){.et-o,.et-o button{transition:none}.fa-p:not([hidden]){animation:none}}
 
 /* Gestion de projet : une étape par bloc, l'un sous l'autre (faits et écran, côtés alternés), puis l'encart centré */
 .ee{display:grid;margin-top:20px}
@@ -1985,6 +1962,22 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 .enc p{max-width:680px;margin:14px auto 0;font:400 17px/28px var(--sans);color:var(--text)}
 @media (max-width:1023px){.ee-b,.ee-inv{grid-template-columns:minmax(0,1fr);gap:28px;padding:32px 0}.ee-inv .ee-t{order:0}}
 @media (max-width:767px){.ee-n{font-size:24px;line-height:28.8px}.ee-b{padding:28px 0}.enc{padding:32px 24px}.enc h2{font-size:26px;line-height:34px}}
+
+/* Fonctions en tuiles (Éditeur de relecture, version B revue validée par Fabien le 2026-10-23) : icône à gauche de la
+   catégorie et du titre, à la hauteur de ces deux lignes ; les fonctions phares sur deux colonnes de la grille */
+.tf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:32px}
+.tf-t{padding:24px;border-radius:14px;background:var(--tile)}
+.tf-g{grid-column:span 2}
+.tf-h{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:stretch}
+.tf-ic{display:grid;place-items:center;height:100%;aspect-ratio:1;border-radius:12px;background:var(--page);color:var(--accent-d);box-shadow:0 1px 2px rgba(6,18,46,.08)}
+.tf-ic svg{width:46%;height:46%}
+.tf-h > div{display:flex;flex-direction:column;justify-content:center}
+.tf-c{font:600 11.5px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tf-t h3{margin:2px 0 0;font:400 22px/30px var(--serif);color:var(--ink)}
+.tf-g h3{font-size:26px;line-height:34px}
+.tf-x{margin-top:14px;font:400 15px/23px var(--sans);color:var(--text)}
+@media (max-width:1023px){.tf{grid-template-columns:repeat(2,minmax(0,1fr))}.tf-g{grid-column:auto}}
+@media (max-width:767px){.tf{grid-template-columns:minmax(0,1fr)}.tf-t h3,.tf-g h3{font-size:21px;line-height:27px}}
 
 /* composants/paire.css */
 /* Pages de paires de langues (outils/composer/paire_modele.py), modèle validé par Fabien le 2026-10-19 */

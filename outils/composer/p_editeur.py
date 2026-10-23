@@ -1,5 +1,6 @@
 """Page Éditeur de relecture : composée par generique.py, sauf trois blocs (Fabien, 2026-10-21) :
-« Ce que fait l'éditeur » en trois familles d'onglets (proposition B : Relire, Vérifier, Partager et suivre) ;
+« Ce que fait l'éditeur » en tuiles, une par fonction, avec sa famille (Relire, Vérifier, Partager et suivre) et son
+icône (version B revue, 2026-10-23) ;
 le parcours « Du fichier déposé au document validé » en frise compacte, suivi de « Travailler dans Word » réduit à
 son texte, un lien vers la page Plugin Word et l'écran Word de cette page (proposition D).
 
@@ -10,17 +11,30 @@ from outil_modele import *
 import p_plugin_word
 
 P = "corrext/editeur-de-relecture/"
-FAMILLES = [("Relire", "relire", ["Deux colonnes", "Origine de chaque phrase", "Confirmation", "Barre d'outils"]),
-            ("Vérifier", "verifier", ["Contrôles", "Mémoires", "Fast Lookup", "Assistant IA"]),
-            ("Partager et suivre", "partager", ["Sync", "Tableau de bord"])]
+FAMILLES = [("Relire", ["Deux colonnes", "Origine de chaque phrase", "Confirmation", "Barre d'outils"]),
+            ("Vérifier", ["Contrôles", "Mémoires", "Fast Lookup", "Assistant IA"]),
+            ("Partager et suivre", ["Sync", "Tableau de bord"])]
+# Icône de chaque fonction (tracés SVG 24 px) ; fonctions phares en grand
+ICONES = {"Deux colonnes": '<path d="M4 5h7v14H4zM13 5h7v14h-7z"/>', "Origine de chaque phrase": '<path d="M4 18h4V9H4zM10 18h4V5h-4zM16 18h4v-6h-4z"/>',
+          "Confirmation": '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8 12 3 3 5-6"/>', "Barre d'outils": '<path d="M7 8 3 12l4 4M17 8l4 4-4 4M14 5l-4 14"/>',
+          "Contrôles": '<path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+          "Mémoires": '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',
+          "Fast Lookup": '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+          "Assistant IA": '<path d="M12 3l1.8 4.7L18.5 9.5 13.8 11.3 12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
+          "Sync": '<path d="M20 12a8 8 0 0 1-14 5.3M4 12a8 8 0 0 1 14-5.3"/><path d="M18 3v4h-4M6 21v-4h4"/>',
+          "Tableau de bord": '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/>'}
+GRAND = {"Deux colonnes", "Origine de chaque phrase", "Fast Lookup", "Assistant IA", "Sync", "Tableau de bord"}
 
 
 def fonctions(sec, ctx):
     lead = bloc(sec, "div", "facts-lead")
-    F = {txt(bloc(f, "b")): brut(bloc(f, "p")) for f in blocs(sec, "div", "fact")}
-    assert {k for *_, ks in FAMILLES for k in ks} == set(F), "fait de la V1 non rangé"
+    F = {}
+    for f in blocs(sec, "div", "fact"):  # la note en petit de la V1 (définition) reste hors de la tuile
+        p = bloc(f, "p")
+        F[txt(bloc(f, "b"))] = brut(p.replace(bloc(p, "small"), "")) if "<small>" in p else brut(p)
+    assert {k for _, ks in FAMILLES for k in ks} == set(F) == set(ICONES), "fait de la V1 non rangé"
     return section(h2(txt(bloc(lead, "h2")), "relecture, exactement") + f'<p class="intro">{brut(bloc(lead, "p"))}</p>'
-                   + familles([(n, c, [(k, F[k]) for k in ks]) for n, c, ks in FAMILLES]))
+                   + tuiles_fonctions([(n, k, F[k], ICONES[k]) for n, ks in FAMILLES for k in ks], GRAND))
 
 
 def parcours(sec, ctx):
