@@ -11,11 +11,13 @@ kp = interne(bloc(dash, "div", "kpis"))
 ecran = A.tableau_bord(tl, pans, txt(bloc(dash, "span", "ddata")), kp)
 out.append(section(scene(1176, 640, ecran, sim="tableau", curseur=False, label="Tableau de bord de Corrext, données de démonstration"), "sec sec-st"))
 pt = bloc(t, "section", "ptrust")
-items = []
+# Garanties en un seul bandeau teinté, icône de la V1 en bleu marine, filets entre les trois (option C, Fabien, 2026-10-23)
+gar = ""
 for li in blocs(pt, "li"):
     tt = bloc(li, "span", "ptrust-t")
-    items.append((None, brut(bloc(tt, "b")), brut(interne(blocs(tt, "span")[1]))))
-out.append(section(tuiles(items, "tl txt")))
+    ic = re.search(r"<svg.*?</svg>", bloc(li, "span", "ptrust-ic"), re.S).group(0).replace("<svg ", '<svg aria-hidden="true" ', 1)
+    gar += f'<div><span class="gb-i">{ic}</span><div><h3>{esc(txt(bloc(tt, "b")))}</h3><p>{brut(interne(blocs(tt, "span")[1]))}</p></div></div>'
+out.append(section(f'<div class="gb" role="list" aria-label="Garanties de Corrext">{gar}</div>'.replace("<div><span class=\"gb-i\">", '<div role="listitem"><span class="gb-i">')))
 po = bloc(t, "section", "postes")
 h, p = tete(po)
 co = EX["co"]
@@ -30,7 +32,10 @@ lead = bloc(us, "div", "usp-lead")
 a = blocs(lead, "a", "feat-link")[0]
 petites = [(brut(bloc(r, "b")), brut(bloc(r, "p")), "") for r in blocs(us, "div", "usp-row")]
 out.append(section(bento({"titre": h2(txt(bloc(lead, "h2")), "agnostique et pérenne", "h3s"), "texte": brut(bloc(lead, "p")),
-                          "lien": (txt(a), re.search(r'href="([^"]+)"', a).group(1))}, petites)))
+                          "lien": (txt(a), re.search(r'href="([^"]+)"', a).group(1)),
+                          # le choix du moteur et Highly sensitive content : agnostique, et tout en Suisse sur demande
+                          "visuel": scene(764, 400, A.fragment_moteurs(esc(co["src"]), esc(co["out"]["en"]["main"])), sim="sensible", curseur=False,
+                                          label="Choix du moteur et mode Highly sensitive content")}, petites)))
 qb = bloc(t, "section", "qband")
 out.append(section(bande(brut(bloc(qb, "b")), ("Demander une démo", C))))
 out.append(faq_section(t))

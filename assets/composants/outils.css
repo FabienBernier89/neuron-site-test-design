@@ -163,3 +163,16 @@
 .gq-c h3{margin-top:2px;font:600 17px/24px var(--sans);color:var(--ink)}
 .gq-c p{margin-top:6px;font:400 16px/24px var(--sans);color:var(--muted)}
 @media (max-width:767px){.gq{grid-template-columns:minmax(0,1fr)}.gq-c{padding:22px;gap:16px}}
+
+/* Grande tuile du bento avec un écran en bas (page Corrext) : l'écran occupe le bas de la tuile, toute sa largeur */
+.bt-v{align-self:stretch;margin-top:auto;padding-top:8px}
+
+/* Bandeau des garanties de la page Corrext (option C) : un seul fond teinté, icône bleu marine, filets entre les trois */
+.gb{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:32px 8px;border-radius:16px;background:var(--tile)}
+.gb > div{display:grid;grid-template-columns:48px minmax(0,1fr);gap:18px;padding:0 28px}
+.gb > div + div{border-left:1px solid var(--line)}
+.gb-i{display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:var(--navy);color:#fff}
+.gb-i svg{width:24px;height:24px}
+.gb h3{margin-top:2px;font:600 17px/24px var(--sans);color:var(--ink)}
+.gb p{margin-top:6px;font:400 15px/23px var(--sans);color:var(--muted)}
+@media (max-width:1023px){.gb{grid-template-columns:minmax(0,1fr);padding:8px 24px}.gb > div{padding:22px 0}.gb > div + div{border-left:0;border-top:1px solid var(--line)}}

@@ -58,7 +58,7 @@ def tuiles(items, cls="tl"):
 
 
 def bento(grande, petites):
-    """grande : dict(pill, titre, texte, lien) ; petites : (libellé, texte, classe en plus)."""
+    """grande : dict(pill, titre, texte, lien, visuel) ; petites : (libellé, texte, classe en plus)."""
     g = grande
     t = '<div class="bt"><div class="bt-g">'
     if g.get("pill"):
@@ -68,6 +68,8 @@ def bento(grande, petites):
         t += f'<p>{g["texte"]}</p>'
     if g.get("lien"):
         t += f'<a class="lien" href="{g["lien"][1]}">{g["lien"][0]}</a>'
+    if g.get("visuel"):  # écran animé en bas de la grande tuile (page Corrext, Fabien, 2026-10-23)
+        t += f'<div class="bt-v">{g["visuel"]}</div>'
     t += "</div>"
     for b, p, extra in petites:
         tete = b if b.startswith("<") else f"<b>{b}</b>"
