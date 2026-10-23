@@ -290,7 +290,7 @@ def eszett(fr, tr):
                      mot) for mot, n in sorted(trop.items())]
 
 
-_MILLIERS = re.compile(r"(?<![\d.,'’])\d{1,3}(?:[   ]\d{3})+(?![\d.,]|[   ]\d)")
+_MILLIERS = re.compile(r"(?<![\d.,'’])\d{1,3}(?:[   ]\d{3})+(?!\d|[   ]\d)")
 
 
 def milliers(texte, langue):

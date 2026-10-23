@@ -111,6 +111,16 @@ class TestControles(unittest.TestCase):
         self.assertFalse(controles.milliers("20 000 documents", "en"))
         self.assertFalse(controles.milliers("Tel. 026 300 00 00 und 2024 Dokumente", "de"))
 
+    def test_milliers_ponctuation_apres_le_nombre(self):
+        # une ponctuation après le dernier groupe ne dispense pas du séparateur : seule une suite de chiffres l'écarte
+        for langue, mot in (("de", "Dokumente"), ("it", "documenti")):
+            with self.subTest(langue=langue):
+                self.assertEqual(len(controles.milliers("Wir haben 20 000.", langue)), 1)
+                self.assertEqual(len(controles.milliers("Kosten: CHF 15 000.-", langue)), 1)
+                self.assertEqual(len(controles.milliers(f"Mehr als 20 000, davon 30 000 {mot}", langue)), 2)
+                self.assertEqual(len(controles.milliers("CHF 20 000,50 netto", langue)), 1)
+                self.assertEqual(controles.milliers("CHF 20'000.- und 15'000, davon 3,5 %", langue), [])
+
     def test_langue_page(self):
         regles = [p["regle"] for p in controles.langue_page(FAUTIVE, "de")]
         self.assertEqual(regles, ["langue", "langue"])
