@@ -8,12 +8,17 @@ from pathlib import Path
 ICI = Path(__file__).resolve().parent.parent
 MOT = "doc" + "trine"  # composé pour ne pas l'écrire en clair
 INTERDITS = [r"Legal ?230", r"\bLexa\b", r"Neur\.on LLM", r"\brapprochement"]
+# dossiers de travail non publiés : .superpowers (briefs, qui citent légitimement les termes interdits), .claude (copies du dépôt)
+IGNORES = {".git", "__pycache__", ".superpowers", ".claude"}
+# fixture volontairement fautive (tâche 0.1) : elle contient les termes interdits pour que les contrôles les attrapent
+FIXTURES_FAUTIVES = {"page-de-fautive.html"}
 BINAIRES = {".png", ".jpg", ".jpeg", ".webp", ".ico", ".pyc", ".woff2"}
 
 
 def fichiers():
     for f in ICI.rglob("*"):
-        if ".git" in f.parts or "__pycache__" in f.parts or not f.is_file() or f.suffix in BINAIRES:
+        parties = f.relative_to(ICI).parts  # relatif : le dépôt peut lui-même vivre sous .claude/worktrees/
+        if (set(parties) & IGNORES) or f.name in FIXTURES_FAUTIVES or not f.is_file() or f.suffix in BINAIRES:
             continue
         yield f
 
