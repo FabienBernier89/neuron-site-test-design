@@ -122,3 +122,37 @@ def situations_rangees(wh, accent):
     rangs = "".join(f'<div class="sr-r"><p class="sr-p">{bloc(r, "span", "ws-ic").replace("ws-ic", "sr-ic", 1)}{txt(bloc(r, "span", "sc-a"))}</p>'
                     f'<h3>{brut(bloc(r, "h3"))}</h3><p class="sr-t">{brut(bloc(r, "p"))}</p></div>' for r in blocs(wh, "article", "sc-row"))
     return section(h2(txt(bloc(wh, "h2")), accent) + f'<div class="sr">{rangs}</div>')
+
+
+def intro_lead(lead):
+    """Paragraphes de tête d'un bloc de la V1 (le deuxième, souvent une note, en gris)."""
+    ps = blocs(lead, "p")
+    return "".join(f'<p class="intro{" intro-n" if i else ""}">{brut(p)}</p>' for i, p in enumerate(ps))
+
+
+def liens_lead(lead):
+    """Liens fléchés de la V1 (feat-link) d'un bloc."""
+    out = ""
+    for a in blocs(lead, "a", "feat-link"):
+        out += f'<a class="lien" href="{re.search(r'href="([^"]+)"', a).group(1)}">{txt(a)}</a>'
+    return f'<p class="fs-l">{out}</p>' if out else ""
+
+
+def fiche_signaletique(sec, accent=None):
+    """Faits de la V1 en fiche : libellé à gauche, valeur à droite, une ligne par fait (pages Presse et À propos,
+    audits du 2026-10-23)."""
+    lead = bloc(sec, "div", "facts-lead")
+    lignes = "".join(f'<div><dt>{txt(bloc(f, "b"))}</dt><dd>{brut(bloc(f, "p"))}</dd></div>' for f in blocs(sec, "div", "fact"))
+    return section(h2(txt(bloc(lead, "h2")), accent) + intro_lead(lead) + f'<dl class="fs">{lignes}</dl>' + liens_lead(lead))
+
+
+def chronologie(sec, accent=None):
+    """Registre de distinctions de la V1 (ledger) en liste chronologique, l'année une seule fois en marge."""
+    lead = bloc(sec, "div", "trust-lead")
+    annees = {}
+    for r in blocs(sec, "div", "ledger-row"):
+        nom = txt(re.sub(r"<small>.*?</small>", "", bloc(r, "span", "tn"), flags=re.S))
+        annees.setdefault(txt(bloc(r, "span", "ty")), []).append(
+            f'<li><b>{nom}</b><span>{brut(bloc(r, "small"))}</span><em>{txt(bloc(r, "span", "tb"))}</em></li>')
+    corps = "".join(f'<div class="ch-a"><p class="ch-y">{a}</p><ul>{"".join(li)}</ul></div>' for a, li in annees.items())
+    return section(h2(txt(bloc(lead, "h2")), accent) + intro_lead(lead) + f'<div class="ch">{corps}</div>')

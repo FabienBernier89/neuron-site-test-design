@@ -17,33 +17,6 @@ MAIL = "team@corrext.com"
 k = lambda c: texte(f"presse.{c}")
 
 
-def liens_v1(bloc_):
-    """Liens de la V1 (feat-link) en liens fléchés."""
-    out = ""
-    for a in blocs(bloc_, "a", "feat-link"):
-        href = re.search(r'href="([^"]+)"', a).group(1)
-        out += f'<a class="lien" href="{href}">{txt(a)}</a>'
-    return out
-
-
-def fiche(sec, ctx):
-    lead = bloc(sec, "div", "facts-lead")
-    lignes = "".join(f'<div><dt>{txt(bloc(f, "b"))}</dt><dd>{brut(bloc(f, "p"))}</dd></div>' for f in blocs(sec, "div", "fact"))
-    return section(h2(txt(bloc(lead, "h2"))) + f'<p class="intro">{brut(bloc(lead, "p"))}</p><dl class="fs">{lignes}</dl>'
-                   + f'<p class="fs-l">{liens_v1(lead)}</p>')
-
-
-def distinctions(sec, ctx):
-    lead = bloc(sec, "div", "trust-lead")
-    annees = {}
-    for r in blocs(sec, "div", "ledger-row"):
-        nom = txt(re.sub(r"<small>.*?</small>", "", bloc(r, "span", "tn"), flags=re.S))
-        annees.setdefault(txt(bloc(r, "span", "ty")), []).append(
-            f'<li><b>{nom}</b><span>{brut(bloc(r, "small"))}</span><em>{txt(bloc(r, "span", "tb"))}</em></li>')
-    corps = "".join(f'<div class="ch-a"><p class="ch-y">{a}</p><ul>{"".join(li)}</ul></div>' for a, li in annees.items())
-    return section(h2(txt(bloc(lead, "h2"))) + f'<p class="intro">{brut(bloc(lead, "p"))}</p><div class="ch">{corps}</div>')
-
-
 def nommer(sec, ctx):
     box = bloc(sec, "div", "gov-box")
     tete = blocs(box, "div")[0]
@@ -68,4 +41,4 @@ def ressources(sec, ctx):
     return section(h2(txt(bloc(sec, "h2"))) + f'<div class="gq">{cartes_}</div>')
 
 
-print(P, generique.composer(P, remplacer={"facts": fiche, "trust": distinctions, "gov": nommer, "pr-res": ressources}) or "écrite")
+print(P, generique.composer(P, remplacer={"facts": lambda sec, ctx: fiche_signaletique(sec), "trust": lambda sec, ctx: chronologie(sec), "gov": nommer, "pr-res": ressources}) or "écrite")

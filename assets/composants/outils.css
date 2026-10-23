@@ -200,3 +200,17 @@
 .pr-m{margin-top:14px}
 @media (max-width:1023px){.nm-r{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.nm-n{grid-column:1/-1}}
 @media (max-width:767px){.fs > div,.ch-a,.nm-r{grid-template-columns:minmax(0,1fr);gap:8px}.ch-y{font-size:32px}.ch li{grid-template-columns:minmax(0,1fr)}.ch li em{grid-column:1;grid-row:auto}}
+.intro:has(+ .intro-n){margin-bottom:0}
+.intro.intro-n{margin-top:12px;font-size:15px;color:var(--muted)}
+
+/* Page À propos (audit du 2026-10-23) : équipe et catégories en rangées */
+.eq{margin-top:32px;border-top:1px solid var(--line)}
+.eq-r{display:grid;grid-template-columns:320px minmax(0,1fr);gap:40px;padding:24px 0;border-bottom:1px solid var(--line)}
+.eq-n{font:300 26px/32px var(--serif);color:var(--ink)}
+.eq-o{margin-top:4px;font:600 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.eq-r > p{font:400 16px/26px var(--sans);color:var(--text)}
+.cg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;border-top:0}
+.cg-r{padding:20px 0;border-top:1px solid var(--line)}
+.cg-r p:not(.eq-n){margin-top:6px;font:400 16px/24px var(--sans);color:var(--muted)}
+.cg-note{max-width:760px;margin-top:28px;font:400 15px/24px var(--sans);color:var(--muted)}
+@media (max-width:767px){.eq-r{grid-template-columns:minmax(0,1fr);gap:10px}.cg{grid-template-columns:minmax(0,1fr)}}
