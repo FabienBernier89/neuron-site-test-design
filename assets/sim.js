@@ -644,6 +644,47 @@
     return jouer(l, etapes.concat(finir(cr)));
   };
 
+  /* Page CHnell, étape « Lire les résultats » : le nombre de résultats, les lignes alignées une à une, puis le terme
+     surligné des deux côtés (sans la frappe de la requête, montrée à l'étape « Chercher ») */
+  SCENES.resultats = function (l) {
+    var cr = l.q(".cr"), c = l.q(".lk-c"), rangs = l.qa(".lk-r > div");
+    var etapes = [function () { cr.classList.add("cherche"); return l.attendre(700); },
+                  function () { c.classList.add("vu"); return l.attendre(500); }];
+    rangs.forEach(function (r) { etapes.push(function () { r.classList.add("vu"); return l.attendre(520); }); });
+    etapes.push(fixe(400), function () { l.qa(".lk-r mark").forEach(function (m) { m.classList.add("vu"); }); return l.attendre(4600); });
+    return jouer(l, etapes.concat(finir(cr)));
+  };
+
+  /* Page CHnell, étape « Depuis une traduction » : un texte traduit dans Text translation, le terme surligné, le
+     bouton Fast Lookup, puis CHnell ouvert sur ce terme sans quitter la traduction */
+  SCENES.fastlookup = function (l) {
+    l.cle = "co";
+    var d = EX.co, cr = l.q(".cr"), entree = l.q(".cr-in"), cnt = l.q(".cr-cnt");
+    var traduction = [  /* frappe et traduction à la saisie, comme etapesTraduction, sans les alternatives */
+      fixe(700),
+      function () {
+        entree.classList.add("rempli", "tape");
+        return l.taper(".cr-txt", d.src, 58, function (i) {
+          cnt.textContent = i + " / 10000";
+          if (i > 22) l.q(".cr-src").classList.add("detecte");
+        });
+      },
+      function () { entree.classList.remove("tape"); cr.classList.add("traduit"); return l.attendre(1000); },
+      function () { cr.classList.remove("traduit"); return l.mots(".cr-out", d.out.en.main); },
+      fixe(1200)
+    ];
+    var terme = cr.getAttribute("data-terme-co");
+    var lookup = [  /* comme etapesLookup, la fenêtre CHnell porte déjà les résultats relevés pour ce terme */
+      function () { surligner(l, d, terme); return l.attendre(750); },
+      function () { cr.classList.add("lkb"); return l.attendre(800); },
+      function () { return l.appui(".cr-lkb"); },
+      function () { cr.classList.add("modal"); return l.attendre(5200); },
+      function () { return l.appui(".cr-btn"); },
+      function () { cr.classList.remove("modal"); cr.classList.remove("lkb"); return l.attendre(900); }
+    ];
+    return jouer(l, traduction.concat(lookup, finir(cr)));
+  };
+
   /* Hub : le tableau de bord parcourt ses onglets */
   SCENES.tableau = function (l) {
     var cr = l.q(".cr"), n = l.qa(".cr-tl span").length, etapes = [fixe(2600)];

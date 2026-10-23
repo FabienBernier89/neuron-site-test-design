@@ -1987,6 +1987,9 @@ details[id]{scroll-margin-top:96px}  /* question ouverte depuis la recherche : s
 @media (max-width:899px){.tf-3{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:767px){.tf-3 .tf-t h3{white-space:normal}}
 
+/* CHnell ouvert par le Fast Lookup dans un écran de fonction (page CHnell, étape 3) : la fenêtre tient dans l'écran */
+.cr-fl .cr-ch{width:calc(100% - 40px)}
+
 /* composants/paire.css */
 /* Pages de paires de langues (outils/composer/paire_modele.py), modèle validé par Fabien le 2026-10-19 */
 

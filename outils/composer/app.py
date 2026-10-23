@@ -141,6 +141,14 @@ def app_corrext(notice_titre, notice_texte, hint_ill, hint_titre, hint_texte):
             + '<div class="cr-modal">' + chnell() + '</div></div>')
 
 
+def fragment_lookup(lookup, terme):
+    """Espace de traduction seul et CHnell ouvert par le Fast Lookup sur `terme` (page CHnell, étape « Depuis une
+    traduction ») : même format que les autres écrans de fonction ; la fenêtre CHnell porte déjà ses résultats."""
+    return (f'<div class="cr cr-frag cr-fl" data-terme-co="{e(terme)}">' + travail()
+            + '<div class="cr-modal">' + chnell(e(lookup["q"]), e(lookup["l1"]), e(lookup["l2"]), e(lookup["count"]), lignes_chnell(lookup))
+            + '</div></div>')
+
+
 def ecran_outil(notice_titre, notice_texte, hint_ill, hint_titre, hint_texte, fichier, pdf, reph):
     """Page outil : les quatre onglets de Traduction texte et document, dans une même fenêtre.
 

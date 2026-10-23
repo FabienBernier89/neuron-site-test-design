@@ -6,6 +6,9 @@ import re
 from pathlib import Path
 
 PAGES = ("corrext/", "corrext/chnell/")  # retiré de la page LexMachina, qui parle du moteur (Fabien, 2026-10-16)
+# Page où le schéma suit une autre section que la première scène : CHnell, après « Trois situations » (rangées .sr),
+# pour que la page explique d'abord CHnell (audit validé par Fabien le 2026-10-23)
+APRES = {"corrext/chnell/": 'class="sr"'}
 COMPOSEUR = Path(__file__).resolve().parents[1] / "composer/schema_produits.py"
 SECTION = re.compile(r"<section\b[^>]*>.*?</section>\n?", re.S)
 _section = []
@@ -26,7 +29,8 @@ def traiter(html, page):
         return html
     debut = html.find('<main id="main">')
     sections = list(SECTION.finditer(html, debut)) if debut >= 0 else []
-    cible = next((m for m in sections if "data-sim" in m.group(0) or 'class="ech"' in m.group(0)), None)
+    cible = next((m for m in sections if APRES[page] in m.group(0)), None) if page in APRES else None
+    cible = cible or next((m for m in sections if "data-sim" in m.group(0) or 'class="ech"' in m.group(0)), None)
     cible = cible or next((m for m in sections if m.group(0).startswith('<section class="hero"')), None)
     if cible is None:
         raise ValueError(f"{page} : ni scène ni hero où placer le schéma « qui fait quoi »")

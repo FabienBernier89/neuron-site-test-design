@@ -15,6 +15,7 @@ sys.path.insert(0, str(ICI / "outils/composer"))
 import build  # noqa: E402
 import schema_produits  # noqa: E402
 from outils import contenus  # noqa: E402
+from outils.post import schema_produits as schema_post  # noqa: E402
 
 PAGES = ("corrext/", "corrext/chnell/")  # plus sur la page LexMachina (Fabien, 2026-10-16)
 LIENS = {"LexMachina": "lexmachina/", "Corrext": "corrext/", "CHnell": "corrext/chnell/"}
@@ -67,12 +68,16 @@ class TestSchema(unittest.TestCase):
         self.assertNotRegex(s, r"<h1[ >]")
 
     def test_place_apres_la_premiere_scene_sinon_apres_le_hero(self):
+        """Sauf la page CHnell, où il suit « Trois situations » (outils/post/schema_produits.APRES)."""
         for p in PAGES:
             h = self.pages[p]
             sections = re.findall(r"<section\b[^>]*>.*?</section>", h[h.index("<main"):], re.S)
             i = next(k for k, s in enumerate(sections) if s.startswith('<section class="sec sp"'))
-            scenes = [k for k, s in enumerate(sections[:i] + sections[i + 1:]) if "data-sim" in s or 'class="ech"' in s]
+            autres = sections[:i] + sections[i + 1:]
+            scenes = [k for k, s in enumerate(autres) if "data-sim" in s or 'class="ech"' in s]
             attendu = scenes[0] if scenes else 0  # sinon le hero, première section de la page
+            if p in schema_post.APRES:  # CHnell : après « Trois situations »
+                attendu = next(k for k, s in enumerate(autres) if schema_post.APRES[p] in s)
             self.assertEqual(i - 1, attendu, p)
             if not scenes:
                 self.assertIn('class="hero"', sections[i - 1], p)
