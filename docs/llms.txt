@@ -97,7 +97,7 @@ Site en français (Suisse), mis à jour le 2026-10-23. Texte intégral des pages
 
 - [Centre d'aide Corrext](https://neur-on.ai/fr/aide/): 71 réponses sur Corrext, vérifiées dans l'application : traduire, faire relire, vérifier un terme, sécurité, et administration de votre organisation.
 - [Mémoires et terminologie · Centre d'aide](https://neur-on.ai/fr/aide/admin-memoires/): Administrer Corrext : importer des mémoires TMX, des bases terminologiques TBX ou XML, et ajouter des ressources propres dans CHnell.
-- [Moteurs et confidentialité · Centre d'aide](https://neur-on.ai/fr/aide/admin-moteurs/): Administrer Corrext : moteurs autorisés par organisation, avis de confidentialité avant les moteurs étrangers, clés API propres pour DeepL, Claude et GPT.
+- [Moteurs et confidentialité · Centre d'aide](https://neur-on.ai/fr/aide/admin-moteurs/): Administrer Corrext : moteurs autorisés par organisation, avis Attorney-Client privilege avant les moteurs étrangers, clés API propres pour DeepL, Claude et GPT.
 - [Organisation, membres et rôles · Centre d'aide](https://neur-on.ai/fr/aide/admin-organisation/): Administrer Corrext : rôles Admin, Project manager et Member, ajout de membres, adhésion par domaine e-mail, organisations parentes et filles.
 - [Fast lookup CHnell : chercher un terme en contexte](https://neur-on.ai/fr/aide/chnell/): Chercher un terme dans CHnell, utiliser les opérateurs, filtrer par domaine et par source, distinguer les ressources et lire un segment en contexte.
 - [Découvrir Corrext · Centre d'aide](https://neur-on.ai/fr/aide/decouvrir-corrext/): Ce qu'est Corrext, ses quatre outils, le moteur LexMachina, les autres moteurs disponibles, la relecture, le prix, l'essai et la mise en place.

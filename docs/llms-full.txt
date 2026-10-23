@@ -360,7 +360,7 @@ Corrext est la plateforme de traduction juridique et financière de Neur.on. Ell
 
 Où mes documents sont-ils stockés et traités ?
 
-Corrext est hébergé en Suisse, chez Infomaniak. Les documents sont traités en Suisse en mode Highly sensitive content ou avec le moteur LexMachina. Les moteurs hébergés à l'étranger déclenchent l'avis de confidentialité de votre organisation et ne sont pas disponibles en mode Highly sensitive content. Neur.on est certifiée ISO 27001.
+Corrext est hébergé en Suisse, chez Infomaniak. Les documents sont traités en Suisse en mode Highly sensitive content ou avec le moteur LexMachina. Les moteurs hébergés à l'étranger déclenchent l'avis Attorney-Client privilege, qui rappelle la politique de votre organisation, et ne sont pas disponibles en mode Highly sensitive content. Neur.on est certifiée ISO 27001.
 
 Quels moteurs de traduction puis-je utiliser ?
 
