@@ -462,7 +462,8 @@ def assembler_fr(meta, corps, page, nav, pied, v):
     robots = '<meta name="robots" content="noindex, nofollow">\n' if CONFIG["apercu"] else ""
     html = (TETE.replace("@ROBOTS@", robots).replace("@TITRE@", meta["title"]).replace("@DESC@", meta["description"])
             .replace("@SEO@", seo(page, meta)).replace("@V@", v).replace("@CX@", lien_cx))
-    html += menu.rendre_entete(nav, meta.get("menu", ""), minimal=meta.get("gabarit") == "contact")
+    html += menu.rendre_entete(nav, meta.get("menu", ""), minimal=meta.get("gabarit") == "contact",
+                              langues=tuple(l for l in langues.LANGUES if l in CONFIG["langues"]))
     html += '<main id="main">\n' + corps + "</main>\n" + menu.rendre_pied(pied)
     demo = 'id="cxSrc"' in corps
     globaux = ["global.js"] if (DOCS / "assets/global.js").exists() else []
@@ -478,11 +479,12 @@ def assembler_fr(meta, corps, page, nav, pied, v):
 def finaliser(html, page, langue, construites, racine=None):
     """Dernière passe d'une page assemblée dans une langue : attribut lang, hreflang de toutes les langues construites
     (poser_alternates, français compris), localisation des liens, de la tête et des données structurées (localiser,
-    hors français), images recopiées, dimensions, puis liens relatifs (relier). construites : pages construites par
-    langue (langue vers ensemble de pages). racine : voir relier (la 404 passe racine="")."""
+    hors français), sélecteur de langue (menu.resoudre_selecteur), images recopiées, dimensions, puis liens relatifs
+    (relier). construites : pages construites par langue (langue vers ensemble de pages). racine : voir relier (la 404 passe racine="")."""
     html = html.replace('<html lang="@LANG@"', f'<html lang="{langue}"', 1)
     html = localiser.poser_alternates(html, page, construites)
     html, _ = localiser.localiser(html, page, langue, construites)
+    html = menu.resoudre_selecteur(html, page, langue, construites)  # après localiser : voir resoudre_selecteur
     copier_images(html)
     return relier(dimensionner(html), page, racine, langue)
 

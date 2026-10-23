@@ -36,3 +36,14 @@
 
 @media (max-width:1023px){.lf-ns{grid-template-columns:repeat(2,minmax(0,1fr))}.lf-l{grid-template-columns:repeat(2,minmax(0,1fr))}.lf-m{grid-template-columns:minmax(0,1fr);gap:28px}.lf-f{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:767px){.lf-ns,.lf-r{grid-template-columns:minmax(0,1fr)}.lf-r{gap:24px}.lf-l{grid-template-columns:minmax(0,1fr)}}
+
+/* Sélecteur de langue de l'en-tête et du menu mobile (menu.py, tâche 1.4 de la traduction). Émis seulement quand plusieurs
+   langues sont construites. Couleurs par les jetons du thème : en clair, --muted vaut #5b6880 et --ink #06122e. */
+.hd-lang{display:flex;align-items:center;gap:2px}
+.hd-lang a{padding:8px 6px;font:500 12px/16px var(--sans);color:var(--muted);text-decoration:none}
+.hd-lang a:hover{color:var(--ink)}
+.hd-lang a[aria-current]{color:var(--ink);text-decoration:underline;text-underline-offset:3px}  /* langue de la page : aussi soulignée, jamais la couleur seule */
+.hd-in > .hd-lang{margin-left:auto}  /* gabarit minimal (contact) : à droite, sans .hd-cta */
+.mm .hd-lang{margin-top:24px;gap:8px}
+.mm .hd-lang a{padding:14px 16px}  /* cibles tactiles de 44 px */
+@media (max-width:1023px){.hd-cta .hd-lang{display:none}}  /* sous 1024 px le menu mobile porte le sélecteur */

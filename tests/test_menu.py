@@ -13,6 +13,7 @@ ICI = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ICI))
 import build  # noqa: E402
 import menu  # noqa: E402
+from outils.i18n import empreintes  # noqa: E402
 from tests import support  # noqa: E402
 
 
@@ -203,6 +204,149 @@ class TestAjoutsDeMenu(unittest.TestCase):
             self.assertEqual(h.count("<b>Titre contact/</b>"), 1)
             self.assertIn('<li><a href="../fr/contact/">Lien ajouté</a></li>', h)
             self.assertIn('<a href="../fr/contact/">Titre contact/</a>', h)  # menu mobile
+
+
+class TestSelecteurDeLangue(unittest.TestCase):
+    """Sélecteur de langue de l'en-tête (tâche 1.4) : balisage de la passe 1, résolution par page (menu.resoudre_selecteur),
+    retrait quand une seule langue est construite."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.nav = menu.lire_menu((build.NEURON / "src/partials/nav.html").read_text(encoding="utf-8"))
+
+    FR_DE = {"fr": {"", "contact/"}, "de": {"", "contact/"}}
+
+    def selecteurs(self, html):
+        return re.findall(r'<nav class="hd-lang".*?</nav>', html)
+
+    def test_selecteur_absent_si_une_langue(self):
+        self.assertNotIn("hd-lang", menu.rendre_entete(self.nav))
+        self.assertNotIn("hd-lang", menu.rendre_entete(self.nav, langues=("fr",)))
+        self.assertNotIn("hd-lang", menu.rendre_entete(self.nav, minimal=True, langues=("fr",)))
+        self.assertNotIn("hd-lang", menu.rendre_mobile(self.nav))
+
+    def test_balisage_de_la_passe_1(self):
+        """Une ligne, sans retour à la ligne autour, dans .hd-cta avant « Connexion » ; marqueurs {{LANGUE:xx}} à résoudre."""
+        h = menu.rendre_entete(self.nav, langues=("fr", "de"))
+        attendu = ('<nav class="hd-lang" aria-label="Langue"><a href="{{LANGUE:fr}}" hreflang="fr-CH" lang="fr" translate="no">FR</a>'
+                   '<a href="{{LANGUE:de}}" hreflang="de-CH" lang="de" translate="no">DE</a></nav>')
+        self.assertIn('<div class="hd-cta">' + attendu + '<a class="hd-cx"', h)
+        self.assertEqual(len(self.selecteurs(h)), 2)  # en-tête et menu mobile
+        self.assertEqual(self.selecteurs(h)[0], attendu)
+
+    def test_selecteur_page_equivalente(self):
+        """Depuis fr/contact/ : le lien DE mène à la page équivalente (de/kontakt/), la langue de la page est marquée."""
+        h = menu.resoudre_selecteur(menu.rendre_entete(self.nav, langues=("fr", "de")), "contact/", "fr", self.FR_DE)
+        self.assertNotIn("{{LANGUE:", h)
+        self.assertIn('<a href="{{ROOT}}fr/contact/" hreflang="fr-CH" lang="fr" translate="no" aria-current="true">FR</a>', h)
+        self.assertIn('<a href="{{ROOT}}de/kontakt/" hreflang="de-CH" lang="de" translate="no">DE</a>', h)
+        self.assertEqual(h.count('aria-current="true"'), 2)  # en-tête et menu mobile
+
+    def test_langue_de_la_page_marquee_hors_francais(self):
+        h = menu.resoudre_selecteur(menu.rendre_entete(self.nav, langues=("fr", "de")), "contact/", "de", self.FR_DE)
+        self.assertIn('<a href="{{ROOT}}de/kontakt/" hreflang="de-CH" lang="de" translate="no" aria-current="true">DE</a>', h)
+        self.assertIn('<a href="{{ROOT}}fr/contact/" hreflang="fr-CH" lang="fr" translate="no">FR</a>', h)
+
+    def test_selecteur_repli_accueil(self):
+        """Page non construite en de : le lien DE mène à l'accueil allemand."""
+        construites = {"fr": {"", "contact/", "corrext/"}, "de": {"", "contact/"}}
+        h = menu.resoudre_selecteur(menu.rendre_entete(self.nav, langues=("fr", "de")), "corrext/", "fr", construites)
+        self.assertIn('<a href="{{ROOT}}de/" hreflang="de-CH"', h)
+        self.assertIn('<a href="{{ROOT}}fr/corrext/" hreflang="fr-CH" lang="fr" translate="no" aria-current="true">', h)
+
+    def test_page_d_accueil_francaise(self):
+        h = menu.resoudre_selecteur(menu.rendre_entete(self.nav, langues=("fr", "de")), "", "fr", self.FR_DE)
+        self.assertIn('<a href="{{ROOT}}fr/" hreflang="fr-CH"', h)
+        self.assertIn('<a href="{{ROOT}}de/" hreflang="de-CH"', h)
+
+    def test_langue_non_construite_retiree(self):
+        """Trois langues configurées, l'italien sans page : son lien disparaît, les deux autres restent."""
+        h = menu.resoudre_selecteur(menu.rendre_entete(self.nav, langues=("fr", "de", "it")), "contact/", "fr", self.FR_DE)
+        self.assertNotIn('hreflang="it-CH"', h)
+        self.assertEqual(h.count('hreflang="de-CH"'), 2)
+
+    def test_une_seule_langue_construite_retire_la_nav(self):
+        h = menu.rendre_entete(self.nav, langues=("fr", "de"))
+        sans = menu.resoudre_selecteur(h, "contact/", "fr", {"fr": {"", "contact/"}, "de": set()})
+        self.assertNotIn("hd-lang", sans)
+        self.assertEqual(sans, menu.rendre_entete(self.nav))  # octet pour octet l'en-tête français d'une seule langue
+        self.assertEqual(menu.resoudre_selecteur(h, "contact/", "fr", {"fr": {"contact/"}}), menu.rendre_entete(self.nav))
+
+    def test_selecteur_mobile(self):
+        """Menu mobile : sélecteur en dernier dans .mm, après le bouton de démo."""
+        m = menu.rendre_mobile(self.nav, langues=("fr", "de"))
+        fin = m[m.index('<a class="btn mm-cta"'):]
+        self.assertRegex(fin, r'Demander une démo</a>\n<nav class="hd-lang" aria-label="Langue">.*</nav></div>\n</div>\n$')
+        res = menu.resoudre_selecteur(m, "contact/", "fr", self.FR_DE)
+        self.assertIn('href="{{ROOT}}de/kontakt/"', res)
+        self.assertEqual(menu.resoudre_selecteur(m, "contact/", "fr", {"fr": {"contact/"}}), menu.rendre_mobile(self.nav))
+
+    def test_selecteur_gabarit_minimal(self):
+        """Gabarit de contact (sans navigation) : le sélecteur est émis quand même, dans .hd-in après le logo."""
+        h = menu.rendre_entete(self.nav, minimal=True, langues=("fr", "de"))
+        self.assertEqual(len(self.selecteurs(h)), 1)
+        self.assertNotIn('class="hd-cta"', h)
+        self.assertRegex(h, r'</a>\n<nav class="hd-lang" aria-label="Langue">.*</nav></div>\n</header>\n$')
+        res = menu.resoudre_selecteur(h, "contact/", "fr", self.FR_DE)
+        self.assertIn('href="{{ROOT}}de/kontakt/"', res)
+        self.assertEqual(menu.resoudre_selecteur(h, "contact/", "fr", {"fr": {"contact/"}}), menu.rendre_entete(self.nav, minimal=True))
+
+    def test_page_hors_table_des_adresses(self):
+        """La 404 n'est dans aucune table : lien français vers fr/, lien allemand vers l'accueil allemand, sans erreur."""
+        h = menu.resoudre_selecteur(menu.rendre_entete(self.nav, langues=("fr", "de")), "404.html", "fr", self.FR_DE)
+        self.assertIn('<a href="{{ROOT}}fr/" hreflang="fr-CH"', h)
+        self.assertIn('<a href="{{ROOT}}de/" hreflang="de-CH"', h)
+
+    def test_retrait_rend_le_fr_identique(self):
+        """fr+de configurées, aucune page DE construite (TRADUIRE signale un segment manquant partout) : le français est
+        identique octet pour octet à la référence prise avant le lot de traduction."""
+        with tempfile.TemporaryDirectory() as tmp:
+            absente = mock.patch.object(build, "TRADUIRE", lambda html, page, langue: (html, ["segment manquant"]))
+            sortie = support.construire(tmp, pages=build.PAGES, langues=("fr", "de"), patches=[absente])
+            self.assertFalse((sortie / "de").exists())
+            obtenu = empreintes.empreintes(sortie)
+        reference = json.loads((ICI / "tests/fixtures/i18n/empreintes-fr-apercu.json").read_text(encoding="utf-8"))
+        self.assertEqual([k for k in obtenu if obtenu[k] != reference.get(k)], [])
+        self.assertEqual(sorted(set(reference) - set(obtenu)), [])
+
+
+class TestSelecteurDansLeBuild(unittest.TestCase):
+    """Le build pose le sélecteur sur les pages construites quand plusieurs langues le sont (la traduction n'est pas
+    branchée : les pages « de » portent le texte français, seuls le balisage et les adresses comptent)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls._tmp = tempfile.TemporaryDirectory()
+        cls.sortie = support.construire(cls._tmp.name, pages=("", "contact/"), langues=("fr", "de"))
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._tmp.cleanup()
+
+    def lire(self, page, langue):
+        return support.chemin(self.sortie, page, langue).read_text(encoding="utf-8")
+
+    def test_page_francaise_renvoie_vers_la_page_allemande(self):
+        h = self.lire("contact/", "fr")
+        self.assertIn('<a href="../../de/kontakt/" hreflang="de-CH" lang="de" translate="no">DE</a>', h)
+        self.assertIn('<a href="../../fr/contact/" hreflang="fr-CH" lang="fr" translate="no" aria-current="true">FR</a>', h)
+
+    def test_lien_francais_du_selecteur_reste_francais_sur_la_page_allemande(self):
+        """Le sélecteur est résolu après la localisation des liens : le lien FR n'est pas renvoyé vers la page DE."""
+        h = self.lire("contact/", "de")
+        self.assertIn('<a href="../../fr/contact/" hreflang="fr-CH" lang="fr" translate="no">FR</a>', h)
+        self.assertIn('<a href="../../de/kontakt/" hreflang="de-CH" lang="de" translate="no" aria-current="true">DE</a>', h)
+        self.assertNotIn("{{", h)
+
+    def test_accueil_avec_entete_complet_et_menu_mobile(self):
+        h = self.lire("", "de")
+        self.assertEqual(h.count('<nav class="hd-lang"'), 2)
+        self.assertIn('<div class="hd-cta"><nav class="hd-lang"', h)
+        self.assertIn('<a href="../de/" hreflang="de-CH" lang="de" translate="no" aria-current="true">DE</a>', h)
+
+    def test_page_404_sans_selecteur(self):
+        """La 404 est une page française seule (assembler ne lui connaît que le français) : jamais de sélecteur."""
+        self.assertNotIn("hd-lang", (self.sortie / "404.html").read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

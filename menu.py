@@ -4,6 +4,8 @@ import json
 import re
 from pathlib import Path
 
+from outils.i18n.langues import HREFLANG, route
+
 AJOUTS = Path(__file__).resolve().parent / "src/data/menu-ajouts.json"  # entrées ajoutées par les lots de la V2
 PAGES = Path(__file__).resolve().parent / "src/pages"
 SOUS_TITRES = {e["titre"]: e["texte"] for e in json.loads(
@@ -225,8 +227,56 @@ def _libelle_fermer():
     return contenus.texte("a11y.menu.fermer")
 
 
-def rendre_entete(nav, actif="", minimal=False):
-    """En-tête et menus. Le ruban d'aperçu a été retiré le 2026-10-15 (demande de Fabien) ; le noindex reste."""
+def selecteur_langues(langues):
+    """Sélecteur de langue de la passe 1 : une nav sur une seule ligne, sans retour à la ligne autour (son retrait par
+    resoudre_selecteur rend alors l'en-tête français octet pour octet). Les adresses sont des marqueurs {{LANGUE:xx}},
+    résolus page par page à la finalisation. Chaîne vide s'il n'y a qu'une langue."""
+    if len(langues) < 2:
+        return ""
+    liens = "".join(f'<a href="{{{{LANGUE:{l}}}}}" hreflang="{HREFLANG[l]}" lang="{l}" translate="no">{l.upper()}</a>'
+                    for l in langues)
+    return f'<nav class="hd-lang" aria-label="Langue">{liens}</nav>'
+
+
+_SELECTEUR = re.compile(r'(<nav class="hd-lang"[^>]*>)(.*?)</nav>')
+_LIEN_LANGUE = re.compile(r'<a href="\{\{LANGUE:([a-z]{2})\}\}"([^>]*)>(.*?)</a>')
+
+
+def resoudre_selecteur(html, page, langue, construites):
+    """Résout les sélecteurs de langue d'une page (en-tête et menu mobile) : {{LANGUE:xx}} devient {{ROOT}}<adresse de la
+    page dans la langue xx> si la page y est construite (construites[xx]), sinon {{ROOT}}xx/ (accueil de la langue) ;
+    la langue de la page porte aria-current="true". Le lien d'une langue où rien n'est construit est retiré, et la nav
+    entière quand il reste moins de deux langues (le français d'une seule langue est alors inchangé).
+
+    À appeler APRÈS localiser (build.finaliser) : les liens du sélecteur visent volontairement d'autres langues, et
+    localiser renverrait vers la langue de la page le lien {{ROOT}}fr/<page> ; les marqueurs {{LANGUE:xx}} lui sont
+    invisibles. Le résultat passe ensuite par relier comme tout lien {{ROOT}}. Page absente de la table des adresses
+    (la 404) : français vers fr/, autres langues vers leur accueil."""
+    if "{{LANGUE:" not in html:
+        return html
+
+    def adresse(l):
+        if page in construites.get(l, ()):
+            return "fr/" + page if l == "fr" else route(page, l)
+        return l + "/"
+
+    def nav(m):
+        liens = []
+        for l in _LIEN_LANGUE.finditer(m.group(2)):
+            code, attributs, libelle = l.groups()
+            if code != langue and not construites.get(code):
+                continue
+            courant = ' aria-current="true"' if code == langue else ""
+            liens.append(f'<a href="{{{{ROOT}}}}{adresse(code)}"{attributs}{courant}>{libelle}</a>')
+        return m.group(1) + "".join(liens) + "</nav>" if len(liens) > 1 else ""
+
+    return _SELECTEUR.sub(nav, html)
+
+
+def rendre_entete(nav, actif="", minimal=False, langues=("fr",)):
+    """En-tête et menus. Le ruban d'aperçu a été retiré le 2026-10-15 (demande de Fabien) ; le noindex reste. Le sélecteur
+    de langue (selecteur_langues) n'est émis que s'il y a plusieurs langues : dans .hd-cta avant « Connexion », ou après
+    le logo dans le gabarit minimal (contact), qui n'a ni navigation ni .hd-cta ; le menu mobile a le sien."""
     h = ['<a class="skip" href="#main">Aller au contenu</a>\n',
          '<header class="hd' + (" min" if minimal else "") + '" id="hd">\n<div class="wrap hd-in">\n',
          '<a class="hd-logo" href="{{ROOT}}" aria-label="Neur.on, retour à l\'accueil">'
@@ -242,20 +292,22 @@ def rendre_entete(nav, actif="", minimal=False):
                 h.append(_panneau(e["cle"], nav["panneaux"][e["cle"]]))
             else:
                 h.append(f'<a class="{cls}" href="{_a(e["href"])}">{_e(e["libelle"])}</a>\n')
-        h.append('</nav>\n<div class="hd-cta"><a class="hd-cx" href="' + H.escape(CONNEXION) + '">Connexion</a>'
+        h.append('</nav>\n<div class="hd-cta">' + selecteur_langues(langues) + '<a class="hd-cx" href="' + H.escape(CONNEXION) + '">Connexion</a>'
                  '<a class="btn btn-s" href="{{ROOT}}contact/" data-suivi="cta-entete">Demander une démo</a>'
                  '<button type="button" class="hd-burger" id="hdBurger" aria-expanded="false" aria-controls="mm" '
                  f'aria-label="Ouvrir le menu" data-fermer="{H.escape(_libelle_fermer(), quote=True)}">'
                  '<span></span><span></span><span></span></button></div>\n')
+    else:
+        h.append(selecteur_langues(langues))
     h.append("</div>\n")
     h.append("</header>\n")
     if not minimal:
         h.append('<div class="mg-voile" hidden></div>\n')
-        h.append(rendre_mobile(nav))
+        h.append(rendre_mobile(nav, langues))
     return "".join(h)
 
 
-def rendre_mobile(nav):
+def rendre_mobile(nav, langues=("fr",)):
     h = ['<div class="mm" id="mm" hidden>\n<div class="wrap">\n']
     for e in nav["entrees"]:
         if not e.get("panneau"):
@@ -271,7 +323,7 @@ def rendre_mobile(nav):
             h.append(f'<a href="{_a(p["promo"]["href"])}">{_e(p["promo"]["lien"])}</a>\n')
         h.append("</div></div>\n")
     h.append('<a class="mm-cx" href="' + H.escape(CONNEXION) + '">Connexion</a>'
-             '<a class="btn mm-cta" href="{{ROOT}}contact/" data-suivi="cta-entete-mobile">Demander une démo</a>\n</div>\n</div>\n')
+             '<a class="btn mm-cta" href="{{ROOT}}contact/" data-suivi="cta-entete-mobile">Demander une démo</a>\n' + selecteur_langues(langues) + '</div>\n</div>\n')
     return "".join(h)
 
 

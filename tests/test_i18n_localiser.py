@@ -251,7 +251,8 @@ class TestBuildFrDe(unittest.TestCase):
         self.assertIn('<meta property="og:locale" content="fr_CH">', h)
         self.assertIn(f'<link rel="canonical" href="{U}fr/contact/">', h)
         self.assertIn('href="../../fr/contact/"', h)
-        self.assertNotIn("../de/", h)
+        # hors sélecteur de langue (tâche 1.4), qui annonce légitimement la version allemande, aucun lien ne quitte le français
+        self.assertNotIn("../de/", re.sub(r'<nav class="hd-lang".*?</nav>', "", h))
 
 
 if __name__ == "__main__":
