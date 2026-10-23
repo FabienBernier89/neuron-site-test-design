@@ -22,6 +22,9 @@ Un fichier par lot : `A-plugin-word.json`, `B-schema.json`, etc.
 - `remplace` ou `insere_avant` (facultatifs) : pour corriger une phrase reprise de la V1, la phrase exacte de la V1 que
   le texte remplace, ou le texte de la V1 devant lequel il s'insère. Un post-traitement ciblé applique la correction
   (exemple : `outils/post/pseudonymisation.py`) et `tests/test_contenu.py` accepte la page de la V1 ainsi corrigée.
+- `ancien` (facultatif) : texte d'origine d'un titre remplacé. Lot E : titre d'un billet ou d'un guide
+  (`outils/post/titres_blog.py`). Lot Y : clé `<page>.h1-requete`, 1re ligne du H1 de hero remplacée dans le seul
+  `<span class="n">` du H1, et clés `<page>.title` / `<page>.og` (`outils/post/titres_requete.py`).
 
 ## Règles
 

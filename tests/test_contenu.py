@@ -1,6 +1,8 @@
 """Tous les textes viennent mot pour mot du site Neur.on publié (spec § 2, § 9 tests 9 et 10), ou des contenus
 nouveaux de src/data/contenus-v2 (spec V2 § 2). Une entrée qui corrige une phrase de la V1 (champ « remplace » ou
-« insere_avant », voir le README du dossier) vaut pour sa page : la page de la V1 ainsi corrigée sert de source."""
+« insere_avant », voir le README du dossier) vaut pour sa page : la page de la V1 ainsi corrigée sert de source.
+Une entrée « <page>.h1-requete » (lot Y, décision de Fabien du 2026-10-23, point 11) remplace la 1re ligne « ancien »
+du H1 de sa page, dans le seul <h1> : la page de la V1 dont le H1 est ainsi corrigé sert aussi de source."""
 import html as H
 import re
 import subprocess
@@ -75,7 +77,10 @@ def corrigee(t, entrees):
     """HTML d'une page de la V1 avec les corrections déclarées par les contenus nouveaux de cette page."""
     for e in entrees:
         nouveau = H.escape(e["texte"], quote=False)
-        if "remplace" in e:
+        if e["cle"].endswith(".h1-requete"):  # 1re ligne du H1 seulement (lot Y)
+            ancien = H.escape(e["ancien"], quote=False)
+            t = re.sub(r"<h1\b[^>]*>.*?</h1>", lambda m: m.group(0).replace(ancien, nouveau, 1), t, count=1, flags=re.S)
+        elif "remplace" in e:
             t = t.replace(H.escape(e["remplace"], quote=False), nouveau)
         else:
             ancre = H.escape(e["insere_avant"], quote=False)
@@ -115,7 +120,7 @@ class TestContenu(unittest.TestCase):
             v1 = build.NEURON / "docs/fr" / p / "index.html"
             sources = [deux_variantes(v1.read_text(encoding="utf-8"))] if v1.exists() else []
             # corrections de la page, et renommages communs à tout le site (page « * », outils/post/renommages.py)
-            corrections = [e for e in contenus.toutes() if e["page"] in (p, "*") and ("remplace" in e or "insere_avant" in e)]
+            corrections = [e for e in contenus.toutes() if e["page"] in (p, "*") and ("remplace" in e or "insere_avant" in e or e["cle"].endswith(".h1-requete"))]
             if corrections and v1.exists():
                 sources.append(deux_variantes(corrigee(v1.read_text(encoding="utf-8"), corrections)))
             sources += [deux_variantes(e["texte"]) for e in contenus.toutes() if e["page"] in (p, "*")]  # « * » : commun à plusieurs pages

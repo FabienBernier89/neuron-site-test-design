@@ -53,6 +53,13 @@ def attribut(s):
     return s.replace("&", "&amp;").replace('"', "&quot;").replace("<", "&lt;")
 
 
+def retitrer(html, title, og):
+    """Remplace le <title> et l'og:title de la page (repris par outils/post/titres_requete.py, lot Y)."""
+    html = re.sub(r"<title>.*?</title>", lambda m: f"<title>{texte_html(title)}</title>", html, count=1, flags=re.S)
+    return re.sub(r'<meta property="og:title" content="[^"]*">',
+                  lambda m: f'<meta property="og:title" content="{attribut(og)}">', html, count=1)
+
+
 def remplacer_h1(html, titre):
     def sub(m):
         interne = m.group(2)
@@ -112,9 +119,7 @@ def traiter(html, page):
     propre = reg.get(page)
     if propre:
         html = remplacer_h1(html, propre["h1"])
-        html = re.sub(r"<title>.*?</title>", lambda m: f"<title>{texte_html(propre['title'])}</title>", html, count=1, flags=re.S)
-        html = re.sub(r'<meta property="og:title" content="[^"]*">',
-                      lambda m: f'<meta property="og:title" content="{attribut(propre["og"])}">', html, count=1)
+        html = retitrer(html, propre["title"], propre["og"])
     html = corriger_json_ld(html, propre["h1"] if propre else None, {x["ancien"]: x["h1"] for x in reg.values()}, bool(propre))
     for q, x in reg.items():
         ancien, nouveau = re.escape(texte_html(x["ancien"])), texte_html(x["h1"])
