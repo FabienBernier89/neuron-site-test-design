@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Site Neur.on V2 : assemble les pages de src/pages dans docs/ (docs/fr/<page>, comme les URL de production).
+"""Site Neur.on V2 : assemble les pages de src/pages dans docs/ (docs/fr/<page>, comme les URL de production ; les
+langues DE, IT et EN de CONFIG["langues"] vivent à côté, sous leur propre adresse : outils/i18n/langues.py).
+
+Le build travaille en trois passes : (1) assembler_fr compose chaque page française, liens encore en {{ROOT}} ;
+(2) TRADUIRE en tire la page de chaque autre langue ; (3) finaliser résout images, dimensions et liens, puis la page est
+écrite à chemin_page(page, langue).
 
 Bibliothèque standard uniquement. Lit le site Neur.on (Sites/neuron) pour le méga-menu, le pied de
 page, la page 404, les redirections, les images et les données de démonstration, sans jamais y écrire. Le
@@ -28,6 +33,7 @@ from pathlib import Path
 import menu
 import redirections
 from outils import donnees_structurees, envoi, llms, post
+from outils.i18n import langues
 
 ICI = Path(__file__).resolve().parent
 NEURON = Path(os.environ.get("NEURON_SRC", ICI.parent / "neuron")).resolve()
@@ -44,12 +50,13 @@ PAGES = sorted((("" if str(f.parent.relative_to(SRC / "pages")) == "." else str(
 ARTICLE = "ressources/blog/traduire-contrat-droit-suisse/"
 PAIRE = re.compile(r"^traduction/(allemand|francais|italien|anglais)-(francais|allemand|anglais|italien)/$")
 BILLET = re.compile(r"^ressources/(blog|actualites)/[^/]+/$")
-LIEN = re.compile(r'href="\{\{ROOT\}\}(?:fr/)?([^"#?]*)([#?][^"]*)?"')
+# lien de page à résoudre ; un lien déjà localisé ({{ROOT}}de/..., it/, en/) est laissé tel quel
+LIEN = re.compile(r'href="\{\{ROOT\}\}(?!(?:de|it|en)/)(?:fr/)?([^"#?]*)([#?][^"]*)?"')
 ENTETE = re.compile(r"\A<!--page\n(.*?)\n-->\n", re.S)
 IMAGES = ["neuron-logo.png", "neuron-logo-blanc.png", "neuron-mark.png", "favicon.ico", "corrext-logo.svg", "chnell-logo.svg", "chnell-symbol.png"]
 
 TETE = """<!DOCTYPE html>
-<html lang="fr" data-theme="systeme">
+<html lang="@LANG@" data-theme="systeme">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -92,21 +99,26 @@ def modele(chemin):
     return ""
 
 
-def chemin_page(page):
-    """Fichier écrit par le build pour une page (chemin publié, ex. « corrext/ ») : docs/fr/<page>/index.html."""
-    return DOCS / "fr" / page / "index.html"
+def chemin_page(page, langue="fr"):
+    """Fichier écrit par le build pour une page (chemin publié, ex. « corrext/ ») dans une langue : docs/fr/<page>/index.html
+    en français, docs/<adresse de la langue>/index.html sinon (langues.route : « traduction/contrats/ » donne
+    de/uebersetzung/vertraege/ en allemand). KeyError si la langue ou, hors français, la page est inconnue."""
+    if langue == "fr":
+        return DOCS / "fr" / page / "index.html"
+    return DOCS / langues.route(page, langue) / "index.html"
 
 
-def relier(html, page, racine=None):
+def relier(html, page, racine=None, langue="fr"):
     """Remplace {{ROOT}} par le chemin relatif vers la racine du site (docs/) et envoie les liens sans page vers
-    leur page modèle.
+    leur page modèle. langue : langue de la page, qui fixe la profondeur de son dossier (de/kontakt/ est à deux niveaux
+    de la racine) ; un lien déjà localisé vers de/, it/ ou en/ n'est pas modifié, hors la racine qui le précède.
 
     Les pages vivent sous fr/ : un lien de page s'écrit {{ROOT}}contact/ ou {{ROOT}}fr/contact/ et mène à
     fr/contact/ depuis n'importe quelle profondeur, le logo ({{ROOT}}) mène à fr/. Hors lien de page,
     {{ROOT}} désigne la racine du site : assets/, envoi.php. La page 404, servie depuis la racine, passe
     racine="" pour que ses liens partent de la base."""
     if racine is None:
-        racine = "../" * (page.count("/") + 1)
+        racine = "../" * ((page.count("/") + 1) if langue == "fr" else langues.route(page, langue).count("/"))
 
     def sub(m):
         chemin, suite = m.group(1), m.group(2) or ""
@@ -192,7 +204,8 @@ ALTERNATE = re.compile(r'<link rel="alternate" hreflang="[^"]+" href="([^"]+)">'
 
 @functools.lru_cache(maxsize=8)
 def _chemins_construits(docs, pages):
-    """Dossiers (relatifs à la sortie, « fr/corrext/ ») des pages que ce build écrit, à l'emplacement de chemin_page."""
+    """Dossiers (relatifs à la sortie, « fr/corrext/ ») des pages françaises que ce build écrit, à l'emplacement de
+    chemin_page. Les autres langues n'y figurent pas : leurs alternates sont posés à la finalisation (tâche 1.3)."""
     return frozenset(chemin_page(p).parent.relative_to(docs).as_posix().rstrip("/") + "/" for p in pages)
 
 
@@ -437,7 +450,9 @@ def utilise_inter(html, css=None):
     return any(classes <= jetons for classes in classes_num(css))
 
 
-def assembler(meta, corps, page, nav, pied, v, racine=None):
+def assembler_fr(meta, corps, page, nav, pied, v):
+    """Page française complète, avant résolution des liens : {{ROOT}} et @LANG@ restent à remplacer (finaliser). C'est ce
+    HTML que TRADUIRE reçoit pour les autres langues."""
     cx = 'id="cx"' in corps
     sim = "data-sim" in corps or "data-ech" in corps
     feuilles = (["cx.css"] if cx else []) + (["maq.css"] if 'class="maq' in corps else []) + meta.get("styles", "").split()
@@ -455,8 +470,21 @@ def assembler(meta, corps, page, nav, pied, v, racine=None):
     # données structurées : @context, entité Organization unique, dateModified (outils/donnees_structurees.py)
     html = donnees_structurees.normaliser(html, page, date_page(page) if page in PAGES else None)
     html = html.replace("@INTER@", PRECHARGE_INTER if utilise_inter(html) else "", 1)  # décidé sur le HTML final
+    return html
+
+
+def finaliser(html, page, langue, construites, racine=None):
+    """Dernière passe d'une page assemblée dans une langue : attribut lang, images recopiées, dimensions, puis liens
+    relatifs (relier). construites : pages construites par langue (langue vers ensemble de pages), que la localisation
+    des liens et de la tête utilisera à partir de la tâche 1.3. racine : voir relier (la 404 passe racine="")."""
+    html = html.replace('<html lang="@LANG@"', f'<html lang="{langue}"', 1)
     copier_images(html)
-    return relier(dimensionner(html), page, racine)
+    return relier(dimensionner(html), page, racine, langue)
+
+
+def assembler(meta, corps, page, nav, pied, v, racine=None):
+    """Page française complète et finalisée : assembler_fr puis finaliser (la 404 s'assemble ainsi)."""
+    return finaliser(assembler_fr(meta, corps, page, nav, pied, v), page, "fr", {"fr": set(PAGES)}, racine)
 
 
 def base_pages():
@@ -573,6 +601,12 @@ def ecrire_redirections():
     (DOCS / ".htaccess").write_text(redirections.htaccess(redirs), encoding="utf-8")
 
 
+# Point d'injection de la traduction (passe 2) : (html français assemblé, page, langue) donne (html traduit, segments
+# restés sans traduction). Identité tant que la traduction n'est pas branchée ; une page avec des segments manquants
+# n'est pas construite dans la langue.
+TRADUIRE = lambda html, page, langue: (html, [])
+
+
 def main():
     garde_sortie()
     if DOCS.exists():
@@ -583,13 +617,26 @@ def main():
     nav = menu.lire_menu((NEURON / "src/partials/nav.html").read_text(encoding="utf-8"))
     pied = menu.lire_pied((NEURON / "src/partials/footer.html").read_text(encoding="utf-8"))
     menu.appliquer_ajouts(nav, pied)  # entrées de menu et de pied ajoutées par les lots (src/data/menu-ajouts.json)
-    metas = {}
-    for page in PAGES:
+    metas, assemblees = {}, {}
+    for page in PAGES:  # passe 1 : pages françaises, liens encore en {{ROOT}}
         meta, corps = lire_page(page)
         metas[page] = meta
-        sortie = chemin_page(page)
-        sortie.parent.mkdir(parents=True, exist_ok=True)
-        sortie.write_text(assembler(meta, corps, page, nav, pied, v), encoding="utf-8")
+        assemblees[page] = assembler_fr(meta, corps, page, nav, pied, v)
+    autres = [l for l in CONFIG["langues"] if l != "fr"]
+    construites, traduites = {"fr": set(PAGES)}, {}
+    for langue in autres:  # passe 2 : une page n'est construite dans une langue que sans segment manquant
+        construites[langue] = set()
+        for page in PAGES:
+            html, manquants = TRADUIRE(assemblees[page], page, langue)
+            if not manquants:
+                construites[langue].add(page)
+                traduites[langue, page] = html
+    for page in PAGES:  # passe 3 : finalisation et écriture, français d'abord
+        pages_langues = [("fr", assemblees[page])] + [(l, traduites[l, page]) for l in autres if page in construites[l]]
+        for langue, html in pages_langues:
+            sortie = chemin_page(page, langue)
+            sortie.parent.mkdir(parents=True, exist_ok=True)
+            sortie.write_text(finaliser(html, page, langue, construites), encoding="utf-8")
     (DOCS / "404.html").write_text(page_404(nav, pied, v), encoding="utf-8")
     (DOCS / "index.html").write_text(page_racine(), encoding="utf-8")
     # Aperçu : aucun robot, aucun plan du site. Production : tout est ouvert, robots.txt annonce sitemap.xml
@@ -603,6 +650,8 @@ def main():
     ecrire_redirections()
     envoi.ecrire(DOCS / "envoi.php", CONFIG)  # envoi des formulaires sur Hostpoint, réglé par la configuration
     print(f"{len(PAGES)} pages écrites dans {DOCS}")
+    for langue in autres:
+        print(f"{len(construites[langue])} pages {langue} écrites")
 
 
 if __name__ == "__main__":

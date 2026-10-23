@@ -28,6 +28,7 @@ class TestBuild(unittest.TestCase):
     def test_arborescence_fr_et_racine(self):
         self.assertEqual(build.chemin_page("corrext/"), build.DOCS / "fr" / "corrext" / "index.html")
         self.assertEqual(build.chemin_page(""), build.DOCS / "fr" / "index.html")
+        self.assertEqual(build.chemin_page("corrext/", "fr"), build.chemin_page("corrext/"))
         racine = (self.docs / "index.html").read_text(encoding="utf-8")
         self.assertIn("location.replace", racine)
         self.assertIn('href="fr/"', racine)
