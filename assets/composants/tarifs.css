@@ -26,9 +26,11 @@
 .tf-et h3{margin-top:16px;font:600 17px/24px var(--sans);color:var(--ink)}
 .tf-et p{margin-top:8px;font:400 15px/25px var(--sans);color:var(--muted)}
 
-@media (max-width:640px){.tf-pg{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:1023px){
   .tf-pg{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tf-p{min-height:0}
   .tf-et{grid-template-columns:minmax(0,1fr);gap:28px}
 }
+/* Une colonne sous 640 px : APRÈS le bloc 1023 px, qui remettait sinon deux colonnes à même spécificité (audit design du
+   2026-10-23 : cartes de 115 px et titres débordants à 390 px) */
+@media (max-width:640px){.tf-pg{grid-template-columns:minmax(0,1fr)}}

@@ -33,8 +33,40 @@ def section(contenu, cls="sec", ident=""):
     return f'<section class="{cls}"{i}><div class="wrap">\n{contenu}\n</div></section>\n'
 
 
+NOMS_OUTILS = ("Traduction texte et document", "Gestion de projet", "Fast lookup CHnell")
+PETITS_MOTS = {"le", "la", "les", "du", "de", "des", "en", "au", "aux", "vers", "un", "une"}
+
+
+def accent_fin(texte, n=2):
+    """Règle commune de l'accent italique (generique.mots_accent) : les derniers mots d'un titre de plus de 4 mots,
+    ponctuation finale exclue. None pour un titre court ou balisé."""
+    if "<" in texte:
+        return None
+    fin = texte.rstrip(" .?!:\u00a0\u202f")
+    mots = fin.split(" ")
+    if len(mots) <= 4:
+        return None
+    for nom in NOMS_OUTILS:  # un nom d'outil en fin de titre reste entier (« sur Gestion de projet »)
+        if fin.endswith(" " + nom):
+            return nom
+    # trois mots quand l'avant-dernier est un petit mot (« droit du travail », « l'allemand vers l'anglais ») sauf après
+    # une conjonction (« et la souveraineté » reste « la souveraineté »), ou quand c'est une conjonction (« éditeurs et
+    # LegalTechs », jamais « et LegalTechs » seul)
+    if n == 2 and ((mots[-2].lower() in PETITS_MOTS and mots[-3].lower() not in ("et", "ou"))
+                   or mots[-2].lower() in ("et", "ou")):
+        n = 3
+    return " ".join(mots[-n:])
+
+
 def h2(texte, accent=None, cls="h2"):
-    if accent and accent in texte:
+    """Titre de section. Sans accent donné, la règle commune s'applique (audit design du 2026-10-23 : un titre de plus
+    de 4 mots porte l'accent italique sur ses derniers mots) ; accent=False : titre sans accent."""
+    if accent is None and "<em>" not in texte:
+        auto = accent_fin(texte)
+        if auto:
+            i = texte.rindex(auto)  # dernière occurrence : la fin du titre
+            texte = texte[:i] + f"<em>{auto}</em>" + texte[i + len(auto):]
+    elif accent and accent in texte:
         texte = texte.replace(accent, f"<em>{accent}</em>", 1)
     return f'<h2 class="{cls}">{texte}</h2>'
 

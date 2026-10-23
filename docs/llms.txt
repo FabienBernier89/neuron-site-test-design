@@ -1,182 +1,202 @@
 # Neur.on
 
-> Neur.on est une société suisse (Fribourg) qui édite Corrext, une plateforme de traduction juridique et financière par intelligence artificielle, et LexMachina, un moteur de traduction neuronale entraîné sur le droit suisse (plus de 15 millions de segments juridiques et financiers multilingues). Stockage en Suisse chez Infomaniak, traitement en Suisse avec LexMachina ou en mode Highly sensitive content, certification ISO 27001 (février 2024), conformité nLPD et RGPD, hors US CLOUD Act.
+> Le moteur de traduction du droit, de la fiscalité et de la finance suisses. Quadrilingue natif, plus de 15 millions de segments, hébergement 100% suisse.
 
-Neur.on s'adresse aux cabinets d'avocats, aux banques et établissements financiers, aux directions juridiques et Legal Ops, aux autorités cantonales et fédérales, aux fiduciaires et aux éditeurs juridiques, en Suisse, en allemand, en français, en italien et en anglais. Pas d'essai gratuit ni de tarif public : démonstration personnalisée sur demande.
+Site en français (Suisse), mis à jour le 2026-10-23. Texte intégral des pages principales : https://neur-on.ai/llms-full.txt
 
-## Produit : la plateforme Corrext
+## Accueil
 
-- [Corrext : plateforme de traduction juridique suisse](https://neur-on.ai/fr/corrext/)
-- [API et on-premises](https://neur-on.ai/fr/corrext/api-on-premises/)
-- [Fast lookup CHnell : concordancier du droit suisse](https://neur-on.ai/fr/corrext/chnell/)
-- [Éditeur de relecture Corrext : outil de TAO juridique suisse](https://neur-on.ai/fr/corrext/editeur-de-relecture/)
-- [Extraits du registre du commerce traduits et certifiés](https://neur-on.ai/fr/corrext/extraits-registre-commerce/)
-- [Gestion de projet : relecture juridique et devis](https://neur-on.ai/fr/corrext/gestion-de-projet/)
-- [Traduction de texte et de documents juridiques](https://neur-on.ai/fr/corrext/traduction-texte-et-document/)
+- [Neur.on : traduction juridique et financière par IA en Suisse](https://neur-on.ai/fr/): Le moteur de traduction du droit, de la fiscalité et de la finance suisses. Quadrilingue natif, plus de 15 millions de segments, hébergement 100% suisse.
 
-## Le moteur et la sécurité
+## Corrext, la plateforme
 
-- [Langues et formats de Corrext par Neur.on : les 30 langues](https://neur-on.ai/fr/langues-et-formats/)
-- [LexMachina : le moteur de Corrext entraîné sur le droit suisse](https://neur-on.ai/fr/lexmachina/)
-- [Quatre niveaux de qualité de traduction](https://neur-on.ai/fr/niveaux-de-qualite/)
-- [Sécurité et souveraineté des données suisses](https://neur-on.ai/fr/securite-souverainete/)
+- [Corrext : plateforme de traduction juridique suisse](https://neur-on.ai/fr/corrext/): Traduction texte et document, Gestion de projet, Fast lookup CHnell et extraits certifiés dans un seul environnement suisse. Stockage en Suisse, ISO 27001.
+- [API et on-premises · Corrext par Neur.on : intégrations](https://neur-on.ai/fr/corrext/api-on-premises/): Intégrer le moteur de traduction juridique suisse dans vos DMS, intranets et produits : API REST, déploiement on-premises, cadrage d'une intégration.
+- [Fast lookup CHnell : concordancier du droit suisse](https://neur-on.ai/fr/corrext/chnell/): Fast lookup CHnell, le concordancier bilingue de Corrext : plus de 20 000 documents officiels suisses alignés, 30 domaines, vos propres ressources.
+- [Éditeur de relecture Corrext : outil de TAO juridique suisse](https://neur-on.ai/fr/corrext/editeur-de-relecture/): Relisez vos traductions phrase par phrase dans Corrext. Chaque correction rejoint votre mémoire, hébergée en Suisse, et sert à vos projets suivants.
+- [Extraits du registre du commerce traduits et certifiés](https://neur-on.ai/fr/corrext/extraits-registre-commerce/): Traduction certifiée d'extraits du registre du commerce suisse, commandée en ligne : certification Corrext, notariée ou apostillée, plus de 30 langues.
+- [Gestion de projet : relecture juridique et devis](https://neur-on.ai/fr/corrext/gestion-de-projet/): Gestion de projet, le tunnel en trois étapes de Corrext : confidentialité, fichiers analysés, relecture interne ou externe, devis et délai instantanés.
+- [Plugin Word · relecture Corrext dans Microsoft Word](https://neur-on.ai/fr/corrext/plugin-word/): Le plugin Word ouvre le panneau Corrext dans Word : mémoire de traduction, Fast Lookup CHnell, alternatives par moteur. Installé sur votre poste.
+- [Traduction de texte et de documents juridiques · Corrext](https://neur-on.ai/fr/corrext/traduction-texte-et-document/): Traduction instantanée de texte et de fichiers dans Corrext : jusqu'à 25 fichiers, conversion PDF vers Word, réécriture, alternatives par moteur.
+
+## LexMachina, le moteur
+
+- [LexMachina : le moteur de Corrext entraîné sur le droit suisse](https://neur-on.ai/fr/lexmachina/): LexMachina, le moteur de Corrext entraîné sur plus de 15 millions de segments juridiques suisses : ATF, FINMA, codes. Quadrilingue, exécuté en Suisse.
+
+## Sécurité, langues et qualité
+
+- [Langues et formats de Corrext par Neur.on : les 30 langues](https://neur-on.ai/fr/langues-et-formats/): Les 30 langues de Corrext, les quatre natives, les formats acceptés (.docx, .pdf, .xlsx, .pptx), 25 fichiers de 50 Mo, la mise en page conservée.
+- [Quatre niveaux de qualité de traduction · Corrext par Neur.on](https://neur-on.ai/fr/niveaux-de-qualite/): Traduction machine, post-édition, relecture juridique, certification : quel niveau pour quel document, qui relit et où le commander dans Corrext.
+- [Sécurité et souveraineté des données suisses · Neur.on Corrext](https://neur-on.ai/fr/securite-souverainete/): Où vos documents sont stockés et traités avec Corrext : serveurs suisses Infomaniak, mode Highly sensitive content, ISO 27001, nLPD, RGPD, hors CLOUD Act.
+
+## Tarifs
+
+- [Tarifs · une offre selon vos volumes et vos langues](https://neur-on.ai/fr/tarifs/): L'offre Corrext se construit sur vos volumes, vos langues et votre niveau de relecture : échange de cadrage, démonstration sur vos documents, puis essai encadré.
 
 ## Solutions par métier
 
-- [Solutions par métier](https://neur-on.ai/fr/solutions/)
-- [Traduction pour autorités et administrations suisses](https://neur-on.ai/fr/solutions/autorites-administration/)
-- [Traduction juridique et financière pour banques](https://neur-on.ai/fr/solutions/banques-finance/)
-- [Traduction juridique pour cabinets d'avocats suisses](https://neur-on.ai/fr/solutions/cabinets-avocats/)
-- [Traduction pour directions juridiques et Legal Ops](https://neur-on.ai/fr/solutions/directions-juridiques/)
-- [Traduction juridique pour LegalTechs et éditeurs](https://neur-on.ai/fr/solutions/editeurs-legaltech/)
-- [Traduction pour fiduciaires, audit et conseil](https://neur-on.ai/fr/solutions/fiduciaires-conseil/)
+- [Solutions par métier · Neur.on, traduction juridique suisse](https://neur-on.ai/fr/solutions/): Avocats, banques, directions juridiques, autorités, fiduciaires, éditeurs : ce que Corrext change pour chaque métier, stockage en Suisse compris.
+- [Traduction pour autorités et administrations suisses](https://neur-on.ai/fr/solutions/autorites-administration/): Tribunaux et administrations : traduisez décisions, rapports et documents officiels en quatre langues, traités en Suisse, avec la terminologie des lois.
+- [Traduction juridique et financière pour banques](https://neur-on.ai/fr/solutions/banques-finance/): Secret bancaire, circulaires FINMA, prospectus et rapports annuels : traduisez en quatre langues, traités en Suisse, avec la terminologie officielle.
+- [Traduction juridique pour cabinets d'avocats suisses](https://neur-on.ai/fr/solutions/cabinets-avocats/): Contentieux, arbitrage, M&A : traduisez pièces et contrats sous secret professionnel, en terminologie suisse, relus par un traducteur juridique.
+- [Traduction pour directions juridiques et Legal Ops](https://neur-on.ai/fr/solutions/directions-juridiques/): Centralisez les traductions de l'entreprise en Suisse : devis et délais immédiats, relecture interne ou externe, mémoire réutilisable, accès par document.
+- [Traduction juridique pour LegalTechs et éditeurs](https://neur-on.ai/fr/solutions/editeurs-legaltech/): Intégrez LexMachina et la terminologie du droit suisse à votre produit : API REST, déploiement on-premises, quatre langues natives, traitement en Suisse.
+- [Traduction pour fiduciaires, audit et conseil](https://neur-on.ai/fr/solutions/fiduciaires-conseil/): Statuts, extraits du registre du commerce, rapports d'audit, documents fiscaux : traduisez et faites certifier vos documents d'entreprise, traités en Suisse.
 
-## Traduction par domaine et par langue
+## Traduction juridique par domaine et par paire de langues
 
-- [Traduction juridique par domaine et par langue](https://neur-on.ai/fr/traduction/)
-- [Traduction juridique de l'allemand vers l'anglais](https://neur-on.ai/fr/traduction/allemand-anglais/)
-- [Traduction juridique de l'allemand au français](https://neur-on.ai/fr/traduction/allemand-francais/)
-- [Traduction juridique de l'anglais vers l'allemand](https://neur-on.ai/fr/traduction/anglais-allemand/)
-- [Traduction juridique pour l'assurance en Suisse](https://neur-on.ai/fr/traduction/assurance/)
-- [Traduction juridique et financière pour les banques](https://neur-on.ai/fr/traduction/banque-finance/)
-- [Traduction réglementaire, compliance et FINMA](https://neur-on.ai/fr/traduction/compliance-finma/)
-- [Traduction juridique pour contentieux et arbitrage](https://neur-on.ai/fr/traduction/contentieux-arbitrage/)
-- [Traduction juridique de contrats suisses, DE FR IT](https://neur-on.ai/fr/traduction/contrats/)
-- [Traduction en droit des sociétés suisse, DE FR IT](https://neur-on.ai/fr/traduction/droit-des-societes/)
-- [Traduction juridique en droit du travail suisse](https://neur-on.ai/fr/traduction/droit-du-travail/)
-- [Traduction en droit pénal et procédure pénale suisse](https://neur-on.ai/fr/traduction/droit-penal/)
-- [Traduction juridique et fiscale en droit suisse](https://neur-on.ai/fr/traduction/fiscalite/)
-- [Traduction juridique du français vers l'allemand](https://neur-on.ai/fr/traduction/francais-allemand/)
-- [Traduction juridique du français vers l'anglais](https://neur-on.ai/fr/traduction/francais-anglais/)
-- [Traduction pour fusions et acquisitions en Suisse](https://neur-on.ai/fr/traduction/fusions-acquisitions/)
-- [Traduction juridique de l'italien au français](https://neur-on.ai/fr/traduction/italien-francais/)
-- [Traduction de brevets, marques et droit d'auteur](https://neur-on.ai/fr/traduction/propriete-intellectuelle/)
-- [Traduction des rapports annuels et comptes suisses](https://neur-on.ai/fr/traduction/rapports-annuels-financiers/)
+- [Traduction juridique par domaine et par langue](https://neur-on.ai/fr/traduction/): Douze domaines du droit suisse et les principales paires de langues : la terminologie officielle en allemand, français, italien et anglais, et ses sources.
+- [Traduction juridique de l'allemand vers l'anglais](https://neur-on.ai/fr/traduction/allemand-anglais/): Le droit suisse alémanique en anglais : les versions anglaises des lois n'ont pas force de loi, et les notions suisses gardent leur terme d'origine.
+- [Traduction juridique de l'allemand au français](https://neur-on.ai/fr/traduction/allemand-francais/): L'allemand juridique suisse vers le français : abréviations OR, ZGB, SchKG converties, orthographe suisse reconnue, documents traités en Suisse.
+- [Traduction juridique de l'anglais vers l'allemand](https://neur-on.ai/fr/traduction/anglais-allemand/): Contrats rédigés en anglais et soumis au droit suisse : la version allemande ancre chaque clause sur les notions exactes du Code des obligations.
+- [Traduction juridique pour l'assurance en Suisse](https://neur-on.ai/fr/traduction/assurance/): Conditions générales, polices, déclarations de sinistre : traduire en assurance privée avec la terminologie de la loi suisse sur le contrat d'assurance.
+- [Traduction juridique et financière pour les banques](https://neur-on.ai/fr/traduction/banque-finance/): Contrats de crédit, prospectus, documentation de fonds : traduire sans que la donnée quitte la Suisse, avec la terminologie de la LB et de la LSFin.
+- [Traduction réglementaire, compliance et FINMA](https://neur-on.ai/fr/traduction/compliance-finma/): Directives internes, dossiers de diligence, rapports à l'autorité de surveillance : traduire la conformité suisse avec la terminologie de la LBA.
+- [Traduction juridique pour contentieux et arbitrage](https://neur-on.ai/fr/traduction/contentieux-arbitrage/): Mémoires, bordereaux de pièces, sentences arbitrales, recours au Tribunal fédéral : traduire avec la terminologie du CPC et de la LDIP en Suisse.
+- [Traduction juridique de contrats suisses, DE FR IT](https://neur-on.ai/fr/traduction/contrats/): Baux, contrats de travail, CGV, prêts : traduire avec la terminologie du Code des obligations suisse et la relecture d'un traducteur juridique.
+- [Traduction en droit des sociétés suisse, DE FR IT](https://neur-on.ai/fr/traduction/droit-des-societes/): Statuts, convocations, procès-verbaux d'assemblée, extraits du registre du commerce : la terminologie du droit suisse des sociétés en quatre langues.
+- [Traduction juridique en droit du travail suisse](https://neur-on.ai/fr/traduction/droit-du-travail/): Contrats de travail, règlements, lettres de résiliation, certificats : traduire les documents RH avec la terminologie du Code des obligations suisse.
+- [Traduction en droit pénal et procédure pénale suisse](https://neur-on.ai/fr/traduction/droit-penal/): Ordonnances pénales, actes d'accusation, dossiers d'instruction, entraide : traduire une procédure pénale suisse avec les termes du CP et du CPP.
+- [Traduction juridique et fiscale en droit suisse](https://neur-on.ai/fr/traduction/fiscalite/): Décisions de taxation, réclamations, correspondance avec l'administration : traduire la fiscalité suisse avec les termes de la LIFD et de la LTVA.
+- [Traduction juridique du français vers l'allemand](https://neur-on.ai/fr/traduction/francais-allemand/): Du français juridique suisse vers l'allemand : termes des lois fédérales, ss et apostrophe des milliers, abréviations CO, LP, LDIP converties.
+- [Traduction juridique du français vers l'anglais](https://neur-on.ai/fr/traduction/francais-anglais/): Le droit suisse romand en anglais : arbitrage, arrêts du Tribunal fédéral et conformité, avec des versions anglaises informatives qui ne font pas foi.
+- [Traduction pour fusions et acquisitions en Suisse](https://neur-on.ai/fr/traduction/fusions-acquisitions/): Data room, due diligence, contrat de fusion, closing : traduire des milliers de pages sans que la transaction quitte la Suisse, terminologie LFus.
+- [Traduction juridique de l'italien au français](https://neur-on.ai/fr/traduction/italien-francais/): L'italien juridique suisse vers le français : ricorso, precetto esecutivo, Tribunale federale et les termes du Tessin, distincts de l'italien d'Italie.
+- [Traduction de brevets, marques et droit d'auteur](https://neur-on.ai/fr/traduction/propriete-intellectuelle/): Demandes de brevet, dépôts de marque, licences, oppositions : traduire des titres opposables avec la terminologie suisse de la LBI, la LPM et la LDA.
+- [Traduction des rapports annuels et comptes suisses](https://neur-on.ai/fr/traduction/rapports-annuels-financiers/): Rapport de gestion, comptes annuels, annexe, rapport de révision : traduire la clôture en quatre langues avec les libellés du Code des obligations.
 
 ## Comparatifs
 
-- [Comparatifs](https://neur-on.ai/fr/comparatif/)
-- [Agence de traduction ou plateforme : le choix avec Corrext](https://neur-on.ai/fr/comparatif/agence-ou-plateforme/)
-- [ChatGPT et traduction juridique : ce que Corrext apporte](https://neur-on.ai/fr/comparatif/chatgpt-traduction-juridique/)
-- [DeepL Pro et traduction juridique : ce que Corrext change](https://neur-on.ai/fr/comparatif/deepl-traduction-juridique/)
+- [Comparatifs · Corrext par Neur.on face aux autres solutions](https://neur-on.ai/fr/comparatif/): Trois comparatifs honnêtes : Corrext et DeepL Pro, Corrext et les LLM généralistes, agence de traduction ou plateforme. Ce que chacun fait bien.
+- [Agence de traduction ou plateforme : le choix avec Corrext](https://neur-on.ai/fr/comparatif/agence-ou-plateforme/): Agence externe, outil générique ou plateforme : trois façons de traduire comparées. Corrext garde la relecture externe pour les documents qui l'exigent.
+- [ChatGPT et traduction juridique : ce que Corrext apporte](https://neur-on.ai/fr/comparatif/chatgpt-traduction-juridique/): Les modèles généralistes reformulent bien. Ce qu'ils ne fournissent pas seuls : terminologie suisse sourcée, références vérifiables et traitement en Suisse.
+- [DeepL Pro et traduction juridique : ce que Corrext change](https://neur-on.ai/fr/comparatif/deepl-traduction-juridique/): DeepL Pro, excellent moteur générique, reste disponible dans Corrext. Ce qui change : lieu de traitement, terminologie du droit suisse, relecture.
+
+## À propos et presse
+
+- [À propos de Neur.on · la société suisse derrière Corrext](https://neur-on.ai/fr/a-propos/): Neur.on AI Solutions SA, société suisse établie à Fribourg : nos distinctions, notre certification ISO 27001 et nos modèles entraînés sur le droit suisse.
+- [Presse · Neur.on AI Solutions SA, LegalTech suisse à Fribourg](https://neur-on.ai/fr/a-propos/presse/): Espace presse de Neur.on : dénomination exacte, siège en Suisse, distinctions, certification ISO 27001, orthographe des marques, contact rédaction.
+
+## Contact
+
+- [Contact et démo · Neur.on, traduction juridique en Suisse](https://neur-on.ai/fr/contact/): Demandez une démo de Corrext par Neur.on : un expert du droit suisse vous la montre sur vos documents, vos langues et votre terminologie, depuis Fribourg.
 
 ## Ressources
 
-- [Ressources sur la traduction juridique suisse](https://neur-on.ai/fr/ressources/)
-- [Blog Neur.on : droit suisse, traduction et actualités](https://neur-on.ai/fr/ressources/blog/)
-- [Actualités de Neur.on depuis 2020](https://neur-on.ai/fr/ressources/blog/actualites/)
-- [Les start-up doivent-elles craindre l’AI Act ?](https://neur-on.ai/fr/ressources/blog/ai-act-grand-challenge-universite-saint-gall/)
-- [Comprendre un devis de traduction juridique suisse](https://neur-on.ai/fr/ressources/blog/comprendre-devis-traduction-juridique/)
-- [Souveraineté des données en Suisse : Trust Valley](https://neur-on.ai/fr/ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/)
-- [eJustice.ch, 40 ans : premier Kamingespräch](https://neur-on.ai/fr/ressources/blog/ejustice-40-ans-kamingesprach-neuron/)
-- [Soutien de l’État de Fribourg à la traduction IA](https://neur-on.ai/fr/ressources/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia/)
-- [Kilian Marty rejoint le conseil consultatif](https://neur-on.ai/fr/ressources/blog/kilian-marty-rejoint-conseil-consultatif-neuron/)
-- [LegalTech et avocats : alliés ou concurrents ?](https://neur-on.ai/fr/ressources/blog/legaltech-avocats-allies-ou-concurrents/)
-- [LegalTechTalk 2024 à Londres : enseignements clés](https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-enseignements/)
-- [LegalTechTalk 2024 : réinventer les cabinets](https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/)
-- [AI Days 2025 Genève : entraîner un LLM à traduire](https://neur-on.ai/fr/ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/)
-- [AMLD EPFL 2024 : AI-Powered Projects à Lausanne](https://neur-on.ai/fr/ressources/blog/neuron-amld-epfl-2024-lausanne/)
-- [Kickstart Innovation 2024 : 42 scale-ups retenues](https://neur-on.ai/fr/ressources/blog/neuron-cohorte-kickstart-innovation-2024/)
-- [Swiss FinTech Awards 2024 : finaliste Early Stage](https://neur-on.ai/fr/ressources/blog/neuron-finaliste-early-stage-swiss-fintech-awards-2024/)
-- [GEN AI Summit 2024 Lausanne : IA et traduction](https://neur-on.ai/fr/ressources/blog/neuron-gen-ai-summit-2024-lausanne/)
-- [Swiss FinTech Awards 2024 : Neur.on parmi les 4 finalistes](https://neur-on.ai/fr/ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/)
-- [Swisscom et Neur.on annoncent une collaboration](https://neur-on.ai/fr/ressources/blog/neuron-swisscom-collaboration-kickstart-2024/)
-- [Neur.on au Startup Showcase du TLTF Summit 2024](https://neur-on.ai/fr/ressources/blog/neuron-tltf-summit-2024-miami-startups-showcase/)
-- [Top 10 des Swiss FinTech Awards 2024](https://neur-on.ai/fr/ressources/blog/neuron-top-10-startups-fintech-suisses-2024/)
-- [Le parcours d’Orane Laeri sur orientation.ch](https://neur-on.ai/fr/ressources/blog/orane-laeri-parcours-orientation-ch/)
-- [IA et études d’avocats : panel AI in Business](https://neur-on.ai/fr/ressources/blog/panel-ai-in-business-zurich-2024/)
-- [Conférence MIDS 2023 à Genève : IA générative](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conference-mids-geneve-2023/)
-- [Paula Reichenberg au Conseil stratégique HES-SO](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conseil-strategique-hes-so/)
-- [Paula Reichenberg, Digital Shaper 2023](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-digital-shaper-2023-bilanz/)
-- [Paula Reichenberg au Female Founder Project 2025](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-female-founder-project-ubs-2025/)
-- [Weblaw Forum 2024 : Paula Reichenberg au jury](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/)
-- [GILW25 : Paula Reichenberg et l’IA rentable](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-panel-gilw25-geneve-ia/)
-- [Paula Reichenberg à l’EPFL Investor Day 2024](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pitch-epfl-investor-day-2024/)
-- [PwC et The LegalTech Fund : pitch à Londres](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pwc-legaltech-fund-londres/)
-- [Conférence BDÜ 2022 : avocats et traducteurs](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-table-ronde-bdu-2022/)
-- [Schwyz : extraits du registre traduits par IA](https://neur-on.ai/fr/ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/)
-- [Secret professionnel et outils de traduction IA](https://neur-on.ai/fr/ressources/blog/secret-professionnel-outils-traduction/)
-- [L’IA dans le secteur juridique : table ronde SLTA](https://neur-on.ai/fr/ressources/blog/table-ronde-ia-juridique-slta-zurich-2024/)
-- [Traduire un contrat en droit suisse quadrilingue](https://neur-on.ai/fr/ressources/blog/traduire-contrat-droit-suisse/)
-- [Trust Valley Day : risques cyber et PME](https://neur-on.ai/fr/ressources/blog/trust-valley-day-2023-risques-cyber-pme/)
-- [Études et benchmarks sur la traduction juridique](https://neur-on.ai/fr/ressources/etudes/)
-- [Évaluer un moteur de traduction sur le droit suisse](https://neur-on.ai/fr/ressources/etudes/evaluer-moteur-traduction-juridique/)
-- [Glossaire juridique suisse en quatre langues](https://neur-on.ai/fr/ressources/glossaire/)
-- [Abtretung : la cession de créance en droit suisse](https://neur-on.ai/fr/ressources/glossaire/abtretung/)
-- [Aktiengesellschaft : la société anonyme suisse](https://neur-on.ai/fr/ressources/glossaire/aktiengesellschaft/)
-- [Aktienkapital : le capital-actions](https://neur-on.ai/fr/ressources/glossaire/aktienkapital/)
-- [Arbeitsvertrag : le contrat de travail suisse](https://neur-on.ai/fr/ressources/glossaire/arbeitsvertrag/)
-- [Arrest : le séquestre en droit suisse des poursuites](https://neur-on.ai/fr/ressources/glossaire/arrest/)
-- [Bankgeheimnis : le secret bancaire en droit suisse](https://neur-on.ai/fr/ressources/glossaire/bankgeheimnis/)
-- [Beschwerde : le recours devant le Tribunal fédéral](https://neur-on.ai/fr/ressources/glossaire/beschwerde/)
-- [Betreibung : la poursuite pour dettes en Suisse](https://neur-on.ai/fr/ressources/glossaire/betreibung/)
-- [Bürgschaft : le cautionnement en droit suisse](https://neur-on.ai/fr/ressources/glossaire/buergschaft/)
-- [Bundesgericht : le Tribunal fédéral suisse](https://neur-on.ai/fr/ressources/glossaire/bundesgericht/)
-- [fristlose Kündigung : la résiliation immédiate](https://neur-on.ai/fr/ressources/glossaire/fristlose-kuendigung/)
-- [Geldwäscherei : le blanchiment d'argent en Suisse](https://neur-on.ai/fr/ressources/glossaire/geldwaescherei/)
-- [Generalversammlung : l'assemblée générale en Suisse](https://neur-on.ai/fr/ressources/glossaire/generalversammlung/)
-- [Gewährleistung : la garantie des défauts](https://neur-on.ai/fr/ressources/glossaire/gewaehrleistung/)
-- [GmbH : la société à responsabilité limitée](https://neur-on.ai/fr/ressources/glossaire/gmbh/)
-- [Grundbuch : le registre foncier suisse](https://neur-on.ai/fr/ressources/glossaire/grundbuch/)
-- [Handelsregister : le registre du commerce suisse](https://neur-on.ai/fr/ressources/glossaire/handelsregister/)
-- [Konkurrenzverbot : la clause de non-concurrence](https://neur-on.ai/fr/ressources/glossaire/konkurrenzverbot/)
-- [Konkurs : la faillite et la masse en droit suisse](https://neur-on.ai/fr/ressources/glossaire/konkurs/)
-- [Konventionalstrafe : la clause pénale](https://neur-on.ai/fr/ressources/glossaire/konventionalstrafe/)
-- [Kündigung : la résiliation du contrat de travail](https://neur-on.ai/fr/ressources/glossaire/kuendigung/)
-- [Mängelrüge : l'avis des défauts en droit suisse](https://neur-on.ai/fr/ressources/glossaire/maengelruege/)
-- [Mehrwertsteuer : la TVA suisse en quatre langues](https://neur-on.ai/fr/ressources/glossaire/mehrwertsteuer/)
-- [Mietvertrag : le bail à loyer en droit suisse](https://neur-on.ai/fr/ressources/glossaire/mietvertrag/)
-- [Nachlassstundung : le sursis concordataire](https://neur-on.ai/fr/ressources/glossaire/nachlassstundung/)
-- [Personendaten : les données personnelles en Suisse](https://neur-on.ai/fr/ressources/glossaire/personendaten/)
-- [Pflichtteil : la réserve héréditaire suisse](https://neur-on.ai/fr/ressources/glossaire/pflichtteil/)
-- [Prospekt : le prospectus des marchés financiers](https://neur-on.ai/fr/ressources/glossaire/prospekt/)
-- [Quellensteuer : l'impôt à la source suisse](https://neur-on.ai/fr/ressources/glossaire/quellensteuer/)
-- [Rechtsöffnung : la mainlevée de l'opposition](https://neur-on.ai/fr/ressources/glossaire/rechtsoeffnung/)
-- [Rechtsvorschlag : l'opposition en poursuite suisse](https://neur-on.ai/fr/ressources/glossaire/rechtsvorschlag/)
-- [Revisionsstelle : l'organe de révision en Suisse](https://neur-on.ai/fr/ressources/glossaire/revisionsstelle/)
-- [Schadenersatz : les dommages-intérêts en Suisse](https://neur-on.ai/fr/ressources/glossaire/schadenersatz/)
-- [Schiedsgericht : le tribunal arbitral en Suisse](https://neur-on.ai/fr/ressources/glossaire/schiedsgericht/)
-- [Schuldnerverzug : la demeure du débiteur](https://neur-on.ai/fr/ressources/glossaire/schuldnerverzug/)
-- [Sorgfaltspflichten : les obligations de diligence](https://neur-on.ai/fr/ressources/glossaire/sorgfaltspflichten/)
-- [Statuten : les statuts d'une société suisse](https://neur-on.ai/fr/ressources/glossaire/statuten/)
-- [Steuerhinterziehung : la soustraction d'impôt](https://neur-on.ai/fr/ressources/glossaire/steuerhinterziehung/)
-- [Strafbefehl : l'ordonnance pénale en droit suisse](https://neur-on.ai/fr/ressources/glossaire/strafbefehl/)
-- [Überstunden : les heures supplémentaires en Suisse](https://neur-on.ai/fr/ressources/glossaire/ueberstunden/)
-- [Untersuchungshaft : la détention provisoire suisse](https://neur-on.ai/fr/ressources/glossaire/untersuchungshaft/)
-- [Verfügung : la décision administrative suisse](https://neur-on.ai/fr/ressources/glossaire/verfuegung/)
-- [Verjährung : la prescription des créances en Suisse](https://neur-on.ai/fr/ressources/glossaire/verjaehrung/)
-- [Verrechnungssteuer : l'impôt anticipé en Suisse](https://neur-on.ai/fr/ressources/glossaire/verrechnungssteuer/)
-- [Versicherungsvertrag : le contrat d'assurance suisse](https://neur-on.ai/fr/ressources/glossaire/versicherungsvertrag/)
-- [Verwaltungsrat : le conseil d'administration suisse](https://neur-on.ai/fr/ressources/glossaire/verwaltungsrat/)
-- [Verzugszins : intérêt moratoire en droit suisse](https://neur-on.ai/fr/ressources/glossaire/verzugszins/)
-- [Vollmacht : pouvoirs et procuration](https://neur-on.ai/fr/ressources/glossaire/vollmacht/)
-- [vorsorgliche Massnahmen : mesures provisionnelles](https://neur-on.ai/fr/ressources/glossaire/vorsorgliche-massnahmen/)
-- [Willensvollstrecker : l'exécuteur testamentaire](https://neur-on.ai/fr/ressources/glossaire/willensvollstrecker/)
-- [Ayant droit économique : la notion de la LBA](https://neur-on.ai/fr/ressources/glossaire/wirtschaftlich-berechtigte-person/)
-- [Zahlungsbefehl : le commandement de payer suisse](https://neur-on.ai/fr/ressources/glossaire/zahlungsbefehl/)
-- [Guides pratiques de la traduction juridique suisse](https://neur-on.ai/fr/ressources/guides/)
-- [Organiser la traduction juridique dans un cabinet](https://neur-on.ai/fr/ressources/guides/organiser-traduction-cabinet/)
-- [Préparer un rapport annuel multilingue en Suisse](https://neur-on.ai/fr/ressources/guides/rapport-annuel-multilingue/)
+- [Ressources sur la traduction juridique suisse](https://neur-on.ai/fr/ressources/): Blog, guides, glossaire en quatre langues, études, comparatifs et centre d'aide : ce que Neur.on publie sur la traduction juridique et financière suisse.
+- [Blog Neur.on : droit suisse, traduction et actualités](https://neur-on.ai/fr/ressources/blog/): Articles de fond sur la traduction juridique en Suisse (terminologie, devis, secret professionnel) et actualités de Neur.on : conférences, événements, presse.
+- [Actualités de Neur.on depuis 2020](https://neur-on.ai/fr/ressources/blog/actualites/): 111 actualités de Neur.on depuis 2020 : prix et distinctions, conférences, partenariats, presse et recherche, classés par année.
+- [Études et benchmarks sur la traduction juridique](https://neur-on.ai/fr/ressources/etudes/): Comment nous évaluons un moteur de traduction sur le droit suisse : critères mesurables, protocole, pièges méthodologiques, et publication des résultats.
+- [Évaluer un moteur de traduction sur le droit suisse](https://neur-on.ai/fr/ressources/etudes/evaluer-moteur-traduction-juridique/): Six critères mesurables, un protocole en double aveugle et sept pièges qui faussent les comparaisons de moteurs sur des textes de droit suisse.
+- [Glossaire juridique suisse en quatre langues](https://neur-on.ai/fr/ressources/glossaire/): 52 termes du droit suisse en allemand, français, italien et anglais, avec la base légale, la source officielle et un exemple tiré de la loi.
+- [Guides pratiques de la traduction juridique suisse](https://neur-on.ai/fr/ressources/guides/): Des méthodes longues et applicables telles quelles : organiser la traduction dans un cabinet suisse, préparer un rapport annuel multilingue cohérent.
+- [Organiser la traduction juridique dans un cabinet](https://neur-on.ai/fr/ressources/guides/organiser-traduction-cabinet/): Cartographier les besoins, répartir les décisions, écrire les règles, faire cesser les traductions sauvages et mesurer, dans un cabinet suisse.
+- [Préparer un rapport annuel multilingue en Suisse](https://neur-on.ai/fr/ressources/guides/rapport-annuel-multilingue/): Calendrier à rebours, gel du texte source, terminologie partagée, cohérence entre les langues, validation et publication d'un rapport annuel suisse.
 
 ## Centre d'aide
 
-- [Centre d'aide Corrext](https://neur-on.ai/fr/aide/)
-- [Mémoires et terminologie](https://neur-on.ai/fr/aide/admin-memoires/)
-- [Moteurs et confidentialité](https://neur-on.ai/fr/aide/admin-moteurs/)
-- [Organisation, membres et rôles](https://neur-on.ai/fr/aide/admin-organisation/)
-- [Fast lookup CHnell : chercher un terme en contexte](https://neur-on.ai/fr/aide/chnell/)
-- [Découvrir Corrext](https://neur-on.ai/fr/aide/decouvrir-corrext/)
-- [Dépannage Corrext : bouton grisé, langue, fichier](https://neur-on.ai/fr/aide/depannage/)
-- [Éditeur de relecture](https://neur-on.ai/fr/aide/editeur-de-relecture/)
-- [Traduction certifiée d'extraits du registre suisse](https://neur-on.ai/fr/aide/extraits-registre/)
-- [Formats de fichiers et langues acceptés par Corrext](https://neur-on.ai/fr/aide/formats-et-langues/)
-- [Gestion de projet : relecture et devis Corrext](https://neur-on.ai/fr/aide/gestion-de-projet/)
-- [Premiers pas dans Corrext : se connecter et traduire](https://neur-on.ai/fr/aide/premiers-pas/)
-- [Sécurité, confidentialité et compte](https://neur-on.ai/fr/aide/securite-et-confidentialite/)
-- [Traduction texte et document dans Corrext](https://neur-on.ai/fr/aide/traduction-texte-et-document/)
+- [Centre d'aide Corrext](https://neur-on.ai/fr/aide/): 71 réponses sur Corrext, vérifiées dans l'application : traduire, faire relire, vérifier un terme, sécurité, et administration de votre organisation.
+- [Mémoires et terminologie · Centre d'aide](https://neur-on.ai/fr/aide/admin-memoires/): Administrer Corrext : importer des mémoires TMX, des bases terminologiques TBX ou XML, et ajouter des ressources propres dans CHnell.
+- [Moteurs et confidentialité · Centre d'aide](https://neur-on.ai/fr/aide/admin-moteurs/): Administrer Corrext : moteurs autorisés par organisation, avis de confidentialité avant les moteurs étrangers, clés API propres pour DeepL, Claude et GPT.
+- [Organisation, membres et rôles · Centre d'aide](https://neur-on.ai/fr/aide/admin-organisation/): Administrer Corrext : rôles Admin, Project manager et Member, ajout de membres, adhésion par domaine e-mail, organisations parentes et filles.
+- [Fast lookup CHnell : chercher un terme en contexte](https://neur-on.ai/fr/aide/chnell/): Chercher un terme dans CHnell, utiliser les opérateurs, filtrer par domaine et par source, distinguer les ressources et lire un segment en contexte.
+- [Découvrir Corrext · Centre d'aide](https://neur-on.ai/fr/aide/decouvrir-corrext/): Ce qu'est Corrext, ses quatre outils, le moteur LexMachina, les autres moteurs disponibles, la relecture, le prix, l'essai et la mise en place.
+- [Dépannage Corrext : bouton grisé, langue, fichier](https://neur-on.ai/fr/aide/depannage/): Bouton Next inactif, langue cible absente, traduction qui ne démarre pas, fichier refusé : les causes réelles de ces blocages et la façon de les lever.
+- [Éditeur de relecture · Centre d'aide](https://neur-on.ai/fr/aide/editeur-de-relecture/): Relire un fichier dans l'éditeur de Corrext, utiliser le panneau latéral, travailler dans Word, faire apprendre la mémoire, valider et récupérer la traduction.
+- [Traduction certifiée d'extraits du registre suisse](https://neur-on.ai/fr/aide/extraits-registre/): Commander la traduction certifiée d'un extrait du registre du commerce suisse : recherche de la société, niveau de certification, livraison et délai.
+- [Formats de fichiers et langues acceptés par Corrext](https://neur-on.ai/fr/aide/formats-et-langues/): Les formats de fichiers acceptés par Corrext, les limites de nombre, de taille et de caractères, les 30 langues et les quatre langues natives.
+- [Gestion de projet : relecture et devis Corrext](https://neur-on.ai/fr/aide/gestion-de-projet/): Créer un projet, fixer la terminologie, choisir le moteur, relire dans l'éditeur ou dans Word, obtenir un devis et valider la traduction.
+- [Premiers pas dans Corrext : se connecter et traduire](https://neur-on.ai/fr/aide/premiers-pas/): Ouvrir Corrext, reconnaître les quatre outils de l'accueil, choisir un moteur de traduction et comprendre le mode de confidentialité avant de commencer.
+- [Sécurité, confidentialité et compte · Centre d'aide](https://neur-on.ai/fr/aide/securite-et-confidentialite/): Où sont stockées et traitées vos données, quels moteurs traitent hors de Suisse, comment fonctionnent les mémoires et comment gérer son compte.
+- [Traduction texte et document dans Corrext](https://neur-on.ai/fr/aide/traduction-texte-et-document/): Traduire un texte, envoyer jusqu'à 25 fichiers, convertir un PDF en Word, comparer les moteurs et reformuler : les gestes de base, pas à pas.
 
-## Entreprise
+## Optional
 
-- [À propos de Neur.on](https://neur-on.ai/fr/a-propos/)
-- [Presse](https://neur-on.ai/fr/a-propos/presse/)
-- [Contact et démo](https://neur-on.ai/fr/contact/)
+- [Mentions légales et conditions d'utilisation](https://neur-on.ai/fr/mentions-legales/): Mentions légales et conditions d'utilisation du site de Neur.on AI Solutions SA, à Fribourg : propriété intellectuelle, liens et droit suisse applicable.
+- [Protection des données](https://neur-on.ai/fr/protection-des-donnees/): Comment Neur.on AI Solutions SA traite les données de son site : vos droits, journaux du serveur, formulaire de contact, cookies et mesure d'audience.
+- [Les start-up doivent-elles craindre l’AI Act ?](https://neur-on.ai/fr/ressources/blog/ai-act-grand-challenge-universite-saint-gall/): En 2023, Neur.on, iCoSys et CertX ont évalué 8 solutions d’IA au regard du projet d’AI Act lors du Grand Challenge de l’Université de Saint-Gall.
+- [Comprendre un devis de traduction juridique suisse](https://neur-on.ai/fr/ressources/blog/comprendre-devis-traduction-juridique/): Page standard, catégorie du document, niveaux de relecture et délais : ce que recouvre chaque ligne d'un devis de traduction juridique en Suisse.
+- [Souveraineté des données en Suisse : Trust Valley](https://neur-on.ai/fr/ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/): À la journée Trust Valley 2023 à l’EPFL, Neur.on a témoigné sur la sécurité des données des PME et relayé l’appel à une infrastructure 100 % suisse.
+- [eJustice.ch, 40 ans : premier Kamingespräch](https://neur-on.ai/fr/ressources/blog/ejustice-40-ans-kamingesprach-neuron/): Pour ses 40 ans, eJustice.ch lance les Kamingespräche. Le 23 janvier 2025, la CEO de Neur.on y débat du « Swiss Justice Base Model ».
+- [Soutien de l’État de Fribourg à la traduction IA](https://neur-on.ai/fr/ressources/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia/): L’État de Fribourg accorde à Neur.on un soutien supplémentaire pour la traduction juridique par IA : R&D, recrutements et expansion internationale.
+- [Kilian Marty rejoint le conseil consultatif](https://neur-on.ai/fr/ressources/blog/kilian-marty-rejoint-conseil-consultatif-neuron/): En août 2023, Kilian Marty, responsable du département Cybersécurité de CertX AG, rejoint le conseil consultatif de Neur.on comme expert en cybersécurité.
+- [LegalTech et avocats : alliés ou concurrents ?](https://neur-on.ai/fr/ressources/blog/legaltech-avocats-allies-ou-concurrents/): À la table ronde LegalTech de la Conférence latine des bâtonniers en 2023, la fondatrice de Neur.on explique pourquoi la simplicité d’usage prime.
+- [LegalTechTalk 2024 à Londres : enseignements clés](https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-enseignements/): Neur.on livre les enseignements de LegalTechTalk 2024 à Londres : attentes des directeurs juridiques, confiance avec les cabinets et rôle de la LegalTech.
+- [LegalTechTalk 2024 : réinventer les cabinets](https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/): Au LegalTechTalk 2024 à Londres, Paula Reichenberg, CEO de Neur.on, modère un panel sur la transformation des modèles opérationnels des cabinets.
+- [AI Days 2025 Genève : entraîner un LLM à traduire](https://neur-on.ai/fr/ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/): Le 28 janvier 2025 aux AI Days de Genève, Eloi Eynard, data scientist chez Neur.on, montre comment Neur.on entraîne des LLM à mieux traduire.
+- [AMLD EPFL 2024 : AI-Powered Projects à Lausanne](https://neur-on.ai/fr/ressources/blog/neuron-amld-epfl-2024-lausanne/): Neur.on intervient le 26 mars 2024 à l’AMLD EPFL, à Lausanne, dans une session sur le déploiement concret de l’IA avec Swisscom, Consulto et Amplify.
+- [Kickstart Innovation 2024 : 42 scale-ups retenues](https://neur-on.ai/fr/ressources/blog/neuron-cohorte-kickstart-innovation-2024/): Neur.on figure parmi les 42 scale-ups retenues pour le programme 2024 de Kickstart Innovation en Suisse, dans la verticale Finance & Insurance.
+- [Swiss FinTech Awards 2024 : finaliste Early Stage](https://neur-on.ai/fr/ressources/blog/neuron-finaliste-early-stage-swiss-fintech-awards-2024/): Neur.on, finaliste des Swiss FinTech Awards 2024 en Early Stage, bâtit sa plateforme Corrext sur les LLM les plus performants pour le droit et la finance.
+- [GEN AI Summit 2024 Lausanne : IA et traduction](https://neur-on.ai/fr/ressources/blog/neuron-gen-ai-summit-2024-lausanne/): Le 29 mai 2024 au GEN AI Summit de Lausanne, Paula Reichenberg, CEO de Neur.on, a parlé des limites de la traduction automatique juridique.
+- [Swiss FinTech Awards 2024 : Neur.on parmi les 4 finalistes](https://neur-on.ai/fr/ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/): Neur.on, plateforme SaaS de traduction par IA, figure parmi les 4 finalistes des Swiss FinTech Awards 2024. Finale le 11 juin à Rüschlikon.
+- [Swisscom et Neur.on annoncent une collaboration](https://neur-on.ai/fr/ressources/blog/neuron-swisscom-collaboration-kickstart-2024/): À la clôture de Kickstart Innovation 2024, Swisscom et Neur.on ont lancé un PoC de traduction et de rédaction juridiques et financières hébergé en Suisse.
+- [Neur.on au Startup Showcase du TLTF Summit 2024](https://neur-on.ai/fr/ressources/blog/neuron-tltf-summit-2024-miami-startups-showcase/): Neur.on fait partie des 24 start-up retenues, sur des centaines de candidatures, pour le Startup Showcase du TLTF Summit, en décembre 2024 à Miami.
+- [Top 10 des Swiss FinTech Awards 2024](https://neur-on.ai/fr/ressources/blog/neuron-top-10-startups-fintech-suisses-2024/): Neur.on figure dans le Top 10 des Swiss FinTech Awards 2024, en catégorie Early Stage. Un panel de 20 experts a examiné plus de 60 candidatures.
+- [Le parcours d’Orane Laeri sur orientation.ch](https://neur-on.ai/fr/ressources/blog/orane-laeri-parcours-orientation-ch/): Orane Laeri, COO de Neur.on, partage sur orientation.ch son parcours en traduction et en linguistique, de l’Université de Genève à la LegalTech.
+- [IA et études d’avocats : panel AI in Business](https://neur-on.ai/fr/ressources/blog/panel-ai-in-business-zurich-2024/): Le 16 septembre 2024 au Google Campus de Zurich, Paula Reichenberg (Neur.on) débat du retour sur investissement de l’IA pour les PME.
+- [Conférence MIDS 2023 à Genève : IA générative](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conference-mids-geneve-2023/): À Genève en septembre 2023, Paula Reichenberg (Neur.on) a comparé l’adoption de l’IA générative à celle de la traduction automatique aux 15 ans du MIDS.
+- [Paula Reichenberg au Conseil stratégique HES-SO](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conseil-strategique-hes-so/): La HES-SO a désigné Paula Reichenberg, CEO de Neur.on, membre de son Conseil stratégique de 2025 à 2028, un organe consultatif aux profils variés.
+- [Paula Reichenberg, Digital Shaper 2023](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-digital-shaper-2023-bilanz/): Paula Reichenberg, CEO et fondatrice de Neur.on, est nommée « Digital Shaper 2023 » par BILANZ, digitalswitzerland, PME, HANDELSZEITUNG et Innosuisse.
+- [Paula Reichenberg au Female Founder Project 2025](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-female-founder-project-ubs-2025/): Paula Reichenberg, CEO de Neur.on, fait partie du Female Founder Project 2025 d’UBS, un programme qui prépare les fondatrices aux investisseurs.
+- [Weblaw Forum 2024 : Paula Reichenberg au jury](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/): Le 20 juin 2024 à Zurich, Paula Reichenberg, CEO de Neur.on, rejoint le jury de l’Elevator Pitch Competition du Weblaw Forum, gagnée par Neur.on en 2023.
+- [GILW25 : Paula Reichenberg et l’IA rentable](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-panel-gilw25-geneve-ia/): Neur.on annonce la participation de Paula Reichenberg à un panel sur l’usage rentable de l’IA, le 12 mars 2025, à la Geneva International Legal Week.
+- [Paula Reichenberg à l’EPFL Investor Day 2024](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pitch-epfl-investor-day-2024/): Paula Reichenberg, CEO de Neur.on, a pitché à l’EPFL Investor Day, le plus grand rendez-vous d’investisseurs de Suisse romande, avec un conseil inattendu.
+- [PwC et The LegalTech Fund : pitch à Londres](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pwc-legaltech-fund-londres/): Paula Reichenberg, CEO de Neur.on, a présenté Neur.on à Londres lors d’un événement sur invitation organisé par PwC et The LegalTech Fund.
+- [Conférence BDÜ 2022 : avocats et traducteurs](https://neur-on.ai/fr/ressources/blog/paula-reichenberg-table-ronde-bdu-2022/): Paula Reichenberg, CEO de Neur.on, a participé en 2022 à une table ronde de la conférence du BDÜ sur le travail dans et avec les cabinets d’avocats.
+- [Schwyz : extraits du registre traduits par IA](https://neur-on.ai/fr/ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/): Schwyz est le seul canton dont le registre du commerce propose des traductions d’extraits en anglais par IA, avec un modèle développé par Neur.on.
+- [Secret professionnel et outils de traduction IA](https://neur-on.ai/fr/ressources/blog/secret-professionnel-outils-traduction/): Stocker n'est pas traiter : ce que vaut une pseudonymisation, pourquoi un avertissement dans l'outil bat une charte, et quoi demander à un fournisseur.
+- [L’IA dans le secteur juridique : table ronde SLTA](https://neur-on.ai/fr/ressources/blog/table-ronde-ia-juridique-slta-zurich-2024/): Le 17 avril 2024 à Zurich, Paula Reichenberg, CEO de Neur.on, débat de l’IA dans le secteur juridique à une table ronde du SLTA Student Chapter Zurich.
+- [Traduire un contrat en droit suisse quadrilingue](https://neur-on.ai/fr/ressources/blog/traduire-contrat-droit-suisse/): Lois publiées en trois langues, abréviations qui changent, anglais sans valeur légale : ce que le quadrilinguisme suisse impose à un contrat traduit.
+- [Trust Valley Day : risques cyber et PME](https://neur-on.ai/fr/ressources/blog/trust-valley-day-2023-risques-cyber-pme/): Le 5 octobre 2023 au Trust Valley Day, Paula Reichenberg, CEO de Neur.on, a appelé à tester l’IA avec des données locales pour les PME suisses.
+- [Abtretung : la cession de créance en droit suisse](https://neur-on.ai/fr/ressources/glossaire/abtretung/): Abtretung, cession de créance, cessione del credito, assignment of a claim : le transfert de créance selon l'art. 164 CO, dans les quatre langues.
+- [Aktiengesellschaft : la société anonyme suisse](https://neur-on.ai/fr/ressources/glossaire/aktiengesellschaft/): Aktiengesellschaft, société anonyme, società anonima, company limited by shares : l'une des formes de société les plus courantes en Suisse, en quatre langues.
+- [Aktienkapital : le capital-actions](https://neur-on.ai/fr/ressources/glossaire/aktienkapital/): Aktienkapital, capital-actions, capitale azionario, share capital : le capital de la société anonyme suisse selon l'art. 621 CO.
+- [Arbeitsvertrag : le contrat de travail suisse](https://neur-on.ai/fr/ressources/glossaire/arbeitsvertrag/): Arbeitsvertrag, contrat de travail, contratto di lavoro, employment contract : le contrat individuel de travail de l'art. 319 CO.
+- [Arrest : le séquestre en droit suisse des poursuites](https://neur-on.ai/fr/ressources/glossaire/arrest/): Arrest, séquestre, sequestro, attachment : la mesure conservatoire du droit suisse des poursuites, ses cas et son terme dans les quatre langues.
+- [Bankgeheimnis : le secret bancaire en droit suisse](https://neur-on.ai/fr/ressources/glossaire/bankgeheimnis/): Bankgeheimnis, secret bancaire, segreto bancario, banking secrecy : le secret professionnel du banquier suisse selon l'art. 47 LB, en quatre langues.
+- [Beschwerde : le recours devant le Tribunal fédéral](https://neur-on.ai/fr/ressources/glossaire/beschwerde/): Beschwerde, recours, ricorso, appeal : la voie de droit qui saisit le Tribunal fédéral suisse, et le terme exact retenu dans les quatre langues.
+- [Betreibung : la poursuite pour dettes en Suisse](https://neur-on.ai/fr/ressources/glossaire/betreibung/): Betreibung, poursuite, esecuzione, debt enforcement : la procédure suisse d'exécution forcée pour une somme d'argent, dans les quatre langues.
+- [Bürgschaft : le cautionnement en droit suisse](https://neur-on.ai/fr/ressources/glossaire/buergschaft/): Bürgschaft, cautionnement, fideiussione, contract of surety : la sûreté personnelle du droit suisse, ses formes et son terme dans les quatre langues.
+- [Bundesgericht : le Tribunal fédéral suisse](https://neur-on.ai/fr/ressources/glossaire/bundesgericht/): Bundesgericht, Tribunal fédéral, Tribunale federale, Federal Supreme Court : l'autorité judiciaire suprême de la Confédération.
+- [fristlose Kündigung : la résiliation immédiate](https://neur-on.ai/fr/ressources/glossaire/fristlose-kuendigung/): fristlose Kündigung, résiliation immédiate, risoluzione immediata, termination with immediate effect : les justes motifs de l'art. 337 CO.
+- [Geldwäscherei : le blanchiment d'argent en Suisse](https://neur-on.ai/fr/ressources/glossaire/geldwaescherei/): Geldwäscherei, blanchiment d'argent, riciclaggio di denaro, money laundering : l'infraction de l'art. 305bis CP et son terme dans les quatre langues.
+- [Generalversammlung : l'assemblée générale en Suisse](https://neur-on.ai/fr/ressources/glossaire/generalversammlung/): Generalversammlung, assemblée générale, assemblea generale, general meeting : l'organe suprême de la société anonyme suisse, dans les quatre langues.
+- [Gewährleistung : la garantie des défauts](https://neur-on.ai/fr/ressources/glossaire/gewaehrleistung/): Gewährleistung, garantie, garanzia, warranty : la garantie du vendeur pour les défauts de la chose, art. 197 CO.
+- [GmbH : la société à responsabilité limitée](https://neur-on.ai/fr/ressources/glossaire/gmbh/): GmbH, société à responsabilité limitée, società a garanzia limitata, limited liability company : la Sàrl suisse de l'art. 772 CO.
+- [Grundbuch : le registre foncier suisse](https://neur-on.ai/fr/ressources/glossaire/grundbuch/): Grundbuch, registre foncier, registro fondiario, land register : le registre des droits sur les immeubles (art. 942 CC).
+- [Handelsregister : le registre du commerce suisse](https://neur-on.ai/fr/ressources/glossaire/handelsregister/): Handelsregister, registre du commerce, registro di commercio, commercial register : le registre public des entités juridiques suisses et ses effets.
+- [Konkurrenzverbot : la clause de non-concurrence](https://neur-on.ai/fr/ressources/glossaire/konkurrenzverbot/): Konkurrenzverbot, prohibition de faire concurrence, divieto di concorrenza : la clause de non-concurrence du contrat de travail suisse, en quatre langues.
+- [Konkurs : la faillite et la masse en droit suisse](https://neur-on.ai/fr/ressources/glossaire/konkurs/): Konkurs, faillite, fallimento, bankruptcy : l'exécution générale du droit suisse, la masse et le désintéressement des créanciers, en quatre langues.
+- [Konventionalstrafe : la clause pénale](https://neur-on.ai/fr/ressources/glossaire/konventionalstrafe/): Konventionalstrafe, clause pénale, pena convenzionale : la peine convenue d'avance en droit suisse selon l'art. 160 CO, dans les quatre langues.
+- [Kündigung : la résiliation du contrat de travail](https://neur-on.ai/fr/ressources/glossaire/kuendigung/): Kündigung, résiliation, disdetta, termination : le congé qui met fin au contrat de travail de durée indéterminée (art. 335 CO).
+- [Mängelrüge : l'avis des défauts en droit suisse](https://neur-on.ai/fr/ressources/glossaire/maengelruege/): Mängelrüge, avis au vendeur ou avis des défauts, avviso al venditore, notice of defects : vérifier et aviser sans délai (art. 201 CO).
+- [Mehrwertsteuer : la TVA suisse en quatre langues](https://neur-on.ai/fr/ressources/glossaire/mehrwertsteuer/): Mehrwertsteuer, taxe sur la valeur ajoutée, imposta sul valore aggiunto : l'impôt général suisse sur la consommation et ses sigles dans les quatre langues.
+- [Mietvertrag : le bail à loyer en droit suisse](https://neur-on.ai/fr/ressources/glossaire/mietvertrag/): Mietvertrag, bail à loyer, contratto di locazione, lease : le contrat de bail de l'art. 253 CO, dans les quatre langues suisses.
+- [Nachlassstundung : le sursis concordataire](https://neur-on.ai/fr/ressources/glossaire/nachlassstundung/): Nachlassstundung, sursis concordataire, moratoria concordataria, composition moratorium : la procédure concordataire de la LP.
+- [Personendaten : les données personnelles en Suisse](https://neur-on.ai/fr/ressources/glossaire/personendaten/): Personendaten, données personnelles, dati personali, personal data : la définition de la loi suisse sur la protection des données, dans les quatre langues.
+- [Pflichtteil : la réserve héréditaire suisse](https://neur-on.ai/fr/ressources/glossaire/pflichtteil/): Pflichtteil, réserve, porzione legittima, statutory entitlement : la part successorale garantie par les art. 470 et 471 CC.
+- [Prospekt : le prospectus des marchés financiers](https://neur-on.ai/fr/ressources/glossaire/prospekt/): Prospekt, prospectus, prospetto : le document obligatoire avant une offre au public de valeurs mobilières en Suisse, dans les quatre langues.
+- [Quellensteuer : l'impôt à la source suisse](https://neur-on.ai/fr/ressources/glossaire/quellensteuer/): Quellensteuer, impôt à la source, imposta alla fonte, tax at source : la retenue opérée par le débiteur de la prestation (art. 83 ss LIFD).
+- [Rechtsöffnung : la mainlevée de l'opposition](https://neur-on.ai/fr/ressources/glossaire/rechtsoeffnung/): Rechtsöffnung, mainlevée, rigetto dell'opposizione, setting aside of an objection : la mainlevée définitive ou provisoire de la LP.
+- [Rechtsvorschlag : l'opposition en poursuite suisse](https://neur-on.ai/fr/ressources/glossaire/rechtsvorschlag/): Rechtsvorschlag, opposition, opposizione, objection : la déclaration qui suspend la poursuite suisse et son terme exact dans les quatre langues.
+- [Revisionsstelle : l'organe de révision en Suisse](https://neur-on.ai/fr/ressources/glossaire/revisionsstelle/): Revisionsstelle, organe de révision, ufficio di revisione, external auditor : l'organe de contrôle des comptes de la société anonyme suisse, en quatre langues.
+- [Schadenersatz : les dommages-intérêts en Suisse](https://neur-on.ai/fr/ressources/glossaire/schadenersatz/): Schadenersatz, dommages-intérêts, risarcimento del danno, damages : la réparation du dommage selon le Code des obligations, dans les quatre langues.
+- [Schiedsgericht : le tribunal arbitral en Suisse](https://neur-on.ai/fr/ressources/glossaire/schiedsgericht/): Schiedsgericht, tribunal arbitral, tribunale arbitrale, arbitral tribunal : l'arbitrage international de siège suisse selon la LDIP, en quatre langues.
+- [Schuldnerverzug : la demeure du débiteur](https://neur-on.ai/fr/ressources/glossaire/schuldnerverzug/): Schuldnerverzug, demeure du débiteur, mora del debitore, default of the obligor : la mise en demeure de l'art. 102 CO et ses effets.
+- [Sorgfaltspflichten : les obligations de diligence](https://neur-on.ai/fr/ressources/glossaire/sorgfaltspflichten/): Sorgfaltspflichten, obligations de diligence, obblighi di diligenza, due diligence obligations : les devoirs des intermédiaires financiers (LBA).
+- [Statuten : les statuts d'une société suisse](https://neur-on.ai/fr/ressources/glossaire/statuten/): Statuten, statuts, statuto, articles of association : l'acte de base de la société anonyme et son contenu légal (art. 626 CO).
+- [Steuerhinterziehung : la soustraction d'impôt](https://neur-on.ai/fr/ressources/glossaire/steuerhinterziehung/): Steuerhinterziehung, soustraction d'impôt, sottrazione d'imposta, tax evasion : l'infraction de l'art. 175 LIFD et sa différence avec la fraude fiscale.
+- [Strafbefehl : l'ordonnance pénale en droit suisse](https://neur-on.ai/fr/ressources/glossaire/strafbefehl/): Strafbefehl, ordonnance pénale, decreto d'accusa : la décision du ministère public suisse et le délai d'opposition, dans les quatre langues.
+- [Überstunden : les heures supplémentaires en Suisse](https://neur-on.ai/fr/ressources/glossaire/ueberstunden/): Überstunden, heures de travail supplémentaires, lavoro straordinario, overtime : la notion de l'art. 321c CO et sa distinction avec l'Überzeit.
+- [Untersuchungshaft : la détention provisoire suisse](https://neur-on.ai/fr/ressources/glossaire/untersuchungshaft/): Untersuchungshaft, détention provisoire, carcerazione preventiva, remand : la mesure de contrainte du droit suisse, dans les quatre langues.
+- [Verfügung : la décision administrative suisse](https://neur-on.ai/fr/ressources/glossaire/verfuegung/): Verfügung, décision, decisione, ruling : l'acte administratif individuel du droit suisse, ses éléments et son terme dans les quatre langues.
+- [Verjährung : la prescription des créances en Suisse](https://neur-on.ai/fr/ressources/glossaire/verjaehrung/): Verjährung, prescription, prescrizione : le délai ordinaire de dix ans de l'art. 127 CO et le terme exact dans les quatre langues du droit suisse.
+- [Verrechnungssteuer : l'impôt anticipé en Suisse](https://neur-on.ai/fr/ressources/glossaire/verrechnungssteuer/): Verrechnungssteuer, impôt anticipé, imposta preventiva, withholding tax : l'impôt fédéral perçu à la source sur les rendements de capitaux mobiliers.
+- [Versicherungsvertrag : le contrat d'assurance suisse](https://neur-on.ai/fr/ressources/glossaire/versicherungsvertrag/): Versicherungsvertrag, contrat d'assurance, contratto d'assicurazione, insurance contract : le contrat régi par la loi suisse sur le contrat d'assurance.
+- [Verwaltungsrat : le conseil d'administration suisse](https://neur-on.ai/fr/ressources/glossaire/verwaltungsrat/): Verwaltungsrat, conseil d'administration, consiglio d'amministrazione, board of directors : l'organe de direction de la société anonyme, en quatre langues.
+- [Verzugszins : intérêt moratoire en droit suisse](https://neur-on.ai/fr/ressources/glossaire/verzugszins/): Verzugszins, intérêt moratoire, interesse moratorio, default interest : la définition de l'art. 104 CO et le terme officiel dans les quatre langues.
+- [Vollmacht : pouvoirs et procuration](https://neur-on.ai/fr/ressources/glossaire/vollmacht/): Vollmacht, pouvoirs ou procuration, procura, authority : le pouvoir de représentation des art. 32 à 34 CO et l'acte qui le confère.
+- [vorsorgliche Massnahmen : mesures provisionnelles](https://neur-on.ai/fr/ressources/glossaire/vorsorgliche-massnahmen/): vorsorgliche Massnahmen, mesures provisionnelles, provvedimenti cautelari, interim measures : les art. 261 à 265 CPC.
+- [Willensvollstrecker : l'exécuteur testamentaire](https://neur-on.ai/fr/ressources/glossaire/willensvollstrecker/): Willensvollstrecker, exécuteur testamentaire, esecutore testamentario, executor : sa désignation et ses pouvoirs (art. 517 et 518 CC).
+- [Ayant droit économique : la notion de la LBA](https://neur-on.ai/fr/ressources/glossaire/wirtschaftlich-berechtigte-person/): wirtschaftlich berechtigte Person, ayant droit économique, avente economicamente diritto, beneficial owner : l'identification exigée par l'art. 4 LBA.
+- [Zahlungsbefehl : le commandement de payer suisse](https://neur-on.ai/fr/ressources/glossaire/zahlungsbefehl/): Zahlungsbefehl, commandement de payer, precetto esecutivo : le premier acte de la poursuite suisse et son terme exact dans les quatre langues.

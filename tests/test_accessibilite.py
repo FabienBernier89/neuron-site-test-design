@@ -218,7 +218,7 @@ class TestLanguesAnnoncesOnglets(Base):
     def test_terme_du_glossaire_et_lignes_chnell(self):
         h = self.pages["ressources/glossaire/aktiengesellschaft/"]
         self.assertIn('<span class="n" lang="de">Aktiengesellschaft', h)
-        self.assertIn('<b lang="it">società anonima</b>', h)
+        self.assertIn('<dd lang="it">società anonima</dd>', h)  # fiche des langues du glossaire (audit design)
         self.assertRegex(h, r'<p lang="de">Die <mark>Aktiengesellschaft</mark> ist eine Kapitalgesellschaft')
         contrats = self.pages["traduction/contrats/"]
         self.assertRegex(contrats, r'data-m="Allemand" lang="de"><b><a [^>]*>Gewährleistung wegen Mängel</a>')

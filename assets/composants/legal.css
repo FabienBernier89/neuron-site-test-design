@@ -20,7 +20,7 @@
 .lg-c ul{list-style:disc}
 .lg-c ol{list-style:decimal}
 .lg-c li{margin-bottom:6px}
-.lg-c a{color:var(--accent-d);text-underline-offset:3px}
+.lg-c a{color:var(--accent-d);text-underline-offset:3px;overflow-wrap:anywhere}  /* une URL longue se coupe sur mobile (audit design du 2026-10-23) */
 .lg-c .legal-card{display:block;margin:0 0 32px;padding:20px 24px;border-radius:8px;background:var(--tile);font:400 15px/24px var(--sans);font-style:normal;color:var(--text)}
 .lg-c .legal-card b{color:var(--ink)}
 @media (max-width:1023px){

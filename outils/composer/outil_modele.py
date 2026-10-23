@@ -116,12 +116,7 @@ def pastilles(titre, items):
     return f'<div class="pst"><p class="pst-t">{esc(titre)}</p><div class="pst-l">' + "".join(f'<span>{esc(x)}</span>' for x in items) + '</div></div>'
 
 
-def situations_rangees(wh, accent):
-    """« Trois situations » en rangées éditoriales (proposition A retenue par Fabien le 2026-10-22) : le métier et son
-    icône (V1), le titre en serif, le texte ; filets entre les rangées, sans fond, pour ne pas redoubler les tuiles."""
-    rangs = "".join(f'<div class="sr-r"><p class="sr-p">{bloc(r, "span", "ws-ic").replace("ws-ic", "sr-ic", 1)}{txt(bloc(r, "span", "sc-a"))}</p>'
-                    f'<h3>{brut(bloc(r, "h3"))}</h3><p class="sr-t">{brut(bloc(r, "p"))}</p></div>' for r in blocs(wh, "article", "sc-row"))
-    return section(h2(txt(bloc(wh, "h2")), accent) + f'<div class="sr">{rangs}</div>')
+# situations_rangees vit dans blocs_communs.py (partagée avec les pages domaines et paires)
 
 
 def intro_lead(lead):

@@ -26,6 +26,15 @@ def faits(t, accent, cls="tl txt t2"):
     return section(h2(txt(bloc(lead, "h2")), accent) + f'<p class="intro">{brut(bloc(lead, "p"))}</p>' + tuiles(items, cls))
 
 
+def situations_rangees(wh, accent):
+    """« Trois situations » en rangées éditoriales (proposition A retenue par Fabien le 2026-10-22) : le métier et son
+    icône (V1), le titre en serif, le texte ; filets entre les rangées, sans fond, pour ne pas redoubler les tuiles.
+    Partagé par les pages outils, domaines et paires (audit design du 2026-10-23)."""
+    rangs = "".join(f'<div class="sr-r"><p class="sr-p">{bloc(r, "span", "ws-ic").replace("ws-ic", "sr-ic", 1)}{txt(bloc(r, "span", "sc-a"))}</p>'
+                    f'<h3>{brut(bloc(r, "h3"))}</h3><p class="sr-t">{brut(bloc(r, "p"))}</p></div>' for r in blocs(wh, "article", "sc-row"))
+    return section(h2(txt(bloc(wh, "h2")), accent) + f'<div class="sr">{rangs}</div>')
+
+
 def situations_cartes(t, accent):
     wh = bloc(t, "section", "who")
     return section(h2(txt(bloc(wh, "h2")), accent) + cartes([(brut(bloc(r, "h3")), brut(bloc(r, "p")), None, "") for r in blocs(wh, "article", "sc-row")]))

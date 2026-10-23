@@ -102,3 +102,5 @@
 .ap:not(.insere) .ap-out{opacity:0}
 .ap:not(.com) .ap-com{opacity:0;transform:translateX(10px)}
 .ap:not(.com) mark{background:transparent}
+.mt-od p.mt-ls{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:14px}  /* deux liens côte à côte (Fiduciaires : « Commander un extrait ») */
+.mt-ls .lien{margin-top:0}

@@ -2,64 +2,78 @@
 ErrorDocument 404 /404.html
 RewriteEngine On
 # La langue n'est pas encore choisie côté serveur : la racine part vers le français (302, provisoire).
-RewriteRule ^$ /fr/ [R=302,L]
-# Anciennes adresses : avec ou sans barre finale, ancre conservée (NE).
-RewriteRule ^1273/?$ /fr/ressources/blog/actualites/#actu-108 [R=301,L,NE]
-RewriteRule ^1513/?$ /fr/ressources/blog/actualites/#actu-104 [R=301,L,NE]
-RewriteRule ^about/?$ /fr/a-propos/ [R=301,L,NE]
-RewriteRule ^author/s-lantin/?$ /fr/ressources/blog/ [R=301,L,NE]
-RewriteRule ^category/non-classifiee/?$ /fr/ressources/blog/ [R=301,L,NE]
-RewriteRule ^category/uncategorized/?$ /fr/ressources/blog/ [R=301,L,NE]
-RewriteRule ^category/unkategorisiert/?$ /fr/ressources/blog/ [R=301,L,NE]
-RewriteRule ^contact/?$ /fr/contact/ [R=301,L,NE]
-RewriteRule ^discover-our-criminal-law-engine/?$ /fr/ressources/blog/actualites/#actu-110 [R=301,L,NE]
-RewriteRule ^discover-our-paper-on-neural-machine-translation-2/?$ /fr/ressources/blog/actualites/#actu-108 [R=301,L,NE]
-RewriteRule ^discover-our-paper-on-neural-machine-translation/?$ /fr/ressources/blog/actualites/#actu-108 [R=301,L,NE]
-RewriteRule ^discover-our-swiss-criminal-law-engine/?$ /fr/ressources/blog/actualites/#actu-110 [R=301,L,NE]
-RewriteRule ^find-the-best-legal-translator-to-improve-last/?$ /fr/ressources/blog/actualites/#actu-111 [R=301,L,NE]
-RewriteRule ^find-the-best-legal-translator-to-improve/?$ /fr/ressources/blog/actualites/#annee-2020 [R=301,L,NE]
-RewriteRule ^find-the-best-legal-translator-to-review-your-machine-translation-2/?$ /fr/ressources/blog/actualites/#actu-111 [R=301,L,NE]
-RewriteRule ^find-the-best-legal-translator-to-review-your-machine-translation/?$ /fr/ressources/blog/actualites/#actu-111 [R=301,L,NE]
-RewriteRule ^fr/about/?$ /fr/a-propos/ [R=301,L,NE]
-RewriteRule ^fr/category/non-classifiee/?$ /fr/ressources/blog/ [R=301,L,NE]
-RewriteRule ^fr/category/uncategorized-fr/?$ /fr/ressources/blog/ [R=301,L,NE]
-RewriteRule ^fr/impressum/?$ /fr/mentions-legales/ [R=301,L,NE]
-RewriteRule ^fr/news/?$ /fr/ressources/blog/actualites/ [R=301,L,NE]
-RewriteRule ^fr/privacy-policy/?$ /fr/protection-des-donnees/ [R=301,L,NE]
-RewriteRule ^fr/schedule-a-demo/?$ /fr/contact/ [R=301,L,NE]
-RewriteRule ^fr/terms-of-use/?$ /fr/mentions-legales/#conditions-d-utilisation [R=301,L,NE]
-RewriteRule ^german-news/?$ /fr/ressources/blog/actualites/#actu-110 [R=301,L,NE]
-RewriteRule ^impressum/?$ /fr/mentions-legales/ [R=301,L,NE]
-RewriteRule ^interview-mit-language-box-den-schweizer-experten-fuer-uebersetzungsprozesse/?$ /fr/ressources/blog/actualites/#actu-105 [R=301,L,NE]
-RewriteRule ^interview-mit-language-box-den-schweizer-experten-fur-ubersetzungsprozesse/?$ /fr/ressources/blog/actualites/#actu-105 [R=301,L,NE]
-RewriteRule ^interview-mit-language-box-den-schweizer-experten-in-ubersetzungsprozessen/?$ /fr/ressources/blog/actualites/#actu-105 [R=301,L,NE]
-RewriteRule ^join-lexmachina-at-the-amta-2020-virtual-conference-2/?$ /fr/ressources/blog/actualites/#actu-109 [R=301,L,NE]
-RewriteRule ^join-lexmachina-at-the-amta-2020-virtual-conference-3/?$ /fr/ressources/blog/actualites/#actu-109 [R=301,L,NE]
-RewriteRule ^join-lexmachina-at-the-amta-2020-virtual-conference/?$ /fr/ressources/blog/actualites/#actu-109 [R=301,L,NE]
-RewriteRule ^lexmachina-becomes-a-member-of-the-swiss-legaltech-association-2/?$ /fr/ressources/blog/actualites/#actu-106 [R=301,L,NE]
-RewriteRule ^lexmachina-becomes-a-member-of-the-swiss-legaltech-association-3/?$ /fr/ressources/blog/actualites/#actu-106 [R=301,L,NE]
-RewriteRule ^lexmachina-becomes-a-member-of-the-swiss-legaltech-association/?$ /fr/ressources/blog/actualites/#actu-106 [R=301,L,NE]
-RewriteRule ^lexmachina-die-erste-uebersetzungsmaschine-die-pdfs-direkt-uebersetzt/?$ /fr/ressources/blog/actualites/#actu-103 [R=301,L,NE]
-RewriteRule ^lexmachina-le-premier-traducteur-automatique-qui-traite-directement-les-pdf/?$ /fr/ressources/blog/actualites/#actu-103 [R=301,L,NE]
-RewriteRule ^lexmachina-powered-by-heia-fr-and-innosuisse-2/?$ /fr/ressources/blog/actualites/#actu-104 [R=301,L,NE]
-RewriteRule ^lexmachina-powered-by-heia-fr-and-innosuisse/?$ /fr/ressources/blog/actualites/#actu-104 [R=301,L,NE]
-RewriteRule ^lexmachina-the-first-translation-engine-directly-processing-pdfs/?$ /fr/ressources/blog/actualites/#actu-103 [R=301,L,NE]
-RewriteRule ^news/?$ /fr/ressources/blog/actualites/ [R=301,L,NE]
-RewriteRule ^privacy-policy/?$ /fr/protection-des-donnees/ [R=301,L,NE]
-RewriteRule ^schedule-a-demo/?$ /fr/contact/ [R=301,L,NE]
-RewriteRule ^tag/news/?$ /fr/ressources/blog/ [R=301,L,NE]
-RewriteRule ^tag/translation/?$ /fr/ressources/blog/ [R=301,L,NE]
-RewriteRule ^terms-of-use/?$ /fr/mentions-legales/#conditions-d-utilisation [R=301,L,NE]
-RewriteRule ^test-page/?$ /fr/ [R=301,L,NE]
-RewriteRule ^vernissage-of-lexmachina-2/?$ /fr/ressources/blog/actualites/#annee-2020 [R=301,L,NE]
-RewriteRule ^vernissage-of-lexmachina/?$ /fr/ressources/blog/actualites/#annee-2020 [R=301,L,NE]
-RewriteRule ^wordbee-french-sample/?$ /fr/ressources/blog/actualites/#actu-112 [R=301,L,NE]
-RewriteRule ^wordbee-panel-discussion-on-nmt-2/?$ /fr/ressources/blog/actualites/#actu-112 [R=301,L,NE]
-RewriteRule ^wordbee-panel-discussion-on-nmt/?$ /fr/ressources/blog/actualites/#actu-112 [R=301,L,NE]
-RewriteRule ^you-missed-our-presentation-at-the-14th-amta-conference-2/?$ /fr/ressources/blog/actualites/#actu-107 [R=301,L,NE]
-RewriteRule ^you-missed-our-presentation-at-the-14th-amta-conference-3/?$ /fr/ressources/blog/actualites/#actu-107 [R=301,L,NE]
-RewriteRule ^you-missed-our-presentation-at-the-14th-amta-conference/?$ /fr/ressources/blog/actualites/#actu-107 [R=301,L,NE]
-# Cache d'un an. Sans mod_headers, rien n'est posé.
+RewriteRule ^$ https://neur-on.ai/fr/ [R=302,L]
+# Anciennes adresses : avec ou sans barre finale, ancre conservée (NE), directement en HTTPS sur l'hôte canonique.
+RewriteRule ^1273/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^1513/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^about/?$ https://neur-on.ai/fr/a-propos/ [R=301,L,NE]
+RewriteRule ^author/s-lantin/?$ https://neur-on.ai/fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^category/non-classifiee/?$ https://neur-on.ai/fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^category/uncategorized/?$ https://neur-on.ai/fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^category/unkategorisiert/?$ https://neur-on.ai/fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^contact/?$ https://neur-on.ai/fr/contact/ [R=301,L,NE]
+RewriteRule ^discover-our-criminal-law-engine/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^discover-our-paper-on-neural-machine-translation-2/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^discover-our-paper-on-neural-machine-translation/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^discover-our-swiss-criminal-law-engine/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^find-the-best-legal-translator-to-improve-last/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^find-the-best-legal-translator-to-improve/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^find-the-best-legal-translator-to-review-your-machine-translation-2/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^find-the-best-legal-translator-to-review-your-machine-translation/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^fr/about/?$ https://neur-on.ai/fr/a-propos/ [R=301,L,NE]
+RewriteRule ^fr/category/non-classifiee/?$ https://neur-on.ai/fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^fr/category/uncategorized-fr/?$ https://neur-on.ai/fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^fr/impressum/?$ https://neur-on.ai/fr/mentions-legales/ [R=301,L,NE]
+RewriteRule ^fr/news/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^fr/privacy-policy/?$ https://neur-on.ai/fr/protection-des-donnees/ [R=301,L,NE]
+RewriteRule ^fr/schedule-a-demo/?$ https://neur-on.ai/fr/contact/ [R=301,L,NE]
+RewriteRule ^fr/terms-of-use/?$ https://neur-on.ai/fr/mentions-legales/#conditions-d-utilisation [R=301,L,NE]
+RewriteRule ^german-news/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^impressum/?$ https://neur-on.ai/fr/mentions-legales/ [R=301,L,NE]
+RewriteRule ^interview-mit-language-box-den-schweizer-experten-fuer-uebersetzungsprozesse/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^interview-mit-language-box-den-schweizer-experten-fur-ubersetzungsprozesse/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^interview-mit-language-box-den-schweizer-experten-in-ubersetzungsprozessen/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^join-lexmachina-at-the-amta-2020-virtual-conference-2/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^join-lexmachina-at-the-amta-2020-virtual-conference-3/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^join-lexmachina-at-the-amta-2020-virtual-conference/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^lexmachina-becomes-a-member-of-the-swiss-legaltech-association-2/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^lexmachina-becomes-a-member-of-the-swiss-legaltech-association-3/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^lexmachina-becomes-a-member-of-the-swiss-legaltech-association/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^lexmachina-die-erste-uebersetzungsmaschine-die-pdfs-direkt-uebersetzt/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^lexmachina-le-premier-traducteur-automatique-qui-traite-directement-les-pdf/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^lexmachina-powered-by-heia-fr-and-innosuisse-2/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^lexmachina-powered-by-heia-fr-and-innosuisse/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^lexmachina-the-first-translation-engine-directly-processing-pdfs/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^news/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^privacy-policy/?$ https://neur-on.ai/fr/protection-des-donnees/ [R=301,L,NE]
+RewriteRule ^schedule-a-demo/?$ https://neur-on.ai/fr/contact/ [R=301,L,NE]
+RewriteRule ^tag/news/?$ https://neur-on.ai/fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^tag/translation/?$ https://neur-on.ai/fr/ressources/blog/ [R=301,L,NE]
+RewriteRule ^terms-of-use/?$ https://neur-on.ai/fr/mentions-legales/#conditions-d-utilisation [R=301,L,NE]
+RewriteRule ^test-page/?$ https://neur-on.ai/fr/ [R=301,L,NE]
+RewriteRule ^vernissage-of-lexmachina-2/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^vernissage-of-lexmachina/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^wordbee-french-sample/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^wordbee-panel-discussion-on-nmt-2/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^wordbee-panel-discussion-on-nmt/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^you-missed-our-presentation-at-the-14th-amta-conference-2/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^you-missed-our-presentation-at-the-14th-amta-conference-3/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+RewriteRule ^you-missed-our-presentation-at-the-14th-amta-conference/?$ https://neur-on.ai/fr/ressources/blog/actualites/ [R=301,L,NE]
+# Adresse canonique : HTTPS (sauf si un proxy l'a déjà terminé) et sans www, en un seul saut. Seuls les deux
+# noms du site sont concernés : une adresse de test de l'hébergeur n'est pas renvoyée vers la production.
+RewriteCond %{HTTP_HOST} ^(www\.)?neur-on\.ai$ [NC]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://neur-on.ai%{REQUEST_URI} [R=301,L,NE]
+RewriteCond %{HTTP_HOST} ^www\.neur-on\.ai$ [NC]
+RewriteRule ^ https://neur-on.ai%{REQUEST_URI} [R=301,L,NE]
+# Compression des textes (pages, feuilles, scripts, données, SVG). Polices woff2 et images déjà compressées.
+<IfModule mod_deflate.c>
+  <IfModule mod_filter.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/javascript application/javascript application/json application/ld+json application/xml image/svg+xml image/x-icon
+  </IfModule>
+</IfModule>
+# Cache. Sans mod_headers, rien n'est posé.
 <IfModule mod_headers.c>
   # Polices (assets/fonts/) : remplacer une police impose de changer son nom de fichier, le navigateur ne la
   # redemande pas pendant un an.
@@ -69,5 +83,13 @@ RewriteRule ^you-missed-our-presentation-at-the-14th-amta-conference/?$ /fr/ress
   # Feuilles et scripts : les pages les appellent avec ?v=<empreinte>, une nouvelle version change l'URL.
   <FilesMatch "\.(css|js)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Images : appelées sans empreinte, une image remplacée sous le même nom doit pouvoir revenir. Un mois.
+  <FilesMatch "\.(webp|png|jpe?g|gif|svg|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  # Pages et fichiers pour les robots : toujours revalidés auprès du serveur, une mise en ligne est vue aussitôt.
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "no-cache"
   </FilesMatch>
 </IfModule>

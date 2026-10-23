@@ -10,6 +10,8 @@ Le test `tests/test_regles_blocs.py` vérifie les règles ci-dessous.
 | Hero à deux colonnes (`.hero-g`) | Titre calé en haut, à la hauteur du texte de droite | `site.css`, `.hero-g` |
 | Tuiles de texte (`.tl.txt`) | Espace de 8 px sous le titre, texte en 14 px, plus petit que le titre | `site.css`, `.tl.txt p` |
 | Tuiles chiffrées (`.tl` avec `.n`) | Chiffre sur une ligne de hauteur fixe, unité accolée (« 30 Langues »), textes alignés d'une tuile à l'autre | `site.css`, `.tl .n` |
+| Situations (« Trois situations ») | Rangées éditoriales `.sr` sur les pages Corrext ; cartes `.pa-sg` sur les domaines et paires (choix à arbitrer par Fabien) | `blocs_communs.situations_rangees`, `paire_modele` |
+| Titres `.h2` | Plus de 4 mots : accent italique sur les derniers mots (deux, trois après un petit mot, un nom d'outil entier), sauf accent donné ou `accent=False` | `comp.h2` |
 | Cartes de liens vers une page outil ou ressource | Grand visuel animé, titre, texte, lien ; trois cartes au plus sur une ligne, jamais de 2 x 2 ; deux cartes : deux grandes colonnes | `outils/post/fonctionnalites.py` |
 | Cartes de texte seul (`.cd`) | Aérées, sans trait d'accent en tête de bloc | `site.css`, `.cd` |
 | Scènes animées | Aucune pause au survol, jauge de déroulé discrète en bas | `assets/sim.js` |

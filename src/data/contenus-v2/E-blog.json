@@ -208,6 +208,54 @@
    "texte": "Ne remplissez pas ce champ.",
    "statut": "a_relire",
    "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) ; libellé du champ piège, lu par les seuls robots (masqué aux utilisateurs et aux lecteurs d'écran)"
+  },
+  {
+   "cle": "ressources/blog/paula-reichenberg-jury-weblaw-forum-2024.marque",
+   "page": "ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/",
+   "texte": "Neur.on",
+   "remplace": "NEUR.ON",
+   "statut": "a_relire",
+   "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive)."
+  },
+  {
+   "cle": "ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais.marque",
+   "page": "ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/",
+   "texte": "Neur.on",
+   "remplace": "NEUR.ON",
+   "statut": "a_relire",
+   "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive)."
+  },
+  {
+   "cle": "ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024.marque",
+   "page": "ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/",
+   "texte": "Neur.on",
+   "remplace": "NEUR.ON",
+   "statut": "a_relire",
+   "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive)."
+  },
+  {
+   "cle": "ressources/blog/neuron-ai-days-2025-geneve-llm-traduction.marque",
+   "page": "ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/",
+   "texte": "Neur.on",
+   "remplace": "NEUR.ON",
+   "statut": "a_relire",
+   "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive)."
+  },
+  {
+   "cle": "ressources/blog/legaltech-avocats-allies-ou-concurrents.marque",
+   "page": "ressources/blog/legaltech-avocats-allies-ou-concurrents/",
+   "texte": "Neur.on",
+   "remplace": "NEUR.ON",
+   "statut": "a_relire",
+   "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive)."
+  },
+  {
+   "cle": "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley.marque",
+   "page": "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/",
+   "texte": "Neur.on",
+   "remplace": "NEUR.ON",
+   "statut": "a_relire",
+   "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive)."
   }
  ]
 }

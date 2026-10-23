@@ -61,6 +61,7 @@ METIERS = {
     "fiduciaires-conseil": {
         "outils": [("Extraits du registre", "extrait"), ("Traduction texte et document", "lot"), ("Gestion de projet", "devis")],
         "accent_outils": "de la fiduciaire", "gov": "niveau de certification", "cta": "Voyez Corrext",
+        "commander": "Extraits du registre",  # lien « Commander un extrait » vers auszug-hr.ch (audit CRO du 2026-10-23)
         "securite": ("restent en Suisse", "Confidentialité client"),
     },
     "autorites-administration": {
@@ -111,7 +112,7 @@ def composer(slug, cfg, E):
         milieu = [gov, securite(slug, accent, faits_[fait])]
     else:
         milieu = [niveaux(), gov]
-    out = ([hero_, distinctions(), gains(slug), avis(slug), sans_avec(slug), outils(slug, items, cfg["accent_outils"])] + milieu
+    out = ([hero_, distinctions(), gains(slug), avis(slug), sans_avec(slug), outils(slug, items, cfg["accent_outils"], cfg.get("commander"))] + milieu
            + [deploiement(DEPLOIEMENT), faq_section(t), trame.appel(cta_section(t, cfg["cta"]), slug)])
     ecrire(P, entete_existant(P), "".join(out))
     print(f"{P} écrite")

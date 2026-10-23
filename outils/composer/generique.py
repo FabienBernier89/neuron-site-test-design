@@ -94,6 +94,15 @@ def premier_p(sec):
     return ""
 
 
+LANGUES_CODE = {"Allemand": "de", "Français": "fr", "Italien": "it", "Anglais": "en"}
+
+
+def attr_lang(langue):
+    """Attribut lang d'un terme cité dans sa langue (lecteurs d'écran), vide pour une langue inconnue."""
+    code = LANGUES_CODE.get(langue)
+    return f' lang="{code}"' if code else ""
+
+
 # ---------- Transpositions par type de bloc ----------
 
 def h_thero(sec, ctx):
@@ -102,8 +111,10 @@ def h_thero(sec, ctx):
     out = hero(n, s, brut(lead[0]) if lead else "", bouton(sec))
     if ctx["P"].startswith("ressources/glossaire/") and "law-spec" in sec:
         spec = bloc(sec, "div", "law-spec")
-        tl = [(None, txt(bloc(r, "b")), txt(bloc(r, "i"))) for r in blocs(spec, "div", "sr")]
-        out += section(f'<p class="k-lab">{txt(bloc(bloc(spec, "div", "sh"), "b"))}</p>' + tuiles(tl, "tl txt t4 tl-lang"))
+        # le terme dans les quatre langues en fiche signalétique (langue, terme), audit design du 2026-10-23
+        lignes = "".join(f'<div><dt>{esc(txt(bloc(r, "i")))}</dt><dd{attr_lang(txt(bloc(r, "i")))}>{esc(txt(bloc(r, "b")))}</dd></div>'
+                         for r in blocs(spec, "div", "sr"))
+        out += section(f'<p class="k-lab">{txt(bloc(bloc(spec, "div", "sh"), "b"))}</p><dl class="fs fs-lang">{lignes}</dl>')
     return out
 
 
@@ -284,7 +295,9 @@ def h_gterm(sec, ctx):
 
 def h_gex(sec, ctx):
     row = bloc(sec, "div", "gex-row")
-    cols = blocs(row, "div")
+    # colonnes de la ligne, sans la ligne elle-même (blocs() la renvoie en premier : la démo affichait deux fois la
+    # première langue et la même phrase des deux côtés, audit design du 2026-10-23)
+    cols = blocs(interne(row), "div")
     langues = [txt(bloc(c, "i")) for c in cols]
     paras = [interne(bloc(c, "p")).strip() for c in cols]
     marque = re.search(r"<mark>(.*?)</mark>", paras[0])

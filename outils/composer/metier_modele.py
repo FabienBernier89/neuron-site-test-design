@@ -52,17 +52,25 @@ def sans_avec(slug, n=5):
                    f'<span role="columnheader">{esc(texte("metier.sa.sans"))}</span><span role="columnheader">{esc(texte("metier.sa.avec"))}</span></div>{lignes}</div>')
 
 
-def outils(slug, items, accent):
+SERVICE_EXTRAITS = "https://auszug-hr.ch"  # service en ligne de commande des extraits (page Extraits du registre)
+
+
+def outils(slug, items, accent, commander=None):
     """D2 : onglets à gauche (usage, outil, texte, lien), grand écran animé à droite.
-    items : (titre, texte, href, scène, libellé du lien)."""
+    items : (titre, texte, href, scène, libellé du lien) ; commander : nom de l'onglet qui présente les extraits du
+    registre, qui reçoit en plus le lien « Commander un extrait » vers le service en ligne (audit CRO du 2026-10-23)."""
     titre = texte(f"{slug}.outils.titre")
     onglets, panneaux = "", ""
     for i, (nom, txt_, href, sc, lien_) in enumerate(items, 1):
         actif = i == 1
+        liens_ = f'<a class="lien" href="{href}">{lien_}</a>'
+        if nom == commander:
+            liens_ = (f'<p class="mt-ls">{liens_}<a class="lien" href="{SERVICE_EXTRAITS}" rel="noopener">'
+                      f'{esc(texte("extraits.commander"))}</a></p>')
         onglets += (f'<div class="mt-o{" on" if actif else ""}"><button type="button" role="tab" id="mt-t{i}" aria-controls="mt-p{i}" '
                     f'aria-selected="{"true" if actif else "false"}"><span class="mt-l">{esc(texte(f"{slug}.outils.{i}.usage"))}</span>'
                     f'<span class="mt-ot">{nom}</span></button><div class="mt-od"><div><p>{txt_}</p>'
-                    f'<a class="lien" href="{href}">{lien_}</a></div></div></div>')
+                    f'{liens_}</div></div></div>')
         panneaux += f'<div class="mt-p" role="tabpanel" id="mt-p{i}" aria-labelledby="mt-t{i}"{"" if actif else " hidden"}>{sc}</div>'
     return section(h2(titre, accent) + f'<div class="mt-ou" data-onglets><div class="mt-os" role="tablist">{onglets}</div>'
                    f'<div class="mt-ps">{panneaux}</div></div>')

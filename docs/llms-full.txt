@@ -1,0 +1,3435 @@
+# Neur.on : texte intégral des pages principales
+
+> Le moteur de traduction du droit, de la fiscalité et de la finance suisses. Quadrilingue natif, plus de 15 millions de segments, hébergement 100% suisse.
+
+Site en français (Suisse), mis à jour le 2026-10-23. Index de toutes les pages : https://neur-on.ai/llms.txt
+
+---
+
+Source : https://neur-on.ai/fr/
+
+# Votre solution de traduction par IA pour le droit, la fiscalité et la finance
+
+Vos traductions juridiques et financières de bout en bout, avec LexMachina : le moteur entraîné sur le droit suisse, hébergé et exécuté en Suisse.
+
+Demander une démo
+
+Démo sur mesure · en français, allemand, italien ou anglais · hébergement 100% suisse
+
+Adopté par les professionnels du droit et de la finance suisses
+
+- Swiss FinTech Awards 2024 Lauréat Early Stage
+
+- BILANZ Entreprises les plus innovantes 2024
+
+- Digital Shapers 2023
+
+- Soutenu par Innosuisse
+
+- ISO 27001 certifié
+
+- Hébergement 100% suisse Infomaniak
+
+## Ce qui freine une traduction juridique
+
+- Terminologie
+
+### Traduire les mots, retrouver le terme exact
+
+Un outil générique s'en tient aux mots. Le droit suisse attend aussi le terme consacré et la forme des références légales, qui change d'une langue à l'autre.
+
+- Confidentialité
+
+### Une pièce sensible collée dans un service en ligne
+
+Le texte quitte votre environnement. Son lieu de traitement et sa réutilisation ne sont plus maîtrisés.
+
+- Relecture
+
+### La relecture, l'une des étapes les plus coûteuses
+
+Harmoniser les termes, les vérifier en contexte, faire relire par un juriste-linguiste : chaque étape pèse sur le coût d'une traduction juridique.
+
+## Un moteur, une plateforme, un concordancier
+
+Trois briques conçues pour le droit suisse : LexMachina traduit, Corrext organise votre travail, CHnell vérifie chaque terme.
+
+LexMachina
+
+### Un moteur entraîné sur le droit suisse
+
+LexMachina apprend des ATF/BGE, des textes FINMA et des codes (CO, CC, LP). Plus de 15 millions de segments juridiques et financiers, pas un modèle généraliste.
+
+- Toutes les paires DE · FR · IT · EN en natif
+
+- Hébergé et exécuté en Suisse
+
+- Les termes suisses : impôt anticipé, assujetti
+
+- +30 langues disponibles
+
+LexMachina, le moteur
+
+Corrext
+
+### Toute votre traduction juridique, sur une seule plateforme
+
+Du simple copier-coller jusqu'à l'installation sur vos propres serveurs : Corrext réunit tous les acteurs et tous vos outils dans un environnement sécurisé.
+
+- Texte et fichiers traduits, PDF vers Word
+
+- Relecture dans l'éditeur ou dans Word
+
+- Gestion de projet et extraits certifiés du registre
+
+Corrext, la plateforme
+
+CHnell
+
+### Chaque terme vérifié dans son contexte officiel
+
+CHnell, le concordancier de Neur.on, apporte la preuve terminologique officielle : chaque terme se lit dans les textes publiés par les autorités suisses, la référence des juristes. 30 domaines, ouverts d'un simple surlignage.
+
+- Feuille fédérale, Fedlex, FINMA, ESTV
+
+- Ouvert depuis la traduction, d'un simple surlignage
+
+- Résultats bilingues, terme surligné des deux côtés
+
+Fast lookup CHnell
+
+## Corrext, LexMachina, CHnell : qui fait quoi
+
+Vous travaillez dans Corrext. La traduction passe par LexMachina ou par le moteur tiers choisi. Le Fast Lookup ouvre CHnell, qui montre chaque terme dans son contexte officiel.
+
+## Une solution entièrement suisse
+
+Où vos documents sont stockés, où ils sont traités, et sous quel droit : les réponses tiennent en un pays.
+
+Sécurité et souveraineté
+
+## Vos documents les plus sensibles restent en Suisse
+
+Pour un avocat ou un banquier, la confidentialité est une condition, pas un réglage. Neur.on est une solution suisse : entité, infrastructure et moteur. Vous choisissez, projet par projet, le niveau de confidentialité, et le mode Highly sensitive garde tout en Suisse.
+
+Sécurité et souveraineté
+
+Stockage 100% suisse
+
+Vos projets et vos mémoires sont conservés sur les serveurs suisses de Corrext (Infomaniak, en Suisse).
+
+Mode Highly sensitive
+
+Stockage et traitement exclusivement en Suisse, hors US CLOUD Act, sans réutilisation en mémoire. Disponible en EN, FR, IT, DE.
+
+Conforme nLPD & RGPD
+
+Respect de la loi suisse sur la protection des données comme du RGPD européen, par conception.
+
+ISO 27001 certifié
+
+Sécurité de l'information certifiée depuis 2024, chiffrement de bout en bout des flux et du stockage.
+
+15 M+
+
+Segments juridiques et financiers multilingues
+
+30 Langues
+
+Sur la plateforme, dont l'allemand, le français, l'italien et l'anglais en natif
+
+4 Moteurs
+
+Orchestrés dans Corrext, dont LexMachina, entraîné sur le droit suisse
+
+100 %
+
+Suisse : entité, infrastructure et moteur LexMachina
+
+## Quatre niveaux de qualité, du gisting à l'assermentation
+
+Vous choisissez le niveau de finition adapté à l'enjeu, et vous ne payez que ce dont vous avez besoin.
+
+1
+
+Traduction machine
+
+Pour comprendre vite : revue de pièces, discovery, lecture interne. Le moteur LexMachina, sans relecture.
+
+2
+
+Post-édition
+
+Light ou full : contrats, CGV, correspondance. Relus par un juriste-linguiste pour un rendu publiable.
+
+3
+
+Relecture juridique
+
+Relecture experte pour les enjeux forts : avis de droit, publication, documents engageants.
+
+4
+
+Certification & apostille
+
+Traduction assermentée et légalisée, via un réseau de traducteurs experts, pour les dossiers officiels.
+
+## Ces solutions traduisent. Neur.on maîtrise le droit suisse.
+
+Une agence externe, un outil générique comme DeepL ou un LLM généraliste rendent service sur une demi-page. Pour un contrat de 60 pages ou 500 pages de pièces d'arbitrage, la sécurité, la terminologie suisse et la gestion documentaire font la différence.
+
+Neur.on | Agence externe | DeepL | LLM généraliste
+
+Spécialisation droit suisse native | Oui | Variable | Non | Généraliste
+
+Terminologie suisse en contexte (CHnell, 30 domaines) | Intégrée | Selon le prestataire | À créer soi-même | Non
+
+Quadrilinguisme DE · FR · IT · EN | Natif | Selon les langues | Sans contexte juridique | Sans contexte juridique
+
+Stockage en Suisse, mode 100 % Suisse au choix | Oui | Variable | Non | Non
+
+Gestion documentaire & OCR (tous formats) | Oui | Manuelle | Limité | Non
+
+Traçabilité & droits granulaires | Oui | Hors plateforme | Selon l'offre | Selon l'offre
+
+Vos contenus réservés à votre propre mémoire | Contractuel | Variable | Selon l'offre | Selon l'offre
+
+Relecture humaine spécialisée | En option | Oui | Non | Non
+
+Oui / natif Partiel / variable Non couvert
+
+## Des faits que vous pouvez vérifier
+
+Par discrétion, Neur.on ne publie ni nom de client ni témoignage.
+
+Références clients communiquées sur demande, avec l'accord écrit des intéressés.
+
+- Plus de 15 millions de segments La donnée juridique et financière suisse sur laquelle LexMachina est entraîné Moteur
+
+- Kickstart Innovation 2024 Cohorte 2024, verticale Finance & Insurance Sélection
+
+## Tout ce qu'il faut savoir
+
+Comment Neur.on garantit-il la précision sur le droit suisse ?
+
+LexMachina, notre moteur, est entraîné sur plus de 15 millions de segments juridiques et financiers suisses : ATF/BGE, textes FINMA, codes (CO, CC, LP). Vous pouvez comparer jusqu'à quatre alternatives d'autres moteurs, vérifier chaque terme dans son contexte officiel avec CHnell, et demander une relecture par un juriste-linguiste.
+
+Mes données restent-elles souveraines ?
+
+Vous choisissez, projet par projet. En mode Standard, vos données sont stockées sur les serveurs suisses de Corrext et traitées par le moteur que vous sélectionnez : LexMachina en Suisse ; DeepL Pro, Azure OpenAI GPT ou Claude à l'étranger, avec un avertissement de pseudonymisation. En mode Highly sensitive, stockage et traitement restent exclusivement en Suisse, sans réutilisation en mémoire. Le tout certifié ISO 27001, conforme nLPD et RGPD.
+
+Quelles langues et quels domaines sont couverts ?
+
+Trente langues sur la plateforme, avec l'allemand, le français, l'italien et l'anglais en natif (mode Highly sensitive et LexMachina). CHnell couvre 30 domaines, du droit bancaire et de la surveillance FINMA à l'arbitrage, la fiscalité, la propriété intellectuelle ou le droit des sociétés. Pour les traductions certifiées, notariées ou apostillées, Corrext propose un service en ligne dédié.
+
+Quelle différence avec DeepL ou un LLM généraliste ?
+
+Les outils génériques traduisent du texte sans connaître le droit suisse ni ses sources officielles, et hébergent vos données hors de Suisse. Corrext vous laisse les utiliser quand c'est pertinent, dans un cadre gouverné, et met à côté un moteur entraîné sur le droit suisse, la comparaison d'alternatives, la vérification terminologique en contexte et un mode 100 % Suisse.
+
+La plateforme est-elle agnostique aux modèles d'IA ?
+
+Oui. Dans Corrext, vous choisissez le moteur à chaque traduction : LexMachina, DeepL Pro, Azure OpenAI GPT ou Claude, et vous comparez jusqu'à quatre alternatives attribuées à leur moteur. Une solution pérenne, qui évolue avec l'état de l'art sans vous enfermer.
+
+Comment intégrer Neur.on à nos outils existants ?
+
+Via le plugin Microsoft Word, l'application web Corrext, ou l'API REST pour vos DMS, intranets et workflows. La gestion des droits est granulaire, jusqu'au niveau document (SharePoint / AD). Un déploiement on-premises est possible. Réservez une démo pour cadrer l'intégration avec un expert.
+
+## Prêt à voir Neur.on sur vos propres documents ?
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/corrext/
+
+# Corrext : reprenez le contrôle de vos traductions
+
+La plateforme qui réunit vos projets, vos devis, vos ressources terminologiques et vos droits d'accès dans un seul environnement suisse. Vous voyez tout et vous décidez de tout.
+
+Demander une démo
+
+## Corrext, LexMachina, CHnell : qui fait quoi
+
+Vous travaillez dans Corrext. La traduction passe par LexMachina ou par le moteur tiers choisi. Le Fast Lookup ouvre CHnell, qui montre chaque terme dans son contexte officiel.
+
+### Hébergé en Suisse, chez Infomaniak
+
+Traité en Suisse en mode Highly sensitive ou avec LexMachina · ISO 27001 · hors US CLOUD Act
+
+### Droits d'accès jusqu'au document
+
+Gérés via SharePoint et Active Directory
+
+### Dans MS Word ou dans le navigateur
+
+Avec une API REST, ou en déploiement on-premises
+
+## Quatre outils, une seule salle de contrôle
+
+Chaque outil a sa page. Ensemble, ils couvrent le processus de traduction, de la vérification d'un terme à la traduction certifiée.
+
+Traduction texte et document
+
+### Texte ou fichier, traduit sur-le-champ
+
+Collez un texte ou déposez jusqu'à 25 fichiers Word, Excel, PowerPoint ou PDF. Choisissez le moteur et la langue cible, comparez jusqu'à quatre alternatives attribuées à leur moteur, vérifiez un terme dans CHnell d'un simple surlignage, reformulez en cinq styles.
+
+- Texte jusqu'à 10'000 caractères, fichiers jusqu'à 50 Mo, conversion PDF vers Word
+
+- LexMachina, DeepL Pro, Azure OpenAI GPT ou Claude, au choix à chaque envoi
+
+- Mode Highly sensitive content : traitement exclusivement en Suisse
+
+Découvrir Traduction texte et document
+
+Gestion de projet
+
+### De la demande au devis, en trois étapes
+
+Nommez le projet, choisissez sa confidentialité (Standard ou Highly sensitive), déposez les fichiers : Corrext détecte la langue, la catégorie juridique et le nombre de pages standard, puis chiffre le délai d'une relecture interne ou externe en trois niveaux.
+
+- Relecture interne par vos équipes, ou externe par un traducteur juridique ou une agence certifiée
+
+- Devis et délai instantanés, date d'échéance, priorité des fichiers
+
+- Projets Standard réutilisés comme mémoire privée ; aucune réutilisation en mode sensible
+
+- Relecture phrase par phrase dans l'éditeur de relecture, vos corrections rejoignent votre mémoire
+
+Découvrir Gestion de projet
+
+Fast lookup CHnell
+
+### Chaque terme vérifié dans son contexte officiel
+
+CHnell, le concordancier de Neur.on, aligne des segments source et cible tirés de la Feuille fédérale, de Fedlex, de la FINMA et des administrations. Trente domaines, des ressources partagées ou propres à votre organisation, des opérateurs de recherche précis.
+
+- Verzugszins ↔ intérêt moratoire : 324 segments alignés, chacun avec sa source
+
+- Filtres par domaine, source et type de ressource ; opérateurs "" - or
+
+- Fast Lookup depuis n'importe quelle traduction, d'un simple surlignage
+
+Découvrir Fast lookup CHnell
+
+Extraits du registre du commerce
+
+### Traduits, certifiés, apostillés, en ligne
+
+Cherchez la société par nom ou par IDE, choisissez le niveau de certification, la livraison et le délai. La traduction est faite par des traducteurs juridiques spécialisés dans le corporate housekeeping, assistés de modèles entraînés sur les extraits du registre suisse.
+
+- Trois niveaux : certification Corrext, notariée, notariée et apostillée (Convention de La Haye)
+
+- Plus de 30 langues cibles, livraison par e-mail ou papier, standard ou express
+
+- Parcours de commande entièrement en ligne, infrastructure suisse certifiée ISO 27001
+
+Découvrir les extraits certifiés
+
+## Une plateforme unique, agnostique et pérenne
+
+Corrext ne vous enferme dans aucun modèle ni aucun prestataire. Elle orchestre les vôtres, avec les bonnes données, dans un environnement approuvé et hébergé en Suisse.
+
+Sécurité & souveraineté des données
+
+Tout, au même endroit
+
+Du gisting au rendu parfait, du DIY à l'externalisation complète, tous formats. Statistiques d'usage et actifs linguistiques du cabinet sous votre contrôle.
+
+Des flux de données sécurisés
+
+Fini les traductions sauvages dans des outils en ligne non sécurisés : aucun échange de données avec des traducteurs externes hors de l'environnement approuvé.
+
+Agnostique aux modèles et aux prestataires
+
+LexMachina, vos modèles finetunés et des LLM génériques via API, correctement promptés en arrière-plan. Accès accordés finement aux clients, spécialistes externes et prestataires.
+
+Word ou navigateur, API ou on-premises
+
+Plugin MS Word natif ou application autonome dans le navigateur. API REST pour vos DMS et intranets, déploiement on-premises pour les environnements les plus sensibles.
+
+Quatre niveaux de qualité, choisis document par document.
+
+Demander une démo
+
+## Questions fréquentes sur Corrext
+
+Qu'est-ce que Corrext ?
+
+Corrext est la plateforme de traduction juridique et financière de Neur.on. Elle réunit quatre outils dans un seul environnement suisse : Traduction texte et document, Gestion de projet, Fast lookup CHnell et les extraits certifiés du registre du commerce.
+
+Où mes documents sont-ils stockés et traités ?
+
+Corrext est hébergé en Suisse, chez Infomaniak. Les documents sont traités en Suisse en mode Highly sensitive content ou avec le moteur LexMachina. Les moteurs hébergés à l'étranger déclenchent l'avis de confidentialité de votre organisation et ne sont pas disponibles en mode Highly sensitive content. Neur.on est certifiée ISO 27001.
+
+Quels moteurs de traduction puis-je utiliser ?
+
+LexMachina, DeepL Pro, Azure OpenAI GPT ou Claude, au choix à chaque envoi. Corrext peut afficher jusqu'à quatre alternatives, chacune attribuée à son moteur, pour comparer avant de choisir.
+
+Quels formats et quelles langues Corrext accepte-t-il ?
+
+Sept types de fichiers bureautiques, du PDF au PowerPoint, jusqu'à 25 fichiers de 50 Mo par envoi, et du texte collé jusqu'à 10'000 caractères. L'allemand, le français, l'italien et l'anglais sont natifs ; la plateforme propose trente langues en tout.
+
+Corrext remplace-t-il la relecture par un traducteur ?
+
+Non. Pour un document engageant, Gestion de projet commande une relecture : Light review ou Full review par un traducteur juridique, ou Double review et traduction certifiée. Le devis et le délai s'affichent avant toute validation.
+
+Comment Corrext s'intègre-t-il à nos outils ?
+
+Par un plugin MS Word natif ou une application dans le navigateur, par une API REST pour vos DMS et vos intranets, ou en déploiement on-premises. Les droits d'accès se règlent jusqu'au document, via SharePoint ou Active Directory.
+
+## Voyez Corrext sur vos propres documents
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/corrext/traduction-texte-et-document/
+
+# Traduction texte et document. Traduisez, comparez et reformulez
+
+L'outil du quotidien dans Corrext : une traduction juridique en quelques secondes, dans le format d'origine, avec le moteur de votre choix et la terminologie suisse vérifiable en contexte. Essayez-le ci-dessous sur de vrais articles de loi.
+
+Demander une démo
+
+## Ce que fait Traduction texte et document, exactement
+
+Traduction texte et document est l'outil de traduction instantanée de Corrext. Il traduit un texte ou un lot de fichiers avec le moteur de votre choix, compare des alternatives attribuées à leur moteur, vérifie un terme dans son contexte officiel via CHnell et reformule un texte en cinq styles. Tout ce qui suit a été observé dans l'application.
+
+Onglets de l'application
+
+Jusqu'à 10'000 caractères, langue source détectée automatiquement, traduction à la saisie sans bouton. Boutons copier, effacer, annuler et rétablir. Sorties de la démo : art. 104 CO, art. 47 LB, art. 186 LDIP, telles que produites par LexMachina.
+
+Jusqu'à 25 fichiers par envoi, 50 Mo par fichier : .pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx. La traduction conserve le format d'origine. Conseil de l'application : déposer le format original (.docx ou .xlsx plutôt que .pdf) quand il existe.
+
+Conversion d'un PDF, y compris scanné, en document Word éditable, avant traduction ou pour le travail interne. L'interrupteur Highly sensitive content est grisé sur cet onglet : il ne traduit pas.
+
+Réécriture d'un texte jusqu'à 5'000 caractères. Styles Formal legal, Financial, Simplified, Formal, Informal ; option Shorten. Les mots modifiés sont soulignés.
+
+30 Langues
+
+30 langues sur la plateforme, dont l'arabe, le chinois, le japonais et les langues européennes. Allemand, français, italien et anglais en natif avec LexMachina et en mode Highly sensitive.
+
+4 Moteurs
+
+LexMachina (suisse, par défaut), DeepL Pro, Azure OpenAI GPT et Claude, choisis à chaque envoi. Les moteurs hébergés à l'étranger déclenchent l'avis Attorney-Client privilege de votre organisation.
+
+100 %
+
+Stockage sur les serveurs suisses de Corrext dans tous les cas. Traitement exclusivement en Suisse avec LexMachina ou en mode Highly sensitive content.
+
+## Trois situations où Traduction texte et document change la journée
+
+Cabinets d'avocats
+
+### 40 pièces à lire avant demain
+
+Déposez le lot en File translation, moteur LexMachina, mode Highly sensitive : vous lisez les pièces dans leur mise en page d'origine, sans qu'un mot ait quitté la Suisse, et vous vérifiez les termes qui comptent dans CHnell.
+
+Compliance
+
+### Une circulaire FINMA en trois langues
+
+Traduisez le passage en Text translation, ouvrez les alternatives pour choisir la formulation la plus proche de l'usage officiel, puis reformulez en style Financial pour la note interne.
+
+Directions juridiques
+
+### Fini les traductions sauvages
+
+Vos équipes ont un outil approuvé, gouverné par la politique de moteurs de l'organisation, avec les mêmes formats et la même terminologie pour tout le monde. Les outils en ligne non sécurisés n'ont plus de raison d'être.
+
+## Que se passe-t-il quand vous choisissez un moteur hébergé à l'étranger ?
+
+Corrext ne vous l'interdit pas : il applique la politique de votre organisation. Dès que DeepL Pro, Azure OpenAI GPT ou Claude est sélectionné, l'avis Attorney-Client privilege rappelle que seuls des documents entièrement pseudonymisés peuvent leur être confiés, et que les dossiers sensibles leur sont interdits. Avec LexMachina ou en mode Highly sensitive content, tout reste en Suisse.
+
+### Avis affiché dans l'outil
+
+Le texte de la politique s'affiche au moment du choix, pas dans une charte oubliée.
+
+### Pseudonymisation exigée
+
+Noms de clients, parties et objet du dossier retirés avant tout envoi à un moteur étranger.
+
+### Mode Highly sensitive content
+
+Stockage et traitement exclusivement en Suisse, EN, FR, IT, DE.
+
+Sécurité et souveraineté des données
+
+## Les autres outils de Corrext
+
+Gestion de projet
+
+Projet en trois étapes, relecture interne ou externe en trois niveaux, devis et délai instantanés.
+
+En savoir plus Fast lookup CHnell
+
+Le concordancier du droit suisse : sources officielles, 30 domaines, vos propres ressources.
+
+En savoir plus Extraits du registre du commerce
+
+Traduction certifiée, notariée ou apostillée, commandée en ligne en quatre étapes.
+
+En savoir plus
+
+## Questions fréquentes sur Traduction texte et document
+
+Quels formats de fichiers Traduction texte et document accepte-t-il ?
+
+Les formats .pdf, .doc, .docx, .xls, .xlsx, .ppt et .pptx, jusqu'à 25 fichiers de 50 Mo chacun par envoi. La traduction est livrée dans le format d'origine. L'onglet PDF to Word convertit un PDF, y compris scanné, en document Word.
+
+Combien de texte puis-je traduire en une fois ?
+
+Jusqu'à 10'000 caractères dans Text translation et 5'000 caractères dans Rephrasing. Au-delà, déposez le document dans File translation ou créez un projet de traduction.
+
+Quels moteurs de traduction sont disponibles ?
+
+LexMachina, le moteur suisse entraîné sur le droit suisse, ainsi que DeepL Pro, Azure OpenAI GPT et Claude. Le moteur se choisit à chaque envoi et le panneau Alternatives compare jusqu'à quatre propositions, chacune attribuée à son moteur.
+
+Que fait l'interrupteur Highly sensitive content ?
+
+Il impose un stockage et un traitement exclusivement en Suisse, pour l'allemand, le français, l'italien et l'anglais ; selon la définition affichée par Corrext dans Gestion de projet, le contenu n'est pas réutilisé dans une mémoire de traduction. Il est grisé sur l'onglet PDF to Word, qui ne traduit pas.
+
+Comment vérifier un terme pendant une traduction ?
+
+Surlignez le mot dans le texte source et cliquez sur Fast Lookup : CHnell affiche des segments alignés tirés de sources officielles suisses, avec le domaine et la source de chaque occurrence.
+
+Traduction texte et document dispense-t-il d'une relecture par un traducteur juridique ?
+
+Non. Traduction texte et document sert à comprendre, préparer et travailler vite. Pour un document destiné à des tiers, à une publication ou à une autorité, créez un projet de traduction avec relecture Light, Full ou Double review et traduction certifiée.
+
+## Essayez Traduction texte et document sur vos propres documents
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/corrext/gestion-de-projet/
+
+# Gestion de projet. De la demande au devis, en trois étapes
+
+Nommez le projet, choisissez son mode de confidentialité, déposez vos fichiers : Corrext détecte la langue, la catégorie juridique et le nombre de pages standard de chacun. Vous choisissez ensuite une relecture interne par votre équipe ou externe en trois niveaux, et le devis comme le délai s'affichent instantanément.
+
+Demander une démo
+
+## Ce que fait Gestion de projet, exactement
+
+Gestion de projet est le tunnel de commande de Corrext en trois étapes : Set-up, File overview, Quotes. Il nomme le projet, fixe le mode de confidentialité, analyse chaque fichier déposé (pages standard, langue, catégorie juridique), puis propose une relecture interne par votre équipe ou externe par un traducteur juridique ou une agence certifiée, avec délai et devis instantanés.
+
+### 1Set-up
+
+Nom du projet généré par défaut (date, organisation, utilisateur) ou saisi librement, mode de confidentialité, puis langues cibles choisies dans une liste à cases avec recherche. Le projet est créé dès le passage à l'étape suivante.
+
+#### Confidentialité
+
+Standard confidentiality : traitement en Suisse ou à l'étranger selon le moteur choisi, projet enregistré sur les serveurs suisses de Corrext. Highly sensitive content : stockage et traitement exclusivement en Suisse, pour EN, FR, IT et DE. En mode sensible, le contenu traduit n'alimente aucune mémoire de traduction.
+
+#### Langues cibles
+
+Une ou plusieurs langues cibles par projet, parmi les 30 langues de la plateforme. Chaque langue retenue s'affiche en chip et se retire d'un clic ; Next reste inactif tant qu'aucune n'est choisie.
+
+### 2File overview
+
+Formats .pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx, 50 Mo par fichier ; l'application conseille le format original (.docx ou .xlsx plutôt que .pdf). Pour chaque fichier : nombre de pages standard, langue détectée et catégorie juridique détectée, toutes deux modifiables. Exemple observé : 2.5 pages standard, French, Private Insurance.
+
+### 3Quotes
+
+#### Internal review
+
+Votre équipe relit la traduction automatique, et son temps est valorisé dans le devis.
+
+#### Custom workflow
+
+Date d'échéance, priorité entre fichiers, puis, pour chaque fichier, relecture interne ou externe et son niveau.
+
+#### Les trois niveaux
+
+Light review pour comprendre, Full review pour transmettre à des tiers, Double review et traduction certifiée pour les autorités.
+
+#### Devis et délai
+
+Calculés instantanément, avant toute commande, à partir des pages, de la catégorie, du niveau de relecture et de l'échéance.
+
+## Mémoire de traduction
+
+Les projets en Standard confidentiality sont enregistrés sur les serveurs suisses de Corrext et réutilisables exclusivement par vous comme mémoire de traduction pour vos projets futurs. Rien n'est réutilisé en mode Highly sensitive.
+
+## Trois situations où Gestion de projet prend le relais
+
+Legal Ops
+
+### Publier en allemand et en italien
+
+Un seul projet, deux langues cibles, Double review et traduction certifiée par une agence spécialisée. Le délai et le devis s'affichent avant la commande : vous arbitrez entre les niveaux de relecture sur des chiffres, sans attendre le retour d'une agence.
+
+Avocats
+
+### Des pièces pour un correspondant étranger
+
+Projet en Highly sensitive content : stockage et traitement en Suisse, aucune réutilisation en mémoire. Full review par un traducteur juridique pour des pièces prêtes à être partagées, avec la date d'échéance fixée dès le devis ; Double review et traduction certifiée si l'autorité destinataire exige un certificat.
+
+Compliance
+
+### Une relecture par l'équipe interne
+
+Internal review : la traduction automatique est relue par vos propres juristes, et leur temps est valorisé dans le devis grâce au prix par page standard et au prix horaire que vous renseignez. Le délai affiché tient compte de cette relecture.
+
+## Standard ou Highly sensitive : que change le mode de confidentialité ?
+
+Le choix se fait à la création de chaque projet, avant le dépôt du premier fichier. Dans les deux cas, le projet est enregistré sur les serveurs suisses de Corrext. La différence porte sur le lieu de traitement et sur la mémoire de traduction : en Standard confidentiality, le traitement suit le moteur choisi, suisse ou étranger, et le projet enrichit votre mémoire privée ; en Highly sensitive content, tout reste en Suisse et rien n'est réutilisé.
+
+### Stockage suisse dans les deux cas
+
+Le projet est enregistré sur les serveurs suisses de Corrext, quel que soit le mode choisi.
+
+### Traitement selon le mode
+
+Standard : en Suisse ou à l'étranger selon le moteur de traduction choisi. Highly sensitive : exclusivement en Suisse, pour EN, FR, IT et DE.
+
+### Mémoire de traduction
+
+Standard : le projet est réutilisable exclusivement par vous comme mémoire pour vos projets futurs. Highly sensitive : aucune réutilisation.
+
+Sécurité et souveraineté des données
+
+## Les autres outils de Corrext
+
+Traduction texte et document
+
+Texte ou fichier traduit instantanément, alternatives par moteur, PDF vers Word, réécriture en cinq styles.
+
+En savoir plus Éditeur de relecture
+
+Relisez la traduction du projet phrase par phrase ; vos corrections nourrissent votre mémoire.
+
+En savoir plus Fast lookup CHnell
+
+Le concordancier du droit suisse : sources officielles, 30 domaines, vos propres ressources.
+
+En savoir plus
+
+## Questions fréquentes sur Gestion de projet
+
+Quelle différence entre Standard confidentiality et Highly sensitive content ?
+
+En Standard confidentiality, le projet est enregistré sur les serveurs suisses de Corrext et les données sont traitées en Suisse ou à l'étranger selon le moteur de traduction choisi ; le projet peut ensuite vous servir, à vous seul, de mémoire de traduction. En Highly sensitive content, stockage et traitement sont exclusivement suisses, pour l'anglais, le français, l'italien et l'allemand, et le contenu traduit n'est jamais réutilisé en mémoire.
+
+Qu'est-ce qu'une page standard ?
+
+C'est l'unité de comptage que Corrext affiche pour chaque fichier dès son dépôt, à côté de la langue et de la catégorie juridique détectées. Le délai estimé et le devis reposent sur ce nombre de pages standard. Dans l'exemple de cette page, un contrat d'assurance de quelques pages compte 2.5 pages standard.
+
+Quels sont les trois niveaux de relecture externe ?
+
+Light review, par un traducteur juridique : les erreurs significatives, omissions et contresens de la traduction automatique sont corrigés, pour une traduction complète et fidèle destinée à la compréhension et à la transmission interne. Full review, par un traducteur juridique : la traduction est en plus adaptée pour la cohérence, les tournures idiomatiques, le style et le ton, prête à être partagée avec des tiers. Double review et traduction certifiée, par une agence spécialisée : relecture complète par deux traducteurs juridiques qualifiés et certificat signé attestant l'exactitude et l'impartialité de la traduction, pour l'usage légal, la publication ou la remise aux autorités.
+
+Qui relit mes documents ?
+
+Vous le décidez fichier par fichier. En Internal review, c'est votre propre équipe : vous renseignez son prix par page standard et son prix horaire approximatif pour valoriser ce travail dans le devis. En relecture externe, c'est un traducteur juridique pour la Light review et la Full review, ou une agence de traduction spécialisée, avec deux traducteurs et un certificat signé, pour la Double review et traduction certifiée.
+
+Le devis et le délai sont-ils vraiment instantanés ?
+
+Oui. Dès que la date d'échéance et le niveau de relecture sont choisis, l'encadré Estimated time affiche la préparation, la relecture interne, la relecture externe et le délai total, sans attendre le retour d'une agence. Le bouton Generate quote produit ensuite le devis correspondant à ces choix.
+
+Mes projets alimentent-ils une mémoire de traduction ?
+
+Seulement en Standard confidentiality : le projet est enregistré sur les serveurs suisses de Corrext et peut être utilisé exclusivement par vous comme mémoire de traduction pour vos projets futurs. En Highly sensitive content, le contenu traduit n'est jamais réutilisé.
+
+## Voyez Gestion de projet sur vos propres dossiers
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/corrext/editeur-de-relecture/
+
+# Éditeur de relecture. Vos corrections servent à vos prochaines traductions
+
+L'éditeur de relecture est l'outil de TAO (traduction assistée par ordinateur) intégré à Corrext. Il présente votre document phrase par phrase : l'original à gauche, la traduction à droite. Vous corrigez, puis vous confirmez. Chaque correction est gardée en mémoire et reprise dans vos traductions suivantes.
+
+Demander une démo
+
+## Ce que fait l'éditeur de relecture, exactement
+
+Un outil de TAO découpe le document en segments. Un segment, c'est une phrase ou un titre. Vous relisez chaque segment face à son original, vous le corrigez si besoin, puis vous le confirmez.
+
+Relire
+
+### Deux colonnes
+
+L'original à gauche, la traduction à droite, segment par segment. Un filtre de recherche au-dessus de chaque colonne retrouve une phrase côté source ou côté traduction.
+
+Relire
+
+### Origine de chaque phrase
+
+Un indicateur signale si la traduction vient du moteur ou de la mémoire de traduction. Pour la traduction automatique, une jauge donne le niveau de qualité : bas, moyen ou haut.
+
+Relire
+
+### Confirmation
+
+Une case par segment confirme sa relecture. La progression du document s'affiche en pourcentage, en haut de l'éditeur.
+
+Relire
+
+### Barre d'outils
+
+Balises de mise en forme (ouvrante, fermante, autonome), gras, italique, souligné, et copie de la source dans la traduction.
+
+Vérifier
+
+### Contrôles
+
+L'éditeur repère les phrases répétées et les balises incohérentes.
+
+Vérifier
+
+### Mémoires
+
+Pour la phrase choisie, les traductions déjà validées les plus proches. Un clic sur Apply les reprend dans la traduction.
+
+Vérifier
+
+### Fast Lookup
+
+Recherche en direct dans vos mémoires et dans CHnell, côté source ou côté cible. Chaque résultat est bilingue, le terme est surligné des deux côtés et le document d'origine est indiqué.
+
+Vérifier
+
+### Assistant IA
+
+Alternatives : la même phrase traduite par plusieurs moteurs, côte à côte, et d'autres sur demande. Rephrasing : une reformulation en cinq styles (juridique formel, financier, simplifié, formel, informel), avec une option pour raccourcir.
+
+Partager et suivre
+
+### Sync
+
+Pour relire à plusieurs : les conflits entre deux versions à arbitrer, les modifications d'un collègue à intégrer, et la propagation d'une correction aux phrases identiques.
+
+Partager et suivre
+
+### Tableau de bord
+
+Confidentialité, type de relecture, langues, avancement, fichiers de référence, instructions, mémoires et équipe. Pour chaque fichier : Open in CAT, Preview, Export docx, Reimport docx, Download TMX et Validate.
+
+## Vos corrections servent-elles à vos prochaines traductions ?
+
+Oui, en confidentialité standard. Chaque correction faite dans l'éditeur est gardée dans votre mémoire de traduction. Au projet suivant, Corrext la reprend. La traduction s'adapte ainsi, projet après projet, à votre façon d'écrire. Et un même passage reste traduit de la même manière d'un projet à l'autre.
+
+### Vous corrigez
+
+Dans l'éditeur, une phrase à la fois, face à l'original.
+
+### La correction est gardée
+
+Le projet est conservé sur les serveurs suisses de Corrext et sert de mémoire à vous seul.
+
+### Le projet suivant la reprend
+
+Vos formulations reviennent, et vos traductions restent cohérentes entre les projets.
+
+### Sauf en mode hautement sensible
+
+Stockage et traitement uniquement en Suisse, aucune réutilisation en mémoire.
+
+Sécurité et souveraineté des données
+
+## Du fichier déposé au document validé
+
+La relecture est une étape d'un projet Corrext. Voici le parcours complet, dans l'ordre de l'application. Les quatre premières étapes se font à la création du projet.
+
+- 01 Projet
+
+### Création du projet
+
+Nom, langues cibles, niveau de confidentialité, traduction ou non des commentaires du document.
+
+- 02 Projet
+
+### Analyse des fichiers
+
+Chaque fichier est compté en pages standard. Une page standard compte 1 800 caractères, espaces compris.
+
+- 03 Projet
+
+### Terminologie du projet
+
+Corrext extrait lui-même les termes candidats du document. Vous fixez leur traduction, ou vous ajoutez vos propres termes.
+
+- 04 Projet
+
+### Choix du moteur
+
+LexMachina, 100 % suisse, ou un moteur tiers autorisé par votre organisation : DeepL Pro, Azure OpenAI GPT, Claude. Les moteurs tiers sont hébergés à l'étranger.
+
+- 05 Moteur
+
+### Traduction automatique
+
+Le moteur choisi traduit le document. Les termes fixés à l'étape 3 sont repris tels quels.
+
+- 06 Éditeur
+
+### Relecture dans l'éditeur
+
+Open in CAT : vous relisez, corrigez et confirmez chaque phrase, seul ou à plusieurs.
+
+- 07 Tableau de bord
+
+### Validation
+
+Le fichier relu est validé depuis le tableau de bord du projet.
+
+- 08 Tableau de bord
+
+### Export
+
+Le document traduit s'exporte en Word. La mémoire du fichier se télécharge au format TMX.
+
+### Travailler dans Word
+
+La relecture peut aussi se faire dans Microsoft Word. Exportez le document depuis le tableau de bord du projet (Export docx). Ouvrez-le dans Word avec le complément Corrext : l'assistant IA, Fast Lookup, les mémoires et Sync s'y trouvent dans un panneau latéral. Une fois la relecture faite, réimportez le fichier (Reimport docx).
+
+Voir le plugin Word
+
+## Trois usages de l'éditeur de relecture
+
+Legal Ops
+
+### Les mêmes mots d'un contrat à l'autre
+
+Vos juristes corrigent la première traduction d'un contrat type. Les traductions suivantes reprennent leurs formulations, et les termes fixés sont respectés. Le vocabulaire de la maison reste stable, projet après projet.
+
+Cabinets d'avocats
+
+### Relire à plusieurs avant un envoi
+
+Deux relecteurs se partagent le document. L'onglet Sync signale les conflits entre versions et les modifications de l'autre. Il propose aussi de répercuter une correction sur les phrases identiques.
+
+Compliance bancaire
+
+### Traiter un dossier sensible
+
+Le projet est créé en mode contenu hautement sensible : stockage et traitement uniquement en Suisse. Vous relisez dans le même éditeur, et aucune phrase n'est réutilisée en mémoire.
+
+## Les autres outils de Corrext
+
+Gestion de projet
+
+Le projet en trois étapes : confidentialité, fichiers analysés, relecture interne ou externe, devis et délai.
+
+En savoir plus Fast lookup CHnell
+
+Le concordancier du droit suisse : sources officielles, 30 domaines, vos propres ressources.
+
+En savoir plus Traduction texte et document
+
+Texte ou fichier traduit tout de suite, alternatives par moteur, PDF vers Word, réécriture en cinq styles.
+
+En savoir plus
+
+## Questions fréquentes sur l'éditeur de relecture
+
+Qu'est-ce qu'un outil de TAO ?
+
+TAO signifie traduction assistée par ordinateur (« CAT tool » en anglais). Un tel outil découpe le document en segments, c'est-à-dire en phrases ou en titres, et place chacun face à sa traduction. Le relecteur corrige puis confirme chaque segment, avec l'aide des mémoires et de la terminologie. Dans Corrext, cet outil s'appelle l'éditeur de relecture.
+
+Comment ouvrir l'éditeur de relecture ?
+
+Depuis le tableau de bord d'un projet. Chaque fichier y porte un bouton Open in CAT, qui ouvre le document dans l'éditeur. Le projet lui-même se crée dans Gestion de projet : langues, niveau de confidentialité, terminologie et moteur de traduction.
+
+Mes corrections servent-elles aux prochaines traductions ?
+
+Oui, en confidentialité standard. Vos projets sont conservés sur les serveurs suisses de Corrext et servent de mémoire de traduction à vous seul. Une correction faite aujourd'hui est reprise dans vos projets suivants. La traduction s'adapte ainsi à votre langue et reste cohérente d'un projet à l'autre.
+
+Et en mode contenu hautement sensible ?
+
+Dans ce mode (Highly sensitive content), les traductions ne nourrissent pas la mémoire. Les données sont stockées et traitées uniquement en Suisse. Le mode est disponible en français, en allemand, en italien et en anglais. Vous le choisissez à la création de chaque projet.
+
+Peut-on relire à plusieurs le même document ?
+
+Oui. L'onglet Sync gère le travail à plusieurs. Il présente les conflits entre deux versions d'une même phrase, à arbitrer. Il liste les modifications d'un collègue, à intégrer. Il propose enfin de répercuter une correction sur les phrases identiques du document : c'est la propagation. L'équipe du projet se gère depuis le tableau de bord.
+
+Faut-il Microsoft Word pour relire ?
+
+Non. L'éditeur de relecture s'utilise directement dans Corrext. Si vous préférez Word, exportez le document depuis le tableau de bord (Export docx), relisez-le avec le complément Corrext, puis réimportez-le (Reimport docx). Le complément demande une connexion, l'appartenance au projet et Office 2021 ou Microsoft 365.
+
+Les termes que je fixe sont-ils respectés ?
+
+Oui. À la création du projet, Corrext extrait lui-même les termes candidats du document. Vous fixez leur traduction, ou vous ajoutez vos propres termes. Un terme fixé est repris tel quel dans la traduction automatique, que vous relisez ensuite dans l'éditeur.
+
+Quels formats de fichiers puis-je relire ?
+
+Ceux que vous déposez dans un projet : .pdf, .doc, .docx, .xls, .xlsx, .ppt et .pptx, jusqu'à 50 Mo par fichier. L'application conseille le format original plutôt que le PDF. Depuis le tableau de bord, le document relu s'exporte en Word, et sa mémoire se télécharge au format TMX, le format standard d'échange des mémoires de traduction.
+
+## Essayez l'éditeur de relecture sur vos propres documents
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/corrext/chnell/
+
+# Fast lookup CHnell. Chaque terme vérifié dans son contexte officiel
+
+CHnell aligne des segments source et cible tirés des sources officielles suisses (Fedlex, Feuille fédérale, administrations fédérales) et de vos propres ressources, dans 30 domaines du droit et de la finance. Accessible depuis toute traduction, d'un simple surlignage. Cherchez un terme ci-dessous.
+
+Demander une démo
+
+## Ce que fait Fast lookup CHnell, exactement
+
+Fast lookup CHnell est le concordancier bilingue de Corrext. Il recherche un mot, une expression ou un terme dans des segments alignés tirés des sources officielles suisses et de vos propres ressources, surligne le terme dans les deux langues et cite pour chaque occurrence son domaine et sa source. Tout ce qui suit a été observé dans l'application.
+
+### 1Chercher
+
+#### Recherche
+
+Un mot, une expression ou un terme, saisi dans le champ « Search for a word, an expression, a term » et lancé par le bouton Search. Le terme est surligné dans les deux langues des résultats.
+
+#### Paires de langues
+
+Allemand, français, italien et anglais, en source comme en cible, avec un bouton d'inversion et une croix d'effacement sur chaque sélecteur. Paire par défaut dans l'application : German → French.
+
+#### Opérateurs
+
+Guillemets "", signe - et or, rappelés sous le champ de recherche avec une icône d'information.
+
+### 2Lire les résultats
+
+#### Résultats
+
+Segments alignés source et cible, terme surligné, domaine en capitales, source citée sur chaque ligne, lien Show in context et bouton Show more results. Verzugszins : plus de 300 résultats ; Bankgeheimnis : plus de 400 résultats.
+
+### 3Depuis une traduction
+
+#### Fast Lookup contextuel
+
+Dans Traduction texte et document, surlignez un mot du texte source : le bouton Fast Lookup ouvre CHnell sur ce mot, en contexte, sans quitter la traduction.
+
+Trente domaines
+
+Banking & Finance Supervisory (FINMA) Fund Prospectuses Company Law Articles of Association M&A Accounting Contracts & GTCs Data Protection Real Estate Criminal Law Litigation & Enforcement Arbitration Employment & Social Ins. Private Insurance Family & Inheritance Patent Law Intellectual Property Tax & Customs Administrative Law Constitution & Publ. Internat. Law Migration Law Med & Pharma Telecom & Transports Environment Education Culture & Tourism Army & Military Legal Profession Trade Other
+
+## Trois situations où CHnell tranche
+
+Juristes-linguistes
+
+### Un seul terme sur 200 pages
+
+Avant de trancher entre deux traductions d'un même terme, cherchez-le dans CHnell : les segments alignés montrent l'usage officiel, dans la Feuille fédérale ou dans Fedlex, avec le domaine de chaque occurrence. La décision repose sur une source citée plutôt que sur une intuition.
+
+Avocats
+
+### Citer la Feuille fédérale dans un mémoire
+
+Recherchez l'expression allemande, lisez en regard la version française telle qu'elle a été publiée et ouvrez le contexte : vous reprenez la formulation officielle, avec sa source, sans la reconstituer de mémoire.
+
+Compliance
+
+### Le terme FINMA en trois langues
+
+Filtrez les domaines Supervisory (FINMA) ou Banking & Finance, cherchez le terme en allemand, puis changez la langue cible pour vérifier le français et l'italien : chaque résultat cite sa source.
+
+## Corrext, LexMachina, CHnell : qui fait quoi
+
+Vous travaillez dans Corrext. La traduction passe par LexMachina ou par le moteur tiers choisi. Le Fast Lookup ouvre CHnell, qui montre chaque terme dans son contexte officiel.
+
+## D'où viennent les segments que CHnell affiche ?
+
+De textes officiels suisses : Fedlex, la Feuille fédérale, les publications des administrations fédérales comme l'AFC ou fedpol, rassemblés dans les jeux de données Neur.on, plus de 15 millions de segments multilingues. S'y ajoutent les ressources propres de votre organisation, recherchées séparément des ressources partagées.
+
+### Source citée sur chaque segment
+
+Feuille fédérale, fedlex.admin.ch, estv.admin.ch, fedpol.admin.ch : la ligne de source accompagne chaque résultat.
+
+### Domaine attribué
+
+Chaque segment porte l'un des 30 domaines, de Banking & Finance à Trade, et se filtre par domaine.
+
+### Ressources propres distinctes des ressources partagées
+
+Le filtre Resource type sépare Own resources et Shared resources.
+
+LexMachina, le moteur entraîné sur ces données
+
+## Les autres outils de Corrext
+
+Traduction texte et document
+
+Texte ou fichier traduit en quelques secondes, moteur au choix, alternatives comparées, reformulation en cinq styles.
+
+En savoir plus Gestion de projet
+
+Projet en trois étapes, relecture interne ou externe en trois niveaux, devis et délai instantanés.
+
+En savoir plus Extraits du registre du commerce
+
+Traduction certifiée, notariée ou apostillée, commandée en ligne en quatre étapes.
+
+En savoir plus
+
+## Questions fréquentes sur Fast lookup CHnell
+
+Qu'est-ce qu'un concordancier bilingue ?
+
+Un outil qui affiche côte à côte un segment dans la langue source et sa traduction telle qu'elle a été publiée. CHnell surligne le terme recherché dans les deux langues et indique, pour chaque segment, son domaine et sa source, par exemple fedlex.admin.ch ou la Feuille fédérale. Vous voyez comment un terme est réellement traduit dans les textes officiels, pas seulement comment il pourrait l'être.
+
+Quelles sources alimentent CHnell ?
+
+Des textes officiels suisses : Fedlex (fedlex.admin.ch), la Feuille fédérale (Bundesblatt), les publications des administrations fédérales comme l'AFC (estv.admin.ch) et fedpol (fedpol.admin.ch), rassemblés dans les jeux de données Neur.on. S'y ajoutent les ressources propres de votre organisation, distinguées des ressources partagées.
+
+Quels domaines sont couverts ?
+
+Trente domaines, dont Banking & Finance, Supervisory (FINMA), Fund Prospectuses, Company Law, Articles of Association, M&A, Accounting, Contracts & GTCs, Data Protection, Real Estate, Criminal Law, Litigation & Enforcement, Arbitration, Employment & Social Ins., Tax & Customs, Administrative Law, Intellectual Property, Med & Pharma, Environment et Trade. Chaque segment porte son domaine et le filtre Domains permet d'en combiner plusieurs.
+
+Quels opérateurs de recherche sont disponibles ?
+
+Trois opérateurs, rappelés sous le champ de recherche : les guillemets "", le signe - et or. Ils s'utilisent comme dans les moteurs de recherche courants : expression exacte, exclusion d'un mot, alternative entre deux termes. La recherche porte sur un mot, une expression ou un terme et se lance avec le bouton Search.
+
+Puis-je ajouter mes propres ressources ?
+
+L'application distingue, dans le filtre Resource type, Own resources et Shared resources : les ressources propres à votre organisation sont recherchées séparément des jeux de données partagés. La mise en place de vos ressources se voit en démonstration, avec un expert Neur.on.
+
+Comment utiliser CHnell sans quitter une traduction ?
+
+Dans Traduction texte et document, surlignez un mot du texte source : un bouton Fast Lookup apparaît et ouvre CHnell sur ce mot, en contexte, avec les segments alignés, le domaine et la source de chaque occurrence. Vous revenez ensuite à votre traduction.
+
+## Essayez CHnell sur votre terminologie
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/corrext/extraits-registre-commerce/
+
+# Extraits du registre du commerce. Traduits en ligne
+
+Cherchez la société par nom ou par IDE, choisissez le niveau de certification, la livraison et le délai. La traduction est réalisée par des traducteurs juridiques spécialisés dans le corporate housekeeping, assistés de modèles entraînés sur les extraits du registre suisse, et la commande se fait entièrement en ligne.
+
+Commander un extrait Demander une démo
+
+## Commander en quatre étapes
+
+- 1 Find the company
+
+### Société et langue
+
+Recherche par nom de société ou par IDE, puis choix de la langue cible parmi plus de 30 langues.
+
+- 2 Select the certification level
+
+### Niveau de certification
+
+Standard Corrext Certification, Notarized Certification ou Notarized & Apostilled Certification, selon le destinataire.
+
+- 3 Choose the delivery method
+
+### Livraison
+
+Par e-mail (PDF), ou e-mail et exemplaire papier envoyé par poste ou par coursier. L'adresse postale est saisie à la commande.
+
+- 4 Set the delivery timeline
+
+### Délai
+
+Standard ou express, pour la Suisse et l'international. Le délai se choisit à la quatrième étape et s'affiche avant validation de la commande.
+
+## Quel niveau de certification pour quel usage ?
+
+En règle générale : pour un usage interne ou un tiers privé, la certification Corrext suffit ; les autorités et tribunaux suisses demandent une certification notariée ; les autorités étrangères d'un État partie à la Convention de La Haye exigent une certification notariée et apostillée. Dans tous les cas, l'autorité destinataire reste juge du niveau requis : vérifiez auprès d'elle avant de commander.
+
+Niveau 1
+
+### Standard Corrext Certification
+
+Ce qui est certifié
+
+Traduction accompagnée d'un certificat signé et tamponné par Corrext.
+
+En règle générale, pour
+
+usage interne, partenaires et tiers privés
+
+Niveau 2
+
+### Notarized Certification
+
+Ce qui est certifié
+
+Traduction certifiée authentifiée par un notaire suisse.
+
+En règle générale, pour
+
+autorités et tribunaux suisses
+
+Niveau 3
+
+### Notarized & Apostilled Certification
+
+Ce qui est certifié
+
+Certification notariée, puis apostille délivrée par la Chancellerie d'État selon la Convention de La Haye du 5 octobre 1961.
+
+En règle générale, pour
+
+autorités étrangères d'un État partie à la Convention
+
+Choisir le niveau dans le parcours de commande
+
+## Trois situations où l'extrait certifié est exigé
+
+Fiduciaires
+
+### Une filiale ou un compte à l'étranger
+
+En règle générale, l'autorité ou la banque étrangère exige l'extrait de la société suisse traduit dans sa langue, notarié et apostillé lorsque l'État est partie à la Convention de La Haye. Le niveau Notarized & Apostilled Certification se commande en ligne, avec l'exemplaire papier envoyé par poste ou par coursier.
+
+Directions juridiques
+
+### Une due diligence à l'étranger
+
+Un extrait certifié en anglais, ou dans la langue de la contrepartie, accompagne le plus souvent le dossier. Selon le destinataire, la certification Corrext suffit ou une certification notariée est demandée : le niveau se choisit à la deuxième étape, sans changer de prestataire.
+
+Banques
+
+### Documenter une société pour l'étranger
+
+Lors d'un KYC mené par un établissement ou un correspondant à l'étranger, l'extrait suisse doit en règle générale être fourni traduit et certifié. Le niveau requis dépend de la contrepartie : certification Corrext pour un tiers privé, notariée ou apostillée si une autorité intervient.
+
+## Qui traduit, et où
+
+### Qui traduit
+
+Des traducteurs juridiques professionnels spécialisés dans le corporate housekeeping, assistés des modèles de langage que l'équipe Corrext de juristes-linguistes et de data scientists a entraînés sur les extraits du registre du commerce suisse.
+
+### Confidentialité
+
+Infrastructure suisse certifiée ISO 27001. Traitement conforme à la LPD suisse et au RGPD.
+
+## Les autres outils de Corrext
+
+Traduction texte et document
+
+Traduction instantanée de textes et de fichiers, alternatives attribuées à leur moteur, reformulation en cinq styles.
+
+En savoir plus Gestion de projet
+
+Projet en trois étapes, relecture interne ou externe en trois niveaux, devis et délai instantanés.
+
+En savoir plus Fast lookup CHnell
+
+Le concordancier du droit suisse : sources officielles, 30 domaines, vos propres ressources.
+
+En savoir plus
+
+## Questions fréquentes sur les extraits certifiés
+
+Qu'est-ce qu'une apostille ?
+
+L'apostille est la formalité prévue par la Convention de La Haye du 5 octobre 1961 : elle authentifie la signature du notaire qui a certifié la traduction, pour que le document soit reconnu dans les autres États parties à la Convention. Sur auszug-hr.ch, elle est délivrée par la Chancellerie d'État dans le niveau Notarized & Apostilled Certification.
+
+Quel niveau de certification une autorité étrangère demande-t-elle ?
+
+Cela dépend de l'autorité et du pays. En règle générale, une autorité d'un État partie à la Convention de La Haye demande une traduction notariée et apostillée ; une autorité suisse se contente le plus souvent d'une certification notariée ; un usage interne ou un tiers privé accepte souvent la certification Corrext. Vérifiez auprès de l'autorité destinataire avant de commander : c'est elle qui fixe l'exigence.
+
+Combien de temps prend une traduction certifiée ?
+
+Le délai dépend du niveau de certification, de la langue cible et de l'option retenue : standard ou express, pour la Suisse ou l'international. Il se choisit à la quatrième étape de la commande et s'affiche avant validation. Une certification notariée ou apostillée ajoute le passage par le notaire, puis par la Chancellerie d'État.
+
+Dans quelles langues l'extrait peut-il être traduit ?
+
+Plus de 30 langues cibles. À la première étape, le sélecteur propose l'allemand, le français, l'italien, l'anglais et l'espagnol en tête de liste, puis les autres langues disponibles sur la plateforme.
+
+Le service fait-il partie de Corrext ?
+
+Oui. auszug-hr.ch est le service en ligne de Corrext dédié aux extraits du registre du commerce, accessible aussi depuis l'accueil de la plateforme. Les traductions sont réalisées par des traducteurs juridiques spécialisés dans le corporate housekeeping, assistés des modèles de langage que l'équipe Corrext de juristes-linguistes et de data scientists a entraînés sur les extraits du registre du commerce suisse.
+
+Comment commander une traduction certifiée d'extrait ?
+
+En quatre étapes, entièrement en ligne sur auszug-hr.ch : recherchez la société par nom ou par IDE et choisissez la langue cible ; sélectionnez le niveau de certification ; choisissez la livraison, par e-mail ou avec un exemplaire papier par poste ou coursier ; fixez le délai, standard ou express, pour la Suisse ou l'international. Validez ensuite avec Order a translation, ou contactez l'équipe via Contact us.
+
+## Un extrait à traduire et certifier ?
+
+Commander un extrait Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/corrext/plugin-word/
+
+# Plugin Word. Relisez dans Word, avec le panneau Corrext
+
+Le plugin Word affiche le panneau Corrext à côté de votre document. Vous y retrouvez les fonctions de l'éditeur de relecture : mémoire de traduction, Fast Lookup dans CHnell, alternatives par moteur. Le plugin s'installe sur votre poste.
+
+Demander une démo
+
+## Les fonctions de l'éditeur de relecture, dans Word
+
+Vous exportez le document de votre projet Corrext, puis vous le relisez dans Word. Le panneau reprend les fonctions de l'éditeur de relecture. Une fois la relecture terminée, vous réimportez le fichier dans le projet.
+
+Relire
+
+### Segments
+
+Source et cible côte à côte, segment par segment. Un segment, c'est une phrase ou un titre.
+
+Vérifier
+
+### Mémoire de traduction
+
+Corrext affiche les traductions déjà validées les plus proches du segment choisi. Un clic sur Apply les reprend dans la traduction.
+
+Vérifier
+
+### Fast Lookup et CHnell
+
+Recherche en direct dans vos mémoires et dans CHnell, côté source ou côté cible. Chaque résultat est bilingue, avec son document d'origine.
+
+Assistant IA
+
+### Alternatives par moteur
+
+La même phrase traduite par plusieurs moteurs, côte à côte : LexMachina et les moteurs tiers autorisés par votre organisation. D'autres alternatives sur demande.
+
+Assistant IA
+
+### Harmonisation des termes
+
+L'assistant IA détecte un changement de terme. Il propose de l'harmoniser dans tout le document.
+
+Relire
+
+### Confirmation et progression
+
+Une case par segment confirme sa relecture. La progression du document s'affiche en pourcentage.
+
+Voir l'éditeur de relecture
+
+## Installé sur votre poste, relié à votre projet
+
+Le plugin Word est un complément installé sur le poste de l'utilisateur. Ce n'est pas un complément de la boutique Microsoft. Il s'ouvre sur un document exporté de votre projet Corrext. Il faut être membre du projet et disposer de Word 2021 ou de Microsoft 365.
+
+- 01
+
+### Export docx
+
+Dans le tableau de bord du projet, exportez le fichier à relire.
+
+- 02
+
+### Bouton Corrext
+
+Ouvrez le fichier dans Word. Le bouton Corrext du ruban affiche le panneau Corrext editor.
+
+- 03
+
+### Relecture
+
+Relisez avec les onglets AI Assistant, Fast Lookup, Matches et Sync. Connectez-vous si le panneau le demande.
+
+- 04
+
+### Reimport docx
+
+Enregistrez le document, puis réimportez-le dans le projet.
+
+## Les mêmes garanties que Corrext
+
+Le plugin travaille sur un projet Corrext. Les règles de confidentialité du projet s'appliquent dans Word aussi.
+
+### Hébergé en Suisse
+
+Vos projets sont conservés sur les serveurs suisses de Corrext, chez Infomaniak.
+
+### Mode Highly sensitive
+
+Stockage et traitement uniquement en Suisse, aucune réutilisation en mémoire. Vous le choisissez à la création du projet.
+
+### Accès réservé
+
+Connexion requise, réservé aux membres du projet.
+
+### ISO 27001
+
+Certification obtenue en février 2024.
+
+Sécurité et souveraineté des données
+
+## Les autres outils de Corrext
+
+Éditeur de relecture
+
+Relisez la traduction du projet phrase par phrase ; vos corrections nourrissent votre mémoire.
+
+En savoir plus Gestion de projet
+
+Projet en trois étapes, relecture interne ou externe en trois niveaux, devis et délai instantanés.
+
+En savoir plus Traduction texte et document
+
+Texte ou fichier traduit instantanément, alternatives par moteur, PDF vers Word, réécriture en cinq styles.
+
+En savoir plus
+
+## Questions fréquentes sur le plugin Word
+
+Le plugin Word est-il un complément de la boutique Microsoft ?
+
+Non. Le plugin Word est installé sur le poste de l'utilisateur. Il ne passe pas par la boutique des compléments Microsoft.
+
+Que faut-il pour utiliser le plugin Word ?
+
+Word 2021 ou Microsoft 365, et un accès au projet Corrext : il faut en être membre. Le panneau demande une connexion.
+
+Le plugin a-t-il les mêmes fonctions que l'éditeur de relecture ?
+
+Oui. Le panneau reprend la mémoire de traduction, Fast Lookup dans CHnell, les alternatives par moteur et l'assistant IA. Vous confirmez chaque segment, et la progression du document s'affiche. L'onglet Sync sert à relire à plusieurs.
+
+Quels documents peut-on relire dans Word ?
+
+Un document exporté d'un projet Corrext avec Export docx. Un fichier issu de la traduction rapide est refusé. Après la relecture, vous réimportez le fichier dans le projet avec Reimport docx.
+
+## Voyez le plugin Word sur vos propres documents
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/corrext/api-on-premises/
+
+# API et on-premises. Intégrer le moteur là où le travail se fait déjà
+
+Vos juristes ne devraient pas changer d'outil pour traduire. Le moteur entraîné sur le droit suisse s'appelle depuis votre gestion documentaire, votre intranet ou votre propre produit, et se déploie dans votre infrastructure quand vos règles internes l'exigent.
+
+Cadrer une intégration
+
+## Trois façons d'intégrer Neur.on à votre système d'information
+
+Gestion documentaire
+
+### Traduire depuis le DMS
+
+Un document déposé dans votre gestion documentaire part à la traduction depuis son propre écran, et la version cible revient à côté de l'original, dans la même arborescence et sous les mêmes droits. Vos juristes ne quittent pas l'outil dans lequel ils classent déjà leurs dossiers, et aucune copie ne part vers un service en ligne non gouverné.
+
+Intranet
+
+### Un service de traduction pour tous
+
+La traduction devient une brique de votre portail : un formulaire interne, une page de dépôt, un bouton dans un workflow de validation. Les équipes qui n'ouvriront jamais une plateforme de traduction y ont accès depuis l'endroit où elles travaillent, avec le périmètre de langues et de moteurs que vous avez décidé.
+
+LegalTechs et éditeurs
+
+### Le moteur dans votre produit
+
+Vous éditez une solution juridique et vos clients suisses demandent la traduction de leurs contenus. Plutôt que d'entraîner un moteur, vous appelez le nôtre depuis votre produit : la fonction est à vous, l'infrastructure et la terminologie suisse sont les nôtres. Le périmètre et la marque affichée se définissent contractuellement.
+
+## Un appel, les mêmes réglages que dans l'interface
+
+Ce qui se choisit à l'écran dans Corrext se choisit aussi dans un appel : la langue source, la langue cible, le moteur et le domaine juridique. C'est ce qui permet à une intégration de respecter la même gouvernance que l'interface, au lieu de créer un canal parallèle sans règles.
+
+- Langue source et langue cible, parmi les langues de la plateforme
+
+- Choix du moteur, donc choix du lieu de traitement
+
+- Domaine juridique, pour la terminologie attendue
+
+- Texte ou fichier, selon ce que votre système envoie
+
+Demander le contrat d'interface
+
+Illustration, pas documentation. Les chemins, les noms de champs et l'authentification réels sont définis dans le contrat d'interface remis lors du cadrage.
+
+## Ce qui est disponible, et sous quelle forme
+
+Tout ce qui suit est disponible aujourd'hui. Les outils s'utilisent dans l'application web dès l'ouverture d'un compte ; l'API, le déploiement on-premises et la synchronisation des droits se mettent en place avec votre DSI. Chaque ligne précise sous quelle forme.
+
+Capacité | Ce que c'est | Sous quelle forme
+
+API REST | Appel du moteur depuis vos propres systèmes, avec les mêmes réglages qu'en interface. | Disponible aujourd'hui Contrat d'interface, authentification et périmètre fixés au cadrage ; documentation technique transmise sur demande.
+
+Déploiement on-premises | Installation dans votre infrastructure, pour les environnements dans lesquels rien ne doit sortir de votre réseau. | Disponible aujourd'hui Fourni dans le cadre d'un projet d'intégration, après étude d'architecture et de dimensionnement.
+
+Droits d'accès synchronisés | Reprise de vos droits SharePoint et Active Directory, pour que chacun retrouve le périmètre qu'il a déjà chez vous. | Disponible aujourd'hui Fourni dans le cadre d'un projet d'intégration ; ce n'est pas un réglage libre-service de l'interface web.
+
+Livraison des traducteurs | Les traducteurs juridiques et les agences travaillent dans leurs outils, Trados ou memoQ, et livrent dans la chaîne du projet. | Disponible aujourd'hui Chaîne de production des projets avec relecture externe, sans intervention de votre part.
+
+Collaboration dans Word | La relecture d'un document traduit se fait dans l'outil de rédaction de vos équipes plutôt que dans une interface de plus. | Disponible aujourd'hui Avec le complément Corrext pour Word, présenté sur la page Plugin Word.
+
+Les quatre outils de la plateforme | Traduction texte et document, Gestion de projet, Fast lookup CHnell et les extraits du registre du commerce certifiés. | Disponible aujourd'hui Disponibles aujourd'hui dans l'application web, dès l'ouverture d'un compte.
+
+Choix du moteur | LexMachina, DeepL Pro, Azure OpenAI GPT et Claude, sélectionnés à chaque envoi et gouvernés par la politique de votre organisation. | Disponible aujourd'hui Disponible aujourd'hui dans l'application web.
+
+Souveraineté, dans les deux cas
+
+Stockage sur des serveurs suisses en toutes circonstances ; traitement exclusivement en Suisse avec LexMachina ou en mode Highly sensitive content. En on-premises, le périmètre est celui de votre propre infrastructure.
+
+## La documentation de l'API, sur demande
+
+La documentation technique de l'API vous est transmise sur demande, avec le contrat d'interface.
+
+Demander la documentation API
+
+## Ce que nous avons besoin de savoir avant de cadrer une intégration
+
+Une intégration se dimensionne sur des faits, pas sur une intention. Cinq réponses suffisent à dire si le sujet relève d'un appel d'API en quelques jours, d'un connecteur à écrire, ou d'un déploiement dans votre infrastructure. Vous pouvez les préparer avant le premier échange : nous partons de là, et nous vous disons ce qui est réaliste.
+
+Nous transmettre ces éléments
+
+- 1
+
+### Volumes
+
+Combien de pages ou de documents par mois, avec quelles pointes, et pour combien d'utilisateurs ?
+
+- 2
+
+### Formats
+
+Que produisent réellement vos systèmes : des fichiers bureautiques, des PDF scannés, du texte brut ?
+
+- 3
+
+### Langues
+
+Quelles paires, dans quelles proportions, et avec quelle part de langues hors des quatre natives ?
+
+- 4
+
+### Niveau de confidentialité
+
+Vos règles internes imposent-elles le mode Highly sensitive content, un moteur suisse, ou un déploiement dans votre réseau ?
+
+- 5
+
+### Systèmes existants
+
+Quel DMS, quel annuaire, quel portail, et qui les exploite chez vous ou chez votre prestataire ?
+
+## Les autres pages de la plateforme
+
+Traduction texte et document
+
+L'outil du quotidien : texte, fichiers, PDF vers Word, réécriture.
+
+En savoir plus Langues et formats
+
+30 langues, quatre natives, sept formats bureautiques et leurs limites.
+
+En savoir plus Sécurité et souveraineté
+
+Stockage, traitement, moteurs et gouvernance, expliqués sans détour.
+
+En savoir plus
+
+## Questions fréquentes sur l'API et le on-premises
+
+Proposez-vous une API pour intégrer la traduction dans nos outils ?
+
+Oui, une API REST permet d'appeler le moteur depuis vos propres systèmes : gestion documentaire, intranet, workflow métier. Nous ne publions pas de documentation technique en accès libre : le contrat d'interface, l'authentification et le périmètre des appels se fixent au moment du cadrage, avec votre DSI et notre équipe technique.
+
+Peut-on déployer la solution dans notre propre infrastructure ?
+
+Un déploiement on-premises est possible pour les environnements les plus sensibles, c'est-à-dire lorsque vos règles internes imposent que rien ne sorte de votre réseau. C'est un projet d'intégration à part entière, cadré avec votre DSI : architecture, dimensionnement, mises à jour et exploitation sont définis avant tout engagement.
+
+Nos droits d'accès peuvent-ils être repris de SharePoint ou d'Active Directory ?
+
+C'est possible dans le cadre d'un projet d'intégration : les droits d'accès peuvent être synchronisés avec votre annuaire et vos espaces documentaires, pour que chacun retrouve dans Corrext le périmètre qu'il a déjà chez vous. Cette synchronisation n'est pas un réglage libre-service de l'interface web : elle se met en place avec votre DSI.
+
+Peut-on intégrer le moteur dans notre propre produit, en marque blanche ?
+
+C'est le cas d'usage des LegalTechs et des éditeurs juridiques : la traduction devient une fonction de votre produit, appelée par API, sans que vos utilisateurs changent d'outil. Le périmètre fonctionnel, la marque affichée et les conditions se définissent contractuellement lors du cadrage.
+
+Où les données sont-elles traitées lors d'un appel à l'API ?
+
+Les mêmes règles qu'en interface s'appliquent : le stockage a lieu sur des serveurs suisses dans tous les cas. Le traitement est exclusivement suisse avec LexMachina ou en mode Highly sensitive content, disponible pour l'anglais, le français, l'italien et l'allemand. Les moteurs tiers, DeepL Pro, Azure OpenAI GPT et Claude, sont hébergés à l'étranger et déclenchent l'avis de pseudonymisation défini par votre organisation. En déploiement on-premises, le périmètre de traitement est celui de votre propre infrastructure.
+
+## Cadrons votre intégration
+
+Cadrer une intégration
+
+---
+
+Source : https://neur-on.ai/fr/lexmachina/
+
+# LexMachina. Le moteur qui connaît les lois qu'il traduit
+
+Un moteur de traduction neuronale entraîné sur la donnée juridique et financière suisse : plus de 15 millions de segments multilingues tirés des arrêts du Tribunal fédéral, des publications de la FINMA et des codes.
+
+Demander une démo
+
+## La différence se joue sur le terme officiel
+
+Un texte financier, traduit de l'anglais vers le français. Regardez les termes du droit suisse, pas le style.
+
+Impôt anticipé · LIA Assujetti · art. 3 LFINMA
+
+Ce qu'il faut regarder | LexMachina | IA généraliste
+
+L'impôt sur le dividende | impôt anticipé officiel le nom de l'impôt suisse, loi fédérale sur l'impôt anticipé (LIA) | retenue à la source désignation générique
+
+Le statut de la banque | assujetti officiel le terme de l'art. 3 LFINMA | établissement soumis à surveillance périphrase descriptive
+
+Entraîné sur les textes suisses, LexMachina reprend le terme qui fait foi, là où un moteur généraliste le décrit.
+
+Comparer les moteurs sur vos textes dans la démo
+
+Sur cet exemple
+
+- Sorties réelles des deux moteurs, reproduites mot pour mot, relevées le 16 octobre 2026.
+
+- Impôt anticipé et assujetti : termes de la loi fédérale sur l'impôt anticipé et de l'art. 3 LFINMA, vérifiés dans CHnell.
+
+- Les sorties d'un moteur varient d'une génération à l'autre : jugez sur vos propres textes, pas sur un exemple choisi.
+
+## Ce qu'est LexMachina, exactement
+
+Un moteur de traduction spécialisé, développé en Suisse, disponible dans Corrext au même titre que les moteurs du marché.
+
+- 15 M+
+
+segments d'entraînement
+
+ATF/BGE, FINMA, codes et lois fédérales. Jamais les documents des clients.
+
+- 4
+
+langues natives
+
+Allemand, français, italien et anglais, dans toutes les paires.
+
+- CH
+
+exécuté en Suisse
+
+Même hors du mode Highly sensitive content.
+
+- 4
+
+alternatives par phrase
+
+Chacune attribuée à son moteur.
+
+- Les matières
+
+CO · contrats LB · banque FINMA LDIP · arbitrage Sociétés Fiscalité Procédure
+
+- Dans Corrext, au choix à chaque envoi
+
+Traduction de texte Traduction de fichiers Projets de traduction
+
+- Les autres moteurs restent là
+
+DeepL Pro Azure OpenAI GPT Claude
+
+## Pourquoi un modèle spécialisé plutôt qu'un modèle généraliste
+
+Non parce qu'il serait « meilleur » dans l'absolu, mais parce que le droit suisse a une propriété rare : il est déjà publié dans quatre langues, et cette matière s'apprend.
+
+La terminologie officielle existe déjà
+
+La Confédération publie ses lois en allemand, en français et en italien, et une large part de ses textes en anglais. Un modèle entraîné sur ces corpus ne cherche pas un équivalent plausible : il reprend celui qui fait foi. « Verzugszins » devient « intérêt moratoire », le terme des textes fédéraux.
+
+Les références légales ont une structure
+
+« Art. 104 al. 1 CO » s'écrit « Art. 104 Abs. 1 OR » en allemand et « Art. 104 para. 1 CO » en anglais ; LDIP devient IPRG puis PILA. Un modèle qui a vu des millions de ces correspondances les restitue sous leur forme officielle au lieu de traduire l'abréviation mot à mot.
+
+La cohérence tient sur la longueur
+
+Sur un contrat de 60 pages, une notion doit porter le même nom de la première à la dernière page. C'est le rôle d'un vocabulaire appris sur des corpus cohérents, et celui du panneau Alternatives, qui vous laisse arrêter une formulation et vous y tenir ensuite.
+
+## Pour aller plus loin
+
+Traduction texte et document
+
+Essayez le moteur sur de vrais articles de loi et comparez les alternatives, dans la démo.
+
+Découvrir l'outil Sécurité et souveraineté
+
+Où va votre document selon le mode et le moteur retenus, sans arrondi.
+
+Voir la page Fast lookup CHnell
+
+Le concordancier du droit suisse : sources officielles, 30 domaines, vos propres ressources.
+
+Découvrir l'outil
+
+## Questions fréquentes sur LexMachina
+
+Sur quoi LexMachina est-il entraîné ?
+
+Sur la donnée juridique et financière suisse : plus de 15 millions de segments multilingues issus des arrêts du Tribunal fédéral (ATF/BGE), des publications de la FINMA et des codes et lois fédérales. Jamais sur les documents de nos clients.
+
+Quelles langues LexMachina couvre-t-il ?
+
+L'allemand, le français, l'italien et l'anglais, en natif et dans toutes les paires : les quatre langues dans lesquelles le droit suisse s'écrit et se plaide. La plateforme Corrext propose 30 langues au total ; au-delà de ces quatre, la traduction passe par un moteur tiers.
+
+Où le modèle s'exécute-t-il ?
+
+En Suisse, sur l'infrastructure suisse de Neur.on. Choisir LexMachina suffit à garder le traitement en Suisse, même sans activer le mode Highly sensitive content, et aucun avis de pseudonymisation ne s'affiche puisque rien ne part à l'étranger.
+
+Mes documents servent-ils à entraîner le modèle ?
+
+Non. LexMachina apprend de corpus juridiques et financiers suisses publics, pas de vos dossiers. En mode Standard, vos projets alimentent une mémoire de traduction utilisable exclusivement par votre organisation ; en mode Highly sensitive content, aucune mémoire n'est alimentée.
+
+Puis-je utiliser d'autres moteurs que LexMachina ?
+
+Oui. Corrext est model-agnostic : DeepL Pro, Azure OpenAI GPT et Claude sont disponibles dans la même interface, et le moteur se choisit à chaque envoi. Les moteurs hébergés à l'étranger déclenchent l'avis Attorney-Client privilege de votre organisation.
+
+Comment comparer les moteurs sur mes propres textes ?
+
+Dans Traduction texte et document, le bouton étincelle ouvre le panneau Alternatives : jusqu'à quatre propositions pour la même phrase, chacune attribuée à son moteur, avec Generate more pour en obtenir d'autres. Vous jugez sur vos textes plutôt que sur une promesse.
+
+## Testez LexMachina sur vos propres textes
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/securite-souverainete/
+
+# Souveraineté des données. Où va votre document, exactement, et qui peut le lire
+
+« Hébergé en Europe » ne dit rien à un avocat tenu au secret professionnel, ni à une banque soumise à l'art. 47 LB. Voici, mode par mode et moteur par moteur, où votre document est stocké, où il est traité, et ce qu'il en reste après.
+
+Demander une démo
+
+## Ce qui expose un document confidentiel
+
+- Outil générique
+
+### Un outil en ligne qui traite le texte hors de Suisse
+
+Un outil de traduction générique traite les données chez un opérateur étranger. Le paragraphe qu'on y colle quitte le périmètre national.
+
+- Droit américain
+
+### Le CLOUD Act suit le prestataire, pas le serveur
+
+Le US CLOUD Act vise les fournisseurs soumis à la juridiction américaine, quel que soit le pays où ils stockent les données. Un hébergement en Suisse chez un tel fournisseur n'y change rien.
+
+- Secret professionnel
+
+### Un secret qui interdit d'exposer le dossier
+
+Le secret de l'avocat et le secret bancaire sont protégés pénalement. Avant d'envoyer une pièce couverte, il faut savoir où le texte sera traité.
+
+## Où va votre document, selon votre choix
+
+Corrext vous laisse choisir un mode de confidentialité et un moteur de traduction. Les deux décisions n'ont pas les mêmes conséquences, et les voici sans arrondi : ce tableau reprend ce que l'application affiche et applique.
+
+Texte affiché par Corrext, en anglais, dès qu'un moteur tiers est sélectionné dans Traduction texte et document.
+
+### Les trois modes, comparés point par point
+
+Mode Highly sensitive content | Mode Standard avec LexMachina | Mode Standard avec un moteur tiers (DeepL Pro, Azure OpenAI GPT, Claude)
+
+Stockage du projet et des fichiers | Serveurs suisses de Corrext | Serveurs suisses de Corrext | Serveurs suisses de Corrext
+
+Traitement du texte par le moteur | Exclusivement en Suisse | En Suisse : le moteur y est exécuté | Hors de Suisse : moteur hébergé à l'étranger
+
+Réutilisation en mémoire de traduction | Aucune | Oui, comme mémoire utilisable exclusivement par vous | Oui, comme mémoire utilisable exclusivement par vous
+
+Avertissement affiché avant l'envoi | Aucun : rien ne quitte la Suisse | Aucun : rien ne quitte la Suisse | Attorney-Client privilege notice
+
+Langues disponibles | EN, FR, IT et DE | Allemand, français, italien, anglais | Jusqu'à 30 langues sur la plateforme
+
+Votre politique s'applique au moment du choix, pas dans une charte oubliée
+
+Demander une démo
+
+## Ce que Neur.on garantit, précisément
+
+Une garantie utile se vérifie : une entité, une infrastructure, une certification, un texte de loi. Voici la liste que votre équipe sécurité peut confronter à son questionnaire, ligne par ligne.
+
+### Entité suisse
+
+Neur.on AI Solutions SA, Place de la Gare 15, 1700 Fribourg. Une société de droit suisse, établie en Suisse, votre interlocuteur contractuel direct.
+
+### Hors CLOUD Act
+
+Société suisse, infrastructure suisse : le stockage de vos projets ne relève pas du US CLOUD Act. Le texte que vous envoyez vous-même à un moteur tiers relève, lui, du droit applicable à ce fournisseur.
+
+### Infrastructure
+
+Hébergement chez Infomaniak, en Suisse. Vos projets et vos fichiers y sont stockés, quel que soit le moteur retenu.
+
+### ISO 27001
+
+Système de management de la sécurité de l'information certifié ISO 27001 depuis février 2024. Le certificat et le périmètre sont remis sur demande, pour votre dossier fournisseur.
+
+### nLPD et RGPD
+
+Traitements conformes à la loi fédérale sur la protection des données et au règlement européen, avec les accords de traitement correspondants.
+
+### Aucun entraînement sur vos contenus
+
+LexMachina apprend de corpus juridiques et financiers suisses publics, jamais de vos dossiers. Vos documents ne deviennent pas la matière première d'un modèle.
+
+### Mémoire privée
+
+En mode Standard, vos projets alimentent une mémoire de traduction utilisable exclusivement par votre organisation, jamais partagée. En mode Highly sensitive content, aucune mémoire n'est alimentée.
+
+### Droits d'accès
+
+Droits granulaires synchronisés avec SharePoint et Active Directory : chacun accède aux projets et aux documents qui le concernent, et à eux seuls.
+
+### On-premises
+
+Corrext peut être déployé dans votre propre environnement quand votre politique de sécurité ou votre régulateur l'exige.
+
+### API REST
+
+La traduction s'appelle depuis votre DMS, votre intranet ou vos workflows, sans que vos utilisateurs aient à sortir de leurs outils.
+
+## Trois régimes de confidentialité, trois manières d'utiliser Corrext
+
+La pièce reste en Suisse
+
+Une pièce de procédure identifie le client dès la première ligne : la pseudonymiser coûte plus cher que de la traduire. Mode Highly sensitive content ou moteur LexMachina, et la question ne se pose plus : stockage et traitement restent en Suisse, et rien n'alimente de mémoire en mode sensible.
+
+Une règle pénalement sanctionnée
+
+La révélation d'un secret confié à un établissement est pénalement sanctionnée par l'art. 47 LB, et la FINMA attend une maîtrise documentée de la chaîne de traitement. Le mode sensible donne à l'auditeur une réponse en trois lignes : un pays, une entité, une certification.
+
+Des documents publics avant l'heure
+
+Un projet de loi, un rapport ou une décision avant publication ne peut pas transiter par un service dont on ignore le pays de traitement. Corrext permet de le traduire en allemand, en français, en italien ou en anglais sans qu'il quitte le territoire, et de tracer qui y a eu accès.
+
+## Pour aller plus loin
+
+LexMachina
+
+Le moteur entraîné sur le droit et la finance suisses, hébergé et exécuté en Suisse.
+
+En savoir plus Gestion de projet
+
+Le mode de confidentialité se choisit à la création du projet, avant tout dépôt de fichier.
+
+En savoir plus Traduction texte et document
+
+L'interrupteur Highly sensitive content et le choix du moteur, dans l'outil du quotidien.
+
+En savoir plus
+
+## Des faits que vous pouvez vérifier
+
+L'essentiel pour votre dossier fournisseur.
+
+- ISO 27001 Sécurité de l'information certifiée depuis février 2024 Certification
+
+- Infomaniak Projets et mémoires hébergés en Suisse Hébergement
+
+- Traitement en Suisse Avec le moteur LexMachina ou le mode Highly sensitive content Lieu de traitement
+
+- nLPD et RGPD Droit suisse et européen de la protection des données Conformité
+
+- Stockage hors US CLOUD Act Société suisse, infrastructure suisse Juridiction
+
+## Questions fréquentes sur la sécurité et la souveraineté
+
+Où sont hébergées mes données ?
+
+Sur des serveurs suisses. Corrext s'appuie sur l'infrastructure d'Infomaniak, en Suisse. Les projets et les fichiers que vous déposez y sont stockés, quel que soit le mode de confidentialité et le moteur de traduction choisis.
+
+Mes données sont-elles traitées en Suisse ?
+
+Le stockage l'est dans tous les cas. Le traitement l'est exclusivement lorsque le mode Highly sensitive content est activé, ou lorsque vous traduisez avec LexMachina. En mode Standard avec un moteur tiers, le texte est traité par un moteur hébergé à l'étranger : l'application vous en avertit avant l'envoi.
+
+Puis-je utiliser DeepL ou ChatGPT pour un dossier couvert par le secret professionnel ?
+
+Corrext ne vous l'interdit pas techniquement : il applique la politique de votre organisation au moment où vous choisissez le moteur. L'avis Attorney-Client privilege s'affiche alors et rappelle que seuls des documents entièrement pseudonymisés peuvent être confiés à un moteur hébergé à l'étranger, et que leur usage est strictement interdit pour les dossiers sensibles ou à enjeu financier. Pour une pièce couverte par le secret professionnel, le choix sûr est LexMachina ou le mode Highly sensitive content.
+
+Mes documents servent-ils à entraîner un modèle ?
+
+Non. LexMachina est entraîné sur des corpus juridiques et financiers suisses publics, pas sur vos dossiers. En mode Standard, vos projets alimentent une mémoire de traduction utilisable exclusivement par vous, selon la définition affichée par Corrext ; en mode Highly sensitive content, aucune mémoire n'est alimentée.
+
+Que devient un projet Highly sensitive ?
+
+Il est stocké et traité exclusivement en Suisse, et son contenu traduit n'est pas réutilisé dans les mémoires de traduction des projets suivants. Le mode est disponible pour l'anglais, le français, l'italien et l'allemand. Il se règle par un interrupteur dans Traduction texte et document et se choisit à la création d'un projet de traduction.
+
+Neur.on est-il soumis au CLOUD Act ?
+
+Non. Neur.on AI Solutions SA est une société suisse établie à Fribourg, et les données sont hébergées en Suisse sur une infrastructure suisse : le US CLOUD Act, qui vise les fournisseurs soumis à la juridiction américaine, ne s'y applique pas. Si vous choisissez vous-même un moteur tiers hébergé à l'étranger, le texte que vous lui envoyez relève en revanche du droit applicable à ce fournisseur.
+
+Un déploiement sur nos propres serveurs est-il possible ?
+
+Oui. Corrext peut être déployé on-premises, dans votre propre environnement, quand votre politique de sécurité ou votre régulateur l'exige. Une API REST permet par ailleurs d'appeler la traduction depuis votre DMS, votre intranet ou vos workflows existants. Le choix dépend de votre infrastructure et de vos obligations : c'est une discussion à avoir lors de la démo.
+
+## Faites examiner ce document par votre équipe sécurité
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/langues-et-formats/
+
+# Langues et formats. Ce que Corrext accepte, et ce qu'il vous rend
+
+La page de référence, sans approximation : les quatre langues natives et les trente de la plateforme, les formats bureautiques acceptés, les limites de taille et de caractères, et ce que devient la mise en page de votre document.
+
+Demander une démo
+
+## Quatre langues natives, celles dans lesquelles la Suisse écrit son droit
+
+Natif veut dire ici : entraîné sur la donnée juridique et financière suisse dans cette langue, plus de 15 millions de segments, et disponible dans le mode le plus protecteur de la plateforme.
+
+Allemand German · DE
+
+Langue officielle de la Confédération et première langue du marché suisse. Allemand standard suisse : « ss » et jamais « ß ».
+
+Français French · FR
+
+Langue officielle de la Confédération. Terminologie romande et fédérale, vérifiable en contexte dans CHnell.
+
+Italien Italian · IT
+
+Langue officielle de la Confédération. Les textes de loi fédéraux font foi dans les trois langues officielles, l'italien compris.
+
+Anglais English · EN
+
+Langue de travail des dossiers transfrontaliers, de l'arbitrage international et de la documentation financière.
+
+Les trente langues disponibles sur la plateforme
+
+Le sélecteur de langue cible de Corrext compte trente-deux entrées pour trente langues distinctes : le chinois et le portugais y figurent chacun en deux variantes. Les libellés de l'application sont en anglais ; ils sont rappelés ici sous chaque langue.
+
+- ArabeArabic
+
+- BulgareBulgarian
+
+- Chinois simplifiéChinese (Simplified)
+
+- Chinois traditionnelChinese (Traditional)
+
+- CoréenKorean
+
+- DanoisDanish
+
+- EspagnolSpanish
+
+- EstonienEstonian
+
+- FinnoisFinnish
+
+- GrecGreek
+
+- HongroisHungarian
+
+- IndonésienIndonesian
+
+- JaponaisJapanese
+
+- LettonLatvian
+
+- LituanienLithuanian
+
+- NéerlandaisDutch
+
+- Norvégien bokmålNorwegian Bokmål
+
+- PolonaisPolish
+
+- Portugais du BrésilPortuguese (Brazil)
+
+- Portugais du PortugalPortuguese (Portugal)
+
+- RoumainRomanian
+
+- RusseRussian
+
+- SlovaqueSlovak
+
+- SlovèneSlovenian
+
+- SuédoisSwedish
+
+- TchèqueCzech
+
+- TurcTurkish
+
+- UkrainienUkrainian
+
+## Pourquoi traduire en Suisse n'est pas traduire en allemand, en français ou en italien
+
+Le droit fédéral est publié dans les trois langues officielles sur Fedlex, et les trois versions font foi. Traduire un texte juridique suisse ne consiste donc pas à inventer une formulation : il s'agit de retrouver celle qui existe déjà dans l'autre langue officielle. À cela s'ajoutent des conventions d'écriture qui trahissent immédiatement une traduction faite ailleurs.
+
+### Allemand standard suisse
+
+Le « ß » n'existe pas : on écrit « ss » dans tous les cas, « Strasse » et non « Straße ».
+
+### Séparateur des milliers
+
+L'usage courant en Suisse écrit 15'000 avec une apostrophe, et non 15.000. Les textes fédéraux emploient une espace (15 000), et leur traduction anglaise une virgule (15,000).
+
+### Textes de loi trilingues
+
+Fedlex publie le droit fédéral en allemand, en français et en italien : la version cible existe, il faut la citer, pas la retraduire.
+
+### La même loi, trois sigles officiels
+
+Citer une loi suisse avec le sigle d'une autre langue est l'erreur la plus visible dans une traduction juridique. Voici cinq textes parmi les plus cités, avec leur abréviation dans chacune des trois langues officielles.
+
+Texte de loi | Français | Allemand | Italien
+
+Code des obligations | CO | OR | CO
+
+Code civil | CC | ZGB | CC
+
+Loi sur les banques | LB | BankG | LBCR
+
+Loi fédérale sur le droit international privé | LDIP | IPRG | LDIP
+
+Loi sur la poursuite pour dettes et la faillite | LP | SchKG | LEF
+
+Sigles officiels tels que publiés sur Fedlex
+
+Vérifier un terme dans les sources officielles
+
+## Les formats acceptés, et leurs limites
+
+Corrext traite les formats bureautiques du travail juridique quotidien : sept types de fichiers, du PDF au PowerPoint, dans Traduction texte et document comme dans le tunnel Gestion de projet.
+
+7 Formats
+
+.pdf, .doc, .docx, .xls, .xlsx, .ppt et .pptx, dans File translation comme à l'étape File overview d'un projet.
+
+25 Fichiers
+
+Jusqu'à 25 fichiers par envoi, déposés d'un coup ou glissés dans la zone de dépôt.
+
+50 Mo
+
+50 Mo par fichier. Un document plus lourd se scinde, ou passe par un projet de traduction.
+
+10'000
+
+10'000 caractères au maximum en traduction de texte, 5'000 caractères en réécriture. Un compteur affiche la position en temps réel.
+
+### La mise en page revient comme elle est partie
+
+Un contrat de cent pages avec ses articles numérotés, un tableau de covenants, un jeu de slides pour un comité : la traduction est rendue dans le format d'origine, structure comprise. Vous ne remettez pas en page après coup.
+
+- Le document cible garde le format et la structure du document source
+
+- Tableaux, listes numérotées et sections restent en place
+
+- Un PDF scanné passe d'abord par PDF to Word pour redevenir un document éditable
+
+- C'est pour cette raison que le format original vaut toujours mieux qu'un PDF
+
+Voir l'outil de traduction de fichiers
+
+### Format original conseillé
+
+L'application recommande de déposer le format d'origine quand il existe, un .docx ou un .xlsx plutôt que le PDF qui en est issu : le texte est lu directement, sans passer par une reconnaissance de caractères.
+
+### PDF, y compris scanné
+
+Le PDF est accepté, scan compris. L'onglet PDF to Word le convertit en document Word éditable, avant traduction ou pour le travail interne. Sur cet onglet, l'interrupteur Highly sensitive content est grisé : la conversion ne traduit pas.
+
+### Ce qui est analysé
+
+Dans un projet, chaque fichier déposé affiche son nombre de pages standard, sa langue détectée et sa catégorie juridique détectée, toutes deux modifiables avant de continuer.
+
+## Pour aller plus loin
+
+Traduction texte et document
+
+Déposez vos fichiers, choisissez le moteur, comparez les alternatives.
+
+En savoir plus Sécurité et souveraineté
+
+Où vos données sont stockées, où elles sont traitées, et par quel moteur.
+
+En savoir plus Niveaux de qualité
+
+De la traduction machine à la certification : quel niveau pour quel document.
+
+En savoir plus
+
+## Questions fréquentes sur les langues et les formats
+
+Quelles langues sont natives dans Corrext ?
+
+Quatre : l'allemand, le français, l'italien et l'anglais, toutes paires. Ce sont les langues sur lesquelles LexMachina, le moteur suisse, a été entraîné à partir de plus de 15 millions de segments juridiques et financiers, et ce sont les seules disponibles en mode Highly sensitive content. Les trois premières sont les langues officielles de la Confédération, dans lesquelles le droit fédéral est publié.
+
+Combien de fichiers puis-je envoyer d'un coup ?
+
+Jusqu'à 25 fichiers par envoi dans File translation et dans PDF to Word. Dans un projet de traduction, les fichiers se déposent à l'étape File overview, où chacun affiche son nombre de pages standard, sa langue détectée et sa catégorie juridique détectée.
+
+Quelle est la taille maximale d'un fichier ?
+
+50 Mo par fichier. Pour le texte collé directement dans l'outil, la limite est de 10'000 caractères en traduction de texte et de 5'000 caractères en réécriture. Au-delà, il faut passer par l'envoi de fichiers ou par un projet de traduction.
+
+Mon PDF scanné est-il accepté ?
+
+Oui. Le format .pdf est accepté, y compris scanné, et l'onglet PDF to Word convertit un PDF en document Word éditable avant traduction ou pour le travail interne. Quand le fichier bureautique d'origine existe, l'application recommande toutefois de le déposer plutôt que sa version PDF : le résultat est meilleur et la mise en page plus fidèle.
+
+La mise en page est-elle conservée ?
+
+Oui. La traduction est rendue dans le format d'origine : un .docx revient en .docx, un .xlsx en .xlsx, un .pptx en .pptx, avec la structure du document. C'est la raison pour laquelle l'application conseille de déposer le format original plutôt qu'un PDF produit à partir de lui.
+
+Toutes les langues sont-elles disponibles en mode Highly sensitive content ?
+
+Non. Le mode Highly sensitive content, qui impose un stockage et un traitement exclusivement en Suisse et interdit la réutilisation du contenu en mémoire de traduction, est disponible pour l'anglais, le français, l'italien et l'allemand. Les autres langues de la plateforme restent accessibles en confidentialité standard : le stockage est suisse dans tous les cas, mais le traitement dépend du moteur choisi.
+
+## Vos langues, vos formats, vos documents
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/niveaux-de-qualite/
+
+# Quatre niveaux de qualité. Choisissez la finition document par document
+
+On ne paie pas la certification pour des pièces qu'on veut seulement comprendre, et on ne remet pas une traduction machine à une autorité. Dans Corrext, le niveau de finition se décide fichier par fichier, avec le délai et le devis affichés avant la commande.
+
+Demander une démo
+
+## Du document qu'on lit à celui qu'on dépose devant une autorité
+
+Chaque niveau ajoute une intervention humaine, un délai et un coût. Le bon niveau est le plus bas qui répond à l'usage réel du document.
+
+Intervention humaine, délai et coût
+
+Niveau 1
+
+### Traduction machine
+
+Comprendre et travailler vite
+
+Qui
+
+Le moteur seul
+
+Où
+
+Traduction texte et document
+
+Niveau 2
+
+### Post-édition
+
+Un texte fidèle, ou prêt pour des tiers
+
+Qui
+
+Un traducteur juridique
+
+Où
+
+Gestion de projet
+
+Niveau 3
+
+### Relecture juridique
+
+Un document publié ou déposé
+
+Qui
+
+Deux traducteurs juridiques, certificat signé
+
+Où
+
+Gestion de projet
+
+Niveau 4
+
+### Certification et apostille
+
+Un dossier destiné à une autorité
+
+Qui
+
+Un notaire suisse, puis la Chancellerie d'État
+
+Où
+
+Extraits du registre
+
+Devis et délai
+
+### Le prix et la date, avant de commander
+
+Calculés à partir du nombre de pages standard, de la catégorie juridique détectée, du niveau retenu et de la date d'échéance, et affichés avant la commande. Le détail distingue la préparation, la relecture interne et la relecture externe.
+
+Confidentialité
+
+### Stocké en Suisse, dans tous les cas
+
+Stockage sur les serveurs suisses de Corrext dans tous les cas, quel que soit le niveau. En mode Highly sensitive content, stockage et traitement exclusivement en Suisse, sans réutilisation en mémoire de traduction.
+
+## Les trois niveaux de relecture externe, dans les termes de l'application
+
+Voici le texte exact affiché par Corrext à l'étape Quotes d'un projet de traduction, suivi de ce qu'il signifie concrètement.
+
+Light review (Legal translator)
+
+The output of the machine translation is reviewed by a translator to correct any significant errors, omissions or mistranslations. The result is a complete and semantically accurate translation of the document, recommended for understanding and internal transmission.
+
+Un traducteur juridique reprend la traduction automatique et corrige les erreurs significatives, les omissions et les contresens. Vous obtenez un texte complet et fidèle au sens, recommandé pour comprendre un dossier et le faire circuler en interne. Le style n'est pas retravaillé.
+
+Full review (Legal translator)
+
+The output of the machine translation is reviewed by a translator, adapted and modified, with additional focus on consistency, idiomatic wording, style and tone. This ensures a good legal translation of your documents, ready to be shared with third parties.
+
+Le même traducteur juridique va plus loin : cohérence terminologique d'un bout à l'autre, tournures idiomatiques, style et ton. C'est le niveau attendu dès qu'un document sort de votre organisation, vers un confrère, une contrepartie ou un client.
+
+Double review & certified translation
+
+Full review of the documents by two qualified legal translators. A certificate signed by the specialized translation agency in charge of the project attests to the accuracy and impartiality of the translation. Suitable for documents intended for legal use, publication, or submission to authorities.
+
+Deux traducteurs juridiques qualifiés relisent intégralement le document, et l'agence spécialisée en charge du projet signe un certificat attestant l'exactitude et l'impartialité de la traduction. C'est le niveau des documents destinés à un usage légal, à la publication ou à une autorité.
+
+## Quel niveau pour quel document
+
+Ce tableau donne la règle générale, celle qui convient dans la grande majorité des cas. Le niveau réellement exigé dépend toujours du destinataire : pour un document officiel, c'est l'autorité destinataire qui fixe l'exigence, et il vaut la peine de la vérifier auprès d'elle avant de commander.
+
+Type de document | Niveau recommandé | Qui relit | Dans quel outil de Corrext
+
+Pièces de procédure à lire en interne | 1Traduction machine | Personne Vous lisez la sortie du moteur | Traduction texte et document File translation, jusqu'à 25 fichiers
+
+Correspondance courante avec un confrère ou un client | 2Light review | Un traducteur juridique Ou votre équipe, en Internal review | Gestion de projet Étape Quotes, relecture au choix
+
+Contrat destiné à un tiers | 2Full review | Un traducteur juridique Cohérence, style et ton repris | Gestion de projet Relecture externe
+
+Rapport annuel ou document publié | 3Double review | Deux traducteurs juridiques Agence spécialisée, certificat signé | Gestion de projet Double review et traduction certifiée
+
+Document destiné à une autorité suisse | 3 ou 4Selon l'autorité | Agence spécialisée Notaire suisse si l'autorité l'exige | Gestion de projet Extraits du registre pour un extrait
+
+Document destiné à une autorité étrangère | 4Certification et apostille | Agence, notaire, Chancellerie Convention de La Haye du 5 octobre 1961 | Extraits du registre Autres documents : à cadrer en projet
+
+## Pour aller plus loin
+
+Traduction texte et document
+
+Le niveau 1 en libre-service : texte, fichiers, PDF vers Word, réécriture.
+
+En savoir plus Gestion de projet
+
+Les niveaux 2 et 3 : relecture interne ou externe, devis et délai instantanés.
+
+En savoir plus Extraits du registre
+
+Le niveau 4 en ligne : certification Corrext, notariée ou apostillée.
+
+En savoir plus
+
+## Questions fréquentes sur les niveaux de qualité
+
+Quelle différence entre post-édition et relecture juridique ?
+
+La post-édition est la reprise de la traduction automatique par un traducteur juridique : en Light review, les erreurs significatives, omissions et contresens sont corrigés ; en Full review, le texte est en plus adapté pour la cohérence, les tournures idiomatiques, le style et le ton. La relecture juridique du niveau 3 correspond à la Double review et traduction certifiée : le document est relu intégralement par deux traducteurs juridiques qualifiés d'une agence spécialisée, qui délivre un certificat signé attestant l'exactitude et l'impartialité de la traduction.
+
+Qu'est-ce qu'une traduction certifiée en Suisse ?
+
+C'est une traduction accompagnée d'un certificat signé qui atteste son exactitude et son impartialité. Dans Corrext, ce certificat est délivré par l'agence spécialisée en charge du projet, au niveau Double review et traduction certifiée. Selon le destinataire, le certificat doit ensuite être authentifié par un notaire suisse, puis muni d'une apostille de la Chancellerie d'État au titre de la Convention de La Haye du 5 octobre 1961. Les exigences varient d'une autorité et d'un canton à l'autre : l'autorité destinataire reste juge du niveau requis.
+
+Puis-je changer de niveau en cours de projet ?
+
+Le niveau se choisit fichier par fichier à l'étape Quotes de Gestion de projet, avant de générer le devis : vous pouvez comparer les niveaux et les délais autant de fois que nécessaire tant que le devis n'est pas généré. Une fois le projet lancé, un changement de niveau se traite avec l'équipe, puisqu'il engage un relecteur externe et une nouvelle estimation de délai.
+
+Qui sont les relecteurs ?
+
+Pour la Light review et la Full review, un traducteur juridique. Pour la Double review et traduction certifiée, une agence de traduction spécialisée qui mobilise deux traducteurs juridiques qualifiés et signe le certificat. Pour les extraits du registre du commerce, des traducteurs juridiques spécialisés dans le corporate housekeeping. Et si vous choisissez l'Internal review, ce sont vos propres équipes, dont le travail est valorisé dans le devis.
+
+Combien de temps prend chaque niveau ?
+
+Le délai dépend du nombre de pages standard, de la catégorie juridique détectée, du niveau de relecture et de la date d'échéance souhaitée. Corrext l'affiche dans le devis, avant toute commande, en distinguant la préparation, la relecture interne et la relecture externe. Le niveau 1, la traduction machine seule, est immédiat dans Traduction texte et document.
+
+Puis-je faire relire par mes propres équipes ?
+
+Oui. L'Internal review confie la relecture à votre organisation : vous indiquez le nombre de pages standard concernées, le prix par page standard facturé par votre équipe et son prix horaire approximatif, et Corrext valorise ce travail dans le devis à côté du temps de relecture estimé. C'est la façon de comparer, sur des chiffres, une relecture interne et une relecture externe.
+
+## Hésitez sur le niveau ? Prenons vos documents réels
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/tarifs/
+
+# Tarifs. Une offre construite sur vos volumes, vos langues et votre niveau de relecture
+
+Un environnement suisse pour traduire, relire et vérifier vos documents juridiques et financiers, adapté à chaque métier du droit et de la finance.
+
+Demander une démo Essayer la démo en direct
+
+Démo sur mesure · essai encadré · hébergement en Suisse
+
+## Une offre pour chaque organisation
+
+Pour les cabinets
+
+### Cabinets d'avocats
+
+Pièces, contrats et mémoires traduits dans un environnement suisse, avec une relecture juridique commandée dans le même écran.
+
+Demander une démo Voir la solution
+
+Pour la banque et la finance
+
+### Banques et finance
+
+Circulaires FINMA, prospectus de fonds et rapports annuels traduits avec les termes des textes officiels, en gardant la main sur le lieu de traitement.
+
+Demander une démo Voir la solution
+
+Pour les directions juridiques
+
+### Directions juridiques et Legal Ops
+
+La demande, la relecture et les ressources linguistiques réunies dans un seul environnement, hébergé en Suisse.
+
+Demander une démo Voir la solution
+
+Pour le secteur public
+
+### Autorités et administration
+
+Décisions, rapports et dossiers dans les langues officielles, avec la terminologie des textes publiés et un traitement qui reste en Suisse.
+
+Demander une démo Voir la solution
+
+Pour les fiduciaires
+
+### Fiduciaires et conseil
+
+Statuts, extraits du registre, rapports d'audit : toute la chaîne, de la lecture rapide à la traduction certifiée ou apostillée.
+
+Demander une démo Voir la solution
+
+Pour les intégrateurs
+
+### LegalTechs et éditeurs
+
+LexMachina et le concordancier CHnell intégrés à votre produit, avec un traitement qui peut rester en Suisse.
+
+Demander une démo Voir la solution
+
+## Ce que réunit la plateforme
+
+Corrext
+
+L'outil de traduction assistée par ordinateur que vous utilisez : traduction de textes et de fichiers, relecture, gestion de projet, plugin Word et extraits certifiés du registre du commerce.
+
+LexMachina
+
+Le moteur de traduction neuronale de Neur.on, entraîné sur plus de 15 millions de segments juridiques et financiers suisses.
+
+CHnell
+
+Le concordancier bilingue de Corrext : plus de 20 000 documents officiels alignés (Feuille fédérale, Fedlex, FINMA, administrations), dans 30 domaines.
+
+Hébergement suisse et ISO 27001
+
+Stockage en Suisse chez Infomaniak, certification ISO 27001, deux modes de confidentialité : Standard et Highly sensitive content.
+
+## Comment obtenir votre offre
+
+Votre offre se construit sur vos volumes, vos langues et votre niveau de relecture, à partir de la façon dont vos traductions circulent aujourd'hui.
+
+- 01
+
+### Un échange de cadrage
+
+Vos langues, vos types de documents, vos contraintes de confidentialité et la façon dont vos traductions circulent aujourd'hui.
+
+- 02
+
+### Une démonstration sur vos documents
+
+Corrext ouvert sur des pièces représentatives de votre pratique, avec le moteur, le mode et la terminologie qui correspondent à votre cas.
+
+- 03
+
+### Un essai encadré
+
+Si l'outil correspond, un essai avec un périmètre, des utilisateurs et une durée définis ensemble.
+
+## Selon vos besoins
+
+Quatre niveaux de qualité
+
+Du moteur seul à la certification et à l'apostille : le bon niveau est le plus bas qui répond à l'usage réel du document.
+
+En savoir plus Extraits du registre du commerce
+
+Traduction certifiée, notariée ou apostillée, commandée entièrement en ligne.
+
+En savoir plus API et on-premises
+
+Intégration à vos DMS, intranets et workflows, cadrée avec votre DSI avant tout engagement.
+
+En savoir plus
+
+## Questions fréquentes sur les tarifs
+
+Comment obtenir une offre ?
+
+Par un échange de cadrage, puis une démonstration sur vos documents. Votre offre se construit ensuite sur vos volumes, vos langues et votre niveau de relecture.
+
+Existe-t-il un essai gratuit en libre-service ?
+
+L'essai existe, mais il est encadré et il suit la démonstration : un périmètre, des utilisateurs et une durée définis ensemble. Pour un premier aperçu, la démo en direct de Traduction texte et document s'essaie sans inscription.
+
+Dans quelles langues travaillez-vous ?
+
+Quatre langues natives, celles dans lesquelles la Suisse écrit son droit : allemand, français, italien et anglais. Trente langues sont disponibles sur la plateforme.
+
+Mes données restent-elles en Suisse ?
+
+Vos projets et vos fichiers sont stockés en Suisse chez Infomaniak, quel que soit le moteur retenu. Avec LexMachina ou en mode Highly sensitive content, le traitement reste aussi en Suisse.
+
+L'API et l'on-premises font-ils partie de l'offre ?
+
+Ils se cadrent à part : c'est un projet d'intégration à part entière, défini avec votre DSI (architecture, dimensionnement, mises à jour et exploitation) avant tout engagement.
+
+## Prêt à essayer ? Démo sur mesure, puis essai encadré
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/solutions/
+
+# Solutions. Le même socle suisse, adapté à votre métier
+
+Un cabinet d'avocats, une banque et une autorité cantonale ne traduisent ni les mêmes documents, ni pour les mêmes raisons. Voici ce que Corrext change pour chacun, avec les mêmes garanties de confidentialité.
+
+Demander une démo
+
+## Par métier
+
+Cabinets d'avocats
+
+Traduire vite des pièces confidentielles, sans sortir le dossier de Suisse.
+
+Banques et finance
+
+Secret bancaire, exigences FINMA et rapports multilingues, sans transfert hors de Suisse.
+
+Directions juridiques
+
+Reprendre le contrôle d'un processus de traduction dispersé, avec des devis lisibles.
+
+Autorités et administration
+
+Le quadrilinguisme institutionnel, avec des données qui ne quittent pas la Suisse.
+
+Fiduciaires et conseil
+
+Statuts, extraits, rapports et documents fiscaux, avec certification quand elle est exigée.
+
+LegalTechs et éditeurs
+
+Intégrer un moteur juridique suisse dans votre produit, par API ou en marque blanche.
+
+## Explorer autrement
+
+Par domaine du droit
+
+Douze domaines, leur terminologie et leurs textes de référence
+
+Par comparaison
+
+Corrext face à DeepL, aux LLM généralistes et à l'agence externe
+
+Par outil
+
+Les quatre outils de la plateforme, démonstration à l'appui
+
+## Voyez Corrext sur les documents de votre métier
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/traduction/
+
+# Traduction juridique et financière. Par domaine du droit et par paire de langues
+
+Le vocabulaire d'un prospectus de fonds n'est pas celui d'une sentence arbitrale, et l'allemand juridique suisse n'est pas l'allemand de Berlin. Chaque page ci-dessous donne la terminologie officielle, les textes de référence et la façon dont Corrext les traite.
+
+Demander une démo
+
+## Par domaine du droit et de la finance
+
+Contrats
+
+Baux, CGV, contrats de prêt : le vocabulaire du Code des obligations.
+
+Droit des sociétés
+
+Statuts, procès-verbaux, extraits du registre : le vocabulaire des sociétés.
+
+Fusions et acquisitions
+
+Data room, contrat de fusion, closing : traduire vite et sans fuite.
+
+Contentieux et arbitrage
+
+Mémoires, pièces, sentences : traduire ce qui sera lu par un juge.
+
+Banque et finance
+
+Contrats de crédit, prospectus, documentation de fonds : le lexique bancaire.
+
+Compliance et FINMA
+
+Directives internes, rapports, correspondance avec l'autorité de surveillance.
+
+Rapports annuels
+
+Rapport de gestion, comptes annuels, annexe : traduire la clôture.
+
+Fiscalité
+
+Décisions de taxation, réclamations, échanges avec l'administration fiscale.
+
+Assurance
+
+Conditions générales, polices, déclarations de sinistre : le vocabulaire LCA.
+
+Propriété intellectuelle
+
+Brevets, marques, droit d'auteur : traduire des titres opposables.
+
+Droit du travail
+
+Contrats de travail, règlements, certificats : le vocabulaire du CO et de la LTr.
+
+Droit pénal
+
+Ordonnances pénales, actes d'accusation, entraide : traduire une procédure.
+
+## Par paire de langues
+
+Allemand vers français
+
+L'allemand juridique suisse vers le français, sans détour par Berlin.
+
+En savoir plus Français vers allemand
+
+Le français juridique suisse vers l'allemand lu à Zurich, Berne ou Coire.
+
+En savoir plus Allemand vers anglais
+
+Le droit suisse en allemand, rendu lisible pour un lecteur de common law.
+
+En savoir plus Anglais vers allemand
+
+Des contrats rédigés en anglais, à faire atterrir dans le droit suisse.
+
+En savoir plus Français vers anglais
+
+Le droit suisse romand rendu lisible dans un dossier international.
+
+En savoir plus Italien vers français
+
+L'italien juridique suisse, distinct de celui d'Italie, rendu en français.
+
+En savoir plus
+
+## Votre domaine n'est pas dans la liste ?
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/comparatif/
+
+# Comparatifs. Ce que les autres solutions font bien, et ce que Corrext ajoute
+
+Trois comparaisons écrites pour des juristes qui liront la ligne qui les intéresse et vérifieront le reste. Nous nommons ce que DeepL Pro, les LLM généralistes et les agences de traduction réussissent, puis nous disons précisément où se situe la différence : le lieu de traitement des données, la terminologie du droit suisse et la chaîne de relecture.
+
+Demander une démo
+
+## Trois comparaisons, trois questions différentes
+
+La première porte sur un moteur de traduction, la deuxième sur un assistant de rédaction, la troisième sur un modèle de travail. Elles ne se répondent pas de la même manière.
+
+Corrext et DeepL
+
+DeepL Pro est un excellent moteur de traduction générique : rapide, fluide, à l'aise sur les documents Office et les PDF. Il reste disponible dans Corrext. Ce qui change, c'est le cadre autour de lui.
+
+Lire le comparatif Corrext et les IA génératives
+
+ChatGPT, Azure OpenAI GPT et Claude reformulent, résument et expliquent un passage juridique avec une aisance qu'aucun moteur de traduction classique n'atteint. Le problème n'est pas là : il est dans ce qu'ils ne peuvent pas prouver.
+
+Lire le comparatif Agence de traduction ou plateforme
+
+Une agence de traduction juridique apporte ce qu'aucun logiciel ne remplace : une responsabilité contractuelle, un traducteur nommé, une certification. Corrext ne cherche pas à la remplacer. Le tunnel projet commande justement cette relecture externe.
+
+Lire le comparatif
+
+## Notre méthode de comparaison
+
+Ces pages sont écrites par Neur.on, éditeur de Corrext. Nous ne prétendons donc pas être neutres : nous nous imposons d'être vérifiables. Chaque ligne de chaque tableau porte sur un critère que vous pouvez contrôler vous-même, dans les deux outils, sans nous croire sur parole.
+
+Où vos données sont stockées et traitées Ce qu'est LexMachina, et ce qu'il n'est pas
+
+Ce que nous comparons
+
+Le lieu de stockage et le lieu de traitement des données, l'existence d'un avertissement avant l'envoi d'un document, la terminologie du droit suisse consultable en contexte, la gestion des références légales suisses, la possibilité de comparer plusieurs moteurs, la relecture humaine commandée dans l'outil, le devis et le délai, la traduction certifiée, les formats et le déploiement.
+
+Ce que nous ne comparons pas
+
+Les prix : ils dépendent de votre volume, de vos langues et de votre niveau de relecture, et une grille comparée n'aurait aucun sens hors contexte. La vitesse brute : tous les moteurs cités traduisent en quelques secondes, l'écart ne décide de rien. La qualité « en général » : elle ne se mesure pas sur une phrase.
+
+Ce que nous affirmons des autres
+
+Uniquement ce qui est public et stable à la date de vérification : la nature générique d'un moteur, la localisation de son infrastructure, l'absence d'une chaîne de relecture juridique intégrée, l'absence d'un concordancier de droit suisse sourcé.
+
+Quand un point nous a paru incertain, nous l'avons nuancé plutôt que tranché.
+
+Ce que nous affirmons de Corrext
+
+Uniquement ce qui a été observé dans l'application. Les fonctions non vues dans l'interface ne sont pas promises sur ce site.
+
+Vérité produit relevée dans Corrext.
+
+Les exemples de traduction
+
+Ce sont des sorties réelles, récoltées dans Corrext ou directement dans l'outil comparé, à une date donnée, sur des articles de loi suisses publics. Elles illustrent une différence, elles ne mesurent rien : une autre génération, un autre jour, donnerait un autre résultat.
+
+Aucun écart de performance chiffré n'est avancé sur ces pages.
+
+Dernière vérification
+
+Septembre 2026. Ces pages sont reprises à chaque évolution significative de Corrext ou des solutions comparées.
+
+## Les trois comparatifs, en un tableau
+
+Chaque case reprend le tableau détaillé de la page concernée. « Non comparé » signale un critère que ce comparatif ne traite pas.
+
+DeepL Pro seul | IA générative seule | Agence externe seule | Corrext
+
+Mise en route | Immédiate | Immédiate | ½Devis, bon de commande, planification | Immédiate pour traduire ; relecture commandée en quelques clics
+
+Stockage et traitement des documents | Hors de Suisse | Hors de Suisse | ½Selon le canal : courriel, portail, sous-traitants | Stockage en Suisse ; traitement en Suisse avec LexMachina ou en mode Highly sensitive
+
+Terminologie du droit suisse | ½Glossaires que vous constituez vous-même | Aucune source affichée | ½Glossaire transmis, appliqué par le traducteur | CHnell : segments alignés, 30 domaines, sources officielles
+
+Plusieurs moteurs sur la même phrase | Un seul moteur | Un seul modèle | Non comparé | Jusqu'à quatre alternatives, chacune attribuée à son moteur
+
+Qualité sur un document engageant | Pas de relecture commandée | Pas de relecture commandée | C'est son métier | Light, Full ou Double review par un traducteur juridique ou une agence certifiée
+
+Traduction certifiée, notariée ou apostillée | Non | Non | Oui | Double review certifiée ; extraits du registre du commerce jusqu'à l'apostille
+
+Disponible et observé ½Partiel ou dépendant de l'offre Absent
+
+Tableau complet face à DeepL Tableau complet face aux IA génératives Tableau complet agence ou plateforme
+
+Comparaison établie à la date de mise en ligne de cette page, à partir des informations publiques des éditeurs et de nos observations dans Corrext. Les produits comparés évoluent : seule leur documentation officielle fait foi.
+
+## Pour aller plus loin
+
+Traduction texte et document
+
+Traduire un texte ou un lot de fichiers, comparer les moteurs, vérifier un terme en contexte.
+
+Découvrir l'outil Gestion de projet
+
+Relecture interne ou externe en trois niveaux, devis et délai calculés dans l'outil.
+
+Découvrir l'outil Sécurité et souveraineté
+
+Stockage suisse, mode Highly sensitive, ISO 27001, gouvernance des moteurs tiers.
+
+Voir la page
+
+## Questions fréquentes sur ces comparatifs
+
+Ces comparatifs sont-ils neutres ?
+
+Non, et nous préférons le dire : ils sont écrits par Neur.on, éditeur de Corrext. C'est précisément pourquoi ils s'en tiennent à des critères vérifiables par vous-même : lieu de stockage et de traitement des données, terminologie du droit suisse en contexte, gestion des références légales, présence d'une chaîne de relecture, d'un devis et d'une certification. Nous ne comparons ni les prix ni la vitesse brute.
+
+Corrext peut-il utiliser DeepL Pro, Azure OpenAI GPT ou Claude ?
+
+Oui. Ces moteurs sont disponibles dans Corrext, aux côtés de LexMachina, et se choisissent à chaque envoi. Comme ils sont hébergés à l'étranger, leur sélection déclenche l'avis Attorney-Client privilege de votre organisation, qui exige une pseudonymisation complète du document. Notre proposition n'est donc pas de renoncer à ces moteurs, mais de les utiliser dans un cadre qui protège votre secret professionnel.
+
+Sur quoi reposent ces comparaisons ?
+
+Tout ce que nous affirmons de Corrext a été observé dans l'application. Ce que nous affirmons des autres solutions se limite à ce qui est public et stable. Les exemples de traduction sont des sorties réelles et ponctuelles, jamais des mesures statistiques.
+
+## La meilleure comparaison se fait sur vos documents
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/comparatif/deepl-traduction-juridique/
+
+# Corrext et DeepL. Le même moteur, dans un cadre qui protège le secret professionnel
+
+DeepL Pro est un très bon moteur de traduction générique, et il est disponible dans Corrext. Cette page ne cherche pas à vous en détourner : elle dit ce qu'il fait bien, puis où se situe exactement la différence pour un dossier juridique suisse.
+
+Demander une démo
+
+## La réponse courte
+
+Oui, DeepL Pro peut traduire un texte juridique : c'est un moteur rapide et fluide.
+
+Dans Corrext, il reste disponible, mais sous la gouvernance de votre organisation. La différence ne tient pas à la fluidité : elle tient au lieu de traitement des données, à la terminologie du droit suisse et à la chaîne de relecture.
+
+Le lieu de traitement, décidé par vous
+
+Stockage sur des serveurs suisses dans tous les cas ; traitement exclusivement en Suisse avec LexMachina ou en mode Highly sensitive content, en allemand, français, italien et anglais.
+
+La terminologie suisse, sourcée
+
+Le concordancier CHnell montre le terme dans des segments alignés tirés de la Feuille fédérale, de fedlex.admin.ch ou d'autres sources officielles, avec son domaine.
+
+La suite du travail
+
+Alternatives comparées par moteur, relecture Light, Full ou Double review commandée dans l'outil, devis et délai, traduction certifiée, notariée ou apostillée.
+
+## Ce que DeepL Pro fait bien
+
+Il serait malhonnête de prétendre le contraire : DeepL Pro est l'un des meilleurs moteurs de traduction généralistes du marché, et beaucoup de juristes l'utilisent tous les jours avec profit.
+
+La fluidité
+
+Ses sorties se lisent naturellement, y compris sur des phrases longues et subordonnées, ce qui est le quotidien d'un texte de loi ou d'un contrat.
+
+Les formats
+
+Il traduit des documents Office et des PDF en conservant l'essentiel de la mise en page, ce qui évite de reconstruire un document à la main.
+
+Les glossaires
+
+Il permet de définir ses propres paires de termes pour imposer une traduction constante d'un mot précis d'un document à l'autre.
+
+Un engagement public sur les données
+
+DeepL indique que les textes de ses clients Pro sont supprimés après traduction et ne servent pas à entraîner ses modèles. Nous n'avons aucune raison d'en douter.
+
+## Onze critères, vérifiables des deux côtés
+
+Ce que nous affirmons de DeepL Pro se limite à ce qui est public et stable : un moteur de traduction générique, une infrastructure située hors de Suisse, pas de chaîne de relecture juridique intégrée, pas de concordancier de droit suisse sourcé. Sur tout le reste, DeepL Pro fait ce qu'il annonce, et bien.
+
+DeepL Pro seul | Corrextqui peut utiliser DeepL Pro
+
+Confidentialité
+
+Lieu de stockage des documents | Hors de Suisse | Serveurs suisses, dans tous les cas
+
+Lieu de traitement du texte | Hors de Suisse | Exclusivement en Suisse avec LexMachina ou en mode Highly sensitive ; hors de Suisse si vous choisissez DeepL Pro
+
+Avertissement avant l'envoi d'un document | Aucun | Avis Attorney-Client privilege affiché au choix du moteur
+
+Déploiement on-premises | ½Selon l'offre entreprise | Possible, avec API REST pour le DMS et les workflows
+
+Qualité juridique
+
+Terminologie du droit suisse en contexte | ½Glossaires que vous constituez vous-même | CHnell : segments alignés, 30 domaines, sources officielles
+
+Références légales suisses (art. 104 CO, art. 47 LB, art. 186 LDIP) | ½Moteur générique, à vérifier au cas par cas | LexMachina entraîné sur le droit suisse, vérification en un clic dans CHnell
+
+Comparaison de plusieurs moteurs sur la même phrase | Un seul moteur | Jusqu'à quatre alternatives, chacune attribuée à son moteur
+
+Relecture et livraison
+
+Relecture humaine commandée dans l'outil | Non | Light review, Full review, Double review, en interne ou en externe
+
+Devis et délai avant de lancer | Non | Calculés dans l'outil, d'après les pages standard et la catégorie juridique détectée
+
+Traduction certifiée, notariée ou apostillée | Non | Double review certifiée ; extraits du registre du commerce jusqu'à l'apostille
+
+Formats et mise en page conservés | Oui, documents Office et PDF | Oui, jusqu'à 25 fichiers de 50 Mo, format d'origine, plus PDF vers Word
+
+Disponible et observé ½Partiel ou dépendant de l'offre Absent
+
+Comparaison établie à la date de mise en ligne de cette page, à partir des informations publiques des éditeurs et de nos observations dans Corrext. Les produits comparés évoluent : seule leur documentation officielle fait foi.
+
+## Un exemple, sur un article de la loi sur les banques
+
+Une phrase de droit bancaire, traduite du français vers l'allemand dans Corrext. Les deux sorties ci-dessous ont été récoltées le même jour, dans le même panneau d'alternatives.
+
+Beaufsichtigte · art. 3 LFINMA
+
+Ce qu'il faut regarder | LexMachina | DeepL Pro
+
+« établissement assujetti » | beaufsichtigte officiel le terme de l'art. 3 LFINMA | unterstellte rendu descriptif
+
+La référence légale | Artikel 47 BankG l'abréviation allemande de la loi sur les banques | Art. 47 BankG l'abréviation allemande de la loi sur les banques
+
+Les deux sorties citent l'art. 47 BankG ; seul LexMachina reprend le terme de la loi sur la surveillance des marchés financiers.
+
+Comparer les moteurs sur vos textes dans la démo
+
+- Sorties réelles obtenues dans Corrext, sur cette phrase précise, en français vers l'allemand, dans le panneau Alternatives.
+
+- Beaufsichtigte : terme de l'art. 3 LFINMA, vérifié dans CHnell et sur Fedlex.
+
+- Il s'agit d'un exemple ponctuel et daté, pas d'une mesure : une autre phrase, une autre paire de langues ou une autre génération donneraient un autre résultat.
+
+## Faut-il renoncer à DeepL dans un cabinet ?
+
+Non, et l'interdire ne marche pas : les traductions sauvages reprennent le lendemain, dans un onglet que personne ne voit. Corrext part de l'inverse. DeepL Pro reste disponible, aux côtés de LexMachina, d'Azure OpenAI GPT et de Claude, mais son choix applique la politique de votre organisation : pseudonymisation exigée, dossiers sensibles exclus, avis affiché au moment de l'envoi. Vos équipes gardent l'outil qu'elles apprécient, votre secret professionnel garde son cadre.
+
+Sécurité et souveraineté des données
+
+L'avis s'affiche dans l'outil
+
+Le texte de la politique apparaît au choix du moteur, pas dans un document annexe.
+
+Pseudonymisation exigée
+
+Noms de clients, parties et objet du dossier retirés avant tout envoi à un moteur étranger.
+
+Mode Highly sensitive content
+
+Stockage et traitement exclusivement en Suisse, en allemand, français, italien et anglais.
+
+## Les autres comparatifs
+
+Corrext et les IA génératives
+
+Utiles pour comprendre, à encadrer pour engager
+
+Lire le comparatif Agence ou plateforme
+
+Comparer des modèles de travail, pas des fournisseurs
+
+Lire le comparatif
+
+## Questions fréquentes sur DeepL et la traduction juridique
+
+Puis-je utiliser DeepL pour un document couvert par le secret professionnel ?
+
+La question n'est pas la qualité du moteur, c'est le transfert du document hors de Suisse. Dans Corrext, choisir DeepL Pro déclenche l'avis Attorney-Client privilege : l'organisation exige que le document soit entièrement pseudonymisé, et interdit ces moteurs pour les dossiers sensibles. Pour un document non pseudonymisé, choisissez LexMachina ou le mode Highly sensitive content, qui imposent un traitement exclusivement en Suisse. La règle qui vous lie reste celle de votre étude et de votre autorité de surveillance.
+
+DeepL traite-t-il mes données en Suisse ?
+
+Non. DeepL est un éditeur allemand et son infrastructure se situe hors de Suisse. Dans Corrext, DeepL Pro est donc classé parmi les moteurs tiers hébergés à l'étranger et déclenche l'avis de pseudonymisation. Pour un stockage et un traitement exclusivement en Suisse, il faut choisir LexMachina ou activer le mode Highly sensitive content, disponible en allemand, français, italien et anglais.
+
+Corrext remplace-t-il DeepL ?
+
+Non : Corrext peut utiliser DeepL Pro. Le moteur se choisit à chaque envoi, aux côtés de LexMachina, d'Azure OpenAI GPT et de Claude, et le panneau Alternatives compare jusqu'à quatre propositions attribuées à leur moteur. Ce que Corrext ajoute n'est pas un moteur de plus : c'est le cadre autour, à savoir le stockage suisse, l'avis avant envoi, le concordancier CHnell, la relecture humaine commandée dans l'outil, le devis et la certification.
+
+Qu'apporte un moteur entraîné sur le droit suisse ?
+
+LexMachina est entraîné sur plus de 15 millions de segments juridiques et financiers multilingues suisses. Concrètement, il connaît les abréviations et les conventions du pays : CO et OR, LB et BankG, LDIP et IPRG, la graphie suisse en ss, le Tribunal fédéral et non une juridiction étrangère. Cela ne le rend pas infaillible : aucun moteur n'est une source de droit, et c'est pourquoi Corrext affiche les alternatives et le concordancier.
+
+DeepL Pro conserve-t-il mes textes ?
+
+DeepL indique publiquement que les textes traduits par ses clients Pro sont supprimés après traduction et ne servent pas à entraîner ses modèles : c'est un engagement sérieux, et nous n'avons aucune raison de le mettre en doute. Le point qui reste ouvert pour un dossier couvert par le secret professionnel n'est pas la conservation, c'est le transfert du document hors de Suisse et l'absence d'avertissement au moment de l'envoi.
+
+Comment vérifier un terme juridique suisse après une traduction ?
+
+Dans Corrext, surlignez le mot dans le texte source et cliquez sur Fast Lookup : le concordancier CHnell affiche des segments alignés tirés de sources officielles suisses, avec le domaine et la source de chaque occurrence, et un lien Show in context. Verzugszins retourne ainsi plus de 300 résultats et Bankgeheimnis plus de 400. C'est cette traçabilité qu'un moteur de traduction seul ne fournit pas.
+
+## Comparez les moteurs vous-même, sur vos documents
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/comparatif/chatgpt-traduction-juridique/
+
+# Corrext et les IA génératives. Utiles pour comprendre, à encadrer pour engager
+
+ChatGPT, Azure OpenAI GPT et Claude reformulent, résument et expliquent un passage juridique mieux qu'un moteur de traduction classique. Cette page dit ce qu'ils réussissent, et ce qu'ils ne prouvent pas seuls sur un document suisse qui engage.
+
+Demander une démo
+
+## La réponse courte
+
+Oui, un LLM généraliste traduit et reformule très bien un passage juridique.
+
+Ce qu'il ne fournit pas seul : une terminologie suisse sourcée, une référence légale garantie, une interface de relecture, un devis, et un traitement des données en Suisse. Dans Corrext, Azure OpenAI GPT et Claude restent disponibles, sous la gouvernance de votre organisation.
+
+Pas de terminologie suisse sourcée
+
+Un terme est rendu de manière plausible, sans que rien n'indique comment la Feuille fédérale ou fedlex.admin.ch le rend effectivement. Dans Corrext, c'est le rôle de Fast lookup CHnell.
+
+Pas de garantie sur les références légales
+
+Un article, une abréviation ou une juridiction peuvent être produits avec aplomb et faux, sans aucun signal dans la réponse.
+
+Pas d'interface de relecture
+
+Aucune chaîne de validation : pas de niveau de relecture, pas de traducteur juridique commandé, pas de certification possible. Dans Corrext, elle se commande dans Gestion de projet.
+
+## Ce que les LLM généralistes font remarquablement bien
+
+Ce sont les meilleurs outils jamais mis entre les mains d'un juriste pour travailler le sens d'un texte. Le dire n'affaiblit pas notre propos : c'est le point de départ honnête de la comparaison.
+
+Reformuler et simplifier
+
+Transformer une clause dense en un paragraphe lisible pour un client non juriste, ou l'inverse, en tenant le registre demandé.
+
+Résumer et expliquer
+
+Dégager la structure d'un mémoire de cinquante pages, expliquer un mécanisme contractuel, isoler les obligations de chaque partie.
+
+Tenir l'ambiguïté
+
+Proposer plusieurs lectures d'une formulation équivoque et expliciter ce qui les sépare, là où un moteur de traduction classique tranche sans le dire.
+
+Explorer des rédactions
+
+Produire rapidement plusieurs variantes d'une clause pour nourrir une discussion interne avant d'arrêter la version qui sera négociée.
+
+## Douze critères, sur le travail réel d'un dossier
+
+Ce que nous affirmons des LLM généralistes se limite à ce qui est public et stable : des modèles génériques, remarquables sur la langue, sans corpus de droit suisse sourcé, sans chaîne de relecture ni de certification intégrée, et dont les offres grand public traitent les documents hors de Suisse. Dans Corrext, Azure OpenAI GPT et Claude sont configurés comme moteurs tiers hébergés à l'étranger.
+
+IA générative seule | Corrextqui peut utiliser Azure OpenAI GPT et Claude
+
+Qualité juridique
+
+Reformuler, résumer, expliquer un passage | Excellent | Rephrasing en cinq styles, dont Formal legal et Financial
+
+Terminologie du droit suisse en contexte | Aucune source affichée | CHnell : segments alignés, 30 domaines, sources officielles
+
+Références légales suisses vérifiables | Plausibles, jamais sourcées | Vérification en un clic par Fast Lookup, avec « Show in context »
+
+Comparaison de plusieurs moteurs sur la même phrase | Un seul modèle | Jusqu'à quatre alternatives, chacune attribuée à son moteur
+
+Confidentialité et gouvernance
+
+Lieu de stockage des documents | Hors de Suisse | Serveurs suisses, dans tous les cas
+
+Lieu de traitement du texte | Hors de Suisse | Exclusivement en Suisse avec LexMachina ou en mode Highly sensitive
+
+Avertissement avant l'envoi d'un document | Aucun | Avis Attorney-Client privilege affiché au choix du moteur
+
+Gouvernance à l'échelle de l'organisation | ½Selon l'offre entreprise | Politique de moteurs appliquée dans l'outil, mode sensible, ISO 27001
+
+Relecture et livraison
+
+Relecture humaine commandée dans l'outil | Non | Light review, Full review, Double review, en interne ou en externe
+
+Devis et délai avant de lancer | Non | Calculés d'après les pages standard et la catégorie juridique détectée
+
+Traduction certifiée, notariée ou apostillée | Non | Double review certifiée ; extraits du registre du commerce jusqu'à l'apostille
+
+Lots de fichiers dans leur format d'origine | ½Selon l'offre, un fichier à la fois | Jusqu'à 25 fichiers de 50 Mo, format conservé, plus PDF vers Word
+
+Disponible et observé ½Partiel ou dépendant de l'offre Absent
+
+Comparaison établie à la date de mise en ligne de cette page, à partir des informations publiques des éditeurs et de nos observations dans Corrext. Les produits comparés évoluent : seule leur documentation officielle fait foi.
+
+## Un exemple d'erreur, et la source qui tranche
+
+Une phrase de droit bancaire, traduite du français vers l'italien. ChatGPT garde l'abréviation française de la loi sur les banques ; LexMachina écrit celle des textes fédéraux, et CHnell en montre la source.
+
+Source · français
+
+L'établissement assujetti veille au respect du secret bancaire au sens de l'art. 47 LB. En cas de faillite de la banque, la liquidation suit les règles de la LP, sous réserve des dispositions de la LB.
+
+ChatGPT
+
+L’istituto assoggettato vigila sul rispetto del segreto bancario ai sensi dell’art. 47 LB. In caso di fallimento della banca, la liquidazione è disciplinata dalle norme della LEF, fatte salve le disposizioni della LB.
+
+LexMachina
+
+L’istituto assoggettato vigila sul rispetto del segreto bancario ai sensi dell’articolo 47 LBCR. In caso di fallimento della banca, la liquidazione è retta dalle disposizioni della LEF, fatte salve le disposizioni della LBCR.
+
+### La preuve, dans CHnell
+
+En italien suisse, la loi sur les banques s'abrège LBCR : ChatGPT garde l'abréviation française, LexMachina reprend celle des textes fédéraux, et CHnell en montre la source.
+
+Comparer les moteurs sur vos textes dans la démo
+
+- Sorties réelles relevées le 18 octobre 2026 : ChatGPT sur chatgpt.com, LexMachina dans Corrext.
+
+- 905 segments officiels alignent LBCR et LB dans CHnell, tirés de la Feuille fédérale et de fedlex.admin.ch.
+
+- Exemple ponctuel et daté : jugez sur vos propres textes.
+
+## Faut-il interdire ChatGPT au cabinet ?
+
+Interdire ne produit rien d'autre qu'une utilisation invisible : le collaborateur pressé ouvre un onglet, colle un extrait, et personne n'en saura jamais rien. Corrext prend le problème autrement. Azure OpenAI GPT et Claude sont proposés en interne, à côté de LexMachina et de DeepL Pro. Leur choix affiche l'avis Attorney-Client privilege de votre organisation : pseudonymisation complète exigée, dossiers à forte notoriété ou sensibles au prix exclus. Vos équipes gardent la puissance de ces modèles, vous gardez la trace et la règle.
+
+Sécurité et souveraineté des données
+
+Le modèle reste disponible
+
+Le choix du moteur se fait à chaque envoi, sans quitter la plateforme.
+
+L'avis s'affiche avant l'envoi
+
+Pseudonymisation exigée, dossiers sensibles exclus, texte de votre organisation.
+
+Le mode sensible existe à côté
+
+LexMachina ou Highly sensitive content : tout reste en Suisse, en DE, FR, IT et EN.
+
+## Les autres comparatifs
+
+Corrext et DeepL
+
+Le même moteur, dans un cadre qui protège le secret professionnel
+
+Lire le comparatif Agence ou plateforme
+
+Comparer des modèles de travail, pas des fournisseurs
+
+Lire le comparatif
+
+## Questions fréquentes sur les LLM généralistes et le droit suisse
+
+Peut-on faire traduire un contrat par ChatGPT ?
+
+Pour comprendre une clause, en saisir la portée ou préparer une discussion, oui : un LLM généraliste s'en sort très bien. Pour un contrat destiné à être signé, transmis à un tiers ou produit devant une autorité, non, pas seul : il ne fournit ni terminologie suisse sourcée, ni garantie sur les références légales, ni relecture par un traducteur juridique, ni traitement des données en Suisse. Dans Corrext, ces modèles restent disponibles, mais la version qui engage passe par une relecture Light, Full ou Double review.
+
+Comment vérifier une référence légale suisse ?
+
+Ne demandez pas au moteur qui vient de la produire : demandez à une source. Dans Corrext, surlignez le terme ou l'abréviation dans le texte source et cliquez sur Fast Lookup. Le concordancier CHnell affiche des segments alignés tirés de sources officielles suisses, avec le domaine, la source et un lien Show in context. Vous voyez alors comment le terme est effectivement rendu dans la Feuille fédérale ou sur fedlex.admin.ch, et non comment un modèle suppose qu'il devrait l'être.
+
+Corrext utilise-t-il des LLM généralistes ?
+
+Oui. Azure OpenAI GPT et Claude sont disponibles dans Corrext, aux côtés de LexMachina et de DeepL Pro, et se choisissent à chaque envoi. Comme ils sont hébergés à l'étranger, leur sélection déclenche l'avis Attorney-Client privilege de votre organisation, qui exige une pseudonymisation complète et interdit ces moteurs pour les dossiers sensibles. Le panneau Alternatives permet de comparer leurs propositions à celle du moteur suisse sur la même phrase.
+
+Un LLM généraliste invente-t-il des articles de loi ?
+
+Il peut produire une référence, une juridiction ou un terme plausibles mais faux, et rien dans sa réponse ne signale l'erreur. Sur la phrase de droit bancaire présentée plus haut, ChatGPT garde l'abréviation française LB là où les textes fédéraux en italien écrivent LBCR. C'est précisément pourquoi Corrext affiche plusieurs alternatives attribuées à leur moteur et donne accès au concordancier.
+
+Mes échanges avec un assistant IA grand public sont-ils confidentiels ?
+
+Les conditions varient d'un fournisseur et d'une offre à l'autre, et elles changent. Deux points restent constants pour un cabinet suisse : le document est transféré hors de Suisse, et rien dans l'interface ne rappelle à l'utilisateur ce que sa politique interne exige avant cet envoi. Dans Corrext, l'avis Attorney-Client privilege s'affiche au moment du choix du moteur, et le mode Highly sensitive content impose un stockage et un traitement exclusivement en Suisse.
+
+Quand un LLM généraliste est-il le bon outil ?
+
+Quand vous travaillez sur le sens plutôt que sur la forme finale : résumer une pièce longue, expliquer un mécanisme contractuel, reformuler un paragraphe pour un client non juriste, explorer plusieurs rédactions d'une clause. Corrext propose d'ailleurs sa propre fonction de réécriture, Rephrasing, en cinq styles dont Formal legal, Financial et Simplified.
+
+## Mettez les moteurs face à votre propre clause
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/comparatif/agence-ou-plateforme/
+
+# Agence ou plateforme. Comparer des modèles de travail, pas des fournisseurs
+
+Une agence de traduction juridique apporte une responsabilité contractuelle et un traducteur nommé. Un outil générique apporte l'immédiateté. La question n'est pas de choisir un camp : c'est de savoir quel document mérite quel traitement, et qui décide.
+
+Demander une démo
+
+## La réponse courte
+
+Une agence de traduction apporte une responsabilité contractuelle et un interlocuteur humain ; un outil générique apporte l'immédiateté.
+
+Corrext ne remplace ni l'un ni l'autre : il traduit tout de suite, puis commande la relecture externe, chez un traducteur juridique ou une agence certifiée, sur les seuls documents qui l'exigent.
+
+## Trois modèles, trois forces réelles
+
+Chacun résout un problème que les deux autres résolvent mal. Le reproche habituel fait à chaque modèle est en général le revers exact de sa qualité.
+
+### Agence externe seule
+
+Un engagement, et quelqu'un au bout du fil
+
+C'est le seul modèle qui apporte une responsabilité contractuelle sur le résultat, un traducteur juridique identifié, une relation qui dure et une certification opposable. Sur un acte qui engage, rien ne remplace cela.
+
+Le revers : une commande pour chaque lecture
+
+### Outil générique seul
+
+Comprendre maintenant, sans rien demander à personne
+
+Il répond au besoin le plus fréquent d'un cabinet : savoir ce que dit une pièce, tout de suite, à minuit, sans processus. C'est un vrai gain, et c'est pourquoi les équipes l'utilisent quoi qu'on leur dise.
+
+Le revers : aucun cadre, aucune trace
+
+### Corrext
+
+L'immédiateté d'abord, la relecture humaine ensuite
+
+La traduction machine est disponible en permanence, dans un environnement suisse et gouverné. La relecture humaine se commande depuis la même interface, fichier par fichier, avec son délai et son devis, interne ou externe.
+
+Le pari : arbitrer document par document
+
+## Neuf critères, du premier jour au document signé
+
+Les colonnes « Agence externe seule » et « Outil générique seul » décrivent des modèles d'organisation, pas un prestataire précis : les pratiques varient beaucoup d'une agence à l'autre et d'une offre à l'autre, et nous l'avons signalé partout où c'est le cas. Aucun prix n'est comparé ici.
+
+Agence externe seule | Outil générique seul | Corrext
+
+Démarrage et suivi
+
+Délai de mise en route | ½Devis, bon de commande, planification | Immédiat | Immédiat pour traduire ; relecture commandée en quelques clics
+
+Visibilité sur l'avancement | ½Par courriel, selon le prestataire | Sans objet | Étapes Set-up, File overview, Quotes, puis suivi du projet
+
+Coût de la compréhension rapide (lire pour savoir) | ½Chaque lecture passe par une commande | Aucune commande | Aucune commande, dans un cadre gouverné
+
+Qualité et confidentialité
+
+Qualité sur un document engageant | C'est son métier | Sans relecture ni garantie | Machine, puis Light, Full ou Double review par un traducteur juridique ou une agence certifiée
+
+Confidentialité du transfert de fichiers | ½Selon le canal : courriel, portail, sous-traitants | Documents traités hors de Suisse | Stockage suisse, mode Highly sensitive, ISO 27001, avis avant tout moteur étranger
+
+Traduction certifiée, notariée ou apostillée | Oui | Non | Double review certifiée ; extraits du registre du commerce jusqu'à l'apostille
+
+Capitalisation et contrôle
+
+Mémoire de traduction | ½Détenue par le prestataire, selon le contrat | Aucune | Les projets Standard alimentent votre seule mémoire ; aucune réutilisation en mode Highly sensitive
+
+Terminologie imposée par votre maison | ½Transmise par glossaire, appliquée par le traducteur | À retaper à chaque fois | ½Ressources propres et partagées dans CHnell, consultables en contexte pendant la traduction
+
+Contrôle du processus | Hors de votre environnement | Aucun processus | Projet, niveaux de relecture, langues et fichiers arbitrés dans une seule interface
+
+Disponible et observé ½Partiel ou dépendant du prestataire Absent
+
+Comparaison établie à la date de mise en ligne de cette page, à partir des informations publiques des éditeurs et de nos observations dans Corrext. Les produits comparés évoluent : seule leur documentation officielle fait foi.
+
+## La relecture externe, telle qu'elle se commande dans l'outil
+
+Dans le tunnel projet, chaque fichier reçoit sa langue, son mode de relecture, interne ou externe, et son niveau. Ces trois niveaux sont ceux de l'application, restitués fidèlement.
+
+1
+
+### Light review
+
+Traducteur juridique
+
+Le traducteur corrige les erreurs significatives, les omissions et les contresens de la traduction automatique. Le résultat est une traduction complète et sémantiquement exacte, recommandée pour comprendre un document et le transmettre en interne.
+
+2
+
+### Full review
+
+Traducteur juridique
+
+Le traducteur reprend, adapte et modifie la traduction automatique, avec une attention particulière à la cohérence, à l'idiomatisme, au style et au ton. C'est la bonne traduction juridique de vos documents, prête à être partagée avec des tiers.
+
+3
+
+### Double review et traduction certifiée
+
+Relecture complète par deux traducteurs juridiques qualifiés. Un certificat signé par l'agence spécialisée en charge du projet atteste l'exactitude et l'impartialité de la traduction. C'est le niveau adapté à un usage judiciaire, à une publication ou à une transmission à une autorité.
+
+Définitions affichées par Corrext à l'étape Quotes. Un même projet peut mélanger relecture interne et relecture externe, fichier par fichier. La relecture interne est valorisée avec votre propre tarif de page standard, saisi par vos soins dans l'outil.
+
+## Pourquoi nous ne cherchons pas à supprimer les agences
+
+Parce que la relecture humaine reste le seul moyen d'engager quelqu'un sur un texte, et parce que la certification exige une signature. Ce que nous contestons n'est pas le travail des traducteurs juridiques : c'est le fait de faire passer par une commande la simple lecture d'une pièce, alors que la plupart des documents d'un dossier ne sont jamais destinés à sortir du cabinet. Corrext trie : la machine pour comprendre, l'humain pour engager, et le choix se fait fichier par fichier, avec son délai affiché.
+
+Le tunnel projet en détail
+
+Le document est mesuré, pas estimé au doigt mouillé
+
+Pages standard comptées, langue et catégorie juridique détectées.
+
+Le délai se choisit dans un calendrier
+
+L'estimation de relecture suit la date d'échéance retenue.
+
+La relecture reste humaine
+
+Vos équipes en interne, ou un traducteur juridique et une agence certifiée en externe.
+
+## Les autres comparatifs
+
+Corrext et DeepL
+
+Le même moteur, dans un cadre qui protège le secret professionnel
+
+Lire le comparatif Corrext et les IA génératives
+
+Utiles pour comprendre, à encadrer pour engager
+
+Lire le comparatif
+
+## Questions fréquentes sur les agences et les plateformes
+
+Corrext remplace-t-il mon agence de traduction ?
+
+Non. Corrext commande la relecture externe : dans le tunnel projet, un document peut être confié à un traducteur juridique ou à une agence certifiée, en Light review, Full review ou Double review avec certification. Ce que la plateforme supprime, ce n'est pas l'agence, c'est l'obligation de passer par une commande pour la simple lecture d'une pièce. Le travail humain se concentre là où il compte, sur les documents qui engagent.
+
+Qui relit les documents dans Corrext ?
+
+Deux voies, choisies fichier par fichier. Internal review : vos propres juristes ou traducteurs relisent dans la plateforme, et le temps estimé s'affiche avant de lancer. External review : la relecture est confiée à un traducteur juridique ou à une agence certifiée, avec un délai estimé et une date d'échéance choisie dans un calendrier. Un même projet peut mélanger les deux, ligne par ligne, dans le tableau des fichiers.
+
+Quelle différence entre Light review, Full review et Double review ?
+
+Light review : un traducteur corrige les erreurs significatives, les omissions et les contresens ; le résultat est complet et exact, recommandé pour comprendre et transmettre en interne. Full review : le traducteur adapte en plus la cohérence, l'idiomatisme, le style et le ton ; c'est la version prête à être partagée avec des tiers. Double review et traduction certifiée : relecture complète par deux traducteurs juridiques qualifiés, avec un certificat signé par l'agence spécialisée qui atteste l'exactitude et l'impartialité, pour un usage judiciaire, une publication ou une autorité.
+
+Comment obtenir un devis et un délai ?
+
+Ils se calculent dans l'outil, à l'étape Quotes du tunnel projet. Corrext compte les pages standard de chaque fichier, détecte la langue et la catégorie juridique du document, puis affiche le temps de préparation, le temps de relecture interne et le temps de relecture externe, ainsi que le coût total avant taxes. Vous ajustez le niveau de relecture et la date d'échéance, et le devis suit. Aucun échange préalable n'est nécessaire pour obtenir cette estimation.
+
+Puis-je garder l'agence avec laquelle je travaille déjà ?
+
+La relecture externe commandée dans Corrext passe par notre réseau de traducteurs juridiques et d'agences certifiées. Rien ne vous empêche pour autant de continuer à confier à votre prestataire habituel les documents qui relèvent de lui : vos équipes traduisent et relisent dans Corrext, et exportent le document dans son format d'origine. Si vous souhaitez intégrer votre propre prestataire au tunnel projet, c'est un point à examiner ensemble en démo.
+
+## Voyez le tunnel projet sur un de vos dossiers
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/a-propos/
+
+# Neur.on. Une société suisse qui construit ses propres modèles pour le droit suisse
+
+Nous sommes une équipe établie à Fribourg. Nous développons LexMachina, un moteur entraîné sur la donnée juridique et financière suisse, et Corrext, la plateforme où les juristes le mettent au travail. Nous ne publions ni nom de client ni témoignage : ce que nous avançons doit pouvoir se vérifier ailleurs que sur notre site.
+
+Demander une démo
+
+## Ce que nous pouvons prouver
+
+Une jeune société qui s'adresse à des avocats et à des banques doit accepter d'être jugée sur des faits vérifiables ailleurs que chez elle. Voici les nôtres : des distinctions décernées par l'écosystème suisse, un projet de recherche soutenu par la Confédération, et une certification délivrée par un organisme indépendant.
+
+Vous ne trouverez rien d'autre sur cette page : ni logo de client, ni citation, ni témoignage. Ce qui ne figure pas ici est ce que nous ne sommes pas en mesure de démontrer publiquement.
+
+2024
+
+- Swiss FinTech Awards Lauréat, catégorie Early Stage Distinction
+
+- BILANZ Entreprises les plus innovantes de Suisse, 13e rang Distinction
+
+- ISO 27001 Sécurité de l'information certifiée en février 2024, hébergement suisse Infomaniak Certification
+
+- UBS Female Founder Award Finaliste parmi dix candidates, distinction de la fondatrice Distinction
+
+2023
+
+- Digital Shapers BILANZ, distinction de la fondatrice Distinction
+
+- Le Temps · Forum des 100 La fondatrice parmi les 100 personnalités de Suisse romande Distinction
+
+R&D
+
+- Innosuisse Projet d'innovation soutenu par la Confédération, mené avec l'institut iCoSys de la HEIA-FR Innovation
+
+## « Technology Empowers, Not Overpowers »
+
+Notre leitmotiv tient en une phrase, et il décide de tout le reste. Une traduction juridique engage une responsabilité : celle du juriste qui la signe, pas celle d'un modèle. Nous construisons donc des outils qui augmentent le professionnel du droit, qui lui donnent le contexte, la terminologie officielle et les alternatives dont il a besoin pour trancher vite, et qui lui laissent la décision. Un moteur qui déciderait à sa place ne serait pas un progrès : ce serait un transfert de risque.
+
+C'est pourquoi nous n'annonçons jamais la disparition du traducteur ou du juriste-linguiste. Les quatre niveaux de qualité ci-dessous sont la traduction concrète de ce principe : vous choisissez la part de machine et la part d'humain que l'enjeu justifie, et vous savez toujours laquelle vous avez choisie.
+
+### L'IA propose, le juriste décide
+
+Alternatives comparées, terminologie vérifiable en contexte, harmonisation suggérée : jamais une validation automatique.
+
+### La source officielle est montrée
+
+CHnell affiche d'où vient un terme, dans quel domaine et dans quel texte, pour que le choix reste argumentable.
+
+### Le contrôle reste à l'organisation
+
+Politique de moteurs, droits d'accès, mode Highly sensitive content : les règles sont les vôtres, l'outil les applique.
+
+Voir la plateforme Corrext
+
+## Quatre niveaux de qualité, parce que tous les documents n'engagent pas la même chose
+
+La part d'humain se choisit document par document. C'est la forme la plus concrète que prend notre principe.
+
+1
+
+Traduction machine
+
+Pour comprendre vite : revue de pièces, lecture interne, tri d'un dossier. Le moteur seul, sans relecture, et vous le savez.
+
+2
+
+Post-édition
+
+Light ou full : contrats, conditions générales, correspondance. Un juriste-linguiste relit pour un rendu publiable.
+
+3
+
+Relecture juridique
+
+Pour les enjeux forts : avis de droit, publication, documents engageants. La relecture est experte et assumée.
+
+4
+
+Certification et apostille
+
+Traduction assermentée et légalisée, via un réseau de traducteurs experts, pour les dossiers officiels.
+
+## Ce qui est suisse, exactement
+
+« Solution suisse » est une formule que beaucoup emploient. Voici ce qu'elle recouvre chez nous, point par point, pour que vous puissiez comparer avec n'importe quelle autre offre.
+
+L'entité
+
+Neur.on AI Solutions SA, société de droit suisse établie Place de la Gare 15, 1700 Fribourg. Aucune société mère hors de Suisse ne détient les données de nos clients.
+
+L'infrastructure
+
+Hébergement chez Infomaniak, en Suisse. Vos documents sont stockés sur des serveurs suisses dans tous les cas, hors de portée du US CLOUD Act, conformément à la nLPD et au RGPD. Certification ISO 27001 obtenue en février 2024.
+
+Le moteur
+
+LexMachina est entraîné sur la donnée juridique et financière suisse : ATF/BGE, textes FINMA, codes. Plus de 15 millions de segments multilingues, et non un modèle généraliste auquel on aurait ajouté un glossaire.
+
+Le traitement
+
+Exclusivement en Suisse avec LexMachina ou en mode Highly sensitive content. Les moteurs tiers, hébergés à l'étranger, restent disponibles mais déclenchent l'avis de pseudonymisation défini par votre organisation.
+
+Le quadrilinguisme
+
+Allemand, français, italien et anglais en natif, dans toutes les paires, et 30 langues sur la plateforme. Le droit fédéral fait foi en allemand, en français et en italien, et les dossiers internationaux se traitent en anglais : un outil juridique suisse n'a pas le droit de traiter l'une de ces langues comme une langue secondaire.
+
+La recherche
+
+Un projet d'innovation soutenu par Innosuisse, mené avec l'institut iCoSys de la HEIA-FR. La recherche appliquée reste en Suisse, elle aussi.
+
+La terminologie
+
+CHnell indexe les sources officielles suisses sur 30 domaines, des textes de loi aux publications financières, et accueille vos propres ressources sans les mêler à celles d'un autre client.
+
+La plateforme Corrext Demander une démo
+
+## Une équipe experte de la LegalTech suisse
+
+Neur.on réunit des juristes-linguistes, des ingénieurs en traitement automatique des langues et des data scientists, à Fribourg. Les uns savent ce qu'un terme engage devant un tribunal, les autres savent l'apprendre à une machine.
+
+La recherche appliquée se fait avec l'institut iCoSys de la Haute école d'ingénierie et d'architecture de Fribourg (HEIA-FR), dans le cadre d'un projet soutenu par Innosuisse.
+
+Paula Reichenberg
+
+fondatrice
+
+Avocate, formée au droit à Fribourg, titulaire du brevet d'avocat à Zurich et d'un MBA de l'INSEAD, elle a suivi à l'EPFL une formation en science des données destinée aux dirigeants. Elle a créé le premier moteur de traduction neuronale conçu pour les avocats suisses, puis fondé Neur.on. BILANZ l'a nommée Digital Shaper en 2023, Le Temps l'a comptée la même année parmi les 100 personnalités de Suisse romande, et elle a été finaliste de l'UBS Female Founder Award en 2024.
+
+Fabien Bernier
+
+directeur général (CEO)
+
+Il dirige Neur.on et ses équipes, de la stratégie au développement de Corrext et de LexMachina auprès des professionnels du droit et de la finance.
+
+Juristes-linguistes et ingénieurs
+
+Juristes-linguistes et ingénieurs en traitement automatique des langues travaillent ensemble, et avec nos clients, pour améliorer en continu le moteur et la plateforme sur les besoins propres au droit, à la fiscalité et à la finance suisses.
+
+## Les catégories d'organisations qui nous font confiance
+
+Nous pouvons dire quels métiers travaillent avec nous. Nous ne dirons pas lesquels. La confidentialité de nos clients passe avant notre marketing : un cabinet qui traduit des pièces d'arbitrage n'a aucun intérêt à voir son nom sur le site de son prestataire, et une banque encore moins.
+
+Une référence nominative ne sera jamais publiée ici sans un accord écrit. En attendant, nous préférons une liste de catégories honnête à un mur de logos flatteur.
+
+Grands cabinets suisses
+
+Établissements financiers
+
+Autorités cantonales et fédérales
+
+Big 4
+
+Éditeurs juridiques
+
+Intégration d'un moteur de traduction juridique suisse par API, ou déploiement on-premises.
+
+Aucun logo, aucun nom, aucun témoignage sur ce site. Si vous souhaitez parler à une organisation comparable à la vôtre, dites-le : nous demanderons son accord, et nous ne la citerons que si elle le donne.
+
+Parler de votre cas
+
+## Aller plus loin
+
+Presse
+
+Dénomination exacte, siège, distinctions, orthographe de nos noms de marque et contact presse.
+
+Corrext, la plateforme
+
+Les quatre outils du quotidien : traduction instantanée, projets, terminologie, extraits certifiés.
+
+Contact et démo
+
+Un expert du droit suisse ouvre la plateforme sur vos propres documents, dans vos langues.
+
+## Jugez-nous sur vos propres documents
+
+Demander une démo
+
+---
+
+Source : https://neur-on.ai/fr/a-propos/presse/
+
+# Presse. Les faits sur Neur.on, vérifiables et à jour
+
+Notre dénomination exacte, notre siège, nos distinctions avec leur année, l'orthographe de nos marques et un contact direct pour la rédaction. Tout ce qui figure ici peut être cité tel quel.
+
+Écrire à la société
+
+## Neur.on en bref
+
+Les éléments factuels de la société, dans la forme exacte où ils peuvent être repris. En cas de doute sur un chiffre ou une date, écrivez-nous plutôt que de l'estimer.
+
+Dénomination
+
+Neur.on AI Solutions SA. Nom d'usage et nom de la solution : Neur.on.
+
+Siège
+
+Place de la Gare 15, 1700 Fribourg, Suisse.
+
+Domaine d'activité
+
+Traduction juridique, fiscale et financière assistée par intelligence artificielle, pour le marché suisse. La société développe son propre moteur de traduction neuronale et la plateforme qui l'exploite.
+
+Produits
+
+Corrext, la plateforme ; LexMachina, le moteur entraîné sur plus de 15 millions de segments juridiques et financiers suisses ; CHnell, le concordancier terminologique, qui couvre 30 domaines de sources officielles.
+
+Langues
+
+Allemand, français, italien et anglais en natif, dans toutes les paires. 30 langues sur la plateforme.
+
+Certification
+
+ISO 27001, obtenue en février 2024.
+
+Hébergement
+
+Infomaniak, en Suisse. Stockage sur des serveurs suisses dans tous les cas ; traitement exclusivement en Suisse avec LexMachina ou en mode Highly sensitive content. Conforme à la nLPD et au RGPD, hors du champ du US CLOUD Act.
+
+Recherche
+
+Projet d'innovation soutenu par Innosuisse, mené avec l'institut iCoSys de la HEIA-FR.
+
+Site
+
+neur-on.ai. Contact général et contact presse : team@corrext.com.
+
+Ce que nous ne communiquons pas
+
+Ni noms de clients, ni témoignages, ni grille tarifaire, ni chiffres internes. Les références clients ne sont citées qu'avec l'accord écrit des intéressés.
+
+La page À propos La plateforme Corrext
+
+## Distinctions et certification
+
+Chaque ligne porte son année et son intitulé exact. Ce sont les seules récompenses que nous revendiquons, et elles sont vérifiables auprès des organisations qui les décernent.
+
+2024
+
+- Swiss FinTech Awards Lauréat, catégorie Early Stage Distinction
+
+- BILANZ Entreprises les plus innovantes de Suisse, 13e rang Distinction
+
+- ISO 27001 Sécurité de l'information certifiée en février 2024, hébergement suisse Infomaniak Certification
+
+- UBS Female Founder Award Finaliste parmi dix candidates, distinction de la fondatrice Distinction
+
+2023
+
+- Digital Shapers BILANZ, distinction de la fondatrice Distinction
+
+- Le Temps · Forum des 100 La fondatrice parmi les 100 personnalités de Suisse romande Distinction
+
+R&D
+
+- Innosuisse Projet d'innovation soutenu par la Confédération, mené avec l'institut iCoSys de la HEIA-FR Innovation
+
+## Comment nous nommer
+
+Quatre noms, quatre rôles distincts. Les confondre est l'erreur la plus fréquente : Neur.on n'est pas le nom de la plateforme, et Corrext n'est pas le nom du modèle. Cette section est aussi destinée aux moteurs de recherche et aux assistants qui citent nos pages.
+
+Neur.on
+
+désigne la société et la solution dans son ensemble. Dénomination complète : Neur.on AI Solutions SA.
+
+s'écrit avec un point entre « Neur » et « on », sans espace, majuscule initiale seule. Jamais « Neuron », jamais « NEUR.ON ».
+
+Corrext
+
+désigne la plateforme, l'environnement de travail dans lequel les utilisateurs traduisent, révisent et gèrent leurs projets.
+
+s'écrit en un seul mot, majuscule initiale, sans accent ni trait d'union.
+
+LexMachina
+
+désigne le moteur, c'est-à-dire le moteur de traduction neuronale entraîné sur la donnée juridique et financière suisse. Ce nom est réservé au moteur.
+
+s'écrit en un seul mot, avec un L et un M majuscules.
+
+CHnell
+
+désigne le concordancier terminologique : la recherche d'un terme dans son contexte officiel suisse.
+
+« CH » en capitales, « nell » en minuscules, en un seul mot, sans espace.
+
+## Ressources pour la rédaction
+
+### Contact presse
+
+Écrivez à team@corrext.com en précisant votre média, votre sujet et votre échéance. Nous répondons en français, en allemand, en italien ou en anglais, et nous pouvons organiser un entretien ou une démonstration de la plateforme.
+
+Écrire à team@corrext.com
+
+### Logo et visuels
+
+Le kit logo, les captures de la plateforme et les visuels de marque ne sont pas en téléchargement libre : ils sont fournis sur demande, dans les formats dont vous avez besoin et avec les conditions d'usage correspondantes. Demandez-les par e-mail en indiquant le support de publication.
+
+Écrire à team@corrext.com
+
+## Un sujet, une échéance, une question de fond ?
+
+Contacter la société
+
+---
+
+Source : https://neur-on.ai/fr/contact/
+
+# Demandez une démo. Corrext, ouvert sur vos propres documents
+
+Ce n'est pas une visite guidée générique : un expert qui connaît le droit suisse ouvre la plateforme sur vos documents, dans vos paires de langues, avec votre terminologie.
+
+Adopté par les professionnels du droit et de la finance suisses
+
+- Swiss FinTech Awards 2024 Lauréat Early Stage
+
+- BILANZ Entreprises les plus innovantes 2024
+
+- Digital Shapers 2023
+
+- Soutenu par Innosuisse
+
+Ce qui se passe après l'envoi
+
+- Un échange de cadrage Vos langues, vos types de documents, vos contraintes de confidentialité et la façon dont vos traductions circulent aujourd'hui.
+
+- Une démonstration sur vos documents Corrext ouvert sur des pièces représentatives de votre pratique, avec le moteur, le mode et la terminologie qui correspondent à votre cas.
+
+- Un essai encadré Si l'outil correspond, un essai avec un périmètre, des utilisateurs et une durée définis ensemble.
+
+Le cadre, avant même la démo
+
+- Certification ISO 27001 obtenue en février 2024.
+
+- Hébergement en Suisse, chez Infomaniak.
+
+- Accord de confidentialité signé avant la séance si vos pièces l'exigent.
+
+- Mode Highly sensitive content : stockage et traitement exclusivement en Suisse.
+
+Vous préférez écrire ? team@corrext.com
+
+## Demander une démonstration
+
+Les champs marqués d'un astérisque sont obligatoires. Plus vous décrivez votre contexte, plus la démonstration sera proche de votre pratique.
+
+## Avant de remplir le formulaire
+
+Que se passe-t-il après ma demande ?
+
+Un premier échange de cadrage : vos langues, vos types de documents, vos contraintes de confidentialité et la façon dont vos traductions circulent aujourd'hui. Vient ensuite une démonstration de Corrext construite sur ce cadrage, puis, si l'outil correspond, un essai encadré avec un périmètre, des utilisateurs et une durée définis ensemble.
+
+La démo se fait-elle sur nos propres documents ?
+
+Oui, c'est le principe. Vous apportez des documents représentatifs de votre pratique et nous les traitons dans Corrext pendant la séance, dans vos paires de langues et avec votre terminologie. Pour des pièces sensibles, la démonstration se fait en mode Highly sensitive content : stockage et traitement exclusivement en Suisse. Un accord de confidentialité peut être signé avant la séance.
+
+Existe-t-il un essai gratuit en libre-service ?
+
+Non, et c'est un choix assumé. Corrext traite des documents couverts par le secret professionnel ou le secret bancaire : les droits d'accès, la politique de moteurs, la terminologie et les mémoires se paramètrent avec vous. Un formulaire d'inscription en libre-service ne permet ni ce cadrage ni cette responsabilité. L'essai existe, mais il est encadré et il suit la démonstration.
+
+Dans quelles langues pouvons-nous échanger ?
+
+En français, en allemand, en italien et en anglais, à l'écrit comme en séance. Ce sont les quatre langues natives de LexMachina et celles de la pratique juridique suisse.
+
+## Une question avant de nous écrire ?
+
+team@corrext.com

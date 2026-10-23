@@ -101,7 +101,8 @@ def langues_chnell(html):
 
 def langues_tableaux(html):
     """Cellules des tableaux de termes, étiquetées par leur colonne (data-m) ; tuiles « quatre langues » du glossaire
-    (<b>terme</b><p>Allemand</p>) ; terme du h1 du glossaire, s'il est l'une de ces tuiles."""
+    (<b>terme</b><p>Allemand</p>) ou fiche des langues (<dt>Allemand</dt><dd>terme</dd>) ; terme du h1 du glossaire, s'il
+    figure dans l'une ou l'autre."""
     html = re.sub(r'<(th|td)\b[^>]*\sdata-m="([^"]+)"[^>]*>', lambda m: _lang(m.group(0), CODES.get(m.group(2))), html)
     tuiles = {}
 
@@ -110,6 +111,9 @@ def langues_tableaux(html):
         tuiles[H.unescape(m.group(2)).strip()] = code
         return _lang(m.group(1), code) + m.group(2) + "</b><p>" + m.group(3) + "</p>"
     html = re.sub(r'(<b>)([^<]+)</b><p>(Allemand|Français|Italien|Anglais)</p>', tuile, html)
+    # fiche des langues du glossaire (langue, terme ; audit design du 2026-10-23) : la langue y est déjà posée
+    for m in re.finditer(r'<dt>(Allemand|Français|Italien|Anglais)</dt><dd lang="([a-z]{2})">([^<]+)</dd>', html):
+        tuiles[H.unescape(m.group(3)).strip()] = m.group(2)
     h1 = re.search(r'(<h1 class="h1"><span class="n")(>)([^<]+?)( ·)?</span>', html)
     if h1 and tuiles.get(H.unescape(h1.group(3)).strip()):
         code = tuiles[H.unescape(h1.group(3)).strip()]
