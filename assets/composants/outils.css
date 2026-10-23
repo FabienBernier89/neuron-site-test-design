@@ -176,3 +176,27 @@
 .gb h3{margin-top:2px;font:600 17px/24px var(--sans);color:var(--ink)}
 .gb p{margin-top:6px;font:400 15px/23px var(--sans);color:var(--muted)}
 @media (max-width:1023px){.gb{grid-template-columns:minmax(0,1fr);padding:8px 24px}.gb > div{padding:22px 0}.gb > div + div{border-left:0;border-top:1px solid var(--line)}}
+
+/* Page Presse (audit du 2026-10-23) : fiche signalétique, distinctions chronologiques, noms et orthographe */
+.fs{margin:32px 0 0;border-top:1px solid var(--line)}
+.fs > div{display:grid;grid-template-columns:260px minmax(0,1fr);gap:32px;padding:16px 0;border-bottom:1px solid var(--line)}
+.fs dt{font:600 16px/24px var(--sans);color:var(--ink)}
+.fs dd{margin:0;font:400 16px/24px var(--sans);color:var(--text)}
+.fs dd small{display:block;margin-top:4px;font-size:14px;color:var(--muted)}
+.fs-l{display:flex;flex-wrap:wrap;gap:12px 32px;margin-top:24px}
+.ch{margin-top:32px;border-top:1px solid var(--line)}
+.ch-a{display:grid;grid-template-columns:160px minmax(0,1fr);gap:32px;padding:24px 0;border-bottom:1px solid var(--line)}
+.ch-y{font:300 40px/1 var(--serif);color:var(--accent-d)}
+.ch ul{list-style:none;margin:0;padding:0}
+.ch li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 24px;padding:4px 0 14px}
+.ch li + li{padding-top:14px;border-top:1px solid var(--line)}
+.ch li b{font:600 17px/24px var(--sans);color:var(--ink)}
+.ch li span{grid-column:1;font:400 16px/24px var(--sans);color:var(--muted)}
+.ch li em{grid-column:2;grid-row:1;font:600 12px/24px var(--sans);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.nm{margin-top:32px;border-top:1px solid var(--line)}
+.nm-r{display:grid;grid-template-columns:220px minmax(0,1.2fr) minmax(0,1fr);gap:40px;padding:24px 0;border-bottom:1px solid var(--line)}
+.nm-n{font:300 30px/36px var(--serif);color:var(--ink)}
+.nm-r p:not(.nm-n){margin-top:4px;font:400 16px/24px var(--sans);color:var(--text)}
+.pr-m{margin-top:14px}
+@media (max-width:1023px){.nm-r{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.nm-n{grid-column:1/-1}}
+@media (max-width:767px){.fs > div,.ch-a,.nm-r{grid-template-columns:minmax(0,1fr);gap:8px}.ch-y{font-size:32px}.ch li{grid-template-columns:minmax(0,1fr)}.ch li em{grid-column:1;grid-row:auto}}
