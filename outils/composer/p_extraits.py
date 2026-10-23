@@ -63,12 +63,20 @@ def demo_et_etapes(sec, ctx):
     return generique.h_tdemo(sec, ctx) + section(h2(titre, " ".join(titre.split()[-2:])) + frise(etapes_).replace('<ol class="fr">', '<ol class="fr fr-l">', 1))
 
 
+# Icônes des deux garanties (tracés SVG 24 px) : les traducteurs, la confidentialité
+ICONES_GARANTIES = {"Qui traduit": '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/>',
+                    "Confidentialité": '<path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/>'}
+
+
 def qui_traduit(sec, ctx):
-    """À la place du bloc de gouvernance (repris plus haut) : encart centré à fond teinté avec les deux garanties
-    (audit design du 2026-10-23 : sans l'intro, qui répétait le haut de page, ni le lien, qui doublait l'appel final)."""
+    """À la place du bloc de gouvernance (repris plus haut) : le titre, puis les deux garanties en cartes teintées,
+    icône à gauche du texte (proposition B retenue par Fabien le 2026-10-23)."""
     fa, F = faits(ctx["t"])
-    g = "".join(f'<div><h3>{n}</h3><p>{sans_note(F[n])}</p></div>' for n in ("Qui traduit", "Confidentialité"))
-    return section(f'<div class="enc enc-2"><h2>{esc(k("qui"))}</h2><div class="enc-g">{g}</div></div>')
+    titre = k("qui")
+    cartes_ = "".join(f'<div class="gq-c"><span class="gq-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" '
+                      f'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONES_GARANTIES[n]}</svg></span>'
+                      f'<div><h3>{n}</h3><p>{sans_note(F[n])}</p></div></div>' for n in ("Qui traduit", "Confidentialité"))
+    return section(h2(titre, titre.split(", ")[1]) + f'<div class="gq">{cartes_}</div>')
 
 
 def appel(sec, ctx):
