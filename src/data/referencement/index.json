@@ -1,0 +1,153 @@
+{
+ "source": "Sites/neuron/docs/fr/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Neur.on : traduction juridique et financière par IA en Suisse\">",
+  "<meta property=\"og:description\" content=\"Le moteur de traduction du droit, de la fiscalité et de la finance suisses. Quadrilingue natif, plus de 15 millions de segments, hébergement 100% suisse.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Comment Neur.on garantit-il la précision sur le droit suisse ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "LexMachina, notre moteur, est entraîné sur plus de 15 millions de segments juridiques et financiers suisses : ATF/BGE, textes FINMA, codes (CO, CC, LP). Vous pouvez comparer jusqu'à quatre alternatives d'autres moteurs, vérifier chaque terme dans son contexte officiel avec CHnell, et demander une relecture par un juriste-linguiste."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Mes données restent-elles souveraines ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Vous choisissez, projet par projet. En mode Standard, vos données sont stockées sur les serveurs suisses de Corrext et traitées par le moteur que vous sélectionnez : LexMachina en Suisse ; DeepL Pro, Azure OpenAI GPT ou Claude à l'étranger, avec un avertissement de pseudonymisation. En mode Highly sensitive, stockage et traitement restent exclusivement en Suisse, sans réutilisation en mémoire. Le tout certifié ISO 27001, conforme nLPD et RGPD."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quelles langues et quels domaines sont couverts ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Trente langues sur la plateforme, avec l'allemand, le français, l'italien et l'anglais en natif (mode Highly sensitive et LexMachina). CHnell couvre 30 domaines, du droit bancaire et de la surveillance FINMA à l'arbitrage, la fiscalité, la propriété intellectuelle ou le droit des sociétés. Pour les traductions certifiées, notariées ou apostillées, Corrext propose un service en ligne dédié."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quelle différence avec DeepL ou un LLM généraliste ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les outils génériques traduisent du texte sans connaître le droit suisse ni ses sources officielles, et hébergent vos données hors de Suisse. Corrext vous laisse les utiliser quand c'est pertinent, dans un cadre gouverné, et met à côté un moteur entraîné sur le droit suisse, la comparaison d'alternatives, la vérification terminologique en contexte et un mode 100 % Suisse."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "La plateforme est-elle agnostique aux modèles d'IA ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Dans Corrext, vous choisissez le moteur à chaque traduction : LexMachina, DeepL Pro, Azure OpenAI GPT ou Claude, et vous comparez jusqu'à quatre alternatives attribuées à leur moteur. Une solution pérenne, qui évolue avec l'état de l'art sans vous enfermer."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment intégrer Neur.on à nos outils existants ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Via le plugin Microsoft Word, l'application web Corrext, ou l'API REST pour vos DMS, intranets et workflows. La gestion des droits est granulaire, jusqu'au niveau document (SharePoint / AD). Un déploiement on-premises est possible. Réservez une démo pour cadrer l'intégration avec un expert."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@graph": [
+    {
+     "@type": "Organization",
+     "@id": "https://neur-on.ai/#organisation",
+     "name": "Neur.on",
+     "legalName": "Neur.on AI Solutions SA",
+     "url": "https://neur-on.ai/",
+     "email": "team@corrext.com",
+     "description": "Société suisse établie à Fribourg. Neur.on développe LexMachina, un moteur de traduction neuronale entraîné sur la donnée juridique et financière suisse, et Corrext, la plateforme de traduction juridique et financière qui l'exploite.",
+     "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Place de la Gare 15",
+      "postalCode": "1700",
+      "addressLocality": "Fribourg",
+      "addressRegion": "FR",
+      "addressCountry": "CH"
+     },
+     "areaServed": "CH",
+     "knowsLanguage": [
+      "de",
+      "fr",
+      "it",
+      "en"
+     ],
+     "award": [
+      "Lauréat des Swiss FinTech Awards 2024, catégorie Early Stage",
+      "BILANZ, classement des entreprises les plus innovantes de Suisse 2024 (13e rang)",
+      "Digital Shapers 2023"
+     ],
+     "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "certification",
+      "name": "ISO 27001",
+      "dateCreated": "2024-02"
+     },
+     "brand": [
+      {
+       "@type": "Brand",
+       "name": "Corrext",
+       "description": "La plateforme de traduction juridique et financière de Neur.on."
+      },
+      {
+       "@type": "Brand",
+       "name": "LexMachina",
+       "description": "Le moteur de Neur.on, entraîné sur la donnée juridique et financière suisse."
+      },
+      {
+       "@type": "Brand",
+       "name": "CHnell",
+       "description": "Le concordancier terminologique suisse de Neur.on."
+      }
+     ],
+     "logo": {
+      "@type": "ImageObject",
+      "url": "https://neur-on.ai/assets/img/neuron-logo.png",
+      "width": 557,
+      "height": 170
+     },
+     "sameAs": [
+      "https://www.linkedin.com/company/neur-on"
+     ]
+    },
+    {
+     "@type": "WebSite",
+     "@id": "https://neur-on.ai/#site",
+     "url": "https://neur-on.ai/",
+     "name": "Neur.on",
+     "inLanguage": "fr-CH",
+     "publisher": {
+      "@id": "https://neur-on.ai/#organisation"
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,105 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/ejustice-40-ans-kamingesprach-neuron/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/ejustice-40-ans-kamingesprach-neuron/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/ejustice-40-ans-kamingesprach-neuron/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/ejustice-40-jahre-kamingespraech/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/ejustice-40-anni-kamingespraech/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/ejustice-40-years-fireside-chat/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"eJustice.ch, 40 ans : premier Kamingespräch · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Pour ses 40 ans, eJustice.ch lance les Kamingespräche. Le 23 janvier 2025, la CEO de Neur.on y débat du « Swiss Justice Base Model ».\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/ejustice-40-ans-kamingesprach-neuron/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/ejustice-40-ans-kamingesprach-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Cinq intervenants assis sur scène devant un écran montrant un feu de cheminée et le logo eJustice.ch\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "40 ans d’eJustice.ch : la CEO de Neur.on débat du « Swiss Justice Base Model »",
+   "description": "Pour ses 40 ans, eJustice.ch lance les Kamingespräche. Le 23 janvier 2025, la CEO de Neur.on y débat du « Swiss Justice Base Model ».",
+   "datePublished": "2025-01-21",
+   "dateModified": "2025-01-21",
+   "inLanguage": "fr-CH",
+   "wordCount": 233,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/ejustice-40-ans-kamingesprach-neuron/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/ejustice-40-ans-kamingesprach-neuron.webp",
+   "about": [
+    {
+     "@type": "Organization",
+     "name": "eJustice.ch"
+    },
+    {
+     "@type": "Event",
+     "name": "Kamingespräche"
+    },
+    {
+     "@type": "Person",
+     "name": "Michael Schöll"
+    },
+    {
+     "@type": "Organization",
+     "name": "Office fédéral de la justice"
+    },
+    {
+     "@type": "Organization",
+     "name": "SwissAI"
+    },
+    {
+     "@type": "Organization",
+     "name": "Swisslex"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "40 ans d’eJustice.ch : la CEO de Neur.on débat du « Swiss Justice Base Model »",
+     "item": "https://neur-on.ai/fr/ressources/blog/ejustice-40-ans-kamingesprach-neuron/"
+    }
+   ]
+  }
+ ]
+}

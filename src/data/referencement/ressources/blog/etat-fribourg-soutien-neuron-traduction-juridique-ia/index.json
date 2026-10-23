@@ -1,0 +1,101 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/staat-freiburg-unterstuetzung/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/cantone-friburgo-sostegno/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/canton-of-fribourg-support/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Soutien de l’État de Fribourg à la traduction IA · Neur.on\">",
+  "<meta property=\"og:description\" content=\"L’État de Fribourg accorde à Neur.on un soutien supplémentaire pour la traduction juridique par IA : R&amp;D, recrutements et expansion internationale.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/etat-fribourg-soutien-neuron-traduction-juridique-ia.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Visuel réunissant le logo Neur.on, l’écusson fribourgeois et le logo de la Promotion économique de l’État de Fribourg\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "L’État de Fribourg renforce son soutien à Neur.on pour la traduction juridique par IA",
+   "description": "L’État de Fribourg accorde à Neur.on un soutien supplémentaire pour la traduction juridique par IA : R&D, recrutements et expansion internationale.",
+   "datePublished": "2022-12-02",
+   "dateModified": "2022-12-02",
+   "inLanguage": "fr-CH",
+   "wordCount": 161,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia.webp",
+   "about": [
+    {
+     "@type": "Organization",
+     "name": "État de Fribourg"
+    },
+    {
+     "@type": "Organization",
+     "name": "Innosuisse"
+    },
+    {
+     "@type": "Organization",
+     "name": "iCoSys"
+    },
+    {
+     "@type": "Organization",
+     "name": "Haute école d’ingénierie et d’architecture de Fribourg"
+    },
+    {
+     "@type": "Place",
+     "name": "Fribourg"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "L’État de Fribourg renforce son soutien à Neur.on pour la traduction juridique par IA",
+     "item": "https://neur-on.ai/fr/ressources/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia/"
+    }
+   ]
+  }
+ ]
+}

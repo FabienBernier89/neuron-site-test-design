@@ -1,0 +1,101 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/kilian-marty-rejoint-conseil-consultatif-neuron/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/kilian-marty-rejoint-conseil-consultatif-neuron/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/kilian-marty-rejoint-conseil-consultatif-neuron/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/kilian-marty-beirat/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/kilian-marty-consiglio-consultivo/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/kilian-marty-advisory-board/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Kilian Marty rejoint le conseil consultatif · Neur.on\">",
+  "<meta property=\"og:description\" content=\"En août 2023, Kilian Marty, responsable du département Cybersécurité de CertX AG, rejoint le conseil consultatif de Neur.on comme expert en cybersécurité.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/kilian-marty-rejoint-conseil-consultatif-neuron/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/kilian-marty-rejoint-conseil-consultatif-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Portrait d’un jeune homme aux cheveux châtains et à la barbe courte, en polo foncé, sur fond blanc\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Kilian Marty rejoint le conseil consultatif de Neur.on comme expert en cybersécurité",
+   "description": "En août 2023, Kilian Marty, responsable du département Cybersécurité de CertX AG, rejoint le conseil consultatif de Neur.on comme expert en cybersécurité.",
+   "datePublished": "2023-08-30",
+   "dateModified": "2023-08-30",
+   "inLanguage": "fr-CH",
+   "wordCount": 257,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/kilian-marty-rejoint-conseil-consultatif-neuron/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/kilian-marty-rejoint-conseil-consultatif-neuron.webp",
+   "about": [
+    {
+     "@type": "Person",
+     "name": "Kilian Marty"
+    },
+    {
+     "@type": "Organization",
+     "name": "CertX AG"
+    },
+    {
+     "@type": "Organization",
+     "name": "Neur.on"
+    },
+    {
+     "@type": "Person",
+     "name": "Jean Hennebert"
+    },
+    {
+     "@type": "Person",
+     "name": "Brian Firlit"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Kilian Marty rejoint le conseil consultatif de Neur.on comme expert en cybersécurité",
+     "item": "https://neur-on.ai/fr/ressources/blog/kilian-marty-rejoint-conseil-consultatif-neuron/"
+    }
+   ]
+  }
+ ]
+}

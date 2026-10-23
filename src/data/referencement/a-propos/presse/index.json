@@ -1,0 +1,99 @@
+{
+ "source": "Sites/neuron/docs/fr/a-propos/presse/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/a-propos/presse/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/a-propos/presse/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ueber-uns/presse/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/chi-siamo/stampa/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/about/press/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Presse · Neur.on AI Solutions SA, LegalTech suisse à Fribourg\">",
+  "<meta property=\"og:description\" content=\"Espace presse de Neur.on : dénomination exacte, siège en Suisse, distinctions, certification ISO 27001, orthographe des marques, contact rédaction.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/a-propos/presse/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "Organization",
+   "name": "Neur.on",
+   "legalName": "Neur.on AI Solutions SA",
+   "url": "https://neur-on.ai/",
+   "email": "team@corrext.com",
+   "description": "Société suisse établie à Fribourg. Neur.on développe LexMachina, un moteur de traduction neuronale entraîné sur la donnée juridique et financière suisse, et Corrext, la plateforme de traduction juridique et financière qui l'exploite.",
+   "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Place de la Gare 15",
+    "postalCode": "1700",
+    "addressLocality": "Fribourg",
+    "addressRegion": "FR",
+    "addressCountry": "CH"
+   },
+   "areaServed": "CH",
+   "knowsLanguage": [
+    "de",
+    "fr",
+    "it",
+    "en"
+   ],
+   "award": [
+    "Lauréat des Swiss FinTech Awards 2024, catégorie Early Stage",
+    "BILANZ, classement des entreprises les plus innovantes de Suisse 2024 (13e rang)",
+    "Digital Shapers 2023"
+   ],
+   "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "credentialCategory": "certification",
+    "name": "ISO 27001",
+    "dateCreated": "2024-02"
+   },
+   "brand": [
+    {
+     "@type": "Brand",
+     "name": "Corrext",
+     "description": "La plateforme de traduction juridique et financière de Neur.on."
+    },
+    {
+     "@type": "Brand",
+     "name": "LexMachina",
+     "description": "Le moteur de Neur.on, entraîné sur la donnée juridique et financière suisse."
+    },
+    {
+     "@type": "Brand",
+     "name": "CHnell",
+     "description": "Le concordancier terminologique suisse de Neur.on."
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "À propos",
+     "item": "https://neur-on.ai/fr/a-propos/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Presse",
+     "item": "https://neur-on.ai/fr/a-propos/presse/"
+    }
+   ]
+  }
+ ]
+}

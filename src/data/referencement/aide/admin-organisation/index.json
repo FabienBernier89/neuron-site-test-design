@@ -1,0 +1,85 @@
+{
+ "source": "Sites/neuron/docs/fr/aide/admin-organisation/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/aide/admin-organisation/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/aide/admin-organisation/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/hilfe/admin-organisation/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/aiuto/admin-organizzazione/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/help/admin-organisation/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Organisation, membres et rôles · Centre d'aide · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Administrer Corrext : rôles Admin, Project manager et Member, ajout de membres, adhésion par domaine e-mail, organisations parentes et filles.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/aide/admin-organisation/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Quels rôles peut-on attribuer dans une organisation ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Trois rôles existent dans Corrext : Admin, Project manager et Member. Le rôle se choisit au moment d'ajouter un membre, individuellement ou pour tout un domaine e-mail. À savoir Le détail des droits attachés à chaque rôle vous est présenté lors de la mise en place. Qui s'en charge : l'administrateur de votre organisation."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment ajouter un membre à l'organisation ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les membres de l'organisation figurent dans le bloc « Direct memberships », avec leur adresse e-mail et leur rôle. Le bouton « Add member » ajoute une adresse et lui attribue un rôle. Ouvrez les membres de votre organisation. Dans « Direct memberships » , cliquez sur « Add member » . Saisissez l'adresse e-mail et choisissez le rôle : Admin, Project manager ou Member. Validez : la personne apparaît dans la liste avec son rôle. À savoir Qui s'en charge : l'administrateur de votre organisation."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment faire entrer automatiquement toute une équipe ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Le bloc « Email domain memberships » associe un domaine e-mail entier à un rôle, avec le bouton « Add domain ». Toute personne qui se connecte avec une adresse de ce domaine rejoint l'organisation avec ce rôle. À savoir Pratique pour un cabinet ou un service entier : chaque nouvel arrivant est rattaché dès sa première connexion. Qui s'en charge : l'administrateur de votre organisation."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment organiser un groupe, des filiales ou des bureaux ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Une organisation peut avoir une organisation parente et des organisations filles, avec leur propre adresse ou celle de la parente. Deux réglages ne se transmettent pas aux organisations filles : l'activation de la terminologie et l'avis de confidentialité. Ils se règlent pour chaque organisation. À savoir Qui s'en charge : l'équipe Neur.on, à la mise en place ou sur demande."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Centre d'aide",
+     "item": "https://neur-on.ai/fr/aide/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Organisation, membres et rôles",
+     "item": "https://neur-on.ai/fr/aide/admin-organisation/"
+    }
+   ]
+  }
+ ]
+}

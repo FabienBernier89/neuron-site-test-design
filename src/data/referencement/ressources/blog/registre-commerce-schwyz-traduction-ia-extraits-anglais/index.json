@@ -1,0 +1,105 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/handelsregister-schwyz-englisch/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/registro-di-commercio-svitto/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/schwyz-commercial-register-english/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Schwyz : extraits du registre traduits par IA · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Schwyz est le seul canton dont le registre du commerce propose des traductions d’extraits en anglais par IA, avec un modèle développé par Neur.on.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/registre-commerce-schwyz-traduction-ia-extraits-anglais.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Visuel « Building Digital Bridges » : ponton sur un lac face aux montagnes, avec les logos de Zurich, Neur.on et Schwyz\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Registre du commerce de Schwyz : des extraits traduits en anglais par l’IA de Neur.on",
+   "description": "Schwyz est le seul canton dont le registre du commerce propose des traductions d’extraits en anglais par IA, avec un modèle développé par Neur.on.",
+   "datePublished": "2024-11-25",
+   "dateModified": "2024-11-25",
+   "inLanguage": "fr-CH",
+   "wordCount": 460,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais.webp",
+   "about": [
+    {
+     "@type": "Organization",
+     "name": "Handelsregister Schwyz"
+    },
+    {
+     "@type": "Organization",
+     "name": "Amt für Wirtschaft, Kanton Zürich"
+    },
+    {
+     "@type": "Organization",
+     "name": "DV Bern AG"
+    },
+    {
+     "@type": "Person",
+     "name": "Othmar Aeschi"
+    },
+    {
+     "@type": "Person",
+     "name": "Raphael von Thiessen"
+    },
+    {
+     "@type": "Place",
+     "name": "Canton de Schwyz"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Registre du commerce de Schwyz : des extraits traduits en anglais par l’IA de Neur.on",
+     "item": "https://neur-on.ai/fr/ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/"
+    }
+   ]
+  }
+ ]
+}

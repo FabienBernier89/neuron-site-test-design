@@ -1,0 +1,77 @@
+{
+ "source": "Sites/neuron/docs/fr/aide/admin-memoires/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/aide/admin-memoires/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/aide/admin-memoires/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/hilfe/admin-uebersetzungsspeicher/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/aiuto/admin-memorie/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/help/admin-translation-memories/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Mémoires et terminologie · Centre d'aide · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Administrer Corrext : importer des mémoires TMX, des bases terminologiques TBX ou XML, et ajouter des ressources propres dans CHnell.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/aide/admin-memoires/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Comment importer nos mémoires de traduction ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les mémoires de l'organisation se gèrent dans « Manage translation memories ». Le bouton « Create » ouvre l'import : vous choisissez d'abord les catégories, c'est-à-dire les domaines, puis vous déposez des fichiers au format .tmx, jusqu'à 5 Mo par fichier. À savoir Chaque mémoire reste rattachée à ses domaines, modifiables ensuite dans la liste. Qui s'en charge : l'administrateur de votre organisation, ou l'équipe Neur.on à la mise en place."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment importer une base terminologique ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les bases terminologiques de l'organisation se gèrent dans « Manage term bases ». Le bouton « Create » accepte des fichiers .tbx ou .xml, jusqu'à 5 Mo par fichier. À savoir Pour imposer un terme dans un projet précis, utilisez l'étape Terminologie du projet. Qui s'en charge : l'administrateur de votre organisation, ou l'équipe Neur.on à la mise en place."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment ajouter nos propres ressources à CHnell ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "CHnell distingue les ressources partagées, issues de sources officielles, et les ressources propres à une organisation, visibles par elle seule. Un document peut être consultable en entier ou seulement par extraits. À savoir Dans la recherche, vos ressources apparaissent distinguées des ressources partagées. Qui s'en charge : l'équipe Neur.on, à la mise en place ou sur demande."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Centre d'aide",
+     "item": "https://neur-on.ai/fr/aide/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Mémoires et terminologie",
+     "item": "https://neur-on.ai/fr/aide/admin-memoires/"
+    }
+   ]
+  }
+ ]
+}

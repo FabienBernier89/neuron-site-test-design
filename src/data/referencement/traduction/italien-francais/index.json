@@ -1,0 +1,115 @@
+{
+ "source": "Sites/neuron/docs/fr/traduction/italien-francais/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/traduction/italien-francais/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/traduction/italien-francais/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/uebersetzung/italienisch-franzoesisch/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/traduzione/italiano-francese/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/translation/italian-french/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction juridique de l'italien au français · Neur.on\">",
+  "<meta property=\"og:description\" content=\"L'italien juridique suisse vers le français : ricorso, precetto esecutivo, Tribunale federale et les termes du Tessin, distincts de l'italien d'Italie.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/traduction/italien-francais/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "L'italien juridique suisse est-il différent de l'italien d'Italie ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui, et la différence porte sur l'essentiel : les institutions et les procédures. Le ricorso suisse va au Tribunale federale, le precetto esecutivo appartient à la procédure de poursuite prévue par le droit fédéral, le decreto d'accusa est un acte du Code de procédure pénale suisse. Les mêmes mots existent parfois en Italie pour désigner autre chose."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "La version italienne d'une loi fédérale fait-elle foi ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui, au même titre que les versions allemande et française. C'est pour cette raison que les équivalences terminologiques se lisent directement dans les textes officiels : les trois versions d'un article donnent les trois termes exacts, sans passer par une traduction d'usage."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment sont converties les abréviations de lois ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Selon la langue cible. La poursuite pour dettes et la faillite s'abrège LEF en italien et LP en français ; le droit international privé s'abrège LDIP dans les deux langues, mais IPRG en allemand ; le Code des obligations reste CO en italien et en français. En cas de doute, le nom complet de la loi est écrit en toutes lettres."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Traitez-vous aussi le français vers l'italien ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui, les quatre langues natives fonctionnent dans toutes les combinaisons, dans un sens comme dans l'autre. Ce sont aussi les seules langues disponibles en mode Highly sensitive content ; la plateforme couvre par ailleurs 30 langues pour les pièces étrangères."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Les documents tessinois arrivent souvent scannés, est-ce un problème ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non. L'onglet PDF to Word de Traduction texte et document convertit un scan en document Word éditable avant traduction, ce qui permet de conserver la structure et d'annoter ensuite. Les fichiers repartent dans leur format d'origine."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Traduction",
+     "item": "https://neur-on.ai/fr/traduction/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Italien vers français",
+     "item": "https://neur-on.ai/fr/traduction/italien-francais/"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "Service",
+   "name": "Italien vers français",
+   "description": "L'italien juridique suisse vers le français : ricorso, precetto esecutivo, Tribunale federale et les termes du Tessin, distincts de l'italien d'Italie.",
+   "serviceType": "Traduction juridique et financière",
+   "url": "https://neur-on.ai/fr/traduction/italien-francais/",
+   "provider": {
+    "@type": "Organization",
+    "@id": "https://neur-on.ai/#organisation",
+    "name": "Neur.on",
+    "url": "https://neur-on.ai/"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "Suisse"
+   },
+   "availableLanguage": [
+    "it",
+    "fr"
+   ]
+  }
+ ]
+}

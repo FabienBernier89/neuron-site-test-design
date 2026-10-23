@@ -1,0 +1,61 @@
+{
+ "@type": "Organization",
+ "@id": "https://neur-on.ai/#organisation",
+ "name": "Neur.on",
+ "legalName": "Neur.on AI Solutions SA",
+ "url": "https://neur-on.ai/",
+ "email": "team@corrext.com",
+ "description": "Société suisse établie à Fribourg. Neur.on développe LexMachina, un moteur de traduction neuronale entraîné sur la donnée juridique et financière suisse, et Corrext, la plateforme de traduction juridique et financière qui l'exploite.",
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "Place de la Gare 15",
+  "postalCode": "1700",
+  "addressLocality": "Fribourg",
+  "addressRegion": "FR",
+  "addressCountry": "CH"
+ },
+ "areaServed": "CH",
+ "knowsLanguage": [
+  "de",
+  "fr",
+  "it",
+  "en"
+ ],
+ "award": [
+  "Lauréat des Swiss FinTech Awards 2024, catégorie Early Stage",
+  "BILANZ, classement des entreprises les plus innovantes de Suisse 2024 (13e rang)",
+  "Digital Shapers 2023"
+ ],
+ "hasCredential": {
+  "@type": "EducationalOccupationalCredential",
+  "credentialCategory": "certification",
+  "name": "ISO 27001",
+  "dateCreated": "2024-02"
+ },
+ "brand": [
+  {
+   "@type": "Brand",
+   "name": "Corrext",
+   "description": "La plateforme de traduction juridique et financière de Neur.on."
+  },
+  {
+   "@type": "Brand",
+   "name": "LexMachina",
+   "description": "Le moteur de Neur.on, entraîné sur la donnée juridique et financière suisse."
+  },
+  {
+   "@type": "Brand",
+   "name": "CHnell",
+   "description": "Le concordancier terminologique suisse de Neur.on."
+  }
+ ],
+ "logo": {
+  "@type": "ImageObject",
+  "url": "https://neur-on.ai/assets/img/neuron-logo.png",
+  "width": 557,
+  "height": 170
+ },
+ "sameAs": [
+  "https://www.linkedin.com/company/neur-on"
+ ]
+}

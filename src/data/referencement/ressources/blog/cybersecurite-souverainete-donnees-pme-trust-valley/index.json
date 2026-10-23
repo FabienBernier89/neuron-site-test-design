@@ -1,0 +1,105 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/trust-valley-2023-datensouveraenitaet/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/trust-valley-2023-sovranita-dati/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/trust-valley-2023-data-sovereignty/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Souveraineté des données en Suisse : Trust Valley · Neur.on\">",
+  "<meta property=\"og:description\" content=\"À la journée Trust Valley 2023 à l’EPFL, Neur.on a témoigné sur la sécurité des données des PME et relayé l’appel à une infrastructure 100 % suisse.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/cybersecurite-souverainete-donnees-pme-trust-valley.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Une femme pose près d’un panneau « Trust Valley Welcome 2023 », trois joueurs de cor des Alpes en arrière-plan\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Trust Valley 2023 : cybersécurité et souveraineté des données, une tradition suisse durable ?",
+   "description": "À la journée Trust Valley 2023 à l’EPFL, Neur.on a témoigné sur la sécurité des données des PME et relayé l’appel à une infrastructure 100 % suisse.",
+   "datePublished": "2023-10-05",
+   "dateModified": "2023-10-05",
+   "inLanguage": "fr-CH",
+   "wordCount": 454,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/cybersecurite-souverainete-donnees-pme-trust-valley.webp",
+   "about": [
+    {
+     "@type": "Event",
+     "name": "Journée Trust Valley 2023"
+    },
+    {
+     "@type": "Organization",
+     "name": "Trust Valley"
+    },
+    {
+     "@type": "Place",
+     "name": "Rolex Learning Center, EPFL"
+    },
+    {
+     "@type": "Person",
+     "name": "Lennig Pedron"
+    },
+    {
+     "@type": "Organization",
+     "name": "HES-SO Haute école spécialisée de Suisse occidentale"
+    },
+    {
+     "@type": "Organization",
+     "name": "Swiss LegalTech Association"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Trust Valley 2023 : cybersécurité et souveraineté des données, une tradition suisse durable ?",
+     "item": "https://neur-on.ai/fr/ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/"
+    }
+   ]
+  }
+ ]
+}

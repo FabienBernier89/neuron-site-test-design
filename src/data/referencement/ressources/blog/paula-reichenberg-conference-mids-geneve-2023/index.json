@@ -1,0 +1,105 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/paula-reichenberg-conference-mids-geneve-2023/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conference-mids-geneve-2023/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conference-mids-geneve-2023/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/mids-konferenz-genf-2023/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/conferenza-mids-ginevra-2023/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/mids-conference-geneva-2023/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Conférence MIDS 2023 à Genève : IA générative · Neur.on\">",
+  "<meta property=\"og:description\" content=\"À Genève en septembre 2023, Paula Reichenberg (Neur.on) a comparé l’adoption de l’IA générative à celle de la traduction automatique aux 15 ans du MIDS.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conference-mids-geneve-2023/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/paula-reichenberg-conference-mids-geneve-2023.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Visuel Neur.on « Back to the future » et « AI Unleashed » avec une balance de la justice sur fond numérique bleu\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Conférence MIDS 2023 à Genève : Paula Reichenberg sur l’adoption de l’IA générative",
+   "description": "À Genève en septembre 2023, Paula Reichenberg (Neur.on) a comparé l’adoption de l’IA générative à celle de la traduction automatique aux 15 ans du MIDS.",
+   "datePublished": "2023-09-22",
+   "dateModified": "2023-09-22",
+   "inLanguage": "fr-CH",
+   "wordCount": 185,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conference-mids-geneve-2023/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/paula-reichenberg-conference-mids-geneve-2023.webp",
+   "about": [
+    {
+     "@type": "Event",
+     "name": "Conférence « Back to the Future » du MIDS 2023"
+    },
+    {
+     "@type": "Organization",
+     "name": "Master in International Dispute Settlement (MIDS)"
+    },
+    {
+     "@type": "Person",
+     "name": "Paula Reichenberg"
+    },
+    {
+     "@type": "Person",
+     "name": "Jacques de Werra"
+    },
+    {
+     "@type": "Person",
+     "name": "Sean McCarthy"
+    },
+    {
+     "@type": "Place",
+     "name": "Genève"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Conférence MIDS 2023 à Genève : Paula Reichenberg sur l’adoption de l’IA générative",
+     "item": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conference-mids-geneve-2023/"
+    }
+   ]
+  }
+ ]
+}

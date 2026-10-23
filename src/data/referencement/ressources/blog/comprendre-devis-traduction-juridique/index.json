@@ -1,0 +1,116 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/comprendre-devis-traduction-juridique/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/comprendre-devis-traduction-juridique/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/comprendre-devis-traduction-juridique/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/offerte-juristische-uebersetzung/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/preventivo-traduzione-giuridica/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/legal-translation-quotes/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Comprendre un devis de traduction juridique suisse · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Page standard, catégorie du document, niveaux de relecture et délais : ce que recouvre chaque ligne d'un devis de traduction juridique en Suisse.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/comprendre-devis-traduction-juridique/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "Article",
+   "headline": "Pages standard, niveaux de relecture, délais : comprendre un devis de traduction juridique",
+   "description": "Comment se construit un devis de traduction juridique : l'unité de comptage, la catégorie détectée du document, les trois niveaux de relecture externe et le coût caché de la relecture interne.",
+   "datePublished": "2026-09-15",
+   "dateModified": "2026-09-15",
+   "inLanguage": "fr-CH",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   }
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Qu'est-ce qu'une page standard en traduction ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Une page standard est une unité de comptage conventionnelle fondée sur le volume de texte, et non sur le nombre de feuilles du document. Un fichier de dix feuilles très aérées peut représenter moins de pages standard qu'un contrat de trois feuilles denses. La définition exacte, en nombre de caractères ou de mots, varie d'un prestataire à l'autre : demandez-la par écrit, car c'est elle qui rend deux devis comparables."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Pourquoi un devis demande-t-il la catégorie juridique du document ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Parce qu'elle détermine la terminologie de référence, le profil du relecteur et donc le temps de traitement. Dans Corrext, l'application détecte la langue et la catégorie du document au moment du dépôt, par exemple Private Insurance, et l'utilisateur peut corriger cette détection avant que le devis soit calculé."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quelle différence entre Light review, Full review et Double review ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Light review corrige les erreurs significatives, les omissions et les contresens : le résultat est complet et exact sur le fond, recommandé pour comprendre et pour une diffusion interne. Full review reprend en plus la cohérence, l'idiomatisme, le style et le ton, pour un document destiné à des tiers. Double review and certified translation fait relire l'ensemble par deux traducteurs juridiques qualifiés, avec un certificat attestant l'exactitude et l'impartialité, pour un usage juridique, une publication ou un dépôt auprès d'une autorité."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "La relecture interne est-elle gratuite ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Elle n'est pas facturée par le prestataire, mais elle consomme du temps de juriste. C'est pourquoi Corrext demande, dans les spécifications de relecture interne, d'indiquer le prix par page standard que vous facturez vous-même pour cette relecture : le devis affiche alors un coût total qui inclut votre propre travail, au lieu de le laisser invisible."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quelles questions poser avant d'accepter un devis de traduction juridique ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Demandez la définition de la page standard, ce que le niveau de relecture retenu garantit exactement, qui relit et avec quelle spécialisation, ce qui se passe en cas de désaccord terminologique, où les données sont stockées et traitées, si le contenu alimente une mémoire de traduction, ce qui est compris en cas de modification du texte source après le lancement, et sous quelle forme le livrable est rendu."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Comprendre un devis",
+     "item": "https://neur-on.ai/fr/ressources/blog/comprendre-devis-traduction-juridique/"
+    }
+   ]
+  }
+ ]
+}

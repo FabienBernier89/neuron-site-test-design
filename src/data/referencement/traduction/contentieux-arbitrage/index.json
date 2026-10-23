@@ -1,0 +1,119 @@
+{
+ "source": "Sites/neuron/docs/fr/traduction/contentieux-arbitrage/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/traduction/contentieux-arbitrage/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/traduction/contentieux-arbitrage/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/uebersetzung/prozesse-schiedsverfahren/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/traduzione/contenzioso-arbitrato/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/translation/litigation-and-arbitration/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction juridique pour contentieux et arbitrage · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Mémoires, bordereaux de pièces, sentences arbitrales, recours au Tribunal fédéral : traduire avec la terminologie du CPC et de la LDIP en Suisse.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/traduction/contentieux-arbitrage/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Un tribunal suisse accepte-t-il une traduction automatique ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Une pièce produite devant un tribunal doit être fiable, et selon le cas attestée. La traduction machine sert à comprendre le dossier ; ce qui est déposé passe par une Full review par un traducteur juridique, ou par une Double review avec certificat quand une attestation est demandée."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Dans quelle langue faut-il traduire les pièces ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Dans la langue officielle du for, qui dépend du canton et de l'autorité saisie. L'allemand, le français et l'italien sont natifs dans toutes les paires, l'anglais également, ce qui couvre aussi les arbitrages internationaux menés en anglais avec des pièces germanophones."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment garder le secret du dossier ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Le stockage se fait sur des serveurs suisses dans tous les cas. Le mode Highly sensitive content impose en plus un traitement exclusivement en Suisse, sans réutilisation du contenu en mémoire de traduction. Les moteurs hébergés à l'étranger affichent un avertissement avant tout envoi."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Peut-on comparer plusieurs traductions d'un même passage ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. La fonction Alternatives propose jusqu'à quatre formulations, chacune attribuée au moteur qui l'a produite. C'est utile pour une citation de sentence ou de jurisprudence, où deux formulations acceptables n'ont pas la même portée devant l'instance suivante. Le choix retenu peut ensuite être fixé dans vos ressources terminologiques, pour tout le dossier."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment vérifier un terme de procédure ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En le surlignant : Fast lookup CHnell l'ouvre en contexte avec sa source officielle, dans les domaines Litigation & Enforcement et Arbitration. Le concordancier accepte les opérateurs entre guillemets, le signe moins et l'opérateur or pour cibler une occurrence précise."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Et les pièces scannées de mauvaise qualité ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "L'onglet PDF to Word de Traduction texte et document convertit un scan en document Word éditable avant traduction ou annotation. C'est souvent la première étape d'un bordereau, où une partie des annexes n'existe que sous forme d'image. Le document Word obtenu se traduit ensuite comme n'importe quel fichier natif."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Traduction",
+     "item": "https://neur-on.ai/fr/traduction/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Contentieux et arbitrage",
+     "item": "https://neur-on.ai/fr/traduction/contentieux-arbitrage/"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "Service",
+   "name": "Contentieux et arbitrage",
+   "description": "Mémoires, bordereaux de pièces, sentences arbitrales, recours au Tribunal fédéral : traduire avec la terminologie du CPC et de la LDIP en Suisse.",
+   "serviceType": "Traduction juridique et financière",
+   "url": "https://neur-on.ai/fr/traduction/contentieux-arbitrage/",
+   "provider": {
+    "@type": "Organization",
+    "@id": "https://neur-on.ai/#organisation",
+    "name": "Neur.on",
+    "url": "https://neur-on.ai/"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "Suisse"
+   }
+  }
+ ]
+}

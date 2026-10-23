@@ -1,0 +1,105 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/weblaw-forum-2024-jury/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/weblaw-forum-2024-giuria/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/weblaw-forum-2024-jury/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Weblaw Forum 2024 : Paula Reichenberg au jury · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Le 20 juin 2024 à Zurich, Paula Reichenberg, CEO de Neur.on, rejoint le jury de l’Elevator Pitch Competition du Weblaw Forum, gagnée par Neur.on en 2023.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/paula-reichenberg-jury-weblaw-forum-2024.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Paula Reichenberg et Barbara Müry posent en extérieur, avec le bandeau « Neur.on wins the 2023 Weblaw LegalTech Pitching Competition »\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Paula Reichenberg, CEO de Neur.on, au jury de l’Elevator Pitch Competition du Weblaw Forum 2024",
+   "description": "Le 20 juin 2024 à Zurich, Paula Reichenberg, CEO de Neur.on, rejoint le jury de l’Elevator Pitch Competition du Weblaw Forum, gagnée par Neur.on en 2023.",
+   "datePublished": "2024-06-18",
+   "dateModified": "2024-06-18",
+   "inLanguage": "fr-CH",
+   "wordCount": 251,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/paula-reichenberg-jury-weblaw-forum-2024.webp",
+   "about": [
+    {
+     "@type": "Event",
+     "name": "Weblaw Forum 2024"
+    },
+    {
+     "@type": "Person",
+     "name": "Paula Reichenberg"
+    },
+    {
+     "@type": "Person",
+     "name": "Barbara Müry"
+    },
+    {
+     "@type": "Person",
+     "name": "Julia Maltby"
+    },
+    {
+     "@type": "Organization",
+     "name": "Herlock"
+    },
+    {
+     "@type": "Place",
+     "name": "Zurich"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Paula Reichenberg, CEO de Neur.on, au jury de l’Elevator Pitch Competition du Weblaw Forum 2024",
+     "item": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/"
+    }
+   ]
+  }
+ ]
+}

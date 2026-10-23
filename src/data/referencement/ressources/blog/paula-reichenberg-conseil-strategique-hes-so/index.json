@@ -1,0 +1,101 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/paula-reichenberg-conseil-strategique-hes-so/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conseil-strategique-hes-so/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conseil-strategique-hes-so/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/strategierat-hes-so/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/consiglio-strategico-hes-so/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/hes-so-strategic-council/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Paula Reichenberg au Conseil stratégique HES-SO · Neur.on\">",
+  "<meta property=\"og:description\" content=\"La HES-SO a désigné Paula Reichenberg, CEO de Neur.on, membre de son Conseil stratégique de 2025 à 2028, un organe consultatif aux profils variés.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conseil-strategique-hes-so/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/paula-reichenberg-conseil-strategique-hes-so.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Paula Reichenberg souriante, bras croisés, à côté d’un encadré annonçant sa nomination au Strategy Council 2025-2028 de la HES-SO\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Paula Reichenberg désignée au Conseil stratégique de la HES-SO pour 2025-2028",
+   "description": "La HES-SO a désigné Paula Reichenberg, CEO de Neur.on, membre de son Conseil stratégique de 2025 à 2028, un organe consultatif aux profils variés.",
+   "datePublished": "2024-11-28",
+   "dateModified": "2024-11-28",
+   "inLanguage": "fr-CH",
+   "wordCount": 377,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conseil-strategique-hes-so/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/paula-reichenberg-conseil-strategique-hes-so.webp",
+   "about": [
+    {
+     "@type": "Person",
+     "name": "Paula Reichenberg"
+    },
+    {
+     "@type": "Organization",
+     "name": "HES-SO Haute école spécialisée de Suisse occidentale"
+    },
+    {
+     "@type": "Organization",
+     "name": "EPFL"
+    },
+    {
+     "@type": "Organization",
+     "name": "EPFZ"
+    },
+    {
+     "@type": "Place",
+     "name": "Suisse"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Paula Reichenberg désignée au Conseil stratégique de la HES-SO pour 2025-2028",
+     "item": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conseil-strategique-hes-so/"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,101 @@
+{
+ "source": "Sites/neuron/docs/fr/solutions/cabinets-avocats/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/solutions/cabinets-avocats/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/solutions/cabinets-avocats/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/loesungen/anwaltskanzleien/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/soluzioni/studi-legali/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/solutions/law-firms/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction juridique pour cabinets d'avocats suisses · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Contentieux, arbitrage, M&amp;A : traduisez pièces et contrats sous secret professionnel, en terminologie suisse, relus par un traducteur juridique.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/solutions/cabinets-avocats/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Le secret professionnel de l'avocat est-il compatible avec une traduction automatique ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui, à condition de maîtriser où le texte est traité. Le mode Highly sensitive content de Corrext impose un stockage et un traitement exclusivement en Suisse, sans réutilisation du contenu en mémoire de traduction. Les moteurs hébergés à l'étranger restent disponibles, mais l'application affiche un avertissement et exige une pseudonymisation préalable."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Combien de pièces puis-je traduire en une fois ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Jusqu'à 25 fichiers de 50 Mo chacun par envoi dans Traduction texte et document, dans les formats .pdf, .doc, .docx, .xls, .xlsx, .ppt et .pptx. Pour un lot plus important ou une relecture humaine, créez un projet de traduction."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "La mise en page des contrats est-elle conservée ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui, la traduction est livrée dans le format d'origine. L'application recommande de déposer le format original, un fichier Word ou Excel plutôt qu'un PDF, quand il est disponible."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Qui relit les documents destinés à des tiers ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Un traducteur juridique, en relecture Light ou Full, ou deux traducteurs et une agence spécialisée pour une Double review avec certificat. Le niveau se choisit document par document, avec le délai affiché avant validation."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Puis-je faire relire par mes propres collaborateurs ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Le mode Internal review du tunnel projet organise la relecture par vos équipes et chiffre le temps nécessaire à partir du nombre de pages standard détecté."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Les traductions d'un dossier alimentent-elles une base commune ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les projets en confidentialité Standard peuvent servir de mémoire de traduction, réutilisable exclusivement par votre organisation. Les projets en mode Highly sensitive content ne sont jamais réutilisés."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Solutions",
+     "item": "https://neur-on.ai/fr/solutions/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Cabinets d'avocats",
+     "item": "https://neur-on.ai/fr/solutions/cabinets-avocats/"
+    }
+   ]
+  }
+ ]
+}

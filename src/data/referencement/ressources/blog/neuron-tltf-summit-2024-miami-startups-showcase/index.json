@@ -1,0 +1,105 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/neuron-tltf-summit-2024-miami-startups-showcase/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/neuron-tltf-summit-2024-miami-startups-showcase/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/neuron-tltf-summit-2024-miami-startups-showcase/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/tltf-summit-2024-miami/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/tltf-summit-2024-miami/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/tltf-summit-2024-miami/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Neur.on au Startup Showcase du TLTF Summit 2024 · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Neur.on fait partie des 24 start-up retenues, sur des centaines de candidatures, pour le Startup Showcase du TLTF Summit, en décembre 2024 à Miami.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/neuron-tltf-summit-2024-miami-startups-showcase/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/neuron-tltf-summit-2024-miami-startups-showcase.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Visuel « We’re going to Miami » : gratte-ciel en bord de plage, logos du TLTF Summit 2024 et de Neur.on\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Neur.on parmi les 24 start-up du Startup Showcase du TLTF Summit 2024 à Miami",
+   "description": "Neur.on fait partie des 24 start-up retenues, sur des centaines de candidatures, pour le Startup Showcase du TLTF Summit, en décembre 2024 à Miami.",
+   "datePublished": "2024-11-11",
+   "dateModified": "2024-11-11",
+   "inLanguage": "fr-CH",
+   "wordCount": 230,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/neuron-tltf-summit-2024-miami-startups-showcase/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/neuron-tltf-summit-2024-miami-startups-showcase.webp",
+   "about": [
+    {
+     "@type": "Event",
+     "name": "TLTF Summit 2024"
+    },
+    {
+     "@type": "Place",
+     "name": "Miami"
+    },
+    {
+     "@type": "Organization",
+     "name": "Neur.on"
+    },
+    {
+     "@type": "Organization",
+     "name": "AffiniPay"
+    },
+    {
+     "@type": "Organization",
+     "name": "Orrick, Herrington & Sutcliffe LLP"
+    },
+    {
+     "@type": "Organization",
+     "name": "LexShares"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Neur.on parmi les 24 start-up du Startup Showcase du TLTF Summit 2024 à Miami",
+     "item": "https://neur-on.ai/fr/ressources/blog/neuron-tltf-summit-2024-miami-startups-showcase/"
+    }
+   ]
+  }
+ ]
+}

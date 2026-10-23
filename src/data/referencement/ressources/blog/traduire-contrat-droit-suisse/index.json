@@ -1,0 +1,116 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/traduire-contrat-droit-suisse/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/traduire-contrat-droit-suisse/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/traduire-contrat-droit-suisse/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/vertrag-uebersetzen-schweizer-recht/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/tradurre-contratto-diritto-svizzero/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/translating-contracts-swiss-law/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduire un contrat en droit suisse quadrilingue · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Lois publiées en trois langues, abréviations qui changent, anglais sans valeur légale : ce que le quadrilinguisme suisse impose à un contrat traduit.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/traduire-contrat-droit-suisse/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "Article",
+   "headline": "Traduire un contrat en droit suisse : ce que change le quadrilinguisme légal",
+   "description": "Pourquoi les lois publiées en allemand, en français et en italien font que la terminologie d'un contrat suisse n'est pas affaire de goût, et comment vérifier un terme dans une source officielle.",
+   "datePublished": "2026-09-15",
+   "dateModified": "2026-09-15",
+   "inLanguage": "fr-CH",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   }
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Quelle version d'une loi fédérale suisse fait foi ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les actes législatifs fédéraux sont publiés en allemand, en français et en italien, et les trois versions ont la même valeur. Aucune n'est la traduction officielle d'une autre : en cas de divergence, l'interprétation se fait en confrontant les trois. C'est pourquoi la terminologie d'un contrat régi par le droit suisse doit reprendre celle de la version officielle de la langue choisie, et non une équivalence trouvée ailleurs."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment s'abrège le Code des obligations en allemand et en italien ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "CO en français, OR (Obligationenrecht) en allemand, CO (Codice delle obbligazioni) en italien. Le Code civil devient ZGB en allemand et CC en italien. La loi sur la poursuite pour dettes et la faillite s'abrège LP en français, SchKG en allemand et LEF en italien. Une abréviation ne se traduit pas : elle se remplace par celle de la version officielle correspondante."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Les traductions anglaises des lois suisses ont-elles une valeur légale ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non. L'anglais n'est pas une langue officielle de la Confédération. Les versions anglaises de textes fédéraux publiées sur le portail Fedlex sont fournies à titre informatif et ne font pas foi. Dans un contrat anglophone soumis au droit suisse, citez l'article dans la langue officielle de référence et indiquez, si vous le souhaitez, une traduction de courtoisie entre parenthèses."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quels pièges de forme reviennent le plus souvent en allemand et en italien de Suisse ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En allemand de Suisse, le ß n'existe pas : on écrit toujours ss. Les milliers se séparent par une apostrophe. En italien de Suisse, plusieurs institutions portent un nom différent de leur homonyme italien : la société anonyme se dit società anonima et non società per azioni, et le Conseil d'État tessinois n'est pas le Consiglio di Stato italien. Le nom de la juridiction suprême est Tribunal fédéral, Bundesgericht, Tribunale federale, jamais le nom d'une juridiction étrangère."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Où vérifier gratuitement un terme juridique suisse dans les trois langues ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sur Fedlex, le portail du droit fédéral, qui affiche le même acte article par article en allemand, en français et en italien. Pour un terme isolé, la banque de données terminologique de la Confédération, TERMDAT, et les arrêts publiés du Tribunal fédéral donnent l'usage attesté. La Feuille fédérale, les publications de la FINMA et les portails cantonaux complètent pour les domaines spécialisés."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Contrat en droit suisse",
+     "item": "https://neur-on.ai/fr/ressources/blog/traduire-contrat-droit-suisse/"
+    }
+   ]
+  }
+ ]
+}

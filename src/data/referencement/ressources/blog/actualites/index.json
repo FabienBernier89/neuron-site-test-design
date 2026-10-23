@@ -1,0 +1,1180 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/actualites/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/actualites/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/actualites/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/aktuelles/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/notizie/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/news/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Actualités de Neur.on depuis 2020 · Neur.on\">",
+  "<meta property=\"og:description\" content=\"111 actualités de Neur.on depuis 2020 : prix et distinctions, conférences, partenariats, presse et recherche, classés par année.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/actualites/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "CollectionPage",
+   "name": "Actualités de Neur.on",
+   "url": "https://neur-on.ai/fr/ressources/blog/actualites/",
+   "inLanguage": "fr-CH",
+   "about": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": 111,
+    "itemListElement": [
+     {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg mise en avant par UBS pour sa conception du leadership",
+       "datePublished": "2025-07-22",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-2"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg au LegalTechTalk de Londres, les 26 et 27 juin 2025",
+       "datePublished": "2025-06-23",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-3"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on au 12e Anwaltskongress de la Fédération Suisse des Avocats à Lucerne",
+       "datePublished": "2025-06-18",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-4"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg présente Neur.on à l’événement PwC et The LegalTech Fund de Londres",
+       "datePublished": "2025-05-23",
+       "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pwc-legaltech-fund-londres/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg présente Neur.on au TLTF Summit 2024",
+       "datePublished": "2025-05-13",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-6"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 6,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on mis en avant par TLTF parmi les start-up du Startup Showcase 2024",
+       "datePublished": "2025-05-03",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-7"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 7,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg, CEO de Neur.on, fait partie du Female Founder Project 2025 d’UBS",
+       "datePublished": "2025-04-14",
+       "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-female-founder-project-ubs-2025/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 8,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "La CEO de Neur.on au Legalweek de New York, les 26 et 27 mars 2025",
+       "datePublished": "2025-03-25",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-9"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 9,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Le Temps revient sur la 7e édition de FORWARD, le rendez-vous des PME",
+       "datePublished": "2025-03-21",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-10"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 10,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on au Forum FORWARD organisé par Le Temps, le 20 mars 2025 à Lausanne",
+       "datePublished": "2025-03-13",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-11"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 11,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Geneva International Legal Week 2025 : un panel sur l’IA rentable avec Paula Reichenberg",
+       "datePublished": "2025-02-28",
+       "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-panel-gilw25-geneve-ia/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 12,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on aux AI Days 2025 avec la HES-SO et la Mobilière",
+       "datePublished": "2025-02-26",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-13"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 13,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg, CEO de Neur.on, à l’honneur dans HZ Banking (Handelszeitung)",
+       "datePublished": "2025-02-11",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-14"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 14,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on aux AI Days 2025 à Genève : comment entraîner un LLM à bien traduire",
+       "datePublished": "2025-01-27",
+       "url": "https://neur-on.ai/fr/ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 15,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "40 ans d’eJustice.ch : la CEO de Neur.on débat du « Swiss Justice Base Model »",
+       "datePublished": "2025-01-21",
+       "url": "https://neur-on.ai/fr/ressources/blog/ejustice-40-ans-kamingesprach-neuron/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 16,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Joyeux Noël et belles fêtes de fin d’année : les vœux de Neur.on",
+       "datePublished": "2024-12-24",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-17"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 17,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Careers and the Business of Law : Paula Reichenberg et David Cowen au TLTF Summit 2024",
+       "datePublished": "2024-12-16",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-18"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 18,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg, CEO de Neur.on, pitche à l’EPFL Investor Day 2024",
+       "datePublished": "2024-12-11",
+       "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pitch-epfl-investor-day-2024/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 19,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on co-lauréat du Startup Showcase du TLTF Summit 2024 à Miami",
+       "datePublished": "2024-12-06",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-20"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 20,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg, CEO de Neur.on, finaliste du UBS Female Founder Award",
+       "datePublished": "2024-12-05",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-21"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 21,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Rejoignez la communauté LegalTech à l’ELTACon, le 12 décembre 2024 à Paris",
+       "datePublished": "2024-11-29",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-23"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 22,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on et Swisscom annoncent une collaboration pour les secteurs juridique et bancaire",
+       "datePublished": "2024-11-29",
+       "url": "https://neur-on.ai/fr/ressources/blog/neuron-swisscom-collaboration-kickstart-2024/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 23,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg désignée au Conseil stratégique de la HES-SO pour 2025-2028",
+       "datePublished": "2024-11-28",
+       "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conseil-strategique-hes-so/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 24,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Registre du commerce de Schwyz : des extraits traduits en anglais par l’IA de Neur.on",
+       "datePublished": "2024-11-25",
+       "url": "https://neur-on.ai/fr/ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 25,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on parmi les 24 start-up du Startup Showcase du TLTF Summit 2024 à Miami",
+       "datePublished": "2024-11-11",
+       "url": "https://neur-on.ai/fr/ressources/blog/neuron-tltf-summit-2024-miami-startups-showcase/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 26,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg partage ses erreurs sur scène au Digital Economy Award 2024",
+       "datePublished": "2024-10-31",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-27"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 27,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Sécurité de l’information : Neur.on obtient la certification ISO 27001",
+       "datePublished": "2024-10-22",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-28"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 28,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Classement BILANZ 2024 : Neur.on 13e des entreprises les plus innovantes et 2e en culture d’innovation",
+       "datePublished": "2024-10-10",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-29"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 29,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Alliance - Innovation Suisse : comment Neur.on révolutionne la traduction juridique",
+       "datePublished": "2024-10-03",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-30"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 30,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on parmi les 24 start-up retenues pour le TLTF Summit 2024 en Floride",
+       "datePublished": "2024-09-25",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-31"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 31,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on rejoint la cohorte Kickstart Innovation, verticale Finance & Insurance",
+       "datePublished": "2024-09-13",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-32"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 32,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "IA et études d’avocats : Paula Reichenberg au panel « AI in Business » de Zurich en 2024",
+       "datePublished": "2024-09-01",
+       "url": "https://neur-on.ai/fr/ressources/blog/panel-ai-in-business-zurich-2024/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 33,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on intègre la cohorte 2024 de Kickstart Innovation, verticale Finance & Insurance",
+       "datePublished": "2024-08-26",
+       "url": "https://neur-on.ai/fr/ressources/blog/neuron-cohorte-kickstart-innovation-2024/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 34,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Innosuisse accorde à Neur.on une subvention « Startup Innovation Project »",
+       "datePublished": "2024-08-01",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-35"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 35,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on lève son verre au travail d’équipe et aux étapes franchies",
+       "datePublished": "2024-07-05",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-36"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 36,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on élu « Early Stage Start-up of the Year » aux Swiss FinTech Awards 2024",
+       "datePublished": "2024-06-24",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-37"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 37,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg, CEO de Neur.on, termine le FF+ Acceleration Program 2024",
+       "datePublished": "2024-06-21",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-38"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 38,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg, CEO de Neur.on, au jury de l’Elevator Pitch Competition du Weblaw Forum 2024",
+       "datePublished": "2024-06-18",
+       "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 39,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "LegalTechTalk 2024 à Londres : 3 pépites sur la réinvention des études d’avocats",
+       "datePublished": "2024-06-14",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-40"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 40,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Les enseignements clés de la conférence LegalTechTalk 2024 à Londres",
+       "datePublished": "2024-06-13",
+       "url": "https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-enseignements/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 41,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on remporte les Swiss FinTech Awards 2024 dans la catégorie Early-Stage",
+       "datePublished": "2024-06-12",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-42"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 42,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "LegalTechTalk 2024 à Londres : réinventer le modèle opérationnel des cabinets d’avocats",
+       "datePublished": "2024-06-07",
+       "url": "https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 43,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on finaliste des Swiss FinTech Awards 2024 dans la catégorie Early Stage",
+       "datePublished": "2024-06-04",
+       "url": "https://neur-on.ai/fr/ressources/blog/neuron-finaliste-early-stage-swiss-fintech-awards-2024/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 44,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on au GEN AI Summit 2024 de Lausanne : les défis de l’IA en traduction juridique",
+       "datePublished": "2024-05-29",
+       "url": "https://neur-on.ai/fr/ressources/blog/neuron-gen-ai-summit-2024-lausanne/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 45,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on parmi les 4 finalistes des Swiss FinTech Awards 2024",
+       "datePublished": "2024-05-24",
+       "url": "https://neur-on.ai/fr/ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 46,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on dans le Top 10 des start-up fintech suisses des Swiss FinTech Awards 2024",
+       "datePublished": "2024-04-19",
+       "url": "https://neur-on.ai/fr/ressources/blog/neuron-top-10-startups-fintech-suisses-2024/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 47,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "IA et secteur juridique : Paula Reichenberg en table ronde le 17 avril 2024 à Zurich",
+       "datePublished": "2024-04-10",
+       "url": "https://neur-on.ai/fr/ressources/blog/table-ronde-ia-juridique-slta-zurich-2024/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 48,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "La fondatrice de Neur.on rejoint le FF+ Acceleration Program",
+       "datePublished": "2024-04-05",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-49"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 49,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "La RTS, télévision nationale suisse, en visite chez Neur.on à Fribourg",
+       "datePublished": "2024-03-25",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-50"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 50,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on à l’AMLD EPFL 2024, du 23 au 26 mars au SwissTech Convention Center de Lausanne",
+       "datePublished": "2024-03-06",
+       "url": "https://neur-on.ai/fr/ressources/blog/neuron-amld-epfl-2024-lausanne/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 51,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Traduction automatique dans l’administration : le rapport de l’Innovation Sandbox est paru",
+       "datePublished": "2024-02-19",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-52"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 52,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Journée des Avocates du SAV à Berne, le 5 février 2024 : des parcours inspirants",
+       "datePublished": "2024-02-05",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-53"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 53,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Notre business angel Jaana Goeggel distinguée Top Woman Investor in Latin American Tech",
+       "datePublished": "2024-02-01",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-54"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 54,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on revient sur sa participation au programme PwC Raise 7.0",
+       "datePublished": "2023-12-20",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-55"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 55,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "L’IA au service de la traduction dans l’administration : Neur.on à l’Innovation Sandbox",
+       "datePublished": "2023-12-12",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-56"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 56,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg, vice-présidente de la SLTA, à la journée de formation 2023 de l’OAF",
+       "datePublished": "2023-12-01",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-57"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 57,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on à l’Investor Summit Liechtenstein du 21 novembre 2023",
+       "datePublished": "2023-11-28",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-58"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 58,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "BrownBag Weblaw.ch du 29 novembre 2023 : la traduction juridique avec l’IA spécialisée",
+       "datePublished": "2023-11-02",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-59"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 59,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Le Temps nomme Paula Reichenberg au « Forum des 100 » 2023",
+       "datePublished": "2023-10-31",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-60"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 60,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg au déjeuner de l’AIBL à Genève sur la legal tech et l’IA générative",
+       "datePublished": "2023-10-24",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-62"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 61,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg rejoint l’Industrial Board du Swiss AI Center for SMEs (CSIA-PME)",
+       "datePublished": "2023-10-11",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-63"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 62,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Trust Valley Day 2023 : Neur.on au panel sur les risques cyber des PME",
+       "datePublished": "2023-10-09",
+       "url": "https://neur-on.ai/fr/ressources/blog/trust-valley-day-2023-risques-cyber-pme/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 63,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Trust Valley 2023 : cybersécurité et souveraineté des données, une tradition suisse durable ?",
+       "datePublished": "2023-10-05",
+       "url": "https://neur-on.ai/fr/ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 64,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on ouvre ses portes à l’occasion de FribourgOpen, organisé par la CCIF",
+       "datePublished": "2023-10-02",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-66"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 65,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Investor Summit Liechtenstein : rendez-vous le 21 novembre 2023",
+       "datePublished": "2023-09-30",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-61"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 66,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "LegalTech et avocats, alliés ou concurrents ? Leçons de la journée de l’étude digitale",
+       "datePublished": "2023-09-29",
+       "url": "https://neur-on.ai/fr/ressources/blog/legaltech-avocats-allies-ou-concurrents/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 67,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Conférence MIDS 2023 à Genève : Paula Reichenberg sur l’adoption de l’IA générative",
+       "datePublished": "2023-09-22",
+       "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conference-mids-geneve-2023/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 68,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "e-forum 2023 : métavers, IA, cybersécurité & Co., opportunités et défis pour les entreprises",
+       "datePublished": "2023-09-06",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-69"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 69,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Kilian Marty rejoint le conseil consultatif de Neur.on comme expert en cybersécurité",
+       "datePublished": "2023-08-30",
+       "url": "https://neur-on.ai/fr/ressources/blog/kilian-marty-rejoint-conseil-consultatif-neuron/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 70,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg, CEO et fondatrice de Neur.on, nommée « Digital Shaper 2023 » par BILANZ",
+       "datePublished": "2023-08-25",
+       "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-digital-shaper-2023-bilanz/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 71,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Sur orientation.ch, Orane Laeri, COO de Neur.on, retrace son parcours en linguistique",
+       "datePublished": "2023-08-24",
+       "url": "https://neur-on.ai/fr/ressources/blog/orane-laeri-parcours-orientation-ch/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 72,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on rejoint Trust4SMEs, le programme de Trust Valley pour la cybersécurité des PME",
+       "datePublished": "2023-07-21",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-73"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 73,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Les start-up de l’IA doivent-elles craindre l’AI Act ? Les leçons du Grand Challenge",
+       "datePublished": "2023-07-20",
+       "url": "https://neur-on.ai/fr/ressources/blog/ai-act-grand-challenge-universite-saint-gall/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 74,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on parmi les meilleures start-up suisses de l’IA, selon Startupticker",
+       "datePublished": "2023-06-19",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-75"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 75,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on remporte le premier prix du concours d’elevator pitch au forum LegalTech de Weblaw",
+       "datePublished": "2023-06-15",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-76"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 76,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on à la LegalTech Summer Eve de Genève : l’IA ne changera RIEN au métier d’avocat·e ?!",
+       "datePublished": "2023-06-14",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-77"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 77,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on prend part au débat du Congrès des avocats 2023 (Anwaltskongress)",
+       "datePublished": "2023-06-06",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-78"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 78,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on participe au débat sur la sécurité des données lors d’une conférence de la CCIF",
+       "datePublished": "2023-05-24",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-79"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 79,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on pitche à la 1re édition des Startup lunches organisée par Fri Up",
+       "datePublished": "2023-05-09",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-80"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 80,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on débat de l’avenir du secteur juridique à la conférence Zukunft Rechtsmarkt 2023",
+       "datePublished": "2023-05-04",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-81"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 81,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Novable présente Neur.on comme « LA » solution de traduction juridique",
+       "datePublished": "2023-04-23",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-82"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 82,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on et son partenaire iCoSys dans La Liberté, journal n° 1 de Fribourg",
+       "datePublished": "2023-04-23",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-83"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 83,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Première apparition télévisée de Neur.on, dans un reportage de La Télé",
+       "datePublished": "2023-04-05",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-84"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 84,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "AGEFI consacre un article à l’écosystème IA pionnier de Fribourg, dont fait partie Neur.on",
+       "datePublished": "2023-04-04",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-85"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 85,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on dans Le Temps, présenté comme le journal le plus lu de Suisse romande",
+       "datePublished": "2023-03-30",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-86"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 86,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on rejoint la Female Founders Initiative Switzerland et figure sur sa carte",
+       "datePublished": "2023-03-06",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-87"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 87,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Yann-Ivain Beffa, CTO de Neur.on, présente « AI for Legal document Analysis » aux AI Days",
+       "datePublished": "2023-03-01",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-88"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 88,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on à l’honneur dans la newsletter de février 2023 du Fribourg Network",
+       "datePublished": "2023-02-15",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-89"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 89,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on, première entreprise de la catégorie « Linguistic Services » de la carte de la SLTA",
+       "datePublished": "2023-02-01",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-91"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 90,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on joue un rôle actif à Words to Deeds 2023, grand rendez-vous européen de la traduction juridique",
+       "datePublished": "2023-01-26",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-90"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 91,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg, fondatrice de Neur.on, « INSEADer of the month » de janvier 2023",
+       "datePublished": "2023-01-20",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-92"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 92,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg, CEO de Neur.on, rejoint le comité exécutif de la SLTA",
+       "datePublished": "2022-12-06",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-93"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 93,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Rencontre de Noël de Neur.on pour les avocats, les acteurs de la LegalTech et leurs familles",
+       "datePublished": "2022-12-03",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-94"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 94,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "L’État de Fribourg renforce son soutien à Neur.on pour la traduction juridique par IA",
+       "datePublished": "2022-12-02",
+       "url": "https://neur-on.ai/fr/ressources/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 95,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on dans Lawstyle : premier investissement en capital-risque de Helbing Lichtenhahn",
+       "datePublished": "2022-12-01",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-96"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 96,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on échange avec les étudiants en droit lors d’un débat LegalTech d’ELSA Bern",
+       "datePublished": "2022-12-01",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-97"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 97,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Neur.on figure dans BratschiTALK, à découvrir en vidéo",
+       "datePublished": "2022-11-30",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-98"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 98,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Innosuisse finance la recherche et le développement du SaaS de traduction de Neur.on",
+       "datePublished": "2022-11-30",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-99"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 99,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Ce que les juristes en gestion d’actifs attendent de la LegalTech : Neur.on à la conférence LAM",
+       "datePublished": "2022-11-29",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-100"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 100,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Conférence BDÜ 2022 : Paula Reichenberg sur la collaboration entre avocats et traducteurs",
+       "datePublished": "2022-11-02",
+       "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-table-ronde-bdu-2022/"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 101,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Paula Reichenberg, CEO de Neur.on, intervient à la Legal Innovation Conference 2022 de Zurich",
+       "datePublished": "2022-08-30",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-102"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 102,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "LexMachina : le seul moteur de traduction qui traite directement les PDF, sur serveurs suisses",
+       "datePublished": "2021-11-25",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-103"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 103,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "LexMachina : propulsé par la HEIA-FR et Innosuisse",
+       "datePublished": "2021-06-16",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-104"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 104,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Interview avec Language Box, les experts suisses des processus de traduction",
+       "datePublished": "2021-01-12",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-105"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 105,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "LexMachina devient membre de la Swiss LegalTech Association",
+       "datePublished": "2020-11-10",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-106"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 106,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Vous avez manqué notre présentation à la 14e conférence de l’AMTA ?",
+       "datePublished": "2020-10-28",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-107"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 107,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Découvrez notre publication sur la traduction automatique neuronale",
+       "datePublished": "2020-10-26",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-108"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 108,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "LexMachina présente son approche à la conférence AMTA 2020 Virtual, le 8 octobre 2020",
+       "datePublished": "2020-09-22",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-109"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 109,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Découvrez notre moteur spécialisé en droit pénal suisse",
+       "datePublished": "2020-08-22",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-110"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 110,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Trouvez le meilleur traducteur juridique pour réviser votre traduction automatique",
+       "datePublished": "2020-08-22",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-111"
+      }
+     },
+     {
+      "@type": "ListItem",
+      "position": 111,
+      "item": {
+       "@type": "NewsArticle",
+       "headline": "Wordbee : table ronde sur la traduction automatique neuronale avec Paula Reichenberg",
+       "datePublished": "2020-08-22",
+       "url": "https://neur-on.ai/fr/ressources/blog/actualites/#actu-112"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Actualités",
+     "item": "https://neur-on.ai/fr/ressources/blog/actualites/"
+    }
+   ]
+  }
+ ]
+}

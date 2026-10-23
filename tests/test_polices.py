@@ -184,7 +184,9 @@ class TestPolices(unittest.TestCase):
             self.assertEqual(len(filtres), 1, fichier)
             self.assertEqual(blocs[filtres[0]], [f'Header set Cache-Control "{UN_AN}"'], fichier)
         for fichier in ("index.html", "OFL-Inter.txt", "robots.txt", "neuron-logo.png"):  # ni pages ni images : pas de cache d'un an
-            self.assertFalse([f for f in blocs if re.search(f, fichier)], fichier)
+            for f in blocs:
+                if re.search(f, fichier):
+                    self.assertNotIn(UN_AN, " ".join(blocs[f]), fichier)
 
     def test_toute_feuille_et_tout_script_local_porte_une_version(self):
         """Invariant du cache d'un an : une feuille ou un script change d'URL (?v=empreinte) quand son contenu change."""

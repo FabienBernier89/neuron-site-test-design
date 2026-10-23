@@ -1,0 +1,101 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/legaltechtalk-2024-londres-enseignements/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-enseignements/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-enseignements/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/legaltechtalk-2024-erkenntnisse/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/legaltechtalk-2024-londra/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/legaltechtalk-2024-key-takeaways/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"LegalTechTalk 2024 à Londres : enseignements clés · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Neur.on livre les enseignements de LegalTechTalk 2024 à Londres : attentes des directeurs juridiques, confiance avec les cabinets et rôle de la LegalTech.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-enseignements/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/legaltechtalk-2024-londres-enseignements.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Une femme et un homme en pleine discussion devant une bannière LegalTechTalk, avec vue sur des gratte-ciel londoniens\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Les enseignements clés de la conférence LegalTechTalk 2024 à Londres",
+   "description": "Neur.on livre les enseignements de LegalTechTalk 2024 à Londres : attentes des directeurs juridiques, confiance avec les cabinets et rôle de la LegalTech.",
+   "datePublished": "2024-06-13",
+   "dateModified": "2024-06-13",
+   "inLanguage": "fr-CH",
+   "wordCount": 585,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-enseignements/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/legaltechtalk-2024-londres-enseignements.webp",
+   "about": [
+    {
+     "@type": "Event",
+     "name": "LegalTechTalk 2024"
+    },
+    {
+     "@type": "Place",
+     "name": "Londres"
+    },
+    {
+     "@type": "Organization",
+     "name": "Pogust Goodhead"
+    },
+    {
+     "@type": "Person",
+     "name": "Jordan Lee"
+    },
+    {
+     "@type": "Organization",
+     "name": "Neur.on"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Les enseignements clés de la conférence LegalTechTalk 2024 à Londres",
+     "item": "https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-enseignements/"
+    }
+   ]
+  }
+ ]
+}

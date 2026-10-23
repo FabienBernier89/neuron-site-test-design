@@ -1,0 +1,105 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/ai-act-grand-challenge-universite-saint-gall/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/ai-act-grand-challenge-universite-saint-gall/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/ai-act-grand-challenge-universite-saint-gall/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/ai-act-grand-challenge-st-gallen/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/ai-act-grand-challenge-san-gallo/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/ai-act-grand-challenge-st-gallen/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Les start-up doivent-elles craindre l’AI Act ? · Neur.on\">",
+  "<meta property=\"og:description\" content=\"En 2023, Neur.on, iCoSys et CertX ont évalué 8 solutions d’IA au regard du projet d’AI Act lors du Grand Challenge de l’Université de Saint-Gall.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/ai-act-grand-challenge-universite-saint-gall/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/ai-act-grand-challenge-universite-saint-gall.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Aperçu du reportage Tagesschau de SRF : ordinateur portable, modèle de cerveau, enceinte connectée et smartphone sur un bureau\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Les start-up de l’IA doivent-elles craindre l’AI Act ? Les leçons du Grand Challenge",
+   "description": "En 2023, Neur.on, iCoSys et CertX ont évalué 8 solutions d’IA au regard du projet d’AI Act lors du Grand Challenge de l’Université de Saint-Gall.",
+   "datePublished": "2023-07-20",
+   "dateModified": "2023-07-20",
+   "inLanguage": "fr-CH",
+   "wordCount": 346,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/ai-act-grand-challenge-universite-saint-gall/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/ai-act-grand-challenge-universite-saint-gall.webp",
+   "about": [
+    {
+     "@type": "Event",
+     "name": "The First University of St. Gallen Grand Challenge: The EU AI ACT"
+    },
+    {
+     "@type": "Organization",
+     "name": "iCoSys"
+    },
+    {
+     "@type": "Organization",
+     "name": "CertX"
+    },
+    {
+     "@type": "Organization",
+     "name": "SRF"
+    },
+    {
+     "@type": "Person",
+     "name": "Thomas Burri"
+    },
+    {
+     "@type": "Organization",
+     "name": "Neur.on"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Les start-up de l’IA doivent-elles craindre l’AI Act ? Les leçons du Grand Challenge",
+     "item": "https://neur-on.ai/fr/ressources/blog/ai-act-grand-challenge-universite-saint-gall/"
+    }
+   ]
+  }
+ ]
+}

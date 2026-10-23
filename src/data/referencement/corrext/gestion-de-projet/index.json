@@ -1,0 +1,100 @@
+{
+ "source": "Sites/neuron/docs/fr/corrext/gestion-de-projet/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/corrext/gestion-de-projet/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/corrext/gestion-de-projet/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/corrext/uebersetzungsprojekte/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/corrext/progetti-di-traduzione/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/corrext/translation-projects/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Gestion de projet : relecture juridique et devis · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Gestion de projet, le tunnel en trois étapes de Corrext : confidentialité, fichiers analysés, relecture interne ou externe, devis et délai instantanés.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/corrext/gestion-de-projet/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Quelle différence entre Standard confidentiality et Highly sensitive content ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En Standard confidentiality, le projet est enregistré sur les serveurs suisses de Corrext et les données sont traitées en Suisse ou à l'étranger selon le moteur de traduction choisi ; le projet peut ensuite vous servir, à vous seul, de mémoire de traduction. En Highly sensitive content, stockage et traitement sont exclusivement suisses, pour l'anglais, le français, l'italien et l'allemand, et le contenu traduit n'est jamais réutilisé en mémoire."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Qu'est-ce qu'une page standard ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "C'est l'unité de comptage que Corrext affiche pour chaque fichier dès son dépôt, à côté de la langue et de la catégorie juridique détectées. Le délai estimé et le devis reposent sur ce nombre de pages standard. Dans l'exemple de cette page, un contrat d'assurance de quelques pages compte 2.5 pages standard."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quels sont les trois niveaux de relecture externe ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Light review, par un traducteur juridique : les erreurs significatives, omissions et contresens de la traduction automatique sont corrigés, pour une traduction complète et fidèle destinée à la compréhension et à la transmission interne. Full review, par un traducteur juridique : la traduction est en plus adaptée pour la cohérence, les tournures idiomatiques, le style et le ton, prête à être partagée avec des tiers. Double review et traduction certifiée, par une agence spécialisée : relecture complète par deux traducteurs juridiques qualifiés et certificat signé attestant l'exactitude et l'impartialité de la traduction, pour l'usage légal, la publication ou la remise aux autorités."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Qui relit mes documents ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Vous le décidez fichier par fichier. En Internal review, c'est votre propre équipe : vous renseignez son prix par page standard et son prix horaire approximatif pour valoriser ce travail dans le devis. En relecture externe, c'est un traducteur juridique pour la Light review et la Full review, ou une agence de traduction spécialisée, avec deux traducteurs et un certificat signé, pour la Double review et traduction certifiée."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Le devis et le délai sont-ils vraiment instantanés ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Dès que la date d'échéance et le niveau de relecture sont choisis, l'encadré Estimated time affiche la préparation, la relecture interne, la relecture externe et le délai total, sans attendre le retour d'une agence. Le bouton Generate quote produit ensuite le devis correspondant à ces choix."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Mes projets alimentent-ils une mémoire de traduction ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Seulement en Standard confidentiality : le projet est enregistré sur les serveurs suisses de Corrext et peut être utilisé exclusivement par vous comme mémoire de traduction pour vos projets futurs. En Highly sensitive content, le contenu traduit n'est jamais réutilisé."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Corrext",
+     "item": "https://neur-on.ai/fr/corrext/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Gestion de projet",
+     "item": "https://neur-on.ai/fr/corrext/gestion-de-projet/"
+    }
+   ]
+  }
+ ]
+}

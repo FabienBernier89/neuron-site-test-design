@@ -1,0 +1,105 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/swiss-fintech-awards-2024-finalisten/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/swiss-fintech-awards-2024-finalisti/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/swiss-fintech-awards-2024-finalists/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Swiss FinTech Awards 2024 : Neur.on parmi les 4 finalistes\">",
+  "<meta property=\"og:description\" content=\"Neur.on, plateforme SaaS de traduction par IA, figure parmi les 4 finalistes des Swiss FinTech Awards 2024. Finale le 11 juin à Rüschlikon.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/neuron-quatre-finalistes-swiss-fintech-awards-2024.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Visuel des finalistes Swiss FinTech Awards : Climada Technologies et Neur.on (Early Stage), GenTwo et Payrexx (Growth Stage)\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Neur.on parmi les 4 finalistes des Swiss FinTech Awards 2024",
+   "description": "Neur.on, plateforme SaaS de traduction par IA, figure parmi les 4 finalistes des Swiss FinTech Awards 2024. Finale le 11 juin à Rüschlikon.",
+   "datePublished": "2024-05-24",
+   "dateModified": "2024-05-24",
+   "inLanguage": "fr-CH",
+   "wordCount": 245,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024.webp",
+   "about": [
+    {
+     "@type": "Event",
+     "name": "Swiss FinTech Awards 2024"
+    },
+    {
+     "@type": "Organization",
+     "name": "Neur.on"
+    },
+    {
+     "@type": "Event",
+     "name": "FinTech 2024"
+    },
+    {
+     "@type": "Organization",
+     "name": "Finanz und Wirtschaft"
+    },
+    {
+     "@type": "Place",
+     "name": "GDI Gottlieb Duttweiler Institute"
+    },
+    {
+     "@type": "Place",
+     "name": "Rüschlikon"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Neur.on parmi les 4 finalistes des Swiss FinTech Awards 2024",
+     "item": "https://neur-on.ai/fr/ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/"
+    }
+   ]
+  }
+ ]
+}

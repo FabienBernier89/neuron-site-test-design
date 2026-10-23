@@ -1,0 +1,113 @@
+{
+ "source": "Sites/neuron/docs/fr/contact/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/contact/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/contact/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/kontakt/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/contatto/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/contact/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Contact et démo · Neur.on, traduction juridique en Suisse\">",
+  "<meta property=\"og:description\" content=\"Demandez une démo de Corrext par Neur.on : un expert du droit suisse vous la montre sur vos documents, vos langues et votre terminologie, depuis Fribourg.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/contact/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "ContactPage",
+   "name": "Contact et démo · Neur.on",
+   "url": "https://neur-on.ai/fr/contact/",
+   "inLanguage": "fr-CH",
+   "mainEntity": {
+    "@type": "Organization",
+    "name": "Neur.on",
+    "legalName": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai/",
+    "email": "team@corrext.com",
+    "address": {
+     "@type": "PostalAddress",
+     "streetAddress": "Place de la Gare 15",
+     "postalCode": "1700",
+     "addressLocality": "Fribourg",
+     "addressRegion": "FR",
+     "addressCountry": "CH"
+    },
+    "contactPoint": {
+     "@type": "ContactPoint",
+     "contactType": "Demande de démonstration",
+     "email": "team@corrext.com",
+     "areaServed": "CH",
+     "availableLanguage": [
+      "fr",
+      "de",
+      "it",
+      "en"
+     ]
+    }
+   }
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Que se passe-t-il après ma demande ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Un premier échange de cadrage : vos langues, vos types de documents, vos contraintes de confidentialité et la façon dont vos traductions circulent aujourd'hui. Vient ensuite une démonstration de Corrext construite sur ce cadrage, puis, si l'outil correspond, un essai encadré avec un périmètre, des utilisateurs et une durée définis ensemble."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "La démo se fait-elle sur nos propres documents ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui, c'est le principe. Vous apportez des documents représentatifs de votre pratique et nous les traitons dans Corrext pendant la séance, dans vos paires de langues et avec votre terminologie. Pour des pièces sensibles, la démonstration se fait en mode Highly sensitive content : stockage et traitement exclusivement en Suisse. Un accord de confidentialité peut être signé avant la séance."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Existe-t-il un essai gratuit en libre-service ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non, et c'est un choix assumé. Corrext traite des documents couverts par le secret professionnel ou le secret bancaire : les droits d'accès, la politique de moteurs, la terminologie et les mémoires se paramètrent avec vous. Un formulaire d'inscription en libre-service ne permet ni ce cadrage ni cette responsabilité. L'essai existe, mais il est encadré et il suit la démonstration."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Dans quelles langues pouvons-nous échanger ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En français, en allemand, en italien et en anglais, à l'écrit comme en séance. Ce sont les quatre langues natives de LexMachina et celles de la pratique juridique suisse."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Contact",
+     "item": "https://neur-on.ai/fr/contact/"
+    }
+   ]
+  }
+ ]
+}

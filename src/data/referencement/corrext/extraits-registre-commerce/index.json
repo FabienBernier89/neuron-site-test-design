@@ -1,0 +1,116 @@
+{
+ "source": "Sites/neuron/docs/fr/corrext/extraits-registre-commerce/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/corrext/extraits-registre-commerce/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/corrext/extraits-registre-commerce/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/corrext/handelsregisterauszug/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/corrext/estratto-registro-di-commercio/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/corrext/commercial-register-extracts/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Extraits du registre du commerce traduits et certifiés\">",
+  "<meta property=\"og:description\" content=\"Traduction certifiée d'extraits du registre du commerce suisse, commandée en ligne : certification Corrext, notariée ou apostillée, plus de 30 langues.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/corrext/extraits-registre-commerce/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@graph": [
+    {
+     "@type": "Service",
+     "name": "Traduction certifiée d'extraits du registre du commerce",
+     "provider": {
+      "@type": "Organization",
+      "name": "Neur.on AI Solutions SA",
+      "url": "https://neur-on.ai"
+     },
+     "areaServed": "CH",
+     "url": "https://auszug-hr.ch"
+    },
+    {
+     "@type": "FAQPage",
+     "mainEntity": [
+      {
+       "@type": "Question",
+       "name": "Qu'est-ce qu'une apostille ?",
+       "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "L'apostille est la formalité prévue par la Convention de La Haye du 5 octobre 1961 : elle authentifie la signature du notaire qui a certifié la traduction, pour que le document soit reconnu dans les autres États parties à la Convention. Sur auszug-hr.ch, elle est délivrée par la Chancellerie d'État dans le niveau Notarized & Apostilled Certification."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "Quel niveau de certification une autorité étrangère demande-t-elle ?",
+       "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cela dépend de l'autorité et du pays. En règle générale, une autorité d'un État partie à la Convention de La Haye demande une traduction notariée et apostillée ; une autorité suisse se contente le plus souvent d'une certification notariée ; un usage interne ou un tiers privé accepte souvent la certification Corrext. Vérifiez auprès de l'autorité destinataire avant de commander : c'est elle qui fixe l'exigence."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "Combien de temps prend une traduction certifiée ?",
+       "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le délai dépend du niveau de certification, de la langue cible et de l'option retenue : standard ou express, pour la Suisse ou l'international. Il se choisit à la quatrième étape de la commande et s'affiche avant validation. Une certification notariée ou apostillée ajoute le passage par le notaire, puis par la Chancellerie d'État."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "Dans quelles langues l'extrait peut-il être traduit ?",
+       "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Plus de 30 langues cibles. À la première étape, le sélecteur propose l'allemand, le français, l'italien, l'anglais et l'espagnol en tête de liste, puis les autres langues disponibles sur la plateforme."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "Le service fait-il partie de Corrext ?",
+       "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. auszug-hr.ch est le service en ligne de Corrext dédié aux extraits du registre du commerce, accessible aussi depuis l'accueil de la plateforme. Les traductions sont réalisées par des traducteurs juridiques spécialisés dans le corporate housekeeping, assistés des modèles de langage que l'équipe Corrext de juristes-linguistes et de data scientists a entraînés sur les extraits du registre du commerce suisse."
+       }
+      },
+      {
+       "@type": "Question",
+       "name": "Comment commander une traduction certifiée d'extrait ?",
+       "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En quatre étapes, entièrement en ligne sur auszug-hr.ch : recherchez la société par nom ou par IDE et choisissez la langue cible ; sélectionnez le niveau de certification ; choisissez la livraison, par e-mail ou avec un exemplaire papier par poste ou coursier ; fixez le délai, standard ou express, pour la Suisse ou l'international. Validez ensuite avec Order a translation, ou contactez l'équipe via Contact us."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Corrext",
+     "item": "https://neur-on.ai/fr/corrext/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Extraits du registre du commerce",
+     "item": "https://neur-on.ai/fr/corrext/extraits-registre-commerce/"
+    }
+   ]
+  }
+ ]
+}

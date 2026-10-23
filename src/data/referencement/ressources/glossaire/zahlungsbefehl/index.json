@@ -1,0 +1,72 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/glossaire/zahlungsbefehl/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/glossaire/zahlungsbefehl/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/glossaire/zahlungsbefehl/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/glossar/zahlungsbefehl/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/glossario/zahlungsbefehl/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/glossary/zahlungsbefehl/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Zahlungsbefehl : le commandement de payer suisse · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Zahlungsbefehl, commandement de payer, precetto esecutivo : le premier acte de la poursuite suisse et son terme exact dans les quatre langues.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/glossaire/zahlungsbefehl/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "DefinedTerm",
+   "name": "Zahlungsbefehl",
+   "inLanguage": "de-CH",
+   "alternateName": [
+    "commandement de payer",
+    "precetto esecutivo",
+    "summons for payment"
+   ],
+   "description": "L'acte notifié au débiteur qui ouvre la poursuite pour dettes.",
+   "termCode": "art. 69 LP",
+   "url": "https://neur-on.ai/fr/ressources/glossaire/zahlungsbefehl/",
+   "inDefinedTermSet": {
+    "@type": "DefinedTermSet",
+    "name": "Glossaire juridique suisse",
+    "url": "https://neur-on.ai/fr/ressources/glossaire/"
+   }
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Glossaire",
+     "item": "https://neur-on.ai/fr/ressources/glossaire/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Zahlungsbefehl · commandement de payer",
+     "item": "https://neur-on.ai/fr/ressources/glossaire/zahlungsbefehl/"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,116 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/secret-professionnel-outils-traduction/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/secret-professionnel-outils-traduction/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/secret-professionnel-outils-traduction/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/berufsgeheimnis-uebersetzungstools/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/segreto-professionale-traduzione-ia/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/professional-secrecy-ai-translation/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Secret professionnel et outils de traduction IA · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Stocker n'est pas traiter : ce que vaut une pseudonymisation, pourquoi un avertissement dans l'outil bat une charte, et quoi demander à un fournisseur.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/secret-professionnel-outils-traduction/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "Article",
+   "headline": "Secret professionnel et outils de traduction : la question du lieu de traitement",
+   "description": "Distinguer stockage et traitement, comprendre ce que protège une pseudonymisation, et poser à un fournisseur de traduction les questions qui engagent réellement la confidentialité d'un dossier.",
+   "datePublished": "2026-09-15",
+   "dateModified": "2026-09-15",
+   "inLanguage": "fr-CH",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   }
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Quelle différence entre stockage et traitement des données ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Le stockage est le lieu où le fichier repose durablement. Le traitement est le lieu où il est lu et calculé, même pendant quelques secondes. Un outil peut parfaitement conserver vos documents sur des serveurs suisses tout en envoyant chaque phrase à un moteur hébergé à l'étranger pour la traduire. Les deux réponses doivent être obtenues séparément, et la seconde dépend du moteur choisi pour chaque envoi."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "La pseudonymisation d'un document suffit-elle à lever le risque ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non, elle le réduit sans le supprimer. Retirer les noms des parties laisse subsister le contexte : une opération singulière, une clause inhabituelle, une combinaison de dates et de juridictions peuvent suffire à réidentifier un dossier. La pseudonymisation est une mesure de prudence utile, pas une anonymisation, et elle ne dispense jamais de savoir où le texte est traité."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Pourquoi un avertissement affiché dans l'outil vaut-il mieux qu'une charte interne ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Parce qu'il apparaît au moment de la décision, à la personne qui la prend. Une charte signée à l'arrivée est oubliée le jour où il faut traduire quarante pièces avant une audience. Dans Corrext, le choix d'un moteur hébergé à l'étranger fait apparaître l'avis Attorney-Client privilege, qui rappelle l'obligation de pseudonymiser et l'interdiction d'utiliser ces moteurs pour les dossiers sensibles."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quelles questions poser à un fournisseur de traduction sur la confidentialité ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Où sont les serveurs de stockage et qui les exploite, où s'effectue le traitement pour chaque moteur proposé, quels sous-traitants interviennent, quelles données sont réutilisées et à quelle fin, combien de temps les contenus sont conservés et comment ils sont supprimés, quelle certification est détenue et sur quel périmètre, et quel droit s'applique au contrat."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Une certification ISO 27001 garantit-elle que mes données restent en Suisse ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non. Une certification de sécurité de l'information atteste qu'un système de management existe et qu'il a été audité sur un périmètre donné. Elle ne dit rien, à elle seule, de la localisation des traitements. Demandez le certificat, sa date, son périmètre exact, et posez séparément la question du lieu de traitement pour chaque moteur proposé."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Secret professionnel",
+     "item": "https://neur-on.ai/fr/ressources/blog/secret-professionnel-outils-traduction/"
+    }
+   ]
+  }
+ ]
+}

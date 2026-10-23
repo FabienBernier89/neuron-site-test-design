@@ -1,0 +1,77 @@
+{
+ "source": "Sites/neuron/docs/fr/aide/admin-moteurs/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/aide/admin-moteurs/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/aide/admin-moteurs/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/hilfe/admin-motoren/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/aiuto/admin-motori/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/help/admin-engines/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Moteurs et confidentialité · Centre d'aide · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Administrer Corrext : moteurs autorisés par organisation, avis de confidentialité avant les moteurs étrangers, clés API propres pour DeepL, Claude et GPT.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/aide/admin-moteurs/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Comment choisir les moteurs disponibles pour nos utilisateurs ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Chaque organisation a sa liste de moteurs autorisés (« Allowed AI providers »). C'est la politique de moteurs de l'organisation : un service qui traite des dossiers sensibles peut, par exemple, s'en tenir à LexMachina. À savoir En mode Highly sensitive content, seuls les moteurs suisses restent sélectionnables, quelle que soit la liste. Qui s'en charge : l'équipe Neur.on, à la mise en place ou sur demande."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment afficher un avis avant l'envoi à un moteur étranger ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Le réglage « Show confidentiality warning when non-confidential engines are selected » affiche l'avis Attorney-Client privilege dès qu'un utilisateur choisit un moteur hébergé à l'étranger. Il s'active organisation par organisation et ne se transmet pas aux organisations filles. À savoir L'avis rappelle la politique de votre organisation au moment du choix du moteur, dans l'outil. Qui s'en charge : l'équipe Neur.on, à la mise en place ou sur demande."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Peut-on utiliser nos propres contrats DeepL, Claude ou GPT ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Par défaut, Corrext utilise ses propres clés d'accès à ces moteurs. Une organisation peut fournir ses propres clés API pour DeepL, Claude et GPT, afin que les appels passent par ses contrats avec ces fournisseurs. À savoir Le traitement par ces moteurs reste hors de Suisse : l'avis de confidentialité s'applique de la même façon. Qui s'en charge : l'équipe Neur.on, à la mise en place ou sur demande."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Centre d'aide",
+     "item": "https://neur-on.ai/fr/aide/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Moteurs et confidentialité",
+     "item": "https://neur-on.ai/fr/aide/admin-moteurs/"
+    }
+   ]
+  }
+ ]
+}

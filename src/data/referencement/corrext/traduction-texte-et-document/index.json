@@ -1,0 +1,100 @@
+{
+ "source": "Sites/neuron/docs/fr/corrext/traduction-texte-et-document/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/corrext/traduction-texte-et-document/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/corrext/traduction-texte-et-document/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/corrext/dokumente-uebersetzen/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/corrext/traduzione-documenti/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/corrext/document-translation/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction de texte et de documents juridiques · Corrext\">",
+  "<meta property=\"og:description\" content=\"Traduction instantanée de texte et de fichiers dans Corrext : jusqu'à 25 fichiers, conversion PDF vers Word, réécriture, alternatives par moteur.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/corrext/traduction-texte-et-document/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Quels formats de fichiers Traduction texte et document accepte-t-il ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les formats .pdf, .doc, .docx, .xls, .xlsx, .ppt et .pptx, jusqu'à 25 fichiers de 50 Mo chacun par envoi. La traduction est livrée dans le format d'origine. L'onglet PDF to Word convertit un PDF, y compris scanné, en document Word."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Combien de texte puis-je traduire en une fois ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Jusqu'à 10'000 caractères dans Text translation et 5'000 caractères dans Rephrasing. Au-delà, déposez le document dans File translation ou créez un projet de traduction."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quels moteurs de traduction sont disponibles ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "LexMachina, le moteur suisse entraîné sur le droit suisse, ainsi que DeepL Pro, Azure OpenAI GPT et Claude. Le moteur se choisit à chaque envoi et le panneau Alternatives compare jusqu'à quatre propositions, chacune attribuée à son moteur."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Que fait l'interrupteur Highly sensitive content ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Il impose un stockage et un traitement exclusivement en Suisse, pour l'allemand, le français, l'italien et l'anglais ; selon la définition affichée par Corrext dans Gestion de projet, le contenu n'est pas réutilisé dans une mémoire de traduction. Il est grisé sur l'onglet PDF to Word, qui ne traduit pas."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment vérifier un terme pendant une traduction ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Surlignez le mot dans le texte source et cliquez sur Fast Lookup : CHnell affiche des segments alignés tirés de sources officielles suisses, avec le domaine et la source de chaque occurrence."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Traduction texte et document dispense-t-il d'une relecture par un traducteur juridique ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non. Traduction texte et document sert à comprendre, préparer et travailler vite. Pour un document destiné à des tiers, à une publication ou à une autorité, créez un projet de traduction avec relecture Light, Full ou Double review et traduction certifiée."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Corrext",
+     "item": "https://neur-on.ai/fr/corrext/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Traduction texte et document",
+     "item": "https://neur-on.ai/fr/corrext/traduction-texte-et-document/"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,105 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/neuron-cohorte-kickstart-innovation-2024/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/neuron-cohorte-kickstart-innovation-2024/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/neuron-cohorte-kickstart-innovation-2024/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/kickstart-innovation-2024/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/kickstart-innovation-2024/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/kickstart-innovation-2024/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Kickstart Innovation 2024 : 42 scale-ups retenues · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Neur.on figure parmi les 42 scale-ups retenues pour le programme 2024 de Kickstart Innovation en Suisse, dans la verticale Finance &amp; Insurance.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/neuron-cohorte-kickstart-innovation-2024/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/neuron-cohorte-kickstart-innovation-2024.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Visuel Kickstart présentant les logos des start-up de la verticale Finance &amp; Insurance, dont celui de Neur.on\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Neur.on intègre la cohorte 2024 de Kickstart Innovation, verticale Finance & Insurance",
+   "description": "Neur.on figure parmi les 42 scale-ups retenues pour le programme 2024 de Kickstart Innovation en Suisse, dans la verticale Finance & Insurance.",
+   "datePublished": "2024-08-26",
+   "dateModified": "2024-08-26",
+   "inLanguage": "fr-CH",
+   "wordCount": 169,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/neuron-cohorte-kickstart-innovation-2024/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/neuron-cohorte-kickstart-innovation-2024.webp",
+   "about": [
+    {
+     "@type": "Organization",
+     "name": "Kickstart Innovation"
+    },
+    {
+     "@type": "Organization",
+     "name": "CB Insights"
+    },
+    {
+     "@type": "Organization",
+     "name": "Swisscom"
+    },
+    {
+     "@type": "Organization",
+     "name": "PostFinance"
+    },
+    {
+     "@type": "Organization",
+     "name": "AXA"
+    },
+    {
+     "@type": "Organization",
+     "name": "MSD"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Neur.on intègre la cohorte 2024 de Kickstart Innovation, verticale Finance & Insurance",
+     "item": "https://neur-on.ai/fr/ressources/blog/neuron-cohorte-kickstart-innovation-2024/"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,264 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Blog Neur.on : droit suisse, traduction et actualités\">",
+  "<meta property=\"og:description\" content=\"Articles de fond sur la traduction juridique en Suisse (terminologie, devis, secret professionnel) et actualités de Neur.on : conférences, événements, presse.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "Blog",
+   "name": "Blog Neur.on",
+   "url": "https://neur-on.ai/fr/ressources/blog/",
+   "inLanguage": "fr-CH",
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "blogPost": [
+    {
+     "@type": "BlogPosting",
+     "headline": "Traduire un contrat en droit suisse : ce que change le quadrilinguisme légal",
+     "datePublished": "2026-09-15",
+     "url": "https://neur-on.ai/fr/ressources/blog/traduire-contrat-droit-suisse/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Pages standard, niveaux de relecture, délais : comprendre un devis de traduction juridique",
+     "datePublished": "2026-09-15",
+     "url": "https://neur-on.ai/fr/ressources/blog/comprendre-devis-traduction-juridique/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Secret professionnel et outils de traduction : la question du lieu de traitement",
+     "datePublished": "2026-09-15",
+     "url": "https://neur-on.ai/fr/ressources/blog/secret-professionnel-outils-traduction/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Paula Reichenberg présente Neur.on à l’événement PwC et The LegalTech Fund de Londres",
+     "datePublished": "2025-05-23",
+     "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pwc-legaltech-fund-londres/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Paula Reichenberg, CEO de Neur.on, fait partie du Female Founder Project 2025 d’UBS",
+     "datePublished": "2025-04-14",
+     "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-female-founder-project-ubs-2025/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Geneva International Legal Week 2025 : un panel sur l’IA rentable avec Paula Reichenberg",
+     "datePublished": "2025-02-28",
+     "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-panel-gilw25-geneve-ia/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Neur.on aux AI Days 2025 à Genève : comment entraîner un LLM à bien traduire",
+     "datePublished": "2025-01-27",
+     "url": "https://neur-on.ai/fr/ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "40 ans d’eJustice.ch : la CEO de Neur.on débat du « Swiss Justice Base Model »",
+     "datePublished": "2025-01-21",
+     "url": "https://neur-on.ai/fr/ressources/blog/ejustice-40-ans-kamingesprach-neuron/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Paula Reichenberg, CEO de Neur.on, pitche à l’EPFL Investor Day 2024",
+     "datePublished": "2024-12-11",
+     "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pitch-epfl-investor-day-2024/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Neur.on et Swisscom annoncent une collaboration pour les secteurs juridique et bancaire",
+     "datePublished": "2024-11-29",
+     "url": "https://neur-on.ai/fr/ressources/blog/neuron-swisscom-collaboration-kickstart-2024/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Paula Reichenberg désignée au Conseil stratégique de la HES-SO pour 2025-2028",
+     "datePublished": "2024-11-28",
+     "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conseil-strategique-hes-so/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Registre du commerce de Schwyz : des extraits traduits en anglais par l’IA de Neur.on",
+     "datePublished": "2024-11-25",
+     "url": "https://neur-on.ai/fr/ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Neur.on parmi les 24 start-up du Startup Showcase du TLTF Summit 2024 à Miami",
+     "datePublished": "2024-11-11",
+     "url": "https://neur-on.ai/fr/ressources/blog/neuron-tltf-summit-2024-miami-startups-showcase/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "IA et études d’avocats : Paula Reichenberg au panel « AI in Business » de Zurich en 2024",
+     "datePublished": "2024-09-01",
+     "url": "https://neur-on.ai/fr/ressources/blog/panel-ai-in-business-zurich-2024/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Neur.on intègre la cohorte 2024 de Kickstart Innovation, verticale Finance & Insurance",
+     "datePublished": "2024-08-26",
+     "url": "https://neur-on.ai/fr/ressources/blog/neuron-cohorte-kickstart-innovation-2024/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Paula Reichenberg, CEO de Neur.on, au jury de l’Elevator Pitch Competition du Weblaw Forum 2024",
+     "datePublished": "2024-06-18",
+     "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Les enseignements clés de la conférence LegalTechTalk 2024 à Londres",
+     "datePublished": "2024-06-13",
+     "url": "https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-enseignements/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "LegalTechTalk 2024 à Londres : réinventer le modèle opérationnel des cabinets d’avocats",
+     "datePublished": "2024-06-07",
+     "url": "https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Neur.on finaliste des Swiss FinTech Awards 2024 dans la catégorie Early Stage",
+     "datePublished": "2024-06-04",
+     "url": "https://neur-on.ai/fr/ressources/blog/neuron-finaliste-early-stage-swiss-fintech-awards-2024/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Neur.on au GEN AI Summit 2024 de Lausanne : les défis de l’IA en traduction juridique",
+     "datePublished": "2024-05-29",
+     "url": "https://neur-on.ai/fr/ressources/blog/neuron-gen-ai-summit-2024-lausanne/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Neur.on parmi les 4 finalistes des Swiss FinTech Awards 2024",
+     "datePublished": "2024-05-24",
+     "url": "https://neur-on.ai/fr/ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Neur.on dans le Top 10 des start-up fintech suisses des Swiss FinTech Awards 2024",
+     "datePublished": "2024-04-19",
+     "url": "https://neur-on.ai/fr/ressources/blog/neuron-top-10-startups-fintech-suisses-2024/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "IA et secteur juridique : Paula Reichenberg en table ronde le 17 avril 2024 à Zurich",
+     "datePublished": "2024-04-10",
+     "url": "https://neur-on.ai/fr/ressources/blog/table-ronde-ia-juridique-slta-zurich-2024/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Neur.on à l’AMLD EPFL 2024, du 23 au 26 mars au SwissTech Convention Center de Lausanne",
+     "datePublished": "2024-03-06",
+     "url": "https://neur-on.ai/fr/ressources/blog/neuron-amld-epfl-2024-lausanne/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Trust Valley Day 2023 : Neur.on au panel sur les risques cyber des PME",
+     "datePublished": "2023-10-09",
+     "url": "https://neur-on.ai/fr/ressources/blog/trust-valley-day-2023-risques-cyber-pme/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Trust Valley 2023 : cybersécurité et souveraineté des données, une tradition suisse durable ?",
+     "datePublished": "2023-10-05",
+     "url": "https://neur-on.ai/fr/ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "LegalTech et avocats, alliés ou concurrents ? Leçons de la journée de l’étude digitale",
+     "datePublished": "2023-09-29",
+     "url": "https://neur-on.ai/fr/ressources/blog/legaltech-avocats-allies-ou-concurrents/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Conférence MIDS 2023 à Genève : Paula Reichenberg sur l’adoption de l’IA générative",
+     "datePublished": "2023-09-22",
+     "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-conference-mids-geneve-2023/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Kilian Marty rejoint le conseil consultatif de Neur.on comme expert en cybersécurité",
+     "datePublished": "2023-08-30",
+     "url": "https://neur-on.ai/fr/ressources/blog/kilian-marty-rejoint-conseil-consultatif-neuron/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Paula Reichenberg, CEO et fondatrice de Neur.on, nommée « Digital Shaper 2023 » par BILANZ",
+     "datePublished": "2023-08-25",
+     "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-digital-shaper-2023-bilanz/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Sur orientation.ch, Orane Laeri, COO de Neur.on, retrace son parcours en linguistique",
+     "datePublished": "2023-08-24",
+     "url": "https://neur-on.ai/fr/ressources/blog/orane-laeri-parcours-orientation-ch/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Les start-up de l’IA doivent-elles craindre l’AI Act ? Les leçons du Grand Challenge",
+     "datePublished": "2023-07-20",
+     "url": "https://neur-on.ai/fr/ressources/blog/ai-act-grand-challenge-universite-saint-gall/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "L’État de Fribourg renforce son soutien à Neur.on pour la traduction juridique par IA",
+     "datePublished": "2022-12-02",
+     "url": "https://neur-on.ai/fr/ressources/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia/"
+    },
+    {
+     "@type": "BlogPosting",
+     "headline": "Conférence BDÜ 2022 : Paula Reichenberg sur la collaboration entre avocats et traducteurs",
+     "datePublished": "2022-11-02",
+     "url": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-table-ronde-bdu-2022/"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,101 @@
+{
+ "source": "Sites/neuron/docs/fr/solutions/directions-juridiques/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/solutions/directions-juridiques/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/solutions/directions-juridiques/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/loesungen/rechtsabteilungen/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/soluzioni/uffici-legali/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/solutions/legal-departments/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction pour directions juridiques et Legal Ops · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Centralisez les traductions de l'entreprise en Suisse : devis et délais immédiats, relecture interne ou externe, mémoire réutilisable, accès par document.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/solutions/directions-juridiques/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Comment le devis est-il calculé ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "À partir du nombre de pages standard détecté dans chaque fichier, de la catégorie juridique reconnue, du niveau de relecture choisi et de la date d'échéance. Le délai et le coût s'affichent avant toute validation, dans l'application."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Peut-on faire relire en interne plutôt qu'en externe ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Le mode Internal review chiffre le temps de relecture de vos équipes à partir du nombre de pages standard, et vous pouvez valoriser vous-même ce temps dans le devis."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment sont gérés les droits d'accès ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les droits se règlent jusqu'au niveau du document et se synchronisent avec SharePoint et Active Directory."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Nos traductions passées peuvent-elles être réutilisées ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les projets créés en confidentialité Standard peuvent servir de mémoire de traduction, réutilisable exclusivement par votre organisation. Les projets en mode Highly sensitive content ne le sont jamais."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Faut-il former les équipes ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "L'interface reprend les gestes attendus : déposer un fichier, choisir une langue, lancer. Le centre d'aide documente chaque écran, et la démonstration se fait sur vos propres documents."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Peut-on intégrer Corrext à nos outils ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Une API REST permet de relier la traduction à vos systèmes de gestion documentaire et à vos intranets, et un déploiement sur vos propres serveurs est possible pour les environnements les plus sensibles."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Solutions",
+     "item": "https://neur-on.ai/fr/solutions/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Directions juridiques",
+     "item": "https://neur-on.ai/fr/solutions/directions-juridiques/"
+    }
+   ]
+  }
+ ]
+}

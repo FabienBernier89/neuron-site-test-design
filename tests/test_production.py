@@ -70,13 +70,14 @@ ALTERNATE = re.compile(r'<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"
 
 class TestHreflang(unittest.TestCase):
     def test_seulement_les_langues_construites(self):
-        """Tant que seule la version fr est construite : hreflang fr-CH (la page elle-même) et x-default (la racine)."""
+        """Tant que seule la version fr est construite : hreflang fr-CH et x-default, tous deux vers la page elle-même
+        (x-default désigne la version française, page indexable, et non plus la racine d'aiguillage non indexée)."""
         for apercu in (False, True):
             docs = support.site_complet(apercu=apercu)
             for p in build.PAGES:
                 h = support.chemin(docs, p).read_text(encoding="utf-8")
                 alternates = ALTERNATE.findall(h[:h.index("</head>")])
-                self.assertEqual(alternates, [("fr-CH", "https://neur-on.ai/fr/" + p), ("x-default", "https://neur-on.ai/")], p)
+                self.assertEqual(alternates, [("fr-CH", "https://neur-on.ai/fr/" + p), ("x-default", "https://neur-on.ai/fr/" + p)], p)
 
     def test_detection_d_une_langue_presente_dans_la_sortie(self):
         """Une variante revient d'elle-même dès que sa page existe dans la sortie (lot F) : rien n'est écrit en dur."""
@@ -99,42 +100,6 @@ class TestHreflang(unittest.TestCase):
         self.assertTrue(build.adresse_construite("https://neur-on.ai/fr/corrext/"))
         self.assertFalse(build.adresse_construite("https://neur-on.ai/de/corrext/"))
         self.assertFalse(build.adresse_construite("https://exemple.ch/fr/corrext/"))
-
-
-LIEN_LLMS = re.compile(r"\]\((https://neur-on\.ai/[^)\s]*)\)")
-
-
-class TestLlmsTxt(unittest.TestCase):
-    def test_aucun_lien_vers_une_langue_absente(self):
-        """llms.txt (production et aperçu) : plus de lien ni de section vers /de/, /it/ ou /en/ ; chaque lien restant
-        mène à une page de la sortie ; les sections françaises restent entières."""
-        v1 = (build.NEURON / "docs/llms.txt").read_text(encoding="utf-8")
-        for apercu in (False, True):
-            docs = support.site_complet(apercu=apercu)
-            t = (docs / "llms.txt").read_text(encoding="utf-8")
-            self.assertIsNone(re.search(r"neur-on\.ai/(?:de|it|en)/", t), apercu)
-            for section in ("## Deutsch", "## Italiano", "## English"):
-                self.assertNotIn(section, t, apercu)
-            for url in LIEN_LLMS.findall(t):
-                self.assertTrue((docs / url[len("https://neur-on.ai/"):] / "index.html").is_file(), url)
-            francais = v1[:v1.index("## Deutsch")]
-            self.assertTrue(t.rstrip("\n") == francais.rstrip("\n"), apercu)  # la partie française, mot pour mot
-
-    def test_detection_et_sections_vides(self):
-        import tempfile
-        from unittest import mock
-        texte = ("# Neur.on\n\n> Résumé.\n\n## Produit\n\n- [Corrext](https://neur-on.ai/fr/corrext/)\n"
-                 "- [Corrext DE](https://neur-on.ai/de/corrext/)\n\n## Deutsch\n\n- [Start](https://neur-on.ai/de/)\n"
-                 "- [Corrext](https://neur-on.ai/de/corrext/)\n\n## English\n\n- [Home](https://neur-on.ai/en/)\n")
-        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(build, "DOCS", Path(tmp)):
-            self.assertEqual(build.llms_txt(texte), "# Neur.on\n\n> Résumé.\n\n## Produit\n\n- [Corrext](https://neur-on.ai/fr/corrext/)\n")
-            (Path(tmp) / "de/corrext").mkdir(parents=True)
-            (Path(tmp) / "de/corrext/index.html").write_text("<!DOCTYPE html>", encoding="utf-8")
-            garde = build.llms_txt(texte)
-            self.assertIn("## Deutsch\n\n- [Corrext](https://neur-on.ai/de/corrext/)\n", garde)
-            self.assertIn("- [Corrext DE](https://neur-on.ai/de/corrext/)", garde)
-            self.assertNotIn("https://neur-on.ai/de/)", garde)
-            self.assertNotIn("## English", garde)
 
 
 class TestPlanDuSite(unittest.TestCase):

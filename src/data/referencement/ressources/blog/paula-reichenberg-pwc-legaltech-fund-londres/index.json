@@ -1,0 +1,101 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/paula-reichenberg-pwc-legaltech-fund-londres/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pwc-legaltech-fund-londres/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pwc-legaltech-fund-londres/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/pwc-legaltech-fund-london/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/pwc-legaltech-fund-londra/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/pwc-legaltech-fund-london/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"PwC et The LegalTech Fund : pitch à Londres · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Paula Reichenberg, CEO de Neur.on, a présenté Neur.on à Londres lors d’un événement sur invitation organisé par PwC et The LegalTech Fund.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pwc-legaltech-fund-londres/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/paula-reichenberg-pwc-legaltech-fund-londres.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Une femme à lunettes pose derrière des cadeaux aux logos PwC, TLTF, ContractPodAi, Agiloft et Conga\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Paula Reichenberg présente Neur.on à l’événement PwC et The LegalTech Fund de Londres",
+   "description": "Paula Reichenberg, CEO de Neur.on, a présenté Neur.on à Londres lors d’un événement sur invitation organisé par PwC et The LegalTech Fund.",
+   "datePublished": "2025-05-23",
+   "dateModified": "2025-05-23",
+   "inLanguage": "fr-CH",
+   "wordCount": 199,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pwc-legaltech-fund-londres/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/paula-reichenberg-pwc-legaltech-fund-londres.webp",
+   "about": [
+    {
+     "@type": "Person",
+     "name": "Paula Reichenberg"
+    },
+    {
+     "@type": "Organization",
+     "name": "PwC"
+    },
+    {
+     "@type": "Organization",
+     "name": "The LegalTech Fund"
+    },
+    {
+     "@type": "Place",
+     "name": "Londres"
+    },
+    {
+     "@type": "Organization",
+     "name": "Neur.on"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Paula Reichenberg présente Neur.on à l’événement PwC et The LegalTech Fund de Londres",
+     "item": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-pwc-legaltech-fund-londres/"
+    }
+   ]
+  }
+ ]
+}

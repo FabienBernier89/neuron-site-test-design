@@ -100,20 +100,50 @@ def page(ancien, cible):
             f'<body><p>Cette page a déménagé : <a href="{relatif}">voir la nouvelle adresse</a>.</p></body></html>\n')
 
 
+HOTE = "neur-on.ai"
+UN_MOIS = "public, max-age=2592000"
+REVALIDER = "no-cache"
+
+
 def htaccess(redirs):
-    """.htaccess Hostpoint : page d'erreur, racine vers le français, une 301 par ancienne adresse, cache d'un an des polices, feuilles et scripts."""
+    """.htaccess de production pour Hostpoint (Apache), dans cet ordre :
+    1. page d'erreur ;
+    2. racine vers le français (302, provisoire : la langue n'est pas encore choisie côté serveur) ;
+    3. une 301 par ancienne adresse ;
+    4. adresse canonique : HTTP vers HTTPS et www.neur-on.ai vers neur-on.ai, en 301 ;
+    5. compression (mod_deflate) et en-têtes de cache (mod_headers), chacun sous garde IfModule.
+    Pas de chaîne : les règles 2 et 3 renvoient directement vers https://neur-on.ai/fr/..., si bien que
+    http://www.neur-on.ai/about/ arrive en un seul saut sur https://neur-on.ai/fr/a-propos/ ; la règle 4 ne sert
+    qu'aux autres adresses et va elle aussi droit à la forme finale. Derrière un proxy qui termine le HTTPS,
+    l'en-tête X-Forwarded-Proto évite une boucle de redirection."""
+    base = f"https://{HOTE}"
     lignes = ["# Généré par build.py : ne pas modifier à la main.",
               "ErrorDocument 404 /404.html",
               "RewriteEngine On",
               "# La langue n'est pas encore choisie côté serveur : la racine part vers le français (302, provisoire).",
-              "RewriteRule ^$ /fr/ [R=302,L]",
-              "# Anciennes adresses : avec ou sans barre finale, ancre conservée (NE).",
+              f"RewriteRule ^$ {base}/fr/ [R=302,L]",
+              "# Anciennes adresses : avec ou sans barre finale, ancre conservée (NE), directement en HTTPS sur l'hôte canonique.",
               ]
     for ancien, cible in sorted(redirs.items()):
         _verifier(ancien, cible)
-        lignes.append(f"RewriteRule ^{ancien.rstrip('/')}/?$ {cible} [R=301,L,NE]")
+        lignes.append(f"RewriteRule ^{ancien.rstrip('/')}/?$ {base}{cible} [R=301,L,NE]")
     lignes += [
-        "# Cache d'un an. Sans mod_headers, rien n'est posé.",
+        "# Adresse canonique : HTTPS (sauf si un proxy l'a déjà terminé) et sans www, en un seul saut. Seuls les deux",
+        "# noms du site sont concernés : une adresse de test de l'hébergeur n'est pas renvoyée vers la production.",
+        "RewriteCond %{HTTP_HOST} ^(www\\.)?neur-on\\.ai$ [NC]",
+        "RewriteCond %{HTTPS} !=on",
+        "RewriteCond %{HTTP:X-Forwarded-Proto} !=https",
+        f"RewriteRule ^ {base}%{{REQUEST_URI}} [R=301,L,NE]",
+        "RewriteCond %{HTTP_HOST} ^www\\.neur-on\\.ai$ [NC]",
+        f"RewriteRule ^ {base}%{{REQUEST_URI}} [R=301,L,NE]",
+        "# Compression des textes (pages, feuilles, scripts, données, SVG). Polices woff2 et images déjà compressées.",
+        "<IfModule mod_deflate.c>",
+        "  <IfModule mod_filter.c>",
+        "    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/javascript application/javascript"
+        " application/json application/ld+json application/xml image/svg+xml image/x-icon",
+        "  </IfModule>",
+        "</IfModule>",
+        "# Cache. Sans mod_headers, rien n'est posé.",
         "<IfModule mod_headers.c>",
         "  # Polices (assets/fonts/) : remplacer une police impose de changer son nom de fichier, le navigateur ne la",
         "  # redemande pas pendant un an.",
@@ -123,6 +153,14 @@ def htaccess(redirs):
         "  # Feuilles et scripts : les pages les appellent avec ?v=<empreinte>, une nouvelle version change l'URL.",
         '  <FilesMatch "\\.(css|js)$">',
         f'    Header set Cache-Control "{UN_AN}"',
+        "  </FilesMatch>",
+        "  # Images : appelées sans empreinte, une image remplacée sous le même nom doit pouvoir revenir. Un mois.",
+        '  <FilesMatch "\\.(webp|png|jpe?g|gif|svg|ico)$">',
+        f'    Header set Cache-Control "{UN_MOIS}"',
+        "  </FilesMatch>",
+        "  # Pages et fichiers pour les robots : toujours revalidés auprès du serveur, une mise en ligne est vue aussitôt.",
+        '  <FilesMatch "\\.(html|xml|txt)$">',
+        f'    Header set Cache-Control "{REVALIDER}"',
         "  </FilesMatch>",
         "</IfModule>",
     ]

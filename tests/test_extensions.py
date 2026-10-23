@@ -154,7 +154,7 @@ class TestRepliSeo(unittest.TestCase):
         for attendu in (
             f'<link rel="canonical" href="{url}">',
             f'<link rel="alternate" hreflang="fr-CH" href="{url}">',
-            '<link rel="alternate" hreflang="x-default" href="https://neur-on.ai/">',
+            f'<link rel="alternate" hreflang="x-default" href="{url}">',  # x-default : la version française de la page
             '<meta property="og:title" content="Page factice pour Corrext · Neur.on">',
             '<meta property="og:description" content="Description &quot;factice&quot; &amp; prête.">',
             f'<meta property="og:url" content="{url}">',
@@ -166,7 +166,10 @@ class TestRepliSeo(unittest.TestCase):
         ):
             self.assertIn(attendu, tete)
         blocs = re.findall(r'<script type="application/ld\+json">(.*?)</script>', tete, re.S)
-        self.assertEqual(len(blocs), 1)
+        self.assertEqual(len(blocs), 2)  # fil d'Ariane, puis WebPage daté (outils/donnees_structurees.py)
+        page = json.loads(blocs[1])
+        self.assertEqual((page["@type"], page["url"], page["name"]), ("WebPage", url, "Page factice pour Corrext · Neur.on"))
+        self.assertEqual(page["dateModified"], build.date_page(PAGE_FACTICE))
         fil = json.loads(blocs[0])
         self.assertEqual(fil["@type"], "BreadcrumbList")
         self.assertEqual([(i["position"], i["name"], i["item"]) for i in fil["itemListElement"]], [
@@ -181,7 +184,7 @@ class TestRepliSeo(unittest.TestCase):
         # le référencement de la page d'accueil actuelle est repris (données structurées comprises), sauf les hreflang
         # des langues absentes de la sortie : seuls fr-CH et x-default restent tant que fr est la seule langue construite
         self.assertIn('<link rel="alternate" hreflang="fr-CH" href="https://neur-on.ai/fr/">', h)
-        self.assertIn('<link rel="alternate" hreflang="x-default" href="https://neur-on.ai/">', h)
+        self.assertIn('<link rel="alternate" hreflang="x-default" href="https://neur-on.ai/fr/">', h)
         self.assertNotIn('hreflang="de-CH"', h)
         self.assertRegex(h, r'"@type": ?"WebSite"')
 

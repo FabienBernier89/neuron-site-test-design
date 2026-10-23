@@ -1,0 +1,97 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/trust-valley-day-2023-risques-cyber-pme/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/trust-valley-day-2023-risques-cyber-pme/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/trust-valley-day-2023-risques-cyber-pme/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/trust-valley-day-2023-cyberrisiken/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/trust-valley-day-2023-rischi-cyber/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/trust-valley-day-2023-cyber-risks/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Trust Valley Day : risques cyber et PME · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Le 5 octobre 2023 au Trust Valley Day, Paula Reichenberg, CEO de Neur.on, a appelé à tester l’IA avec des données locales pour les PME suisses.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/trust-valley-day-2023-risques-cyber-pme/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/trust-valley-day-2023-risques-cyber-pme.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Visuel Trust Valley du panel « Risques cyber : les PME sous pression », avec sept intervenants dont Paula Reichenberg\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Trust Valley Day 2023 : Neur.on au panel sur les risques cyber des PME",
+   "description": "Le 5 octobre 2023 au Trust Valley Day, Paula Reichenberg, CEO de Neur.on, a appelé à tester l’IA avec des données locales pour les PME suisses.",
+   "datePublished": "2023-10-09",
+   "dateModified": "2023-10-09",
+   "inLanguage": "fr-CH",
+   "wordCount": 177,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/trust-valley-day-2023-risques-cyber-pme/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/trust-valley-day-2023-risques-cyber-pme.webp",
+   "about": [
+    {
+     "@type": "Event",
+     "name": "Trust Valley Day"
+    },
+    {
+     "@type": "Organization",
+     "name": "Trust Valley"
+    },
+    {
+     "@type": "Person",
+     "name": "Paula Reichenberg"
+    },
+    {
+     "@type": "Organization",
+     "name": "Neur.on"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Trust Valley Day 2023 : Neur.on au panel sur les risques cyber des PME",
+     "item": "https://neur-on.ai/fr/ressources/blog/trust-valley-day-2023-risques-cyber-pme/"
+    }
+   ]
+  }
+ ]
+}

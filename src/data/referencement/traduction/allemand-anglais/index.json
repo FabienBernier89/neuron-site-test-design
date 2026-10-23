@@ -1,0 +1,115 @@
+{
+ "source": "Sites/neuron/docs/fr/traduction/allemand-anglais/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/traduction/allemand-anglais/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/traduction/allemand-anglais/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/uebersetzung/deutsch-englisch/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/traduzione/tedesco-inglese/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/translation/german-english/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction juridique de l'allemand vers l'anglais · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Le droit suisse alémanique en anglais : les versions anglaises des lois n'ont pas force de loi, et les notions suisses gardent leur terme d'origine.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/traduction/allemand-anglais/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Une traduction anglaise d'une loi suisse a-t-elle une valeur juridique ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non. L'anglais n'est pas une langue officielle de la Confédération. Les lois fédérales font foi en allemand, en français et en italien ; les versions anglaises sont publiées à titre informatif et ne peuvent pas être opposées devant une autorité suisse. Pour une citation qui engage, la version allemande, française ou italienne est reprise, au besoin accompagnée de sa traduction."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Faut-il traduire les termes suisses ou les garder ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les deux, dans cet ordre. Le terme suisse est conservé, suivi d'une explication à sa première occurrence, puis réutilisé tel quel. C'est la seule façon de rendre la Betreibung ou la Verfügung sans les convertir en notions de common law qui ne recouvrent pas la même chose."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment traiter les raisons sociales et les sigles ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ils ne se traduisent pas. Une société inscrite au registre du commerce sous la forme AG ou GmbH garde cette forme dans tout le document. Seule la nature juridique peut être explicitée une fois, par exemple company limited by shares pour l'Aktiengesellschaft."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Les traductions anglaises sont-elles moins précises que les autres paires ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "L'anglais est l'une des quatre langues natives de LexMachina, entraîné sur des textes juridiques et financiers suisses. Ce qui change n'est pas la qualité de la langue, c'est le statut du texte produit : informatif, parce que le droit suisse ne s'écrit pas en anglais."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Le document peut-il rester en Suisse alors que le destinataire est à l'étranger ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Le lieu de traitement ne dépend pas du destinataire mais du moteur choisi. Avec LexMachina ou en mode Highly sensitive content, stockage et traitement restent exclusivement en Suisse. Le fichier traduit est ensuite transmis par vos propres canaux."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Traduction",
+     "item": "https://neur-on.ai/fr/traduction/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Allemand vers anglais",
+     "item": "https://neur-on.ai/fr/traduction/allemand-anglais/"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "Service",
+   "name": "Allemand vers anglais",
+   "description": "Le droit suisse alémanique en anglais : les versions anglaises des lois n'ont pas force de loi, et les notions suisses gardent leur terme d'origine.",
+   "serviceType": "Traduction juridique et financière",
+   "url": "https://neur-on.ai/fr/traduction/allemand-anglais/",
+   "provider": {
+    "@type": "Organization",
+    "@id": "https://neur-on.ai/#organisation",
+    "name": "Neur.on",
+    "url": "https://neur-on.ai/"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "Suisse"
+   },
+   "availableLanguage": [
+    "de",
+    "en"
+   ]
+  }
+ ]
+}

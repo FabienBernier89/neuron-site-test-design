@@ -1,0 +1,72 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/glossaire/konkurrenzverbot/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/glossaire/konkurrenzverbot/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/glossaire/konkurrenzverbot/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/glossar/konkurrenzverbot/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/glossario/konkurrenzverbot/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/glossary/konkurrenzverbot/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Konkurrenzverbot : la clause de non-concurrence · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Konkurrenzverbot, prohibition de faire concurrence, divieto di concorrenza : la clause de non-concurrence du contrat de travail suisse, en quatre langues.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/glossaire/konkurrenzverbot/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "DefinedTerm",
+   "name": "Konkurrenzverbot",
+   "inLanguage": "de-CH",
+   "alternateName": [
+    "prohibition de faire concurrence",
+    "divieto di concorrenza",
+    "prohibition of competition"
+   ],
+   "description": "La clause qui interdit au travailleur de concurrencer son ancien employeur.",
+   "termCode": "art. 340 CO",
+   "url": "https://neur-on.ai/fr/ressources/glossaire/konkurrenzverbot/",
+   "inDefinedTermSet": {
+    "@type": "DefinedTermSet",
+    "name": "Glossaire juridique suisse",
+    "url": "https://neur-on.ai/fr/ressources/glossaire/"
+   }
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Glossaire",
+     "item": "https://neur-on.ai/fr/ressources/glossaire/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Konkurrenzverbot · prohibition de faire concurrence",
+     "item": "https://neur-on.ai/fr/ressources/glossaire/konkurrenzverbot/"
+    }
+   ]
+  }
+ ]
+}

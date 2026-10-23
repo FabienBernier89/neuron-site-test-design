@@ -1,0 +1,72 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/glossaire/arrest/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/glossaire/arrest/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/glossaire/arrest/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/glossar/arrest/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/glossario/arrest/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/glossary/arrest/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Arrest : le séquestre en droit suisse des poursuites · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Arrest, séquestre, sequestro, attachment : la mesure conservatoire du droit suisse des poursuites, ses cas et son terme dans les quatre langues.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/glossaire/arrest/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "DefinedTerm",
+   "name": "Arrest",
+   "inLanguage": "de-CH",
+   "alternateName": [
+    "séquestre",
+    "sequestro",
+    "attachment"
+   ],
+   "description": "La mesure qui bloque en Suisse les biens du débiteur avant exécution.",
+   "termCode": "art. 271 LP",
+   "url": "https://neur-on.ai/fr/ressources/glossaire/arrest/",
+   "inDefinedTermSet": {
+    "@type": "DefinedTermSet",
+    "name": "Glossaire juridique suisse",
+    "url": "https://neur-on.ai/fr/ressources/glossaire/"
+   }
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Glossaire",
+     "item": "https://neur-on.ai/fr/ressources/glossaire/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Arrest · séquestre",
+     "item": "https://neur-on.ai/fr/ressources/glossaire/arrest/"
+    }
+   ]
+  }
+ ]
+}

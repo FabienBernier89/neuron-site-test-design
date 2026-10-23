@@ -1,0 +1,116 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/guides/organiser-traduction-cabinet/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/guides/organiser-traduction-cabinet/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/guides/organiser-traduction-cabinet/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/leitfaeden/uebersetzung-kanzlei-organisieren/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/guide/organizzare-traduzioni-studio-legale/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/guides/law-firm-translation-workflow/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Organiser la traduction juridique dans un cabinet · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Cartographier les besoins, répartir les décisions, écrire les règles, faire cesser les traductions sauvages et mesurer, dans un cabinet suisse.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/guides/organiser-traduction-cabinet/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "Article",
+   "headline": "Organiser la traduction juridique dans un cabinet suisse",
+   "description": "Un guide en sept étapes pour passer d'une pratique dispersée à un processus de traduction gouverné : cartographie des besoins, répartition des décisions, règles écrites, outil par défaut et indicateurs de suivi.",
+   "datePublished": "2026-09-15",
+   "dateModified": "2026-09-15",
+   "inLanguage": "fr-CH",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   }
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Par où commencer pour organiser la traduction dans un cabinet ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Par l'état des lieux, sur quatre semaines et sans jugement : qui traduit, quoi, avec quel outil, pour quel destinataire. La plupart des cabinets découvrent à ce stade que la majorité des traductions sont faites en interne, en urgence, sans que personne ne les compte. Tant que ce volume reste invisible, aucune règle ne tiendra."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment classer les besoins de traduction d'un cabinet ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En trois familles définies par le destinataire : comprendre (pour soi et pour l'équipe), produire (pour un client ou une partie adverse), déposer (pour une autorité, un tribunal ou une publication). Chaque famille appelle un niveau de relecture différent, un délai différent et un mode de confidentialité différent. Classer par destinataire évite les débats sans fin sur la qualité en général."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment faire cesser les traductions sauvages ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En donnant un outil approuvé plus rapide que l'alternative non autorisée, et en affichant la règle au moment du choix plutôt que dans une charte. Une interdiction sans solution de remplacement déplace le problème hors de votre vue : les collaborateurs utilisent alors des services grand public, qui n'avertissent de rien et ne laissent aucune trace."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quels indicateurs suivre pour piloter la traduction juridique ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Le volume traité par famille de besoin, la part traitée dans l'outil approuvé, le délai réel entre demande et livraison, le nombre d'heures de relecture interne valorisées, les reprises après livraison et la part de dossiers traités dans le mode de confidentialité le plus strict. Six indicateurs suffisent, à condition d'être relevés au même moment chaque trimestre."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Qui doit décider du niveau de relecture d'un document ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "L'associé ou le juriste responsable du dossier, parce qu'il est le seul à connaître le destinataire et le risque. La règle écrite doit lui donner une réponse par défaut pour chaque famille de besoin, de façon qu'il n'ait à arbitrer que les cas particuliers. Le secrétariat exécute, il ne décide pas du niveau."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Guides",
+     "item": "https://neur-on.ai/fr/ressources/guides/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Organiser la traduction en cabinet",
+     "item": "https://neur-on.ai/fr/ressources/guides/organiser-traduction-cabinet/"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,101 @@
+{
+ "source": "Sites/neuron/docs/fr/comparatif/deepl-traduction-juridique/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/comparatif/deepl-traduction-juridique/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/comparatif/deepl-traduction-juridique/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/vergleich/deepl-juristische-uebersetzung/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/confronto/deepl-traduzione-giuridica/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/comparison/deepl-legal-translation/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"DeepL Pro et traduction juridique : ce que Corrext change\">",
+  "<meta property=\"og:description\" content=\"DeepL Pro, excellent moteur générique, reste disponible dans Corrext. Ce qui change : lieu de traitement, terminologie du droit suisse, relecture.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/comparatif/deepl-traduction-juridique/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Puis-je utiliser DeepL pour un document couvert par le secret professionnel ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "La question n'est pas la qualité du moteur, c'est le transfert du document hors de Suisse. Dans Corrext, choisir DeepL Pro déclenche l'avis Attorney-Client privilege : l'organisation exige que le document soit entièrement pseudonymisé, et interdit ces moteurs pour les dossiers sensibles. Pour un document non pseudonymisé, choisissez LexMachina ou le mode Highly sensitive content, qui imposent un traitement exclusivement en Suisse. La règle qui vous lie reste celle de votre étude et de votre autorité de surveillance."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "DeepL traite-t-il mes données en Suisse ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non. DeepL est un éditeur allemand et son infrastructure se situe hors de Suisse. Dans Corrext, DeepL Pro est donc classé parmi les moteurs tiers hébergés à l'étranger et déclenche l'avis de pseudonymisation. Pour un stockage et un traitement exclusivement en Suisse, il faut choisir LexMachina ou activer le mode Highly sensitive content, disponible en allemand, français, italien et anglais."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Corrext remplace-t-il DeepL ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non : Corrext peut utiliser DeepL Pro. Le moteur se choisit à chaque envoi, aux côtés de LexMachina, d'Azure OpenAI GPT et de Claude, et le panneau Alternatives compare jusqu'à quatre propositions attribuées à leur moteur. Ce que Corrext ajoute n'est pas un moteur de plus : c'est le cadre autour, à savoir le stockage suisse, l'avis avant envoi, le concordancier CHnell, la relecture humaine commandée dans l'outil, le devis et la certification."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Qu'apporte un moteur entraîné sur le droit suisse ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "LexMachina est entraîné sur plus de 15 millions de segments juridiques et financiers multilingues suisses. Concrètement, il connaît les abréviations et les conventions du pays : CO et OR, LB et BankG, LDIP et IPRG, la graphie suisse en ss, le Tribunal fédéral et non une juridiction étrangère. Cela ne le rend pas infaillible : aucun moteur n'est une source de droit, et c'est pourquoi Corrext affiche les alternatives et le concordancier."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "DeepL Pro conserve-t-il mes textes ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "DeepL indique publiquement que les textes traduits par ses clients Pro sont supprimés après traduction et ne servent pas à entraîner ses modèles : c'est un engagement sérieux, et nous n'avons aucune raison de le mettre en doute. Le point qui reste ouvert pour un dossier couvert par le secret professionnel n'est pas la conservation, c'est le transfert du document hors de Suisse et l'absence d'avertissement au moment de l'envoi."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment vérifier un terme juridique suisse après une traduction ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Dans Corrext, surlignez le mot dans le texte source et cliquez sur Fast Lookup : le concordancier CHnell affiche des segments alignés tirés de sources officielles suisses, avec le domaine et la source de chaque occurrence, et un lien Show in context. Verzugszins retourne ainsi plus de 300 résultats et Bankgeheimnis plus de 400. C'est cette traçabilité qu'un moteur de traduction seul ne fournit pas."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Comparatifs",
+     "item": "https://neur-on.ai/fr/comparatif/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Corrext et DeepL",
+     "item": "https://neur-on.ai/fr/comparatif/deepl-traduction-juridique/"
+    }
+   ]
+  }
+ ]
+}

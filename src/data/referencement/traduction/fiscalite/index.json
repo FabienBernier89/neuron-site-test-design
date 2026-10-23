@@ -1,0 +1,119 @@
+{
+ "source": "Sites/neuron/docs/fr/traduction/fiscalite/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/traduction/fiscalite/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/traduction/fiscalite/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/uebersetzung/steuerrecht/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/traduzione/diritto-tributario/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/translation/tax-law/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction juridique et fiscale en droit suisse · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Décisions de taxation, réclamations, correspondance avec l'administration : traduire la fiscalité suisse avec les termes de la LIFD et de la LTVA.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/traduction/fiscalite/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Dans quelle langue l'administration fiscale communique-t-elle ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Dans la langue officielle du canton concerné, ce qui produit des dossiers multilingues dès qu'une société a des établissements dans plusieurs régions. Les quatre langues de travail de la plateforme, allemand, français, italien et anglais, sont natives dans toutes les paires."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Une traduction suffit-elle pour répondre à une décision ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "La traduction sert à comprendre et à décider. L'écriture déposée, réclamation ou recours, engage le contribuable et justifie une Full review par un traducteur juridique. Quand une attestation est demandée, la Double review avec certificat reste disponible. Le délai de relecture s'affiche avant la validation du devis."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment traduire les notions fiscales qui n'ont pas d'équivalent ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En partant du texte de loi plutôt que de l'usage. L'impôt anticipé, par exemple, porte un nom officiel dans les trois langues et une définition propre. Le domaine Tax & Customs du concordancier affiche ces occurrences en contexte avec leur source."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Les dossiers fiscaux sont-ils traités en Suisse ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Le stockage se fait sur des serveurs suisses dans tous les cas, et le traitement reste en Suisse avec LexMachina ou en mode Highly sensitive content. Un dossier contenant des données de contribuables ne devrait pas partir vers un moteur hébergé à l'étranger sans pseudonymisation préalable."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Peut-on traduire les annexes comptables d'une déclaration ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Les formats .xls et .xlsx sont pris en charge comme Word, PowerPoint et PDF, jusqu'à 25 fichiers de 50 Mo par envoi, et les fichiers reviennent dans leur format d'origine avec leur structure de tableau. Pour un lot plus important, la voie est Gestion de projet."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Et pour un simple courrier à l'administration ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "La traduction de texte de Traduction texte et document accepte jusqu'à 10'000 caractères collés, avec choix du moteur et jusqu'à quatre alternatives de formulation. C'est le geste adapté à une lettre courte qu'il faut envoyer dans la journée. Une Light review peut être commandée ensuite si le courrier engage la société."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Traduction",
+     "item": "https://neur-on.ai/fr/traduction/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Fiscalité",
+     "item": "https://neur-on.ai/fr/traduction/fiscalite/"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "Service",
+   "name": "Fiscalité",
+   "description": "Décisions de taxation, réclamations, correspondance avec l'administration : traduire la fiscalité suisse avec les termes de la LIFD et de la LTVA.",
+   "serviceType": "Traduction juridique et financière",
+   "url": "https://neur-on.ai/fr/traduction/fiscalite/",
+   "provider": {
+    "@type": "Organization",
+    "@id": "https://neur-on.ai/#organisation",
+    "name": "Neur.on",
+    "url": "https://neur-on.ai/"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "Suisse"
+   }
+  }
+ ]
+}

@@ -1,0 +1,116 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/etudes/evaluer-moteur-traduction-juridique/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/etudes/evaluer-moteur-traduction-juridique/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/etudes/evaluer-moteur-traduction-juridique/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/studien/uebersetzungsmotor-evaluieren/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/studi/valutare-motore-traduzione/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/studies/evaluating-translation-engines/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Évaluer un moteur de traduction sur le droit suisse · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Six critères mesurables, un protocole en double aveugle et sept pièges qui faussent les comparaisons de moteurs sur des textes de droit suisse.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/etudes/evaluer-moteur-traduction-juridique/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "Article",
+   "headline": "Comment évaluer un moteur de traduction sur le droit suisse",
+   "description": "Une méthode d'évaluation de moteurs de traduction appliquée aux textes juridiques suisses : critères mesurables, constitution du corpus, protocole en double aveugle et pièges méthodologiques.",
+   "datePublished": "2026-09-15",
+   "dateModified": "2026-09-15",
+   "inLanguage": "fr-CH",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   }
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Pourquoi les scores automatiques ne suffisent-ils pas pour un texte juridique ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Parce qu'ils mesurent une proximité de surface avec une traduction de référence, et non l'exactitude d'une référence légale. Une phrase qui cite le mauvais article ou la mauvaise juridiction peut obtenir un très bon score automatique : elle est fluide, proche de la référence, et juridiquement fausse. Sur du droit, l'évaluation doit être faite par des humains, sur des critères binaires définis à l'avance."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Combien de segments faut-il pour évaluer un moteur de traduction juridique ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Il n'existe pas de nombre universel : la taille dépend du nombre de critères, de la rareté des phénomènes observés et de la précision recherchée. La règle utile est ailleurs : le corpus doit couvrir chaque domaine, chaque sens de traduction et chaque type de document que vous traitez réellement, avec assez de segments par case pour qu'un écart ne tienne pas à une phrase. Un corpus déséquilibré donne un résultat faux quelle que soit sa taille."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Qu'est-ce qu'une évaluation en aveugle pour des moteurs de traduction ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "C'est une évaluation dans laquelle l'évaluateur ne sait pas quel moteur a produit la sortie qu'il note. Les sorties sont anonymisées, mélangées et présentées dans un ordre aléatoire. Sans cet aveugle, le nom du moteur influence la notation, dans les deux sens : indulgence envers celui que l'on connaît, sévérité envers celui que l'on soupçonne."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Faut-il évaluer une seule fois ou plusieurs fois le même segment ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Plusieurs fois, à des dates différentes. Une sortie peut varier d'une génération à l'autre, ou au contraire rester strictement identique. Lors d'une session d'observation, la régénération de la même phrase a produit des sorties strictement identiques pour certains segments, tandis que d'autres variaient. Une mesure faite une seule fois ne dit pas si l'écart observé est une différence de qualité ou une variation de génération."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quels critères mesurer sur des textes de droit suisse ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Six critères se notent de façon binaire et donc reproductible : l'exactitude de la référence légale, la conformité terminologique aux textes officiels, la cohérence à l'intérieur d'un même document, le traitement des noms de juridictions et d'autorités, la gestion des montants et des dates au format suisse, et l'intégrité du segment, c'est-à-dire l'absence d'omission, d'ajout et de caractère parasite."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Études et benchmarks",
+     "item": "https://neur-on.ai/fr/ressources/etudes/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Évaluer un moteur",
+     "item": "https://neur-on.ai/fr/ressources/etudes/evaluer-moteur-traduction-juridique/"
+    }
+   ]
+  }
+ ]
+}

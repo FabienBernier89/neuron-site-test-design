@@ -1,0 +1,71 @@
+{
+ "source": "Sites/neuron/docs/fr/comparatif/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/comparatif/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/comparatif/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/vergleich/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/confronto/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/comparison/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Comparatifs · Corrext par Neur.on face aux autres solutions\">",
+  "<meta property=\"og:description\" content=\"Trois comparatifs honnêtes : Corrext et DeepL Pro, Corrext et les LLM généralistes, agence de traduction ou plateforme. Ce que chacun fait bien.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/comparatif/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Ces comparatifs sont-ils neutres ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non, et nous préférons le dire : ils sont écrits par Neur.on, éditeur de Corrext. C'est précisément pourquoi ils s'en tiennent à des critères vérifiables par vous-même : lieu de stockage et de traitement des données, terminologie du droit suisse en contexte, gestion des références légales, présence d'une chaîne de relecture, d'un devis et d'une certification. Nous ne comparons ni les prix ni la vitesse brute."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Corrext peut-il utiliser DeepL Pro, Azure OpenAI GPT ou Claude ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Ces moteurs sont disponibles dans Corrext, aux côtés de LexMachina, et se choisissent à chaque envoi. Comme ils sont hébergés à l'étranger, leur sélection déclenche l'avis Attorney-Client privilege de votre organisation, qui exige une pseudonymisation complète du document. Notre proposition n'est donc pas de renoncer à ces moteurs, mais de les utiliser dans un cadre qui protège votre secret professionnel."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Sur quoi reposent ces comparaisons ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tout ce que nous affirmons de Corrext a été observé dans l'application. Ce que nous affirmons des autres solutions se limite à ce qui est public et stable. Les exemples de traduction sont des sorties réelles et ponctuelles, jamais des mesures statistiques."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Comparatifs",
+     "item": "https://neur-on.ai/fr/comparatif/"
+    }
+   ]
+  }
+ ]
+}

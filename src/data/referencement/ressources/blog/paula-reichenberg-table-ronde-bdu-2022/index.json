@@ -1,0 +1,101 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/paula-reichenberg-table-ronde-bdu-2022/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-table-ronde-bdu-2022/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-table-ronde-bdu-2022/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/bdue-konferenz-2022/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/conferenza-bdue-2022/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/bdue-conference-2022/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Conférence BDÜ 2022 : avocats et traducteurs · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Paula Reichenberg, CEO de Neur.on, a participé en 2022 à une table ronde de la conférence du BDÜ sur le travail dans et avec les cabinets d’avocats.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-table-ronde-bdu-2022/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/paula-reichenberg-table-ronde-bdu-2022.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Quatre intervenants, deux femmes et deux hommes, assis dans des fauteuils sur scène lors d’une table ronde\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Conférence BDÜ 2022 : Paula Reichenberg sur la collaboration entre avocats et traducteurs",
+   "description": "Paula Reichenberg, CEO de Neur.on, a participé en 2022 à une table ronde de la conférence du BDÜ sur le travail dans et avec les cabinets d’avocats.",
+   "datePublished": "2022-11-02",
+   "dateModified": "2022-11-02",
+   "inLanguage": "fr-CH",
+   "wordCount": 205,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-table-ronde-bdu-2022/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/paula-reichenberg-table-ronde-bdu-2022.webp",
+   "about": [
+    {
+     "@type": "Organization",
+     "name": "BDÜ e.V."
+    },
+    {
+     "@type": "Person",
+     "name": "Paula Reichenberg"
+    },
+    {
+     "@type": "Person",
+     "name": "Karen Rückert"
+    },
+    {
+     "@type": "Person",
+     "name": "Dirk Poppendieck"
+    },
+    {
+     "@type": "Person",
+     "name": "Richard Delaney"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Conférence BDÜ 2022 : Paula Reichenberg sur la collaboration entre avocats et traducteurs",
+     "item": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-table-ronde-bdu-2022/"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/glossaire/vollmacht/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/glossaire/vollmacht/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/glossaire/vollmacht/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/glossar/vollmacht/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/glossario/vollmacht/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/glossary/vollmacht/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Vollmacht : pouvoirs et procuration · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Vollmacht, pouvoirs ou procuration, procura, authority : le pouvoir de représentation des art. 32 à 34 CO et l'acte qui le confère.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/glossaire/vollmacht/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "DefinedTerm",
+   "name": "Vollmacht",
+   "inLanguage": "de-CH",
+   "alternateName": [
+    "pouvoirs (procuration)",
+    "procura",
+    "authority (power of attorney)"
+   ],
+   "description": "Le pouvoir de représenter autrui, conféré par le représenté, et l'acte qui le constate.",
+   "termCode": "art. 32 à 34 CO",
+   "url": "https://neur-on.ai/fr/ressources/glossaire/vollmacht/",
+   "inDefinedTermSet": {
+    "@type": "DefinedTermSet",
+    "name": "Glossaire juridique suisse",
+    "url": "https://neur-on.ai/fr/ressources/glossaire/"
+   }
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Glossaire",
+     "item": "https://neur-on.ai/fr/ressources/glossaire/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Vollmacht · pouvoirs (procuration)",
+     "item": "https://neur-on.ai/fr/ressources/glossaire/vollmacht/"
+    }
+   ]
+  }
+ ]
+}

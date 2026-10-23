@@ -1,0 +1,117 @@
+{
+ "source": "Sites/neuron/docs/fr/aide/decouvrir-corrext/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/aide/decouvrir-corrext/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/aide/decouvrir-corrext/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/hilfe/corrext-kennenlernen/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/aiuto/scoprire-corrext/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/help/corrext-overview/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Découvrir Corrext · Centre d'aide · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Ce qu'est Corrext, ses quatre outils, le moteur LexMachina, les autres moteurs disponibles, la relecture, le prix, l'essai et la mise en place.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/aide/decouvrir-corrext/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Qu'est-ce que Corrext ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Corrext est la plateforme de traduction juridique et financière de Neur.on. Elle réunit quatre outils, accessibles depuis l'accueil : Traduction texte et document pour traduire tout de suite, Gestion de projet pour faire relire et certifier, Fast lookup CHnell pour vérifier un terme dans les textes officiels suisses, et Extraits du registre du commerce pour commander une traduction certifiée en ligne. À savoir Vos documents sont stockés en Suisse, quel que soit le moteur choisi. Plusieurs moteurs sont disponibles, dont LexMachina, le moteur suisse de Neur.on."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Pourquoi les outils portent-ils des noms anglais dans l'application ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les libellés de l'application sont en anglais, alors que ce site et ce centre d'aide emploient des noms français. La correspondance est la suivante : « Fast translation » est Traduction texte et document, « Translation project » est Gestion de projet, « Fast lookup » est Fast lookup CHnell, et « Commercial register extract » est Extraits du registre du commerce. À savoir Dans les réponses de ce centre d'aide, les libellés entre guillemets sont ceux affichés par l'application, en anglais."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Qu'est-ce que LexMachina ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Le moteur de traduction neuronale de Neur.on, entraîné sur la donnée juridique et financière suisse, plus de quinze millions de segments multilingues issus de la jurisprudence du Tribunal fédéral, des textes de la FINMA et des codes. Il s'exécute en Suisse. Voir la page LexMachina ."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Puis-je utiliser DeepL ou un modèle généraliste dans Corrext ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. DeepL Pro, Azure OpenAI GPT et Claude sont disponibles dans l'interface, avec l'avis de pseudonymisation qui s'affiche au moment du choix. La fonction Alternatives compare jusqu'à quatre propositions, chacune attribuée à son moteur."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Qui relit les traductions ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Vos propres équipes en relecture interne, un traducteur juridique en Light review ou en Full review, ou deux traducteurs et une agence spécialisée pour une Double review avec certificat. Le niveau se choisit document par document dans le tunnel projet , avec le délai affiché avant validation."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Combien cela coûte-t-il ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les prix ne sont pas publics : ils dépendent des volumes, des langues et du niveau de relecture. Dans l'application, le devis et le délai s'affichent avant toute validation, calculés à partir du nombre de pages standard et de la catégorie juridique détectés dans vos fichiers. Le cadrage se fait lors d'une démonstration."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Existe-t-il un essai gratuit ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Pas d'essai en libre-service. La démonstration se fait avec un spécialiste, sur vos propres documents, dans vos langues. La démonstration interactive de ce site reproduit l'interface réelle avec des résultats obtenus dans l'application."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Combien de temps prend la mise en place ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "L'application web ne demande aucune installation : un compte suffit, avec une authentification par mot de passe ou par authentification unique Microsoft. Une intégration à vos systèmes par API, ou un déploiement sur vos propres serveurs, se cadre lors d'un échange technique."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Centre d'aide",
+     "item": "https://neur-on.ai/fr/aide/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Découvrir Corrext",
+     "item": "https://neur-on.ai/fr/aide/decouvrir-corrext/"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,115 @@
+{
+ "source": "Sites/neuron/docs/fr/traduction/francais-allemand/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/traduction/francais-allemand/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/traduction/francais-allemand/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/uebersetzung/franzoesisch-deutsch/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/traduzione/francese-tedesco/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/translation/french-german/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction juridique du français vers l'allemand · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Du français juridique suisse vers l'allemand : termes des lois fédérales, ss et apostrophe des milliers, abréviations CO, LP, LDIP converties.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/traduction/francais-allemand/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Faut-il écrire en allemand standard ou en suisse allemand ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En allemand standard, dans sa variante suisse. Le suisse allemand est une langue parlée : aucun texte juridique n'est rédigé dans un dialecte. La variante suisse de l'allemand standard impose le ss à la place du ß, l'apostrophe dans les milliers, les guillemets en chevrons et le vocabulaire des lois fédérales."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment éviter les termes du droit allemand ou autrichien ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En partant des textes suisses plutôt que d'un corpus généraliste. LexMachina est entraîné sur le droit suisse, et chaque terme douteux se vérifie dans Fast lookup CHnell, qui affiche le segment officiel, sa langue source et sa référence. Un terme qui n'apparaît dans aucun texte suisse n'a pas sa place dans le document."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Les deux versions d'un contrat peuvent-elles faire foi ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les parties peuvent le convenir, et c'est fréquent pour un contrat suisse bilingue. Cela impose un contrôle terme à terme des deux versions, parce qu'un écart de vocabulaire devient un écart de droit. Une Double review avec certificat est le niveau de relecture prévu pour ce cas."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Peut-on imposer la terminologie interne de l'entreprise ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Fast lookup CHnell couvre 30 domaines à partir de sources officielles, et vos propres ressources s'y ajoutent, en accès privé ou partagé. Les termes maison se retrouvent alors dans les traductions suivantes, avec leur contexte."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Où le document est-il traité ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Le stockage est en Suisse dans tous les cas. Avec LexMachina ou en mode Highly sensitive content, le traitement l'est aussi et le contenu n'est pas réutilisé en mémoire de traduction. Les moteurs tiers, hébergés à l'étranger, déclenchent l'avis Attorney-Client privilege et supposent un document pseudonymisé."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Traduction",
+     "item": "https://neur-on.ai/fr/traduction/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Français vers allemand",
+     "item": "https://neur-on.ai/fr/traduction/francais-allemand/"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "Service",
+   "name": "Français vers allemand",
+   "description": "Du français juridique suisse vers l'allemand : termes des lois fédérales, ss et apostrophe des milliers, abréviations CO, LP, LDIP converties.",
+   "serviceType": "Traduction juridique et financière",
+   "url": "https://neur-on.ai/fr/traduction/francais-allemand/",
+   "provider": {
+    "@type": "Organization",
+    "@id": "https://neur-on.ai/#organisation",
+    "name": "Neur.on",
+    "url": "https://neur-on.ai/"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "Suisse"
+   },
+   "availableLanguage": [
+    "fr",
+    "de"
+   ]
+  }
+ ]
+}

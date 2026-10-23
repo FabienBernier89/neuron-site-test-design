@@ -1,0 +1,97 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/paula-reichenberg-female-founder-project-ubs-2025/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-female-founder-project-ubs-2025/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-female-founder-project-ubs-2025/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/female-founder-project-ubs-2025/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/female-founder-project-ubs-2025/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/female-founder-project-ubs-2025/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Paula Reichenberg au Female Founder Project 2025 · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Paula Reichenberg, CEO de Neur.on, fait partie du Female Founder Project 2025 d’UBS, un programme qui prépare les fondatrices aux investisseurs.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/paula-reichenberg-female-founder-project-ubs-2025/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/paula-reichenberg-female-founder-project-ubs-2025.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Portrait d’une femme à lunettes, logo UBS et mention « I’m part of Project Female Founder 2025 »\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Paula Reichenberg, CEO de Neur.on, fait partie du Female Founder Project 2025 d’UBS",
+   "description": "Paula Reichenberg, CEO de Neur.on, fait partie du Female Founder Project 2025 d’UBS, un programme qui prépare les fondatrices aux investisseurs.",
+   "datePublished": "2025-04-14",
+   "dateModified": "2025-04-14",
+   "inLanguage": "fr-CH",
+   "wordCount": 269,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-female-founder-project-ubs-2025/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/paula-reichenberg-female-founder-project-ubs-2025.webp",
+   "about": [
+    {
+     "@type": "Person",
+     "name": "Paula Reichenberg"
+    },
+    {
+     "@type": "Organization",
+     "name": "UBS"
+    },
+    {
+     "@type": "Organization",
+     "name": "Harvard Business Review"
+    },
+    {
+     "@type": "Organization",
+     "name": "Neur.on AI Solutions SA"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Paula Reichenberg, CEO de Neur.on, fait partie du Female Founder Project 2025 d’UBS",
+     "item": "https://neur-on.ai/fr/ressources/blog/paula-reichenberg-female-founder-project-ubs-2025/"
+    }
+   ]
+  }
+ ]
+}

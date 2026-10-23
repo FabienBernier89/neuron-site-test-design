@@ -1,0 +1,119 @@
+{
+ "source": "Sites/neuron/docs/fr/traduction/fusions-acquisitions/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/traduction/fusions-acquisitions/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/traduction/fusions-acquisitions/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/uebersetzung/fusionen-uebernahmen/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/traduzione/fusioni-acquisizioni/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/translation/mergers-and-acquisitions/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction pour fusions et acquisitions en Suisse · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Data room, due diligence, contrat de fusion, closing : traduire des milliers de pages sans que la transaction quitte la Suisse, terminologie LFus.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/traduction/fusions-acquisitions/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Peut-on traduire une data room sans que les documents quittent la Suisse ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Le stockage se fait sur des serveurs suisses dans tous les cas, et le traitement reste en Suisse avec LexMachina ou en mode Highly sensitive content. Si un collaborateur choisit un moteur hébergé à l'étranger, l'avis Attorney-Client privilege s'affiche avant l'envoi et rappelle qu'une pseudonymisation préalable est nécessaire."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Combien de documents peut-on envoyer en une fois ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Jusqu'à 25 fichiers de 50 Mo chacun par envoi dans Traduction texte et document, dans les formats .pdf, .doc, .docx, .xls, .xlsx, .ppt et .pptx. Pour un lot plus important, pour un suivi par lots ou pour une relecture humaine, la bonne porte d'entrée est Gestion de projet."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Tous les documents d'une transaction méritent-ils une relecture humaine ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non, et c'est tout l'intérêt de séparer les deux gestes. Les pièces lues pour comprendre passent en traduction machine. Les actes qui engagent les parties, contrat de fusion et décisions sociales en tête, passent en Full review ou en Double review certifiée, choisies document par document."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Les documents de l'opération alimentent-ils une base partagée ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les projets en confidentialité Standard peuvent alimenter une mémoire de traduction réutilisable exclusivement par votre organisation. Les projets en mode Highly sensitive content ne sont jamais réutilisés en mémoire, ce qui convient aux opérations encore confidentielles. Le choix du mode se fait projet par projet, au moment de la création."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment traduire le vocabulaire de la restructuration ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En reprenant les termes de la loi sur la fusion, qui distingue quatre opérations : fusion, scission, transformation et transfert de patrimoine. Chacune a un nom officiel en allemand, en français et en italien, consultable en contexte dans Fast lookup CHnell avec sa référence."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Et pour les pièces rédigées dans une langue plus rare ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "La plateforme couvre 30 langues, avec l'allemand, le français, l'italien et l'anglais en natif dans toutes les paires. Une filiale étrangère dont les contrats sont rédigés dans une autre langue reste donc lisible pour l'équipe de transaction. Les pièces reviennent dans leur format d'origine quelle que soit la langue de départ."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Traduction",
+     "item": "https://neur-on.ai/fr/traduction/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Fusions et acquisitions",
+     "item": "https://neur-on.ai/fr/traduction/fusions-acquisitions/"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "Service",
+   "name": "Fusions et acquisitions",
+   "description": "Data room, due diligence, contrat de fusion, closing : traduire des milliers de pages sans que la transaction quitte la Suisse, terminologie LFus.",
+   "serviceType": "Traduction juridique et financière",
+   "url": "https://neur-on.ai/fr/traduction/fusions-acquisitions/",
+   "provider": {
+    "@type": "Organization",
+    "@id": "https://neur-on.ai/#organisation",
+    "name": "Neur.on",
+    "url": "https://neur-on.ai/"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "Suisse"
+   }
+  }
+ ]
+}

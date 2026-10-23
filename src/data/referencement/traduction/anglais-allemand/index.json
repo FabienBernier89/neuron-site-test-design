@@ -1,0 +1,115 @@
+{
+ "source": "Sites/neuron/docs/fr/traduction/anglais-allemand/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/traduction/anglais-allemand/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/traduction/anglais-allemand/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/uebersetzung/englisch-deutsch/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/traduzione/inglese-tedesco/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/translation/english-german/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction juridique de l'anglais vers l'allemand · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Contrats rédigés en anglais et soumis au droit suisse : la version allemande ancre chaque clause sur les notions exactes du Code des obligations.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/traduction/anglais-allemand/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Un contrat en anglais est-il valable en droit suisse ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui, les parties sont libres de choisir la langue de leur contrat, et le droit suisse peut s'appliquer à un texte anglais. La difficulté est pratique : devant une autorité ou un tribunal suisse alémanique, c'est la version allemande qui sera lue, et les notions anglo-saxonnes devront de toute façon être rattachées au Code des obligations."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment rendre une clause qui n'a pas d'équivalent suisse ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En traduisant l'effet recherché avec les notions du droit suisse plutôt que la formule d'origine. Une clause d'indemnisation s'exprime en termes de responsabilité et de garantie ; une liquidated damages clause devient une clause pénale. Ce choix relève du juriste : la traduction machine prépare le texte, la relecture juridique tranche."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Faut-il garder les termes anglais définis dans le contrat ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "C'est fréquent pour les termes propres à l'opération, à condition que le choix soit constant et signalé. Chaque terme défini doit recevoir un traitement unique, repris à l'identique dans les annexes et les avenants. Les variations d'un document à l'autre sont la première source de litige d'interprétation."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Les deux versions peuvent-elles faire foi en même temps ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les parties peuvent le prévoir, mais c'est un choix lourd : chaque écart entre les deux versions devient une question d'interprétation. Une clause de prévalence, qui désigne la version qui l'emporte, est plus simple. Quand les deux versions font foi, une Double review avec certificat est le niveau de contrôle adapté."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Où le contrat est-il traité ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sur des serveurs suisses dans tous les cas. Avec LexMachina ou en mode Highly sensitive content, le traitement reste lui aussi exclusivement en Suisse et le contenu n'alimente aucune mémoire. Si un moteur tiers hébergé à l'étranger est sélectionné, l'avis Attorney-Client privilege s'affiche avant l'envoi."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Traduction",
+     "item": "https://neur-on.ai/fr/traduction/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Anglais vers allemand",
+     "item": "https://neur-on.ai/fr/traduction/anglais-allemand/"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "Service",
+   "name": "Anglais vers allemand",
+   "description": "Contrats rédigés en anglais et soumis au droit suisse : la version allemande ancre chaque clause sur les notions exactes du Code des obligations.",
+   "serviceType": "Traduction juridique et financière",
+   "url": "https://neur-on.ai/fr/traduction/anglais-allemand/",
+   "provider": {
+    "@type": "Organization",
+    "@id": "https://neur-on.ai/#organisation",
+    "name": "Neur.on",
+    "url": "https://neur-on.ai/"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "Suisse"
+   },
+   "availableLanguage": [
+    "en",
+    "de"
+   ]
+  }
+ ]
+}

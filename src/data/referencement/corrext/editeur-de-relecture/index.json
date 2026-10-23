@@ -1,0 +1,117 @@
+{
+ "source": "Sites/neuron/docs/fr/corrext/editeur-de-relecture/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/corrext/editeur-de-relecture/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/corrext/editeur-de-relecture/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/corrext/lektorat/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/corrext/revisione/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/corrext/review-editor/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Éditeur de relecture Corrext : outil de TAO juridique suisse\">",
+  "<meta property=\"og:description\" content=\"Relisez vos traductions phrase par phrase dans Corrext. Chaque correction rejoint votre mémoire, hébergée en Suisse, et sert à vos projets suivants.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/corrext/editeur-de-relecture/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Qu'est-ce qu'un outil de TAO ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "TAO signifie traduction assistée par ordinateur (« CAT tool » en anglais). Un tel outil découpe le document en segments, c'est-à-dire en phrases ou en titres, et place chacun face à sa traduction. Le relecteur corrige puis confirme chaque segment, avec l'aide des mémoires et de la terminologie. Dans Corrext, cet outil s'appelle l'éditeur de relecture."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment ouvrir l'éditeur de relecture ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Depuis le tableau de bord d'un projet. Chaque fichier y porte un bouton Open in CAT, qui ouvre le document dans l'éditeur. Le projet lui-même se crée dans Gestion de projet : langues, niveau de confidentialité, terminologie et moteur de traduction."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Mes corrections servent-elles aux prochaines traductions ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui, en confidentialité standard. Vos projets sont conservés sur les serveurs suisses de Corrext et servent de mémoire de traduction à vous seul. Une correction faite aujourd'hui est reprise dans vos projets suivants. La traduction s'adapte ainsi à votre langue et reste cohérente d'un projet à l'autre."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Et en mode contenu hautement sensible ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Dans ce mode (Highly sensitive content), les traductions ne nourrissent pas la mémoire. Les données sont stockées et traitées uniquement en Suisse. Le mode est disponible en français, en allemand, en italien et en anglais. Vous le choisissez à la création de chaque projet."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Peut-on relire à plusieurs le même document ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. L'onglet Sync gère le travail à plusieurs. Il présente les conflits entre deux versions d'une même phrase, à arbitrer. Il liste les modifications d'un collègue, à intégrer. Il propose enfin de répercuter une correction sur les phrases identiques du document : c'est la propagation. L'équipe du projet se gère depuis le tableau de bord."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Faut-il Microsoft Word pour relire ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non. L'éditeur de relecture s'utilise directement dans Corrext. Si vous préférez Word, exportez le document depuis le tableau de bord (Export docx), relisez-le avec le complément Corrext, puis réimportez-le (Reimport docx). Le complément demande une connexion, l'appartenance au projet et Office 2021 ou Microsoft 365."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Les termes que je fixe sont-ils respectés ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. À la création du projet, Corrext extrait lui-même les termes candidats du document. Vous fixez leur traduction, ou vous ajoutez vos propres termes. Un terme fixé est repris tel quel dans la traduction automatique, que vous relisez ensuite dans l'éditeur."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quels formats de fichiers puis-je relire ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ceux que vous déposez dans un projet : .pdf, .doc, .docx, .xls, .xlsx, .ppt et .pptx, jusqu'à 50 Mo par fichier. L'application conseille le format original plutôt que le PDF. Depuis le tableau de bord, le document relu s'exporte en Word, et sa mémoire se télécharge au format TMX, le format standard d'échange des mémoires de traduction."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Corrext",
+     "item": "https://neur-on.ai/fr/corrext/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Éditeur de relecture",
+     "item": "https://neur-on.ai/fr/corrext/editeur-de-relecture/"
+    }
+   ]
+  }
+ ]
+}

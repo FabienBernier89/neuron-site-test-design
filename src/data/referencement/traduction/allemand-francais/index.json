@@ -1,0 +1,115 @@
+{
+ "source": "Sites/neuron/docs/fr/traduction/allemand-francais/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/traduction/allemand-francais/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/traduction/allemand-francais/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/uebersetzung/deutsch-franzoesisch/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/traduzione/tedesco-francese/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/translation/german-french/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction juridique de l'allemand au français · Neur.on\">",
+  "<meta property=\"og:description\" content=\"L'allemand juridique suisse vers le français : abréviations OR, ZGB, SchKG converties, orthographe suisse reconnue, documents traités en Suisse.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/traduction/allemand-francais/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "L'allemand juridique suisse est-il vraiment différent de l'allemand d'Allemagne ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui, et pas seulement par l'orthographe. Le ß n'existe pas en Suisse, les milliers s'écrivent avec une apostrophe et les guillemets sont des chevrons. Surtout, le vocabulaire renvoie à d'autres lois : SchKG, OR et ZGB n'ont pas d'équivalent allemand direct, et un moteur entraîné sur des textes d'Allemagne produit des termes qui n'existent pas en droit suisse."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment les abréviations de lois sont-elles traitées ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Elles sont converties, jamais recopiées. OR devient CO, ZGB devient CC, StGB devient CP, SchKG devient LP et IPRG devient LDIP. Quand le contexte laisse un doute, le nom complet de la loi est écrit en toutes lettres plutôt qu'une abréviation approximative."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Les références de jurisprudence sont-elles converties aussi ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Un BGE allemand se cite ATF en français, avec le même volume et la même page ; la Feuille fédérale se cite BBl en allemand et FF en français ; le Recueil systématique passe de SR à RS. Ces conversions sont mécaniques, mais ce sont elles qui rendent un mémoire citable devant une autorité romande."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Un document long garde-t-il sa mise en page ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui, la traduction est livrée dans le format d'origine. Traduction texte et document accepte jusqu'à 25 fichiers de 50 Mo par envoi, aux formats .pdf, .doc, .docx, .xls, .xlsx, .ppt et .pptx, et l'onglet PDF to Word convertit un scan en document éditable avant traitement."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Le texte peut-il rester en Suisse de bout en bout ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Les projets sont stockés sur des serveurs suisses dans tous les cas, et le mode Highly sensitive content ou le moteur LexMachina garantissent en plus un traitement exclusivement en Suisse. Si un collaborateur choisit un moteur tiers hébergé à l'étranger, l'avis Attorney-Client privilege s'affiche avant tout envoi."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Traduction",
+     "item": "https://neur-on.ai/fr/traduction/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Allemand vers français",
+     "item": "https://neur-on.ai/fr/traduction/allemand-francais/"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "Service",
+   "name": "Allemand vers français",
+   "description": "L'allemand juridique suisse vers le français : abréviations OR, ZGB, SchKG converties, orthographe suisse reconnue, documents traités en Suisse.",
+   "serviceType": "Traduction juridique et financière",
+   "url": "https://neur-on.ai/fr/traduction/allemand-francais/",
+   "provider": {
+    "@type": "Organization",
+    "@id": "https://neur-on.ai/#organisation",
+    "name": "Neur.on",
+    "url": "https://neur-on.ai/"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "Suisse"
+   },
+   "availableLanguage": [
+    "de",
+    "fr"
+   ]
+  }
+ ]
+}

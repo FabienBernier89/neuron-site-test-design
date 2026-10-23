@@ -51,20 +51,21 @@ class TestRedirections(unittest.TestCase):
 
     def test_ancre_et_barre_finale(self):
         self.assertEqual(self.r["fr/terms-of-use/"], "/fr/mentions-legales/#conditions-d-utilisation")
-        self.assertIn("RewriteRule ^fr/terms-of-use/?$ /fr/mentions-legales/#conditions-d-utilisation [R=301,L,NE]",
-                      self.htaccess)
+        self.assertIn("RewriteRule ^fr/terms-of-use/?$ https://neur-on.ai/fr/mentions-legales/#conditions-d-utilisation "
+                      "[R=301,L,NE]", self.htaccess)
         self.assertIn("ErrorDocument 404 /404.html", self.htaccess)
 
     def test_htaccess_regles(self):
         lignes = self.htaccess.splitlines()
         self.assertLess(lignes.index("RewriteEngine On"), min(i for i, l in enumerate(lignes) if l.startswith("RewriteRule")))
-        self.assertIn("RewriteRule ^$ /fr/ [R=302,L]", lignes)  # la racine part vers le français, provisoirement
-        regles = [l.split() for l in lignes if l.startswith("RewriteRule ^") and "[R=301" in l]
+        self.assertIn("RewriteRule ^$ https://neur-on.ai/fr/ [R=302,L]", lignes)  # la racine part vers le français, provisoirement
+        # anciennes adresses : « RewriteRule ^ancien/?$ cible » (la règle d'adresse canonique, « RewriteRule ^ https... », à part)
+        regles = [l.split() for l in lignes if l.startswith("RewriteRule ^") and "[R=301" in l and not l.startswith("RewriteRule ^ ")]
         self.assertEqual(len(regles), ATTENDU)
         modeles = set()
         for _, modele, cible, options in regles:
             self.assertEqual(options, "[R=301,L,NE]")  # NE : l'ancre # n'est pas échappée
-            self.assertTrue(cible.startswith("/fr/"), cible)
+            self.assertTrue(cible.startswith("https://neur-on.ai/fr/"), cible)  # en HTTPS sur l'hôte canonique : aucune chaîne
             sans_barre = modele[1:-len("/?$")]
             for url in (sans_barre, sans_barre + "/"):  # avec ou sans barre finale
                 self.assertTrue(re.search(modele, url), (modele, url))
@@ -75,6 +76,7 @@ class TestRedirections(unittest.TestCase):
 
     def test_pages_d_apercu(self):
         for ancien, cible in self.r.items():
+            cible = build.cible_v2(cible)  # ancre vérifiée dans la page V2
             h = (build.DOCS / ancien / "index.html").read_text(encoding="utf-8")
             self.assertIn('<meta name="robots" content="noindex">', h, ancien)
             self.assertIn(f'<link rel="canonical" href="https://neur-on.ai{cible}">', h, ancien)

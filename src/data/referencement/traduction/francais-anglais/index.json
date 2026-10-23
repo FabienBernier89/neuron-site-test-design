@@ -1,0 +1,115 @@
+{
+ "source": "Sites/neuron/docs/fr/traduction/francais-anglais/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/traduction/francais-anglais/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/traduction/francais-anglais/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/uebersetzung/franzoesisch-englisch/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/traduzione/francese-inglese/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/translation/french-english/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction juridique du français vers l'anglais · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Le droit suisse romand en anglais : arbitrage, arrêts du Tribunal fédéral et conformité, avec des versions anglaises informatives qui ne font pas foi.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/traduction/francais-anglais/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Peut-on citer une loi suisse en anglais dans un mémoire ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "On peut la citer en anglais pour la lecture, mais pas la lui faire dire quelque chose. L'anglais n'est pas une langue officielle de la Confédération et les versions anglaises des lois sont publiées à titre informatif. L'usage sûr consiste à citer le texte français, allemand ou italien, puis à en donner la traduction anglaise."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment citer un arrêt du Tribunal fédéral en anglais ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "La référence ne se traduit pas : un ATF garde sa forme, avec son volume, sa partie et sa page, et l'institution s'appelle Federal Supreme Court. Seul le passage cité est traduit, en précisant qu'il s'agit d'une traduction de courtoisie."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Le vocabulaire de l'arbitrage est-il stable d'un dossier à l'autre ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Il doit l'être à l'intérieur d'un même dossier avant tout. Compétence, sentence, recours et mesures provisionnelles reçoivent un terme unique, repris dans tous les échanges. Fast lookup CHnell affiche l'usage officiel de chaque terme, et vos propres ressources s'ajoutent aux sources publiques."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Que faire des notions qui n'existent pas en common law ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Les garder et les expliquer. La poursuite, le séquestre ou l'ordonnance pénale n'ont pas de contrepartie exacte : le terme suisse est conservé, expliqué à sa première occurrence, puis réutilisé tel quel. La traduction par une notion anglo-saxonne approchante crée un contresens invisible pour le lecteur."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Où les pièces sont-elles traitées ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sur des serveurs suisses dans tous les cas. Avec LexMachina ou le mode Highly sensitive content, le traitement reste exclusivement en Suisse et le contenu n'est pas réutilisé en mémoire. Les moteurs tiers hébergés à l'étranger déclenchent l'avis Attorney-Client privilege et supposent une pseudonymisation préalable."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Traduction",
+     "item": "https://neur-on.ai/fr/traduction/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Français vers anglais",
+     "item": "https://neur-on.ai/fr/traduction/francais-anglais/"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "Service",
+   "name": "Français vers anglais",
+   "description": "Le droit suisse romand en anglais : arbitrage, arrêts du Tribunal fédéral et conformité, avec des versions anglaises informatives qui ne font pas foi.",
+   "serviceType": "Traduction juridique et financière",
+   "url": "https://neur-on.ai/fr/traduction/francais-anglais/",
+   "provider": {
+    "@type": "Organization",
+    "@id": "https://neur-on.ai/#organisation",
+    "name": "Neur.on",
+    "url": "https://neur-on.ai/"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "Suisse"
+   },
+   "availableLanguage": [
+    "fr",
+    "en"
+   ]
+  }
+ ]
+}

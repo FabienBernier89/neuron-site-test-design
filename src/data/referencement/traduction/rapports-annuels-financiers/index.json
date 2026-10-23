@@ -1,0 +1,119 @@
+{
+ "source": "Sites/neuron/docs/fr/traduction/rapports-annuels-financiers/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/traduction/rapports-annuels-financiers/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/traduction/rapports-annuels-financiers/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/uebersetzung/geschaeftsberichte/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/traduzione/rapporti-annuali/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/translation/annual-reports/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction des rapports annuels et comptes suisses · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Rapport de gestion, comptes annuels, annexe, rapport de révision : traduire la clôture en quatre langues avec les libellés du Code des obligations.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/traduction/rapports-annuels-financiers/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Les tableaux Excel sont-ils traduits sans casser la structure ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui, les fichiers .xls et .xlsx sont pris en charge comme les autres formats bureautiques et reviennent dans leur format d'origine, structure de tableau conservée. Pour un fichier complexe, il vaut mieux déposer le format natif plutôt qu'un export PDF."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quels libellés comptables faut-il employer ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ceux du titre 32 du Code des obligations, qui nomme le bilan, le compte de résultat et l'annexe dans les trois langues officielles. Les usages de place existent, mais un rapport publié gagne à reprendre le vocabulaire légal, que le concordancier affiche avec sa source."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Un rapport non encore publié est-il protégé ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Le stockage se fait sur des serveurs suisses dans tous les cas. Pour un rapport sous embargo, le mode Highly sensitive content impose en plus un traitement exclusivement en Suisse, sans réutilisation du contenu en mémoire de traduction. Les moteurs hébergés à l'étranger affichent un avertissement avant tout envoi."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Faut-il tout faire relire par un humain ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Rarement. Le texte de gestion, qui sera lu et cité, justifie une Full review. Les annexes très standardisées peuvent se contenter d'une Light review, voire d'une Internal review par vos équipes, dont le tunnel projet chiffre le temps à partir du nombre de pages détecté."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment gagner du temps d'une clôture à l'autre ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En réutilisant la mémoire de traduction constituée par les projets en confidentialité Standard : les passages inchangés ne sont pas retraduits et le travail se concentre sur les nouveautés de l'exercice. La mémoire reste réutilisable exclusivement par votre organisation. Le rapport de l'organe de révision, très stable, en profite particulièrement."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Dans quelles langues peut-on publier ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "L'allemand, le français, l'italien et l'anglais sont natifs dans toutes les paires, ce qui couvre les besoins d'un rapport suisse. La plateforme prend en charge 30 langues au total pour les publications destinées à des investisseurs étrangers. Le choix des langues se fait document par document dans le tunnel projet."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Traduction",
+     "item": "https://neur-on.ai/fr/traduction/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Rapports annuels",
+     "item": "https://neur-on.ai/fr/traduction/rapports-annuels-financiers/"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "Service",
+   "name": "Rapports annuels",
+   "description": "Rapport de gestion, comptes annuels, annexe, rapport de révision : traduire la clôture en quatre langues avec les libellés du Code des obligations.",
+   "serviceType": "Traduction juridique et financière",
+   "url": "https://neur-on.ai/fr/traduction/rapports-annuels-financiers/",
+   "provider": {
+    "@type": "Organization",
+    "@id": "https://neur-on.ai/#organisation",
+    "name": "Neur.on",
+    "url": "https://neur-on.ai/"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "Suisse"
+   }
+  }
+ ]
+}

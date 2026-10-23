@@ -1,0 +1,105 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/legaltechtalk-2024-kanzleimodell/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/legaltechtalk-2024-modello-operativo/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/legaltechtalk-2024-law-firm-operating-model/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"LegalTechTalk 2024 : réinventer les cabinets · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Au LegalTechTalk 2024 à Londres, Paula Reichenberg, CEO de Neur.on, modère un panel sur la transformation des modèles opérationnels des cabinets.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/legaltechtalk-2024-londres-modele-operationnel-cabinets.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Visuel LegalTechTalk 2024 à Londres présentant Paula Reichenberg, CEO et fondatrice de Neur.on, comme intervenante du panel\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "LegalTechTalk 2024 à Londres : réinventer le modèle opérationnel des cabinets d’avocats",
+   "description": "Au LegalTechTalk 2024 à Londres, Paula Reichenberg, CEO de Neur.on, modère un panel sur la transformation des modèles opérationnels des cabinets.",
+   "datePublished": "2024-06-07",
+   "dateModified": "2024-06-07",
+   "inLanguage": "fr-CH",
+   "wordCount": 475,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets.webp",
+   "about": [
+    {
+     "@type": "Event",
+     "name": "LegalTechTalk 2024"
+    },
+    {
+     "@type": "Place",
+     "name": "Londres"
+    },
+    {
+     "@type": "Person",
+     "name": "Paula Reichenberg"
+    },
+    {
+     "@type": "Person",
+     "name": "James Lane"
+    },
+    {
+     "@type": "Person",
+     "name": "Line Lolk Thomsen"
+    },
+    {
+     "@type": "Person",
+     "name": "Jordan Lee"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "LegalTechTalk 2024 à Londres : réinventer le modèle opérationnel des cabinets d’avocats",
+     "item": "https://neur-on.ai/fr/ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/"
+    }
+   ]
+  }
+ ]
+}

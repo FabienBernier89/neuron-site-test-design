@@ -2,7 +2,9 @@
 """Site Neur.on V2 : assemble les pages de src/pages dans docs/ (docs/fr/<page>, comme les URL de production).
 
 Bibliothèque standard uniquement. Lit le site Neur.on (Sites/neuron) pour le méga-menu, le pied de
-page, la page 404 et les données de démonstration, sans jamais y écrire.
+page, la page 404, les redirections, les images et les données de démonstration, sans jamais y écrire. Le
+référencement repris de la V1 (balises et JSON-LD de 156 pages) est figé dans src/data/referencement/ et n'est plus lu
+dans la V1 (outils/figer_referencement.py).
 
 Variables d'environnement :
 - SORTIE : dossier de sortie (par défaut docs/), pour construire sans écraser le site publié ;
@@ -18,16 +20,20 @@ import os
 import re
 import shutil
 import struct
+import subprocess
 import sys
+from datetime import date
 from pathlib import Path
 
 import menu
 import redirections
-from outils import envoi, post
+from outils import donnees_structurees, envoi, llms, post
 
 ICI = Path(__file__).resolve().parent
 NEURON = Path(os.environ.get("NEURON_SRC", ICI.parent / "neuron")).resolve()
 SRC, ASSETS = ICI / "src", ICI / "assets"
+# Référencement repris de la V1, figé dans le dépôt (outils/figer_referencement.py) : le build ne le lit plus dans la V1
+REFERENCEMENT = SRC / "data/referencement"
 DOCS = Path(os.environ.get("SORTIE") or ICI / "docs").resolve()  # dossier de sortie du build
 # Réglages du site : apercu (noindex, robots), base, identifiants, destinataire des formulaires
 CONFIG = json.loads((SRC / "data/config.json").read_text(encoding="utf-8"))
@@ -213,14 +219,28 @@ def blocs_json(html):
     return [json.loads(b[b.index(">") + 1:b.rindex("<")]) for b in DONNEES.findall(html)]
 
 
+@functools.lru_cache(maxsize=1)
+def _libelles_fil():
+    f = REFERENCEMENT / "_fil.json"
+    return json.loads(f.read_text(encoding="utf-8")) if f.is_file() else {}
+
+
 def nom_fil(chemin):
-    """Libellé d'un niveau du fil d'Ariane : celui du site Neur.on actuel quand la page y existe, sinon son slug."""
-    f = NEURON / "docs/fr" / chemin / "index.html"
-    if f.is_file():
-        for d in blocs_json(f.read_text(encoding="utf-8")):
-            if isinstance(d, dict) and d.get("@type") == "BreadcrumbList":
-                return d["itemListElement"][-1]["name"]
-    return chemin.rstrip("/").split("/")[-1].replace("-", " ").capitalize()
+    """Libellé d'un niveau du fil d'Ariane : celui du site Neur.on V1 (figé dans src/data/referencement/_fil.json)
+    quand la page y existait, sinon son slug."""
+    return _libelles_fil().get(chemin) or chemin.rstrip("/").split("/")[-1].replace("-", " ").capitalize()
+
+
+LANGUE_PAR_DEFAUT = "fr"  # langue de la page désignée par hreflang x-default
+X_DEFAULT = re.compile(r'<link rel="alternate" hreflang="x-default" href="[^"]*">')
+
+
+def adresse_x_default(page):
+    """Cible du hreflang x-default d'une page : sa version dans la langue par défaut (le français), une page réelle et
+    indexable. La racine du domaine, page d'aiguillage non indexée (redirigée côté serveur), n'en est plus la cible.
+    Quand les versions DE, IT et EN existeront, chacune gardera ce x-default : la version française de la même page
+    (ou celle de LANGUE_PAR_DEFAUT si l'on en change)."""
+    return f"{PRODUCTION}{LANGUE_PAR_DEFAUT}/{page}"
 
 
 def seo_repli(page, meta):
@@ -239,7 +259,7 @@ def seo_repli(page, meta):
     lignes = [x for x in [
         f'<link rel="canonical" href="{url}">',
         f'<link rel="alternate" hreflang="fr-CH" href="{url}">',
-        '<link rel="alternate" hreflang="x-default" href="https://neur-on.ai/">',
+        f'<link rel="alternate" hreflang="x-default" href="{adresse_x_default(page)}">',
         f'<meta property="og:title" content="{echappe(titre)}">',
         f'<meta property="og:description" content="{echappe(meta.get("description", ""))}">',
         f'<meta property="og:url" content="{url}">',
@@ -255,37 +275,74 @@ def seo_repli(page, meta):
     return "".join(x + "\n" for x in lignes)
 
 
+def referencement_fige(page):
+    """Référencement de la page repris de la V1 et figé dans le dépôt (src/data/referencement/<page>index.json), ou
+    None pour une page nouvelle. Format décrit dans outils/figer_referencement.py."""
+    f = REFERENCEMENT / page / "index.json"
+    return json.loads(f.read_text(encoding="utf-8")) if f.is_file() else None
+
+
+OG_IMAGE = re.compile(r'<meta property="og:image" content="([^"]+)"')
+
+
 def seo(page, meta=None):
-    """Référencement de la page Neur.on correspondante, repris tel quel : canonique et hreflang vers les URL de
+    """Référencement de la page Neur.on V1 correspondante, figé dans le dépôt : canonique et hreflang vers les URL de
     production, Open Graph, données structurées (la version retenue se publiera à ces adresses). Une page nouvelle,
-    sans équivalent dans le site actuel, reçoit un référencement de repli tiré de sa méta. Les hreflang ne gardent que
-    les langues dont la page existe dans la sortie (garder_alternate) : aujourd'hui fr-CH et x-default."""
-    s = NEURON / "docs/fr" / page / "index.html"
+    sans équivalent dans la V1, reçoit un référencement de repli tiré de sa méta. Les hreflang ne gardent que les
+    langues dont la page existe dans la sortie (garder_alternate) : aujourd'hui fr-CH et x-default ; x-default désigne
+    la version française de la page (adresse_x_default)."""
     if not page.endswith("/") and page:
         return ""
-    if not s.exists():
+    fige = referencement_fige(page)
+    if fige is None:
         return seo_repli(page, meta or {})
-    h = s.read_text(encoding="utf-8")
-    tete = [x for x in SEO_TETE.findall(h[:h.find("</head>")]) if garder_alternate(x)]
-    image = re.search(r'<meta property="og:image" content="([^"]+)"', h)
-    return "".join(x + "\n" for x in tete + [completer(d, image.group(1) if image else None) for d in DONNEES.findall(h)])
+    balises = [X_DEFAULT.sub(f'<link rel="alternate" hreflang="x-default" href="{adresse_x_default(page)}">', x)
+               for x in fige["balises"] if garder_alternate(x)]
+    image = next((m.group(1) for m in map(OG_IMAGE.match, fige["balises"]) if m), None)
+    return "".join(x + "\n" for x in balises + [completer(d, image) for d in fige["donnees_structurees"]])
 
 
-def completer(bloc, image):
-    """Complète les entités principales des champs recommandés pour les résultats enrichis, à partir des visuels
-    réels du site : image de partage pour un article qui n'en a pas, logo pour une organisation."""
-    d = json.loads(bloc[bloc.index(">") + 1:bloc.rindex("<")])
-    modifie = False
+def completer(d, image):
+    """Bloc JSON-LD (lu) prêt pour la page, complété des champs recommandés pour les résultats enrichis à partir des
+    visuels réels du site : image de partage pour un article qui n'en a pas, logo pour une organisation."""
+    d = json.loads(json.dumps(d))  # copie : le référencement figé n'est jamais modifié
     for o in (d.get("@graph") or [d]) if isinstance(d, dict) else d:
         if o.get("@type") in ("Article", "BlogPosting", "NewsArticle") and "image" not in o and image:
             o["image"] = image
-            modifie = True
         if o.get("@type") == "Organization" and "logo" not in o and o.get("url", "").startswith("https://neur-on.ai"):
             o["logo"] = "https://neur-on.ai/assets/img/neuron-logo.png"
-            modifie = True
-    if not modifie:
-        return bloc
-    return '<script type="application/ld+json">' + json.dumps(d, ensure_ascii=False) + "</script>"
+    return '<script type="application/ld+json">' + donnees_structurees.ecrire(d) + "</script>"
+
+
+DATE_BUILD = date.today().isoformat()
+
+
+@functools.lru_cache(maxsize=1)
+def _dates_git():
+    """{fichier source relatif au dépôt : date AAAA-MM-JJ du dernier commit qui l'a modifié}, pour src/pages. Un fichier
+    modifié ou nouveau, pas encore commité, en est absent (il prend la date du build). Vide si git est indisponible."""
+    def git(*args):
+        return subprocess.run(["git", *args], cwd=ICI, capture_output=True, text=True, check=True).stdout
+    try:
+        journal = git("log", "--format=@%cs", "--name-only", "--relative", "--", "src/pages")
+        en_cours = set(git("diff", "--name-only", "--relative", "HEAD", "--", "src/pages").split())
+        en_cours |= set(git("ls-files", "--others", "--exclude-standard", "--", "src/pages").split())
+    except (OSError, subprocess.CalledProcessError):
+        return {}
+    dates, courante = {}, None
+    for ligne in journal.splitlines():
+        if ligne.startswith("@"):
+            courante = ligne[1:]
+        elif ligne and ligne not in dates:
+            dates[ligne] = courante
+    return {f: d for f, d in dates.items() if f not in en_cours}
+
+
+def date_page(page):
+    """Date de dernière modification d'une page (AAAA-MM-JJ), utilisée par le sitemap (lastmod) et par le JSON-LD
+    (dateModified) : la date du dernier commit de son fichier source src/pages/<page>index.html (git log) ; à défaut
+    (fichier modifié et pas encore commité, nouveau, ou dépôt sans git), la date du build."""
+    return _dates_git().get(f"src/pages/{page}index.html", DATE_BUILD)
 
 
 _TAILLES = {}
@@ -395,6 +452,8 @@ def assembler(meta, corps, page, nav, pied, v, racine=None):
     scripts = ["nav.js"] + globaux + (["corrext-demo.js"] if demo else []) + (["sim-data.js", "sim.js"] if sim or demo else []) + meta.get("scripts", "").split()
     html += "".join('<script src="{{ROOT}}assets/' + s + "?v=" + v + '" defer></script>\n' for s in scripts)
     html = post.appliquer(html + "</body>\n</html>\n", page)  # post-traitements des lots, avant la résolution des liens
+    # données structurées : @context, entité Organization unique, dateModified (outils/donnees_structurees.py)
+    html = donnees_structurees.normaliser(html, page, date_page(page) if page in PAGES else None)
     html = html.replace("@INTER@", PRECHARGE_INTER if utilise_inter(html) else "", 1)  # décidé sur le HTML final
     copier_images(html)
     return relier(dimensionner(html), page, racine)
@@ -425,6 +484,7 @@ def page_racine():
     h = (NEURON / "docs/index.html").read_text(encoding="utf-8")
     h, n = re.subn(r'var dispo=\[[^\]]*\],def="[a-z]+"', 'var dispo=["fr"],def="fr"', h)
     h = h.replace('<html lang="en">', '<html lang="fr">', 1)
+    h = X_DEFAULT.sub(f'<link rel="alternate" hreflang="x-default" href="{adresse_x_default("")}">', h)
     h = re.sub(r'<link rel="alternate" hreflang="(?:de|it|en)[^"]*" href="[^"]*">\n', "", h)
     h = re.sub(r'<a href="(?:de|it|en)/" hreflang="[^"]*">[A-Z]+</a>(?: · )?', "", h)
     h = re.sub(r" · (?=</p>)", "", h)
@@ -435,9 +495,9 @@ def page_racine():
 
 def plan_du_site():
     """sitemap.xml de la production : l'adresse canonique de chaque page indexable écrite par ce build, lue dans son
-    HTML. Ni page noindex (remerciement), ni redirection, ni page d'aiguillage ; une page dont la canonique désigne une
-    autre adresse n'y figure pas."""
-    adresses = []
+    HTML, avec sa date de dernière modification (lastmod, date_page). Ni page noindex (remerciement), ni redirection,
+    ni page d'aiguillage ; une page dont la canonique désigne une autre adresse n'y figure pas."""
+    adresses = {}
     for page in PAGES:
         tete = chemin_page(page).read_text(encoding="utf-8").split("</head>", 1)[0]
         if re.search(r'<meta name="robots" content="[^"]*noindex', tete):
@@ -445,31 +505,34 @@ def plan_du_site():
         canonique = re.search(r'<link rel="canonical" href="([^"]+)">', tete)
         propre = PRODUCTION + chemin_page(page).parent.relative_to(DOCS).as_posix() + "/"
         if canonique and H.unescape(canonique.group(1)) == propre and propre not in adresses:
-            adresses.append(propre)
+            adresses[propre] = date_page(page)
     return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-            + "".join(f"<url><loc>{H.escape(a, quote=False)}</loc></url>\n" for a in adresses) + "</urlset>\n")
+            + "".join(f"<url><loc>{H.escape(a, quote=False)}</loc><lastmod>{d}</lastmod></url>\n" for a, d in adresses.items())
+            + "</urlset>\n")
 
 
-LIEN_LANGUE = re.compile(r"https://neur-on\.ai/(?:de|it|en)/[^)\s]*")
+ROBOTS_APERCU = '<meta name="robots" content="noindex, nofollow">\n'
+# Pages jamais indexées, quel que soit le mode : la page de remerciement des formulaires (noindex posé par
+# outils/post/z_formulaires.py, MERCI ; sur l'aperçu, la balise générale le masque, d'où cette liste)
+NON_INDEXEES = ("contact/merci/",)
 
 
-def llms_txt(texte):
-    """llms.txt du site Neur.on réduit à la sortie : chaque ligne qui mène à une page /de/, /it/ ou /en/ absente de la
-    sortie est retirée (adresse_construite), et une section (« ## ») qui perd ainsi tous ses liens disparaît avec son
-    titre. Le reste est gardé mot pour mot ; une langue dont les pages sont construites revient d'elle-même."""
-    def gardee(ligne):
-        return all(adresse_construite(u) for u in LIEN_LANGUE.findall(ligne))
+def indexable(page):
+    """Vrai si la page est destinée aux moteurs en production : ni dans NON_INDEXEES, ni exclue par sa propre balise
+    robots (la balise noindex que l'aperçu pose sur toutes les pages ne compte pas)."""
+    if page in NON_INDEXEES:
+        return False
+    tete = chemin_page(page).read_text(encoding="utf-8").split("</head>", 1)[0].replace(ROBOTS_APERCU, "", 1)
+    return not re.search(r'<meta name="robots" content="[^"]*noindex', tete)
 
-    blocs = re.split(r"(?m)^(?=## )", texte)
-    sortie = [blocs[0]]
-    for bloc in blocs[1:]:
-        lignes = bloc.splitlines(keepends=True)
-        restantes = [l for l in lignes if gardee(l)]
-        avait = any("](https://" in l for l in lignes)
-        if avait and not any("](https://" in l for l in restantes):
-            continue
-        sortie.append("".join(restantes))
-    return re.sub(r"\n{3,}", "\n\n", "".join(sortie)).rstrip("\n") + "\n"
+
+def ecrire_llms(metas):
+    """llms.txt et llms-full.txt générés depuis les pages de la V2 (outils/llms.py), datés de la page la plus récente."""
+    pages = [(p, metas[p]) for p in PAGES if indexable(p)]
+    recente = max((date_page(p) for p, _ in pages), default=DATE_BUILD)
+    (DOCS / "llms.txt").write_text(llms.llms_txt(pages, recente), encoding="utf-8")
+    lire = lambda p: chemin_page(p).read_text(encoding="utf-8")
+    (DOCS / "llms-full.txt").write_text(llms.llms_full_txt(pages, lire, recente), encoding="utf-8")
 
 
 def garde_sortie():
@@ -485,9 +548,22 @@ def garde_sortie():
         sys.exit(f"Dossier de sortie refusé (dans le dépôt, où seul docs/ est une sortie) : {DOCS}")
 
 
+def cible_v2(cible):
+    """Cible d'une redirection vérifiée dans la sortie V2 : une ancre (#actu-108) absente de la page V2 construite est
+    retirée, la redirection mène alors en haut de la page. Les ancres de la V1 (cartes de la page actualités) n'existent
+    pas dans la V2 ; vérifié le 2026-10-23 : aucune des actualités de 2020 et 2021 visées n'a de billet dans la V2,
+    la page actualités sans ancre est donc la meilleure cible existante."""
+    chemin, _, ancre = cible.partition("#")
+    if not ancre:
+        return cible
+    page = chemin_page(chemin[len("/fr/"):])
+    return cible if page.is_file() and f'id="{ancre}"' in page.read_text(encoding="utf-8") else chemin
+
+
 def ecrire_redirections():
-    """Anciennes adresses du site Neur.on : une page de redirection par adresse (aperçu) et un .htaccess de 301."""
-    redirs = redirections.lire(NEURON)
+    """Anciennes adresses du site Neur.on : une page de redirection par adresse (aperçu) et un .htaccess de 301.
+    Appelée après l'écriture des pages : chaque ancre est vérifiée dans la page V2 (cible_v2)."""
+    redirs = {ancien: cible_v2(cible) for ancien, cible in redirections.lire(NEURON).items()}
     for ancien, cible in redirs.items():
         sortie = DOCS / ancien / "index.html"
         if sortie.exists():
@@ -507,8 +583,10 @@ def main():
     nav = menu.lire_menu((NEURON / "src/partials/nav.html").read_text(encoding="utf-8"))
     pied = menu.lire_pied((NEURON / "src/partials/footer.html").read_text(encoding="utf-8"))
     menu.appliquer_ajouts(nav, pied)  # entrées de menu et de pied ajoutées par les lots (src/data/menu-ajouts.json)
+    metas = {}
     for page in PAGES:
         meta, corps = lire_page(page)
+        metas[page] = meta
         sortie = chemin_page(page)
         sortie.parent.mkdir(parents=True, exist_ok=True)
         sortie.write_text(assembler(meta, corps, page, nav, pied, v), encoding="utf-8")
@@ -520,8 +598,7 @@ def main():
     else:
         (DOCS / "sitemap.xml").write_text(plan_du_site(), encoding="utf-8")
         (DOCS / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {PRODUCTION}sitemap.xml\n", encoding="utf-8")
-    if (NEURON / "docs/llms.txt").exists():  # résumé pour les moteurs IA du site Neur.on, réduit aux pages de la sortie
-        (DOCS / "llms.txt").write_text(llms_txt((NEURON / "docs/llms.txt").read_text(encoding="utf-8")), encoding="utf-8")
+    ecrire_llms(metas)  # résumé et texte intégral pour les moteurs IA, générés depuis les pages de la V2
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
     ecrire_redirections()
     envoi.ecrire(DOCS / "envoi.php", CONFIG)  # envoi des formulaires sur Hostpoint, réglé par la configuration

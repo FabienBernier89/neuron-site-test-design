@@ -1,0 +1,111 @@
+{
+ "source": "Sites/neuron/docs/fr/lexmachina/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/lexmachina/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/lexmachina/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/lexmachina/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/lexmachina/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/lexmachina/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"LexMachina : le moteur de Corrext entraîné sur le droit suisse\">",
+  "<meta property=\"og:description\" content=\"LexMachina, le moteur de Corrext entraîné sur plus de 15 millions de segments juridiques suisses : ATF, FINMA, codes. Quadrilingue, exécuté en Suisse.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/lexmachina/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Sur quoi LexMachina est-il entraîné ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sur la donnée juridique et financière suisse : plus de 15 millions de segments multilingues issus des arrêts du Tribunal fédéral (ATF/BGE), des publications de la FINMA et des codes et lois fédérales. Jamais sur les documents de nos clients."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quelles langues LexMachina couvre-t-il ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "L'allemand, le français, l'italien et l'anglais, en natif et dans toutes les paires : les quatre langues dans lesquelles le droit suisse s'écrit et se plaide. La plateforme Corrext propose 30 langues au total ; au-delà de ces quatre, la traduction passe par un moteur tiers."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Où le modèle s'exécute-t-il ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "En Suisse, sur l'infrastructure suisse de Neur.on. Choisir LexMachina suffit à garder le traitement en Suisse, même sans activer le mode Highly sensitive content, et aucun avis de pseudonymisation ne s'affiche puisque rien ne part à l'étranger."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Mes documents servent-ils à entraîner le modèle ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non. LexMachina apprend de corpus juridiques et financiers suisses publics, pas de vos dossiers. En mode Standard, vos projets alimentent une mémoire de traduction utilisable exclusivement par votre organisation ; en mode Highly sensitive content, aucune mémoire n'est alimentée."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Puis-je utiliser d'autres moteurs que LexMachina ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui. Corrext est model-agnostic : DeepL Pro, Azure OpenAI GPT et Claude sont disponibles dans la même interface, et le moteur se choisit à chaque envoi. Les moteurs hébergés à l'étranger déclenchent l'avis Attorney-Client privilege de votre organisation."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment comparer les moteurs sur mes propres textes ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Dans Traduction texte et document, le bouton étincelle ouvre le panneau Alternatives : jusqu'à quatre propositions pour la même phrase, chacune attribuée à son moteur, avec Generate more pour en obtenir d'autres. Vous jugez sur vos textes plutôt que sur une promesse."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "LexMachina",
+     "item": "https://neur-on.ai/fr/lexmachina/"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "SoftwareApplication",
+   "name": "LexMachina",
+   "applicationCategory": "BusinessApplication",
+   "operatingSystem": "Web",
+   "url": "https://neur-on.ai/fr/lexmachina/",
+   "description": "LexMachina, le moteur de Corrext entraîné sur plus de 15 millions de segments juridiques suisses : ATF, FINMA, codes. Quadrilingue, exécuté en Suisse.",
+   "inLanguage": "fr-CH",
+   "publisher": {
+    "@type": "Organization",
+    "@id": "https://neur-on.ai/#organisation",
+    "name": "Neur.on",
+    "url": "https://neur-on.ai/"
+   }
+  }
+ ]
+}

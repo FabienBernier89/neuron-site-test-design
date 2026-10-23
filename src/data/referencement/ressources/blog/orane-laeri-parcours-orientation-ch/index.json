@@ -1,0 +1,97 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/orane-laeri-parcours-orientation-ch/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/orane-laeri-parcours-orientation-ch/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/orane-laeri-parcours-orientation-ch/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/orane-laeri-werdegang/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/orane-laeri-percorso/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/orane-laeri-career-path/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Le parcours d’Orane Laeri sur orientation.ch · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Orane Laeri, COO de Neur.on, partage sur orientation.ch son parcours en traduction et en linguistique, de l’Université de Genève à la LegalTech.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/orane-laeri-parcours-orientation-ch/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/orane-laeri-parcours-orientation-ch.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Une femme assise à un bureau, travaillant sur un ordinateur portable et un grand écran, dans un bureau lumineux\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Sur orientation.ch, Orane Laeri, COO de Neur.on, retrace son parcours en linguistique",
+   "description": "Orane Laeri, COO de Neur.on, partage sur orientation.ch son parcours en traduction et en linguistique, de l’Université de Genève à la LegalTech.",
+   "datePublished": "2023-08-24",
+   "dateModified": "2023-08-24",
+   "inLanguage": "fr-CH",
+   "wordCount": 218,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/orane-laeri-parcours-orientation-ch/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/orane-laeri-parcours-orientation-ch.webp",
+   "about": [
+    {
+     "@type": "Person",
+     "name": "Orane Laeri"
+    },
+    {
+     "@type": "Organization",
+     "name": "orientation.ch"
+    },
+    {
+     "@type": "Organization",
+     "name": "Université de Genève"
+    },
+    {
+     "@type": "Organization",
+     "name": "Neur.on AI Solutions SA"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Sur orientation.ch, Orane Laeri, COO de Neur.on, retrace son parcours en linguistique",
+     "item": "https://neur-on.ai/fr/ressources/blog/orane-laeri-parcours-orientation-ch/"
+    }
+   ]
+  }
+ ]
+}

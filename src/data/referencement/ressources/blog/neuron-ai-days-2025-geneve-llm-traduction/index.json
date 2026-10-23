@@ -1,0 +1,97 @@
+{
+ "source": "Sites/neuron/docs/fr/ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/ressourcen/blog/ai-days-2025-genf/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/risorse/blog/ai-days-2025-ginevra/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/resources/blog/ai-days-2025-geneva/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"AI Days 2025 Genève : entraîner un LLM à traduire · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Le 28 janvier 2025 aux AI Days de Genève, Eloi Eynard, data scientist chez Neur.on, montre comment Neur.on entraîne des LLM à mieux traduire.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/\">",
+  "<meta property=\"og:type\" content=\"article\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/blog/og/neuron-ai-days-2025-geneve-llm-traduction.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Un jeune homme tient l’affiche scientifique de Neur.on sur la traduction automatique par LLM, signée Eloi Eynard\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "BlogPosting",
+   "headline": "Neur.on aux AI Days 2025 à Genève : comment entraîner un LLM à bien traduire",
+   "description": "Le 28 janvier 2025 aux AI Days de Genève, Eloi Eynard, data scientist chez Neur.on, montre comment Neur.on entraîne des LLM à mieux traduire.",
+   "datePublished": "2025-01-27",
+   "dateModified": "2025-01-27",
+   "inLanguage": "fr-CH",
+   "wordCount": 151,
+   "articleSection": "Actualités",
+   "mainEntityOfPage": "https://neur-on.ai/fr/ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/",
+   "author": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Neur.on AI Solutions SA",
+    "url": "https://neur-on.ai",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://neur-on.ai/assets/img/neuron-logo.png"
+    }
+   },
+   "image": "https://neur-on.ai/assets/img/blog/neuron-ai-days-2025-geneve-llm-traduction.webp",
+   "about": [
+    {
+     "@type": "Event",
+     "name": "AI Days 2025"
+    },
+    {
+     "@type": "Person",
+     "name": "Eloi Eynard"
+    },
+    {
+     "@type": "Place",
+     "name": "Genève"
+    },
+    {
+     "@type": "Organization",
+     "name": "Neur.on"
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ressources",
+     "item": "https://neur-on.ai/fr/ressources/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Blog",
+     "item": "https://neur-on.ai/fr/ressources/blog/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Neur.on aux AI Days 2025 à Genève : comment entraîner un LLM à bien traduire",
+     "item": "https://neur-on.ai/fr/ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/"
+    }
+   ]
+  }
+ ]
+}

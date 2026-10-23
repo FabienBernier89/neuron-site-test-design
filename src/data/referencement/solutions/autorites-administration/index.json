@@ -1,0 +1,101 @@
+{
+ "source": "Sites/neuron/docs/fr/solutions/autorites-administration/index.html",
+ "balises": [
+  "<link rel=\"canonical\" href=\"https://neur-on.ai/fr/solutions/autorites-administration/\">",
+  "<link rel=\"alternate\" hreflang=\"fr-CH\" href=\"https://neur-on.ai/fr/solutions/autorites-administration/\">",
+  "<link rel=\"alternate\" hreflang=\"de-CH\" href=\"https://neur-on.ai/de/loesungen/behoerden/\">",
+  "<link rel=\"alternate\" hreflang=\"it-CH\" href=\"https://neur-on.ai/it/soluzioni/enti-pubblici/\">",
+  "<link rel=\"alternate\" hreflang=\"en\" href=\"https://neur-on.ai/en/solutions/public-authorities/\">",
+  "<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://neur-on.ai/\">",
+  "<meta property=\"og:title\" content=\"Traduction pour autorités et administrations suisses · Neur.on\">",
+  "<meta property=\"og:description\" content=\"Tribunaux et administrations : traduisez décisions, rapports et documents officiels en quatre langues, traités en Suisse, avec la terminologie des lois.\">",
+  "<meta property=\"og:url\" content=\"https://neur-on.ai/fr/solutions/autorites-administration/\">",
+  "<meta property=\"og:type\" content=\"website\">",
+  "<meta property=\"og:image\" content=\"https://neur-on.ai/assets/img/og-neuron.jpg\">",
+  "<meta property=\"og:image:alt\" content=\"Neur.on, traduction par IA pour le droit, la fiscalité et la finance\">",
+  "<meta property=\"og:site_name\" content=\"Neur.on\">",
+  "<meta property=\"og:locale\" content=\"fr_CH\">",
+  "<meta name=\"twitter:card\" content=\"summary_large_image\">",
+  "<meta name=\"theme-color\" content=\"#001B4C\">"
+ ],
+ "donnees_structurees": [
+  {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Les données restent-elles en Suisse ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Le stockage est suisse dans tous les cas. Le traitement l'est également en mode Highly sensitive content ou avec le moteur LexMachina. Les moteurs tiers, hébergés à l'étranger, déclenchent un avertissement explicite avant tout envoi."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "La terminologie des textes officiels est-elle respectée ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Le concordancier CHnell aligne des segments issus de Fedlex, de la Feuille fédérale et des publications des administrations fédérales. Chaque occurrence affiche sa source et s'ouvre en contexte."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Un déploiement sur nos propres serveurs est-il possible ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Oui, un déploiement on-premises est prévu pour les environnements les plus sensibles. Le cadrage se fait lors d'un échange technique."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Comment obtenir une traduction certifiée pour une autorité étrangère ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Pour un extrait du registre du commerce, le service en ligne propose trois niveaux : certification par Corrext, certification notariée, et certification notariée puis apostillée selon la Convention de La Haye du 5 octobre 1961."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Quelles langues sont couvertes ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Trente langues sur la plateforme. L'allemand, le français, l'italien et l'anglais sont natifs et sont les quatre langues disponibles en mode Highly sensitive content."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Les documents servent-ils à entraîner des modèles ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Non. Les contenus clients ne servent pas à entraîner les modèles de Neur.on, et les projets en mode Highly sensitive content ne sont pas réutilisés en mémoire de traduction."
+     }
+    }
+   ]
+  },
+  {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://neur-on.ai/fr/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Solutions",
+     "item": "https://neur-on.ai/fr/solutions/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Autorités et administration",
+     "item": "https://neur-on.ai/fr/solutions/autorites-administration/"
+    }
+   ]
+  }
+ ]
+}
