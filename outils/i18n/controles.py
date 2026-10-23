@@ -439,15 +439,21 @@ def _chemin_de_url(url):
     return urlsplit(url[len(PRODUCTION):]).path
 
 
+_REDIRECTION = re.compile(r'<meta http-equiv="refresh"')
+
+
 def hreflang(sortie):
     """Pour chaque page de sortie/{fr,de,it,en}/ : auto-référence, x-default vers une page française, cibles existantes
-    et dans la bonne langue, réciprocité (si A annonce B sous la langue de B, B annonce A sous la langue de A)."""
+    et dans la bonne langue, réciprocité (si A annonce B sous la langue de B, B annonce A sous la langue de A). Les pages
+    de redirection des anciennes adresses (meta refresh, noindex) ne sont pas des pages du site : elles sont ignorées."""
     sortie = Path(sortie)
     pages = {}  # chemin de la page (« de/x/ ») -> liste (hreflang, href)
     for langue in LANGUES:
         for f in sorted((sortie / langue).rglob("index.html")):
-            chemin = f.parent.relative_to(sortie).as_posix() + "/"
-            pages[chemin] = _tete(f.read_text(encoding="utf-8")).alternates
+            html = f.read_text(encoding="utf-8")
+            if _REDIRECTION.search(html):
+                continue
+            pages[f.parent.relative_to(sortie).as_posix() + "/"] = _tete(html).alternates
     problemes = []
     for chemin, alternates in pages.items():
         langue, url = chemin.split("/")[0], PRODUCTION + chemin

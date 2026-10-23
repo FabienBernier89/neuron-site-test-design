@@ -79,21 +79,16 @@ class TestHreflang(unittest.TestCase):
                 alternates = ALTERNATE.findall(h[:h.index("</head>")])
                 self.assertEqual(alternates, [("fr-CH", "https://neur-on.ai/fr/" + p), ("x-default", "https://neur-on.ai/fr/" + p)], p)
 
-    def test_detection_d_une_langue_presente_dans_la_sortie(self):
-        """Une variante revient d'elle-même dès que sa page existe dans la sortie (lot F) : rien n'est écrit en dur."""
-        import tempfile
-        from unittest import mock
-        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(build, "DOCS", Path(tmp)):
-            seule = dict(ALTERNATE.findall(build.seo("corrext/")))
-            self.assertEqual(sorted(seule), ["fr-CH", "x-default"])
-            (Path(tmp) / "de/corrext").mkdir(parents=True)
-            (Path(tmp) / "de/corrext/index.html").write_text("<!DOCTYPE html>", encoding="utf-8")
-            avec = dict(ALTERNATE.findall(build.seo("corrext/")))
-            self.assertEqual(sorted(avec), ["de-CH", "fr-CH", "x-default"])
-            self.assertEqual(avec["de-CH"], "https://neur-on.ai/de/corrext/")
-        with mock.patch.object(build, "PAGES", build.PAGES + ["essai-de/"]), \
-                mock.patch.object(build, "chemin_page", lambda p: build.DOCS / ("de/corrext" if p == "essai-de/" else "fr/" + p) / "index.html"):
-            self.assertIn("de-CH", dict(ALTERNATE.findall(build.seo("corrext/"))))  # page de ce build, pas encore écrite
+    def test_alternates_poses_par_les_pages_construites(self):
+        """Les hreflang d'une page finalisée viennent des pages construites dans chaque langue (localiser.poser_alternates),
+        jamais du contenu du dossier de sortie : une page de cette langue construite les fait apparaître, rien d'écrit en dur."""
+        tete = build.seo("corrext/")
+        seule = build.finaliser(tete, "corrext/", "fr", {"fr": {"corrext/"}})
+        self.assertEqual(sorted(dict(ALTERNATE.findall(seule))), ["fr-CH", "x-default"])
+        avec = dict(ALTERNATE.findall(build.finaliser(tete, "corrext/", "fr", {"fr": {"corrext/"}, "de": {"corrext/"}})))
+        self.assertEqual(sorted(avec), ["de-CH", "fr-CH", "x-default"])
+        self.assertEqual(avec["de-CH"], "https://neur-on.ai/de/corrext/")
+        self.assertEqual(avec["x-default"], "https://neur-on.ai/fr/corrext/")
 
     def test_adresse_construite(self):
         self.assertTrue(build.adresse_construite("https://neur-on.ai/"))

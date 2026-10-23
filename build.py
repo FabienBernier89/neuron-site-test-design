@@ -33,7 +33,7 @@ from pathlib import Path
 import menu
 import redirections
 from outils import donnees_structurees, envoi, llms, post
-from outils.i18n import langues
+from outils.i18n import langues, localiser
 
 ICI = Path(__file__).resolve().parent
 NEURON = Path(os.environ.get("NEURON_SRC", ICI.parent / "neuron")).resolve()
@@ -211,8 +211,9 @@ def _chemins_construits(docs, pages):
 
 def adresse_construite(url):
     """Vrai si une adresse de production désigne une page de la sortie : la page d'aiguillage de la racine, une page de
-    ce build (PAGES) ou une page déjà écrite dans le dossier de sortie. Rien n'est écrit en dur : un hreflang vers une
-    langue absente de la sortie est retiré, et revient de lui-même dès que les pages de cette langue sont construites."""
+    ce build (PAGES) ou une page déjà écrite dans le dossier de sortie. Rien n'est écrit en dur. Ne sert qu'au filtre
+    provisoire de seo() : les hreflang définitifs d'une page ne dépendent pas du dossier de sortie, ce sont ceux que
+    finaliser pose (outils/i18n/localiser.poser_alternates) d'après les pages construites dans chaque langue."""
     if not url.startswith(PRODUCTION):
         return False
     chemin = url[len(PRODUCTION):].split("#")[0].split("?")[0]
@@ -301,9 +302,10 @@ OG_IMAGE = re.compile(r'<meta property="og:image" content="([^"]+)"')
 def seo(page, meta=None):
     """Référencement de la page Neur.on V1 correspondante, figé dans le dépôt : canonique et hreflang vers les URL de
     production, Open Graph, données structurées (la version retenue se publiera à ces adresses). Une page nouvelle,
-    sans équivalent dans la V1, reçoit un référencement de repli tiré de sa méta. Les hreflang ne gardent que les
-    langues dont la page existe dans la sortie (garder_alternate) : aujourd'hui fr-CH et x-default ; x-default désigne
-    la version française de la page (adresse_x_default)."""
+    sans équivalent dans la V1, reçoit un référencement de repli tiré de sa méta. Les hreflang ne gardent ici que
+    les langues dont la page existe dans la sortie (garder_alternate) : un état provisoire, que finaliser remplace par
+    les alternates des pages construites dans chaque langue (localiser.poser_alternates) ; x-default désigne la
+    version française de la page (adresse_x_default)."""
     if not page.endswith("/") and page:
         return ""
     fige = referencement_fige(page)
@@ -474,10 +476,13 @@ def assembler_fr(meta, corps, page, nav, pied, v):
 
 
 def finaliser(html, page, langue, construites, racine=None):
-    """Dernière passe d'une page assemblée dans une langue : attribut lang, images recopiées, dimensions, puis liens
-    relatifs (relier). construites : pages construites par langue (langue vers ensemble de pages), que la localisation
-    des liens et de la tête utilisera à partir de la tâche 1.3. racine : voir relier (la 404 passe racine="")."""
+    """Dernière passe d'une page assemblée dans une langue : attribut lang, hreflang de toutes les langues construites
+    (poser_alternates, français compris), localisation des liens, de la tête et des données structurées (localiser,
+    hors français), images recopiées, dimensions, puis liens relatifs (relier). construites : pages construites par
+    langue (langue vers ensemble de pages). racine : voir relier (la 404 passe racine="")."""
     html = html.replace('<html lang="@LANG@"', f'<html lang="{langue}"', 1)
+    html = localiser.poser_alternates(html, page, construites)
+    html, _ = localiser.localiser(html, page, langue, construites)
     copier_images(html)
     return relier(dimensionner(html), page, racine, langue)
 

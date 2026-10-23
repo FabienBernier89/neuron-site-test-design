@@ -159,6 +159,17 @@ class TestControles(unittest.TestCase):
             ecrire(tmp, "de/x", page_alternates(*tout))
             self.assertEqual(controles.hreflang(Path(tmp)), [])
 
+    def test_hreflang_ignore_les_pages_de_redirection(self):
+        """Une ancienne adresse (meta refresh, sans alternate) n'est pas une page du site : ni auto-référence exigée,
+        ni réciprocité."""
+        with tempfile.TemporaryDirectory() as tmp:
+            tout = (("fr-CH", "fr/x/"), ("de-CH", "de/x/"), ("x-default", "fr/x/"))
+            ecrire(tmp, "fr/x", page_alternates(*tout))
+            ecrire(tmp, "de/x", page_alternates(*tout))
+            ecrire(tmp, "fr/ancien", '<!DOCTYPE html>\n<html lang="fr"><head><meta http-equiv="refresh" content="0; url=../x/">'
+                                     "</head><body></body></html>")
+            self.assertEqual(controles.hreflang(Path(tmp)), [])
+
     def test_hreflang_fautes(self):
         with tempfile.TemporaryDirectory() as tmp:
             # pas d'auto-référence ; x-default vers une autre langue que le français ; cible absente
