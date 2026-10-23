@@ -18,7 +18,7 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(RACINE))
 from outils.contenus import texte  # noqa: E402
-from comp import scene, hero, section, h2, tuiles, bento, cta, faq  # noqa: E402
+from comp import scene, hero, section, h2, tuiles, bento, cta, faq, cartes  # noqa: E402
 from app import IC  # noqa: E402
 
 NEURON = Path(os.environ.get("NEURON_SRC") or RACINE.parent / "neuron")
@@ -188,6 +188,13 @@ def composer():
                for k in ("suisse", "sensible", "acces", "iso")]
     out.append(section(rangees(h2(t("plugin-word.garanties.titre"), "que Corrext"), t("plugin-word.garanties.texte"),
                                (t("plugin-word.garanties.lien"), "{{ROOT}}securite-souverainete/"), [(x, y) for x, y, _ in petites]), "sec pw-garanties"))
+
+    # les autres outils, comme sur les autres pages outils (Fabien, 2026-10-23) ; outils/post/fonctionnalites.py
+    # reconstruit ces cartes avec leur mini-interface animée
+    autres = [("Éditeur de relecture", "editeur", "corrext/editeur-de-relecture/"), ("Gestion de projet", "gestion", "corrext/gestion-de-projet/"),
+              ("Traduction texte et document", "traduction", "corrext/traduction-texte-et-document/")]
+    out.append(section(h2(t("plugin-word.autres.titre"), "de Corrext")
+                       + cartes([(nom, t(f"plugin-word.autres.{k}"), ("En savoir plus", "{{ROOT}}fr/" + href), "") for nom, k, href in autres])))
 
     qr = [(texte(f"plugin-word.faq.q{i}"), texte(f"plugin-word.faq.r{i}")) for i in range(1, 5)]
     out.append(faq(t("plugin-word.faq.titre"), [(e(q), f"<p>{e(r)}</p>") for q, r in qr]))
