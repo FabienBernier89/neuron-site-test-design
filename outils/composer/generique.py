@@ -250,7 +250,7 @@ def h_levels(sec, ctx):
     niv = [(str(i + 1), brut(bloc(x, "h3")), brut(bloc(x, "p"))) for i, x in enumerate(blocs(sec, "div", "lev"))]
     if not niv:
         return h_generique(sec, ctx)
-    return section(titre(sec) + (f'<p class="intro">{premier_p(sec)}</p>' if premier_p(sec) else "") + tuiles(niv, "tl t4"))
+    return section(titre(sec) + (f'<p class="intro">{premier_p(sec)}</p>' if premier_p(sec) else "") + frise_niveaux(niv))
 
 
 def h_pillars(sec, ctx):

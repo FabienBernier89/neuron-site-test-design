@@ -122,7 +122,7 @@ lv = bloc(t, "section", "levels")
 tete = bloc(lv, "div", "sec-head")
 niv = [(str(i + 1), brut(bloc(x, "h3")), brut(bloc(x, "p"))) for i, x in enumerate(blocs(lv, "div", "lev"))]
 # Retour de Fabien du 2026-10-16 : introduction sur une ligne, titres des quatre tuiles alignés
-B["niveaux"] = (section(h2(txt(bloc(tete, "h2")), "Quatre niveaux") + f'<p class="intro intro-l">{brut(bloc(tete, "p"))}</p>' + tuiles(niv, "tl t4")))
+B["niveaux"] = (section(h2(txt(bloc(tete, "h2")), "Quatre niveaux") + f'<p class="intro intro-l">{brut(bloc(tete, "p"))}</p>' + frise_niveaux(niv)))
 
 # 8. Comparaison
 cp = bloc(t, "section", "compare")

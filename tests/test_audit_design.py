@@ -44,7 +44,8 @@ class TestAuditDesign(unittest.TestCase):
             if re.fullmatch(r"solutions/[a-z-]+/", p):
                 self.assertIn('<div class="tl">', h, p)  # gains chiffrés des métiers (Fabien, 2026-10-19)
             if re.fullmatch(r"traduction/[a-z-]+/", p) and 'class="h2">Trois situations' in h:
-                self.assertIn('class="pa-sg"', h, p)  # situations en cartes du modèle de domaine validé
+                self.assertIn('<div class="sr">', h, p)  # rangées, comme les pages outils (arbitrage du 2026-10-23, B)
+                self.assertNotIn('class="pa-sg"', h, p)
 
     # Item 5 : glossaire
     def test_glossaire_en_fiche_de_langues(self):

@@ -8,7 +8,7 @@
 .dm-reg > div{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,1.6fr);gap:32px;align-items:start;padding:24px 0;border-bottom:1px solid var(--line)}
 .dm-ab{font:400 34px/40px var(--serif);color:var(--accent-d)}
 .dm-reg h3{font:600 15px/22px var(--sans);color:var(--ink)}
-.dm-reg > div > p:last-child{font:400 14px/22px var(--sans);color:var(--text)}
+.dm-reg > div > p:last-child{font:400 16px/24px var(--sans);color:var(--muted)}
 .dm-tr::after{content:"."}  /* fin « ; OR en allemand… » sortie en étiquettes */
 .dm-lgs{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
 .dm-lg{display:inline-flex;align-items:center;gap:6px;font:500 13px/18px var(--sans);color:var(--text)}
@@ -21,7 +21,7 @@
 .dm-num li{display:grid;grid-template-columns:40px minmax(0,1fr);padding:18px 0;border-top:1px solid var(--line);counter-increment:acte}
 .dm-num li::before{content:counter(acte,decimal-leading-zero);grid-row:span 2;font:400 22px/22px var(--serif);color:var(--accent-d)}
 .dm-num h3,.dm-ck h3{font:600 15px/22px var(--sans);color:var(--ink)}
-.dm-num p,.dm-ck p{margin-top:6px;font:400 14px/22px var(--sans);color:var(--text)}
+.dm-num p,.dm-ck p{margin-top:6px;font:400 16px/24px var(--sans);color:var(--muted)}
 .dm-in{padding:28px 32px 8px;border-radius:12px;background:var(--tile)}
 .dm-ck > div{display:grid;grid-template-columns:24px minmax(0,1fr);gap:12px;padding:20px 0;border-bottom:1px solid var(--line)}
 .dm-ck > div:first-child{padding-top:4px}

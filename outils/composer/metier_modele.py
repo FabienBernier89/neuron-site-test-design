@@ -77,13 +77,13 @@ def outils(slug, items, accent, commander=None):
 
 
 def niveaux():
-    """Les quatre niveaux de la page Niveaux de qualité, en tuiles chiffrées (même rendu que cette page)."""
+    """Les quatre niveaux de la page Niveaux de qualité, en frise (arbitrage du 2026-10-23, même rendu que l'accueil)."""
     P = "niveaux-de-qualite/"
     lv = bloc(liens(charger(P), P), "section", "levels")
     niv = [(str(i + 1), brut(bloc(x, "h3")), brut(bloc(x, "p"))) for i, x in enumerate(blocs(lv, "div", "lev"))]
     t = texte("metier.niveaux.titre")  # titre de la page Niveaux de qualité, déclaré pour les pages métier
     assert t == txt(bloc(lv, "h2")), "le titre des niveaux a changé dans la V1"
-    return section(h2(t, "devant une autorité") + f'<p class="intro">{brut(bloc(bloc(lv, "div", "sec-head"), "p"))}</p>' + tuiles(niv, "tl t4"))
+    return section(h2(t, "devant une autorité") + f'<p class="intro">{brut(bloc(bloc(lv, "div", "sec-head"), "p"))}</p>' + frise_niveaux(niv))
 
 
 def deploiement(items):

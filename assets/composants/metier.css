@@ -21,7 +21,7 @@
 .mt-sa > div + div{border-top:1px solid var(--line)}
 .mt-sah span{padding:14px 24px;font:600 13px/18px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .mt-sah span + span{color:#0b6e47;background:rgba(16,140,90,.06)}
-.mt-sa p{display:flex;gap:12px;padding:18px 24px;font:400 15px/23px var(--sans)}
+.mt-sa p{display:flex;gap:12px;padding:18px 24px;font:400 16px/24px var(--sans)}
 .mt-sans{color:var(--muted)}
 .mt-avec{background:rgba(16,140,90,.06);color:var(--ink);font-weight:500 !important}
 .mt-sa i{display:grid;flex:none;place-items:center;width:22px;height:22px;margin-top:1px;border-radius:50%}

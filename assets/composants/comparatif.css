@@ -3,13 +3,13 @@
 /* En bref : la réponse à gauche, trois différences en tuiles à droite */
 .cp-eb{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:56px;align-items:start}
 .cp-q{font:400 26px/34px var(--serif);color:var(--ink);text-wrap:balance}
-.cp-s{margin-top:16px;font:400 15px/24px var(--sans);color:var(--text)}
+.cp-s{margin-top:16px;font:400 16px/24px var(--sans);color:var(--muted)}
 .cp-eb ul{display:grid;gap:10px;margin:0;padding:0;list-style:none}
 .cp-eb li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;padding:18px;border-radius:10px;background:var(--tile)}
 .cp-ic{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;color:#fff;background:linear-gradient(140deg,#4f8dff 0%,#2c4fd8 55%,#1b2f8f 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
 .cp-ic svg{width:20px;height:20px}
 .cp-eb b{display:block;font:600 15px/22px var(--sans);color:var(--ink)}
-.cp-eb li p{margin-top:4px;font:400 14px/22px var(--sans);color:var(--text)}
+.cp-eb li p{margin-top:4px;font:400 16px/24px var(--sans);color:var(--muted)}
 .cp-eb li a{color:var(--accent-d);text-decoration:underline;text-underline-offset:3px}
 
 /* Ce que l'autre solution fait bien : liste cochée sur deux colonnes */
@@ -18,7 +18,7 @@
 .cp-ok{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:rgba(16,140,90,.14);color:#0b6e47}
 .cp-ok svg{width:13px;height:13px}
 .cp-fb b{display:block;font:600 16px/24px var(--sans);color:var(--ink)}
-.cp-fb p{margin-top:4px;font:400 14px/22px var(--sans);color:var(--text)}
+.cp-fb p{margin-top:4px;font:400 16px/24px var(--sans);color:var(--muted)}
 
 /* Tableau des critères, regroupé par thème */
 .cp-tw{overflow-x:auto}
@@ -66,7 +66,7 @@
 .cp-mt-d{display:grid;gap:22px;margin:0;padding:0;list-style:none}
 .cp-mt-d li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px}
 .cp-mt-d b{display:block;font:600 16px/24px var(--sans);color:var(--ink)}
-.cp-mt-d p{margin-top:4px;font:400 14px/22px var(--sans);color:var(--text)}
+.cp-mt-d p{margin-top:4px;font:400 16px/24px var(--sans);color:var(--muted)}
 .cp-mt-d small{display:block;margin-top:6px;font:500 13px/18px var(--sans);color:var(--muted)}
 
 /* Réponse seule (page agence) : la phrase en grand, la suite à côté */
@@ -79,7 +79,7 @@
 .cp-md{display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:10px;background:var(--tile)}
 .cp-md h3{margin-top:6px;font:600 18px/26px var(--sans);color:var(--ink)}
 .cp-md-s{font:400 16px/24px var(--serif);color:var(--ink)}
-.cp-md p{font:400 14px/22px var(--sans);color:var(--text)}
+.cp-md p{font:400 16px/24px var(--sans);color:var(--muted)}
 .cp-md p a{color:var(--accent-d);text-decoration:underline;text-underline-offset:3px}
 .cp-md .cp-md-t{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font:500 13px/20px var(--sans);color:var(--muted)}
 
@@ -89,7 +89,7 @@
 /* Exemple statique (page IA génératives) : la source, puis les deux sorties côte à côte */
 .cp-xs{margin-bottom:12px;padding:18px 20px;border-radius:10px;background:var(--tile)}
 .cp-xe{margin-bottom:6px;font:500 12px/16px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
-.cp-xs p:not(.cp-xe),.cp-xc p:not(.cp-xe){font:400 15px/24px var(--sans);color:var(--ink)}
+.cp-xs p:not(.cp-xe),.cp-xc p:not(.cp-xe){font:400 16px/24px var(--sans);color:var(--ink)}
 .cp-xg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .cp-xc{padding:18px 20px;border:1px solid var(--line);border-radius:10px;background:var(--page)}
 .cp-xg mark{border-radius:3px;padding:0 2px;color:inherit}
@@ -105,7 +105,7 @@
 .cp-lv-n{display:grid;place-items:center;width:32px;height:32px;margin-bottom:14px;border-radius:50%;background:var(--ink);color:var(--page);font:600 14px/1 var(--sans)}
 .cp-lv h3{font:600 17px/24px var(--sans);color:var(--ink)}
 .cp-lv-s{margin-top:2px;font:500 13px/18px var(--sans);color:var(--muted)}
-.cp-lv p:last-child{margin-top:10px;font:400 14px/22px var(--sans);color:var(--text)}
+.cp-lv p:last-child{margin-top:10px;font:400 16px/24px var(--sans);color:var(--muted)}
 
 @media (max-width:1023px){.cp-mt{grid-template-columns:minmax(0,1fr);gap:32px}.cp-mt-g{position:static}.cp-eb,.cp-gv,.cp-eb.cp-eb1{grid-template-columns:minmax(0,1fr);gap:24px}.cp-mg,.cp-lvg{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){.cp-xg{grid-template-columns:minmax(0,1fr)}}

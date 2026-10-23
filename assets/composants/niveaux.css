@@ -9,7 +9,7 @@
 .nq-b{padding:18px 20px 20px}
 .nq-n{font:600 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--accent-d)}
 .nq-b h3{margin-top:6px;font:400 22px/28px var(--serif);color:var(--ink)}
-.nq-u{margin-top:8px;font:400 15px/23px var(--sans);color:var(--text)}
+.nq-u{margin-top:8px;font:400 16px/24px var(--sans);color:var(--muted)}
 .nq-b dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font:400 13.5px/20px var(--sans)}
 .nq-b dt{font:600 11px/20px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .nq-b dd{margin:0;color:var(--ink)}
@@ -19,7 +19,7 @@
 .nq-pr > div{padding-top:20px;border-top:2px solid var(--accent-d)}
 .nq-pk{font:600 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--accent-d)}
 .nq-pr h3{margin-top:10px;font:400 28px/36px var(--serif);color:var(--ink)}
-.nq-pr p:last-child{margin-top:12px;font:400 15px/24px var(--sans);color:var(--text)}
+.nq-pr p:last-child{margin-top:12px;font:400 16px/24px var(--sans);color:var(--muted)}
 
 /* Dans l'application : écran de devis, et les trois libellés exacts de l'étape Quotes */
 .nq-app{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;align-items:start;margin-top:32px}
@@ -27,7 +27,7 @@
 .nq-d + .nq-d{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
 .nq-dl{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--tile);border:1px solid var(--line);font:600 13px/20px var(--sans);color:var(--ink)}
 .nq-d blockquote{margin-top:10px;padding-left:12px;border-left:2px solid var(--line);font:400 12.5px/19px var(--sans);font-style:italic;color:var(--muted)}
-.nq-d p:last-child{margin-top:10px;font:400 14.5px/23px var(--sans);color:var(--text)}
+.nq-d p:last-child{margin-top:10px;font:400 16px/24px var(--sans);color:var(--muted)}
 
 /* Quel niveau pour quel document : pastille du niveau, mention principale puis précision */
 .nq-pill{display:inline-grid;place-items:center;min-width:26px;height:22px;margin-right:8px;padding:0 7px;border-radius:999px;background:var(--navy);

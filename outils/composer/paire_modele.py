@@ -107,14 +107,9 @@ def pratique(t, cfg, accent):
 
 
 def situations(t, accent):
-    """Les situations de la V1, avec leur icône et leur contexte (Contentieux…)."""
-    wh = bloc(t, "section", "who")
-    cartes_ = []
-    for r in blocs(wh, "article", "sc-row"):
-        ic = re.search(r"<svg.*?</svg>", bloc(r, "span", "ws-ic"), re.S).group(0)
-        cartes_.append(f'<div class="pa-si"><p class="pa-sc"><span class="pa-ic pa-ic-l">{ic}</span>{txt(bloc(r, "span", "sc-a"))}</p>'
-                       f'<h3>{brut(bloc(r, "h3"))}</h3><p>{brut(bloc(r, "p"))}</p></div>')
-    return section(h2(txt(bloc(wh, "h2")), accent) + f'<div class="pa-sg">{"".join(cartes_)}</div>')
+    """Les situations de la V1 en rangées éditoriales, comme sur les pages outils (arbitrage de Fabien du 2026-10-23,
+    option B : un seul modèle « Trois situations » sur tout le site)."""
+    return situations_rangees(bloc(t, "section", "who"), accent)
 
 
 def autres_paires(t):

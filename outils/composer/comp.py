@@ -89,6 +89,12 @@ def tuiles(items, cls="tl"):
     return f'<div class="{cls}">' + "".join(out) + "</div>"
 
 
+def frise_niveaux(items):
+    """Niveaux de qualité 1 à 4 en frise (arbitrage de Fabien du 2026-10-23, option B : une progression se lit comme les
+    étapes des pages outils) ; items : (numéro, titre, texte). Les chiffres clés gardent leurs tuiles (option A)."""
+    return '<ol class="fr fr-nv">' + "".join(f'<li><span class="fr-n">{n}</span><h3>{b}</h3><p>{p}</p></li>' for n, b, p in items) + "</ol>"
+
+
 def bento(grande, petites):
     """grande : dict(pill, titre, texte, lien, visuel) ; petites : (libellé, texte, classe en plus)."""
     g = grande

@@ -271,3 +271,26 @@ class TestTexteCourantCommun(unittest.TestCase):
                       ".gb p{margin-top:6px;font:400 16px/24px var(--sans);color:var(--muted)}"):
             self.assertIn(regle, css)
         self.assertIn(".fr h3{margin-top:8px;font:600 17px/24px var(--sans)", css)
+
+    def test_fiches_et_bento_au_reglage_commun(self):
+        """Arbitrages du 2026-10-23 (blocs, cas 1 et 5) : texte du bento et des fiches propres aux pages en 16/24."""
+        css = (ICI / "assets/site.css").read_text(encoding="utf-8")
+        self.assertIn(".bt-p p{font:400 16px/24px var(--sans);color:var(--muted)}", css)
+        for f in ("domaine", "paire", "langues", "comparatif", "niveaux", "lexmachina"):
+            feuille = (ICI / f"assets/composants/{f}.css").read_text(encoding="utf-8")
+            # texte courant : plus de 14 ou 15 px hors tableaux (les tableaux gardent leur densité)
+            for regle in re.findall(r"(?m)^([^{@]+)\{([^}]*font:400 1[45](?:\.5)?px/[^}]*)\}", feuille):
+                self.assertRegex(regle[0], r"-t\b|-tb\b|table|figcaption", f"{f} : {regle[0]}")
+
+
+class TestNiveauxEnFrise(unittest.TestCase):
+    """Arbitrage du 2026-10-23 (blocs, cas 3) : les quatre niveaux en frise, les chiffres clés gardent leurs tuiles."""
+
+    def test_niveaux_en_frise(self):
+        docs = support.site_complet(apercu=True)
+        for p in ("", "a-propos/", "solutions/cabinets-avocats/", "solutions/banques-finance/"):
+            h = (docs / "fr" / p / "index.html").read_text(encoding="utf-8")
+            self.assertIn('<ol class="fr fr-nv"><li><span class="fr-n">1</span>', h, p)
+            self.assertNotIn('<div class="tl t4"><div><span class="n">1</span>', h, p)
+        accueil = (docs / "fr/index.html").read_text(encoding="utf-8")
+        self.assertIn('<div class="tl t4"><div><span class="n">15 M+</span>', accueil)

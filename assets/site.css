@@ -494,7 +494,7 @@ ul{padding:0;list-style:none}
 .bt-g p{color:var(--text)}
 .bt-p{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px;text-align:center}
 .bt-p b{font:500 16px/24px var(--sans);color:var(--ink)}
-.bt-p p{font:400 14px/20px var(--sans);color:var(--text)}
+.bt-p p{font:400 16px/24px var(--sans);color:var(--muted)}
 .bt-p .n .u{display:block;margin-top:2px;font-size:20px;line-height:26px;font-weight:500}
 .bt-p .ic{width:34px;height:34px;color:var(--ink)}
 .bt-l{grid-column:span 2}
