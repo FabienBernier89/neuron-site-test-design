@@ -57,7 +57,8 @@ class TestCiblesTactiles(unittest.TestCase):
         self.assertIn(sel + " p{margin-top:12px;font-size:15px;line-height:25px;color:var(--muted)}", self.css)
 
     def test_jauge_de_deroule_fine_et_constante(self):
-        """La jauge remplace le bouton pause : ligne fine au bas de la scène, épaisseur constante à l'écran."""
+        """Jauge de déroulé : ligne fine au bas de la scène, épaisseur constante à l'écran. Le bouton pause revenu avec
+        l'audit du 2026-10-23 (WCAG 2.2.2) porte la classe anim-pause, testée dans test_accessibilite."""
         d = " ".join(regles(self.css, ".sim-jauge"))
         self.assertIn("height:calc(3px / var(--k,1))", d)
         self.assertIn("pointer-events:none", d)
@@ -209,7 +210,9 @@ class TestSuiviDesAppels(unittest.TestCase):
 
 
 class TestAnimationsSansPause(unittest.TestCase):
-    """Les animations continuent au survol ; chaque scène animée porte une jauge de déroulé, aucune un bouton pause."""
+    """Les animations continuent au survol ; chaque scène animée porte une jauge de déroulé. Depuis l'audit du
+    2026-10-23 (WCAG 2.2.2), chacune porte aussi un bouton pause (anim-pause) : seuls ce bouton et la sortie de l'écran
+    suspendent la scène, jamais le survol."""
 
     @classmethod
     def setUpClass(cls):
@@ -218,12 +221,13 @@ class TestAnimationsSansPause(unittest.TestCase):
 
     def test_le_survol_ne_met_pas_en_pause(self):
         self.assertNotIn("mouseenter", self.sim)
-        self.assertIn("return this.visible && !this.arret;", self.sim)
+        self.assertIn("return this.visible && !this.arret && !this.enPause;", self.sim)
 
     def test_une_jauge_par_scene_animee(self):
         for f in self.sortie.rglob("index.html"):
             h = f.read_text(encoding="utf-8")
-            self.assertNotIn("sim-pause", h, f)
+            self.assertNotIn("sim-pause", h, f)  # ancien bouton retiré le 2026-10-15 ; le nouveau est anim-pause
+            self.assertEqual(len(re.findall(r'<div class="st" data-sim=', h)), h.count('class="anim-pause sim-pp"'), f)
             self.assertEqual(len(re.findall(r'<div class="st" data-sim=', h)), h.count('class="sim-jauge"'), f)
 
     def test_hero_joue_une_fois_puis_libre(self):
