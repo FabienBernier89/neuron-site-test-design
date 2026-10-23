@@ -46,16 +46,30 @@ def bandeau(titre, texte_):
     return section(f'<div class="enc"><h2>{titre}</h2><p>{texte_}</p></div>')
 
 
-def tuiles_fonctions(liste, grand=()):
+# Icônes des fonctions de l'éditeur de relecture (tracés SVG 24 px), partagées par l'Éditeur et Plugin Word
+ICONES_FONCTIONS = {
+    "Deux colonnes": '<path d="M4 5h7v14H4zM13 5h7v14h-7z"/>', "Origine de chaque phrase": '<path d="M4 18h4V9H4zM10 18h4V5h-4zM16 18h4v-6h-4z"/>',
+    "Confirmation": '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8 12 3 3 5-6"/>', "Barre d'outils": '<path d="M7 8 3 12l4 4M17 8l4 4-4 4M14 5l-4 14"/>',
+    "Contrôles": '<path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+    "Mémoires": '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',
+    "Fast Lookup": '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+    "Assistant IA": '<path d="M12 3l1.8 4.7L18.5 9.5 13.8 11.3 12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
+    "Sync": '<path d="M20 12a8 8 0 0 1-14 5.3M4 12a8 8 0 0 1 14-5.3"/><path d="M18 3v4h-4M6 21v-4h4"/>',
+    "Tableau de bord": '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/>',
+    "Harmonisation": '<path d="M4 8h12M4 16h12"/><path d="m14 5 3 3-3 3M14 13l3 3-3 3"/>'}
+
+
+def tuiles_fonctions(liste, grand=(), cls=""):
     """Une tuile par fonction (version B revue validée par Fabien le 2026-10-23 pour l'Éditeur de relecture) : icône à
     gauche de la catégorie et du titre, à la hauteur de ces deux lignes, puis le texte. liste : [(catégorie, titre,
-    texte, tracé SVG de l'icône)] ; grand : titres des fonctions phares, sur deux colonnes de la grille."""
+    texte, tracé SVG de l'icône)] ; grand : titres des fonctions phares, sur deux colonnes de la grille ; cls : variante
+    (« tf-3 » : trois tuiles par ligne, titres sur une ligne, textes alignés, Plugin Word)."""
     t_ = ""
     for cat, titre, texte_, trace in liste:
         t_ += (f'<div class="tf-t{" tf-g" if titre in grand else ""}"><div class="tf-h"><span class="tf-ic"><svg viewBox="0 0 24 24" fill="none" '
                f'stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{trace}</svg></span>'
                f'<div><p class="tf-c">{cat}</p><h3>{titre}</h3></div></div><p class="tf-x">{texte_}</p></div>')
-    return f'<div class="tf">{t_}</div>'
+    return f'<div class="tf{" " + cls if cls else ""}">{t_}</div>'
 
 
 def frise(rangs):

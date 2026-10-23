@@ -138,3 +138,11 @@
 .tf-x{margin-top:14px;font:400 15px/23px var(--sans);color:var(--text)}
 @media (max-width:1023px){.tf{grid-template-columns:repeat(2,minmax(0,1fr))}.tf-g{grid-column:auto}}
 @media (max-width:767px){.tf{grid-template-columns:minmax(0,1fr)}.tf-t h3,.tf-g h3{font-size:21px;line-height:27px}}
+
+/* Variante trois par ligne (Plugin Word) : titres sur une ligne, textes alignés d'une tuile à l'autre (sous-grille) */
+.tf-3{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:auto auto;row-gap:16px}
+.tf-3 .tf-t{display:grid;grid-row:span 2;grid-template-rows:subgrid;row-gap:0}
+.tf-3 .tf-t h3{white-space:nowrap;font-size:20px;line-height:28px}
+@media (max-width:1199px){.tf-3{grid-template-columns:repeat(2,minmax(0,1fr))}}  /* sous 1200 px, un titre ne tient plus sur une ligne à trois par ligne */
+@media (max-width:899px){.tf-3{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:767px){.tf-3 .tf-t h3{white-space:normal}}

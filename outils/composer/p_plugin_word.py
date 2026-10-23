@@ -7,7 +7,7 @@ onglets). Le HTML porte l'état final de la scène ; assets/visite-word.js rejou
 
     cd outils/composer && NEURON_SRC=<site Neur.on> python3 p_plugin_word.py
 """
-from outil_modele import frise, rangees
+from outil_modele import frise, rangees, tuiles_fonctions, ICONES_FONCTIONS
 import html as H
 import json
 import os
@@ -173,10 +173,14 @@ def composer():
     out.append(section(scene(1176, 640, ecran, sim="word", titre="Microsoft Word", curseur=False,
                              label=H.escape(texte("plugin-word.scene.label"))), "sec sec-st", "demo"))
 
-    fonctions = [(None, t(f"plugin-word.fonctions.{k}.titre"), t(f"plugin-word.fonctions.{k}.texte"))
-                 for k in ("segments", "memoire", "lookup", "alternatives", "harmonisation", "progression")]
+    # tuiles à icône, comme sur la page Éditeur de relecture (proposition A, Fabien, 2026-10-23) : catégorie et icône
+    # de la fonction correspondante de l'éditeur
+    fonctions = [(cat, t(f"plugin-word.fonctions.{k}.titre"), t(f"plugin-word.fonctions.{k}.texte"), ICONES_FONCTIONS[ic])
+                 for k, cat, ic in (("segments", "Relire", "Deux colonnes"), ("memoire", "Vérifier", "Mémoires"), ("lookup", "Vérifier", "Fast Lookup"),
+                                    ("alternatives", "Assistant IA", "Assistant IA"), ("harmonisation", "Assistant IA", "Harmonisation"),
+                                    ("progression", "Relire", "Confirmation"))]
     out.append(section(h2(t("plugin-word.fonctions.titre"), "dans Word") + f'<p class="intro">{t("plugin-word.fonctions.intro")}</p>'
-                       + tuiles(fonctions, "tl txt")
+                       + tuiles_fonctions(fonctions, cls="tf-3")
                        + f'<p class="pw-suite"><a class="lien" href="{{{{ROOT}}}}corrext/editeur-de-relecture/">{t("plugin-word.fonctions.lien")}</a></p>'))
 
     # étapes en frise compacte et garanties en rangées (audit des pages outils, Fabien, 2026-10-21)
