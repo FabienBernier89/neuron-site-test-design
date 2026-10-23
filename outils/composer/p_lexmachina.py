@@ -41,7 +41,7 @@ def conclusion(note):
     assert derniere.startswith("Les sorties d'un moteur varient"), derniere
     phrases = [k("lecture.note1"), k("lecture.note2"), derniere]
     return (f'<div class="lm-cc"><div class="lm-cc-g"><p class="lm-conc">{k("lecture.conclusion")}</p>'
-            f'<a class="lien" href="{{{{ROOT}}}}corrext/traduction-texte-et-document/#demo">{k("lecture.demo")}</a></div>'
+            f'<a class="lien" href="{{{{ROOT}}}}#demo">{k("lecture.demo")}</a></div>'
             f'<div class="lm-cc-d"><p class="lm-cc-t">{k("lecture.exemple")}</p><ul>'
             + "".join(f"<li>{OK_IC}<span>{x}</span></li>" for x in phrases) + "</ul></div></div>")
 

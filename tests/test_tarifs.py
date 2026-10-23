@@ -31,7 +31,7 @@ class TestTarifs(unittest.TestCase):
         self.assertLess(mobile.index(">Tarifs</a>"), mobile.index(">Ressources"))
 
     def test_structure_et_appel(self):
-        for attendu in ('<span class="n">Tarifs.</span>', 'data-suivi="cta-tarifs-hero"', 'class="btn btn-2" href="../../fr/corrext/traduction-texte-et-document/#demo"',
+        for attendu in ('<span class="n">Tarifs.</span>', 'data-suivi="cta-tarifs-hero"', 'class="btn btn-2" href="../../fr/#demo"',
                         'class="tf-pg"', 'class="fx-g"', 'data-suivi="cta-tarifs-fin"', "Prêt à essayer ?"):
             self.assertIn(attendu, self.h)
         self.assertEqual(self.main.count('class="tf-p"'), 6)  # un profil par page Solutions

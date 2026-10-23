@@ -92,7 +92,7 @@ class TestProtectionDesDonnees(unittest.TestCase):
         for cle, (texte, ancien) in attendus.items():
             self.assertEqual(e[cle]["texte"], texte, cle)
             self.assertEqual(e[cle]["page"], DONNEES, cle)
-            self.assertEqual(e[cle]["statut"], "a_relire", cle)
+            self.assertIn(e[cle]["statut"], ("a_relire", "valide"), cle)  # validés par Fabien le 2026-10-23
             self.assertIn(DECISION, e[cle]["source"], cle)
             self.assertEqual(e[cle].get("remplace"), ancien, cle)
         self.assertIn("formulation juridiquement exacte de la pseudonymisation", e["protection-des-donnees.analytics.pseudonymisation"]["source"])
@@ -230,7 +230,7 @@ class TestPageSecurite(unittest.TestCase):
                                              for x in ("nom", "detail", "type")]
         for cle in cles:
             self.assertEqual(e[cle]["page"], SECURITE, cle)
-            self.assertEqual(e[cle]["statut"], "a_relire", cle)
+            self.assertIn(e[cle]["statut"], ("a_relire", "valide"), cle)  # validés par Fabien le 2026-10-23
             self.assertTrue(e[cle]["source"].strip(), cle)
         # Chaque preuve cite le site publié (V1) comme source
         for i in ("traitement", "nlpd", "cloudact"):

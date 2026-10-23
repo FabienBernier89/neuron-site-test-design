@@ -1,261 +1,37 @@
-{
- "lot": "E",
- "entrees": [
-  {
-   "cle": "ressources/blog/comprendre-devis-traduction-juridique.h1",
-   "page": "ressources/blog/comprendre-devis-traduction-juridique/",
-   "texte": "Deux devis de traduction juridique pour le même contrat : pourquoi l'écart ?",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; fondé sur l'article ouvre sur « Deux devis pour le même contrat peuvent différer du simple au triple » ; titre d'origine : Pages standard, niveaux de relecture, délais : comprendre un devis de traduction juridique",
-   "ancien": "Pages standard, niveaux de relecture, délais : comprendre un devis de traduction juridique"
-  },
-  {
-   "cle": "ressources/blog/comprendre-devis-traduction-juridique.title",
-   "page": "ressources/blog/comprendre-devis-traduction-juridique/",
-   "texte": "Comparer deux devis de traduction juridique · Neur.on",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; 60 caractères au plus ; titre d'origine : Comprendre un devis de traduction juridique suisse · Neur.on"
-  },
-  {
-   "cle": "ressources/blog/comprendre-devis-traduction-juridique.og",
-   "page": "ressources/blog/comprendre-devis-traduction-juridique/",
-   "texte": "Deux devis de traduction juridique, deux montants : pourquoi ? · Neur.on",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; titre de partage aligné sur le H1 ; titre d'origine : Comprendre un devis de traduction juridique suisse · Neur.on"
-  },
-  {
-   "cle": "ressources/blog/secret-professionnel-outils-traduction.h1",
-   "page": "ressources/blog/secret-professionnel-outils-traduction/",
-   "texte": "Secret professionnel et outils de traduction : stockés en Suisse, mais traités où ?",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; fondé sur section « Stocker n'est pas traiter » de l'article ; titre d'origine : Secret professionnel et outils de traduction : la question du lieu de traitement",
-   "ancien": "Secret professionnel et outils de traduction : la question du lieu de traitement"
-  },
-  {
-   "cle": "ressources/blog/secret-professionnel-outils-traduction.title",
-   "page": "ressources/blog/secret-professionnel-outils-traduction/",
-   "texte": "Secret professionnel : où se fait la traduction ? · Neur.on",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E), repris à la relecture finale pour contenir « traduction » ; fondé sur la section « Stocker n'est pas traiter » de l'article ; 60 caractères au plus ; titre d'origine : Secret professionnel et outils de traduction IA · Neur.on"
-  },
-  {
-   "cle": "ressources/blog/secret-professionnel-outils-traduction.og",
-   "page": "ressources/blog/secret-professionnel-outils-traduction/",
-   "texte": "Secret professionnel : stockés en Suisse, traités où ? · Neur.on",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; titre de partage aligné sur le H1 ; titre d'origine : Secret professionnel et outils de traduction IA · Neur.on"
-  },
-  {
-   "cle": "ressources/blog/traduire-contrat-droit-suisse.h1",
-   "page": "ressources/blog/traduire-contrat-droit-suisse/",
-   "texte": "Traduire un contrat en droit suisse : comment ne pas s'écarter du texte de loi",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; fondé sur l'article : proposer un terme autre que celui de la loi « introduit un écart avec le texte que le juge lira » ; titre d'origine : Traduire un contrat en droit suisse : ce que change le quadrilinguisme légal",
-   "ancien": "Traduire un contrat en droit suisse : ce que change le quadrilinguisme légal"
-  },
-  {
-   "cle": "ressources/blog/traduire-contrat-droit-suisse.title",
-   "page": "ressources/blog/traduire-contrat-droit-suisse/",
-   "texte": "Traduire un contrat en droit suisse sans écart · Neur.on",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; 60 caractères au plus ; titre d'origine : Traduire un contrat en droit suisse quadrilingue · Neur.on"
-  },
-  {
-   "cle": "ressources/blog/traduire-contrat-droit-suisse.og",
-   "page": "ressources/blog/traduire-contrat-droit-suisse/",
-   "texte": "Traduire un contrat en droit suisse sans écart avec la loi · Neur.on",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; titre de partage aligné sur le H1 ; titre d'origine : Traduire un contrat en droit suisse quadrilingue · Neur.on"
-  },
-  {
-   "cle": "ressources/guides/organiser-traduction-cabinet.h1",
-   "page": "ressources/guides/organiser-traduction-cabinet/",
-   "texte": "Chacun traduit à sa façon : organiser la traduction juridique dans un cabinet suisse",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; fondé sur le guide : « la traduction n'est pas un processus : c'est une somme d'arrangements individuels » ; titre d'origine : Organiser la traduction juridique dans un cabinet suisse",
-   "ancien": "Organiser la traduction juridique dans un cabinet suisse"
-  },
-  {
-   "cle": "ressources/guides/organiser-traduction-cabinet.h1.complet",
-   "page": "ressources/guides/organiser-traduction-cabinet/",
-   "texte": "Guide. Chacun traduit à sa façon : organiser la traduction juridique dans un cabinet suisse",
-   "statut": "a_relire",
-   "source": "H1 tel qu'affiché : le repère « Guide. » du site actuel suivi du titre ci-dessus (entrée de contrôle du corpus, pas un texte de plus à relire)"
-  },
-  {
-   "cle": "ressources/guides/organiser-traduction-cabinet.title",
-   "page": "ressources/guides/organiser-traduction-cabinet/",
-   "texte": "Traduction juridique en cabinet : qui fait quoi ? · Neur.on",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; 60 caractères au plus ; titre d'origine : Organiser la traduction juridique dans un cabinet · Neur.on"
-  },
-  {
-   "cle": "ressources/guides/organiser-traduction-cabinet.og",
-   "page": "ressources/guides/organiser-traduction-cabinet/",
-   "texte": "Chacun traduit à sa façon : organiser la traduction en cabinet · Neur.on",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; titre de partage aligné sur le H1 ; titre d'origine : Organiser la traduction juridique dans un cabinet · Neur.on"
-  },
-  {
-   "cle": "ressources/guides/rapport-annuel-multilingue.h1",
-   "page": "ressources/guides/rapport-annuel-multilingue/",
-   "texte": "Rapport annuel multilingue : tenir la date quand le texte source bouge encore",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; fondé sur le guide : ces rapports échouent « sur un texte source qui continue de bouger » ; la date de publication est « la seule donnée non négociable » ; titre d'origine : Préparer un rapport annuel multilingue",
-   "ancien": "Préparer un rapport annuel multilingue"
-  },
-  {
-   "cle": "ressources/guides/rapport-annuel-multilingue.h1.complet",
-   "page": "ressources/guides/rapport-annuel-multilingue/",
-   "texte": "Guide. Rapport annuel multilingue : tenir la date quand le texte source bouge encore",
-   "statut": "a_relire",
-   "source": "H1 tel qu'affiché : le repère « Guide. » du site actuel suivi du titre ci-dessus (entrée de contrôle du corpus, pas un texte de plus à relire)"
-  },
-  {
-   "cle": "ressources/guides/rapport-annuel-multilingue.title",
-   "page": "ressources/guides/rapport-annuel-multilingue/",
-   "texte": "Rapport annuel multilingue : tenir la date · Neur.on",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; 60 caractères au plus ; titre d'origine : Préparer un rapport annuel multilingue en Suisse · Neur.on"
-  },
-  {
-   "cle": "ressources/guides/rapport-annuel-multilingue.og",
-   "page": "ressources/guides/rapport-annuel-multilingue/",
-   "texte": "Rapport annuel multilingue : tenir la date de publication · Neur.on",
-   "statut": "a_relire",
-   "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; titre de partage aligné sur le H1 ; titre d'origine : Préparer un rapport annuel multilingue en Suisse · Neur.on"
-  },
-  {
-   "cle": "ressources/blog.guides.titre",
-   "page": "ressources/blog/",
-   "texte": "Guides",
-   "statut": "a_relire",
-   "source": "décision du contrôleur du 2026-10-14 (lot E, liste du blog en deux sections)"
-  },
-  {
-   "cle": "ressources/blog.guides.intro",
-   "page": "ressources/blog/",
-   "texte": "Les articles de fond et les guides pratiques de l'équipe juridique et linguistique de Neur.on.",
-   "statut": "a_relire",
-   "source": "décision du contrôleur du 2026-10-14 (lot E, liste du blog en deux sections) ; l'auteur « Équipe juridique et linguistique de Neur.on » vient des billets du site actuel"
-  },
-  {
-   "cle": "ressources/blog.guides.lien",
-   "page": "ressources/blog/",
-   "texte": "Voir tous les guides pratiques",
-   "statut": "a_relire",
-   "source": "décision du contrôleur du 2026-10-14 (lot E, liste du blog en deux sections) ; lien vers ressources/guides/"
-  },
-  {
-   "cle": "ressources/blog.actualites.titre",
-   "page": "ressources/blog/",
-   "texte": "Actualités",
-   "statut": "a_relire",
-   "source": "décision du contrôleur du 2026-10-14 (lot E, liste du blog en deux sections)"
-  },
-  {
-   "cle": "ressources/blog.actualites.intro",
-   "page": "ressources/blog/",
-   "texte": "Prix et distinctions, conférences, partenariats, presse et recherche.",
-   "statut": "a_relire",
-   "source": "décision du contrôleur du 2026-10-14 (lot E, liste du blog en deux sections) ; énumération reprise de la description de la page « Actualités » du site actuel (ressources/blog/actualites/)"
-  },
-  {
-   "cle": "newsletter.titre",
-   "page": "*",
-   "texte": "Recevoir la lettre d'information de Neur.on",
-   "statut": "a_relire",
-   "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) ; « lettre d'information » est le terme du formulaire de contact du site actuel (contact/)"
-  },
-  {
-   "cle": "newsletter.texte",
-   "page": "*",
-   "texte": "Les nouveaux articles, guides et actualités de Neur.on, dès leur parution.",
-   "statut": "a_relire",
-   "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) ; reprend la phrase du site actuel « Les nouveaux articles et actualités, dès leur parution » (ressources/blog/). Aucune fréquence ni contenu promis : à compléter par Fabien"
-  },
-  {
-   "cle": "newsletter.email",
-   "page": "*",
-   "texte": "Votre adresse e-mail",
-   "statut": "a_relire",
-   "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter)"
-  },
-  {
-   "cle": "newsletter.bouton",
-   "page": "*",
-   "texte": "S'inscrire",
-   "statut": "a_relire",
-   "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter)"
-  },
-  {
-   "cle": "newsletter.consentement",
-   "page": "*",
-   "texte": "J'accepte que Neur.on AI Solutions SA m'envoie sa lettre d'information, selon sa politique de protection des données.",
-   "statut": "a_relire",
-   "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) ; adapté de la case de consentement du formulaire de contact du site actuel. Texte juridique : validation de Fabien obligatoire (la mention du droit de se désinscrire reste à décider)"
-  },
-  {
-   "cle": "newsletter.consentement.lien",
-   "page": "*",
-   "texte": "politique de protection des données",
-   "statut": "a_relire",
-   "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) ; mots du texte de consentement qui portent le lien vers la page Protection des données (libellé du site actuel, contact/)"
-  },
-  {
-   "cle": "newsletter.piege",
-   "page": "*",
-   "texte": "Ne remplissez pas ce champ.",
-   "statut": "a_relire",
-   "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) ; libellé du champ piège, lu par les seuls robots (masqué aux utilisateurs et aux lecteurs d'écran)"
-  },
-  {
-   "cle": "ressources/blog/paula-reichenberg-jury-weblaw-forum-2024.marque",
-   "page": "ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/",
-   "texte": "Neur.on",
-   "remplace": "NEUR.ON",
-   "statut": "a_relire",
-   "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive)."
-  },
-  {
-   "cle": "ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais.marque",
-   "page": "ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/",
-   "texte": "Neur.on",
-   "remplace": "NEUR.ON",
-   "statut": "a_relire",
-   "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive)."
-  },
-  {
-   "cle": "ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024.marque",
-   "page": "ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/",
-   "texte": "Neur.on",
-   "remplace": "NEUR.ON",
-   "statut": "a_relire",
-   "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive)."
-  },
-  {
-   "cle": "ressources/blog/neuron-ai-days-2025-geneve-llm-traduction.marque",
-   "page": "ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/",
-   "texte": "Neur.on",
-   "remplace": "NEUR.ON",
-   "statut": "a_relire",
-   "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive)."
-  },
-  {
-   "cle": "ressources/blog/legaltech-avocats-allies-ou-concurrents.marque",
-   "page": "ressources/blog/legaltech-avocats-allies-ou-concurrents/",
-   "texte": "Neur.on",
-   "remplace": "NEUR.ON",
-   "statut": "a_relire",
-   "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive)."
-  },
-  {
-   "cle": "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley.marque",
-   "page": "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/",
-   "texte": "Neur.on",
-   "remplace": "NEUR.ON",
-   "statut": "a_relire",
-   "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive)."
-  }
- ]
-}
+{"lot": "E", "entrees": [
+  {"cle": "ressources/blog/comprendre-devis-traduction-juridique.h1", "page": "ressources/blog/comprendre-devis-traduction-juridique/", "texte": "Deux devis de traduction juridique pour le même contrat : pourquoi l'écart ?", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; fondé sur l'article ouvre sur « Deux devis pour le même contrat peuvent différer du simple au triple » ; titre d'origine : Pages standard, niveaux de relecture, délais : comprendre un devis de traduction juridique Validé par Fabien le 2026-10-23 (relecture de tous les textes français).", "ancien": "Pages standard, niveaux de relecture, délais : comprendre un devis de traduction juridique"},
+  {"cle": "ressources/blog/comprendre-devis-traduction-juridique.title", "page": "ressources/blog/comprendre-devis-traduction-juridique/", "texte": "Comparer deux devis de traduction juridique · Neur.on", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; 60 caractères au plus ; titre d'origine : Comprendre un devis de traduction juridique suisse · Neur.on Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog/comprendre-devis-traduction-juridique.og", "page": "ressources/blog/comprendre-devis-traduction-juridique/", "texte": "Deux devis de traduction juridique, deux montants : pourquoi ? · Neur.on", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; titre de partage aligné sur le H1 ; titre d'origine : Comprendre un devis de traduction juridique suisse · Neur.on Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog/secret-professionnel-outils-traduction.h1", "page": "ressources/blog/secret-professionnel-outils-traduction/", "texte": "Secret professionnel et outils de traduction : stockés en Suisse, mais traités où ?", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; fondé sur section « Stocker n'est pas traiter » de l'article ; titre d'origine : Secret professionnel et outils de traduction : la question du lieu de traitement Validé par Fabien le 2026-10-23 (relecture de tous les textes français).", "ancien": "Secret professionnel et outils de traduction : la question du lieu de traitement"},
+  {"cle": "ressources/blog/secret-professionnel-outils-traduction.title", "page": "ressources/blog/secret-professionnel-outils-traduction/", "texte": "Secret professionnel : où se fait la traduction ? · Neur.on", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E), repris à la relecture finale pour contenir « traduction » ; fondé sur la section « Stocker n'est pas traiter » de l'article ; 60 caractères au plus ; titre d'origine : Secret professionnel et outils de traduction IA · Neur.on Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog/secret-professionnel-outils-traduction.og", "page": "ressources/blog/secret-professionnel-outils-traduction/", "texte": "Secret professionnel : stockés en Suisse, traités où ? · Neur.on", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; titre de partage aligné sur le H1 ; titre d'origine : Secret professionnel et outils de traduction IA · Neur.on Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog/traduire-contrat-droit-suisse.h1", "page": "ressources/blog/traduire-contrat-droit-suisse/", "texte": "Traduire un contrat en droit suisse : comment ne pas s'écarter du texte de loi", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; fondé sur l'article : proposer un terme autre que celui de la loi « introduit un écart avec le texte que le juge lira » ; titre d'origine : Traduire un contrat en droit suisse : ce que change le quadrilinguisme légal Validé par Fabien le 2026-10-23 (relecture de tous les textes français).", "ancien": "Traduire un contrat en droit suisse : ce que change le quadrilinguisme légal"},
+  {"cle": "ressources/blog/traduire-contrat-droit-suisse.title", "page": "ressources/blog/traduire-contrat-droit-suisse/", "texte": "Traduire un contrat en droit suisse sans écart · Neur.on", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; 60 caractères au plus ; titre d'origine : Traduire un contrat en droit suisse quadrilingue · Neur.on Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog/traduire-contrat-droit-suisse.og", "page": "ressources/blog/traduire-contrat-droit-suisse/", "texte": "Traduire un contrat en droit suisse sans écart avec la loi · Neur.on", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; titre de partage aligné sur le H1 ; titre d'origine : Traduire un contrat en droit suisse quadrilingue · Neur.on Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/guides/organiser-traduction-cabinet.h1", "page": "ressources/guides/organiser-traduction-cabinet/", "texte": "Chacun traduit à sa façon : organiser la traduction juridique dans un cabinet suisse", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; fondé sur le guide : « la traduction n'est pas un processus : c'est une somme d'arrangements individuels » ; titre d'origine : Organiser la traduction juridique dans un cabinet suisse Validé par Fabien le 2026-10-23 (relecture de tous les textes français).", "ancien": "Organiser la traduction juridique dans un cabinet suisse"},
+  {"cle": "ressources/guides/organiser-traduction-cabinet.h1.complet", "page": "ressources/guides/organiser-traduction-cabinet/", "texte": "Guide. Chacun traduit à sa façon : organiser la traduction juridique dans un cabinet suisse", "statut": "valide", "source": "H1 tel qu'affiché : le repère « Guide. » du site actuel suivi du titre ci-dessus (entrée de contrôle du corpus, pas un texte de plus à relire) Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/guides/organiser-traduction-cabinet.title", "page": "ressources/guides/organiser-traduction-cabinet/", "texte": "Traduction juridique en cabinet : qui fait quoi ? · Neur.on", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; 60 caractères au plus ; titre d'origine : Organiser la traduction juridique dans un cabinet · Neur.on Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/guides/organiser-traduction-cabinet.og", "page": "ressources/guides/organiser-traduction-cabinet/", "texte": "Chacun traduit à sa façon : organiser la traduction en cabinet · Neur.on", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; titre de partage aligné sur le H1 ; titre d'origine : Organiser la traduction juridique dans un cabinet · Neur.on Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/guides/rapport-annuel-multilingue.h1", "page": "ressources/guides/rapport-annuel-multilingue/", "texte": "Rapport annuel multilingue : tenir la date quand le texte source bouge encore", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; fondé sur le guide : ces rapports échouent « sur un texte source qui continue de bouger » ; la date de publication est « la seule donnée non négociable » ; titre d'origine : Préparer un rapport annuel multilingue Validé par Fabien le 2026-10-23 (relecture de tous les textes français).", "ancien": "Préparer un rapport annuel multilingue"},
+  {"cle": "ressources/guides/rapport-annuel-multilingue.h1.complet", "page": "ressources/guides/rapport-annuel-multilingue/", "texte": "Guide. Rapport annuel multilingue : tenir la date quand le texte source bouge encore", "statut": "valide", "source": "H1 tel qu'affiché : le repère « Guide. » du site actuel suivi du titre ci-dessus (entrée de contrôle du corpus, pas un texte de plus à relire) Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/guides/rapport-annuel-multilingue.title", "page": "ressources/guides/rapport-annuel-multilingue/", "texte": "Rapport annuel multilingue : tenir la date · Neur.on", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; 60 caractères au plus ; titre d'origine : Préparer un rapport annuel multilingue en Suisse · Neur.on Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/guides/rapport-annuel-multilingue.og", "page": "ressources/guides/rapport-annuel-multilingue/", "texte": "Rapport annuel multilingue : tenir la date de publication · Neur.on", "statut": "valide", "source": "retitrage du plan V2 validé par Fabien le 2026-10-14 (lot E) ; titre de partage aligné sur le H1 ; titre d'origine : Préparer un rapport annuel multilingue en Suisse · Neur.on Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog.guides.titre", "page": "ressources/blog/", "texte": "Guides", "statut": "valide", "source": "décision du contrôleur du 2026-10-14 (lot E, liste du blog en deux sections) Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog.guides.intro", "page": "ressources/blog/", "texte": "Les articles de fond et les guides pratiques de l'équipe juridique et linguistique de Neur.on.", "statut": "valide", "source": "décision du contrôleur du 2026-10-14 (lot E, liste du blog en deux sections) ; l'auteur « Équipe juridique et linguistique de Neur.on » vient des billets du site actuel Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog.guides.lien", "page": "ressources/blog/", "texte": "Voir tous les guides pratiques", "statut": "valide", "source": "décision du contrôleur du 2026-10-14 (lot E, liste du blog en deux sections) ; lien vers ressources/guides/ Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog.actualites.titre", "page": "ressources/blog/", "texte": "Actualités", "statut": "valide", "source": "décision du contrôleur du 2026-10-14 (lot E, liste du blog en deux sections) Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog.actualites.intro", "page": "ressources/blog/", "texte": "Prix et distinctions, conférences, partenariats, presse et recherche.", "statut": "valide", "source": "décision du contrôleur du 2026-10-14 (lot E, liste du blog en deux sections) ; énumération reprise de la description de la page « Actualités » du site actuel (ressources/blog/actualites/) Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "newsletter.titre", "page": "*", "texte": "Recevoir la lettre d'information de Neur.on", "statut": "valide", "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) ; « lettre d'information » est le terme du formulaire de contact du site actuel (contact/) Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "newsletter.texte", "page": "*", "texte": "Les nouveaux articles, guides et actualités de Neur.on, dès leur parution.", "statut": "valide", "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) ; reprend la phrase du site actuel « Les nouveaux articles et actualités, dès leur parution » (ressources/blog/). Aucune fréquence ni contenu promis : à compléter par Fabien Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "newsletter.email", "page": "*", "texte": "Votre adresse e-mail", "statut": "valide", "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "newsletter.bouton", "page": "*", "texte": "S'inscrire", "statut": "valide", "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "newsletter.consentement", "page": "*", "texte": "J'accepte que Neur.on AI Solutions SA m'envoie sa lettre d'information, selon sa politique de protection des données.", "statut": "valide", "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) ; adapté de la case de consentement du formulaire de contact du site actuel. Texte juridique : validation de Fabien obligatoire (la mention du droit de se désinscrire reste à décider) Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "newsletter.consentement.lien", "page": "*", "texte": "politique de protection des données", "statut": "valide", "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) ; mots du texte de consentement qui portent le lien vers la page Protection des données (libellé du site actuel, contact/) Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "newsletter.piege", "page": "*", "texte": "Ne remplissez pas ce champ.", "statut": "valide", "source": "décision du contrôleur du 2026-10-14 (lot E, encart newsletter) ; libellé du champ piège, lu par les seuls robots (masqué aux utilisateurs et aux lecteurs d'écran) Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog/paula-reichenberg-jury-weblaw-forum-2024.marque", "page": "ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/", "texte": "Neur.on", "remplace": "NEUR.ON", "statut": "valide", "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive). Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais.marque", "page": "ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/", "texte": "Neur.on", "remplace": "NEUR.ON", "statut": "valide", "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive). Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024.marque", "page": "ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/", "texte": "Neur.on", "remplace": "NEUR.ON", "statut": "valide", "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive). Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog/neuron-ai-days-2025-geneve-llm-traduction.marque", "page": "ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/", "texte": "Neur.on", "remplace": "NEUR.ON", "statut": "valide", "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive). Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog/legaltech-avocats-allies-ou-concurrents.marque", "page": "ressources/blog/legaltech-avocats-allies-ou-concurrents/", "texte": "Neur.on", "remplace": "NEUR.ON", "statut": "valide", "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive). Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."},
+  {"cle": "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley.marque", "page": "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/", "texte": "Neur.on", "remplace": "NEUR.ON", "statut": "valide", "source": "Audit design du 2026-10-23 : nom de la marque en capitales dans le texte de l'article de la V1. Règle de la page Presse : « Neur.on », majuscule initiale seule, jamais « NEUR.ON ». Correction limitée à cette page (la page Presse cite la forme fautive). Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."}
+]}

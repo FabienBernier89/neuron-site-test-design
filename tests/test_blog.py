@@ -122,7 +122,7 @@ class TestTitres(unittest.TestCase):
     def test_titres_nouveaux_a_relire_avec_source(self):
         for e in contenus.toutes():
             if e["lot"] == "E":
-                self.assertEqual(e["statut"], "a_relire", e["cle"])
+                self.assertIn(e["statut"], ("a_relire", "valide"), e["cle"])  # validés par Fabien le 2026-10-23
                 self.assertTrue(e["source"].strip(), e["cle"])
                 if e["cle"].endswith(".h1"):
                     self.assertIn("titre d'origine : " + e["ancien"], e["source"], e["cle"])

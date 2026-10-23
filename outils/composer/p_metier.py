@@ -11,7 +11,7 @@ from metier_modele import *
 from lexmachina_ecran import ecran_corrige, k as k_lm
 import trame
 
-DEMO = "{{ROOT}}fr/corrext/traduction-texte-et-document/#demo"
+DEMO = "{{ROOT}}#demo"  # démo interactive de l'accueil (Fabien, 2026-10-23)
 
 
 def ecrans():

@@ -1,3 +1,3 @@
 {"lot": "T", "entrees": [
-  {"cle": "presse.res.lien", "page": "a-propos/presse/", "texte": "Écrire à team@corrext.com", "statut": "a_relire", "source": "Lien mailto des ressources pour la rédaction (audit de la page Presse validé par Fabien le 2026-10-23) ; adresse de la V1."}
+  {"cle": "presse.res.lien", "page": "a-propos/presse/", "texte": "Écrire à team@corrext.com", "statut": "valide", "source": "Lien mailto des ressources pour la rédaction (audit de la page Presse validé par Fabien le 2026-10-23) ; adresse de la V1. Validé par Fabien le 2026-10-23 (relecture de tous les textes français)."}
 ]}

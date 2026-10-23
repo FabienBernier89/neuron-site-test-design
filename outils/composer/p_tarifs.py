@@ -21,7 +21,7 @@ import trame  # noqa: E402
 P = "tarifs/"
 C = "{{ROOT}}contact/"
 DEMO = "Demander une démo"
-EN_DIRECT = "{{ROOT}}corrext/traduction-texte-et-document/#demo"
+EN_DIRECT = "{{ROOT}}#demo"  # démo interactive de l'accueil (Fabien, 2026-10-23)
 
 
 def t(cle):

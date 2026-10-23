@@ -409,7 +409,7 @@ class TestTextesC(unittest.TestCase):
     def test_lot_et_statut(self):
         self.assertEqual(self.f["lot"], "C")
         for e in self.f["entrees"]:
-            self.assertEqual(e["statut"], "a_relire", e["cle"])
+            self.assertIn(e["statut"], ("a_relire", "valide"), e["cle"])  # validés par Fabien le 2026-10-23
             self.assertTrue(e["source"], e["cle"])
 
     def test_paragraphe_google_analytics_a_relire_non_publie(self):

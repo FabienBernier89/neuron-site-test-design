@@ -177,7 +177,7 @@ def tableau(t, cfg, k):
 
 def carte_conclusion(q, notes, k):
     return (f'<div class="lm-cc"><div class="lm-cc-g"><p class="lm-conc">{q}</p>'
-            f'<a class="lien" href="{{{{ROOT}}}}corrext/traduction-texte-et-document/#demo">{k("cmp.ex.demo")}</a></div>'
+            f'<a class="lien" href="{{{{ROOT}}}}#demo">{k("cmp.ex.demo")}</a></div>'
             f'<div class="lm-cc-d"><ul>' + "".join(f"<li>{OK}<span>{x}</span></li>" for x in notes) + "</ul></div></div>")
 
 

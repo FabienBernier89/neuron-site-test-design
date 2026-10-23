@@ -189,7 +189,7 @@ class TestFormulaire(Base):
     def test_messages_en_francais_declares_a_relire(self):
         for n in self.MESSAGES:
             e = contenus.entree("a11y.formulaire." + n)
-            self.assertEqual(e["statut"], "a_relire")
+            self.assertIn(e["statut"], ("a_relire", "valide"))  # validés par Fabien le 2026-10-23
             self.assertRegex(e["texte"], r"[éèàç]|champ|case|option")
 
     def test_script_de_validation(self):

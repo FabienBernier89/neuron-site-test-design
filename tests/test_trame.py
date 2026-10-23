@@ -236,7 +236,7 @@ class TestTrame(unittest.TestCase):
         self.assertEqual(f["lot"], "D")
         par_cle = {e["cle"]: e for e in f["entrees"]}
         for e in f["entrees"]:
-            self.assertEqual(e["statut"], "a_relire", e["cle"])
+            self.assertIn(e["statut"], ("a_relire", "valide"), e["cle"])  # validés par Fabien le 2026-10-23
             self.assertTrue(e["source"].strip(), e["cle"])
             self.assertTrue(e["cle"].startswith("trame."), e["cle"])
         for p in PAGES:

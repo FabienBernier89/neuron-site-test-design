@@ -57,7 +57,7 @@ class TestMenu(unittest.TestCase):
         h = build.chemin_page("").read_text(encoding="utf-8").replace("&#x27;", "'")
         self.assertEqual(len(d["entrees"]), 19)
         for e in d["entrees"]:
-            self.assertEqual(e["statut"], "a_relire", e["titre"])
+            self.assertIn(e["statut"], ("a_relire", "valide"), e["titre"])  # validés par Fabien le 2026-10-23
             self.assertTrue(e["source"].strip(), e["titre"])
             self.assertIn(f"<b>{e['titre']}</b><em>{e['texte']}</em>", h, e["titre"])
 

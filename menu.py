@@ -38,7 +38,7 @@ CONNEXION = ("https://auth.corrext.com/realms/corrext/protocol/openid-connect/au
 def _visuels_mega():
     from outils.post.fonctionnalites import VISUELS
     return {
-        "corrext/traduction-texte-et-document/#demo": VISUELS["fr/corrext/traduction-texte-et-document/"],
+        DEMO: VISUELS["fr/corrext/traduction-texte-et-document/"],
         "comparatif/": ('<div class="u-lbl">Comparatifs</div><div class="u-list u-niv">'
                         '<div class="u-it u-n1"><i></i>Corrext et DeepL</div>'
                         '<div class="u-it u-n2"><i></i>Corrext et les LLM généralistes</div>'
@@ -62,9 +62,15 @@ def _txt(s):
     return re.sub(r"\s+", " ", H.unescape(re.sub(r"<[^>]+>", "", s))).strip()
 
 
+# La démo « Essayez sans inscription » de la page Traduction texte et document n'est pas interactive : le lien mène à
+# la démo interactive de l'accueil (décision de Fabien du 2026-10-23)
+DEMO_V1, DEMO = "corrext/traduction-texte-et-document/#demo", "#demo"
+
+
 def _href(h):
     """Chemin du site actuel sans le préfixe {{ROOT}}fr/."""
-    return re.sub(r"^\{\{ROOT\}\}(fr/)?", "", h)
+    h = re.sub(r"^\{\{ROOT\}\}(fr/)?", "", h)
+    return DEMO if h == DEMO_V1 else h
 
 
 def _a(href):

@@ -130,7 +130,7 @@ class TestSchema(unittest.TestCase):
                     "schema.hebergement"):
             self.assertIn(cle, cles)
         for e in f["entrees"]:
-            self.assertEqual(e["statut"], "a_relire", e["cle"])
+            self.assertIn(e["statut"], ("a_relire", "valide"), e["cle"])  # validés par Fabien le 2026-10-23
             self.assertEqual(e["page"], "*", e["cle"])  # commun aux pages qui affichent le schéma
             self.assertTrue(e["source"].strip(), e["cle"])
         titre = re.search(r"<h2[^>]*>(.*?)</h2>", self.section, re.S).group(1)
