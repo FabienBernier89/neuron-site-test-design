@@ -187,6 +187,38 @@ def appliquer_ajouts(nav, pied, ajouts=None):
     return nav, pied
 
 
+def _panneau(cle, p):
+    """Panneau du méga-menu, émis dans la nav juste après son bouton : la tabulation passe du bouton ouvert à la
+    première entrée du panneau (audit du 2026-10-23, WCAG 2.4.3) ; la position à l'écran reste réglée en CSS."""
+    h = [f'<div class="mg" id="mg-{cle}" hidden>\n<div class="wrap mg-in">\n']
+    for col in p["colonnes"]:
+        h.append(f'<div class="mg-col"><p class="mg-h">{_e(col["titre"])}</p>\n')
+        for l in col["liens"]:
+            if l["titre"].startswith("Tous les "):
+                # lien vers le hub de la colonne : simple lien fléché, comme « Voir les comparatifs » (Fabien, 2026-10-19)
+                h.append(f'<a class="mg-tous" href="{_a(l["href"])}"><span class="lien">Voir {_e(l["titre"][0].lower() + l["titre"][1:])}</span></a>\n')
+                continue
+            desc = SOUS_TITRES.get(l["titre"]) or l["desc"] or sous_titre_de_page(l["href"])
+            em = f'<em>{_e(desc)}</em>' if desc else ""
+            h.append(f'<a class="mg-a" href="{_a(l["href"])}"><b>{_e(l["titre"])}</b>{em}</a>\n')
+        h.append("</div>\n")
+    pr = p["promo"]
+    if pr:
+        vis = _visuels_mega().get(pr["href"])
+        fond = f'<span class="fx-w mg-w">{vis}</span>' if vis else '<span class="mg-mw"><i></i><i></i><i></i></span>'
+        h.append(f'<a class="mg-card" href="{_a(pr["href"])}"><span class="mg-mini" aria-hidden="true">{fond}</span>'
+                 f'<b>{_e(pr["titre"])}</b><span class="mg-t">{_e(pr["texte"])}</span>'
+                 f'<span class="lien">{_e(pr["lien"])}</span></a>\n')
+    h.append("</div>\n</div>\n")
+    return "".join(h)
+
+
+def _libelle_fermer():
+    """Nom du bouton du menu mobile une fois ouvert (contenus nouveaux de la V2, lot V)."""
+    from outils import contenus
+    return contenus.texte("a11y.menu.fermer")
+
+
 def rendre_entete(nav, actif="", minimal=False):
     """En-tête et menus. Le ruban d'aperçu a été retiré le 2026-10-15 (demande de Fabien) ; le noindex reste."""
     h = ['<a class="skip" href="#main">Aller au contenu</a>\n',
@@ -201,35 +233,15 @@ def rendre_entete(nav, actif="", minimal=False):
             if e.get("panneau"):
                 h.append(f'<button type="button" class="{cls}" aria-expanded="false" aria-controls="mg-{e["cle"]}" '
                          f'data-mg>{_e(e["libelle"])}{CHEVRON}</button>\n')
+                h.append(_panneau(e["cle"], nav["panneaux"][e["cle"]]))
             else:
                 h.append(f'<a class="{cls}" href="{_a(e["href"])}">{_e(e["libelle"])}</a>\n')
         h.append('</nav>\n<div class="hd-cta"><a class="hd-cx" href="' + H.escape(CONNEXION) + '">Connexion</a>'
                  '<a class="btn btn-s" href="{{ROOT}}contact/" data-suivi="cta-entete">Demander une démo</a>'
                  '<button type="button" class="hd-burger" id="hdBurger" aria-expanded="false" aria-controls="mm" '
-                 'aria-label="Ouvrir le menu"><span></span><span></span><span></span></button></div>\n')
+                 f'aria-label="Ouvrir le menu" data-fermer="{H.escape(_libelle_fermer(), quote=True)}">'
+                 '<span></span><span></span><span></span></button></div>\n')
     h.append("</div>\n")
-    if not minimal:
-        for cle, p in nav["panneaux"].items():
-            h.append(f'<div class="mg" id="mg-{cle}" hidden>\n<div class="wrap mg-in">\n')
-            for col in p["colonnes"]:
-                h.append(f'<div class="mg-col"><p class="mg-h">{_e(col["titre"])}</p>\n')
-                for l in col["liens"]:
-                    if l["titre"].startswith("Tous les "):
-                        # lien vers le hub de la colonne : simple lien fléché, comme « Voir les comparatifs » (Fabien, 2026-10-19)
-                        h.append(f'<a class="mg-tous" href="{_a(l["href"])}"><span class="lien">Voir {_e(l["titre"][0].lower() + l["titre"][1:])}</span></a>\n')
-                        continue
-                    desc = SOUS_TITRES.get(l["titre"]) or l["desc"] or sous_titre_de_page(l["href"])
-                    em = f'<em>{_e(desc)}</em>' if desc else ""
-                    h.append(f'<a class="mg-a" href="{_a(l["href"])}"><b>{_e(l["titre"])}</b>{em}</a>\n')
-                h.append("</div>\n")
-            pr = p["promo"]
-            if pr:
-                vis = _visuels_mega().get(pr["href"])
-                fond = f'<span class="fx-w mg-w">{vis}</span>' if vis else '<span class="mg-mw"><i></i><i></i><i></i></span>'
-                h.append(f'<a class="mg-card" href="{_a(pr["href"])}"><span class="mg-mini" aria-hidden="true">{fond}</span>'
-                         f'<b>{_e(pr["titre"])}</b><span class="mg-t">{_e(pr["texte"])}</span>'
-                         f'<span class="lien">{_e(pr["lien"])}</span></a>\n')
-            h.append("</div>\n</div>\n")
     h.append("</header>\n")
     if not minimal:
         h.append('<div class="mg-voile" hidden></div>\n')

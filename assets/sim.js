@@ -1,10 +1,50 @@
 /* Simulations de l'interface Corrext : scènes horodatées, lecture à la visibilité, jauge de progression.
-   Aucun texte affiché n'est écrit ici : les textes viennent du HTML de la page ou de window.SIM_EX. */
+   Bouton pause (WCAG 2.2.2) ; hors écran ou en pause, les boucles requestAnimationFrame s'arrêtent et les animations
+   CSS de la scène sont suspendues (classes hors-champ et en-pause). Aucun texte affiché n'est écrit ici : les textes
+   viennent du HTML de la page ou de window.SIM_EX ; les libellés du bouton, de ses attributs data-. */
 (function () {
   "use strict";
   var reduit = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var EX = window.SIM_EX || {};
   var SCENES = {};
+
+  /* Langue des textes non français (WCAG 3.1.2) : nom affiché par l'interface, puis code de langue */
+  var CODES = { German: "de", Allemand: "de", English: "en", Anglais: "en", Italian: "it", Italien: "it", French: "fr", "Français": "fr" };
+  function poserLangue(el, nom) {
+    var code = CODES[(nom || "").trim()];
+    if (!el) return;
+    if (code && code !== "fr") el.setAttribute("lang", code); else el.removeAttribute("lang");
+  }
+  /* Textes d'une scène : la source dans la langue détectée affichée (« Detected language (English) »), les sorties de
+     traduction dans la langue cible affichée (anglais par défaut, comme la démo) */
+  function langues(racine) {
+    [].forEach.call(racine.querySelectorAll(".cr-txt:not(.cr-rtxt)"), function (el) {
+      var cr = el.closest(".cr") || racine, v = cr.querySelector(".cr-src .v1"), m = v && /\(([^)]+)\)/.exec(v.textContent);
+      poserLangue(el, m ? m[1] : "");
+    });
+    [].forEach.call(racine.querySelectorAll(".cr-out:not(.cr-rout),.cr-alt"), function (el) {
+      var cr = el.closest(".cr") || racine, cible = cr.querySelector(".cr-tgtsel .cr-v");
+      poserLangue(el, cible ? cible.textContent : "English");
+    });
+    [].forEach.call(racine.querySelectorAll(".mx-out"), function (el) {
+      var p = el.closest(".mx-p"), lg = p && p.querySelector("small");
+      poserLangue(el, lg ? lg.textContent : "");
+    });
+  }
+  /* Régions d'annonce d'une démo (aria-live, role status ou alert) : muettes pendant la visite automatique, pour que
+     les lecteurs d'écran ne lisent pas en continu un texte qui change seul ; rendues au premier geste du visiteur */
+  function couperAnnonces(racine, couper) {
+    [].forEach.call(racine.querySelectorAll("[aria-live],[role=status],[role=alert]"), function (el) {
+      if (couper) {
+        if (!el.hasAttribute("data-live")) el.setAttribute("data-live", el.getAttribute("aria-live") || "");
+        el.setAttribute("aria-live", "off");
+      } else if (el.hasAttribute("data-live")) {
+        var v = el.getAttribute("data-live");
+        if (v) el.setAttribute("aria-live", v); else el.removeAttribute("aria-live");
+        el.removeAttribute("data-live");
+      }
+    });
+  }
 
   /* Mise à l'échelle des scènes : dessinées à leur taille de référence, réduites dans les colonnes étroites */
   function echelonner() {
@@ -49,13 +89,27 @@
     /* Jauge : temps de lecture écoulé dans le cycle en cours, rapporté à la durée du cycle précédent */
     this.jauge = racine.querySelector(".sim-jauge i");
     this.ecoule = 0; this.duree = 0;
-    /* Démo interactive : le premier geste réel du visiteur arrête la visite guidée */
+    /* Boucles requestAnimationFrame suspendues (scène hors écran ou en pause), relancées par reveiller() */
+    this.suspendues = [];
+    this.enPause = false;
+    this.bouton = racine.querySelector(".anim-pause");
+    if (this.bouton && !reduit) {
+      this.bouton.hidden = false;
+      this.bouton.addEventListener("click", function () { self.basculer(); });
+    }
+    this.muet = racine.hasAttribute("data-interactif");
+    if (this.muet) couperAnnonces(this.scene, true);
+    langues(this.scene);
+    /* Démo interactive : le premier geste réel du visiteur arrête la visite guidée (le bouton pause n'en est pas un) */
     if (racine.hasAttribute("data-interactif")) {
       ["pointerdown", "keydown"].forEach(function (type) {
         racine.addEventListener(type, function (e) {
           if (!e.isTrusted || self.libre) return;
+          if (self.bouton && self.bouton.contains(e.target)) return;
           self.arret = true;
+          if (self.enPause) self.basculer();  // la démo libre répond au visiteur : plus de pause en cours
           racine.classList.add("sim-libre");
+          couperAnnonces(self.scene, false);
           if (racine.hasAttribute("data-une-fois")) self.passerLibre();
           /* un appui interrompu ne doit pas laisser de contrôle enfoncé */
           [].forEach.call(self.scene.querySelectorAll(".press"), function (x) { x.classList.remove("press"); });
@@ -63,7 +117,31 @@
       });
     }
   }
-  Lecteur.prototype.actif = function () { return this.visible && !this.arret; };
+  Lecteur.prototype.actif = function () { return this.visible && !this.arret && !this.enPause; };
+  /* Relance les boucles suspendues quand la scène redevient active (à l'écran et hors pause) */
+  Lecteur.prototype.reveiller = function () {
+    if (!this.actif() || !this.suspendues.length) return;
+    var l = this.suspendues;
+    this.suspendues = [];
+    l.forEach(function (tic) { requestAnimationFrame(tic); });
+  };
+  /* Bouton pause : suspend la scène (boucles et animations CSS), puis la relance ; le nom suit l'état */
+  Lecteur.prototype.basculer = function () {
+    var b = this.bouton;
+    this.enPause = !this.enPause;
+    this.r.classList.toggle("en-pause", this.enPause);
+    if (b) {
+      b.setAttribute("aria-label", b.getAttribute(this.enPause ? "data-relancer" : "data-pause"));
+      b.toggleAttribute("data-en-pause", this.enPause);
+    }
+    this.reveiller();
+  };
+  /* Visibilité (IntersectionObserver) : hors écran, les animations CSS de la scène s'arrêtent */
+  Lecteur.prototype.voir = function (visible, dansLaPage) {
+    this.visible = visible;
+    this.r.classList.toggle("hors-champ", !dansLaPage);
+    this.reveiller();
+  };
   /* Premier cycle : durée inconnue, la jauge avance en s'approchant de la fin sans l'atteindre */
   Lecteur.prototype.progres = function () {
     if (this.duree) return Math.min(0.995, this.ecoule / this.duree);
@@ -74,7 +152,9 @@
     if (!this.jauge || reduit) return;
     function tic(t) {
       if (self.arret) return;
-      if (self.actif()) self.ecoule += t - avant;
+      /* scène inactive : plus aucune image demandée, la boucle attend reveiller() */
+      if (!self.actif()) { avant = null; self.suspendues.push(tic); return; }
+      if (avant !== null) self.ecoule += t - avant;
       avant = t;
       self.jauge.style.transform = "scaleX(" + self.progres().toFixed(4) + ")";
       requestAnimationFrame(tic);
@@ -90,7 +170,8 @@
       var reste = ms, avant = performance.now();
       function tic(t) {
         if (self.arret) return;
-        if (self.actif()) reste -= t - avant;
+        if (!self.actif()) { avant = null; self.suspendues.push(tic); return; }
+        if (avant !== null) reste -= t - avant;
         avant = t;
         if (reste <= 0) fin(); else requestAnimationFrame(tic);
       }
@@ -138,6 +219,7 @@
     var el = typeof sel === "string" ? this.q(sel) : sel, n = 0;
     el.classList.remove("vu", "sort");
     if (html) el.innerHTML = texte; else el.textContent = texte;
+    if (el.matches(".cr-out,.cr-alt,.mx-out")) langues(el.closest(".cr,.mx") || this.scene);
     (function decouper(noeud) {
       [].slice.call(noeud.childNodes).forEach(function (c) {
         if (c.nodeType === 1) { decouper(c); return; }
@@ -209,6 +291,8 @@
         self.scene.innerHTML = self.modele;
         poserPilules(self.scene);
         compter(self.scene);
+        if (self.muet && !self.libre) couperAnnonces(self.scene, true);
+        langues(self.scene);
       }
       fn(self).then(function () {
         if (self.r.hasAttribute("data-une-fois")) { if (!self.arret) self.passerLibre(); return; }
@@ -229,6 +313,7 @@
     this.scene.innerHTML = this.modele;
     poserPilules(this.scene);
     compter(this.scene);
+    langues(this.scene);
     var main = this.r.querySelector(".sim-main");
     if (main) main.hidden = false;
     fn(this);
@@ -260,6 +345,7 @@
 
   function remplirLookup(l, lk) {
     l.q(".lk-q").textContent = lk.q;
+    poserLangue(l.q(".lk-q"), lk.l1);
     l.q(".lk-l1").textContent = lk.l1;
     l.q(".lk-l2").textContent = lk.l2;
     l.q(".lk-c").textContent = lk.count;
@@ -280,6 +366,8 @@
       }
       b.textContent = ligne.b;
       s.textContent = ligne.src;
+      poserLangue(a, lk.l1);
+      poserLangue(b, lk.l2);
       bloc.appendChild(a); bloc.appendChild(b); bloc.appendChild(s);
       r.appendChild(bloc);
     });
@@ -836,8 +924,8 @@
 
   function demarrer() {
   var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
-    es.forEach(function (e) { e.target.__lecteur.visible = e.isIntersecting; });
-  }, { threshold: 0.4 }) : null;
+    es.forEach(function (e) { e.target.__lecteur.voir(e.isIntersecting && e.intersectionRatio >= 0.4, e.isIntersecting); });
+  }, { threshold: [0, 0.4] }) : null;
   /* Pastilles des écrans statiques */
   poserPilules(document);
   compter(document);

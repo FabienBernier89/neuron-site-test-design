@@ -6,3 +6,16 @@
 .mc .hero-d p a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
 .mc-et{padding-top:0}
 .mc-et .tl{grid-template-columns:minmax(0,1fr);max-width:760px}
+/* Erreurs des formulaires (assets/global/formulaires.js, audit du 2026-10-23) : résumé en tête du formulaire, message
+   sous chaque champ fautif. Rouge à 4,5:1 au moins sur la tuile et la page, dans les deux thèmes. */
+form{--erreur:#B42318}
+:root[data-theme="sombre"] form{--erreur:#FFB4AB}
+@media (prefers-color-scheme:dark){:root[data-theme="systeme"] form{--erreur:#FFB4AB}}
+/* Région vide : hors du flux mais rendue (display:none la retirerait de l'arbre d'accessibilité) */
+.f-err:empty{position:absolute;width:1px;height:1px;padding:0;border:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.f-err{grid-column:1/-1;padding:12px 16px;border:1px solid var(--erreur);border-left-width:4px;border-radius:8px;background:var(--page);font:400 14px/20px var(--sans);color:var(--ink)}
+.f-err p{font-weight:600}
+.f-err ul{margin:6px 0 0;padding-left:18px}
+.f-err a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.f-msg{grid-column:1/-1;margin:6px 0 0;font:500 13px/18px var(--sans);color:var(--erreur)}
+form [aria-invalid="true"]{border-color:var(--erreur)}

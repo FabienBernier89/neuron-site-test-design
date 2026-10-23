@@ -9,6 +9,9 @@ l'encart newsletter qu'un autre lot insère.
 - Le formulaire de démo de la page contact reçoit son action et le champ Secteur (les 6 pages secteur, plus « Autre »).
 - Les cases à cocher qui partagent un nom partent en tableau (« langues[] ») : PHP n'en garderait qu'une.
 - La page de remerciement n'est jamais indexée, même en production.
+- Chaque formulaire reçoit en tête une région role="alert", vide au chargement : assets/global/formulaires.js y écrit le
+  résumé des erreurs et place sous chaque champ fautif le message lié (aria-invalid, aria-describedby). Les messages
+  viennent de src/data/contenus-v2 (lot V) par les attributs data- de cette région (audit du 2026-10-23, WCAG 3.3.1).
 
 Idempotent : repasser une page déjà traitée ne la change pas."""
 import html as H
@@ -53,6 +56,13 @@ def _secteur():
             '<select id="cf-secteur" name="secteur" autocomplete="off">' + "".join(options) + "</select></div>")
 
 
+def _resume():
+    """Région des erreurs : vide, donc invisible, tant que le formulaire n'a pas été envoyé incomplet."""
+    attributs = "".join(f' data-{n}="{H.escape(contenus.texte("a11y.formulaire." + n), quote=True)}"'
+                        for n in ("resume", "requis", "choix", "email", "case"))
+    return f'<div class="f-err" role="alert"{attributs}></div>'
+
+
 def _ouverture(o, apercu):
     # Méthode imposée : envoi.php refuse tout autre méthode que POST
     if re.search(r"\smethod=", o):
@@ -72,6 +82,8 @@ def _corps(corps, apercu):
                     for n in CACHES if not re.search(r'\sname="' + n + '"', corps))
     if 'name="site_url"' not in corps:
         ajout += PIEGE
+    if 'class="f-err"' not in corps:
+        ajout += _resume()
     corps = ajout + corps
     # Cases à cocher de même nom : un tableau pour PHP
     for nom in set(re.findall(r'<input\b(?=[^>]*\stype="checkbox")[^>]*\sname="([^"\[\]]+)"', corps)):

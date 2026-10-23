@@ -23,11 +23,35 @@
     if (voile) voile.hidden = false;
     ouvert = { btn: btn, pan: pan };
   }
-  function fermerMobile() {
+  /* Menu mobile modal : le reste de la page devient inerte, la tabulation boucle entre le bouton et les entrées du
+     menu, Échap ferme et rend le focus au bouton (audit du 2026-10-23, WCAG 2.4.3 et 2.4.11) */
+  var ouvrirLibelle = burger && burger.getAttribute("aria-label");
+  function inertes() {
+    return [].filter.call(document.body.children, function (el) { return el !== hd && el !== mm && el.tagName !== "SCRIPT"; });
+  }
+  function focusables() {
+    var l = [].filter.call(mm.querySelectorAll("a[href],button,input,select,textarea,[tabindex]"), function (el) {
+      return el.tabIndex >= 0 && !el.disabled && el.getClientRects().length;
+    });
+    return [burger].concat(l);
+  }
+  function ouvrirMobile() {
+    mm.hidden = false;
+    burger.setAttribute("aria-expanded", "true");
+    if (burger.hasAttribute("data-fermer")) burger.setAttribute("aria-label", burger.getAttribute("data-fermer"));
+    document.body.style.overflow = "hidden";
+    inertes().forEach(function (el) { el.inert = true; });
+    var premier = focusables()[1];
+    if (premier) premier.focus();
+  }
+  function fermerMobile(rendreFocus) {
     if (!mm || mm.hidden) return;
     mm.hidden = true;
     burger.setAttribute("aria-expanded", "false");
+    if (ouvrirLibelle) burger.setAttribute("aria-label", ouvrirLibelle);
     document.body.style.overflow = "";
+    inertes().forEach(function (el) { el.inert = false; });
+    if (rendreFocus) burger.focus();
   }
 
   if (hd) {
@@ -42,21 +66,30 @@
     hd.addEventListener("mouseenter", function () { clearTimeout(minuterie); });
   }
   if (voile) voile.addEventListener("click", fermer);
+  /* Méga-menu : quand le focus quitte le bouton et son panneau (tabulation), le panneau se referme */
+  document.addEventListener("focusin", function (e) {
+    if (ouvert && !ouvert.btn.contains(e.target) && !ouvert.pan.contains(e.target)) fermer();
+  });
   document.addEventListener("keydown", function (e) {
+    if (e.key === "Tab" && mm && !mm.hidden) {
+      var l = focusables(), i = l.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0) { e.preventDefault(); l[l.length - 1].focus(); }
+      else if (!e.shiftKey && (i < 0 || i === l.length - 1)) { e.preventDefault(); l[0].focus(); }
+      return;
+    }
     if (e.key !== "Escape") return;
     var b = ouvert && ouvert.btn;
     fermer();
-    fermerMobile();
+    if (mm && !mm.hidden) { fermerMobile(true); return; }
     if (b) b.focus();
   });
 
   if (burger && mm) {
     burger.addEventListener("click", function () {
-      var o = mm.hidden;
-      mm.hidden = !o;
-      burger.setAttribute("aria-expanded", String(o));
-      document.body.style.overflow = o ? "hidden" : "";
+      if (mm.hidden) ouvrirMobile(); else fermerMobile(true);
     });
+    /* passage en largeur bureau, menu ouvert : la page ne doit pas rester inerte */
+    if (bureau.addEventListener) bureau.addEventListener("change", function (m) { if (m.matches) fermerMobile(false); });
   }
   [].forEach.call(document.querySelectorAll(".mm-g > .mm-h"), function (b) {
     b.addEventListener("click", function () {

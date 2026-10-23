@@ -148,6 +148,26 @@ ul{padding:0;list-style:none}
   box-shadow:0 1px 2px rgba(0,27,76,.08),0 8px 20px -10px rgba(0,27,76,.3);font:500 calc(13px / var(--k,1))/1.4 var(--sans);color:#06122e;text-wrap:balance;transform:translateX(-50%);animation:sim-main .5s ease both}
 @keyframes sim-main{from{opacity:0;transform:translate(-50%,6px)}to{opacity:1;transform:translateX(-50%)}}
 .sim-libre [role="button"]{cursor:pointer}
+/* Pause des animations (WCAG 2.2.2) : bouton pause (.en-pause) ou bloc hors de l'écran (.hors-champ, posé par sim.js et
+   global/animations.js) ; une animation suspendue ne coûte plus rien au processeur */
+.en-pause *,.en-pause *::before,.en-pause *::after,.hors-champ *,.hors-champ *::before,.hors-champ *::after{animation-play-state:paused!important}
+.anim-pause{display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid var(--line);border-radius:50%;background:var(--page);color:var(--ink);cursor:pointer}
+.anim-pause[hidden]{display:none}
+.anim-pause svg{width:12px;height:12px;fill:currentColor}
+.anim-pause .ap-lecture,.anim-pause[data-en-pause] .ap-pause{display:none}
+.anim-pause[data-en-pause] .ap-lecture{display:block}
+.anim-pause:hover{border-color:var(--mid)}
+.anim-pause:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* Dans une scène : coin bas droit, au-dessus de la jauge, taille constante à l'écran quelle que soit la réduction (--k) ;
+   la scène garde ses couleurs claires en thème sombre */
+.sim-pp{position:absolute;right:calc(12px / var(--k,1));bottom:calc(14px / var(--k,1));z-index:7;width:calc(32px / var(--k,1));height:calc(32px / var(--k,1));
+  border:calc(1px / var(--k,1)) solid #E3E9F3;background:#fff;color:#06122e;box-shadow:0 1px 2px rgba(0,27,76,.08),0 6px 16px -8px rgba(0,27,76,.3)}
+.sim-pp svg{width:calc(12px / var(--k,1));height:calc(12px / var(--k,1))}
+.sim-pp:focus-visible{outline:calc(2px / var(--k,1)) solid #1f5fd6;outline-offset:calc(2px / var(--k,1))}
+/* Démo libre (visite finie ou interrompue) : plus rien ne bouge seul, le bouton s'efface dès qu'il perd le focus */
+.sim-libre .sim-pp:not(:focus){display:none}
+/* Grille de cartes animées : bouton au-dessus de la grille, à droite */
+.fx-pp{margin:16px 0 -24px auto}
 .sim-libre [role="button"]:focus-visible{outline:2px solid #317BFF;outline-offset:2px}
 .sim-libre .cr-txt{position:relative;z-index:3}  /* le terme surligné reste cliquable au-dessus des calques du panneau */
 .sim-libre .cr-txt mark[role="button"]:hover{filter:brightness(.96)}
@@ -814,7 +834,7 @@ ul{padding:0;list-style:none}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important}
-  .sim-cur,.sim-jauge{display:none}
+  .sim-cur,.sim-jauge,.anim-pause{display:none}
 }
 
 /* ---------- Vues Corrext par fonction (blocs explicatifs) ---------- */

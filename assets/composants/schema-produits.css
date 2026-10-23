@@ -107,8 +107,11 @@
 .sp-pret.sp-e1 .sp-menu > .on::after{animation:sp-pouls 1s var(--ease)}
 .sp-pret.sp-a1 .sp-lm .sp-ui::after,.sp-pret.sp-a2 .sp-cx .sp-ui::after,.sp-pret.sp-a3 .sp-ch .sp-ui::after{opacity:1}
 .sp-pret.sp-a1 .sp-et li:nth-child(1)::after,.sp-pret.sp-a2 .sp-et li:nth-child(2)::after,.sp-pret.sp-a3 .sp-et li:nth-child(3)::after{opacity:1}
-.sp-pret .sp-et li{transition:opacity .4s ease;opacity:.55}
-.sp-pret.sp-a1 .sp-et li:nth-child(1),.sp-pret.sp-a2 .sp-et li:nth-child(2),.sp-pret.sp-a3 .sp-et li:nth-child(3){opacity:1}
+/* Étape inactive : couleur atténuée --muted (au moins 4,5:1 sur le fond), sans opacité qui la ferait passer sous ce seuil
+   (2,28:1 relevé par l'audit du 2026-10-23) ; l'étape en cours passe à l'encre, sur sa tuile qui apparaît en fondu
+   (::after). La couleur change sans transition : le schéma n'anime que transform et opacity. */
+.sp-pret .sp-et li{color:var(--muted)}
+.sp-pret.sp-a1 .sp-et li:nth-child(1),.sp-pret.sp-a2 .sp-et li:nth-child(2),.sp-pret.sp-a3 .sp-et li:nth-child(3){color:var(--ink)}
 .sp-pret.sp-e2 .sp-sk{opacity:0}
 .sp-pret.sp-e2 .sp-out{opacity:1;transform:none}
 .sp-pret.sp-e3 .sp-lkb{opacity:1;transform:none}
