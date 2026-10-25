@@ -2,6 +2,7 @@
 
     python3 -m outils.i18n etat de [--production]
     python3 -m outils.i18n memoire de
+    python3 -m outils.i18n lexique de
 
 etat : état de la traduction d'une langue, page par page (outils/i18n/traduire.py, etat), en aperçu par défaut ou selon
 les règles de la production ; écrit la liste des textes français à traduire dans src/langues/<langue>/a_traduire.json
@@ -11,12 +12,17 @@ chaque appel.
 memoire : pré-remplit la table de la langue (src/langues/<langue>/segments.json) avec les traductions validées de la V1
 (outils/i18n/memoire_v1.py, prefill), au statut v1, puis la complète des blocs recomposés et des variantes de balisage
 au statut adapte (outils/i18n/recomposition.py, recomposer, tâche 3.2) ; écrit le rapport src/langues/<langue>/memoire-rapport.json et
-les contextes V1 des textes à traduire, src/langues/<langue>/contextes.json."""
+les contextes V1 des textes à traduire, src/langues/<langue>/contextes.json.
+
+lexique : lexique des termes à vérifier dans CHnell pour une langue (outils/i18n/terminologie.py, candidats, tâche 4.1) :
+termes V1, références légales et n-grammes des segments sans traduction V1, avec leur priorité (1, 2 ou 3) et leur
+origine. Écrit dans lexique.json du dossier de la terminologie (hors dépôt : Bibliotheque-Claude, variable
+NEURON_TERMINOLOGIE), en gardant les décisions « retenu » déjà prises."""
 import argparse
 import json
 import sys
 
-from outils.i18n import memoire_v1, recomposition, traduire
+from outils.i18n import memoire_v1, recomposition, terminologie, traduire
 from outils.i18n.table import LANGUES, Table
 
 
@@ -64,6 +70,17 @@ def afficher_memoire(rapport):
     return "\n".join(lignes)
 
 
+def afficher_lexique(langue, entrees, fichier):
+    """Résumé lisible du lexique : comptes par priorité et par origine."""
+    c = terminologie.compter(entrees)
+    lignes = [f"Lexique {langue} : {c['total']} termes à vérifier"]
+    lignes += [f"  priorité {p} : {n}" for p, n in c["priorites"].items()]
+    lignes += [f"  origine {o} : {n}" for o, n in c["origines"].items()]
+    lignes.append(f"  à valider par Fabien (retenu non décidé) : {sum(1 for e in entrees if e['retenu'] is None)}")
+    lignes.append(f"Lexique : {fichier}")
+    return "\n".join(lignes)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="python3 -m outils.i18n", description="Outils de la traduction du site.")
     sous = parser.add_subparsers(dest="commande", required=True)
@@ -72,8 +89,21 @@ def main(argv=None):
     p.add_argument("--production", action="store_true", help="règles de la production (statuts relus seulement)")
     p = sous.add_parser("memoire", help="pré-remplir la table d'une langue avec la mémoire validée de la V1")
     p.add_argument("langue", choices=LANGUES)
+    p = sous.add_parser("lexique", help="lexique des termes à vérifier dans CHnell pour une langue")
+    p.add_argument("langue", choices=LANGUES)
     args = parser.parse_args(argv)
     import build  # import tardif : les dossiers de build.py (DOSSIER_LANGUES, NEURON) servent d'emplacement
+    if args.commande == "lexique":
+        fichier_v1 = build.NEURON / "src/i18n" / f"termes-{args.langue}.json"
+        if not fichier_v1.is_file():
+            print(f"Termes V1 introuvables : {fichier_v1} (NEURON_SRC ?)", file=sys.stderr)
+            return 1
+        termes = json.loads(fichier_v1.read_text(encoding="utf-8"))
+        entrees = terminologie.candidats(args.langue, Table(args.langue, build.DOSSIER_LANGUES), termes)
+        entrees = terminologie.conserver_decisions(entrees, terminologie.charger_lexique(args.langue))
+        fichier = terminologie.ecrire_lexique(args.langue, entrees)
+        print(afficher_lexique(args.langue, entrees, fichier))
+        return 0
     if args.commande == "memoire":
         table = Table(args.langue, build.DOSSIER_LANGUES)
         pages = traduire.pages_assemblees(args.langue, "apercu")
