@@ -3,6 +3,8 @@
     python3 -m outils.i18n etat de [--production]
     python3 -m outils.i18n memoire de
     python3 -m outils.i18n lexique de
+    python3 -m outils.i18n chnell file de [--priorite-max 3]
+    python3 -m outils.i18n chnell ajouter de capital-actions --retenu Aktienkapital --statut confirme ...
 
 etat : état de la traduction d'une langue, page par page (outils/i18n/traduire.py, etat), en aperçu par défaut ou selon
 les règles de la production ; écrit la liste des textes français à traduire dans src/langues/<langue>/a_traduire.json
@@ -17,12 +19,19 @@ les contextes V1 des textes à traduire, src/langues/<langue>/contextes.json.
 lexique : lexique des termes à vérifier dans CHnell pour une langue (outils/i18n/terminologie.py, candidats, tâche 4.1) :
 termes V1, références légales et n-grammes des segments sans traduction V1, avec leur priorité (1, 2 ou 3) et leur
 origine. Écrit dans lexique.json du dossier de la terminologie (hors dépôt : Bibliotheque-Claude, variable
-NEURON_TERMINOLOGIE), en gardant les décisions « retenu » déjà prises."""
+NEURON_TERMINOLOGIE), en gardant les décisions « retenu » déjà prises.
+
+chnell : session de vérification dans CHnell (outils/i18n/chnell.py, tâche 4.2). « chnell file » liste les termes
+retenus du lexique qui n'ont pas encore de ligne de journal, avec leurs adresses CHnell (priorité 3 au plus par défaut,
+décision V5) ; « chnell ajouter » ajoute une ligne au journal.jsonl du dossier de la terminologie (schéma validé, aucun
+extrait de texte) ; « chnell lire » lira les résultats d'une page capturée : à faire avec la structure réelle de CHnell."""
 import argparse
 import json
 import sys
+from datetime import date
+from pathlib import Path
 
-from outils.i18n import memoire_v1, recomposition, terminologie, traduire
+from outils.i18n import chnell, memoire_v1, recomposition, terminologie, traduire
 from outils.i18n.table import LANGUES, Table
 
 
@@ -81,6 +90,45 @@ def afficher_lexique(langue, entrees, fichier):
     return "\n".join(lignes)
 
 
+def afficher_file(langue, file, priorite_max):
+    """Termes à vérifier dans CHnell : une ligne par terme, l'adresse Fedlex s'obtient en ajoutant « &sources=60 »."""
+    lignes = [f"File CHnell {langue} : {len(file)} terme(s) retenu(s) de priorité 1 à {priorite_max} sans ligne de journal",
+              "Concordances de Fedlex seules : ajouter « &sources=60 » à l'adresse (url_fedlex de chnell.file_attente)"]
+    lignes += [f"  P{e['priorite']} {e['fr']} : {e['url']}" for e in file]
+    return "\n".join(lignes)
+
+
+def commande_chnell(args):
+    """chnell file, ajouter et lire : n'ont besoin ni du site V1 ni de build.py."""
+    if args.action == "lire":
+        fichier = Path(args.fichier)
+        try:  # le fichier n'est lu qu'une fois lire_resultats écrite : d'ici là, seul le message de 4.2 compte
+            chnell.lire_resultats(fichier.read_text(encoding="utf-8") if fichier.is_file() else "")
+        except NotImplementedError as e:
+            print(e, file=sys.stderr)
+            return 1
+        return 0
+    if args.action == "file":
+        lexique = terminologie.charger_lexique(args.langue)
+        if not lexique:
+            print(f"Lexique {args.langue} introuvable ou vide : lancer d'abord « lexique {args.langue} »", file=sys.stderr)
+            return 1
+        file = chnell.file_attente(args.langue, lexique, chnell.charger_journal(), args.priorite_max)
+        print(afficher_file(args.langue, file, args.priorite_max))
+        return 0
+    entree = {"date": args.date, "fr": args.fr, "langue": args.langue,
+              "url": args.url or chnell.url_chnell(args.fr, args.langue), "resultats": args.resultats,
+              "sources": args.source, "retenu": args.retenu, "statut": args.statut,
+              "justification": args.justification, "verifie_par": args.verifie_par}
+    try:
+        chnell.ajouter(chnell.fichier_journal(), entree)
+    except ValueError as e:
+        print(f"Ligne refusée, journal inchangé : {e}", file=sys.stderr)
+        return 1
+    print(f"Journal : « {args.fr} » ({args.langue}) ajouté au statut {args.statut} : {chnell.fichier_journal()}")
+    return 0
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="python3 -m outils.i18n", description="Outils de la traduction du site.")
     sous = parser.add_subparsers(dest="commande", required=True)
@@ -91,7 +139,29 @@ def main(argv=None):
     p.add_argument("langue", choices=LANGUES)
     p = sous.add_parser("lexique", help="lexique des termes à vérifier dans CHnell pour une langue")
     p.add_argument("langue", choices=LANGUES)
+    p = sous.add_parser("chnell", help="session de vérification dans CHnell : file d'attente, journal")
+    actions = p.add_subparsers(dest="action", required=True)
+    a = actions.add_parser("file", help="termes retenus du lexique sans ligne de journal, avec leurs adresses CHnell")
+    a.add_argument("langue", choices=LANGUES)
+    a.add_argument("--priorite-max", type=int, default=chnell.PRIORITE_MAX, help="priorité la plus basse vérifiée (3)")
+    a = actions.add_parser("ajouter", help="ajouter une ligne au journal (schéma validé, aucun extrait de texte)")
+    a.add_argument("langue", choices=LANGUES)
+    a.add_argument("fr", help="terme français vérifié")
+    a.add_argument("--statut", required=True, help="confirme, corrige, absent ou a_arbitrer")
+    a.add_argument("--retenu", help="équivalent retenu (absent pour le statut absent)")
+    a.add_argument("--resultats", type=int, default=0, help="nombre de résultats CHnell")
+    a.add_argument("--source", action="append", default=[], help="source des concordances, répétable (« Fedlex : CO art. 620 »)")
+    a.add_argument("--justification", required=True, help="une phrase, jamais un extrait de texte")
+    a.add_argument("--verifie-par", default="agent", help="agent ou Fabien (un arbitrage de Fabien)")
+    a.add_argument("--date", default=date.today().isoformat(), help="AAAA-MM-JJ (aujourd'hui par défaut)")
+    a.add_argument("--url", help="adresse CHnell consultée (url_chnell par défaut)")
+    a = actions.add_parser("lire", help="lire une page de résultats capturée (à faire avec Fabien)")
+    a.add_argument("fichier")
+    a.add_argument("--fr", required=True)
+    a.add_argument("--langue", required=True, choices=LANGUES)
     args = parser.parse_args(argv)
+    if args.commande == "chnell":
+        return commande_chnell(args)
     import build  # import tardif : les dossiers de build.py (DOSSIER_LANGUES, NEURON) servent d'emplacement
     if args.commande == "lexique":
         fichier_v1 = build.NEURON / "src/i18n" / f"termes-{args.langue}.json"
