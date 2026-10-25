@@ -223,6 +223,15 @@ class TestLanguesAnnoncesOnglets(Base):
         contrats = self.pages["traduction/contrats/"]
         self.assertRegex(contrats, r'data-m="Allemand" lang="de"><b><a [^>]*>Gewährleistung wegen Mängel</a>')
 
+    def test_exemple_de_loi_du_glossaire_en_allemand_et_en_francais(self):
+        """Chaque exemple de loi du glossaire porte ses deux langues : l'allemand et le français sont balisés (le français
+        explicitement, pour qu'il reste du français sur une page traduite : tâche 3.3 de la traduction)."""
+        termes = [p for p in build.PAGES if re.fullmatch(r"ressources/glossaire/[^/]+/", p)]
+        self.assertGreaterEqual(len(termes), 50)
+        for p in termes:
+            lignes = re.search(r'<div class="lk-r">(.*?)</div><div class="cr-ch-f">', self.pages[p], re.S).group(1)
+            self.assertRegex(lignes, r'^(<div style="--i:\d+"><p lang="de">[^\n]*?</p><p lang="fr">[^\n]*?</p></div>)+$', p)
+
     def test_annonces_muettes_pendant_la_visite(self):
         self.assertIn('el.setAttribute("aria-live", "off")', self.sim)
         self.assertIn("if (this.muet) couperAnnonces(this.scene, true);", self.sim)

@@ -6,8 +6,9 @@ après les post-traitements qui posent les blocs concernés (cartes .fx-g de fon
   le script l'affiche, sauf en mouvement réduit, où rien ne bouge. Libellés lus dans src/data/contenus-v2.
 - Listes d'onglets (role="tablist") : nommées par le titre h2 de leur section (aria-labelledby).
 - Passages en allemand, anglais ou italien dont la langue est connue (WCAG 3.1.2) : lignes alignées de CHnell (langues
-  affichées dans la barre de recherche), cellules des tableaux de termes (data-m="Allemand"...), tuiles « quatre
-  langues » et terme du h1 du glossaire, avis et encart d'aide en anglais des écrans Corrext reproduits.
+  affichées dans la barre de recherche ; sur les pages du glossaire, le français de l'exemple de loi porte lang="fr"
+  explicite, pour rester français sur une page traduite), cellules des tableaux de termes (data-m="Allemand"...), tuiles
+  « quatre langues » et terme du h1 du glossaire, avis et encart d'aide en anglais des écrans Corrext reproduits.
 
 Aucun texte affiché n'est ajouté ici. Idempotent : repasser une page déjà traitée ne la change pas."""
 import html as H
@@ -63,9 +64,10 @@ def onglets_nommes(html):
     return ONGLETS.sub(nommer, html)
 
 
-def _lang(balise, code):
-    """Pose lang sur une balise ouvrante qui n'en a pas (le français, langue de la page, n'est pas répété)."""
-    if not code or code == "fr" or " lang=" in balise:
+def _lang(balise, code, francais=False):
+    """Pose lang sur une balise ouvrante qui n'en a pas (le français, langue de la page, n'est pas répété, sauf si
+    `francais` : un passage français voulu, qui doit le rester sur une page traduite)."""
+    if not code or (code == "fr" and not francais) or " lang=" in balise:
         return balise
     return balise[:-1] + f' lang="{code}">'
 
@@ -73,9 +75,10 @@ def _lang(balise, code):
 LIGNE =re.compile(r'(<div style="--i:\d+">)(<p>)(.*?</p>)(<p>)')
 
 
-def langues_chnell(html):
+def langues_chnell(html, francais=False):
     """Lignes alignées de CHnell : la 1re colonne dans la langue de gauche (lk-l1), la 2e dans celle de droite (lk-l2) ;
-    le terme recherché (lk-q) dans la langue de gauche."""
+    le terme recherché (lk-q) dans la langue de gauche. francais : le français d'une ligne porte lang="fr" explicite
+    (exemple de loi du glossaire)."""
     sortie, pos = [], 0
     for q in re.finditer(r'<div class="cr-ch-q">', html):
         if q.start() < pos:
@@ -93,7 +96,8 @@ def langues_chnell(html):
         fin = min([b for b in bornes if b >= 0] or [len(html)])
         bloc = html[q.start():fin]
         bloc = re.sub(r'<b class="lk-q">', lambda m: _lang(m.group(0), a), bloc, count=1)
-        bloc = LIGNE.sub(lambda m: m.group(1) + _lang(m.group(2), a) + m.group(3) + _lang(m.group(4), b), bloc)
+        bloc = LIGNE.sub(lambda m: m.group(1) + _lang(m.group(2), a, francais) + m.group(3) + _lang(m.group(4), b, francais),
+                         bloc)
         sortie.append(html[pos:q.start()] + bloc)
         pos = fin
     return "".join(sortie) + html[pos:]
@@ -129,13 +133,16 @@ def langues_interface(html):
 
 
 def traiter(html, page):
+    # exemple de loi du glossaire : le français y reste du français sur les pages traduites (allemand : l'exemple est
+    # allemand et français ; italien et anglais : le français est remplacé par la langue de la page, tâche 3.3)
+    glossaire = re.fullmatch(r"ressources/glossaire/[^/]+/", page) is not None
     debut = html.find('<main id="main">')
     if debut < 0:
         return html
     tete, corps = html[:debut], html[debut:]
     corps = boutons_pause(corps)
     corps = onglets_nommes(corps)
-    corps = langues_chnell(corps)
+    corps = langues_chnell(corps, glossaire)
     corps = langues_tableaux(corps)
     corps = langues_interface(corps)
     return tete + corps
