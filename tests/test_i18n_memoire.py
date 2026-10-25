@@ -11,7 +11,7 @@ from pathlib import Path
 import build
 from outils.i18n import memoire_v1 as M
 from outils.i18n import traduire as T
-from outils.i18n.table import LANGUES, STATUTS, Table
+from outils.i18n.table import LANGUES, STATUTS, Table, cle
 
 
 def doc(corps, titre="Titre", ld=None, lang="fr"):
@@ -131,9 +131,10 @@ class TestPrefill(unittest.TestCase):
         self.assertEqual(t.chercher("Traduction juridique", "a/"),
                          {"fr": "Traduction juridique", "trad": "Juristische Übersetzung", "statut": "v1",
                           "source": "V1 de/a-de/"})
-        # traduction identique au français : statut v1 aussi (validée par les traducteurs)
+        # traduction identique au français : statut v1 aussi (validée par les traducteurs), pour sa page seulement
         self.assertEqual(t.chercher("Pied", "a/")["statut"], "v1")
-        self.assertEqual(r["segments_v1"], len(t.entrees))
+        self.assertIsNone(t.chercher("Pied", "autre/"))
+        self.assertEqual(r["segments_v1"] + r["par_page_seulement"], len(t.entrees))
 
     def test_doublons_divergents_en_par_page(self):
         pa = doc("<p>Allemand</p><p>Contrat</p>")
@@ -202,9 +203,14 @@ class TestPrefill(unittest.TestCase):
                     {"fr/a/": {"de": "de/a-de/"}, "fr/b/": {"de": "de/b-de/"}, "fr/c/": {"de": "de/c-de/"}})
         t = self.table()
         r = M.prefill("de", neuron, t, pages={})
-        for texte, attendu in (("Allemand", "Deutsch"), ("Français", "Französisch"), ("OR", "OR"), ("CO", "CO")):
+        for texte, attendu in (("Allemand", "Deutsch"), ("Français", "Französisch")):
             with self.subTest(texte=texte):
                 self.assertEqual(t.chercher(texte, "b/")["trad"], attendu)
+        # « OR » et « CO » gardés tels quels : posés pour les pages a et c seulement (Ruling 19), pas pour la page permutée
+        for texte in ("OR", "CO"):
+            with self.subTest(texte=texte):
+                self.assertEqual(t.chercher(texte, "a/")["trad"], texte)
+                self.assertIsNone(t.chercher(texte, "b/"))
         self.assertEqual(t.chercher("Texte", "b/")["trad"], "Erlass")
         self.assertEqual(r["refus"]["permutation probable dans la page"]["unites"], 4)
         self.assertEqual(r["doublons_divergents"], [])
@@ -234,6 +240,31 @@ class TestPrefill(unittest.TestCase):
                          {"fr": "Projets", "trad": "Projekte", "statut": "v1", "source": "V1 de/b-de/"})
         self.assertEqual(r["doublons_divergents"], [])
         self.assertIn(M.CAUSES["identique_traduit"], r["refus"])
+
+    def test_identique_pose_pour_sa_page_seulement(self):
+        # Ruling 19 : un terme FR gardé tel quel par la V1 (colonne française d'un tableau) n'est accepté en français
+        # que sur sa page ; une marque (invariant) reste globale
+        fr = doc("<table><tr><td>Handelsregister</td><td>registre du commerce</td></tr></table><p>Corrext</p>")
+        neuron = v1(self.dossier / "v1", {"fr/a/": fr, "de/a-de/": fr.replace('lang="fr"', 'lang="de"')},
+                    {"fr/a/": {"de": "de/a-de/"}})
+        t = self.table()
+        r = M.prefill("de", neuron, t, pages={})
+        v2 = doc("<p>registre du commerce</p><p>Corrext</p>")
+        # (a) accepté sur sa page d'origine
+        self.assertEqual(t.chercher("registre du commerce", "a/")["statut"], "v1")
+        manquants_a = T.analyser(v2, "a/", "de", t, "apercu")["manquants"]
+        self.assertNotIn("registre du commerce", [m["fr"] for m in manquants_a])
+        # (b) manquant sur une autre page qui le contient comme texte à traduire
+        self.assertIsNone(t.chercher("registre du commerce", "b/"))
+        manquants_b = T.analyser(v2, "b/", "de", t, "apercu")["manquants"]
+        self.assertIn({"cle": cle("registre du commerce"), "fr": "registre du commerce", "statut": None,
+                       "raison": "absent"}, manquants_b)
+        # (c) un invariant identique reste global
+        self.assertEqual(t.chercher("Corrext", "b/")["trad"], "Corrext")
+        self.assertNotIn("Corrext", [m["fr"] for m in manquants_b])
+        for texte in ("registre du commerce", "Handelsregister", "Pied"):  # identiques, non invariants
+            self.assertIsNone(t.entrees[cle(texte)]["trad"], texte)
+        self.assertEqual(r["par_page_seulement"], sum(1 for e in t.entrees.values() if e["trad"] is None))
 
     def test_controles_refus_signales(self):
         # « ß » sans ß en français : refusé par Table.poser, compté dans le rapport, jamais contourné
@@ -282,8 +313,14 @@ class TestTablesProduites(unittest.TestCase):
                 self.assertNotIn(chr(0x2014), texte)
                 self.assertNotIn(chr(0x2013), texte)
                 for e in json.loads(texte).values():
-                    for v in [e] + list(e["par_page"].values()):
+                    if e["trad"] is None:  # entrée par page seulement (Ruling 19)
+                        self.assertEqual((e["statut"], e["source"]), (None, None))
+                        self.assertTrue(e["par_page"])
+                    for v in ([e] if e["trad"] is not None else []) + list(e["par_page"].values()):
                         self.assertIn(v["statut"], STATUTS)
+                        if v["trad"] == e["fr"]:
+                            # Ruling 19 : traduction identique par défaut seulement pour un invariant
+                            self.assertTrue(v is not e or Table.est_invariant(e["fr"]), e["fr"])
                         if "ß" in v["trad"]:
                             self.assertIn("ß", e["fr"], v["trad"])
 
@@ -306,7 +343,14 @@ class TestV1Reelle(unittest.TestCase):
                 self.assertLess(abs(r["couverture_texte"] - 84.6), 5, r["couverture_texte"])
                 # couverture utilisable (marqueurs compris) : au plus celle de l'audit
                 self.assertLessEqual(r["couverture_mots"], r["couverture_texte"])
-                self.assertTrue(all(e["statut"] == "v1" for e in t.entrees.values()))
+                for e in t.entrees.values():
+                    self.assertTrue(all(v["statut"] == "v1" for v in e["par_page"].values()))
+                    if e["trad"] is None:  # par page seulement (Ruling 19)
+                        self.assertTrue(e["par_page"])
+                    else:
+                        self.assertEqual(e["statut"], "v1")
+                        if " ".join(e["trad"].split()) == e["fr"]:
+                            self.assertTrue(Table.est_invariant(e["fr"]), e["fr"])
 
 
 if __name__ == "__main__":

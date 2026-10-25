@@ -47,6 +47,29 @@ class TestTable(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.de.poser("Allemand", "Deutsch", "v1", "V1", page="contact/")
 
+    def test_entree_par_page_seulement(self):
+        # Ruling 19 : un texte gardé tel quel par la V1 sur une page n'a pas de traduction par défaut
+        self.de.poser("registre du commerce", "registre du commerce", "v1", "V1 de/glossar/", page="ressources/glossaire/",
+                      sans_defaut=True)
+        self.assertEqual(self.de.chercher("registre du commerce", "ressources/glossaire/"),
+                         {"fr": "registre du commerce", "trad": "registre du commerce", "statut": "v1",
+                          "source": "V1 de/glossar/"})
+        self.assertIsNone(self.de.chercher("registre du commerce", "contact/"))
+        with self.assertRaises(KeyError):
+            self.de.t("registre du commerce")
+        self.de.enregistrer()
+        relue = Table("de", self.dossier)
+        self.assertIsNone(relue.chercher("registre du commerce", "contact/"))
+        self.assertEqual(relue.chercher("registre du commerce", "ressources/glossaire/")["statut"], "v1")
+        # une traduction par défaut posée ensuite garde la traduction de la page
+        self.de.poser("registre du commerce", "Handelsregister", "relu", "relecteur DE")
+        self.assertEqual(self.de.chercher("registre du commerce", "contact/")["trad"], "Handelsregister")
+        self.assertEqual(self.de.chercher("registre du commerce", "ressources/glossaire/")["trad"], "registre du commerce")
+
+    def test_sans_defaut_exige_une_page(self):
+        with self.assertRaises(ValueError):
+            self.de.poser("registre du commerce", "registre du commerce", "v1", "V1", sans_defaut=True)
+
     def test_chercher_absent(self):
         self.assertIsNone(self.de.chercher("Inconnu", "contact/"))
 

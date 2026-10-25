@@ -4,6 +4,9 @@ Une entrée par texte français, retrouvée par sa clé (empreinte du texte aux 
     "3f2a9c0d1e2b4a5f": {"fr": "Demander une démo", "trad": "Demo anfragen", "statut": "v1",
                          "source": "V1 de/kontakt/", "par_page": {}}
 « par_page » porte les traductions propres à une page (même texte français, autre rendu) : même format sans « fr ».
+Une entrée « par page seulement » (Ruling 19) n'a pas de traduction par défaut : « trad », « statut » et « source » y
+valent null, et chercher ne rend rien hors de ses pages. C'est le cas d'un texte que la V1 garde en français sur une
+page (terme d'une colonne française de tableau) : il n'est accepté tel quel que là.
 
 Statuts, du moins au plus sûr : mt (sortie brute de LexMachina), adapte (adaptée, non relue), v1 (validée par les
 traducteurs en V1), invariant (jamais traduit), relu (relue par un traducteur expert). ACCEPTES dit lesquels une page
@@ -48,18 +51,22 @@ class Table:
 
     def chercher(self, texte_fr, page):
         """Traduction de la page (par_page[page]) d'abord, sinon celle par défaut de l'entrée : {fr, trad, statut,
-        source}, une copie ; None si le texte n'est pas dans la table."""
+        source}, une copie ; None si le texte n'est pas dans la table, ou si l'entrée n'a que des traductions de page
+        et aucune pour cette page."""
         entree = self.entrees.get(cle(texte_fr))
         if entree is None:
             return None
         propre = entree["par_page"].get(page)
         if propre is not None:
             return {"fr": entree["fr"], **propre}
+        if entree["trad"] is None:
+            return None
         return {k: entree[k] for k in ("fr", "trad", "statut", "source")}
 
-    def poser(self, texte_fr, trad, statut, source, page=None):
+    def poser(self, texte_fr, trad, statut, source, page=None, sans_defaut=False):
         """Enregistre la traduction par défaut du texte, ou celle d'une page (la traduction par défaut doit alors
-        exister déjà). La table n'est écrite sur disque que par enregistrer()."""
+        exister déjà, sauf sans_defaut : l'entrée est alors créée « par page seulement », sans traduction par défaut).
+        La table n'est écrite sur disque que par enregistrer()."""
         if statut not in STATUTS:
             raise ValueError(f"statut inconnu : « {statut} » (attendu : {', '.join(STATUTS)})")
         problemes = controles.tirets(trad)
@@ -69,7 +76,11 @@ class Table:
             raise ValueError("; ".join(f"{p['regle']} : {p['detail']} ({p['extrait']})" for p in problemes))
         fr, k = " ".join(texte_fr.split()), cle(texte_fr)
         entree = self.entrees.get(k)
+        if sans_defaut and page is None:
+            raise ValueError("sans_defaut : une page est nécessaire")
         if page is not None:
+            if entree is None and sans_defaut:
+                entree = self.entrees[k] = {"fr": fr, "trad": None, "statut": None, "source": None, "par_page": {}}
             if entree is None:
                 raise ValueError(f"« {fr[:50]} » : poser d'abord la traduction par défaut, puis celle de la page")
             entree["par_page"][page] = {"trad": trad, "statut": statut, "source": source}
@@ -80,7 +91,7 @@ class Table:
     def t(self, texte_fr):
         """Traduction par défaut d'un libellé fixe ; KeyError si la table ne l'a pas."""
         entree = self.entrees.get(cle(texte_fr))
-        if entree is None:
+        if entree is None or entree["trad"] is None:
             raise KeyError(f"{self.langue} : pas de traduction pour « {' '.join(texte_fr.split())[:60]} »")
         return entree["trad"]
 

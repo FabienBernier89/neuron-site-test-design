@@ -30,6 +30,9 @@ Pré-remplissage (prefill), sur les paires de toutes les pages :
   écartée, ses pages prennent la traduction ;
 - deux traductions différentes du même texte dans une même page ne se représentent pas (une seule traduction par
   page) : le texte n'est alors posé nulle part ;
+- une traduction identique au français (hors invariant) n'est jamais la traduction par défaut (Ruling 19) : l'entrée
+  est « par page seulement » (Table.poser, sans_defaut), le texte n'est accepté tel quel que sur les pages où la V1
+  l'a gardé ; ailleurs il reste à traduire ;
 - une entrée relue n'est jamais écrasée ; une traduction refusée par les contrôles de Table.poser (tirets, ß) n'est
   pas posée. Chaque refus est compté dans le rapport.
 
@@ -312,14 +315,15 @@ def _retirer_v1(table):
     for k in list(table.entrees):
         e = table.entrees[k]
         e["par_page"] = {p: v for p, v in e["par_page"].items() if not de_v1(v)}
-        if de_v1(e) and not e["par_page"]:
+        if (de_v1(e) or e["trad"] is None) and not e["par_page"]:
             del table.entrees[k]
 
 
 def prefill(langue, neuron, table, pages=None):
     """Pré-remplit la table de la langue depuis la V1 (dossier neuron, lu en lecture seule) et renvoie le rapport :
     {"pages_alignees", "pages_non_alignees": [{"page", "cause"}], "segments_v1" (textes FR posés par défaut),
-     "par_page_v1", "doublons_divergents": [{"fr", "trads", "pages"}], "couverture_mots" (main), "couverture_page",
+     "par_page_v1", "par_page_seulement" (textes identiques au français posés pour leurs pages seulement, Ruling 19),
+     "doublons_divergents": [{"fr", "trads", "pages"}], "couverture_mots" (main), "couverture_page",
      "couverture_texte" (main, balises ignorées : définition de l'audit),
      "refus": {cause: {"unites", "textes", "mots"}}, "refus_non_rattrapes": {"textes", "mots"}, "404_non_posee",
      "i18n_hors_pages"}.
@@ -358,7 +362,7 @@ def prefill(langue, neuron, table, pages=None):
         else:
             occurrences.setdefault(fr, []).append((tr, page, adresse))
 
-    doublons, poses, par_page = [], 0, 0
+    doublons, poses, par_page, seulement = [], 0, 0, 0
     for fr, occ in occurrences.items():
         entree = table.entrees.get(cle(fr))
         if entree and entree["statut"] == "relu":
@@ -393,6 +397,17 @@ def prefill(langue, neuron, table, pages=None):
             _compter(refus, CAUSES["meme_page"], fr, distincts)
             continue
         defaut = next(iter(valides))
+        if _normal(defaut) == fr and not T._invariant(fr, langue):
+            # Ruling 19 : gardé en français par la V1 (terme d'une colonne française de tableau) ; accepté tel quel sur
+            # ses pages seulement, jamais par défaut : ailleurs, le même texte reste à traduire
+            for page, trads in par_page_fr.items():
+                (n, adresse), = trads.items()
+                propre = table.entrees.get(cle(fr), {}).get("par_page", {}).get(page)
+                if not (propre and propre["statut"] == "relu"):
+                    table.poser(fr, valides[n], STATUT, f"V1 {adresse}", page=page, sans_defaut=True)
+                    par_page += 1
+            seulement += 1
+            continue
         table.poser(fr, valides[defaut], STATUT, f"V1 {next(a for t, _, a in occ if _blancs(t) == defaut)}")
         poses += 1
         for page, trads in par_page_fr.items():
@@ -405,7 +420,8 @@ def prefill(langue, neuron, table, pages=None):
         if len(valides) > 1:
             doublons.append({"fr": fr, "trads": list(valides), "pages": list(dict.fromkeys(p for _, p, _ in occ))})
 
-    poses_fr = {e["fr"] for e in table.entrees.values() if e["statut"] == STATUT}
+    poses_fr = {e["fr"] for e in table.entrees.values()
+                if e["statut"] == STATUT or any(v["statut"] == STATUT for v in e["par_page"].values())}
     non_rattrapes = {_normal(t) for c, t in distincts if c != CAUSES["relu"]} - poses_fr
     i18n = neuron / "src/i18n" / f"{langue}.json"
     hors_pages = [k for k in (json.loads(i18n.read_text(encoding="utf-8")) if i18n.is_file() else {})
@@ -413,7 +429,7 @@ def prefill(langue, neuron, table, pages=None):
     if pages is None:
         pages = T.pages_assemblees(langue, "apercu")
     return {"langue": langue, "pages_alignees": alignees, "pages_non_alignees": non_alignees, "segments_v1": poses,
-            "par_page_v1": par_page, "doublons_divergents": doublons,
+            "par_page_v1": par_page, "par_page_seulement": seulement, "doublons_divergents": doublons,
             "couverture_mots": couverture(table, pages), "couverture_page": couverture(table, pages, "page"),
             "couverture_texte": couverture(table, pages, balises=False),
             "refus": dict(sorted(refus.items())),

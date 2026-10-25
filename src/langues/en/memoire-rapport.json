@@ -2,8 +2,9 @@
  "langue": "en",
  "pages_alignees": 156,
  "pages_non_alignees": [],
- "segments_v1": 7554,
- "par_page_v1": 27,
+ "segments_v1": 6820,
+ "par_page_v1": 1453,
+ "par_page_seulement": 734,
  "doublons_divergents": [
   {
    "fr": "BILANZ, classement des entreprises les plus innovantes de Suisse 2024 (13e rang)",
@@ -228,8 +229,8 @@
    ]
   }
  ],
- "couverture_mots": 77.1,
- "couverture_page": 78.5,
+ "couverture_mots": 76.7,
+ "couverture_page": 78.2,
  "couverture_texte": 82.6,
  "refus": {
   "divergence dans une même page": {

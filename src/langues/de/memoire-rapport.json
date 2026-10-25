@@ -2,8 +2,9 @@
  "langue": "de",
  "pages_alignees": 156,
  "pages_non_alignees": [],
- "segments_v1": 7538,
- "par_page_v1": 34,
+ "segments_v1": 6736,
+ "par_page_v1": 1350,
+ "par_page_seulement": 802,
  "doublons_divergents": [
   {
    "fr": "Traduction assermentée et légalisée, via un réseau de traducteurs experts, pour les dossiers officiels.",
@@ -309,8 +310,8 @@
    ]
   }
  ],
- "couverture_mots": 77.0,
- "couverture_page": 78.4,
+ "couverture_mots": 76.7,
+ "couverture_page": 78.0,
  "couverture_texte": 82.6,
  "refus": {
   "divergence dans une même page": {
