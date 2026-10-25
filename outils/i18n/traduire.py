@@ -34,6 +34,7 @@ MODES = ("apercu", "production")
 RELUS = {"v1", "invariant", "relu"}  # statuts qui ne demandent pas le bandeau de l'aperçu
 IDENTIQUES = {"invariant", "v1"}      # statuts d'une traduction identique au français admise par l'exhaustivité
 LIBELLE_BANDEAU = "Version de travail, traduction non relue"
+CONTEXTES = "contextes.json"  # contextes V1 des textes à traduire, par langue (memoire_v1.recomposer, commande memoire)
 BANDEAU = '<div class="bandeau-travail" role="note">{}</div>\n'
 # Pages dont les scripts inline n'écrivent que des libellés anglais de l'application (inventaire de la tâche 2.1,
 # tests/test_i18n_segments.py, SCRIPTS_CONNUS) : elles ne sont pas bloquées par la raison « scripts »
@@ -209,6 +210,20 @@ def etat(langue, mode):
     pages : chaque page de build.PAGES, plus « 404 » et « llms » (libellés fixes des llms.txt) ; mots : mots français
     des textes manquants. segments : textes français distincts du site par statut (« absent » : sans entrée)."""
     return etat_detaille(langue, mode)[0]
+
+
+def fichier_a_traduire(a_traduire, contextes):
+    """Contenu de src/langues/<langue>/a_traduire.json : {clé: {"fr": texte FR, "contexte": {...}}}, « contexte »
+    seulement quand la mémoire V1 en a un (memoire_v1.recomposer, fichier contextes.json : morceau d'un texte V1 plus
+    long, correction V2, variante de balisage refusée, recomposition non posée) : {nature, page_v1, fr_complet,
+    trad_complete}, pour l'adaptation. a_traduire : {clé: texte FR} (etat_detaille) ; contextes : {clé: {"fr",
+    "contexte"}}."""
+    sortie = {}
+    for k in sorted(a_traduire):
+        sortie[k] = {"fr": a_traduire[k]}
+        if k in contextes:
+            sortie[k]["contexte"] = contextes[k]["contexte"]
+    return sortie
 
 
 def verifier_libelles(table, mode):

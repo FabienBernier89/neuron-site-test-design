@@ -230,7 +230,7 @@
   }
  ],
  "couverture_mots": 76.7,
- "couverture_page": 78.2,
+ "couverture_page": 78.3,
  "couverture_texte": 82.6,
  "refus": {
   "cible d'un lien différente": {
@@ -254,9 +254,9 @@
    "mots": 1
   },
   "nomme une source dont la V1 a changé le lien sur la page": {
-   "unites": 4,
-   "textes": 4,
-   "mots": 57
+   "unites": 1,
+   "textes": 1,
+   "mots": 12
   },
   "voisin d'un écart, même signature": {
    "unites": 2,
@@ -274,5 +274,22 @@
   "mots": 714
  },
  "404_non_posee": 18,
- "i18n_hors_pages": 105
+ "i18n_hors_pages": 105,
+ "recomposition": {
+  "recomposes": 5,
+  "variantes_recalees": 17,
+  "variantes_refusees": 1081,
+  "morceaux": 665,
+  "corrections": 69,
+  "contextes_par_nature": {
+   "correction V2": 69,
+   "morceau": 665,
+   "recomposition": 1,
+   "variante de balisage": 1081
+  },
+  "refus": {
+   "variante : recalage non sûr (marqueurs différents) ou identique au français": 1081
+  },
+  "contextes": 1816
+ }
 }

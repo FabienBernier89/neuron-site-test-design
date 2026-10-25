@@ -17,7 +17,7 @@ from tests import support
 from outils import llms
 from outils.i18n import controles, empreintes, traduire as T
 from outils.i18n import segments as S
-from outils.i18n.table import Table
+from outils.i18n.table import Table, cle
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures" / "i18n"
 PAGE = (FIXTURES / "page-fr-assemblee.html").read_text(encoding="utf-8")
@@ -418,6 +418,13 @@ class TestEtat(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             dossier = Path(tmp) / "langues"
             sortie = io.StringIO()
+            # contexte V1 d'un texte à traduire (commande memoire, tâche 3.2) : repris dans a_traduire.json
+            contexte = {"nature": "morceau", "page_v1": "de/kontakt/", "fr_complet": "Demander une démonstration ici",
+                        "trad_complete": "Hier eine Demo anfragen"}
+            (dossier / "de").mkdir(parents=True)
+            (dossier / "de" / T.CONTEXTES).write_text(json.dumps(
+                {cle("Demander une démonstration"): {"fr": "Demander une démonstration", "contexte": contexte}}),
+                encoding="utf-8")
             with mock.patch.object(build, "PAGES", ["contact/"]), mock.patch.object(build, "DOSSIER_LANGUES", dossier), \
                     contextlib.redirect_stdout(sortie):
                 self.assertEqual(commande.main(["etat", "de", "--production"]), 0)
@@ -426,8 +433,11 @@ class TestEtat(unittest.TestCase):
             self.assertIn("contact/ : ", texte)
             self.assertIn("Mots à traduire : ", texte)
             a_traduire = json.loads((dossier / "de/a_traduire.json").read_text(encoding="utf-8"))
-            self.assertIn("Demander une démonstration", a_traduire.values())
-            self.assertIn(llms.SOURCE, a_traduire.values())
+            textes = [v["fr"] for v in a_traduire.values()]
+            self.assertIn("Demander une démonstration", textes)
+            self.assertIn(llms.SOURCE, textes)
+            self.assertEqual(a_traduire[cle("Demander une démonstration")]["contexte"], contexte)
+            self.assertNotIn("contexte", a_traduire[cle(llms.SOURCE)])
             self.assertNotIn(chr(0x2014), texte)
 
 

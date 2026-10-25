@@ -69,6 +69,13 @@
   "source": "V1 it/lingue-e-formati/",
   "par_page": {}
  },
+ "005b51fe8f453f8a": {
+  "fr": "Roumain{1}Romanian{/1}",
+  "trad": "Rumeno{1}Romanian{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
+  "par_page": {}
+ },
  "005f759cd7533a0b": {
   "fr": "{1}Nombre de fichiers{/1}",
   "trad": "{1}Numero di file{/1}",
@@ -851,6 +858,13 @@
   "trad": "{1}25 agosto 2023{/1}{2}Premi e riconoscimenti{/2}",
   "statut": "v1",
   "source": "V1 it/risorse/blog/notizie/",
+  "par_page": {}
+ },
+ "03d7eff106ed4289": {
+  "fr": "Hongrois{1}Hungarian{/1}",
+  "trad": "Ungherese{1}Hungarian{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "03ed087fe12829df": {
@@ -2419,6 +2433,13 @@
   "source": "V1 it/aiuto/admin-organizzazione/",
   "par_page": {}
  },
+ "0a8a32e781028e50": {
+  "fr": "{1}{2}Corrext, le poste de commande{/2}{3}Projets, devis, ressources et droits dans un seul environnement suisse{/3}{/1} {4}{5}LexMachina{/5}{6}Le moteur entraîné sur le droit et la finance suisses{/6}{/4} {7}{8}Sécurité et souveraineté{/8}{9}Où vos données sont stockées, traitées et par quel moteur{/9}{/7} {10}{11}API et on-premises{/11}{12}Intégration à vos DMS, intranets et workflows{/12}{/10}",
+  "trad": "{1}{2}Corrext, la cabina di regia{/2}{3}Progetti, offerte, risorse e diritti d'accesso in un unico ambiente svizzero{/3}{/1} {4}{5}LexMachina{/5}{6}Il motore addestrato sul diritto e sulla finanza svizzeri{/6}{/4} {7}{8}Sicurezza e sovranità dei dati{/8}{9}Dove i vostri dati sono archiviati e trattati, e da quale motore{/9}{/7} {10}{11}API e on-premises{/11}{12}Integrazione con i vostri DMS, intranet e flussi di lavoro{/12}{/10}",
+  "statut": "adapte",
+  "source": "recomposition V1 it/",
+  "par_page": {}
+ },
  "0a8f431ee821dae1": {
   "fr": "L'écran de connexion ne propose pas de création de compte : l'ouverture d'un accès passe par votre administrateur.",
   "trad": "La schermata di accesso non permette di creare un account: è il vostro amministratore ad aprire l'accesso.",
@@ -2824,6 +2845,13 @@
   "trad": "Testo inglese riprodotto così come appare in Corrext, nella fase Quotes di Gestione dei progetti. Le diciture dell'applicazione restano in inglese; il testo italiano qui sopra è una spiegazione, non una versione ufficiale.",
   "statut": "v1",
   "source": "V1 it/livelli-di-qualita/",
+  "par_page": {}
+ },
+ "0c266debaf5b8b79": {
+  "fr": "Finnois{1}Finnish{/1}",
+  "trad": "Finlandese{1}Finnish{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "0c3030590b2549aa": {
@@ -4097,6 +4125,13 @@
   "trad": "Neur.on annuncia la partecipazione di Paula Reichenberg a un panel sull’uso redditizio dell’IA, il 12 marzo 2025, alla Geneva International Legal Week.",
   "statut": "v1",
   "source": "V1 it/risorse/blog/gilw25-ginevra-panel-ia/",
+  "par_page": {}
+ },
+ "10f3a37301566ac8": {
+  "fr": "Arabe{1}Arabic{/1}",
+  "trad": "Arabo{1}Arabic{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "10f6a80128db9db1": {
@@ -6477,6 +6512,13 @@
    }
   }
  },
+ "1b6d6f429c2dc1b0": {
+  "fr": "2020 {1}7 actualités{/1}",
+  "trad": "2020 {1}7 notizie{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/risorse/blog/notizie/",
+  "par_page": {}
+ },
  "1b739011d6cdce24": {
   "fr": "Comment commander une traduction certifiée d'extrait ?",
   "trad": "Come si ordina la traduzione certificata di un estratto?",
@@ -7362,6 +7404,13 @@
   "source": "V1 it/risorse/glossario/steuerhinterziehung/",
   "par_page": {}
  },
+ "1efb961b408b7af9": {
+  "fr": "Estonien{1}Estonian{/1}",
+  "trad": "Estone{1}Estonian{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
+  "par_page": {}
+ },
  "1eff614abeab8c0e": {
   "fr": "Les termes que je fixe sont-ils respectés ?",
   "trad": "I termini che fisso vengono rispettati?",
@@ -7979,6 +8028,13 @@
   "source": "V1 it/aiuto/primi-passi/",
   "par_page": {}
  },
+ "21b35826f17bd588": {
+  "fr": "{1}1{/1}Traduction machine",
+  "trad": "{1}1{/1}Traduzione automatica",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/livelli-di-qualita/",
+  "par_page": {}
+ },
  "21b3de721489d2e6": {
   "fr": "Droits d'accès",
   "trad": "Diritti di accesso",
@@ -8516,6 +8572,13 @@
   "trad": "Ai confronti",
   "statut": "v1",
   "source": "V1 it/",
+  "par_page": {}
+ },
+ "2411848ad4c7d05e": {
+  "fr": "{1}{2}{/2} Oui / natif{/1}{3}{4}{/4} Partiel / variable{/3}{5}{6}{/6} Non couvert{/5}",
+  "trad": "{1}{2}{/2} Sì / nativo{/1}{3}{4}{/4} Parziale / variabile{/3}{5}{6}{/6} Non coperto{/5}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/",
   "par_page": {}
  },
  "24133e20e1782a7f": {
@@ -9727,6 +9790,13 @@
   "trad": "Durata stimata della revisione",
   "statut": "v1",
   "source": "V1 it/corrext/progetti-di-traduzione/",
+  "par_page": {}
+ },
+ "28c574622db78545": {
+  "fr": "2022 {1}10 actualités{/1}",
+  "trad": "2022 {1}10 notizie{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/risorse/blog/notizie/",
   "par_page": {}
  },
  "28cbee345c14dc1e": {
@@ -10975,6 +11045,13 @@
   "source": "V1 it/corrext/progetti-di-traduzione/",
   "par_page": {}
  },
+ "2e5c4ef72e16f71c": {
+  "fr": "Fonction{1}*{/1}",
+  "trad": "Funzione{1}*{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/contatto/",
+  "par_page": {}
+ },
  "2e66cd87ce09683d": {
   "fr": "Allemand {1}German{/1} {2}Natif{/2}",
   "trad": "Tedesco {1}German{/1} {2}Nativa{/2}",
@@ -11018,6 +11095,789 @@
     "trad": "prescrizione",
     "statut": "v1",
     "source": "V1 it/traduzione/contratti/"
+   }
+  }
+ },
+ "2e9ada0c7f102192": {
+  "fr": "{1}Blog{/1} {2}Guides{/2} {3}Études et benchmarks{/3}",
+  "trad": null,
+  "statut": null,
+  "source": null,
+  "par_page": {
+   "": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/"
+   },
+   "a-propos/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/chi-siamo/"
+   },
+   "a-propos/presse/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/chi-siamo/stampa/"
+   },
+   "aide/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/"
+   },
+   "aide/admin-memoires/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/admin-memorie/"
+   },
+   "aide/admin-moteurs/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/admin-motori/"
+   },
+   "aide/admin-organisation/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/admin-organizzazione/"
+   },
+   "aide/chnell/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/chnell/"
+   },
+   "aide/decouvrir-corrext/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/scoprire-corrext/"
+   },
+   "aide/depannage/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/risoluzione-problemi/"
+   },
+   "aide/editeur-de-relecture/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/revisione/"
+   },
+   "aide/extraits-registre/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/estratto-registro-di-commercio/"
+   },
+   "aide/formats-et-langues/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/formati-e-lingue/"
+   },
+   "aide/gestion-de-projet/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/progetti-di-traduzione/"
+   },
+   "aide/premiers-pas/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/primi-passi/"
+   },
+   "aide/securite-et-confidentialite/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/sicurezza-e-riservatezza/"
+   },
+   "aide/traduction-texte-et-document/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/aiuto/traduzione-documenti/"
+   },
+   "comparatif/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/confronto/"
+   },
+   "comparatif/agence-ou-plateforme/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/confronto/agenzia-o-piattaforma/"
+   },
+   "comparatif/chatgpt-traduction-juridique/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/confronto/chatgpt-traduzione-giuridica/"
+   },
+   "comparatif/deepl-traduction-juridique/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/confronto/deepl-traduzione-giuridica/"
+   },
+   "corrext/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/corrext/"
+   },
+   "corrext/api-on-premises/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/corrext/api-on-premises/"
+   },
+   "corrext/chnell/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/corrext/chnell/"
+   },
+   "corrext/editeur-de-relecture/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/corrext/revisione/"
+   },
+   "corrext/extraits-registre-commerce/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/corrext/estratto-registro-di-commercio/"
+   },
+   "corrext/gestion-de-projet/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/corrext/progetti-di-traduzione/"
+   },
+   "corrext/traduction-texte-et-document/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/corrext/traduzione-documenti/"
+   },
+   "langues-et-formats/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/lingue-e-formati/"
+   },
+   "lexmachina/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/lexmachina/"
+   },
+   "mentions-legales/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/note-legali/"
+   },
+   "niveaux-de-qualite/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/livelli-di-qualita/"
+   },
+   "protection-des-donnees/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/protezione-dei-dati/"
+   },
+   "ressources/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/"
+   },
+   "ressources/blog/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/"
+   },
+   "ressources/blog/actualites/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/notizie/"
+   },
+   "ressources/blog/ai-act-grand-challenge-universite-saint-gall/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/ai-act-grand-challenge-san-gallo/"
+   },
+   "ressources/blog/comprendre-devis-traduction-juridique/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/preventivo-traduzione-giuridica/"
+   },
+   "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/trust-valley-2023-sovranita-dati/"
+   },
+   "ressources/blog/ejustice-40-ans-kamingesprach-neuron/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/ejustice-40-anni-kamingespraech/"
+   },
+   "ressources/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/cantone-friburgo-sostegno/"
+   },
+   "ressources/blog/kilian-marty-rejoint-conseil-consultatif-neuron/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/kilian-marty-consiglio-consultivo/"
+   },
+   "ressources/blog/legaltech-avocats-allies-ou-concurrents/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/legaltech-e-avvocati/"
+   },
+   "ressources/blog/legaltechtalk-2024-londres-enseignements/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/legaltechtalk-2024-londra/"
+   },
+   "ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/legaltechtalk-2024-modello-operativo/"
+   },
+   "ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/ai-days-2025-ginevra/"
+   },
+   "ressources/blog/neuron-amld-epfl-2024-lausanne/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/amld-epfl-2024-losanna/"
+   },
+   "ressources/blog/neuron-cohorte-kickstart-innovation-2024/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/kickstart-innovation-2024/"
+   },
+   "ressources/blog/neuron-finaliste-early-stage-swiss-fintech-awards-2024/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/swiss-fintech-awards-2024-early-stage/"
+   },
+   "ressources/blog/neuron-gen-ai-summit-2024-lausanne/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/gen-ai-summit-2024-losanna/"
+   },
+   "ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/swiss-fintech-awards-2024-finalisti/"
+   },
+   "ressources/blog/neuron-swisscom-collaboration-kickstart-2024/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/collaborazione-swisscom-2024/"
+   },
+   "ressources/blog/neuron-tltf-summit-2024-miami-startups-showcase/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/tltf-summit-2024-miami/"
+   },
+   "ressources/blog/neuron-top-10-startups-fintech-suisses-2024/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/swiss-fintech-awards-2024-top-10/"
+   },
+   "ressources/blog/orane-laeri-parcours-orientation-ch/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/orane-laeri-percorso/"
+   },
+   "ressources/blog/panel-ai-in-business-zurich-2024/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/ai-in-business-zurigo-2024/"
+   },
+   "ressources/blog/paula-reichenberg-conference-mids-geneve-2023/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/conferenza-mids-ginevra-2023/"
+   },
+   "ressources/blog/paula-reichenberg-conseil-strategique-hes-so/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/consiglio-strategico-hes-so/"
+   },
+   "ressources/blog/paula-reichenberg-digital-shaper-2023-bilanz/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/digital-shaper-2023-bilanz/"
+   },
+   "ressources/blog/paula-reichenberg-female-founder-project-ubs-2025/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/female-founder-project-ubs-2025/"
+   },
+   "ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/weblaw-forum-2024-giuria/"
+   },
+   "ressources/blog/paula-reichenberg-panel-gilw25-geneve-ia/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/gilw25-ginevra-panel-ia/"
+   },
+   "ressources/blog/paula-reichenberg-pitch-epfl-investor-day-2024/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/epfl-investor-day-2024/"
+   },
+   "ressources/blog/paula-reichenberg-pwc-legaltech-fund-londres/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/pwc-legaltech-fund-londra/"
+   },
+   "ressources/blog/paula-reichenberg-table-ronde-bdu-2022/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/conferenza-bdue-2022/"
+   },
+   "ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/registro-di-commercio-svitto/"
+   },
+   "ressources/blog/secret-professionnel-outils-traduction/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/segreto-professionale-traduzione-ia/"
+   },
+   "ressources/blog/table-ronde-ia-juridique-slta-zurich-2024/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/tavola-rotonda-slta-zurigo-2024/"
+   },
+   "ressources/blog/traduire-contrat-droit-suisse/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/tradurre-contratto-diritto-svizzero/"
+   },
+   "ressources/blog/trust-valley-day-2023-risques-cyber-pme/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/blog/trust-valley-day-2023-rischi-cyber/"
+   },
+   "ressources/etudes/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/studi/"
+   },
+   "ressources/etudes/evaluer-moteur-traduction-juridique/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/studi/valutare-motore-traduzione/"
+   },
+   "ressources/glossaire/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/"
+   },
+   "ressources/glossaire/abtretung/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/abtretung/"
+   },
+   "ressources/glossaire/aktiengesellschaft/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/aktiengesellschaft/"
+   },
+   "ressources/glossaire/aktienkapital/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/aktienkapital/"
+   },
+   "ressources/glossaire/arbeitsvertrag/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/arbeitsvertrag/"
+   },
+   "ressources/glossaire/arrest/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/arrest/"
+   },
+   "ressources/glossaire/bankgeheimnis/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/bankgeheimnis/"
+   },
+   "ressources/glossaire/beschwerde/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/beschwerde/"
+   },
+   "ressources/glossaire/betreibung/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/betreibung/"
+   },
+   "ressources/glossaire/buergschaft/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/buergschaft/"
+   },
+   "ressources/glossaire/bundesgericht/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/bundesgericht/"
+   },
+   "ressources/glossaire/fristlose-kuendigung/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/fristlose-kuendigung/"
+   },
+   "ressources/glossaire/geldwaescherei/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/geldwaescherei/"
+   },
+   "ressources/glossaire/generalversammlung/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/generalversammlung/"
+   },
+   "ressources/glossaire/gewaehrleistung/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/gewaehrleistung/"
+   },
+   "ressources/glossaire/gmbh/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/gmbh/"
+   },
+   "ressources/glossaire/grundbuch/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/grundbuch/"
+   },
+   "ressources/glossaire/handelsregister/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/handelsregister/"
+   },
+   "ressources/glossaire/konkurrenzverbot/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/konkurrenzverbot/"
+   },
+   "ressources/glossaire/konkurs/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/konkurs/"
+   },
+   "ressources/glossaire/konventionalstrafe/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/konventionalstrafe/"
+   },
+   "ressources/glossaire/kuendigung/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/kuendigung/"
+   },
+   "ressources/glossaire/maengelruege/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/maengelruege/"
+   },
+   "ressources/glossaire/mehrwertsteuer/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/mehrwertsteuer/"
+   },
+   "ressources/glossaire/mietvertrag/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/mietvertrag/"
+   },
+   "ressources/glossaire/nachlassstundung/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/nachlassstundung/"
+   },
+   "ressources/glossaire/personendaten/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/personendaten/"
+   },
+   "ressources/glossaire/pflichtteil/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/pflichtteil/"
+   },
+   "ressources/glossaire/prospekt/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/prospekt/"
+   },
+   "ressources/glossaire/quellensteuer/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/quellensteuer/"
+   },
+   "ressources/glossaire/rechtsoeffnung/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/rechtsoeffnung/"
+   },
+   "ressources/glossaire/rechtsvorschlag/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/rechtsvorschlag/"
+   },
+   "ressources/glossaire/revisionsstelle/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/revisionsstelle/"
+   },
+   "ressources/glossaire/schadenersatz/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/schadenersatz/"
+   },
+   "ressources/glossaire/schiedsgericht/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/schiedsgericht/"
+   },
+   "ressources/glossaire/schuldnerverzug/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/schuldnerverzug/"
+   },
+   "ressources/glossaire/sorgfaltspflichten/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/sorgfaltspflichten/"
+   },
+   "ressources/glossaire/statuten/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/statuten/"
+   },
+   "ressources/glossaire/steuerhinterziehung/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/steuerhinterziehung/"
+   },
+   "ressources/glossaire/strafbefehl/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/strafbefehl/"
+   },
+   "ressources/glossaire/ueberstunden/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/ueberstunden/"
+   },
+   "ressources/glossaire/untersuchungshaft/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/untersuchungshaft/"
+   },
+   "ressources/glossaire/verfuegung/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/verfuegung/"
+   },
+   "ressources/glossaire/verjaehrung/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/verjaehrung/"
+   },
+   "ressources/glossaire/verrechnungssteuer/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/verrechnungssteuer/"
+   },
+   "ressources/glossaire/versicherungsvertrag/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/versicherungsvertrag/"
+   },
+   "ressources/glossaire/verwaltungsrat/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/verwaltungsrat/"
+   },
+   "ressources/glossaire/verzugszins/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/verzugszins/"
+   },
+   "ressources/glossaire/vollmacht/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/vollmacht/"
+   },
+   "ressources/glossaire/vorsorgliche-massnahmen/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/vorsorgliche-massnahmen/"
+   },
+   "ressources/glossaire/willensvollstrecker/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/willensvollstrecker/"
+   },
+   "ressources/glossaire/wirtschaftlich-berechtigte-person/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/wirtschaftlich-berechtigte-person/"
+   },
+   "ressources/glossaire/zahlungsbefehl/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/glossario/zahlungsbefehl/"
+   },
+   "ressources/guides/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/guide/"
+   },
+   "ressources/guides/organiser-traduction-cabinet/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/guide/organizzare-traduzioni-studio-legale/"
+   },
+   "ressources/guides/rapport-annuel-multilingue/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/risorse/guide/rapporto-annuale-multilingue/"
+   },
+   "securite-souverainete/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/sicurezza/"
+   },
+   "solutions/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/soluzioni/"
+   },
+   "solutions/autorites-administration/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/soluzioni/enti-pubblici/"
+   },
+   "solutions/banques-finance/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/soluzioni/banche/"
+   },
+   "solutions/cabinets-avocats/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/soluzioni/studi-legali/"
+   },
+   "solutions/directions-juridiques/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/soluzioni/uffici-legali/"
+   },
+   "solutions/editeurs-legaltech/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/soluzioni/legaltech-editori/"
+   },
+   "solutions/fiduciaires-conseil/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/soluzioni/fiduciarie/"
+   },
+   "traduction/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/"
+   },
+   "traduction/allemand-anglais/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/tedesco-inglese/"
+   },
+   "traduction/allemand-francais/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/tedesco-francese/"
+   },
+   "traduction/anglais-allemand/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/inglese-tedesco/"
+   },
+   "traduction/assurance/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/assicurazioni/"
+   },
+   "traduction/banque-finance/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/banca-finanza/"
+   },
+   "traduction/compliance-finma/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/compliance-finma/"
+   },
+   "traduction/contentieux-arbitrage/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/contenzioso-arbitrato/"
+   },
+   "traduction/contrats/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/contratti/"
+   },
+   "traduction/droit-des-societes/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/diritto-societario/"
+   },
+   "traduction/droit-du-travail/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/diritto-del-lavoro/"
+   },
+   "traduction/droit-penal/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/diritto-penale/"
+   },
+   "traduction/fiscalite/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/diritto-tributario/"
+   },
+   "traduction/francais-allemand/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/francese-tedesco/"
+   },
+   "traduction/francais-anglais/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/francese-inglese/"
+   },
+   "traduction/fusions-acquisitions/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/fusioni-acquisizioni/"
+   },
+   "traduction/italien-francais/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/italiano-francese/"
+   },
+   "traduction/propriete-intellectuelle/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/proprieta-intellettuale/"
+   },
+   "traduction/rapports-annuels-financiers/": {
+    "trad": "{1}Blog{/1} {2}Guide{/2} {3}Studi e benchmark{/3}",
+    "statut": "adapte",
+    "source": "recomposition V1 it/traduzione/rapporti-annuali/"
    }
   }
  },
@@ -11321,6 +12181,13 @@
   "trad": "Ciò che scegliete sullo schermo in Corrext lo scegliete anche in una chiamata: lingua di partenza, lingua di arrivo, motore e settore giuridico. Così un'integrazione è soggetta allo stesso controllo dell'interfaccia, invece di creare un canale parallelo senza regole.",
   "statut": "v1",
   "source": "V1 it/corrext/api-on-premises/",
+  "par_page": {}
+ },
+ "2faced7ec03355fa": {
+  "fr": "Slovène{1}Slovenian{/1}",
+  "trad": "Sloveno{1}Slovenian{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "2fb6b0cc7a6e0d42": {
@@ -11998,6 +12865,13 @@
   "trad": "{1}Guardare l’intervista{/1}!",
   "statut": "v1",
   "source": "V1 it/risorse/blog/notizie/",
+  "par_page": {}
+ },
+ "326be6ffee93e561": {
+  "fr": "Slovaque{1}Slovak{/1}",
+  "trad": "Slovacco{1}Slovak{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "32785b9a28472b13": {
@@ -14767,6 +15641,13 @@
   "source": "V1 it/lingue-e-formati/",
   "par_page": {}
  },
+ "3ee65811372eb202": {
+  "fr": "Suédois{1}Swedish{/1}",
+  "trad": "Svedese{1}Swedish{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
+  "par_page": {}
+ },
  "3ef1d676f9172d40": {
   "fr": "Vollmacht : pouvoirs et procuration · Neur.on",
   "trad": "Vollmacht: facoltà di rappresentanza e procura · Neur.on",
@@ -16188,6 +17069,13 @@
   "source": "V1 it/aiuto/scoprire-corrext/",
   "par_page": {}
  },
+ "44c31dfe78bd32a0": {
+  "fr": "Danois{1}Danish{/1}",
+  "trad": "Danese{1}Danish{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
+  "par_page": {}
+ },
  "44c57abd888a66b3": {
   "fr": "Reset",
   "trad": null,
@@ -16564,6 +17452,13 @@
   "trad": "{1}Diritto del lavoro{/1}{2}art. 319 CO{/2}",
   "statut": "v1",
   "source": "V1 it/risorse/glossario/arbeitsvertrag/",
+  "par_page": {}
+ },
+ "46732c72ce11ad70": {
+  "fr": "J'accepte que Neur.on AI Solutions SA utilise ces informations pour donner suite à ma demande, selon sa {1}politique de protection des données{/1}.{2}*{/2}",
+  "trad": "Accetto che Neur.on AI Solutions SA utilizzi queste informazioni per dare seguito alla mia richiesta, secondo la sua {1}informativa sulla protezione dei dati{/1}.{2}*{/2}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/contatto/",
   "par_page": {}
  },
  "4676742c58bd4416": {
@@ -17835,6 +18730,13 @@
   "trad": "Italian",
   "statut": "v1",
   "source": "V1 it/",
+  "par_page": {}
+ },
+ "485d450772316560": {
+  "fr": "Tchèque{1}Czech{/1}",
+  "trad": "Ceco{1}Czech{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "486491010f5cb14b": {
@@ -20562,6 +21464,13 @@
   "source": "V1 it/risorse/glossario/untersuchungshaft/",
   "par_page": {}
  },
+ "53cfa77b86f708b8": {
+  "fr": "Nom{1}*{/1}",
+  "trad": "Cognome{1}*{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/contatto/",
+  "par_page": {}
+ },
  "53da4f154adab7b1": {
   "fr": "{1}Français vers anglais.{/1} Le dossier romand à l'international",
   "trad": "{1}Traduzione dal francese all'inglese.{/1} Il dossier romando sulla scena internazionale",
@@ -21753,6 +22662,13 @@
    }
   }
  },
+ "58dda2b475b686d0": {
+  "fr": "2024 {1}38 actualités{/1}",
+  "trad": "2024 {1}38 notizie{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/risorse/blog/notizie/",
+  "par_page": {}
+ },
  "58e9ac2397ed785c": {
   "fr": "La méthode tient en quatre gestes et ne demande aucun abonnement.",
   "trad": "Il metodo si riduce a quattro passaggi e non richiede alcun abbonamento.",
@@ -22567,6 +23483,13 @@
   "trad": "{1}Darlehensvertrag_FR.docx{/1}{2}pag. 14 / 100{/2}",
   "statut": "v1",
   "source": "V1 it/lingue-e-formati/",
+  "par_page": {}
+ },
+ "5cf0c5861b85db76": {
+  "fr": "E-mail professionnel{1}*{/1}",
+  "trad": "E-mail professionale{1}*{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/contatto/",
   "par_page": {}
  },
  "5cf54285c0bfe893": {
@@ -25023,6 +25946,13 @@
   "source": "V1 it/traduzione/diritto-del-lavoro/",
   "par_page": {}
  },
+ "6768ef5498d20b93": {
+  "fr": "{1}Accueil{/1}{2}Insertion{/2}{3}Révision{/3}{4}Corrext{/4}",
+  "trad": "{1}Home{/1}{2}Inserisci{/2}{3}Revisione{/3}{4}Corrext{/4}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/",
+  "par_page": {}
+ },
  "677376d07acf8ee5": {
   "fr": "La monnaie s'écrit CHF, généralement avant le montant, avec l'apostrophe comme séparateur des milliers.",
   "trad": "La valuta si scrive CHF, di solito prima dell'importo, con l'apostrofo come separatore delle migliaia.",
@@ -25461,6 +26391,13 @@
   "trad": "Il ricorso è il rimedio giuridico con cui una parte impugna una decisione davanti all'autorità superiore. Davanti al Tribunale federale, la legge distingue in particolare il ricorso in materia civile, il ricorso in materia penale e il ricorso in materia di diritto pubblico. Ciascuno ha proprie condizioni di ammissibilità. Di regola è diretto contro le decisioni delle autorità cantonali di ultima istanza.",
   "statut": "v1",
   "source": "V1 it/risorse/glossario/beschwerde/",
+  "par_page": {}
+ },
+ "69615eb7bdcfe470": {
+  "fr": "Norvégien bokmål{1}Norwegian Bokmål{/1}",
+  "trad": "Norvegese bokmål{1}Norwegian Bokmål{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "6961feadacdf7ae6": {
@@ -26158,6 +27095,13 @@
   "trad": "{1}Hosting{/1}",
   "statut": "v1",
   "source": "V1 it/chi-siamo/stampa/",
+  "par_page": {}
+ },
+ "6c7fabd9e2a716e6": {
+  "fr": "Letton{1}Latvian{/1}",
+  "trad": "Lettone{1}Latvian{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "6c891b46c177c402": {
@@ -26865,6 +27809,13 @@
   "trad": "Gewährleistung, garantie, garanzia, warranty: la garanzia del venditore per i difetti della cosa venduta, secondo l'articolo 197 CO.",
   "statut": "v1",
   "source": "V1 it/risorse/glossario/gewaehrleistung/",
+  "par_page": {}
+ },
+ "6f522baf55d4b4c0": {
+  "fr": "Russe{1}Russian{/1}",
+  "trad": "Russo{1}Russian{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "6f579283280b1cd7": {
@@ -28056,6 +29007,13 @@
   "source": "V1 it/corrext/",
   "par_page": {}
  },
+ "7427c1053feae41d": {
+  "fr": "Chinois simplifié{1}Chinese (Simplified){/1}",
+  "trad": "Cinese semplificato{1}Chinese (Simplified){/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
+  "par_page": {}
+ },
  "742f2d1d0f640890": {
   "fr": "Paula Reichenberg, CEO de Neur.on, termine le FF+ Acceleration Program 2024",
   "trad": "Paula Reichenberg, CEO di Neur.on, conclude il FF+ Acceleration Program 2024",
@@ -28110,6 +29068,13 @@
   "trad": "Swisscom e Neur.on annunciano una collaborazione · Neur.on",
   "statut": "v1",
   "source": "V1 it/risorse/blog/collaborazione-swisscom-2024/",
+  "par_page": {}
+ },
+ "74573f32d72eb5e2": {
+  "fr": "Turc{1}Turkish{/1}",
+  "trad": "Turco{1}Turkish{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "7457ea70b12e0c87": {
@@ -28552,6 +29517,13 @@
   "trad": "Diritti sincronizzati con SharePoint / Active Directory",
   "statut": "v1",
   "source": "V1 it/corrext/",
+  "par_page": {}
+ },
+ "76010fa2303bbc45": {
+  "fr": "Grec{1}Greek{/1}",
+  "trad": "Greco{1}Greek{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "7607a789e1b4f835": {
@@ -30273,6 +31245,13 @@
   "source": "V1 it/confronto/",
   "par_page": {}
  },
+ "7dedb78ee92bab02": {
+  "fr": "Portugais du Brésil{1}Portuguese (Brazil){/1}",
+  "trad": "Portoghese del Brasile{1}Portuguese (Brazil){/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
+  "par_page": {}
+ },
  "7df2c6d94c2973e2": {
   "fr": "Le certificat de la « Double review » est signé par l'agence de traduction spécialisée en charge du projet et atteste l'exactitude et l'impartialité de la traduction.",
   "trad": "L'attestazione della «Double review» è firmata dall'agenzia di traduzione specializzata incaricata del progetto e attesta l'esattezza e l'imparzialità della traduzione.",
@@ -31634,6 +32613,13 @@
   "source": "V1 it/risorse/blog/notizie/",
   "par_page": {}
  },
+ "84b94809b155255c": {
+  "fr": "Lituanien{1}Lithuanian{/1}",
+  "trad": "Lituano{1}Lithuanian{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
+  "par_page": {}
+ },
  "84ba69da99f80c94": {
   "fr": "Pour un extrait du registre du commerce, la certification, la notarisation et l'apostille se commandent en ligne.",
   "trad": "Per un estratto del registro di commercio, certificazione, autenticazione notarile e apostille si ordinano in linea.",
@@ -31889,6 +32875,13 @@
    }
   }
  },
+ "859ce75c9ebf8a3b": {
+  "fr": "2023 {1}38 actualités{/1}",
+  "trad": "2023 {1}38 notizie{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/risorse/blog/notizie/",
+  "par_page": {}
+ },
  "85a1fb097333619e": {
   "fr": "Voici le texte exact affiché par Corrext à l'étape Quotes d'un projet de traduction, suivi de ce qu'il signifie concrètement.",
   "trad": "Ecco il testo esatto che Corrext mostra nella fase Quotes di un progetto di traduzione, seguito da ciò che significa in concreto.",
@@ -31929,6 +32922,13 @@
   "trad": "{1}PDF to Word{/1}",
   "statut": "v1",
   "source": "V1 it/corrext/traduzione-documenti/",
+  "par_page": {}
+ },
+ "85c1656aaccfada7": {
+  "fr": "2025 {1}15 actualités{/1}",
+  "trad": "2025 {1}15 notizie{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/risorse/blog/notizie/",
   "par_page": {}
  },
  "85cb31ded0d025e9": {
@@ -35244,6 +36244,13 @@
   "source": "V1 it/traduzione/compliance-finma/",
   "par_page": {}
  },
+ "9380cecc8cbfc432": {
+  "fr": "{1}4{/1}Certification et apostille",
+  "trad": "{1}4{/1}Autenticazione e apostille",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/livelli-di-qualita/",
+  "par_page": {}
+ },
  "938716c68919267c": {
   "fr": "Interface reproduite d'après l'application Corrext · données de démonstration · 3 des 4 moteurs nommés sur ce site, Claude sans sortie récoltée · résultats réels obtenus dans Corrext.",
   "trad": "Interfaccia riprodotta dall'applicazione Corrext · dati dimostrativi · 3 dei 4 motori citati su questo sito, nessun risultato raccolto per Claude · risultati reali ottenuti in Corrext.",
@@ -35270,6 +36277,13 @@
   "trad": "Al dossier si allega per lo più un estratto certificato in inglese o nella lingua della controparte. A seconda del destinatario basta la certificazione Corrext oppure serve un'autenticazione notarile: il livello si sceglie nella seconda fase, senza cambiare fornitore.",
   "statut": "v1",
   "source": "V1 it/corrext/estratto-registro-di-commercio/",
+  "par_page": {}
+ },
+ "93a91e6278596794": {
+  "fr": "Portugais du Portugal{1}Portuguese (Portugal){/1}",
+  "trad": "Portoghese del Portogallo{1}Portuguese (Portugal){/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "93cd70668af617f6": {
@@ -35401,6 +36415,13 @@
   "trad": "art. 69 LEF",
   "statut": "v1",
   "source": "V1 it/traduzione/italiano-francese/",
+  "par_page": {}
+ },
+ "9472bcc8e7b86a38": {
+  "fr": "{1}Mentions légales et CGU{/1}{2}Protection des données{/2}",
+  "trad": "{1}Note legali e condizioni d'uso{/1}{2}Protezione dei dati{/2}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/",
   "par_page": {}
  },
  "947f5e31faa62df1": {
@@ -36375,6 +37396,13 @@
   "source": "V1 it/aiuto/risoluzione-problemi/",
   "par_page": {}
  },
+ "990971944106d1ea": {
+  "fr": "{1}Équipe juridique et linguistique de Neur.on{/1}{2}15 septembre 2026{/2}",
+  "trad": "{1}Team giuridico e linguistico di Neur.on{/1}{2}15 settembre 2026{/2}",
+  "statut": "adapte",
+  "source": "recomposition V1 it/risorse/blog/preventivo-traduzione-giuridica/",
+  "par_page": {}
+ },
  "990aaa54ad57f676": {
   "fr": "{1}Mängelrüge{/1} · avis au vendeur (avis des défauts)",
   "trad": "{1}Mängelrüge{/1} · avviso al venditore",
@@ -36994,6 +38022,13 @@
   "trad": "Vi interessano piuttosto le conferenze e i dibattiti su come respingere i ciberattacchi, sulla sovranità digitale della Svizzera di fronte ai giganti statunitensi o sulle possibilità che la blockchain offre alle imprese? Anche in questo caso la giornata dovrebbe soddisfarvi.",
   "statut": "v1",
   "source": "V1 it/risorse/blog/notizie/",
+  "par_page": {}
+ },
+ "9c9483ea8bbc0980": {
+  "fr": "Espagnol{1}Spanish{/1}",
+  "trad": "Spagnolo{1}Spanish{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "9c9a046033445ea3": {
@@ -37752,6 +38787,13 @@
   "trad": "Il testatore può, mediante disposizione testamentaria, incaricare dell'esecuzione della sua ultima volontà una o più persone aventi l'esercizio dei diritti civili. L'incarico è comunicato d'ufficio all'esecutore testamentario, che deve pronunciarsi sull'accettazione entro 14 giorni; il silenzio vale accettazione. L'esecutore amministra la successione, ne paga i debiti, soddisfa i legati e procede alla divisione conformemente alle disposizioni del testatore o a tenor di legge. Ha diritto a un equo compenso.",
   "statut": "v1",
   "source": "V1 it/risorse/glossario/willensvollstrecker/",
+  "par_page": {}
+ },
+ "9faea854f4acb82b": {
+  "fr": "{1}Demander une démo{/1}{2}Essayer la démo en direct{/2}",
+  "trad": "{1}Richiedere una demo{/1}{2}Provare la demo dal vivo{/2}",
+  "statut": "adapte",
+  "source": "recomposition V1 it/corrext/",
   "par_page": {}
  },
  "9fafb40d74c556be": {
@@ -40007,6 +41049,13 @@
     "source": "V1 it/traduzione/francese-tedesco/"
    }
   }
+ },
+ "a9623b5781322c73": {
+  "fr": "Indonésien{1}Indonesian{/1}",
+  "trad": "Indonesiano{1}Indonesian{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
+  "par_page": {}
  },
  "a9764441ebeb0af4": {
   "fr": "{1}Actualités{/1}",
@@ -43894,6 +44943,13 @@
   "source": "V1 it/risorse/glossario/strafbefehl/",
   "par_page": {}
  },
+ "bb8cd0402f80c047": {
+  "fr": "2021 {1}3 actualités{/1}",
+  "trad": "2021 {1}3 notizie{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/risorse/blog/notizie/",
+  "par_page": {}
+ },
  "bb9024d3e8257fd6": {
   "fr": "Les outils les plus utilisés par les établissements financiers",
   "trad": "Gli strumenti più usati dagli istituti finanziari",
@@ -47632,6 +48688,13 @@
    }
   }
  },
+ "cad44c4d5fe0f8f9": {
+  "fr": "Prénom{1}*{/1}",
+  "trad": "Nome{1}*{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/contatto/",
+  "par_page": {}
+ },
  "cadc2e71ce6decc1": {
   "fr": "En résumé, cette discussion a mis en évidence le besoin crucial de renforcer la cybersécurité des PME. L’appel à l’action est sans équivoque : unir nos forces, partager nos connaissances et collaborer étroitement pour bâtir un écosystème plus sûr et plus résilient.",
   "trad": "In sintesi, la discussione ha messo in evidenza il bisogno cruciale di rafforzare la cibersicurezza delle PMI. L’appello all’azione è inequivocabile: unire le forze, condividere le conoscenze e collaborare strettamente per costruire un ecosistema più sicuro e più resiliente.",
@@ -48047,6 +49110,13 @@
   "trad": "Provate Corrext su una data room di prova",
   "statut": "v1",
   "source": "V1 it/traduzione/fusioni-acquisizioni/",
+  "par_page": {}
+ },
+ "cca813f51e4b1cb6": {
+  "fr": "{1}3 ou 4{/1}Selon l'autorité",
+  "trad": "{1}3 o 4{/1}Secondo l'autorità",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/livelli-di-qualita/",
   "par_page": {}
  },
  "ccaa67a3380d054b": {
@@ -48756,6 +49826,13 @@
   "source": "V1 it/risorse/studi/",
   "par_page": {}
  },
+ "cf5a0ef28c52d235": {
+  "fr": "Organisation{1}*{/1}",
+  "trad": "Organizzazione{1}*{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/contatto/",
+  "par_page": {}
+ },
  "cf76f768666234a1": {
   "fr": "Le moteur de traduction du droit, de la fiscalité et de la finance suisses. Quadrilingue natif, plus de 15 millions de segments, hébergement 100% suisse.",
   "trad": "Motore di traduzione con l'IA per il diritto, il fisco e la finanza svizzeri: quadrilingue nativo, oltre 15 milioni di segmenti, hosting al 100 % in Svizzera.",
@@ -49399,6 +50476,13 @@
   "source": "V1 it/risorse/blog/",
   "par_page": {}
  },
+ "d199611977f1bc16": {
+  "fr": "Polonais{1}Polish{/1}",
+  "trad": "Polacco{1}Polish{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
+  "par_page": {}
+ },
  "d19af3c5f93a51d9": {
   "fr": "Choisissez {1}« Standard Corrext Certification »{/1} pour un certificat signé et tamponné accompagnant la traduction.",
   "trad": "Scegliete {1}«Standard Corrext Certification»{/1} per un'attestazione firmata e timbrata che accompagna la traduzione.",
@@ -49551,6 +50635,13 @@
    }
   }
  },
+ "d25f8aaa2d603f53": {
+  "fr": "Ukrainien{1}Ukrainian{/1}",
+  "trad": "Ucraino{1}Ukrainian{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
+  "par_page": {}
+ },
  "d2652275fe9b8ce9": {
   "fr": "Texte de loi",
   "trad": "Testo di legge",
@@ -49673,6 +50764,13 @@
   "trad": "{1}I tre livelli{/1}",
   "statut": "v1",
   "source": "V1 it/corrext/progetti-di-traduzione/",
+  "par_page": {}
+ },
+ "d2b981b93420894c": {
+  "fr": "Néerlandais{1}Dutch{/1}",
+  "trad": "Olandese{1}Dutch{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "d2bc5e6c79e29de2": {
@@ -50789,6 +51887,13 @@
   "trad": "Disciplina l'esecuzione dei crediti pecuniari, dal rigetto dell'opposizione al fallimento; SchKG in tedesco, LP in francese.",
   "statut": "v1",
   "source": "V1 it/traduzione/contenzioso-arbitrato/",
+  "par_page": {}
+ },
+ "d730cd7742f60a24": {
+  "fr": "Japonais{1}Japanese{/1}",
+  "trad": "Giapponese{1}Japanese{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "d733d0174e36ff4b": {
@@ -52475,6 +53580,13 @@
   "trad": "Siamo fieri di annunciare che TLTF ha di recente dato risalto a Neur.on nella sua rassegna delle start-up che si sono distinte allo Startup Showcase del TLTF Summit 2024.",
   "statut": "v1",
   "source": "V1 it/risorse/blog/notizie/",
+  "par_page": {}
+ },
+ "de30a40468a213eb": {
+  "fr": "Coréen{1}Korean{/1}",
+  "trad": "Coreano{1}Korean{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "de363d4099d9ea97": {
@@ -54918,6 +56030,13 @@
   "source": "V1 it/risorse/blog/notizie/",
   "par_page": {}
  },
+ "e8caa2e9899b2b9f": {
+  "fr": "{1}Allemand{/1}{2}Français{/2}{3}Italien{/3}{4}Anglais{/4}",
+  "trad": "{1}Tedesco{/1}{2}Francese{/2}{3}Italiano{/3}{4}Inglese{/4}",
+  "statut": "adapte",
+  "source": "recomposition V1 it/contatto/",
+  "par_page": {}
+ },
  "e8cac7ff1205be67": {
   "fr": "Les trois niveaux de certification",
   "trad": "I tre livelli di certificazione",
@@ -55360,6 +56479,13 @@
   "trad": "Sì",
   "statut": "v1",
   "source": "V1 it/corrext/progetti-di-traduzione/",
+  "par_page": {}
+ },
+ "eaa572ac10e30be4": {
+  "fr": "Bulgare{1}Bulgarian{/1}",
+  "trad": "Bulgaro{1}Bulgarian{/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "eaa6573f4345a05d": {
@@ -59315,6 +60441,13 @@
   "trad": "Nella fase {1}«Set-up»{/1}, cliccate su «Select target languages» e selezionate almeno una lingua di arrivo.",
   "statut": "v1",
   "source": "V1 it/aiuto/risoluzione-problemi/",
+  "par_page": {}
+ },
+ "fb2c7bc2a468ed63": {
+  "fr": "Chinois traditionnel{1}Chinese (Traditional){/1}",
+  "trad": "Cinese tradizionale{1}Chinese (Traditional){/1}",
+  "statut": "adapte",
+  "source": "variante de balisage V1 it/lingue-e-formati/",
   "par_page": {}
  },
  "fb2d8a02b16af5e2": {

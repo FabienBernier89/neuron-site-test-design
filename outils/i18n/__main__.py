@@ -5,10 +5,13 @@
 
 etat : état de la traduction d'une langue, page par page (outils/i18n/traduire.py, etat), en aperçu par défaut ou selon
 les règles de la production ; écrit la liste des textes français à traduire dans src/langues/<langue>/a_traduire.json
-({clé: texte FR}), fichier régénéré à chaque appel.
+({clé: {"fr": texte FR, "contexte": contexte V1 s'il y en a un}}, traduire.fichier_a_traduire), fichier régénéré à
+chaque appel.
 
 memoire : pré-remplit la table de la langue (src/langues/<langue>/segments.json) avec les traductions validées de la V1
-(outils/i18n/memoire_v1.py, prefill), au statut v1, et écrit le rapport src/langues/<langue>/memoire-rapport.json."""
+(outils/i18n/memoire_v1.py, prefill), au statut v1, puis la complète des blocs recomposés et des variantes de balisage
+au statut adapte (memoire_v1.recomposer, tâche 3.2) ; écrit le rapport src/langues/<langue>/memoire-rapport.json et
+les contextes V1 des textes à traduire, src/langues/<langue>/contextes.json."""
 import argparse
 import json
 import sys
@@ -50,6 +53,14 @@ def afficher_memoire(rapport):
     lignes.append(f"Textes refusés jamais posés ailleurs : {r['textes']} ({r['mots']} mots)")
     lignes.append(f"Non posés (traduction V1 non validée) : {rapport['404_non_posee']} textes de la 404, "
                   f"{rapport['i18n_hors_pages']} textes de src/i18n hors des 156 pages")
+    r = rapport.get("recomposition")
+    if r:
+        lignes.append(f"Statut adapte : {r['recomposes']} blocs recomposés, {r['variantes_recalees']} variantes de "
+                      f"balisage recalées ({r['variantes_refusees']} refusées)")
+        lignes.append(f"Contextes V1 pour l'adaptation : {r['contextes']} textes, dont {r['morceaux']} morceaux et "
+                      f"{r['corrections']} corrections V2")
+        for cause, n in r["refus"].items():
+            lignes.append(f"  refus, {cause} : {n} texte(s)")
     return "\n".join(lignes)
 
 
@@ -65,18 +76,28 @@ def main(argv=None):
     import build  # import tardif : les dossiers de build.py (DOSSIER_LANGUES, NEURON) servent d'emplacement
     if args.commande == "memoire":
         table = Table(args.langue, build.DOSSIER_LANGUES)
-        rapport = memoire_v1.prefill(args.langue, build.NEURON, table)
+        pages = traduire.pages_assemblees(args.langue, "apercu")
+        rapport = memoire_v1.prefill(args.langue, build.NEURON, table, pages=pages)
+        recomposition = memoire_v1.recomposer(args.langue, build.NEURON, table, pages=pages)
+        contextes = recomposition.pop("contextes")
+        rapport["recomposition"] = {**recomposition, "contextes": len(contextes)}
         table.enregistrer()
-        fichier = build.DOSSIER_LANGUES / args.langue / "memoire-rapport.json"
+        dossier = build.DOSSIER_LANGUES / args.langue
+        fichier = dossier / "memoire-rapport.json"
         fichier.write_text(json.dumps(rapport, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+        (dossier / traduire.CONTEXTES).write_text(json.dumps(contextes, indent=1, ensure_ascii=False) + "\n",
+                                                  encoding="utf-8")
         print(afficher_memoire(rapport))
-        print(f"Table : {table.fichier}\nRapport : {fichier}")
+        print(f"Table : {table.fichier}\nRapport : {fichier}\nContextes : {dossier / traduire.CONTEXTES}")
         return 0
     mode = "production" if args.production else "apercu"
     etat, a_traduire = traduire.etat_detaille(args.langue, mode)
     fichier = build.DOSSIER_LANGUES / args.langue / "a_traduire.json"
     fichier.parent.mkdir(parents=True, exist_ok=True)
-    fichier.write_text(json.dumps(dict(sorted(a_traduire.items())), indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    f_contextes = fichier.parent / traduire.CONTEXTES
+    contextes = json.loads(f_contextes.read_text(encoding="utf-8")) if f_contextes.is_file() else {}
+    fichier.write_text(json.dumps(traduire.fichier_a_traduire(a_traduire, contextes), indent=1, ensure_ascii=False)
+                       + "\n", encoding="utf-8")
     print(afficher_etat(args.langue, mode, etat, a_traduire))
     print(f"Liste des segments à traduire : {fichier}")
     return 0

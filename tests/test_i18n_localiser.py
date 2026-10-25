@@ -130,6 +130,48 @@ class TestTete(unittest.TestCase):
         self.assertEqual(h, '<form><input type="hidden" name="langue" value="it"><input name="prenom" value="fr"></form>')
 
 
+class TestFedlex(unittest.TestCase):
+    """Ruling 22 : les liens Fedlex de la page traduite mènent au texte de loi dans la langue de la page, comme dans
+    la V1. Seule forme présente dans la sortie FR (relevé du 2026-10-25, 52 liens, 17 actes) :
+    https://www.fedlex.admin.ch/eli/cc/<année ou recueil>/<numéro>/fr ; aucun paramètre de langue."""
+    CO = "https://www.fedlex.admin.ch/eli/cc/27/317_321_377/"   # Code des obligations : publié en anglais
+    LTF = "https://www.fedlex.admin.ch/eli/cc/2006/218/"         # loi sur le Tribunal fédéral : pas d'anglais
+
+    def page(self, adresse):
+        return f'<p>Source : Fedlex, <a href="{adresse}fr" target="_blank" rel="noopener">Code des obligations</a></p>'
+
+    def test_eli_localise_en_allemand_et_en_italien(self):
+        for langue in ("de", "it"):
+            with self.subTest(langue=langue):
+                h, _ = localiser.localiser(self.page(self.CO), "", langue, {"fr": {""}, langue: {""}})
+                self.assertEqual(h, self.page(self.CO).replace(f"{self.CO}fr", f"{self.CO}{langue}"))
+
+    def test_eli_en_anglais_si_fedlex_le_publie(self):
+        h, _ = localiser.localiser(self.page(self.CO), "", "en", {"fr": {""}, "en": {""}})
+        self.assertIn(f'href="{self.CO}en"', h)
+
+    def test_eli_sans_anglais_mene_au_texte_allemand(self):
+        """Fedlex ne publie pas l'anglais de tous les actes : la V1 anglaise renvoie alors au texte allemand."""
+        h, _ = localiser.localiser(self.page(self.LTF), "", "en", {"fr": {""}, "en": {""}})
+        self.assertIn(f'href="{self.LTF}de"', h)
+
+    def test_francais_et_mentions_sans_lien_intacts(self):
+        src = self.page(self.CO) + "<p>Textes officiels : fedlex.admin.ch, version française.</p>"
+        self.assertEqual(localiser.localiser(src, "", "fr", {"fr": {""}})[0], src)
+        h, _ = localiser.localiser(src, "", "de", {"fr": {""}, "de": {""}})
+        self.assertIn("<p>Textes officiels : fedlex.admin.ch, version française.</p>", h)
+
+    def test_actes_du_site_tous_classes_pour_l_anglais(self):
+        """Chaque acte cité par les sources du site est classé (anglais publié ou non, d'après la V1 anglaise) : un
+        acte nouveau oblige à vérifier sur Fedlex plutôt que de produire un lien anglais introuvable."""
+        actes = set()
+        for f in (build.ICI / "src").rglob("*.html"):
+            actes |= set(re.findall(r"fedlex\.admin\.ch/eli/cc/([^/\"]+/[^/\"]+)/fr", f.read_text(encoding="utf-8")))
+        self.assertTrue(actes)
+        self.assertEqual(actes - localiser.FEDLEX_ANGLAIS - localiser.FEDLEX_SANS_ANGLAIS, set())
+        self.assertEqual(localiser.FEDLEX_ANGLAIS & localiser.FEDLEX_SANS_ANGLAIS, set())
+
+
 class TestAlternates(unittest.TestCase):
     def test_une_seule_langue_inchangee(self):
         u = U + "fr/corrext/"

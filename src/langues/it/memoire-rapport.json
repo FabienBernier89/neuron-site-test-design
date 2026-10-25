@@ -256,9 +256,9 @@
    ]
   }
  ],
- "couverture_mots": 76.6,
- "couverture_page": 78.1,
- "couverture_texte": 82.6,
+ "couverture_mots": 76.8,
+ "couverture_page": 78.3,
+ "couverture_texte": 82.7,
  "refus": {
   "divergence dans une même page": {
    "unites": 8,
@@ -286,5 +286,22 @@
   "mots": 720
  },
  "404_non_posee": 18,
- "i18n_hors_pages": 105
+ "i18n_hors_pages": 105,
+ "recomposition": {
+  "recomposes": 5,
+  "variantes_recalees": 46,
+  "variantes_refusees": 1081,
+  "morceaux": 705,
+  "corrections": 67,
+  "contextes_par_nature": {
+   "correction V2": 67,
+   "morceau": 705,
+   "recomposition": 1,
+   "variante de balisage": 1081
+  },
+  "refus": {
+   "variante : recalage non sûr (marqueurs différents) ou identique au français": 1081
+  },
+  "contextes": 1854
+ }
 }
