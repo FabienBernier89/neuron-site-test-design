@@ -1,4 +1,4 @@
-"""Terminologie vérifiée dans CHnell : adresses, file d'attente et journal (tâche 4.2).
+"""Terminologie vérifiée dans CHnell : adresses, file d'attente, journal et glossaire (tâches 4.2 et 4.3).
 
 Fabien fait vérifier chaque terme du lexique (terminologie.py, tâche 4.1) dans CHnell avant toute traduction nouvelle. Ce
 module prépare la session et garde ses résultats ; il n'ouvre ni Corrext ni CHnell et ne fait aucune requête réseau.
@@ -18,7 +18,11 @@ table, hors V1), absent (terme introuvable : retenu vaut null) ou a_arbitrer (é
 V1 : la décision revient à Fabien). Le journal ne garde aucun extrait de texte : champs exacts, valeurs courtes, jamais
 de tiret long ; un terme revérifié s'ajoute une nouvelle ligne, la dernière l'emporte.
 
-Ruling 5 (décision V6) : journal.jsonl vit dans le dossier de la terminologie (hors dépôt, voir
+construire_glossaire(journal, termes_v1) rend {fr: {langue: {"terme", "source", "statut"}}} avec les seules entrées confirme
+et corrige. Toute divergence avec la V1 (décision V5) devient un arbitrage et sort du glossaire, sauf si la ligne est de
+Fabien (verifie_par « Fabien » : arbitrage tranché). arbitrages() les liste pour la remise à Fabien.
+
+Ruling 5 (décision V6) : journal.jsonl et glossaire.json vivent dans le dossier de la terminologie (hors dépôt, voir
 terminologie.TERMINOLOGIE), jamais dans le dépôt public.
 
 ZONE (sélecteur CSS de la zone de résultats) et lire_resultats() restent à faire : ils dépendent de la structure réelle de
@@ -39,12 +43,15 @@ MESSAGE_CAPTURE = "capture CHnell à faire avec Fabien (tâche 4.2 step 1)"
 PRIORITE_MAX = 3  # décision V5 : les trois priorités sont vérifiées
 
 JOURNAL = "journal.jsonl"
+GLOSSAIRE = "glossaire.json"
 STATUTS = ("confirme", "corrige", "absent", "a_arbitrer")
 STATUTS_GLOSSAIRE = ("confirme", "corrige")
 CHAMPS = ("date", "fr", "langue", "url", "resultats", "sources", "retenu", "statut", "justification", "verifie_par")
 # Garde-fou contre un extrait de CHnell collé par erreur : ces champs restent des mots ou des phrases courtes
 LONGUEUR_MAX = {"fr": 120, "retenu": 120, "justification": 300, "verifie_par": 60}
 LONGUEUR_SOURCE_MAX = 120
+SOURCE_PAR_DEFAUT = "CHnell"
+ARBITRE_PAR = "fabien"
 
 
 def url_chnell(terme, langue, fedlex=False):
@@ -162,3 +169,86 @@ def charger_journal(dossier=None):
         except ValueError as e:
             raise ValueError(f"{f} : ligne {i} illisible ({e})") from None
     return entrees
+
+
+# ---------- glossaire ----------
+
+def _dernieres(journal):
+    """Dernière ligne de chaque couple (terme français, langue) : un terme revérifié remplace l'avis précédent."""
+    return {(_normal(e["fr"]), e["langue"]): e for e in journal}
+
+
+def _equivalents_v1(termes_v1, langue, fr):
+    """Équivalents du terme dans les termes V1 de la langue (termes-<langue>.json), sans doublon."""
+    vus = []
+    for t in termes_v1.get(langue, []):
+        eq = t.get(langue)
+        if isinstance(eq, str) and _normal(t["fr"]).casefold() == _normal(fr).casefold() and _normal(eq) not in vus:
+            vus.append(_normal(eq))
+    return vus
+
+
+def _diverge_de_v1(e, v1):
+    """Vrai si la ligne confirme ou corrige un équivalent absent des termes V1 du même terme, sans l'aval de Fabien."""
+    return (e["statut"] in STATUTS_GLOSSAIRE and bool(v1) and e["verifie_par"].casefold() != ARBITRE_PAR
+            and _normal(e["retenu"]).casefold() not in {v.casefold() for v in v1})
+
+
+def arbitrages(journal, termes_v1):
+    """Arbitrages à remettre à Fabien : lignes a_arbitrer du journal et divergences avec la V1 (dernière ligne de chaque
+    terme), [{fr, langue, retenu, v1, justification, sources, raison}], par langue puis terme français.
+    termes_v1 : {langue: contenu de termes-<langue>.json}."""
+    sortie = []
+    for (fr, langue), e in sorted(_dernieres(journal).items(), key=lambda kv: (kv[0][1], kv[0][0])):
+        v1 = _equivalents_v1(termes_v1, langue, e["fr"])
+        if e["statut"] == "a_arbitrer":
+            raison = "à arbitrer dans la session CHnell"
+        elif _diverge_de_v1(e, v1):
+            raison = "diverge de la V1 (décision V5)"
+        else:
+            continue
+        sortie.append({"fr": e["fr"], "langue": langue, "retenu": e["retenu"], "v1": v1,
+                       "justification": e["justification"], "sources": e["sources"], "raison": raison})
+    return sortie
+
+
+def construire_glossaire(journal, termes_v1):
+    """Glossaire de projet : {fr: {langue: {"terme", "source", "statut"}}} d'après la dernière ligne de chaque terme et
+    langue du journal. Seules les lignes confirme et corrige y entrent, hors divergence avec la V1 (arbitrage, voir
+    arbitrages). source : les sources du journal réunies, « CHnell » si la ligne n'en a pas.
+    termes_v1 : {langue: contenu de termes-<langue>.json}."""
+    glossaire = {}
+    for (fr, langue), e in _dernieres(journal).items():
+        if e["statut"] not in STATUTS_GLOSSAIRE or _diverge_de_v1(e, _equivalents_v1(termes_v1, langue, e["fr"])):
+            continue
+        glossaire.setdefault(e["fr"], {})[langue] = {"terme": e["retenu"], "statut": e["statut"],
+                                                     "source": " ; ".join(e["sources"]) or SOURCE_PAR_DEFAUT}
+    return {fr: {l: glossaire[fr][l] for l in sorted(glossaire[fr])} for fr in sorted(glossaire)}
+
+
+def _fichier_glossaire(dossier):
+    return Path(dossier or terminologie.TERMINOLOGIE) / GLOSSAIRE
+
+
+def charger_glossaire(dossier=None):
+    """Glossaire du dossier de la terminologie ({} s'il n'existe pas encore)."""
+    f = _fichier_glossaire(dossier)
+    return json.loads(f.read_text(encoding="utf-8")) if f.is_file() else {}
+
+
+def ecrire_glossaire(glossaire, langue, dossier=None):
+    """Remplace dans glossaire.json les entrées de la langue par celles de glossaire (construire_glossaire) ; les autres
+    langues sont gardées. Rend le chemin du fichier. Le dossier est créé au besoin."""
+    f = _fichier_glossaire(dossier)
+    complet = charger_glossaire(dossier)
+    for fr in list(complet):
+        complet[fr].pop(langue, None)
+        if not complet[fr]:
+            del complet[fr]
+    for fr, langues in glossaire.items():
+        if langue in langues:
+            complet.setdefault(fr, {})[langue] = langues[langue]
+    f.parent.mkdir(parents=True, exist_ok=True)
+    f.write_text(json.dumps({fr: {l: complet[fr][l] for l in sorted(complet[fr])} for fr in sorted(complet)},
+                            indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    return f

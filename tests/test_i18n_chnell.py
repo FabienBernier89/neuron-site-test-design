@@ -1,4 +1,4 @@
-"""Terminologie vérifiée dans CHnell (tâche 4.2) : outils/i18n/chnell.py et commandes chnell.
+"""Terminologie vérifiée dans CHnell (tâches 4.2 et 4.3) : outils/i18n/chnell.py et commandes chnell, glossaire.
 
 Tout est synthétique : lexique, journal et termes V1 écrits ici, dossiers temporaires pour les fichiers. Aucun test ne lit
 ni n'écrit le dossier réel de la terminologie (Bibliotheque-Claude, Ruling 5), aucune requête réseau, aucune capture de
@@ -141,8 +141,100 @@ V1_DE = [{"fr": "capital-actions", "de": "Aktienkapital", "type": "glossaire", "
          {"fr": "devis", "de": "Offerte", "type": "metier", "source": "V1"}]
 
 
+class TestGlossaire(unittest.TestCase):
+    def construire(self, journal, termes=None):
+        return chnell.construire_glossaire(journal, {"de": V1_DE if termes is None else termes})
+
+    def test_glossaire_ignore_a_arbitrer(self):
+        journal = [ligne("capital-actions", retenu="Grundkapital", statut="a_arbitrer"),
+                   ligne("assemblée générale", retenu="Generalversammlung", statut="confirme"),
+                   ligne("mandat", statut="absent", retenu=None, resultats=0, sources=[])]
+        self.assertEqual(list(self.construire(journal)), ["assemblée générale"])
+
+    def test_glossaire_garde_la_source(self):
+        journal = [ligne("capital-actions", sources=["Fedlex : CO art. 620", "Fedlex : CC art. 2"]),
+                   ligne("assemblée générale", retenu="Generalversammlung", statut="corrige", sources=[])]
+        g = self.construire(journal)
+        self.assertEqual(g["capital-actions"]["de"],
+                         {"terme": "Aktienkapital", "source": "Fedlex : CO art. 620 ; Fedlex : CC art. 2",
+                          "statut": "confirme"})
+        self.assertEqual(g["assemblée générale"]["de"],
+                         {"terme": "Generalversammlung", "source": "CHnell", "statut": "corrige"})
+
+    def test_conflit_v1_signale(self):
+        journal = [ligne("capital-actions", retenu="Grundkapital", statut="confirme"),
+                   ligne("devis", retenu="Offerte", statut="confirme"),
+                   ligne("prescription", retenu="verjährung", statut="confirme")]  # casse seule : pas un conflit
+        g = self.construire(journal)
+        self.assertNotIn("capital-actions", g, "divergence avec la V1 : à Fabien, pas dans le glossaire")
+        self.assertEqual(sorted(g), ["devis", "prescription"])
+        a = chnell.arbitrages(journal, {"de": V1_DE})
+        self.assertEqual([(x["fr"], x["langue"], x["retenu"], x["v1"]) for x in a],
+                         [("capital-actions", "de", "Grundkapital", ["Aktienkapital"])])
+        self.assertIn("V1", a[0]["raison"])
+
+    def test_a_arbitrer_du_journal_est_liste(self):
+        journal = [ligne("assemblée générale", retenu="Generalversammlung", statut="a_arbitrer",
+                         justification="deux équivalents à égalité")]
+        a = chnell.arbitrages(journal, {"de": V1_DE})
+        self.assertEqual([(x["fr"], x["v1"], x["justification"]) for x in a],
+                         [("assemblée générale", [], "deux équivalents à égalité")])
+
+    def test_arbitrage_tranche_par_fabien(self):
+        """La dernière ligne d'un terme l'emporte ; celle de Fabien n'est plus un conflit avec la V1."""
+        journal = [ligne("capital-actions", retenu="Grundkapital", statut="a_arbitrer"),
+                   ligne("capital-actions", retenu="Grundkapital", statut="corrige", verifie_par="Fabien",
+                         justification="arbitrage de Fabien")]
+        g = self.construire(journal)
+        self.assertEqual(g["capital-actions"]["de"]["terme"], "Grundkapital")
+        self.assertEqual(chnell.arbitrages(journal, {"de": V1_DE}), [])
+
+    def test_derniere_ligne_l_emporte(self):
+        journal = [ligne("devis", retenu="Offerte", statut="confirme"),
+                   ligne("devis", retenu="Offerte", statut="absent", resultats=0, sources=[])]
+        # le dernier avis est « absent » : plus d'entrée au glossaire
+        self.assertNotIn("devis", self.construire(journal))
+
+    def test_langue_sans_termes_v1_pas_de_conflit(self):
+        journal = [ligne("capital-actions", langue="en", retenu="share capital")]
+        g = chnell.construire_glossaire(journal, {})
+        self.assertEqual(g["capital-actions"]["en"]["terme"], "share capital")
+
+    def test_trois_langues_dans_un_meme_glossaire(self):
+        journal = [ligne("capital-actions"), ligne("capital-actions", langue="en", retenu="share capital")]
+        g = chnell.construire_glossaire(journal, {"de": V1_DE})
+        self.assertEqual(sorted(g["capital-actions"]), ["de", "en"])
+
+
+class TestFichiersTerminologie(unittest.TestCase):
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.dossier = Path(tmp.name)
+
+    def test_ecrire_remplace_la_langue_et_garde_les_autres(self):
+        de = {"capital-actions": {"de": {"terme": "Aktienkapital", "source": "CHnell", "statut": "confirme"}}}
+        en = {"capital-actions": {"en": {"terme": "share capital", "source": "CHnell", "statut": "confirme"}}}
+        chnell.ecrire_glossaire(de, "de", self.dossier)
+        chnell.ecrire_glossaire(en, "en", self.dossier)
+        self.assertEqual(sorted(chnell.charger_glossaire(self.dossier)["capital-actions"]), ["de", "en"])
+        chnell.ecrire_glossaire({}, "de", self.dossier)  # relancer : le terme DE disparu est retiré, l'anglais reste
+        self.assertEqual(list(chnell.charger_glossaire(self.dossier)["capital-actions"]), ["en"])
+        chnell.ecrire_glossaire({}, "en", self.dossier)
+        self.assertEqual(chnell.charger_glossaire(self.dossier), {})
+
+    def test_glossaire_absent(self):
+        self.assertEqual(chnell.charger_glossaire(self.dossier), {})
+
+    def test_fichiers_dans_le_dossier_de_la_terminologie_par_defaut(self):
+        with mock.patch.object(terminologie, "TERMINOLOGIE", self.dossier):
+            chnell.ecrire_glossaire({}, "de")
+            self.assertEqual(chnell.fichier_journal(), self.dossier / "journal.jsonl")
+            self.assertTrue((self.dossier / "glossaire.json").is_file())
+
+
 class Commandes(unittest.TestCase):
-    """Commandes chnell, dans un dossier de terminologie et un site V1 temporaires."""
+    """Commandes chnell et glossaire, dans un dossier de terminologie et un site V1 temporaires."""
 
     def setUp(self):
         tmp = tempfile.TemporaryDirectory()
@@ -204,6 +296,48 @@ class TestCommandesChnell(Commandes):
         self.assertIn("&sources=60", sortie)
         _, sortie, _ = self.lancer("chnell", "file", "de", "--priorite-max", "4")
         self.assertIn("hors seuil", sortie)
+
+
+class TestCommandeGlossaire(Commandes):
+    def test_glossaire_ecrit_le_fichier_et_liste_les_arbitrages(self):
+        terminologie.ecrire_lexique("de", [lex("capital-actions", 2), lex("devis", 3), lex("assemblée générale", 1),
+                                           lex("procuration", 2)], self.dossier)
+        self.ajouter("capital-actions", "Grundkapital")           # diverge de la V1 : arbitrage
+        self.ajouter("devis", "Offerte")                          # confirme la V1
+        self.ajouter("assemblée générale", "Generalversammlung", "a_arbitrer")
+        code, sortie, erreur = self.lancer("glossaire", "--langue", "de", "--arbitrages")
+        self.assertEqual(code, 0, erreur)
+        g = chnell.charger_glossaire(self.dossier)
+        self.assertEqual(list(g), ["devis"])
+        self.assertEqual(g["devis"]["de"]["terme"], "Offerte")
+        self.assertIn("Arbitrages pour Fabien : 2", sortie)
+        self.assertIn("capital-actions", sortie)
+        self.assertIn("Grundkapital", sortie)
+        self.assertIn("Aktienkapital", sortie)          # l'équivalent de la V1 en regard
+        self.assertIn("assemblée générale", sortie)
+        # critère V5 : « procuration » est retenu, de priorité 2, et n'a pas de ligne de journal
+        self.assertIn("1 terme(s) retenu(s)", sortie)
+        self.assertIn("procuration", sortie)
+
+    def test_glossaire_sans_l_option_ne_detaille_pas_les_arbitrages(self):
+        self.ajouter("capital-actions", "Grundkapital")
+        code, sortie, _ = self.lancer("glossaire", "--langue", "de")
+        self.assertEqual(code, 0)
+        self.assertIn("Arbitrages pour Fabien : 1", sortie)
+        self.assertNotIn("Grundkapital", sortie)
+
+    def test_glossaire_garde_les_autres_langues(self):
+        chnell.ecrire_glossaire({"capital-actions": {"en": {"terme": "share capital", "source": "CHnell",
+                                                            "statut": "confirme"}}}, "en", self.dossier)
+        self.ajouter("devis", "Offerte")
+        self.lancer("glossaire", "--langue", "de")
+        self.assertEqual(sorted(chnell.charger_glossaire(self.dossier)), ["capital-actions", "devis"])
+
+    def test_termes_v1_introuvables(self):
+        (self.v1 / "src/i18n/termes-de.json").unlink()
+        code, _, erreur = self.lancer("glossaire", "--langue", "de")
+        self.assertEqual(code, 1)
+        self.assertIn("Termes V1 introuvables", erreur)
 
 
 if __name__ == "__main__":

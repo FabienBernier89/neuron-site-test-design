@@ -5,6 +5,7 @@
     python3 -m outils.i18n lexique de
     python3 -m outils.i18n chnell file de [--priorite-max 3]
     python3 -m outils.i18n chnell ajouter de capital-actions --retenu Aktienkapital --statut confirme ...
+    python3 -m outils.i18n glossaire --langue de [--arbitrages]
 
 etat : état de la traduction d'une langue, page par page (outils/i18n/traduire.py, etat), en aperçu par défaut ou selon
 les règles de la production ; écrit la liste des textes français à traduire dans src/langues/<langue>/a_traduire.json
@@ -21,10 +22,15 @@ termes V1, références légales et n-grammes des segments sans traduction V1, a
 origine. Écrit dans lexique.json du dossier de la terminologie (hors dépôt : Bibliotheque-Claude, variable
 NEURON_TERMINOLOGIE), en gardant les décisions « retenu » déjà prises.
 
-chnell : session de vérification dans CHnell (outils/i18n/chnell.py, tâche 4.2). « chnell file » liste les termes
+chnell : session de vérification dans CHnell (outils/i18n/chnell.py, tâches 4.2 et 4.3). « chnell file » liste les termes
 retenus du lexique qui n'ont pas encore de ligne de journal, avec leurs adresses CHnell (priorité 3 au plus par défaut,
 décision V5) ; « chnell ajouter » ajoute une ligne au journal.jsonl du dossier de la terminologie (schéma validé, aucun
-extrait de texte) ; « chnell lire » lira les résultats d'une page capturée : à faire avec la structure réelle de CHnell."""
+extrait de texte) ; « chnell lire » lira les résultats d'une page capturée : à faire avec la structure réelle de CHnell.
+
+glossaire : construit le glossaire de projet d'une langue d'après le journal (glossaire.json du dossier de la terminologie,
+les autres langues sont gardées) : seules les lignes confirme et corrige y entrent, toute divergence avec les termes V1 et
+toute ligne a_arbitrer sont des arbitrages pour Fabien (--arbitrages : la liste détaillée). Signale aussi les termes
+retenus du lexique sans ligne de journal (critère de la décision V5)."""
 import argparse
 import json
 import sys
@@ -98,6 +104,32 @@ def afficher_file(langue, file, priorite_max):
     return "\n".join(lignes)
 
 
+def afficher_arbitrages(langue, arbitrages, detail):
+    """Nombre d'arbitrages pour Fabien, et leur liste si detail."""
+    lignes = [f"Arbitrages pour Fabien : {len(arbitrages)}"]
+    if detail:
+        for a in arbitrages:
+            retenu = f"CHnell « {a['retenu']} »" if a["retenu"] else "aucun équivalent retenu"
+            v1 = "V1 " + " ou ".join(f"« {v} »" for v in a["v1"]) if a["v1"] else "pas de terme V1"
+            lignes.append(f"  « {a['fr']} » : {retenu} ; {v1} ; {a['raison']}. {a['justification']}")
+    return "\n".join(lignes)
+
+
+def afficher_glossaire(langue, glossaire, arbitrages, detail, restants, fichier):
+    """Résumé lisible du glossaire d'une langue : comptes, arbitrages, termes retenus sans ligne de journal."""
+    entrees = [langues[langue] for langues in glossaire.values()]
+    statuts = {s: sum(1 for e in entrees if e["statut"] == s) for s in chnell.STATUTS_GLOSSAIRE}
+    lignes = [f"Glossaire {langue} : {len(entrees)} terme(s) (" + ", ".join(f"{s} {n}" for s, n in statuts.items()) + ")",
+              afficher_arbitrages(langue, arbitrages, detail),
+              f"{len(restants)} terme(s) retenu(s) de priorité 1 à {chnell.PRIORITE_MAX} sans ligne de journal"
+              + (f" (commande : chnell file {langue})" if restants else "")]
+    lignes += [f"  P{e['priorite']} {e['fr']}" for e in restants[:20]]
+    if len(restants) > 20:
+        lignes.append(f"  et {len(restants) - 20} autre(s)")
+    lignes.append(f"Glossaire : {fichier}")
+    return "\n".join(lignes)
+
+
 def commande_chnell(args):
     """chnell file, ajouter et lire : n'ont besoin ni du site V1 ni de build.py."""
     if args.action == "lire":
@@ -159,10 +191,26 @@ def main(argv=None):
     a.add_argument("fichier")
     a.add_argument("--fr", required=True)
     a.add_argument("--langue", required=True, choices=LANGUES)
+    p = sous.add_parser("glossaire", help="construire le glossaire de projet d'une langue d'après le journal")
+    p.add_argument("--langue", required=True, choices=LANGUES)
+    p.add_argument("--arbitrages", action="store_true", help="liste détaillée des arbitrages pour Fabien")
     args = parser.parse_args(argv)
     if args.commande == "chnell":
         return commande_chnell(args)
     import build  # import tardif : les dossiers de build.py (DOSSIER_LANGUES, NEURON) servent d'emplacement
+    if args.commande == "glossaire":
+        fichier_v1 = build.NEURON / "src/i18n" / f"termes-{args.langue}.json"
+        if not fichier_v1.is_file():
+            print(f"Termes V1 introuvables : {fichier_v1} (NEURON_SRC ?)", file=sys.stderr)
+            return 1
+        termes = {args.langue: json.loads(fichier_v1.read_text(encoding="utf-8"))}
+        journal = [e for e in chnell.charger_journal() if e["langue"] == args.langue]
+        glossaire = chnell.construire_glossaire(journal, termes)
+        fichier = chnell.ecrire_glossaire(glossaire, args.langue)
+        restants = chnell.file_attente(args.langue, terminologie.charger_lexique(args.langue), journal, chnell.PRIORITE_MAX)
+        print(afficher_glossaire(args.langue, glossaire, chnell.arbitrages(journal, termes), args.arbitrages, restants,
+                                 fichier))
+        return 0
     if args.commande == "lexique":
         fichier_v1 = build.NEURON / "src/i18n" / f"termes-{args.langue}.json"
         if not fichier_v1.is_file():
