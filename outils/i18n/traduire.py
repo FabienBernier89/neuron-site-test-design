@@ -9,10 +9,15 @@ langue que si elle est entièrement et correctement traduite ; sinon traduire re
 - « balisage » : la traduction perd, double ou inverse un marqueur {n}…{/n} des balises en ligne ;
 - « exhaustivite » : la page traduite, ré-extraite, garde un texte français de la page d'origine sans que ce soit
   voulu (condition de Fabien : ne jamais oublier un texte à traduire ; décision V2, Ruling 3) ;
-- « scripts » : un script de la page écrit du texte français que l'extraction ne voit pas (Ruling 13, tâche 7.3).
+- « scripts » : un script de la page écrit du texte français que l'extraction ne voit pas (Ruling 13, tâche 7.3) ;
+- « exemples » : l'exemple de loi d'une page du glossaire ne se remplace pas de façon certaine par celui de la V1 (italien
+  et anglais, tâche 3.3, exemples_glossaire.py) ; la page est alors non publiable, sans autre manquant relevé.
 
-Restent en français, sans être manquants : les unités sous un lang="fr" explicite (Ruling 14), les invariants
-(Table.est_invariant), et une traduction de statut invariant ou v1 identique au français. Hors français, les avis
+Restent en français, sans être manquants : les unités sous un lang="fr" explicite (Ruling 14 : sources françaises des
+démos, français de l'exemple de loi du glossaire, balisé par outils/post/y_accessibilite.py), les invariants
+(Table.est_invariant), et une traduction de statut invariant ou v1 identique au français. Sur les pages de termes du
+glossaire, l'exemple de loi italien et anglais est celui de la page V1 (statut v1 de fait, texte validé le 2026-10-05) :
+il est posé avant l'extraction, avec son lang, et n'est jamais traduit ni compté. Hors français, les avis
 fictifs des pages métier sont retirés avant l'extraction (décision V8, Ruling 4). En aperçu, une page qui contient une
 traduction non relue (statut adapte) reçoit le bandeau « Version de travail, traduction non relue » (décision V4,
 Ruling 2), traduit par la table ; jamais en production.
@@ -26,7 +31,7 @@ import shutil
 import tempfile
 from pathlib import Path
 
-from outils.i18n import controles
+from outils.i18n import controles, exemples_glossaire
 from outils.i18n import segments as S
 from outils.i18n.table import ACCEPTES, Table, cle
 
@@ -83,13 +88,25 @@ def libelle(table, texte_fr, mode, page=None):
     return entree["trad"], None
 
 
-def analyser(html, page, langue, table, mode):
+def _neuron():
+    """Dossier du site V1 (lecture seule), tel que le build le lit."""
+    import build  # import tardif : build importe ce module
+    return build.NEURON
+
+
+def analyser(html, page, langue, table, mode, neuron=None):
     """Traduction détaillée d'une page : {"html": page traduite ou "", "manquants": [...], "statuts": {clé: statut}}.
     statuts : statut de chaque texte français de la page (celui de la table, « invariant » pour un invariant sans
-    entrée, « absent » sinon) ; les unités lang="fr" n'y figurent pas."""
+    entrée, « absent » sinon) ; les unités lang="fr" n'y figurent pas. neuron : dossier du site V1 (lecture seule), lu
+    pour l'exemple de loi des pages du glossaire en italien et en anglais ; build.NEURON si absent."""
     if mode not in MODES:
         raise ValueError(f"mode inconnu : « {mode} » (attendu : {', '.join(MODES)})")
     html = retirer_avis_fictifs(html)
+    try:
+        if exemples_glossaire.concerne(page, langue):
+            html = exemples_glossaire.exemples(html, page, langue, neuron or _neuron())
+    except ValueError as e:
+        return {"html": "", "manquants": [{"cle": None, "fr": str(e), "statut": None, "raison": "exemples"}], "statuts": {}}
     unites = S.extraire_page(html)
     manquants, vus, statuts, traductions, utilises = [], set(), {}, {}, set()
 
@@ -145,11 +162,11 @@ def analyser(html, page, langue, table, mode):
     return {"html": "" if manquants else traduit, "manquants": manquants, "statuts": statuts}
 
 
-def traduire(html, page, langue, table, mode):
+def traduire(html, page, langue, table, mode, neuron=None):
     """Page française assemblée -> (page traduite, manquants). La page traduite n'est rendue que si rien ne manque,
     sinon "". page : clé de la page dans build.PAGES (« contact/ »), « 404 » pour la page 404 ; c'est aussi la clé de
-    par_page dans la table. mode : « apercu » ou « production »."""
-    r = analyser(html, page, langue, table, mode)
+    par_page dans la table. mode : « apercu » ou « production ». neuron : dossier du site V1 (voir analyser)."""
+    r = analyser(html, page, langue, table, mode, neuron)
     return r["html"], r["manquants"]
 
 

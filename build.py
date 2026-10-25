@@ -698,7 +698,7 @@ def mode_build():
 def traduire_page(html, page, langue):
     """Passe 2 : page française assemblée -> (page traduite, manquants) avec la table de la langue et le mode du build
     (outils/i18n/traduire.py). Une page avec des manquants n'est pas construite dans la langue."""
-    return traduire.traduire(html, page, langue, table(langue), mode_build())
+    return traduire.traduire(html, page, langue, table(langue), mode_build(), NEURON)
 
 
 def libelles_llms(langue):
