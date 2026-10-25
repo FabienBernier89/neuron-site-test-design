@@ -5,7 +5,8 @@ Bibliothèque standard seulement. Les listes protégées (marques, libellés d'a
 interdits) sont lues dans src/langues/proteges.json.
 
 Les mots outils français (MOTS_OUTILS), la liste des ambigus (AMBIGUS), les seuils et l'heuristique _restes_fr sont
-copiés de la V1 (Sites/neuron/outils/controle_traductions.py) : la V2 ne dépend pas du code V1."""
+copiés de la V1 (Sites/neuron/outils/controle_traductions.py) : la V2 ne dépend pas du code V1. Il en va de même de la
+logique de terminologie() (« _termes » de la V1)."""
 import html as H
 import json
 import posixpath
@@ -292,6 +293,60 @@ def eszett(fr, tr):
     trop = Counter(_ESZETT.findall(H.unescape(tr))) - Counter(_ESZETT.findall(H.unescape(fr)))
     return [probleme("eszett", f"« {mot} » ({n} fois) : pas de ß en allemand de Suisse, écrire « {mot.replace('ß', 'ss')} »",
                      mot) for mot, n in sorted(trop.items())]
+
+
+_MARQUEURS_EN_LIGNE = re.compile(r"\{/?\d+\}")  # marqueurs {n}…{/n} des balises en ligne des unités de la table
+_AVANT_LETTRE, _APRES_LETTRE = r"(?<![^\W\d_])", r"(?![^\W\d_])"  # bord de mot de la V1 : ni lettre avant, ni lettre après
+
+
+def terminologie(fr, tr, langue, glossaire):
+    """Termes du glossaire de projet (chnell.construire_glossaire : {fr: {langue: {"terme", ...}}}) dont le terme français
+    figure dans le texte FR sans que l'équivalent retenu figure dans la traduction. Logique de « _termes » de la V1 : un
+    sigle (CO, LB : majuscules, 6 caractères au plus) se cherche en mot entier à la casse exacte, un autre terme avec un
+    pluriel facultatif, sans tenir compte de la casse ; l'équivalent est reconnu par le début (5 lettres) de chacun de
+    ses mots d'au moins 3 lettres, pour tolérer les flexions. Une alerte, jamais une certitude : à revoir par un humain."""
+    fr = " ".join(H.unescape(_MARQUEURS_EN_LIGNE.sub(" ", fr)).split())
+    tr = " ".join(H.unescape(_MARQUEURS_EN_LIGNE.sub(" ", tr)).split())
+    problemes = []
+    for terme_fr, langues in glossaire.items():
+        eq = (langues.get(langue) or {}).get("terme")
+        if not eq or not terme_fr.strip():
+            continue
+        if terme_fr.isupper() and len(terme_fr) <= 6:
+            motif = re.compile(_AVANT_LETTRE + re.escape(terme_fr) + _APRES_LETTRE)
+        else:
+            motif = re.compile(_AVANT_LETTRE + r"[sx]?\s+".join(re.escape(m) for m in terme_fr.split()) + r"[sx]?"
+                               + _APRES_LETTRE, re.I)
+        mots = _MOT.findall(eq)
+        prefixes = [m[:5].casefold() for m in ([m for m in mots if len(m) >= 3] or mots)]
+        if motif.search(fr) and not all(p in tr.casefold() for p in prefixes):
+            problemes.append(probleme("terminologie", f"« {terme_fr} » sans « {eq} »", tr))
+    return problemes
+
+
+BLOQUANTS = ("tirets", "eszett", "marques", "interdits")  # règles de controler_traductions qui bloquent ; le reste avertit
+EXCLUS_DU_CONTROLE = ("v1", "invariant")  # statuts d'une traduction déjà validée ou jamais traduite
+
+
+def controler_traductions(langue, entrees, glossaire):
+    """Contrôle les traductions d'une table (Table.entrees) hors statuts v1 et invariant, par défaut et par page.
+    Rend (nombre de traductions contrôlées, problèmes) ; chaque problème : {lieu, regle, detail, extrait, gravite} avec
+    gravite « bloquant » (tirets, eszett, marques, interdits) ou « avertissement » (terminologie)."""
+    controlees, problemes = 0, []
+    for cle in sorted(entrees):
+        e = entrees[cle]
+        versions = [(None, e)] + [(page, e["par_page"][page]) for page in sorted(e["par_page"])]
+        for page, v in versions:
+            if v.get("trad") is None or v.get("statut") in EXCLUS_DU_CONTROLE:
+                continue
+            controlees += 1
+            lieu = f"« {_extrait(e['fr'], 50)} » [{cle}" + (f", page {page or 'accueil'}" if page is not None else "") + "]"
+            tr = v["trad"]
+            trouves = tirets(tr) + (eszett(e["fr"], tr) if langue == "de" else []) + marques(e["fr"], tr) + interdits(tr)
+            trouves += terminologie(e["fr"], tr, langue, glossaire)
+            problemes += [{"lieu": lieu, **p, "gravite": "bloquant" if p["regle"] in BLOQUANTS else "avertissement"}
+                          for p in trouves]
+    return controlees, problemes
 
 
 _MILLIERS = re.compile(r"(?<![\d.,'’])\d{1,3}(?:[   ]\d{3})+(?!\d|[   ]\d)")

@@ -30,14 +30,18 @@ extrait de texte) ; « chnell lire » lira les résultats d'une page capturée :
 glossaire : construit le glossaire de projet d'une langue d'après le journal (glossaire.json du dossier de la terminologie,
 les autres langues sont gardées) : seules les lignes confirme et corrige y entrent, toute divergence avec les termes V1 et
 toute ligne a_arbitrer sont des arbitrages pour Fabien (--arbitrages : la liste détaillée). Signale aussi les termes
-retenus du lexique sans ligne de journal (critère de la décision V5)."""
+retenus du lexique sans ligne de journal (critère de la décision V5).
+
+controler : contrôle les traductions de la table d'une langue hors statuts v1 et invariant (outils/i18n/controles.py,
+controler_traductions, tâche 4.4) : tirets longs, ß en allemand, marques, termes interdits (bloquants) et terminologie du
+glossaire (avertissement). Code de sortie 1 s'il y a un problème bloquant. Sans glossaire, le dit et contrôle le reste."""
 import argparse
 import json
 import sys
 from datetime import date
 from pathlib import Path
 
-from outils.i18n import chnell, memoire_v1, recomposition, terminologie, traduire
+from outils.i18n import chnell, controles, memoire_v1, recomposition, terminologie, traduire
 from outils.i18n.table import LANGUES, Table
 
 
@@ -130,6 +134,22 @@ def afficher_glossaire(langue, glossaire, arbitrages, detail, restants, fichier)
     return "\n".join(lignes)
 
 
+def afficher_controle(langue, controlees, problemes, glossaire):
+    """Rapport du contrôle d'une table : bloquants d'abord, puis avertissements de terminologie."""
+    bloquants = [p for p in problemes if p["gravite"] == "bloquant"]
+    avertissements = [p for p in problemes if p["gravite"] == "avertissement"]
+    lignes = [f"Contrôle {langue} : {controlees} traduction(s) hors statuts v1 et invariant, "
+              f"{len(bloquants)} problème(s) bloquant(s), {len(avertissements)} avertissement(s) de terminologie"]
+    if not glossaire:
+        lignes.append("Glossaire absent ou vide pour cette langue : terminologie non contrôlée (commande glossaire, "
+                      "après la session CHnell)")
+    for titre, groupe in (("Bloquants", bloquants), ("Avertissements de terminologie", avertissements)):
+        if groupe:
+            lignes.append(f"{titre} :")
+            lignes += [f"  {p['lieu']} : {p['regle']}, {p['detail']} : {p['extrait']}" for p in groupe]
+    return "\n".join(lignes)
+
+
 def commande_chnell(args):
     """chnell file, ajouter et lire : n'ont besoin ni du site V1 ni de build.py."""
     if args.action == "lire":
@@ -194,6 +214,8 @@ def main(argv=None):
     p = sous.add_parser("glossaire", help="construire le glossaire de projet d'une langue d'après le journal")
     p.add_argument("--langue", required=True, choices=LANGUES)
     p.add_argument("--arbitrages", action="store_true", help="liste détaillée des arbitrages pour Fabien")
+    p = sous.add_parser("controler", help="contrôler les traductions de la table d'une langue (hors v1 et invariant)")
+    p.add_argument("langue", choices=LANGUES)
     args = parser.parse_args(argv)
     if args.commande == "chnell":
         return commande_chnell(args)
@@ -211,6 +233,12 @@ def main(argv=None):
         print(afficher_glossaire(args.langue, glossaire, chnell.arbitrages(journal, termes), args.arbitrages, restants,
                                  fichier))
         return 0
+    if args.commande == "controler":
+        table = Table(args.langue, build.DOSSIER_LANGUES)
+        glossaire = {fr: l for fr, l in chnell.charger_glossaire().items() if args.langue in l}
+        controlees, problemes = controles.controler_traductions(args.langue, table.entrees, glossaire)
+        print(afficher_controle(args.langue, controlees, problemes, glossaire))
+        return 1 if any(p["gravite"] == "bloquant" for p in problemes) else 0
     if args.commande == "lexique":
         fichier_v1 = build.NEURON / "src/i18n" / f"termes-{args.langue}.json"
         if not fichier_v1.is_file():

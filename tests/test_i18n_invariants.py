@@ -1,12 +1,18 @@
 """Contrôles d'invariants de la traduction (outils/i18n/controles.py) : chaque contrôle attrape sa faute sur la page
 fautive, aucun ne se déclenche sur la page conforme ni sur la sortie FR actuelle."""
+import contextlib
+import io
 import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from tests import support
-from outils.i18n import controles
+import build
+from outils.i18n import __main__ as commandes
+from outils.i18n import chnell, controles, terminologie
+from outils.i18n.table import Table, cle
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures" / "i18n"
 CONFORME = (FIXTURES / "page-de-conforme.html").read_text(encoding="utf-8")
@@ -233,6 +239,150 @@ class TestControles(unittest.TestCase):
         for f in (support.site_complet() / "fr").rglob("index.html"):
             t = f.read_text(encoding="utf-8")
             self.assertEqual(controles.tirets(t) + controles.interdits(t), [], f)
+
+
+GLOSSAIRE = {"capital-actions": {"de": {"terme": "Aktienkapital", "source": "CHnell", "statut": "confirme"},
+                                 "en": {"terme": "share capital", "source": "CHnell", "statut": "confirme"}},
+             "CO": {"de": {"terme": "OR", "source": "Fedlex", "statut": "confirme"}}}
+
+
+class TestTerminologie(unittest.TestCase):
+    """Tâche 4.4 : un terme du glossaire de projet présent dans le texte FR doit y être traduit par son équivalent retenu."""
+
+    def test_terme_du_glossaire_absent_signale(self):
+        p = controles.terminologie("Le capital-actions est libéré.", "Das Grundkapital ist einbezahlt.", "de", GLOSSAIRE)
+        self.assertEqual(len(p), 1)
+        self.assertEqual(p[0]["regle"], "terminologie")
+        self.assertIn("« capital-actions » sans « Aktienkapital »", p[0]["detail"])
+        self.assertIn("Grundkapital", p[0]["extrait"])
+
+    def test_terme_present_accepte(self):
+        self.assertEqual(controles.terminologie("Le capital-actions est libéré.",
+                                                "Das Aktienkapital ist einbezahlt.", "de", GLOSSAIRE), [])
+        # flexion et casse : la V1 compare le début de chaque mot de l'équivalent
+        self.assertEqual(controles.terminologie("Le Capital-actions est libéré.",
+                                                "Des Aktienkapitals Libierung.", "de", GLOSSAIRE), [])
+
+    def test_terme_absent_du_texte_fr_sans_objet(self):
+        self.assertEqual(controles.terminologie("Une société anonyme.", "Eine Aktiengesellschaft.", "de", GLOSSAIRE), [])
+
+    def test_equivalent_a_plusieurs_mots(self):
+        g = {"droit des sociétés": {"de": {"terme": "Gesellschaftsrecht"}}, "capital social": {"en": {"terme": "share capital"}}}
+        self.assertEqual(len(controles.terminologie("Le droit des sociétés.", "Das Handelsrecht.", "de", g)), 1)
+        self.assertEqual(controles.terminologie("Le capital social.", "The share capital.", "en", g), [])
+        self.assertEqual(len(controles.terminologie("Le capital social.", "The capital.", "en", g)), 1)
+
+    def test_sigle_en_mot_entier_a_la_casse_exacte(self):
+        self.assertEqual(len(controles.terminologie("Selon le CO.", "Gemäss Gesetz.", "de", GLOSSAIRE)), 1)
+        self.assertEqual(controles.terminologie("Selon le CO.", "Gemäss OR.", "de", GLOSSAIRE), [])
+        self.assertEqual(controles.terminologie("Le coco et la COTE.", "Gesetz.", "de", GLOSSAIRE), [])
+
+    def test_seule_la_langue_du_texte_compte(self):
+        self.assertEqual(controles.terminologie("Le capital-actions.", "Das Grundkapital.", "it", GLOSSAIRE), [])
+        self.assertEqual(len(controles.terminologie("Le capital-actions.", "The capital.", "en", GLOSSAIRE)), 1)
+
+    def test_marqueurs_et_entites_ignores(self):
+        self.assertEqual(controles.terminologie("Le {1}capital-actions{/1} &amp; le reste.",
+                                                "Das {1}Aktienkapital{/1} &amp; der Rest.", "de", GLOSSAIRE), [])
+
+    def test_glossaire_vide(self):
+        self.assertEqual(controles.terminologie("Le capital-actions.", "Das Kapital.", "de", {}), [])
+
+
+class TestControlerTraductions(unittest.TestCase):
+    def entrees(self, **versions):
+        """Table de test : un texte par clé de versions, {fr, trad, statut}."""
+        return {f"cle{i}": {"fr": fr, "trad": trad, "statut": statut, "source": "test", "par_page": {}}
+                for i, (fr, trad, statut) in enumerate(versions.values())}
+
+    def test_v1_et_invariant_hors_controle(self):
+        entrees = self.entrees(a=("Le capital-actions", "Das Grundkapital", "v1"), b=("Corrext", "Corrext", "invariant"),
+                               c=("Le capital-actions", "Das Grundkapital", "adapte"))
+        controlees, problemes = controles.controler_traductions("de", entrees, GLOSSAIRE)
+        self.assertEqual(controlees, 1)
+        self.assertEqual([p["regle"] for p in problemes], ["terminologie"])
+        self.assertEqual(problemes[0]["gravite"], "avertissement")
+
+    def test_gravites(self):
+        entrees = self.entrees(a=("Un texte", f"Ein Text {chr(0x2014)} ohne Sinn", "mt"), b=("Une loi", "Eine Straße", "relu"),
+                               c=("Neur.on aide", "Neuron hilft", "adapte"), d=("Un pays", "Ein Land von Lexa", "mt"))
+        controlees, problemes = controles.controler_traductions("de", entrees, {})
+        self.assertEqual(controlees, 4)
+        self.assertEqual(sorted(p["regle"] for p in problemes), ["eszett", "interdits", "marques", "tirets"])
+        self.assertTrue(all(p["gravite"] == "bloquant" for p in problemes))
+        self.assertTrue(all("cle" in p["lieu"] for p in problemes))
+
+    def test_eszett_en_allemand_seulement(self):
+        entrees = {"k": {"fr": "Une rue", "trad": "Eine Straße", "statut": "mt", "source": "test", "par_page": {}}}
+        self.assertEqual(controles.controler_traductions("en", entrees, {}), (1, []))
+
+    def test_traductions_par_page_controlees(self):
+        entrees = {"k": {"fr": "Le capital-actions", "trad": "Das Aktienkapital", "statut": "v1", "source": "V1",
+                         "par_page": {"a/": {"trad": "Das Grundkapital", "statut": "adapte", "source": "test"},
+                                      "b/": {"trad": "Das Grundkapital", "statut": "v1", "source": "V1"}}}}
+        controlees, problemes = controles.controler_traductions("de", entrees, GLOSSAIRE)
+        self.assertEqual(controlees, 1)
+        self.assertIn("page a/", problemes[0]["lieu"])
+
+    def test_entree_par_page_seulement_sans_defaut(self):
+        entrees = {"k": {"fr": "Le capital-actions", "trad": None, "statut": None, "source": None,
+                         "par_page": {"": {"trad": "Das Grundkapital", "statut": "mt", "source": "test"}}}}
+        controlees, problemes = controles.controler_traductions("de", entrees, GLOSSAIRE)
+        self.assertEqual(controlees, 1)
+        self.assertIn("page accueil", problemes[0]["lieu"])
+
+
+class TestCommandeControler(unittest.TestCase):
+    def setUp(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.dossier = Path(tmp.name) / "terminologie"
+        self.langues = Path(tmp.name) / "langues"
+        for patch in (mock.patch.object(terminologie, "TERMINOLOGIE", self.dossier),
+                      mock.patch.object(build, "DOSSIER_LANGUES", self.langues)):
+            patch.start()
+            self.addCleanup(patch.stop)
+        self.table = Table("de", self.langues)
+
+    def poser(self, fr, trad, statut):
+        self.table.poser(fr, trad, statut, "test")
+
+    def lancer(self):
+        self.table.enregistrer()
+        sortie, erreur = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(sortie), contextlib.redirect_stderr(erreur):
+            code = commandes.main(["controler", "de"])
+        return code, sortie.getvalue()
+
+    def test_sans_glossaire_le_dit_et_controle_le_reste(self):
+        self.poser("Un texte", "Ein Text", "adapte")
+        self.table.entrees[cle("Autre")] = {  # Table.poser refuse un tiret : l'entrée fautive est écrite directement
+            "fr": "Autre", "trad": f"Ein {chr(0x2014)} Text", "statut": "mt", "source": "test", "par_page": {}}
+        code, sortie = self.lancer()
+        self.assertEqual(code, 1)
+        self.assertIn("2 traduction(s) hors statuts v1 et invariant, 1 problème(s) bloquant(s)", sortie)
+        self.assertIn("Glossaire absent ou vide pour cette langue", sortie)
+        self.assertIn("tirets", sortie)
+        self.assertNotIn(chr(0x2014), sortie)
+
+    def test_terminologie_en_avertissement_sans_echec(self):
+        chnell.ecrire_glossaire({"capital-actions": GLOSSAIRE["capital-actions"]}, "de", self.dossier)
+        self.poser("Le capital-actions est libéré.", "Das Grundkapital ist einbezahlt.", "adapte")
+        self.poser("Le capital-actions est libéré.", "Das Aktienkapital ist einbezahlt.", "v1")  # remplace : v1, hors contrôle
+        self.poser("Le capital-actions augmente.", "Das Grundkapital steigt.", "relu")
+        code, sortie = self.lancer()
+        self.assertEqual(code, 0)
+        self.assertIn("0 problème(s) bloquant(s), 1 avertissement(s) de terminologie", sortie)
+        self.assertIn("« capital-actions » sans « Aktienkapital »", sortie)
+        self.assertNotIn("Glossaire absent", sortie)
+
+    def test_table_conforme(self):
+        chnell.ecrire_glossaire({"capital-actions": GLOSSAIRE["capital-actions"]}, "de", self.dossier)
+        self.poser("Le capital-actions augmente.", "Das Aktienkapital steigt.", "relu")
+        code, sortie = self.lancer()
+        self.assertEqual(code, 0)
+        self.assertIn("1 traduction(s)", sortie)
+        self.assertIn("0 problème(s) bloquant(s), 0 avertissement(s)", sortie)
 
 
 if __name__ == "__main__":
