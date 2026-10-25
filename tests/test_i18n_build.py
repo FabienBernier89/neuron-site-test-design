@@ -1,8 +1,8 @@
 """Build en trois passes et chemins par langue (tâche 1.2) : adresses, attribut lang, liens relatifs des pages
 construites hors français.
 
-La traduction n'est pas encore branchée (build.TRADUIRE est l'identité) : une page « de » contient le texte français.
-Ces tests vérifient la structure (chemin, lang, liens relatifs), jamais le texte."""
+La traduction y est remplacée par l'identité (support.identite) : une page « de » contient le texte français. Ces tests
+vérifient la structure (chemin, lang, liens relatifs), jamais le texte (tests/test_i18n_traduire.py le fait)."""
 import re
 import tempfile
 import unittest
@@ -68,7 +68,7 @@ class TestBuildDeuxLangues(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls._tmp = tempfile.TemporaryDirectory()
-        cls.sortie = support.construire(cls._tmp.name, pages=PAGES, langues=("fr", "de"))
+        cls.sortie = support.construire(cls._tmp.name, pages=PAGES, langues=("fr", "de"), patches=support.identite())
 
     @classmethod
     def tearDownClass(cls):
@@ -122,7 +122,8 @@ class TestPagesNonConstruites(unittest.TestCase):
             self.assertTrue((sortie / "fr/contact/index.html").is_file())
 
     def test_traduire_recoit_le_html_francais_complet(self):
-        """TRADUIRE reçoit la page française assemblée (liens encore en {{ROOT}}) pour chaque langue hors fr."""
+        """TRADUIRE reçoit la page française assemblée (liens encore en {{ROOT}}) pour chaque langue hors fr, la 404
+        comprise (clé de page « 404 »)."""
         appels = []
 
         def traduire(html, page, langue):
@@ -130,7 +131,7 @@ class TestPagesNonConstruites(unittest.TestCase):
             return html, []
         with tempfile.TemporaryDirectory() as tmp, mock.patch.object(build, "TRADUIRE", traduire):
             support.construire(tmp, pages=PAGES, langues=("fr", "de"))
-        self.assertEqual(sorted(appels), [("", "de", True), ("contact/", "de", True)])
+        self.assertEqual(sorted(appels), [("", "de", True), ("404", "de", True), ("contact/", "de", True)])
 
     def test_traduire_jamais_appele_en_francais_seul(self):
         with tempfile.TemporaryDirectory() as tmp, mock.patch.object(build, "TRADUIRE", side_effect=AssertionError("appelé")):
@@ -142,7 +143,7 @@ class TestLiensDepuisDe(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.sortie = support.site_complet(langues=("fr", "de"), apercu=True)
+        cls.sortie = support.site_complet(langues=("fr", "de"), apercu=True, sans_traduction=True)
 
     def test_toutes_les_pages_de(self):
         attendues = {build.chemin_page(p, "de").relative_to(build.DOCS).as_posix() for p in build.PAGES}

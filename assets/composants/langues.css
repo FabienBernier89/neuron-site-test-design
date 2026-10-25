@@ -47,3 +47,7 @@
 .mm .hd-lang{margin-top:24px;gap:8px}
 .mm .hd-lang a{padding:14px 16px}  /* cibles tactiles de 44 px */
 @media (max-width:1023px){.hd-cta .hd-lang{display:none}}  /* sous 1024 px le menu mobile porte le sélecteur */
+
+/* Bandeau des pages de l'aperçu qui contiennent une traduction non relue (outils/i18n/traduire.py, décision V4), jamais en
+   production. --ink sur --tile : #06122e sur #F5F8FF en clair, #ffffff sur #06246b en sombre (contraste AA largement). */
+.bandeau-travail{padding:10px 16px;background:var(--tile);border-bottom:2px solid var(--accent-d);font:600 14px/20px var(--sans);color:var(--ink);text-align:center}

@@ -311,13 +311,14 @@ class TestSelecteurDeLangue(unittest.TestCase):
 
 
 class TestSelecteurDansLeBuild(unittest.TestCase):
-    """Le build pose le sélecteur sur les pages construites quand plusieurs langues le sont (la traduction n'est pas
-    branchée : les pages « de » portent le texte français, seuls le balisage et les adresses comptent)."""
+    """Le build pose le sélecteur sur les pages construites quand plusieurs langues le sont (la traduction est
+    remplacée par l'identité, support.identite : les pages « de » portent le texte français, seuls le balisage et les
+    adresses comptent)."""
 
     @classmethod
     def setUpClass(cls):
         cls._tmp = tempfile.TemporaryDirectory()
-        cls.sortie = support.construire(cls._tmp.name, pages=("", "contact/"), langues=("fr", "de"))
+        cls.sortie = support.construire(cls._tmp.name, pages=("", "contact/"), langues=("fr", "de"), patches=support.identite())
 
     @classmethod
     def tearDownClass(cls):

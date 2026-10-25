@@ -4,7 +4,8 @@ Copie de l'extracteur de la V1 (Sites/neuron/outils/segments.py : découpe en bl
 par des marqueurs {n}…{/n}, restauration), étendue pour la page complète telle que le build l'assemble :
 - la tête (<title>, content des métas de texte), le corps, les attributs lisibles ou lus par les scripts ;
 - le JSON-LD (sans alternateName) et les JSON de données (index du centre d'aide) ;
-- les exclusions : sous-arbres dont le lang n'est pas fr, éléments translate="no", attributs classés « jamais » ;
+- les exclusions : sous-arbres dont le lang n'est pas fr, éléments translate="no" ou de CLASSES_NON_TRADUITES,
+  attributs classés « jamais » ;
 - le drapeau ui (écran d'application, ancêtre [data-ui]) et le drapeau lang_fr (passage en français voulu).
 
 Un segment est une unité {id, genre, debut, fin, html, texte, table, ui, attr, lang_fr} :
@@ -94,7 +95,8 @@ _MARQ = re.compile(r"\{\s*(/?)\s*(\d+)\s*\}")
 
 
 def restaurer(texte, table):
-    """Texte traduit avec marqueurs -> HTML. Lève ValueError si un marqueur manque, est en double ou dans le désordre."""
+    """Texte traduit avec marqueurs -> HTML. Lève ValueError si un marqueur manque, est en double ou dans le désordre.
+    Les espaces de la traduction sont gardées telles quelles, y compris à l'intérieur d'une paire de marqueurs."""
     vus = {}
     for m in _MARQ.finditer(texte):
         vus.setdefault((m.group(1), int(m.group(2))), []).append(m.start())
@@ -108,9 +110,9 @@ def restaurer(texte, table):
                 raise ValueError(f"marqueurs {{{n}}}…{{/{n}}} absents, en double ou inversés")
     if any(int(m.group(2)) not in table for m in _MARQ.finditer(texte)):
         raise ValueError("marqueur inconnu")
-    # espaces ajoutées par le moteur à l'intérieur d'une paire
-    texte = re.sub(r"\{\s*(\d+)\s*\}(?=\S)|\{\s*(\d+)\s*\}\s+", lambda m: _ouvre(m, table), texte)
-    texte = re.sub(r"\s+\{\s*/\s*(\d+)\s*\}|\{\s*/\s*(\d+)\s*\}", lambda m: "{/%s}" % (m.group(1) or m.group(2)), texte)
+    # marqueurs écrits avec des espaces (« { /1 } ») remis en forme ; les espaces autour des marqueurs sont celles de
+    # la traduction, gardées telles quelles (la V1 rognait celle d'avant « {/n} » : « l'interview {/1}! »)
+    texte = _MARQ.sub(lambda m: "{%s%s}" % (m.group(1), m.group(2)), texte)
     morceaux, pos = [], 0
     for m in re.finditer(r"\{(/?)(\d+)\}", texte):
         morceaux.append(html.escape(texte[pos:m.start()], quote=False))
@@ -119,12 +121,6 @@ def restaurer(texte, table):
         pos = m.end()
     morceaux.append(html.escape(texte[pos:], quote=False))
     return "".join(morceaux)
-
-
-def _ouvre(m, table):
-    n = int(m.group(1) or m.group(2))
-    garde = "" if "vide" not in table[n] or m.group(1) else (" " if m.group(0).endswith(" ") else "")
-    return "{%d}" % n + garde
 
 
 def _a_du_texte(fragment):
@@ -144,6 +140,11 @@ def scripts_a_traduire(source):
 
 
 # ---------- classement des attributs ----------
+
+# Classes des éléments jamais traduits, comme translate="no" : bloc de code de l'exemple d'API (tarifs/, JSON indenté
+# découpé en balises en ligne). Exclus par leur classe pour laisser le français identique ; controles.texte_visible
+# les exclut aussi.
+CLASSES_NON_TRADUITES = {"u-code"}
 
 # Attributs dont la valeur est du texte français affiché ou lu par un script : extraits, où qu'ils soient.
 ATTRS_TEXTE = ("alt", "aria-label", "title", "placeholder", "data-m", "data-v-erreur", "data-v-refus", "data-vide",
@@ -350,7 +351,7 @@ def _entree(parent, balise, attrs):
         lang, explicite = attrs["lang"], True
     non_traduit = parent["non_traduit"]
     t = attrs.get("translate", "").strip().lower()
-    if t == "no":
+    if t == "no" or CLASSES_NON_TRADUITES & set(attrs.get("class", "").split()):
         non_traduit = True
     elif t == "yes":
         non_traduit = False

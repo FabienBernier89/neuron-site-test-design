@@ -16,6 +16,13 @@ sys.path.insert(0, str(ICI))
 import build  # noqa: E402
 
 
+def identite():
+    """Patches qui remplacent la traduction par l'identité (build.TRADUIRE, build.LIBELLES) : chaque page est construite
+    dans chaque langue avec le texte français. Pour les tests de structure (adresses, liens, balisage), jamais du texte."""
+    return [mock.patch.object(build, "TRADUIRE", lambda html, page, langue: (html, [])),
+            mock.patch.object(build, "LIBELLES", lambda langue: ((lambda s: s), []))]
+
+
 def construire(tmp, pages=("", "contact/"), config=None, patches=(), langues=None):
     """Construit le site dans <tmp>/docs (en mémoire, sans sous-processus) avec les pages données et des réglages
     surchargés. langues : langues construites, par exemple ("fr", "de") ; équivaut à config={"langues": [...]}.
@@ -37,15 +44,17 @@ def construire(tmp, pages=("", "contact/"), config=None, patches=(), langues=Non
 _SITES = {}
 
 
-def site_complet(langues=None, **config):
+def site_complet(langues=None, sans_traduction=False, **config):
     """Site complet (toutes les pages de src/pages), construit une seule fois par jeu de réglages et par processus de
     test, dans un dossier temporaire supprimé à la fin. Exemple : site_complet(apercu=False) pour la production
-    simulée, site_complet(langues=("fr", "de")) pour construire aussi l'allemand. Renvoie le dossier de sortie."""
-    cle = (tuple(langues) if langues else None, tuple(sorted(config.items())))
+    simulée, site_complet(langues=("fr", "de")) pour construire aussi l'allemand ; sans_traduction : traduction remplacée
+    par l'identité (identite()). Renvoie le dossier de sortie."""
+    cle = (tuple(langues) if langues else None, sans_traduction, tuple(sorted(config.items())))
     if cle not in _SITES:
         tmp = tempfile.mkdtemp(prefix="neuron-site-")
         atexit.register(shutil.rmtree, tmp, True)
-        _SITES[cle] = construire(tmp, build.PAGES, config=config, langues=langues)
+        _SITES[cle] = construire(tmp, build.PAGES, config=config, langues=langues,
+                                 patches=identite() if sans_traduction else ())
     return _SITES[cle]
 
 

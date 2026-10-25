@@ -1,5 +1,6 @@
 """Contrôles d'invariants de la traduction (outils/i18n/controles.py) : chaque contrôle attrape sa faute sur la page
 fautive, aucun ne se déclenche sur la page conforme ni sur la sortie FR actuelle."""
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -48,6 +49,11 @@ class TestTexteVisible(unittest.TestCase):
         self.assertNotIn("Ce nom reste", textes)              # translate="no"
         self.assertNotIn("dividende", textes)                 # data-html
         self.assertNotIn("script ne compte pas", textes)      # script hors JSON-LD
+
+    def test_bloc_de_code_exclu(self):
+        """Point 9 de la tâche 2.3 : le bloc de code de l'exemple d'API (classe u-code) n'est pas du texte de langue."""
+        textes = controles.texte_visible('<p>Avant</p><pre class="u-code"><span>"source_language": "de"</span></pre>', "de")
+        self.assertEqual(textes, ["Avant"])
 
     def test_entites_desechappees(self):
         textes = controles.texte_visible("<p>a &amp; b &#8212; c</p>", "de")
@@ -129,6 +135,21 @@ class TestControles(unittest.TestCase):
     def test_langue_page_json_ld(self):
         html = CONFORME.replace('"inLanguage":"de-CH"', '"inLanguage":"fr-CH"')
         self.assertEqual(len(controles.langue_page(html, "de")), 1)
+
+    def test_langue_page_terme_du_glossaire(self):
+        """Ruling 11 : sur une page de glossaire italienne, un DefinedTerm de-CH (et son DefinedTermSet) garde sa langue
+        sans être signalé ; le inLanguage de la page (WebPage) reste contrôlé."""
+        ld = {"@context": "https://schema.org", "@graph": [
+            {"@type": "WebPage", "name": "Prescrizione", "inLanguage": "it-CH"},
+            {"@type": "DefinedTerm", "name": "Verjährung", "inLanguage": "de-CH",
+             "inDefinedTermSet": {"@type": "DefinedTermSet", "name": "Glossar", "inLanguage": "de-CH"}},
+            {"@type": ["DefinedTerm"], "name": "prescription", "inLanguage": "fr-CH"}]}
+        html = ('<!DOCTYPE html><html lang="it"><head><meta property="og:locale" content="it_CH">'
+                '<script type="application/ld+json">' + json.dumps(ld) + "</script></head><body></body></html>")
+        self.assertEqual(controles.langue_page(html, "it"), [])
+        fautive = html.replace('"it-CH"', '"fr-CH"')
+        self.assertEqual([p["detail"] for p in controles.langue_page(fautive, "it")],
+                         ["inLanguage « fr-CH » dans le JSON-LD : « it » attendu"])
 
     def test_page_fautive(self):
         regles = {p["regle"] for p in controles.controler_page(FAUTIVE, "de")}

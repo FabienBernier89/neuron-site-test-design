@@ -191,13 +191,15 @@ NS_XHTML = "{http://www.w3.org/1999/xhtml}"
 
 class TestProductionMultilingue(unittest.TestCase):
     """Production simulée en français et en allemand (tâche 1.5) : racine, 404, sitemaps, robots et llms.txt par langue.
-    La traduction n'est pas branchée : les pages « de » portent le texte français, seuls les adresses et le balisage comptent."""
+    Traduction remplacée par l'identité (support.identite) : les pages « de » portent le texte français, seuls les adresses
+    et le balisage comptent."""
 
     @classmethod
     def setUpClass(cls):
         import tempfile
         cls._tmp = tempfile.TemporaryDirectory()
-        cls.docs = support.construire(cls._tmp.name, pages=PAGES_MULTI, config={"apercu": False}, langues=("fr", "de"))
+        cls.docs = support.construire(cls._tmp.name, pages=PAGES_MULTI, config={"apercu": False}, langues=("fr", "de"),
+                                      patches=support.identite())
 
     @classmethod
     def tearDownClass(cls):
@@ -335,6 +337,28 @@ class TestLlmsParLangue(unittest.TestCase):
         self.assertIn("## Kontakt", txt)
         self.assertIn("(https://neur-on.ai/de/kontakt/)", txt)
         self.assertIn("https://neur-on.ai/de/llms-full.txt", txt)
+
+
+    def test_source_porte_sa_ponctuation(self):
+        """Relecture 1.5 : la ponctuation de « Source : » est portée par le libellé passé à t (typographie de la langue)."""
+        from outils import llms
+        lire = lambda page: "<main><p>Texte</p></main>"
+        fr = llms.llms_full_txt(self.PAGES, lire, "2026-10-23")
+        self.assertIn("Source : https://neur-on.ai/fr/contact/", fr)
+        de = llms.llms_full_txt(self.PAGES, lire, "2026-10-23", "de", lambda s: {"Source :": "Quelle:"}.get(s, s))
+        self.assertIn("Quelle: https://neur-on.ai/de/kontakt/", de)
+        self.assertIn(llms.SOURCE, llms.libelles_fixes())
+
+    def test_optional_jamais_traduit(self):
+        """« Optional » est un mot clé du format llms.txt : jamais passé à t, jamais dans les libellés à traduire."""
+        from outils import llms
+        pages = self.PAGES + [("ressources/blog/comprendre-devis-traduction-juridique/", {"title": "Un billet · Neur.on", "description": "Billet."})]
+        vus = []
+        txt = llms.llms_txt(pages, "2026-10-23", "de", lambda s: vus.append(s) or "DE " + s)
+        self.assertIn("## Optional", txt)
+        self.assertIn("## DE Contact", txt)
+        self.assertNotIn("Optional", vus)
+        self.assertNotIn("Optional", llms.libelles_fixes())
 
 
 class TestPageRacine(unittest.TestCase):

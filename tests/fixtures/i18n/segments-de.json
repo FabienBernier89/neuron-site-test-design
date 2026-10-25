@@ -1,0 +1,842 @@
+{
+ "014a88cfae1345a1": {
+  "fr": "Le moteur de traduction du droit, de la fiscalité et de la finance suisses. Une solution entièrement suisse : entité, infrastructure et moteur LexMachina, pour une précision quadrilingue et une souveraineté totale des données.",
+  "trad": "Die Übersetzungsmaschine für Schweizer Recht, Steuern und Finanzen. Eine vollständig schweizerische Lösung: Unternehmen, Infrastruktur und Maschine LexMachina, für viersprachige Präzision und volle Datensouveränität.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "024a27a6c229da80": {
+  "fr": "Demandez une démo de Corrext par Neur.on : un expert du droit suisse vous la montre sur vos documents, vos langues et votre terminologie, depuis Fribourg.",
+  "trad": "Fordern Sie eine Demo von Corrext by Neur.on an: Eine Fachperson für Schweizer Recht zeigt sie Ihnen mit Ihren Dokumenten, Ihren Sprachen und Ihrer Terminologie, von Freiburg aus.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "03b0f8c0a8aa8ea1": {
+  "fr": "Cochez cette case pour envoyer votre demande.",
+  "trad": "Kreuzen Sie dieses Feld an, um Ihre Anfrage zu senden.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "04494da43d088660": {
+  "fr": "Rechercher une question (ex : traduire un fichier, devis, ajouter un membre)",
+  "trad": "Eine Frage suchen (z. B. Datei übersetzen, Offerte, Mitglied hinzufügen)",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "0590ccffdc95fc57": {
+  "fr": "Facultatif : ces précisions nous aident à choisir les pièces, le moteur et la terminologie de la séance.",
+  "trad": "Freiwillig: Diese Angaben helfen uns, Unterlagen, Maschine und Terminologie für die Sitzung auszuwählen.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "0650815438534ca0": {
+  "fr": "{1}Aller au contenu{/1}",
+  "trad": "{1}Zum Inhalt{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "0681b25c6be07eb6": {
+  "fr": "Demander une démonstration",
+  "trad": "Demonstration anfragen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "08a679d2c54f2874": {
+  "fr": "{1}Swiss FinTech Awards 2024{/1}{2}Lauréat Early Stage{/2}",
+  "trad": "{1}Swiss FinTech Awards 2024{/1}{2}Gewinner Early Stage{/2}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "0a8a32e781028e50": {
+  "fr": "{1}{2}Corrext, le poste de commande{/2}{3}Projets, devis, ressources et droits dans un seul environnement suisse{/3}{/1} {4}{5}LexMachina{/5}{6}Le moteur entraîné sur le droit et la finance suisses{/6}{/4} {7}{8}Sécurité et souveraineté{/8}{9}Où vos données sont stockées, traitées et par quel moteur{/9}{/7} {10}{11}API et on-premises{/11}{12}Intégration à vos DMS, intranets et workflows{/12}{/10}",
+  "trad": "{1}{2}Corrext, die Schaltzentrale{/2}{3}Projekte, Offerten, Ressourcen und Rechte in einer einzigen Schweizer Umgebung{/3}{/1}\n{4}{5}LexMachina{/5}{6}Die Maschine, trainiert mit Schweizer Recht und Finanzwesen{/6}{/4}\n{7}{8}Sicherheit und Souveränität{/8}{9}Wo Ihre Daten gespeichert und verarbeitet werden, und mit welcher Maschine{/9}{/7}\n{10}{11}API und On-Premises{/11}{12}Integration in Ihre DMS, Intranets und Workflows{/12}{/10}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "0deac7c2f74e2a6a": {
+  "fr": "Neur.on, retour à l'accueil",
+  "trad": "Neur.on, zurück zur Startseite",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "0e9f64f272de907b": {
+  "fr": "Traduction, terminologie ou documentation",
+  "trad": "Übersetzung, Terminologie oder Dokumentation",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "0f85156e3f126053": {
+  "fr": "Pour préparer votre démonstration",
+  "trad": "Zur Vorbereitung Ihrer Demonstration",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "10646983f5b230b0": {
+  "fr": "Directions juridiques",
+  "trad": "Rechtsabteilungen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "15723a3d381eab3e": {
+  "fr": "100 à 500 pages par mois",
+  "trad": "100 bis 500 Seiten pro Monat",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "177b10aa357b6d5f": {
+  "fr": "Fermer le menu",
+  "trad": "Menü schliessen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "186eea88e8b92a68": {
+  "fr": "Puis-je utiliser DeepL ou un modèle généraliste dans Corrext ?",
+  "trad": "Kann ich DeepL oder ein allgemeines Modell in Corrext verwenden?",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "1bcb03fa7488f007": {
+  "fr": "Choisissez votre fonction",
+  "trad": "Wählen Sie Ihre Funktion",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "1d3e8b482a740110": {
+  "fr": "Hébergement en Suisse, chez Infomaniak.",
+  "trad": "Hosting in der Schweiz, bei Infomaniak.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "20c482ae675b14da": {
+  "fr": "Le formulaire n'a pas été envoyé. Corrigez les champs suivants :",
+  "trad": "Das Formular wurde nicht gesendet. Korrigieren Sie folgende Felder:",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "2150b85ae2714941": {
+  "fr": "Banques et finance",
+  "trad": "Banken und Finanzen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "264d1489636a7e3a": {
+  "fr": "Fiduciaires et conseil",
+  "trad": "Treuhand und Beratung",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "2cc05569a519496e": {
+  "fr": "{1}Allemand{/1}",
+  "trad": "{1}Deutsch{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "2e5c4ef72e16f71c": {
+  "fr": "Fonction{1}*{/1}",
+  "trad": "Funktion{1}*{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "30cabd01bda09882": {
+  "fr": "Ce qui se passe après l'envoi",
+  "trad": "Was nach dem Absenden geschieht",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "30d89f5f380dfbb7": {
+  "fr": "Compliance ou risque",
+  "trad": "Compliance oder Risiko",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "314553173124c5cc": {
+  "fr": "1 à 10 personnes",
+  "trad": "1 bis 10 Personen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "324ae72e2bb5aa43": {
+  "fr": "Moins de 100 pages par mois",
+  "trad": "Weniger als 100 Seiten pro Monat",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "3effbdde0d5d9509": {
+  "fr": "{1}Comment pouvons-nous vous aider ?{/1}",
+  "trad": "{1}Wie können wir Ihnen helfen?{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "3fc783c995377481": {
+  "fr": "11 à 50 personnes",
+  "trad": "11 bis 50 Personen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "43c7e150dbdd14eb": {
+  "fr": "Ouvrir le menu",
+  "trad": "Menü öffnen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "43dacf9e4764b799": {
+  "fr": "Autre",
+  "trad": "Andere",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "45dc6171e3340f3f": {
+  "fr": "Qu'est-ce que LexMachina ?",
+  "trad": "Was ist LexMachina?",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "46732c72ce11ad70": {
+  "fr": "J'accepte que Neur.on AI Solutions SA utilise ces informations pour donner suite à ma demande, selon sa {1}politique de protection des données{/1}.{2}*{/2}",
+  "trad": "Ich bin damit einverstanden, dass die Neur.on AI Solutions SA diese Angaben zur Bearbeitung meiner Anfrage verwendet, gemäss ihrer {1}Datenschutzerklärung{/1}.{2}*{/2}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "476d2e8004eb81a0": {
+  "fr": "Avocat ou associé de cabinet",
+  "trad": "Anwalt oder Partner einer Kanzlei",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "4c64745092c25702": {
+  "fr": "{1}Soutenu par Innosuisse{/1}",
+  "trad": "{1}Unterstützt von Innosuisse{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "4d898ac702fce098": {
+  "fr": "Adopté par les professionnels du droit et de la finance suisses",
+  "trad": "Im Einsatz bei Schweizer Fachleuten aus Recht und Finanzwesen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "4d9c70f6c60572e0": {
+  "fr": "Contact et démo · Neur.on",
+  "trad": "Kontakt und Demo · Neur.on",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "4f01b664ebff4a94": {
+  "fr": "51 à 200 personnes",
+  "trad": "51 bis 200 Personen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "50464b1f805d6f3e": {
+  "fr": "Le concordancier terminologique suisse de Neur.on.",
+  "trad": "Die Schweizer Terminologie-Konkordanz von Neur.on.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "525129ba6805eb09": {
+  "fr": "Aucune question ne correspond. Essayez un autre mot, ou écrivez-nous à team@corrext.com.",
+  "trad": "Keine passende Frage gefunden. Versuchen Sie ein anderes Wort, oder schreiben Sie uns an team@corrext.com.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "52dc44da78c29038": {
+  "fr": "Questions correspondantes",
+  "trad": "Passende Fragen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "53cfa77b86f708b8": {
+  "fr": "Nom{1}*{/1}",
+  "trad": "Name{1}*{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "569a4c6e2108aa95": {
+  "fr": "{1}Italien{/1}",
+  "trad": "{1}Italienisch{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "5856031ef2623c63": {
+  "fr": "Choisissez une option dans la liste.",
+  "trad": "Wählen Sie eine Option aus der Liste.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "590602a77c744384": {
+  "fr": "Formulaire de démonstration : aucun envoi.",
+  "trad": "Demonstrationsformular: kein Versand.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "5b278f2654cb9a3e": {
+  "fr": "{1}Digital Shapers 2023{/1}",
+  "trad": "{1}Digital Shapers 2023{/1}",
+  "statut": "invariant",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "5cf0c5861b85db76": {
+  "fr": "E-mail professionnel{1}*{/1}",
+  "trad": "Geschäftliche E-Mail{1}*{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "5d4529022a254873": {
+  "fr": "Oui, c'est le principe. Vous apportez des documents représentatifs de votre pratique et nous les traitons dans Corrext pendant la séance, dans vos paires de langues et avec votre terminologie. Pour des pièces sensibles, la démonstration se fait en mode Highly sensitive content : stockage et traitement exclusivement en Suisse. Un accord de confidentialité peut être signé avant la séance.",
+  "trad": "Ja, das ist das Prinzip. Sie bringen typische Dokumente aus Ihrer Praxis mit, und wir bearbeiten sie während der Sitzung in Corrext, in Ihren Sprachpaaren und mit Ihrer Terminologie. Für heikle Unterlagen läuft die Demonstration im Modus Highly sensitive content: Speicherung und Verarbeitung ausschliesslich in der Schweiz. Eine Vertraulichkeitsvereinbarung kann vor der Sitzung unterzeichnet werden.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "5e988aae721c4d95": {
+  "fr": "500 à 2000 pages par mois",
+  "trad": "500 bis 2000 Seiten pro Monat",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "5eb6665417346346": {
+  "fr": "La démo se fait-elle sur nos propres documents ?",
+  "trad": "Findet die Demo mit unseren eigenen Dokumenten statt?",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "5f2ad7cabb071f4a": {
+  "fr": "Qu'est-ce que Corrext ?",
+  "trad": "Was ist Corrext?",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "6125927ce88a76a8": {
+  "fr": "Taille de l'organisation",
+  "trad": "Grösse der Organisation",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "612e142583819bae": {
+  "fr": "Que se passe-t-il après ma demande ?",
+  "trad": "Was geschieht nach meiner Anfrage?",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "622bf59f112823c2": {
+  "fr": "Digital Shapers 2023",
+  "trad": "Digital Shapers 2023",
+  "statut": "invariant",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "62aa4c84607dbd0e": {
+  "fr": "Un premier échange de cadrage : vos langues, vos types de documents, vos contraintes de confidentialité et la façon dont vos traductions circulent aujourd'hui. Vient ensuite une démonstration de Corrext construite sur ce cadrage, puis, si l'outil correspond, un essai encadré avec un périmètre, des utilisateurs et une durée définis ensemble.",
+  "trad": "Ein erstes Gespräch zur Abklärung: Ihre Sprachen, Ihre Dokumenttypen, Ihre Vorgaben zur Vertraulichkeit und wie Ihre Übersetzungen heute laufen. Darauf folgt eine Demonstration von Corrext auf dieser Grundlage und, wenn das Tool passt, ein begleiteter Test mit gemeinsam festgelegtem Umfang, Nutzerkreis und Zeitraum.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "62bd58fac275cfe4": {
+  "fr": "Mode Highly sensitive content : stockage et traitement exclusivement en Suisse.",
+  "trad": "Modus Highly sensitive content: Speicherung und Verarbeitung ausschliesslich in der Schweiz.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "6398670f9f2764fa": {
+  "fr": "Découvrir Corrext",
+  "trad": "Corrext entdecken",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "64eb2c5d0c02600a": {
+  "fr": "Les champs marqués d'un astérisque sont obligatoires. Plus vous décrivez votre contexte, plus la démonstration sera proche de votre pratique.",
+  "trad": "Felder mit Sternchen sind Pflichtfelder. Je genauer Sie Ihren Kontext beschreiben, desto näher ist die Demonstration an Ihrer Praxis.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "65981e3d7f0586ba": {
+  "fr": "Lauréat des Swiss FinTech Awards 2024, catégorie Early Stage",
+  "trad": "Gewinner der Swiss FinTech Awards 2024, Kategorie Early Stage",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "65a6bdd2dd521b4f": {
+  "fr": "Secteur",
+  "trad": "Branche",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "65d92a68c22a2baf": {
+  "fr": "Votre message",
+  "trad": "Ihre Nachricht",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "6619264a4b579c12": {
+  "fr": "Langue",
+  "trad": "Sprache",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "6c3f02104387bc90": {
+  "fr": "Choisissez une taille",
+  "trad": "Wählen Sie eine Grösse",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "6e01d9617edcf847": {
+  "fr": "LegalTechs et éditeurs",
+  "trad": "LegalTechs und Verlage",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "6ef7c04b7a6bb397": {
+  "fr": "La plateforme",
+  "trad": "Die Plattform",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "727673d70d270452": {
+  "fr": "Direction ou direction générale",
+  "trad": "Geschäftsleitung oder Direktion",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "7358f28c138cbbbe": {
+  "fr": "Cabinets d'avocats",
+  "trad": "Anwaltskanzleien",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "769d01fae7492271": {
+  "fr": "Choisissez votre secteur",
+  "trad": "Wählen Sie Ihre Branche",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "770265db3abc1fd8": {
+  "fr": "BILANZ, classement des entreprises les plus innovantes de Suisse 2024 (13e rang)",
+  "trad": "BILANZ, Rangliste der innovativsten Unternehmen der Schweiz 2024 (Rang 13)",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "775e9c37b336075e": {
+  "fr": "Combien cela coûte-t-il ?",
+  "trad": "Was kostet das?",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "7ef9bef4aed94c34": {
+  "fr": "{1}BILANZ{/1}{2}Entreprises les plus innovantes 2024{/2}",
+  "trad": "{1}BILANZ{/1}{2}Innovativste Unternehmen 2024{/2}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "7efb5d6c2d6f05be": {
+  "fr": "Autorités et administration",
+  "trad": "Behörden und Verwaltung",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "868d795f7c2679e5": {
+  "fr": "Toutes les réponses pour utiliser Corrext au quotidien et pour l'administrer, vérifiées dans l'application.",
+  "trad": "Alle Antworten zur täglichen Nutzung und zur Verwaltung von Corrext, geprüft in der Anwendung.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "86f80c6eb003d439": {
+  "fr": "{1}Demandez une démo.{/1} {2}Corrext, ouvert sur vos propres documents{/2}",
+  "trad": "{1}Fragen Sie eine Demo an.{/1} {2}Corrext, mit Ihren eigenen Dokumenten{/2}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "88a1f7fe7edb3490": {
+  "fr": "Choisissez un ordre de grandeur",
+  "trad": "Wählen Sie eine Grössenordnung",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "8e2024ea2f27a325": {
+  "fr": "{1}{2}Une démonstration sur vos documents{/2}{/1}{3}Corrext ouvert sur des pièces représentatives de votre pratique, avec le moteur, le mode et la terminologie qui correspondent à votre cas.{/3}",
+  "trad": "{1}{2}Eine Demonstration mit Ihren Dokumenten{/2}{/1}{3}Corrext mit typischen Unterlagen aus Ihrer Praxis, mit der Maschine, dem Modus und der Terminologie, die zu Ihrem Fall passen.{/3}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "9005f4c87fd7e747": {
+  "fr": "Saisissez une adresse e-mail complète, par exemple prenom.nom@exemple.ch.",
+  "trad": "Geben Sie eine vollständige E-Mail-Adresse ein, zum Beispiel vorname.name@beispiel.ch.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "9132711ab08a739a": {
+  "fr": "Le cadre, avant même la démo",
+  "trad": "Der Rahmen, schon vor der Demo",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "932979bb7052adbb": {
+  "fr": "Volume mensuel approximatif",
+  "trad": "Ungefähres Monatsvolumen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "95840ee32d99c1ef": {
+  "fr": "Ce champ est obligatoire.",
+  "trad": "Dieses Feld ist ein Pflichtfeld.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "9ced2f1ca5ae282a": {
+  "fr": "Qui relit les traductions ?",
+  "trad": "Wer prüft die Übersetzungen?",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "9d64862366cbf07e": {
+  "fr": "Accord de confidentialité signé avant la séance si vos pièces l'exigent.",
+  "trad": "Vertraulichkeitsvereinbarung vor der Sitzung, wenn Ihre Unterlagen es verlangen.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "9d6af3415a0ede8d": {
+  "fr": "201 à 1000 personnes",
+  "trad": "201 bis 1000 Personen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "a0e9fd3fd1a9ec23": {
+  "fr": "{1}{2}Un échange de cadrage{/2}{/1}{3}Vos langues, vos types de documents, vos contraintes de confidentialité et la façon dont vos traductions circulent aujourd'hui.{/3}",
+  "trad": "{1}{2}Ein Gespräch zur Abklärung{/2}{/1}{3}Ihre Sprachen, Ihre Dokumenttypen, Ihre Vorgaben zur Vertraulichkeit und wie Ihre Übersetzungen heute laufen.{/3}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "a1654f4419b93ba5": {
+  "fr": "Neur.on, traduction par IA pour le droit, la fiscalité et la finance",
+  "trad": "Neur.on, KI-Übersetzung für Recht, Steuern und Finanzen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "a1884ff82d9f1f32": {
+  "fr": "{1}Français{/1}",
+  "trad": "{1}Französisch{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "a871bde8eec8292d": {
+  "fr": "ISO 27001",
+  "trad": "ISO 27001",
+  "statut": "invariant",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "a8ff8fd207898612": {
+  "fr": "Accueil",
+  "trad": "Startseite",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "aa112c4fe360cad8": {
+  "fr": "Société suisse établie à Fribourg. Neur.on développe LexMachina, un moteur de traduction neuronale entraîné sur la donnée juridique et financière suisse, et Corrext, la plateforme de traduction juridique et financière qui l'exploite.",
+  "trad": "Schweizer Unternehmen mit Sitz in Freiburg. Neur.on entwickelt LexMachina, eine neuronale Übersetzungsmaschine, trainiert mit Schweizer Rechts- und Finanzdaten, und Corrext, die Plattform für juristische und finanzielle Übersetzung, die sie nutzt.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "aa2375a6be2c101e": {
+  "fr": "ISO 27001 · Hébergement en Suisse (Infomaniak) · nLPD et RGPD",
+  "trad": "ISO 27001 · Hosting in der Schweiz (Infomaniak) · revDSG und DSGVO",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "aa3ac56ee26ddcd9": {
+  "fr": "Navigation principale",
+  "trad": "Hauptnavigation",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "aabc644952726408": {
+  "fr": "Plus de 2000 pages par mois",
+  "trad": "Mehr als 2000 Seiten pro Monat",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "ad7db03912705dae": {
+  "fr": "Demande de démonstration",
+  "trad": "Anfrage für eine Demonstration",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "b12d61c550f547ef": {
+  "fr": "{1}Autre langue{/1}",
+  "trad": "{1}Andere Sprache{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "b35de4cab3f595dd": {
+  "fr": "Votre contexte, vos contraintes de confidentialité, les outils déjà en place, les documents que vous aimeriez voir traités pendant la démonstration.",
+  "trad": "Ihr Kontext, Ihre Vorgaben zur Vertraulichkeit, die bereits eingesetzten Tools, die Dokumente, die wir in der Demonstration bearbeiten sollen.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "b37456c4530be810": {
+  "fr": "Contact",
+  "trad": "Kontakt",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "ba9593187c52c475": {
+  "fr": "{1}Anglais{/1}",
+  "trad": "{1}Englisch{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "bff0e2c2790368d4": {
+  "fr": "Rechercher dans le centre d'aide",
+  "trad": "Im Hilfecenter suchen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "c2958c0414cd4493": {
+  "fr": "{1}Connexion{/1}{2}Demander une démo{/2}",
+  "trad": "{1}Anmelden{/1}{2}Demo anfragen{/2}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "c47310cfb44114c4": {
+  "fr": "Ponctuel, quelques documents par mois",
+  "trad": "Gelegentlich, einige Dokumente pro Monat",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "c675f8dbdf5bd04f": {
+  "fr": "Demander ma démonstration",
+  "trad": "Meine Demonstration anfragen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "c739431da91e9768": {
+  "fr": "Le moteur de Neur.on, entraîné sur la donnée juridique et financière suisse.",
+  "trad": "Die Übersetzungsmaschine von Neur.on, trainiert mit Schweizer Rechts- und Finanzdaten.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "cad44c4d5fe0f8f9": {
+  "fr": "Prénom{1}*{/1}",
+  "trad": "Vorname{1}*{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "cf5a0ef28c52d235": {
+  "fr": "Organisation{1}*{/1}",
+  "trad": "Organisation{1}*{/1}",
+  "statut": "invariant",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "d126731ed313fa96": {
+  "fr": "Juriste d'entreprise",
+  "trad": "Unternehmensjurist",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "d1b46ae9ab94cf22": {
+  "fr": "Nous vous répondons sous 24 h.",
+  "trad": "Wir antworten innerhalb von 24 Stunden.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "d65b390426d3709e": {
+  "fr": "Contact et démo · Neur.on, traduction juridique en Suisse",
+  "trad": "Kontakt und Demo · Neur.on, juristische Übersetzung in der Schweiz",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "d66f5da4d8c8bacc": {
+  "fr": "Ce n'est pas une visite guidée générique : un expert qui connaît le droit suisse ouvre la plateforme sur vos documents, dans vos paires de langues, avec votre terminologie.",
+  "trad": "Das ist keine allgemeine Produktführung: Eine Fachperson, die das Schweizer Recht kennt, öffnet die Plattform mit Ihren Dokumenten, in Ihren Sprachpaaren, mit Ihrer Terminologie.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "d96dbdbe08698104": {
+  "fr": "N'envoyez aucune pièce confidentielle par ce formulaire : les documents de la démonstration se transmettent dans un cadre convenu ensemble.",
+  "trad": "Senden Sie über dieses Formular keine vertraulichen Unterlagen: Die Dokumente für die Demonstration werden in einem gemeinsam vereinbarten Rahmen übermittelt.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "dbf09555f02e25e1": {
+  "fr": "Avant de {1}remplir le formulaire{/1}",
+  "trad": "Bevor Sie {1}das Formular ausfüllen{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "dcd6ece91890806d": {
+  "fr": "Ces informations ne servent qu'à traiter votre demande de démonstration et à préparer l'échange. Elles ne sont ni revendues, ni cédées à des tiers, et n'entraînent aucune inscription automatique à une lettre d'information.",
+  "trad": "Diese Angaben dienen nur der Bearbeitung Ihrer Demo-Anfrage und der Vorbereitung des Gesprächs. Sie werden weder verkauft noch an Dritte weitergegeben und führen zu keiner automatischen Anmeldung für einen Newsletter.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "ea1ff13352183f87": {
+  "fr": "Certification ISO 27001 obtenue en février 2024.",
+  "trad": "Zertifizierung nach ISO 27001 seit Februar 2024.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "eaf3f93692dfb421": {
+  "fr": "Je ne sais pas encore",
+  "trad": "Ich weiss es noch nicht",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "ec9101bc2af35d7c": {
+  "fr": "{1}{2}Un essai encadré{/2}{/1}{3}Si l'outil correspond, un essai avec un périmètre, des utilisateurs et une durée définis ensemble.{/3}",
+  "trad": "{1}{2}Ein begleiteter Test{/2}{/1}{3}Wenn das Tool passt, ein Test mit gemeinsam festgelegtem Umfang, Nutzerkreis und Zeitraum.{/3}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "f3a4024da18b200f": {
+  "fr": "Vous préférez écrire ? {1}team@corrext.com{/1}",
+  "trad": "Sie schreiben lieber? {1}team@corrext.com{/1}",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "f3b46b65a0655d72": {
+  "fr": "La plateforme de traduction juridique et financière de Neur.on.",
+  "trad": "Die Plattform für juristische und finanzielle Übersetzung von Neur.on.",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "f3fb039137521caa": {
+  "fr": "Plus de 1000 personnes",
+  "trad": "Mehr als 1000 Personen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "f9afe12fdbfbeb47": {
+  "fr": "Langues concernées",
+  "trad": "Betroffene Sprachen",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "fb693f865b5f46a3": {
+  "fr": "Pourquoi les outils portent-ils des noms anglais dans l'application ?",
+  "trad": "Warum tragen die Tools in der Anwendung englische Namen?",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ },
+ "ff673dc28e899181": {
+  "fr": "Produit",
+  "trad": "Produkt",
+  "statut": "relu",
+  "source": "fixture de test (traduction synthétique)",
+  "par_page": {}
+ }
+}

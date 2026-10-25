@@ -61,12 +61,22 @@ def fichier(nom, langue="fr"):
     return PRODUCTION + ("" if langue == "fr" else langue + "/") + nom
 
 
-# Libellés fixes, passés à t (traduction de la langue ; identité en français). Les phrases portent {date} et {url}.
+# Libellés fixes, passés à t (traduction de la langue ; identité en français). Les phrases portent {date} et {url} ; la
+# ponctuation de SOURCE fait partie du libellé (typographie propre à chaque langue : « Source : », « Quelle: »), l'espace
+# qui le sépare de l'adresse est ajoutée par llms_full_txt.
 INTRO_INDEX = "Site en français (Suisse), mis à jour le {date}. Texte intégral des pages principales : {url}"
 INTRO_COMPLET = "Site en français (Suisse), mis à jour le {date}. Index de toutes les pages : {url}"
 TITRE_COMPLET = "Neur.on : texte intégral des pages principales"
 TITRE_VERSIONS = "Versions linguistiques"
-SOURCE = "Source"
+SOURCE = "Source :"
+OPTIONAL = "Optional"  # mot clé du format llms.txt : jamais traduit
+
+
+def libelles_fixes():
+    """Libellés qu'un fichier llms d'une autre langue que le français peut passer à t : titres des sections (hors
+    « Optional », mot clé du format), phrases d'introduction, titre du texte intégral, préfixe des sources.
+    « Versions linguistiques » n'apparaît que dans le fichier français."""
+    return [nom for nom, _ in SECTIONS if nom != OPTIONAL] + [INTRO_INDEX, INTRO_COMPLET, TITRE_COMPLET, SOURCE]
 
 
 def remplir(phrase, date, url):
@@ -91,10 +101,10 @@ def llms_txt(pages, date, langue="fr", t=lambda s: s, langues=("fr",)):
     if langue == "fr" and len(langues) > 1:
         ranges[TITRE_VERSIONS] = [f"- [{NOMS_LANGUES[l]}]({fichier('llms.txt', l)})" for l in langues if l != "fr"]
     sections = [n for n, _ in SECTIONS]
-    sections.insert(sections.index("Optional"), TITRE_VERSIONS)  # « Optional » reste la dernière section du format
+    sections.insert(sections.index(OPTIONAL), TITRE_VERSIONS)  # « Optional » reste la dernière section du format
     for nom in sections:
         if ranges.get(nom):
-            lignes += [f"## {t(nom)}", ""] + ranges[nom] + [""]
+            lignes += [f"## {nom if nom == OPTIONAL else t(nom)}", ""] + ranges[nom] + [""]
     return "\n".join(lignes).rstrip("\n") + "\n"
 
 
@@ -211,5 +221,5 @@ def llms_full_txt(pages, lire_html, date, langue="fr", t=lambda s: s):
         if page not in metas:
             continue
         corps = texte_principal(lire_html(page))
-        parties.append(f"---\n\n{t(SOURCE)} : {adresse(page, langue)}\n\n{corps}\n")
+        parties.append(f"---\n\n{t(SOURCE)} {adresse(page, langue)}\n\n{corps}\n")
     return "\n".join(entete) + "\n" + "\n".join(parties)

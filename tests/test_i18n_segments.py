@@ -358,6 +358,37 @@ class TestReinjection(unittest.TestCase):
                 self.assertEqual(_suite_de_balises(sortie), _suite_de_balises(h))
 
 
+class TestRestaurer(unittest.TestCase):
+    """Relecture 2.1 : les espaces de la traduction sont gardées, y compris à l'intérieur d'une paire de marqueurs."""
+
+    def test_espace_interieure_gardee(self):
+        texte, table = S.proteger('<a href="x/">Regarder l\'interview </a>!')
+        self.assertEqual(texte, "{1}Regarder l'interview {/1}!")
+        self.assertEqual(S.restaurer(texte, table), '<a href="x/">Regarder l\'interview </a>!')
+        self.assertEqual(S.restaurer("{1} Das Interview ansehen {/1}!", table), '<a href="x/"> Das Interview ansehen </a>!')
+
+    def test_marqueurs_espaces_remis_en_forme(self):
+        _, table = S.proteger('<a href="x/">Démo</a> et <br> suite')
+        self.assertEqual(S.restaurer("{ 1 }Demo{ /1 } und {2} weiter", table), '<a href="x/">Demo</a> und <br> weiter')
+
+
+class TestCodeNonTraduit(unittest.TestCase):
+    """Relecture 2.1 : le bloc de code de l'exemple d'API (tarifs/, classe u-code) n'est jamais extrait, donc jamais
+    traduit ni réindenté ; le français reste identique (exclusion par la classe, sans toucher à la source)."""
+
+    def test_classe_u_code_exclue(self):
+        h = doc('<pre class="u-code"><span class="l1"><b>POST</b> /v1/translate</span>\n<span class="l3">  <em>"engine"</em>: '
+                '"lexmachina",</span></pre><p>Après</p>')
+        self.assertEqual(textes(S.extraire_page(h)), ["Après"])
+
+    def test_tarifs(self):
+        h = dict(pages_du_site())["fr/tarifs/index.html"]
+        self.assertIn('<pre class="u-code">', h)
+        for u in unites_du_site(h):
+            self.assertNotIn("source_language", u["texte"])
+            self.assertNotIn("/v1/translate", u["texte"])
+
+
 class TestClassement(unittest.TestCase):
     def test_listes_du_plan(self):
         for nom in ("alt", "aria-label", "title", "placeholder", "data-m", "data-v-erreur", "data-v-refus", "data-vide",
@@ -469,9 +500,8 @@ def _lecteur_espace(h):
 
 
 def _normaliser(texte):
-    """Espaces normalisées ; celles qui touchent un marqueur sont retirées (restaurer, copié de la V1, rogne les espaces
-    à l'intérieur d'une paire de marqueurs)."""
-    return re.sub(r"\s*(\{/?\d+\})\s*", r"\1", " ".join(texte.split()))
+    """Espaces normalisées (restaurer garde les espaces de la traduction, y compris autour des marqueurs)."""
+    return " ".join(texte.split())
 
 
 def _suite_de_balises(h):

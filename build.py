@@ -3,8 +3,10 @@
 langues DE, IT et EN de CONFIG["langues"] vivent à côté, sous leur propre adresse : outils/i18n/langues.py).
 
 Le build travaille en trois passes : (1) assembler_fr compose chaque page française, liens encore en {{ROOT}} ;
-(2) TRADUIRE en tire la page de chaque autre langue ; (3) finaliser résout images, dimensions et liens, puis la page est
-écrite à chemin_page(page, langue).
+(2) TRADUIRE en tire la page de chaque autre langue (outils/i18n/traduire.py, table src/langues/<l>/segments.json) ; une
+page n'est construite dans une langue que si elle y est entièrement traduite, et en production une langue ne l'est que
+si toutes ses pages, sa 404 et ses llms.txt le sont (décision V3) ; (3) finaliser résout images, dimensions et liens,
+puis la page est écrite à chemin_page(page, langue).
 
 Bibliothèque standard uniquement. Lit le site Neur.on (Sites/neuron) pour le méga-menu, le pied de
 page, la page 404, les redirections, les images et les données de démonstration, sans jamais y écrire. Le
@@ -33,13 +35,15 @@ from pathlib import Path
 import menu
 import redirections
 from outils import donnees_structurees, envoi, llms, post
-from outils.i18n import langues, localiser
+from outils.i18n import langues, localiser, traduire
+from outils.i18n.table import Table
 
 ICI = Path(__file__).resolve().parent
 NEURON = Path(os.environ.get("NEURON_SRC", ICI.parent / "neuron")).resolve()
 SRC, ASSETS = ICI / "src", ICI / "assets"
 # Référencement repris de la V1, figé dans le dépôt (outils/figer_referencement.py) : le build ne le lit plus dans la V1
 REFERENCEMENT = SRC / "data/referencement"
+DOSSIER_LANGUES = SRC / "langues"  # tables de traduction : <langue>/segments.json (outils/i18n/table.py)
 DOCS = Path(os.environ.get("SORTIE") or ICI / "docs").resolve()  # dossier de sortie du build
 # Réglages du site : apercu (noindex, robots), base, identifiants, destinataire des formulaires
 CONFIG = json.loads((SRC / "data/config.json").read_text(encoding="utf-8"))
@@ -506,18 +510,33 @@ def base_pages():
     return os.environ.get("BASE_PAGES") or ("/" if not CONFIG["apercu"] else CONFIG["base"])
 
 
-def page_404(nav, pied, v, langue="fr", construites=None):
-    """Page 404 d'une langue : DOCS/404.html en français, DOCS/<l>/404.html sinon (main écrit aussi DOCS/<l>/.htaccess, qui
-    la désigne). construites : voir assembler ; les liens et le sélecteur de langue en dépendent (aucun sélecteur tant
-    que le français est seul construit). Le texte reste celui du français : sa traduction n'est pas encore branchée."""
+def assembler_404_fr(nav, pied, v):
+    """Page 404 française assemblée (passe 1), avant traduction et finalisation ; nommée 404.html pour les
+    post-traitements."""
     src = (NEURON / "src/partials/404.html").read_text(encoding="utf-8")
     h1 = re.search(r'<h1 data-t="h1">(.*?)</h1>', src, re.S).group(1)
     lead = re.search(r'<p class="lead" data-t="lead">(.*?)</p>', src, re.S).group(1)
     corps = ('<section class="hero"><div class="wrap hero-g"><h1 class="h1">' + h1 + "</h1>"
              '<div class="hero-d"><p>' + lead + '</p><a class="btn" href="{{ROOT}}">Neur.on</a></div></div></section>\n')
     meta = {"title": "Page introuvable · Neur.on", "description": "Page introuvable."}
-    # servie depuis la racine du site, à toute profondeur, via <base> ; nommée 404.html pour les post-traitements
-    html = assembler(meta, corps, "404.html", nav, pied, v, racine="", langue=langue, construites=construites)
+    return assembler_fr(meta, corps, "404.html", nav, pied, v)
+
+
+def page_404_a_traduire(html):
+    """404 française assemblée, telle que TRADUIRE la reçoit (clé de page « 404 ») : sans ses données structurées, que
+    page_404 retire de toute façon (elles n'ont donc pas à être traduites)."""
+    return DONNEES.sub("", html)
+
+
+def page_404(nav, pied, v, langue="fr", construites=None, html=None):
+    """Page 404 d'une langue : DOCS/404.html en français, DOCS/<l>/404.html sinon (main écrit aussi DOCS/<l>/.htaccess, qui
+    la désigne). construites : voir assembler ; les liens et le sélecteur de langue en dépendent (aucun sélecteur tant
+    que le français est seul construit). html : la 404 assemblée dans la langue (traduite par TRADUIRE hors français) ;
+    par défaut, la 404 française."""
+    if html is None:
+        html = assembler_404_fr(nav, pied, v)
+    # servie depuis la racine du site, à toute profondeur, via <base>
+    html = finaliser(html, "404.html", langue, construites or {"fr": set(PAGES)}, racine="")
     html = DONNEES.sub("", SEO_TETE.sub("", html)).replace("\n\n", "\n")  # la page 404 n'a ni canonique ni données structurées
     return html.replace("<head>\n", '<head>\n<base href="' + base_pages() + '">\n', 1)
 
@@ -603,20 +622,23 @@ def meta_de_html(html):
     return {"title": titre.group(1) if titre else "", "description": desc.group(1) if desc else ""}
 
 
-def ecrire_llms(metas, construites=None):
+def ecrire_llms(metas, construites=None, libelles=None):
     """llms.txt et llms-full.txt générés depuis les pages de la V2 (outils/llms.py), datés de la page la plus récente :
-    à la racine en français, sous <l>/ pour chaque autre langue construite (métas lues dans ses pages). Le fichier racine
-    renvoie vers les autres quand plusieurs langues sont construites. construites : voir assembler."""
+    à la racine en français, sous <l>/ pour chaque autre langue construite dont les libellés fixes sont traduits
+    (libelles : langue -> fonction de traduction des libellés, Table.t ; métas lues dans ses pages). Le fichier racine
+    renvoie vers les autres quand plusieurs langues en ont un. construites : voir assembler."""
     construites = construites or {"fr": set(PAGES)}
-    presentes = langues_construites(construites)
+    libelles = {"fr": lambda s: s, **(libelles or {})}
+    presentes = [l for l in langues_construites(construites) if l in libelles]
     for langue in presentes:
         pages = [(p, metas[p] if langue == "fr" else meta_de_html(chemin_page(p, langue).read_text(encoding="utf-8")))
                  for p in PAGES if p in construites[langue] and indexable(p, langue)]
         recente = max((date_page(p) for p, _ in pages), default=DATE_BUILD)
         dossier = DOCS if langue == "fr" else DOCS / langue
-        (dossier / "llms.txt").write_text(llms.llms_txt(pages, recente, langue, langues=presentes), encoding="utf-8")
+        t = libelles[langue]
+        (dossier / "llms.txt").write_text(llms.llms_txt(pages, recente, langue, t, langues=presentes), encoding="utf-8")
         lire = lambda p, l=langue: chemin_page(p, l).read_text(encoding="utf-8")
-        (dossier / "llms-full.txt").write_text(llms.llms_full_txt(pages, lire, recente, langue), encoding="utf-8")
+        (dossier / "llms-full.txt").write_text(llms.llms_full_txt(pages, lire, recente, langue, t), encoding="utf-8")
 
 
 def garde_sortie():
@@ -657,10 +679,53 @@ def ecrire_redirections():
     (DOCS / ".htaccess").write_text(redirections.htaccess(redirs), encoding="utf-8")
 
 
-# Point d'injection de la traduction (passe 2) : (html français assemblé, page, langue) donne (html traduit, segments
-# restés sans traduction). Identité tant que la traduction n'est pas branchée ; une page avec des segments manquants
-# n'est pas construite dans la langue.
-TRADUIRE = lambda html, page, langue: (html, [])
+_TABLES = {}  # tables de traduction lues pendant un build (vidé au début de main)
+
+
+def table(langue):
+    """Table de traduction d'une langue (DOSSIER_LANGUES/<langue>/segments.json), lue une fois par build."""
+    k = (langue, str(DOSSIER_LANGUES))
+    if k not in _TABLES:
+        _TABLES[k] = Table(langue, DOSSIER_LANGUES)
+    return _TABLES[k]
+
+
+def mode_build():
+    """Mode de la traduction : « apercu » (traductions adaptées acceptées, avec bandeau) ou « production »."""
+    return "apercu" if CONFIG["apercu"] else "production"
+
+
+def traduire_page(html, page, langue):
+    """Passe 2 : page française assemblée -> (page traduite, manquants) avec la table de la langue et le mode du build
+    (outils/i18n/traduire.py). Une page avec des manquants n'est pas construite dans la langue."""
+    return traduire.traduire(html, page, langue, table(langue), mode_build())
+
+
+def libelles_llms(langue):
+    """Libellés fixes des llms.txt d'une langue : (Table(langue).t, manquants) ; les llms de la langue ne sont écrits que
+    sans manquant."""
+    return table(langue).t, traduire.verifier_libelles(table(langue), mode_build())
+
+
+# Points d'injection de la traduction, remplacés par l'identité dans les tests de structure (tests/support.identite)
+TRADUIRE = traduire_page
+LIBELLES = libelles_llms
+
+
+def assembler_pages():
+    """Passe 1 : copie les assets dans DOCS puis assemble chaque page française (liens encore en {{ROOT}}). Renvoie
+    (métas, pages assemblées, menu, pied, version des assets)."""
+    copier_assets()
+    v = version()
+    nav = menu.lire_menu((NEURON / "src/partials/nav.html").read_text(encoding="utf-8"))
+    pied = menu.lire_pied((NEURON / "src/partials/footer.html").read_text(encoding="utf-8"))
+    menu.appliquer_ajouts(nav, pied)  # entrées de menu et de pied ajoutées par les lots (src/data/menu-ajouts.json)
+    metas, assemblees = {}, {}
+    for page in PAGES:
+        meta, corps = lire_page(page)
+        metas[page] = meta
+        assemblees[page] = assembler_fr(meta, corps, page, nav, pied, v)
+    return metas, assemblees, nav, pied, v
 
 
 def main():
@@ -668,35 +733,37 @@ def main():
     if DOCS.exists():
         shutil.rmtree(DOCS)
     DOCS.mkdir(parents=True)
-    copier_assets()
-    v = version()
-    nav = menu.lire_menu((NEURON / "src/partials/nav.html").read_text(encoding="utf-8"))
-    pied = menu.lire_pied((NEURON / "src/partials/footer.html").read_text(encoding="utf-8"))
-    menu.appliquer_ajouts(nav, pied)  # entrées de menu et de pied ajoutées par les lots (src/data/menu-ajouts.json)
-    metas, assemblees = {}, {}
-    for page in PAGES:  # passe 1 : pages françaises, liens encore en {{ROOT}}
-        meta, corps = lire_page(page)
-        metas[page] = meta
-        assemblees[page] = assembler_fr(meta, corps, page, nav, pied, v)
+    _TABLES.clear()
+    metas, assemblees, nav, pied, v = assembler_pages()  # passe 1
+    fr404 = assembler_404_fr(nav, pied, v)
     autres = [l for l in CONFIG["langues"] if l != "fr"]
-    construites, traduites = {"fr": set(PAGES)}, {}
+    construites, traduites, pages_404, libelles = {"fr": set(PAGES)}, {}, {}, {}
     for langue in autres:  # passe 2 : une page n'est construite dans une langue que sans segment manquant
-        construites[langue] = set()
-        for page in PAGES:
-            html, manquants = TRADUIRE(assemblees[page], page, langue)
-            if not manquants:
-                construites[langue].add(page)
-                traduites[langue, page] = html
+        resultats = {page: TRADUIRE(assemblees[page], page, langue) for page in PAGES}
+        html_404, manquants_404 = TRADUIRE(page_404_a_traduire(fr404), "404", langue)
+        t, manquants_llms = LIBELLES(langue)
+        incompletes = ([p for p, (_, m) in resultats.items() if m] + (["404"] if manquants_404 else [])
+                       + (["llms"] if manquants_llms else []))
+        if not CONFIG["apercu"] and incompletes:  # production : la langue entière ou rien (décision V3)
+            print(f"Langue {langue} non publiée : {len(incompletes)} pages incomplètes")
+            construites[langue] = set()
+            continue
+        construites[langue] = {p for p, (_, m) in resultats.items() if not m}
+        traduites.update(((langue, p), h) for p, (h, m) in resultats.items() if not m)
+        if not manquants_404:
+            pages_404[langue] = html_404
+        if not manquants_llms:
+            libelles[langue] = t
     for page in PAGES:  # passe 3 : finalisation et écriture, français d'abord
         pages_langues = [("fr", assemblees[page])] + [(l, traduites[l, page]) for l in autres if page in construites[l]]
         for langue, html in pages_langues:
             sortie = chemin_page(page, langue)
             sortie.parent.mkdir(parents=True, exist_ok=True)
             sortie.write_text(finaliser(html, page, langue, construites), encoding="utf-8")
-    (DOCS / "404.html").write_text(page_404(nav, pied, v, "fr", construites), encoding="utf-8")
-    for langue in autres:  # une 404 par langue construite, désignée par le .htaccess de son dossier
-        if construites[langue]:
-            (DOCS / langue / "404.html").write_text(page_404(nav, pied, v, langue, construites), encoding="utf-8")
+    (DOCS / "404.html").write_text(page_404(nav, pied, v, "fr", construites, fr404), encoding="utf-8")
+    for langue in autres:  # une 404 par langue construite et traduite, désignée par le .htaccess de son dossier ; sinon
+        if construites[langue] and langue in pages_404:  # la 404 française de la racine sert de repli
+            (DOCS / langue / "404.html").write_text(page_404(nav, pied, v, langue, construites, pages_404[langue]), encoding="utf-8")
             (DOCS / langue / ".htaccess").write_text(
                 f"# Généré par build.py : ne pas modifier à la main.\nErrorDocument 404 {base_pages()}{langue}/404.html\n", encoding="utf-8")
     presentes = langues_construites(construites)
@@ -714,7 +781,7 @@ def main():
         else:
             (DOCS / "sitemap.xml").write_text(plan_du_site("fr", construites), encoding="utf-8")
         (DOCS / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {PRODUCTION}sitemap.xml\n", encoding="utf-8")
-    ecrire_llms(metas, construites)  # résumé et texte intégral pour les moteurs IA, un jeu par langue construite
+    ecrire_llms(metas, construites, libelles)  # résumé et texte intégral pour les moteurs IA, un jeu par langue construite
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
     ecrire_redirections()
     envoi.ecrire(DOCS / "envoi.php", CONFIG)  # envoi des formulaires sur Hostpoint, réglé par la configuration

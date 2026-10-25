@@ -15,6 +15,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
+from outils.i18n.segments import CLASSES_NON_TRADUITES  # éléments jamais traduits, comme translate="no"
+
 ICI = Path(__file__).resolve().parent.parent.parent
 PROTEGES = ICI / "src/langues/proteges.json"
 PRODUCTION = "https://neur-on.ai/"  # adresse du site publié (même valeur que build.PRODUCTION)
@@ -136,7 +138,8 @@ def _chaines_json(valeur, sortie):
 class _Lecteur(HTMLParser):
     """Textes lisibles d'une page : un texte par bloc (un élément en ligne ne coupe rien), plus les attributs lisibles,
     les méta de description et les valeurs du JSON-LD. Sous-arbres exclus : lang d'une autre langue (le lang de <html>
-    est ignoré : c'est langue_page qui le juge), translate="no", scripts et styles (sauf JSON-LD)."""
+    est ignoré : c'est langue_page qui le juge), translate="no", classes jamais traduites (CLASSES_NON_TRADUITES, bloc
+    de code de l'exemple d'API), scripts et styles (sauf JSON-LD)."""
 
     def __init__(self, langue):
         super().__init__(convert_charrefs=True)
@@ -165,7 +168,8 @@ class _Lecteur(HTMLParser):
     def handle_starttag(self, balise, attrs):
         a = {k: v or "" for k, v in attrs}
         exclut = balise != "html" and (
-            ("lang" in a and _primaire(a["lang"]) != self.langue) or a.get("translate", "").lower() == "no")
+            ("lang" in a and _primaire(a["lang"]) != self.langue) or a.get("translate", "").lower() == "no"
+            or bool(CLASSES_NON_TRADUITES & set(a.get("class", "").split())))
         if balise in _BLOCS:
             self._vider()
         if balise in _VIDES:
@@ -335,11 +339,24 @@ def _tete(html):
 _LD = re.compile(r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script\s*>', re.S | re.I)
 
 
+# objets JSON-LD dont le inLanguage est le leur, pas celui de la page : un terme du glossaire défini dans une autre
+# langue (DefinedTerm de-CH sur une page italienne) le garde (Ruling 10)
+_LANGUE_PROPRE = {"DefinedTerm", "DefinedTermSet"}
+
+
+def _types(objet):
+    t = objet.get("@type")
+    return set(t) if isinstance(t, list) else {t}
+
+
 def _in_language(valeur, sortie):
+    """inLanguage des objets de la page (WebPage, Article, FAQPage...), hors DefinedTerm et DefinedTermSet (Ruling 11)."""
     if isinstance(valeur, dict):
+        propre = bool(_types(valeur) & _LANGUE_PROPRE)
         for cle, v in valeur.items():
-            if cle == "inLanguage" and isinstance(v, str):
-                sortie.append(v)
+            if cle == "inLanguage":
+                if isinstance(v, str) and not propre:
+                    sortie.append(v)
             else:
                 _in_language(v, sortie)
     elif isinstance(valeur, list):
@@ -348,7 +365,8 @@ def _in_language(valeur, sortie):
 
 
 def langue_page(html, langue):
-    """<html lang>, og:locale (fr_CH, de_CH, it_CH, en_GB) et "inLanguage" du JSON-LD concordent avec la langue."""
+    """<html lang>, og:locale (fr_CH, de_CH, it_CH, en_GB) et "inLanguage" du JSON-LD concordent avec la langue. Le
+    inLanguage d'un DefinedTerm ou d'un DefinedTermSet (terme du glossaire dans sa propre langue) n'est pas contrôlé."""
     t = _tete(html)
     problemes = []
     if _primaire(t.lang) != langue:

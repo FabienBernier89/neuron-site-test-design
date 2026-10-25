@@ -2,7 +2,7 @@
 version de la langue quand elle est construite, canonique et Open Graph, hreflang réciproques, og:locale et inLanguage.
 
 Les unités testent localiser, alternates et poser_alternates sur de petites pages ; la construction réelle (français
-et allemand, TRADUIRE identité) vérifie la réciprocité avec outils.i18n.controles.hreflang."""
+et allemand, traduction remplacée par l'identité : support.identite) vérifie la réciprocité avec outils.i18n.controles.hreflang."""
 import re
 import tempfile
 import unittest
@@ -212,7 +212,7 @@ class TestBuildFrDe(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls._tmp = tempfile.TemporaryDirectory()
-        cls.sortie = support.construire(cls._tmp.name, pages=PAGES, langues=("fr", "de"))
+        cls.sortie = support.construire(cls._tmp.name, pages=PAGES, langues=("fr", "de"), patches=support.identite())
 
     @classmethod
     def tearDownClass(cls):
