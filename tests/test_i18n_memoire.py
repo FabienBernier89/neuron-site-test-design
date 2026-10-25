@@ -502,6 +502,28 @@ class TestRecomposition(unittest.TestCase):
                                                     "trad_complete": "Siehe den {1}vollständigen Leitfaden{/1}."}})
         self.assertEqual((r["variantes_recalees"], r["variantes_refusees"]), (1, 1))
 
+    def test_variante_marqueur_englobant(self):
+        # Ruling 23 : seul un marqueur englobant (autour du texte entier) est ajouté ou retiré : traduction V1 recalée,
+        # adapte ; une autre différence en plus (marqueur intérieur retiré) : refusée, contexte V1
+        fr = doc('<p>Hébergement</p><p><a href="/x">Siège social</a></p><p><b>Arrest</b> · séquestre</p>')
+        de = doc('<p>Hosting</p><p><a href="/x">Firmensitz</a></p><p><b>Arrest</b> · Arrest (Sequestration)</p>',
+                 lang="de")
+        v2 = doc('<p><a href="/h">Hébergement</a></p><p>Siège social</p><p><a href="/a">Arrest · séquestre</a></p>')
+        t, r = self.memoire({"fr/a/": fr, "de/a-de/": de}, {"fr/a/": {"de": "de/a-de/"}}, {"a/": v2, "z/": v2})
+        self.assertEqual(t.chercher("{1}Hébergement{/1}", "z/"),                       # ajouté
+                         {"fr": "{1}Hébergement{/1}", "trad": "{1}Hosting{/1}", "statut": "adapte",
+                          "source": "variante de balisage V1 de/a-de/ (marqueur englobant)"})
+        self.assertEqual(t.chercher("Siège social", "z/")["trad"], "Firmensitz")      # retiré
+        self.assertEqual(t.chercher("Siège social", "z/")["statut"], "adapte")
+        texte = "{1}Arrest · séquestre{/1}"                                             # englobant + autre écart
+        self.assertIsNone(t.chercher(texte, "z/"))
+        self.assertEqual(r["contextes"][cle(texte)]["contexte"]["nature"], "variante de balisage")
+        self.assertEqual((r["variantes_recalees"], r["variantes_refusees"]), (2, 1))
+        # retrait avec marqueurs intérieurs renumérotés ; refus si la traduction ne garde pas le marqueur autour de tout
+        self.assertEqual(M._recaler_englobant("{1}{2}X{/2} y{/1}", "{1}X{/1} y", "{1}{2}Ix{/2} yy{/1}"), "{1}Ix{/1} yy")
+        self.assertIsNone(M._recaler_englobant("{1}{2}X{/2} y{/1}", "{1}X{/1} y", "{1}{2}Ix{/2}{/1} yy"))
+        self.assertEqual(M._recaler_englobant("{1}X{/1} y", "{1}{2}X{/2} y{/1}", "yy {1}Ix{/1}"), "{1}yy {2}Ix{/2}{/1}")
+
     def test_morceau_donne_un_contexte(self):
         fr = doc("<p>Le moteur LexMachina traduit vos contrats en Suisse.</p>")
         de = doc("<p>Die Engine LexMachina übersetzt Ihre Verträge in der Schweiz.</p>", lang="de")

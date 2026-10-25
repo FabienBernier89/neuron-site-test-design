@@ -786,6 +786,39 @@ def _recaler(fr_v1, fr_v2, trad):
     return sortie if _marqueurs_conformes(sortie, fr_v2) else None
 
 
+def _sans_englobant(texte):
+    """Texte sans le marqueur {1}…{/1} qui l'entoure tout entier, renuméroté depuis 1 ; None s'il n'en a pas."""
+    m = re.fullmatch(r"\{1\}(.*)\{/1\}", texte)
+    if not m or "{1}" in m.group(1) or "{/1}" in m.group(1):
+        return None
+    c = _canonique(m.group(1), _paires_marqueurs(texte))
+    return c[0] if c else None
+
+
+def _decaler(texte, pas):
+    """Marqueurs renumérotés de pas (+1 : place libérée pour un marqueur englobant {1})."""
+    return _JETON.sub(lambda m: "{%s%d}" % (m.group(1), int(m.group(2)) + pas), texte)
+
+
+def _recaler_englobant(fr_v1, fr_v2, trad):
+    """Ruling 23 : traduction V1 recalée quand la V2 ne diffère de la V1 que par un marqueur englobant (autour du texte
+    entier) ajouté ou retiré, le texte intérieur et les autres marqueurs identiques et dans le même ordre ; None sinon.
+    Ajout : la traduction entière est entourée du marqueur {1} (les siens décalés de 1). Retrait : la traduction V1
+    doit elle-même être entourée de ce marqueur, qui est retiré."""
+    if not _marqueurs_conformes(trad, fr_v1):
+        return None
+    if _sans_englobant(fr_v2) == fr_v1:
+        sortie = "{1}" + _decaler(trad, 1) + "{/1}"
+    elif _sans_englobant(fr_v1) == fr_v2:
+        # la traduction doit garder le marqueur {1} autour de tout ; ses marqueurs intérieurs (dans l'ordre de la
+        # traduction, qui peut différer du français) perdent 1
+        m = re.fullmatch(r"\{1\}(.*)\{/1\}", trad.strip(), re.S)
+        sortie = _decaler(m.group(1), -1) if m and "{/1}" not in m.group(1) else None
+    else:
+        return None
+    return sortie if sortie is not None and _marqueurs_conformes(sortie, fr_v2) else None
+
+
 def _corrections():
     """[(page V2 ou None pour tout le site, ancien, nouveau)] : corrections V2 des phrases de la V1. Entrées
     contenus-v2 « remplace » (renommages, sur tout le site ; autres entrées, sur leur page) et « insere_avant »
@@ -859,9 +892,10 @@ def recomposer(langue, neuron, table, pages=None, corrections=None):
       une espace, ou accolés contre un marqueur ; marqueurs renumérotés) reçoit la suite de leurs traductions, source
       « recomposition V1 <adresse> ». Un texte qui est lui-même un texte de la V1 (refusé par l'alignement) n'est
       jamais recomposé de ses parties.
-    - Variante de balisage (Ruling 20) : un texte V2 dont les mots sont ceux d'un texte V1 traduit, au balisage près,
-      reçoit la traduction V1 recalée sur ses marqueurs (_recaler), source « variante de balisage V1 <adresse> » ; si
-      le recalage n'est pas sûr, aucune traduction et la traduction V1 en contexte.
+    - Variante de balisage : un texte V2 dont les mots sont ceux d'un texte V1 traduit, au balisage près, reçoit la
+      traduction V1 recalée sur ses marqueurs, source « variante de balisage V1 <adresse> » : blancs seulement
+      (_recaler, Ruling 20), ou marqueur englobant ajouté ou retiré (_recaler_englobant, Ruling 23, source suivie de
+      « (marqueur englobant) ») ; sinon, aucune traduction et la traduction V1 en contexte.
     - Rulings 19 et 21 : une traduction par défaut n'est posée que si toutes les parties ont une traduction par défaut
       et que toutes les pages V1 donnent le même résultat ; sinon, seulement pour les pages V2 qui ont la leur. Une
       traduction identique au français (hors invariant) n'est jamais posée : adapte, elle serait refusée par
@@ -899,7 +933,15 @@ def recomposer(langue, neuron, table, pages=None, corrections=None):
         else:
             del manquants[texte]
 
-    # 1. variantes de balisage (Ruling 20) : texte entier
+    def recaler(c, texte, trad, source):
+        """(traduction recalée, source) : blancs seulement (Ruling 20), ou marqueur englobant (Ruling 23) ; None."""
+        r = _recaler(c, texte, trad)
+        if r:
+            return r, SOURCE_VARIANTE + source
+        r = _recaler_englobant(c, texte, trad)
+        return (r, SOURCE_VARIANTE + source + " (marqueur englobant)") if r else None
+
+    # 1. variantes de balisage (Rulings 20 et 23) : texte entier
     recalees, variantes_vues = set(), set()
     for texte, pages_v2 in list(manquants.items()):
         candidats = [c for c in index["variantes"].get(_sans_blancs(texte), ()) if c != texte]
@@ -910,17 +952,17 @@ def recomposer(langue, neuron, table, pages=None, corrections=None):
         for c in candidats:
             e = table.entrees.get(cle(c))
             if e and e["trad"] is not None and e["statut"] in VALIDES:
-                r = _recaler(c, texte, e["trad"])
-                if r and not identique(texte, r):
-                    defauts.add((r, SOURCE_VARIANTE + e["source"]))
+                r = recaler(c, texte, e["trad"], e["source"])
+                if r and not identique(texte, r[0]):
+                    defauts.add(r)
             for page in pages_v2:
                 # traduction propre à une page : seulement d'une page V1 où le texte figure (Ruling 21) ; ailleurs,
                 # la traduction par défaut, si elle est unique
                 trouve = table.chercher(c, page) if page in index["rangs"][c] else None
                 if page not in resultats and trouve and trouve["statut"] in VALIDES:
-                    r = _recaler(c, texte, trouve["trad"])
-                    if r and not identique(texte, r):
-                        resultats[page] = (r, SOURCE_VARIANTE + trouve["source"])
+                    r = recaler(c, texte, trouve["trad"], trouve["source"])
+                    if r and not identique(texte, r[0]):
+                        resultats[page] = r
         (defaut, source), = defauts if len(defauts) == 1 else ((None, None),)
         c = min(candidats, key=lambda x: (not any(p in index["rangs"][x] for p in pages_v2), x))
         a_contexte.setdefault(texte, {})["variante de balisage"] = (c, _preferer([(c, p) for p in index["rangs"][c]],

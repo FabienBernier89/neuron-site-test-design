@@ -343,19 +343,19 @@
  "i18n_hors_pages": 104,
  "recomposition": {
   "recomposes": 5,
-  "variantes_recalees": 45,
-  "variantes_refusees": 1081,
+  "variantes_recalees": 598,
+  "variantes_refusees": 528,
   "morceaux": 709,
   "corrections": 69,
   "contextes_par_nature": {
    "correction V2": 69,
    "morceau": 709,
    "recomposition": 1,
-   "variante de balisage": 1081
+   "variante de balisage": 529
   },
   "refus": {
-   "variante : recalage non sûr (marqueurs différents) ou identique au français": 1081
+   "variante : recalage non sûr (marqueurs différents) ou identique au français": 528
   },
-  "contextes": 1860
+  "contextes": 1308
  }
 }
