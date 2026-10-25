@@ -10,6 +10,7 @@ from pathlib import Path
 
 import build
 from outils.i18n import memoire_v1 as M
+from outils.i18n import recomposition as R
 from outils.i18n import segments as S
 from outils.i18n import traduire as T
 from outils.i18n.table import LANGUES, STATUTS, Table, cle
@@ -397,7 +398,7 @@ class TestRecomposition(unittest.TestCase):
         neuron = v1(self.dossier / "v1", pages_v1, routes)
         t = Table("de", self.dossier / "tables")
         M.prefill("de", neuron, t, pages={})
-        return t, M.recomposer("de", neuron, t, pages=pages_v2, corrections=list(corrections))
+        return t, R.recomposer("de", neuron, t, pages=pages_v2, corrections=list(corrections))
 
     def test_recomposition_deux_segments(self):
         fr = doc("<p>Découvrir Corrext</p><p>Autre</p><p>8 questions</p>" + self.MENU_FR)
@@ -480,7 +481,7 @@ class TestRecomposition(unittest.TestCase):
         avant = json.dumps(t.entrees, sort_keys=True)
         neuron = self.dossier / "v1"
         M.prefill("de", neuron, t, pages={})
-        M.recomposer("de", neuron, t, pages={"a/": v2, "b/": v2, "c/": v2}, corrections=[])
+        R.recomposer("de", neuron, t, pages={"a/": v2, "b/": v2, "c/": v2}, corrections=[])
         self.assertEqual(json.dumps(t.entrees, sort_keys=True), avant)
 
     def test_variante_de_balisage(self):
@@ -502,6 +503,46 @@ class TestRecomposition(unittest.TestCase):
                                                     "trad_complete": "Siehe den {1}vollständigen Leitfaden{/1}."}})
         self.assertEqual((r["variantes_recalees"], r["variantes_refusees"]), (1, 1))
 
+    def test_deux_passes_memoire_identiques(self):
+        # relecture 3.2, Important 1 : la couverture « mémoire V1 » ne compte que v1 et invariant, et la commande
+        # memoire purge les recompositions de la passe précédente avant prefill : deux passes, même rapport, même table
+        import contextlib
+        import io
+        from unittest import mock
+        from outils.i18n import __main__ as commande
+        fr = doc("<p>Découvrir Corrext</p><p>Autre</p><p>8 questions</p>")
+        de = doc("<p>Corrext entdecken</p><p>Andere</p><p>8 Fragen</p>", lang="de")
+        neuron = v1(self.dossier / "v1", {"fr/a/": fr, "de/a-de/": de}, {"fr/a/": {"de": "de/a-de/"}})
+        dossier = self.dossier / "langues"
+        v2 = {"a/": doc("<p>Découvrir Corrext 8 questions</p><p>Un texte nouveau ici</p>")}
+        sorties = []
+        with mock.patch.object(build, "NEURON", neuron), mock.patch.object(build, "DOSSIER_LANGUES", dossier), \
+                mock.patch.object(T, "pages_assemblees", lambda langue, mode: v2), \
+                contextlib.redirect_stdout(io.StringIO()):
+            for _ in range(2):
+                self.assertEqual(commande.main(["memoire", "de"]), 0)
+                sorties.append({n: (dossier / "de" / n).read_text(encoding="utf-8")
+                                for n in ("segments.json", "memoire-rapport.json", T.CONTEXTES)})
+        self.assertEqual(sorties[0], sorties[1])
+        rapport = json.loads(sorties[1]["memoire-rapport.json"])
+        self.assertEqual(rapport["recomposition"]["recomposes"], 1)
+        # main : « Découvrir Corrext 8 questions » (adapte, non compté) et « Un texte nouveau ici » : 0 % de mémoire V1
+        self.assertEqual(rapport["couverture_mots"], 0.0)
+
+    def test_variante_defaut_unique_par_la_traduction(self):
+        # relecture 3.2, mineur (a) : deux textes V1 candidats, même traduction recalée, sources différentes : la
+        # traduction par défaut est unique, elle est posée (source de la première page)
+        pa = doc('<ul><li>Grec <span class="en">Greek</span></li></ul>')
+        pb = doc('<ul><li>Grec<span class="en"> Greek</span></li></ul>')
+        da = doc('<ul><li>Griechisch <span class="en">Greek</span></li></ul>', lang="de")
+        dbb = doc('<ul><li>Griechisch<span class="en"> Greek</span></li></ul>', lang="de")
+        v2 = doc('<ul><li>Grec<span class="en">Greek</span></li></ul>')
+        t, r = self.memoire({"fr/a/": pa, "de/a-de/": da, "fr/b/": pb, "de/b-de/": dbb},
+                            {"fr/a/": {"de": "de/a-de/"}, "fr/b/": {"de": "de/b-de/"}}, {"z/": v2})
+        self.assertEqual(t.chercher("Grec{1}Greek{/1}", "z/"),
+                         {"fr": "Grec{1}Greek{/1}", "trad": "Griechisch{1}Greek{/1}", "statut": "adapte",
+                          "source": "variante de balisage V1 de/a-de/"})
+
     def test_variante_marqueur_englobant(self):
         # Ruling 23 : seul un marqueur englobant (autour du texte entier) est ajouté ou retiré : traduction V1 recalée,
         # adapte ; une autre différence en plus (marqueur intérieur retiré) : refusée, contexte V1
@@ -520,9 +561,9 @@ class TestRecomposition(unittest.TestCase):
         self.assertEqual(r["contextes"][cle(texte)]["contexte"]["nature"], "variante de balisage")
         self.assertEqual((r["variantes_recalees"], r["variantes_refusees"]), (2, 1))
         # retrait avec marqueurs intérieurs renumérotés ; refus si la traduction ne garde pas le marqueur autour de tout
-        self.assertEqual(M._recaler_englobant("{1}{2}X{/2} y{/1}", "{1}X{/1} y", "{1}{2}Ix{/2} yy{/1}"), "{1}Ix{/1} yy")
-        self.assertIsNone(M._recaler_englobant("{1}{2}X{/2} y{/1}", "{1}X{/1} y", "{1}{2}Ix{/2}{/1} yy"))
-        self.assertEqual(M._recaler_englobant("{1}X{/1} y", "{1}{2}X{/2} y{/1}", "yy {1}Ix{/1}"), "{1}yy {2}Ix{/2}{/1}")
+        self.assertEqual(R._recaler_englobant("{1}{2}X{/2} y{/1}", "{1}X{/1} y", "{1}{2}Ix{/2} yy{/1}"), "{1}Ix{/1} yy")
+        self.assertIsNone(R._recaler_englobant("{1}{2}X{/2} y{/1}", "{1}X{/1} y", "{1}{2}Ix{/2}{/1} yy"))
+        self.assertEqual(R._recaler_englobant("{1}X{/1} y", "{1}{2}X{/2} y{/1}", "yy {1}Ix{/1}"), "{1}yy {2}Ix{/2}{/1}")
 
     def test_morceau_donne_un_contexte(self):
         fr = doc("<p>Le moteur LexMachina traduit vos contrats en Suisse.</p>")
@@ -615,7 +656,7 @@ class TestV1Reelle(unittest.TestCase):
                     # tâche 3.2 sur la V1 réelle : tout ce que pose la recomposition est adapte, jamais v1 ; cas témoin
                     # du Ruling 16, les noms anglais des langues de Langues et formats (blancs différents de la V1)
                     avant = {k: json.dumps(e, sort_keys=True) for k, e in t.entrees.items()}
-                    rec = M.recomposer(langue, build.NEURON, t, pages=pages)
+                    rec = R.recomposer(langue, build.NEURON, t, pages=pages)
                     self.assertEqual(t.chercher("Grec{1}Greek{/1}", "langues-et-formats/")["trad"],
                                      "Griechisch{1}Greek{/1}")
                     self.assertGreater(rec["variantes_recalees"], 30)

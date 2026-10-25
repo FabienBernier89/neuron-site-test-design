@@ -10,13 +10,13 @@ chaque appel.
 
 memoire : pré-remplit la table de la langue (src/langues/<langue>/segments.json) avec les traductions validées de la V1
 (outils/i18n/memoire_v1.py, prefill), au statut v1, puis la complète des blocs recomposés et des variantes de balisage
-au statut adapte (memoire_v1.recomposer, tâche 3.2) ; écrit le rapport src/langues/<langue>/memoire-rapport.json et
+au statut adapte (outils/i18n/recomposition.py, recomposer, tâche 3.2) ; écrit le rapport src/langues/<langue>/memoire-rapport.json et
 les contextes V1 des textes à traduire, src/langues/<langue>/contextes.json."""
 import argparse
 import json
 import sys
 
-from outils.i18n import memoire_v1, traduire
+from outils.i18n import memoire_v1, recomposition, traduire
 from outils.i18n.table import LANGUES, Table
 
 
@@ -77,10 +77,11 @@ def main(argv=None):
     if args.commande == "memoire":
         table = Table(args.langue, build.DOSSIER_LANGUES)
         pages = traduire.pages_assemblees(args.langue, "apercu")
+        recomposition.retirer_recompositions(table)  # passe précédente retirée avant prefill : commande idempotente
         rapport = memoire_v1.prefill(args.langue, build.NEURON, table, pages=pages)
-        recomposition = memoire_v1.recomposer(args.langue, build.NEURON, table, pages=pages)
-        contextes = recomposition.pop("contextes")
-        rapport["recomposition"] = {**recomposition, "contextes": len(contextes)}
+        resultat = recomposition.recomposer(args.langue, build.NEURON, table, pages=pages)
+        contextes = resultat.pop("contextes")
+        rapport["recomposition"] = {**resultat, "contextes": len(contextes)}
         table.enregistrer()
         dossier = build.DOSSIER_LANGUES / args.langue
         fichier = dossier / "memoire-rapport.json"
