@@ -53,13 +53,13 @@ class TestMenu(unittest.TestCase):
         self.assertIn("<b>Cabinets d&#x27;avocats</b><em>Traduire un dossier sans jamais le sortir de Suisse</em>".replace("&#x27;", "'"), h)
 
     def test_sous_titres_allonges_sources_et_utilises(self):
-        """menu-sous-titres.json : chaque sous-titre allongé (deux lignes) est sourcé, à relire, et affiché sous son titre."""
+        """menu-sous-titres.json : chaque sous-titre allongé (deux lignes) est sourcé, validé (décision n° 9 de Fabien) et affiché sous son titre."""
         d = json.loads((ICI / "src/data/menu-sous-titres.json").read_text(encoding="utf-8"))
         h = build.chemin_page("").read_text(encoding="utf-8").replace("&#x27;", "'")
         self.assertEqual(len(d["entrees"]), 19)
         for e in d["entrees"]:
-            self.assertIn(e["statut"], ("a_relire", "valide"), e["titre"])  # validés par Fabien le 2026-10-23
-            self.assertTrue(e["source"].strip(), e["titre"])
+            self.assertEqual(e["statut"], "valide", e["titre"])  # décision n° 9 : « tous les textes en français sont bons »
+            self.assertIn("décision n° 9", e["source"], e["titre"])
             self.assertIn(f"<b>{e['titre']}</b><em>{e['texte']}</em>", h, e["titre"])
 
     def test_sous_titres_sur_deux_lignes(self):
