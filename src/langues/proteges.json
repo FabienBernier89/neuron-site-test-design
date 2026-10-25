@@ -34,7 +34,14 @@
     "Simplified",
     "Formal",
     "Informal",
-    "Shorten"
+    "Shorten",
+    "German",
+    "English",
+    "Italian",
+    "French",
+    "Spanish",
+    "DeepL Pro",
+    "Azure OpenAI - GPT"
   ],
   "invariants_exacts": [
     "Place de la Gare 15, 1700 Fribourg",
