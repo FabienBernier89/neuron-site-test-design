@@ -2,9 +2,9 @@
  "langue": "en",
  "pages_alignees": 156,
  "pages_non_alignees": [],
- "segments_v1": 6820,
- "par_page_v1": 1453,
- "par_page_seulement": 734,
+ "segments_v1": 6799,
+ "par_page_v1": 1476,
+ "par_page_seulement": 753,
  "doublons_divergents": [
   {
    "fr": "BILANZ, classement des entreprises les plus innovantes de Suisse 2024 (13e rang)",
@@ -233,6 +233,11 @@
  "couverture_page": 78.2,
  "couverture_texte": 82.6,
  "refus": {
+  "cible d'un lien différente": {
+   "unites": 1,
+   "textes": 1,
+   "mots": 26
+  },
   "divergence dans une même page": {
    "unites": 4,
    "textes": 4,
@@ -248,6 +253,11 @@
    "textes": 1,
    "mots": 1
   },
+  "nomme une source dont la V1 a changé le lien sur la page": {
+   "unites": 4,
+   "textes": 4,
+   "mots": 57
+  },
   "voisin d'un écart, même signature": {
    "unites": 2,
    "textes": 2,
@@ -260,8 +270,8 @@
   }
  },
  "refus_non_rattrapes": {
-  "textes": 222,
-  "mots": 676
+  "textes": 224,
+  "mots": 714
  },
  "404_non_posee": 18,
  "i18n_hors_pages": 105

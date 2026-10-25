@@ -10,6 +10,7 @@ from pathlib import Path
 
 import build
 from outils.i18n import memoire_v1 as M
+from outils.i18n import segments as S
 from outils.i18n import traduire as T
 from outils.i18n.table import LANGUES, STATUTS, Table, cle
 
@@ -104,6 +105,34 @@ class TestAlignement(unittest.TestCase):
         self.assertNotIn("{1}Français{/1}", paires)
         self.assertIn({"fr": "{1}Français{/1}", "cause": M.CAUSES["libelle"]}, detail["refus"])
 
+    def test_cible_de_lien_differente_refusee(self):
+        # glossaire EN de la V1 : la source citée a changé (Constitution au lieu de la LTF) ; la V2 garde la LTF
+        fr = doc('<p>Source : Fedlex, <a href="https://www.fedlex.admin.ch/eli/cc/2006/218/fr">loi sur le Tribunal '
+                 'fédéral</a></p><p>Voir <a href="https://www.fedlex.admin.ch/eli/cc/1999/404/fr">la Constitution</a></p>'
+                 '<div class="sf">art. 1 LTF · source : Fedlex, loi sur le Tribunal fédéral</div>')
+        en = doc('<p>Source: Fedlex, <a href="https://www.fedlex.admin.ch/eli/cc/1999/404/en">Federal Constitution</a>'
+                 '</p><p>See <a href="https://www.fedlex.admin.ch/eli/cc/1999/404/en">the Constitution</a></p>'
+                 '<div class="sf">Art. 1 Federal Supreme Court Act · source: Fedlex, Federal Constitution</div>', lang="en")
+        detail = M.aligner_detail(fr, en)
+        paires = {f: t for f, t, _ in detail["paires"]}
+        self.assertNotIn("Source : Fedlex, {1}loi sur le Tribunal fédéral{/1}", paires)
+        self.assertIn({"fr": "Source : Fedlex, {1}loi sur le Tribunal fédéral{/1}", "cause": M.CAUSES["cible"]},
+                      detail["refus"])
+        # sans lien, le même nom de source sur la page est refusé aussi
+        self.assertNotIn("art. 1 LTF · source : Fedlex, loi sur le Tribunal fédéral", paires)
+        self.assertIn({"fr": "art. 1 LTF · source : Fedlex, loi sur le Tribunal fédéral",
+                       "cause": M.CAUSES["meme_source"]}, detail["refus"])
+        # même adresse au segment de langue près (/fr ↔ /en) : appariée
+        self.assertEqual(paires["Voir {1}la Constitution{/1}"], "See {1}the Constitution{/1}")
+
+    def test_json_traduit_illisible_refuse(self):
+        fr = doc("<p>Texte</p>", ld={"@type": "WebPage", "description": "Une description"})
+        tr = fr.replace('{"@type": "WebPage", "description": "Une description"}', '{"@type": "WebPage", "description": ')
+        unites = [u for u in S.extraire_page(fr) if u["genre"] == "ld"]
+        paires, refus = M._apparier_donnees(fr, tr, unites)
+        self.assertEqual(paires, [])
+        self.assertEqual([c for _, c in refus], ["ld_illisible"])
+
     def test_passage_lang_fr_jamais_apparie(self):
         fr = doc('<p>Exemple :</p><p lang="fr">Le contrat est résilié.</p>')
         de = doc('<p>Beispiel:</p><p lang="fr">Le contrat est résilié.</p>', lang="de")
@@ -145,10 +174,13 @@ class TestPrefill(unittest.TestCase):
                     {"fr/a/": {"de": "de/a-de/"}, "fr/b/": {"de": "de/b-de/"}})
         t = self.table()
         r = M.prefill("de", neuron, t, pages={})
-        self.assertEqual(t.chercher("Allemand", "a/")["trad"], "Deutsch")
+        self.assertEqual(t.chercher("Allemand", "a/"),
+                         {"fr": "Allemand", "trad": "Deutsch", "statut": "v1", "source": "V1 de/a-de/"})
         self.assertEqual(t.chercher("Allemand", "b/"),
                          {"fr": "Allemand", "trad": "Deutsch (Sprache)", "statut": "v1", "source": "V1 de/b-de/"})
-        self.assertEqual(t.chercher("Allemand", "autre/")["trad"], "Deutsch")  # la première traduction par défaut
+        # Ruling 21 : aucune traduction par défaut pour un doublon divergent ; ailleurs, circuit normal
+        self.assertIsNone(t.chercher("Allemand", "autre/"))
+        self.assertIsNone(t.entrees[cle("Allemand")]["trad"])
         self.assertEqual(r["doublons_divergents"],
                          [{"fr": "Allemand", "trads": ["Deutsch", "Deutsch (Sprache)"], "pages": ["a/", "b/"]}])
         self.assertEqual(t.chercher("Contrat", "b/")["source"], "V1 de/a-de/")  # même traduction : pas de par_page
@@ -163,6 +195,16 @@ class TestPrefill(unittest.TestCase):
         self.assertIsNone(t.chercher("Allemand", "a/"))
         self.assertEqual(t.chercher("Texte", "a/")["trad"], "Text")
         self.assertIn("divergence dans une même page", r["refus"])
+
+    def test_ne_remplace_jamais_invariant(self):
+        neuron = v1(self.dossier / "v1", {"fr/a/": FR, "de/a-de/": DE}, {"fr/a/": {"de": "de/a-de/"}})
+        t = self.table()
+        t.poser("Traduction juridique", "Traduction juridique", "invariant", "relu par X, identique au français")
+        t.poser("Pied", "Fusszeile", "relu", "relecteur", page="a/", sans_defaut=True)
+        r = M.prefill("de", neuron, t, pages={})
+        self.assertEqual(t.chercher("Traduction juridique", "a/")["statut"], "invariant")
+        self.assertEqual(t.chercher("Pied", "a/")["trad"], "Fusszeile")  # traduction de page relue gardée
+        self.assertIn(M.CAUSES["relu"], r["refus"])
 
     def test_ne_remplace_jamais_relu(self):
         neuron = v1(self.dossier / "v1", {"fr/a/": FR, "de/a-de/": DE}, {"fr/a/": {"de": "de/a-de/"}})
@@ -188,6 +230,15 @@ class TestPrefill(unittest.TestCase):
         self.assertIsNone(t.chercher("Allemand", "b/"))
         self.assertEqual(t.chercher("Texte relu", "a/")["statut"], "relu")
         self.assertEqual(t.chercher("Traduction juridique", "a/")["statut"], "v1")
+
+    def test_relance_retire_le_defaut_perime_garde_la_page_relue(self):
+        neuron = v1(self.dossier / "v1", {"fr/a/": FR, "de/a-de/": DE}, {"fr/a/": {"de": "de/a-de/"}})
+        t = self.table()
+        t.poser("Ancien texte", "Alter Text", "v1", "V1 de/ancien/")
+        t.poser("Ancien texte", "Geprüft", "relu", "relecteur", page="b/")
+        M.prefill("de", neuron, t, pages={})
+        self.assertIsNone(t.chercher("Ancien texte", "a/"))          # défaut v1 périmé retiré
+        self.assertEqual(t.chercher("Ancien texte", "b/")["trad"], "Geprüft")
 
     def test_permutation_jamais_posee(self):
         # la V1 allemande met la colonne allemande en premier : chaque cellule fait face à celle d'une autre langue
@@ -277,6 +328,14 @@ class TestPrefill(unittest.TestCase):
         self.assertEqual(t.chercher("Texte", "a/")["trad"], "Text")
         self.assertTrue(any(c.startswith("contrôle") for c in r["refus"]))
 
+    def test_page_traduite_illisible_signalee(self):
+        de = DE.replace('"inLanguage": "de-CH"}', '"inLanguage": ')
+        neuron = v1(self.dossier / "v1", {"fr/a/": FR, "de/a-de/": de}, {"fr/a/": {"de": "de/a-de/"}})
+        r = M.prefill("de", neuron, self.table(), pages={})
+        self.assertEqual(r["pages_alignees"], 0)
+        self.assertEqual(r["pages_non_alignees"][0]["page"], "a/")
+        self.assertIn("illisible", r["pages_non_alignees"][0]["cause"])
+
     def test_page_absente_signalee(self):
         neuron = v1(self.dossier / "v1", {"fr/a/": FR}, {"fr/a/": {"de": "de/a-de/"}})
         r = M.prefill("de", neuron, self.table(), pages={})
@@ -328,15 +387,12 @@ class TestTablesProduites(unittest.TestCase):
 @unittest.skipUnless((build.NEURON / "src/routes.json").is_file(), "source V1 absente (NEURON_SRC)")
 class TestV1Reelle(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        cls.pages = T.pages_assemblees("de", "apercu")
-
     def test_v1_reelle(self):
         for langue in ("de", "en", "it"):
             with self.subTest(langue=langue), tempfile.TemporaryDirectory() as tmp:
                 t = Table(langue, tmp)
-                r = M.prefill(langue, build.NEURON, t, pages=self.pages)
+                # pages V2 assemblées pour la langue mesurée (comme la commande memoire)
+                r = M.prefill(langue, build.NEURON, t, pages=T.pages_assemblees(langue, "apercu"))
                 self.assertEqual(r["pages_alignees"], 156, r["pages_non_alignees"])
                 self.assertEqual(r["pages_non_alignees"], [])
                 # même ordre que l'audit (84,6 % des mots retrouvés dans la V1, § 1, balises ignorées), à 5 points près

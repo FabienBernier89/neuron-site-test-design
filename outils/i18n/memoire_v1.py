@@ -10,7 +10,8 @@ cause.
 Alignement d'une page (aligner_detail), à partir des unités de segments.extraire_page (tête, menu, main, pied) :
 - passages et attributs, dans l'ordre : la suite des signatures (genre, attribut, balise et classe qui précèdent
   l'unité, lang="fr", écran d'application, balises et suite des marqueurs {n}…{/n}) est comparée par difflib. Seules
-  les unités des plages égales sont appariées ; une unité d'un écart, et ses voisines de même signature (on ne sait pas
+  les unités des plages égales sont appariées, si les liens externes de leurs balises ont les mêmes cibles (au segment
+  de langue près : fedlex …/fr et …/en) ; une unité d'un écart, et ses voisines de même signature (on ne sait pas
   laquelle manque), sont refusées ; si moins de SEUIL des unités trouvent leur place, la page n'est pas alignée ;
 - chaînes des JSON-LD et des JSON de données : script par script (même rang, même genre), chemin JSON par chemin JSON,
   à condition que les deux scripts aient le même squelette (mêmes chemins, mêmes @type). Le chemin apparie aussi les
@@ -24,16 +25,16 @@ Pré-remplissage (prefill), sur les paires de toutes les pages :
 - écartées : les permutations (_permutations : tableau dont la V1 allemande met la colonne allemande en premier), et
   les traductions identiques au français lues dans les données structurées (que les traducteurs n'ont pas relues : la
   featureList de corrext/ est restée en français dans la V1 anglaise), sauf invariant (traduire._invariant) ;
-- la première traduction rencontrée (ordre de src/routes.json de la V1, puis ordre de la page) devient la traduction
-  par défaut ; une traduction différente du même texte va dans par_page pour ses pages (doublon divergent). Une
+- une traduction unique devient la traduction par défaut. Un doublon divergent (deux traductions du même texte selon
+  la page) n'a pas de traduction par défaut (Ruling 21) : chaque traduction est posée pour ses pages seulement. Une
   traduction identique au français alors que le même texte est traduit ailleurs est un oubli de la V1 : elle est
-  écartée, ses pages prennent la traduction ;
+  écartée ;
 - deux traductions différentes du même texte dans une même page ne se représentent pas (une seule traduction par
   page) : le texte n'est alors posé nulle part ;
 - une traduction identique au français (hors invariant) n'est jamais la traduction par défaut (Ruling 19) : l'entrée
   est « par page seulement » (Table.poser, sans_defaut), le texte n'est accepté tel quel que sur les pages où la V1
   l'a gardé ; ailleurs il reste à traduire ;
-- une entrée relue n'est jamais écrasée ; une traduction refusée par les contrôles de Table.poser (tirets, ß) n'est
+- une entrée relue ou invariante n'est jamais écrasée ; une traduction refusée par les contrôles de Table.poser (tirets, ß) n'est
   pas posée. Chaque refus est compté dans le rapport.
 
 Sources non posées, volontairement :
@@ -59,10 +60,15 @@ from outils.i18n.table import cle
 # (86,5 % : les 36 langues de la liste y portent leur nom local en lang="xx", structure différente, refusées une à une).
 SEUIL = 0.5
 STATUT = "v1"
+PROTEGES = ("relu", "invariant")  # statuts jamais écrasés par la mémoire V1
 
 _SCRIPT = re.compile(r"<script\b([^>]*)>(.*?)</script\s*>", re.S | re.I)
 _CLASSE = re.compile(r"""\sclass\s*=\s*(?:"([^"]*)"|'([^']*)')""", re.I)
 _MARQUEURS = re.compile(r"\{/?\d+\}")
+_HREF = re.compile(r"""\shref\s*=\s*(?:"([^"]*)"|'([^']*)')""", re.I)
+_EXTERNE = re.compile(r"^(?:https?:|mailto:|tel:)", re.I)
+_SEGMENT_LANGUE = re.compile(r"(?<=/)(?:fr|de|it|en)(?:-ch)?(?=/|$|[?#])", re.I)
+_PARAM_LANGUE = re.compile(r"([?&](?:lang|language|locale)=)(?:fr|de|it|en)(?:[-_]ch)?\b", re.I)
 _BLANCS = re.compile(r"[ \t\r\n\f]+")  # blancs HTML seulement : l'espace insécable d'une traduction est gardée
 
 CAUSES = {
@@ -72,7 +78,10 @@ CAUSES = {
     "ld_valeur": "données structurées : valeur absente ou non textuelle",
     "meme_page": "divergence dans une même page",
     "permutation": "permutation probable dans la page",
-    "relu": "entrée relue gardée",
+    "relu": "entrée relue ou invariante gardée",
+    "cible": "cible d'un lien différente",
+    "meme_source": "nomme une source dont la V1 a changé le lien sur la page",
+    "ld_illisible": "données structurées : JSON traduit illisible",
     "libelle": "libellé d'un passage en français que la V1 remplace",
     "ld_identique": "identique au français dans les données structurées (oubli probable de la V1)",
     "identique_traduit": "identique au français, traduit ailleurs (oubli probable de la V1)",
@@ -101,6 +110,22 @@ def _signature(source, u):
     marqueurs = tuple(_etiquette(e.get("ouvre") or e.get("vide")) for _, e in sorted(u["table"].items()))
     return (u["genre"], u["attr"], u["lang_fr"], u["ui"], _etiquette(balise), marqueurs,
             tuple(_MARQUEURS.findall(u["texte"])))
+
+
+def _cibles(table_marqueurs):
+    """Cibles externes des balises d'une unité, marqueur par marqueur : adresse du lien, au segment ou au paramètre de
+    langue près (fedlex.admin.ch/eli/…/fr et …/en sont la même cible) ; None pour un lien interne (adapté à la langue
+    par les adresses du site) ou une balise sans lien."""
+    sortie = []
+    for _, e in sorted(table_marqueurs.items()):
+        m = _HREF.search(e.get("ouvre") or e.get("vide"))
+        href = (m.group(1) if m.group(1) is not None else m.group(2)) if m else ""
+        if not _EXTERNE.match(href):
+            sortie.append(None)
+            continue
+        href = _PARAM_LANGUE.sub(lambda x: x.group(1) + "*", _SEGMENT_LANGUE.sub("*", href.strip()))
+        sortie.append(href.lower().rstrip("/"))
+    return tuple(sortie)
 
 
 def _scripts(source):
@@ -141,7 +166,11 @@ def _apparier_donnees(fr_html, tr_html, unites):
     traduits = {}
     for rang, (genre, _, corps) in enumerate(sf):
         if rang < len(st) and st[rang][0] == genre:
-            donnees_tr = json.loads(st[rang][2])
+            try:
+                donnees_tr = json.loads(st[rang][2])
+            except ValueError:
+                traduits[rang] = None
+                continue
             if _squelette(json.loads(corps)) == _squelette(donnees_tr):
                 traduits[rang] = donnees_tr
     paires, refus = [], []
@@ -149,6 +178,9 @@ def _apparier_donnees(fr_html, tr_html, unites):
         rang, chemin = position[u["debut"]]
         if rang not in traduits:
             refus.append((u, "ld_structure"))
+            continue
+        if traduits[rang] is None:
+            refus.append((u, "ld_illisible"))
             continue
         valeur = S._suivre(traduits[rang], chemin)
         if isinstance(valeur, str) and valeur.strip():
@@ -193,12 +225,33 @@ def aligner_detail(fr_html, tr_html):
             continue
         if i in causes:
             refus.append((u, causes[i]))
+        elif _cibles(u["table"]) != _cibles(hb[apparies[i]]["table"]):
+            # la V1 traduite cite une autre source (glossaire EN : Constitution au lieu de la LTF)
+            refus.append((u, "cible"))
         else:
             t = hb[apparies[i]]["texte"]
             paires.append((u, _blancs(t) if u["genre"] == "bloc" else t))
     p, r = _apparier_donnees(fr_html, tr_html, [u for u in ua if u["genre"] in ("ld", "json") and not u["lang_fr"]])
     paires += p
     refus += r
+    # une source dont la V1 a changé le lien (glossaire EN : Constitution au lieu de la LTF) : tout texte de la page qui
+    # la nomme est suspect (« art. 188 Cst. et art. 1 LTF · source : Fedlex, loi sur le Tribunal fédéral », sans lien)
+    sources = set()
+    for u, c in refus:
+        if c == "cible":
+            for n in u["table"]:
+                m = re.search(r"\{%d\}(.*?)\{/%d\}" % (n, n), u["texte"])
+                nom = _sans_balises(m.group(1)) if m else ""
+                if len(nom) >= 8:
+                    sources.add(nom)
+    if sources:
+        gardees = []
+        for u, tr in paires:
+            if any(s in _sans_balises(u["texte"]) for s in sources):
+                refus.append((u, "meme_source"))
+            else:
+                gardees.append((u, tr))
+        paires = gardees
     paires.sort(key=lambda x: x[0]["debut"])
     refus.sort(key=lambda x: x[0]["debut"])
     return {"paires": [(u["texte"], t, u["genre"]) for u, t in paires],
@@ -308,21 +361,25 @@ def _textes_404(neuron, langue):
 
 def _retirer_v1(table):
     """Retire de la table les traductions posées par une mémoire V1 précédente (statut v1, source « V1 … ») : la mémoire
-    se recalcule entièrement à chaque appel, sans garder une paire qu'un contrôle refuse désormais. Une entrée dont une
-    traduction de page a un autre statut est gardée entière (sa traduction par défaut est alors simplement reposée)."""
+    se recalcule entièrement à chaque appel, sans garder une paire qu'un contrôle refuse désormais. Une entrée qui garde
+    une traduction de page d'un autre statut (relue) devient « par page seulement » si sa traduction par défaut venait
+    de la V1 : le nouveau calcul la repose, ou non."""
     def de_v1(e):
-        return e["statut"] == STATUT and e["source"].startswith("V1 ")
+        return e["statut"] == STATUT and (e["source"] or "").startswith("V1 ")
     for k in list(table.entrees):
         e = table.entrees[k]
         e["par_page"] = {p: v for p, v in e["par_page"].items() if not de_v1(v)}
-        if (de_v1(e) or e["trad"] is None) and not e["par_page"]:
+        if de_v1(e):
+            e.update(trad=None, statut=None, source=None)
+        if e["trad"] is None and not e["par_page"]:
             del table.entrees[k]
 
 
 def prefill(langue, neuron, table, pages=None):
     """Pré-remplit la table de la langue depuis la V1 (dossier neuron, lu en lecture seule) et renvoie le rapport :
     {"pages_alignees", "pages_non_alignees": [{"page", "cause"}], "segments_v1" (textes FR posés par défaut),
-     "par_page_v1", "par_page_seulement" (textes identiques au français posés pour leurs pages seulement, Ruling 19),
+     "par_page_v1", "par_page_seulement" (textes posés pour leurs pages seulement : identiques au français, Ruling 19, ou
+     doublons divergents, Ruling 21),
      "doublons_divergents": [{"fr", "trads", "pages"}], "couverture_mots" (main), "couverture_page",
      "couverture_texte" (main, balises ignorées : définition de l'audit),
      "refus": {cause: {"unites", "textes", "mots"}}, "refus_non_rattrapes": {"textes", "mots"}, "404_non_posee",
@@ -343,7 +400,11 @@ def prefill(langue, neuron, table, pages=None):
         if not (f_fr.is_file() and f_tr and f_tr.is_file()):
             non_alignees.append({"page": page, "cause": "page V1 absente"})
             continue
-        d = aligner_detail(f_fr.read_text(encoding="utf-8"), f_tr.read_text(encoding="utf-8"))
+        try:
+            d = aligner_detail(f_fr.read_text(encoding="utf-8"), f_tr.read_text(encoding="utf-8"))
+        except ValueError as e:
+            non_alignees.append({"page": page, "cause": f"page V1 illisible : {e}"})
+            continue
         if d is None:
             non_alignees.append({"page": page, "cause": f"structure différente (moins de {SEUIL:.0%} des unités)"})
             continue
@@ -365,7 +426,7 @@ def prefill(langue, neuron, table, pages=None):
     doublons, poses, par_page, seulement = [], 0, 0, 0
     for fr, occ in occurrences.items():
         entree = table.entrees.get(cle(fr))
-        if entree and entree["statut"] == "relu":
+        if entree and entree["statut"] in PROTEGES:
             _compter(refus, CAUSES["relu"], fr, distincts)
             continue
         # traductions distinctes (aux blancs près), dans l'ordre de lecture ; mêmes contrôles que Table.poser
@@ -397,28 +458,22 @@ def prefill(langue, neuron, table, pages=None):
             _compter(refus, CAUSES["meme_page"], fr, distincts)
             continue
         defaut = next(iter(valides))
-        if _normal(defaut) == fr and not T._invariant(fr, langue):
-            # Ruling 19 : gardé en français par la V1 (terme d'une colonne française de tableau) ; accepté tel quel sur
-            # ses pages seulement, jamais par défaut : ailleurs, le même texte reste à traduire
+        if len(valides) > 1 or (_normal(defaut) == fr and not T._invariant(fr, langue)):
+            # Ruling 21 : doublon divergent, chaque traduction n'est validée que sur ses pages ; Ruling 19 : gardé en
+            # français par la V1 (terme d'une colonne française de tableau). Posés pour leurs pages seulement, jamais
+            # par défaut : ailleurs, le même texte suit le circuit normal
             for page, trads in par_page_fr.items():
                 (n, adresse), = trads.items()
                 propre = table.entrees.get(cle(fr), {}).get("par_page", {}).get(page)
-                if not (propre and propre["statut"] == "relu"):
+                if not (propre and propre["statut"] in PROTEGES):
                     table.poser(fr, valides[n], STATUT, f"V1 {adresse}", page=page, sans_defaut=True)
                     par_page += 1
             seulement += 1
+            if len(valides) > 1:
+                doublons.append({"fr": fr, "trads": list(valides), "pages": list(dict.fromkeys(p for _, p, _ in occ))})
             continue
         table.poser(fr, valides[defaut], STATUT, f"V1 {next(a for t, _, a in occ if _blancs(t) == defaut)}")
         poses += 1
-        for page, trads in par_page_fr.items():
-            (n, adresse), = trads.items()
-            propre = table.entrees[cle(fr)]["par_page"].get(page)
-            if n == defaut or (propre and propre["statut"] == "relu"):
-                continue
-            table.poser(fr, valides[n], STATUT, f"V1 {adresse}", page=page)
-            par_page += 1
-        if len(valides) > 1:
-            doublons.append({"fr": fr, "trads": list(valides), "pages": list(dict.fromkeys(p for _, p, _ in occ))})
 
     poses_fr = {e["fr"] for e in table.entrees.values()
                 if e["statut"] == STATUT or any(v["statut"] == STATUT for v in e["par_page"].values())}

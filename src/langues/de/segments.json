@@ -4301,10 +4301,15 @@
  },
  "12750b49a938b0bd": {
   "fr": "{1}Arbitrage international{/1}",
-  "trad": "{1}Internationale Schiedsverfahren{/1}",
-  "statut": "v1",
-  "source": "V1 de/loesungen/anwaltskanzleien/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "solutions/cabinets-avocats/": {
+    "trad": "{1}Internationale Schiedsverfahren{/1}",
+    "statut": "v1",
+    "source": "V1 de/loesungen/anwaltskanzleien/"
+   },
    "traduction/anglais-allemand/": {
     "trad": "{1}Internationale Schiedsgerichtsbarkeit{/1}",
     "statut": "v1",
@@ -8677,14 +8682,39 @@
  },
  "252c135ba9343b40": {
   "fr": "Pour aller plus loin",
-  "trad": "Mehr zum Thema",
-  "statut": "v1",
-  "source": "V1 de/lexmachina/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "comparatif/": {
+    "trad": "Mehr zum Thema",
+    "statut": "v1",
+    "source": "V1 de/vergleich/"
+   },
+   "langues-et-formats/": {
+    "trad": "Mehr zum Thema",
+    "statut": "v1",
+    "source": "V1 de/sprachen-und-formate/"
+   },
+   "lexmachina/": {
+    "trad": "Mehr zum Thema",
+    "statut": "v1",
+    "source": "V1 de/lexmachina/"
+   },
+   "niveaux-de-qualite/": {
+    "trad": "Mehr zum Thema",
+    "statut": "v1",
+    "source": "V1 de/qualitaetsstufen/"
+   },
    "ressources/etudes/": {
     "trad": "Weiterführende Seiten",
     "statut": "v1",
     "source": "V1 de/ressourcen/studien/"
+   },
+   "securite-souverainete/": {
+    "trad": "Mehr zum Thema",
+    "statut": "v1",
+    "source": "V1 de/sicherheit/"
    }
   }
  },
@@ -9324,10 +9354,15 @@
  },
  "2792c1c9a7a3cbd1": {
   "fr": "Cadrons votre intégration",
-  "trad": "Planen wir Ihre Integration",
-  "statut": "v1",
-  "source": "V1 de/corrext/api-on-premises/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/api-on-premises/": {
+    "trad": "Planen wir Ihre Integration",
+    "statut": "v1",
+    "source": "V1 de/corrext/api-on-premises/"
+   },
    "solutions/editeurs-legaltech/": {
     "trad": "Lassen Sie uns Ihre Integration planen",
     "statut": "v1",
@@ -11496,10 +11531,15 @@
  },
  "31180de5ebacd2b5": {
   "fr": "{1}{/1}{2}DeepL Pro seul{/2}{3}Corrext{/3}",
-  "trad": "{1}{/1}{2}DeepL Pro allein{/2}{3}Corrext{/3}",
-  "statut": "v1",
-  "source": "V1 de/vergleich/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "comparatif/": {
+    "trad": "{1}{/1}{2}DeepL Pro allein{/2}{3}Corrext{/3}",
+    "statut": "v1",
+    "source": "V1 de/vergleich/"
+   },
    "comparatif/deepl-traduction-juridique/": {
     "trad": "{1}{/1}{2}Nur DeepL Pro{/2}{3}Corrext{/3}",
     "statut": "v1",
@@ -13766,10 +13806,15 @@
  },
  "3b9016fe7a249c08": {
   "fr": "{1}Moteurs étrangers{/1}",
-  "trad": "{1}Ausländische Übersetzungsmotoren{/1}",
-  "statut": "v1",
-  "source": "V1 de/loesungen/anwaltskanzleien/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "solutions/cabinets-avocats/": {
+    "trad": "{1}Ausländische Übersetzungsmotoren{/1}",
+    "statut": "v1",
+    "source": "V1 de/loesungen/anwaltskanzleien/"
+   },
    "traduction/banque-finance/": {
     "trad": "{1}Übersetzungsmotoren im Ausland{/1}",
     "statut": "v1",
@@ -16157,10 +16202,15 @@
  },
  "45b789f5882a910e": {
   "fr": "Quelle différence entre Light review, Full review et Double review ?",
-  "trad": "Was unterscheidet Light review, Full review und Double review?",
-  "statut": "v1",
-  "source": "V1 de/vergleich/uebersetzungsbuero-oder-plattform/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "comparatif/agence-ou-plateforme/": {
+    "trad": "Was unterscheidet Light review, Full review und Double review?",
+    "statut": "v1",
+    "source": "V1 de/vergleich/uebersetzungsbuero-oder-plattform/"
+   },
    "ressources/blog/comprendre-devis-traduction-juridique/": {
     "trad": "Was ist der Unterschied zwischen Light review, Full review und Double review?",
     "statut": "v1",
@@ -18013,10 +18063,15 @@
  },
  "49f378961c606462": {
   "fr": "{1}Gestion de projet.{/1} De la demande au devis, en trois étapes",
-  "trad": "{1}Projektmanagement.{/1} Von der Anfrage zur Offerte in drei Schritten",
-  "statut": "v1",
-  "source": "V1 de/corrext/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/": {
+    "trad": "{1}Projektmanagement.{/1} Von der Anfrage zur Offerte in drei Schritten",
+    "statut": "v1",
+    "source": "V1 de/corrext/"
+   },
    "corrext/gestion-de-projet/": {
     "trad": "{1}Projektmanagement.{/1} Von der Anfrage zur Offerte, in drei Schritten",
     "statut": "v1",
@@ -22732,10 +22787,15 @@
  },
  "5eb14dac37055425": {
   "fr": "Fusions et acquisitions",
-  "trad": "Fusionen und Akquisitionen",
-  "statut": "v1",
-  "source": "V1 de/corrext/uebersetzungsprojekte/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/gestion-de-projet/": {
+    "trad": "Fusionen und Akquisitionen",
+    "statut": "v1",
+    "source": "V1 de/corrext/uebersetzungsprojekte/"
+   },
    "traduction/fusions-acquisitions/": {
     "trad": "Fusionen und Übernahmen",
     "statut": "v1",
@@ -23808,10 +23868,15 @@
  },
  "632ed0c1c43a5b22": {
   "fr": "400 pages de pièces avant l'audience",
-  "trad": "400 Seiten Akten vor der Verhandlung",
-  "statut": "v1",
-  "source": "V1 de/loesungen/anwaltskanzleien/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "solutions/cabinets-avocats/": {
+    "trad": "400 Seiten Akten vor der Verhandlung",
+    "statut": "v1",
+    "source": "V1 de/loesungen/anwaltskanzleien/"
+   },
    "traduction/contentieux-arbitrage/": {
     "trad": "400 Seiten Beilagen vor der Verhandlung",
     "statut": "v1",
@@ -26871,10 +26936,15 @@
  },
  "713fa049ece843cc": {
   "fr": "{1}Fiscalité{/1}",
-  "trad": "{1}Steuern{/1}",
-  "statut": "v1",
-  "source": "V1 de/loesungen/treuhand/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "solutions/fiduciaires-conseil/": {
+    "trad": "{1}Steuern{/1}",
+    "statut": "v1",
+    "source": "V1 de/loesungen/treuhand/"
+   },
    "traduction/fiscalite/": {
     "trad": "{1}Steuerrecht{/1}",
     "statut": "v1",
@@ -34152,10 +34222,15 @@
  },
  "9105d684026c174a": {
   "fr": "{1}Délai{/1}",
-  "trad": "{1}Lieferfrist{/1}",
-  "statut": "v1",
-  "source": "V1 de/corrext/handelsregisterauszug/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/extraits-registre-commerce/": {
+    "trad": "{1}Lieferfrist{/1}",
+    "statut": "v1",
+    "source": "V1 de/corrext/handelsregisterauszug/"
+   },
    "traduction/droit-penal/": {
     "trad": "{1}Frist{/1}",
     "statut": "v1",
@@ -35339,14 +35414,19 @@
  },
  "95e3a36e083c9938": {
   "fr": "{1}{2}Pseudonymisation exigée.{/2} Noms de clients, parties et objet du dossier retirés avant tout envoi à un moteur étranger.{/1}",
-  "trad": "{1}{2}Pseudonymisierung verlangt.{/2} Kundennamen, Parteien und Gegenstand des Dossiers werden vor jedem Versand an einen ausländischen Motor entfernt.{/1}",
-  "statut": "v1",
-  "source": "V1 de/corrext/dokumente-uebersetzen/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "comparatif/deepl-traduction-juridique/": {
     "trad": "{1}{2}Pseudonymisierung verlangt.{/2} Namen der Klientschaft, Parteien und Gegenstand des Dossiers werden vor jedem Versand an einen ausländischen Motor entfernt.{/1}",
     "statut": "v1",
     "source": "V1 de/vergleich/deepl-juristische-uebersetzung/"
+   },
+   "corrext/traduction-texte-et-document/": {
+    "trad": "{1}{2}Pseudonymisierung verlangt.{/2} Kundennamen, Parteien und Gegenstand des Dossiers werden vor jedem Versand an einen ausländischen Motor entfernt.{/1}",
+    "statut": "v1",
+    "source": "V1 de/corrext/dokumente-uebersetzen/"
    }
   }
  },
@@ -37684,10 +37764,15 @@
  },
  "a11ef6480ae9e1af": {
   "fr": "{1}{/1}{2}Agence seule{/2}{3}Corrext{/3}",
-  "trad": "{1}{/1}{2}Büro allein{/2}{3}Corrext{/3}",
-  "statut": "v1",
-  "source": "V1 de/vergleich/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "comparatif/": {
+    "trad": "{1}{/1}{2}Büro allein{/2}{3}Corrext{/3}",
+    "statut": "v1",
+    "source": "V1 de/vergleich/"
+   },
    "comparatif/agence-ou-plateforme/": {
     "trad": "{1}{/1}{2}Nur Übersetzungsbüro{/2}{3}Corrext{/3}",
     "statut": "v1",
@@ -38931,10 +39016,15 @@
  },
  "a6f0f0b3fbf3e71a": {
   "fr": "2 min de lecture",
-  "trad": "1 Min. Lesezeit",
-  "statut": "v1",
-  "source": "V1 de/ressourcen/blog/ai-act-grand-challenge-st-gallen/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "ressources/blog/ai-act-grand-challenge-universite-saint-gall/": {
+    "trad": "1 Min. Lesezeit",
+    "statut": "v1",
+    "source": "V1 de/ressourcen/blog/ai-act-grand-challenge-st-gallen/"
+   },
    "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/": {
     "trad": "2 Min. Lesezeit",
     "statut": "v1",
@@ -38949,6 +39039,16 @@
     "trad": "2 Min. Lesezeit",
     "statut": "v1",
     "source": "V1 de/ressourcen/blog/legaltechtalk-2024-kanzleimodell/"
+   },
+   "ressources/blog/neuron-gen-ai-summit-2024-lausanne/": {
+    "trad": "1 Min. Lesezeit",
+    "statut": "v1",
+    "source": "V1 de/ressourcen/blog/gen-ai-summit-2024-lausanne/"
+   },
+   "ressources/blog/paula-reichenberg-conseil-strategique-hes-so/": {
+    "trad": "1 Min. Lesezeit",
+    "statut": "v1",
+    "source": "V1 de/ressourcen/blog/strategierat-hes-so/"
    },
    "ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/": {
     "trad": "2 Min. Lesezeit",
@@ -39648,10 +39748,15 @@
  },
  "a9b31abc4810cb8a": {
   "fr": "{1}{/1}{2}LLM seul{/2}{3}Corrext{/3}",
-  "trad": "{1}{/1}{2}LLM allein{/2}{3}Corrext{/3}",
-  "statut": "v1",
-  "source": "V1 de/vergleich/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "comparatif/": {
+    "trad": "{1}{/1}{2}LLM allein{/2}{3}Corrext{/3}",
+    "statut": "v1",
+    "source": "V1 de/vergleich/"
+   },
    "comparatif/chatgpt-traduction-juridique/": {
     "trad": "{1}{/1}{2}Nur ein LLM{/2}{3}Corrext{/3}",
     "statut": "v1",
@@ -44925,14 +45030,24 @@
  },
  "c1708ffdc0bc316e": {
   "fr": "{1}Recherche{/1}",
-  "trad": "{1}Suche{/1}",
-  "statut": "v1",
-  "source": "V1 de/corrext/chnell/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "a-propos/presse/": {
     "trad": "{1}Forschung{/1}",
     "statut": "v1",
     "source": "V1 de/ueber-uns/presse/"
+   },
+   "corrext/chnell/": {
+    "trad": "{1}Suche{/1}",
+    "statut": "v1",
+    "source": "V1 de/corrext/chnell/"
+   },
+   "corrext/extraits-registre-commerce/": {
+    "trad": "{1}Suche{/1}",
+    "statut": "v1",
+    "source": "V1 de/corrext/handelsregisterauszug/"
    },
    "solutions/editeurs-legaltech/": {
     "trad": "{1}Forschung{/1}",
@@ -46279,10 +46394,15 @@
  },
  "c7f90e2713429ff0": {
   "fr": "Un déploiement sur nos propres serveurs est-il possible ?",
-  "trad": "Ist ein Betrieb auf unseren eigenen Servern möglich?",
-  "statut": "v1",
-  "source": "V1 de/sicherheit/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "securite-souverainete/": {
+    "trad": "Ist ein Betrieb auf unseren eigenen Servern möglich?",
+    "statut": "v1",
+    "source": "V1 de/sicherheit/"
+   },
    "solutions/autorites-administration/": {
     "trad": "Ist eine Installation auf unseren eigenen Servern möglich?",
     "statut": "v1",
@@ -46711,14 +46831,24 @@
  },
  "c96011c0410e2318": {
   "fr": "{1}Conditions générales{/1}",
-  "trad": "{1}Allgemeine Geschäftsbedingungen{/1}",
-  "statut": "v1",
-  "source": "V1 de/uebersetzung/vertraege/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "traduction/assurance/": {
     "trad": "{1}Allgemeine Versicherungsbedingungen{/1}",
     "statut": "v1",
     "source": "V1 de/uebersetzung/versicherungsrecht/"
+   },
+   "traduction/banque-finance/": {
+    "trad": "{1}Allgemeine Geschäftsbedingungen{/1}",
+    "statut": "v1",
+    "source": "V1 de/uebersetzung/bank-und-finanzrecht/"
+   },
+   "traduction/contrats/": {
+    "trad": "{1}Allgemeine Geschäftsbedingungen{/1}",
+    "statut": "v1",
+    "source": "V1 de/uebersetzung/vertraege/"
    }
   }
  },
@@ -46814,10 +46944,15 @@
  },
  "ca0cc223d145816b": {
   "fr": "Le mode Highly sensitive content impose un stockage et un traitement exclusivement en Suisse, sans réutilisation du contenu en mémoire de traduction.{1}Disponible en allemand, français, italien et anglais.{/1}",
-  "trad": "Der Modus Highly sensitive content verlangt Speicherung und Verarbeitung ausschliesslich in der Schweiz, ohne Wiederverwendung des Inhalts als Translation Memory.{1}Verfügbar auf Deutsch, Französisch, Italienisch und Englisch.{/1}",
-  "statut": "v1",
-  "source": "V1 de/loesungen/anwaltskanzleien/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "solutions/cabinets-avocats/": {
+    "trad": "Der Modus Highly sensitive content verlangt Speicherung und Verarbeitung ausschliesslich in der Schweiz, ohne Wiederverwendung des Inhalts als Translation Memory.{1}Verfügbar auf Deutsch, Französisch, Italienisch und Englisch.{/1}",
+    "statut": "v1",
+    "source": "V1 de/loesungen/anwaltskanzleien/"
+   },
    "traduction/contrats/": {
     "trad": "Der Modus Highly sensitive content schreibt Speicherung und Verarbeitung ausschliesslich in der Schweiz vor, ohne Wiederverwendung des Inhalts im Translation Memory.{1}Verfügbar auf Deutsch, Französisch, Italienisch und Englisch.{/1}",
     "statut": "v1",
@@ -50686,10 +50821,15 @@
  },
  "da0769034919c799": {
   "fr": "Banque et finance",
-  "trad": "Bank und Finanzen",
-  "statut": "v1",
-  "source": "V1 de/corrext/uebersetzungsprojekte/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/gestion-de-projet/": {
+    "trad": "Bank und Finanzen",
+    "statut": "v1",
+    "source": "V1 de/corrext/uebersetzungsprojekte/"
+   },
    "traduction/banque-finance/": {
     "trad": "Bank- und Finanzrecht",
     "statut": "v1",
@@ -52116,14 +52256,19 @@
  },
  "dfebb18901162671": {
   "fr": "{1}Éditeurs juridiques{/1}",
-  "trad": "{1}Juristische Verlage{/1}",
-  "statut": "v1",
-  "source": "V1 de/loesungen/legaltech-verlage/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "a-propos/": {
     "trad": "{1}Juristische Fachverlage{/1}",
     "statut": "v1",
     "source": "V1 de/ueber-uns/"
+   },
+   "solutions/editeurs-legaltech/": {
+    "trad": "{1}Juristische Verlage{/1}",
+    "statut": "v1",
+    "source": "V1 de/loesungen/legaltech-verlage/"
    }
   }
  },
@@ -55183,10 +55328,15 @@
  },
  "ed03f4317f30a78c": {
   "fr": "Traduction assermentée et légalisée, via un réseau de traducteurs experts, pour les dossiers officiels.",
-  "trad": "Beglaubigte und legalisierte Übersetzung über ein Netz von Fachübersetzerinnen und Fachübersetzern, für amtliche Dossiers.",
-  "statut": "v1",
-  "source": "V1 de/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "": {
+    "trad": "Beglaubigte und legalisierte Übersetzung über ein Netz von Fachübersetzerinnen und Fachübersetzern, für amtliche Dossiers.",
+    "statut": "v1",
+    "source": "V1 de/"
+   },
    "a-propos/": {
     "trad": "Beglaubigte und legalisierte Übersetzung für amtliche Dossiers, über ein Netzwerk erfahrener Übersetzerinnen und Übersetzer.",
     "statut": "v1",
@@ -57806,10 +57956,15 @@
  },
  "f48765356710d39d": {
   "fr": "{1}Pièces scannées{/1}",
-  "trad": "{1}Gescannte Akten{/1}",
-  "statut": "v1",
-  "source": "V1 de/loesungen/anwaltskanzleien/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "solutions/cabinets-avocats/": {
+    "trad": "{1}Gescannte Akten{/1}",
+    "statut": "v1",
+    "source": "V1 de/loesungen/anwaltskanzleien/"
+   },
    "traduction/contentieux-arbitrage/": {
     "trad": "{1}Gescannte Beilagen{/1}",
     "statut": "v1",
@@ -58488,10 +58643,15 @@
  },
  "f7622f9041b818d3": {
   "fr": "Devis",
-  "trad": "Offerten",
-  "statut": "v1",
-  "source": "V1 de/corrext/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/": {
+    "trad": "Offerten",
+    "statut": "v1",
+    "source": "V1 de/corrext/"
+   },
    "corrext/gestion-de-projet/": {
     "trad": "Offerte",
     "statut": "v1",
@@ -58819,14 +58979,19 @@
  },
  "f8c4b56f94eaf484": {
   "fr": "{1}Certification{/1}",
-  "trad": "{1}Beglaubigung{/1}",
-  "statut": "v1",
-  "source": "V1 de/loesungen/banken/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "a-propos/presse/": {
     "trad": "{1}Zertifizierung{/1}",
     "statut": "v1",
     "source": "V1 de/ueber-uns/presse/"
+   },
+   "solutions/banques-finance/": {
+    "trad": "{1}Beglaubigung{/1}",
+    "statut": "v1",
+    "source": "V1 de/loesungen/banken/"
    }
   }
  },
@@ -59598,14 +59763,19 @@
  },
  "fca1ad85f8c752f8": {
   "fr": "{1}{/1} Aucune",
-  "trad": "{1}{/1} Keine",
-  "statut": "v1",
-  "source": "V1 de/sicherheit/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "comparatif/agence-ou-plateforme/": {
     "trad": "{1}{/1} Keines",
     "statut": "v1",
     "source": "V1 de/vergleich/uebersetzungsbuero-oder-plattform/"
+   },
+   "securite-souverainete/": {
+    "trad": "{1}{/1} Keine",
+    "statut": "v1",
+    "source": "V1 de/sicherheit/"
    }
   }
  },

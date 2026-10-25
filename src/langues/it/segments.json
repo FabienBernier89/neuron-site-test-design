@@ -9433,10 +9433,15 @@
  },
  "2792c1c9a7a3cbd1": {
   "fr": "Cadrons votre intégration",
-  "trad": "Pianifichiamo la vostra integrazione",
-  "statut": "v1",
-  "source": "V1 it/corrext/api-on-premises/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/api-on-premises/": {
+    "trad": "Pianifichiamo la vostra integrazione",
+    "statut": "v1",
+    "source": "V1 it/corrext/api-on-premises/"
+   },
    "solutions/editeurs-legaltech/": {
     "trad": "Definiamo insieme la vostra integrazione",
     "statut": "v1",
@@ -10320,10 +10325,15 @@
  },
  "2bbf65df37bcaed5": {
   "fr": "{1}2024{/1}{2}UBS Female Founder Award{3}Finaliste parmi dix candidates, distinction de la fondatrice{/3}{/2}{4}Distinction{/4}",
-  "trad": "{1}2024{/1}{2}UBS Female Founder Award{3}Finalista tra dieci candidate, riconoscimento della fondatrice{/3}{/2}{4}Riconoscimento{/4}",
-  "statut": "v1",
-  "source": "V1 it/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "": {
+    "trad": "{1}2024{/1}{2}UBS Female Founder Award{3}Finalista tra dieci candidate, riconoscimento della fondatrice{/3}{/2}{4}Riconoscimento{/4}",
+    "statut": "v1",
+    "source": "V1 it/"
+   },
    "a-propos/": {
     "trad": "{1}2024{/1}{2}UBS Female Founder Award{3}Finalista tra dieci candidate, riconoscimento alla fondatrice{/3}{/2}{4}Riconoscimento{/4}",
     "statut": "v1",
@@ -18997,14 +19007,19 @@
  },
  "4d257308a54e73fe": {
   "fr": "Comment obtenir un devis et un délai ?",
-  "trad": "Come si ottengono un'offerta e un termine di consegna?",
-  "statut": "v1",
-  "source": "V1 it/confronto/agenzia-o-piattaforma/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "aide/gestion-de-projet/": {
     "trad": "Come ottengo un'offerta e un termine di consegna?",
     "statut": "v1",
     "source": "V1 it/aiuto/progetti-di-traduzione/"
+   },
+   "comparatif/agence-ou-plateforme/": {
+    "trad": "Come si ottengono un'offerta e un termine di consegna?",
+    "statut": "v1",
+    "source": "V1 it/confronto/agenzia-o-piattaforma/"
    }
   }
  },
@@ -23525,10 +23540,15 @@
  },
  "60d1e005879f80d3": {
   "fr": "{1}2023{/1}{2}Digital Shapers{3}BILANZ, distinction de la fondatrice{/3}{/2}{4}Distinction{/4}",
-  "trad": "{1}2023{/1}{2}Digital Shapers{3}BILANZ, riconoscimento della fondatrice{/3}{/2}{4}Riconoscimento{/4}",
-  "statut": "v1",
-  "source": "V1 it/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "": {
+    "trad": "{1}2023{/1}{2}Digital Shapers{3}BILANZ, riconoscimento della fondatrice{/3}{/2}{4}Riconoscimento{/4}",
+    "statut": "v1",
+    "source": "V1 it/"
+   },
    "a-propos/": {
     "trad": "{1}2023{/1}{2}Digital Shapers{3}BILANZ, riconoscimento alla fondatrice{/3}{/2}{4}Riconoscimento{/4}",
     "statut": "v1",
@@ -24088,10 +24108,15 @@
  },
  "632ed0c1c43a5b22": {
   "fr": "400 pages de pièces avant l'audience",
-  "trad": "400 pagine di atti prima dell'udienza",
-  "statut": "v1",
-  "source": "V1 it/soluzioni/studi-legali/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "solutions/cabinets-avocats/": {
+    "trad": "400 pagine di atti prima dell'udienza",
+    "statut": "v1",
+    "source": "V1 it/soluzioni/studi-legali/"
+   },
    "traduction/contentieux-arbitrage/": {
     "trad": "400 pagine di documenti prima dell'udienza",
     "statut": "v1",
@@ -28861,10 +28886,15 @@
  },
  "7791d5e4a048bc4c": {
   "fr": "Le tunnel projet, étape par étape",
-  "trad": "Il percorso del progetto, fase per fase",
-  "statut": "v1",
-  "source": "V1 it/livelli-di-qualita/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "niveaux-de-qualite/": {
+    "trad": "Il percorso del progetto, fase per fase",
+    "statut": "v1",
+    "source": "V1 it/livelli-di-qualita/"
+   },
    "solutions/directions-juridiques/": {
     "trad": "Il percorso del progetto, passo dopo passo",
     "statut": "v1",
@@ -34502,10 +34532,15 @@
  },
  "9105d684026c174a": {
   "fr": "{1}Délai{/1}",
-  "trad": "{1}Termine di consegna{/1}",
-  "statut": "v1",
-  "source": "V1 it/corrext/estratto-registro-di-commercio/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/extraits-registre-commerce/": {
+    "trad": "{1}Termine di consegna{/1}",
+    "statut": "v1",
+    "source": "V1 it/corrext/estratto-registro-di-commercio/"
+   },
    "traduction/droit-penal/": {
     "trad": "{1}Termine{/1}",
     "statut": "v1",
@@ -35705,14 +35740,19 @@
  },
  "95e3a36e083c9938": {
   "fr": "{1}{2}Pseudonymisation exigée.{/2} Noms de clients, parties et objet du dossier retirés avant tout envoi à un moteur étranger.{/1}",
-  "trad": "{1}{2}Pseudonimizzazione obbligatoria.{/2} Nomi dei clienti, delle parti e oggetto del dossier rimossi prima di ogni invio a un motore estero.{/1}",
-  "statut": "v1",
-  "source": "V1 it/corrext/traduzione-documenti/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "comparatif/deepl-traduction-juridique/": {
     "trad": "{1}{2}Pseudonimizzazione obbligatoria.{/2} Nomi dei clienti, delle parti e oggetto del dossier vanno rimossi prima di ogni invio a un motore estero.{/1}",
     "statut": "v1",
     "source": "V1 it/confronto/deepl-traduzione-giuridica/"
+   },
+   "corrext/traduction-texte-et-document/": {
+    "trad": "{1}{2}Pseudonimizzazione obbligatoria.{/2} Nomi dei clienti, delle parti e oggetto del dossier rimossi prima di ogni invio a un motore estero.{/1}",
+    "statut": "v1",
+    "source": "V1 it/corrext/traduzione-documenti/"
    }
   }
  },
@@ -39314,10 +39354,15 @@
  },
  "a6f0f0b3fbf3e71a": {
   "fr": "2 min de lecture",
-  "trad": "Lettura: 1 min",
-  "statut": "v1",
-  "source": "V1 it/risorse/blog/ai-act-grand-challenge-san-gallo/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "ressources/blog/ai-act-grand-challenge-universite-saint-gall/": {
+    "trad": "Lettura: 1 min",
+    "statut": "v1",
+    "source": "V1 it/risorse/blog/ai-act-grand-challenge-san-gallo/"
+   },
    "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/": {
     "trad": "Lettura: 2 min",
     "statut": "v1",
@@ -39332,6 +39377,11 @@
     "trad": "Lettura: 2 min",
     "statut": "v1",
     "source": "V1 it/risorse/blog/legaltechtalk-2024-modello-operativo/"
+   },
+   "ressources/blog/neuron-gen-ai-summit-2024-lausanne/": {
+    "trad": "Lettura: 1 min",
+    "statut": "v1",
+    "source": "V1 it/risorse/blog/gen-ai-summit-2024-losanna/"
    },
    "ressources/blog/paula-reichenberg-conseil-strategique-hes-so/": {
     "trad": "Lettura: 2 min",
@@ -45425,10 +45475,15 @@
  },
  "c1e8b60fc22cbc2d": {
   "fr": "Voyez Corrext sur vos propres documents",
-  "trad": "Vedete Corrext all'opera sui vostri documenti",
-  "statut": "v1",
-  "source": "V1 it/corrext/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/": {
+    "trad": "Vedete Corrext all'opera sui vostri documenti",
+    "statut": "v1",
+    "source": "V1 it/corrext/"
+   },
    "ressources/blog/actualites/": {
     "trad": "Guardate Corrext all'opera sui vostri documenti",
     "statut": "v1",
@@ -47407,10 +47462,15 @@
  },
  "ca0cc223d145816b": {
   "fr": "Le mode Highly sensitive content impose un stockage et un traitement exclusivement en Suisse, sans réutilisation du contenu en mémoire de traduction.{1}Disponible en allemand, français, italien et anglais.{/1}",
-  "trad": "La modalità Highly sensitive content impone archiviazione e trattamento esclusivamente in Svizzera, senza riutilizzo del contenuto in una memoria di traduzione.{1}Disponibile in tedesco, francese, italiano e inglese.{/1}",
-  "statut": "v1",
-  "source": "V1 it/soluzioni/studi-legali/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "solutions/cabinets-avocats/": {
+    "trad": "La modalità Highly sensitive content impone archiviazione e trattamento esclusivamente in Svizzera, senza riutilizzo del contenuto in una memoria di traduzione.{1}Disponibile in tedesco, francese, italiano e inglese.{/1}",
+    "statut": "v1",
+    "source": "V1 it/soluzioni/studi-legali/"
+   },
    "traduction/contrats/": {
     "trad": "La modalità Highly sensitive content impone archiviazione e trattamento esclusivamente in Svizzera, senza riutilizzare il contenuto nella memoria di traduzione.{1}Disponibile in tedesco, francese, italiano e inglese.{/1}",
     "statut": "v1",
@@ -49112,10 +49172,15 @@
  },
  "d0e82d2d149aa724": {
   "fr": "10 min de lecture",
-  "trad": "Lettura: 10 min",
-  "statut": "v1",
-  "source": "V1 it/risorse/blog/preventivo-traduzione-giuridica/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "ressources/blog/comprendre-devis-traduction-juridique/": {
+    "trad": "Lettura: 10 min",
+    "statut": "v1",
+    "source": "V1 it/risorse/blog/preventivo-traduzione-giuridica/"
+   },
    "ressources/blog/secret-professionnel-outils-traduction/": {
     "trad": "Lettura: 9 min",
     "statut": "v1",
@@ -49756,14 +49821,19 @@
  },
  "d34e291e68f861ba": {
   "fr": "La mise en page est-elle conservée ?",
-  "trad": "Il layout del documento viene mantenuto?",
-  "statut": "v1",
-  "source": "V1 it/lingue-e-formati/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "aide/formats-et-langues/": {
     "trad": "L'impaginazione viene mantenuta?",
     "statut": "v1",
     "source": "V1 it/aiuto/formati-e-lingue/"
+   },
+   "langues-et-formats/": {
+    "trad": "Il layout del documento viene mantenuto?",
+    "statut": "v1",
+    "source": "V1 it/lingue-e-formati/"
    }
   }
  },
@@ -51517,10 +51587,15 @@
  },
  "dade2efa9df36a32": {
   "fr": "Extraits de démonstration",
-  "trad": "Estratti della demo",
-  "statut": "v1",
-  "source": "V1 it/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "": {
+    "trad": "Estratti della demo",
+    "statut": "v1",
+    "source": "V1 it/"
+   },
    "corrext/traduction-texte-et-document/": {
     "trad": "Estratti dimostrativi",
     "statut": "v1",
@@ -55851,10 +55926,15 @@
  },
  "ed03f4317f30a78c": {
   "fr": "Traduction assermentée et légalisée, via un réseau de traducteurs experts, pour les dossiers officiels.",
-  "trad": "Traduzione certificata e legalizzata, tramite una rete di traduttori specializzati, per i dossier ufficiali.",
-  "statut": "v1",
-  "source": "V1 it/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "": {
+    "trad": "Traduzione certificata e legalizzata, tramite una rete di traduttori specializzati, per i dossier ufficiali.",
+    "statut": "v1",
+    "source": "V1 it/"
+   },
    "a-propos/": {
     "trad": "Traduzione certificata e legalizzata, tramite una rete di traduttori esperti, per i dossier ufficiali.",
     "statut": "v1",
@@ -55913,10 +55993,15 @@
  },
  "ed4c9f4de1146924": {
   "fr": "{1}Découvrir Gestion de projet{/1}",
-  "trad": "{1}Scoprire lo strumento{/1}",
-  "statut": "v1",
-  "source": "V1 it/confronto/agenzia-o-piattaforma/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "comparatif/agence-ou-plateforme/": {
+    "trad": "{1}Scoprire lo strumento{/1}",
+    "statut": "v1",
+    "source": "V1 it/confronto/agenzia-o-piattaforma/"
+   },
    "ressources/blog/comprendre-devis-traduction-juridique/": {
     "trad": "{1}Gestione dei progetti{/1}",
     "statut": "v1",
@@ -57725,10 +57810,15 @@
  },
  "f48765356710d39d": {
   "fr": "{1}Pièces scannées{/1}",
-  "trad": "{1}Atti scansionati{/1}",
-  "statut": "v1",
-  "source": "V1 it/soluzioni/studi-legali/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "solutions/cabinets-avocats/": {
+    "trad": "{1}Atti scansionati{/1}",
+    "statut": "v1",
+    "source": "V1 it/soluzioni/studi-legali/"
+   },
    "traduction/contentieux-arbitrage/": {
     "trad": "{1}Documenti scansionati{/1}",
     "statut": "v1",
@@ -58431,10 +58521,15 @@
  },
  "f7622f9041b818d3": {
   "fr": "Devis",
-  "trad": "Offerte",
-  "statut": "v1",
-  "source": "V1 it/corrext/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/": {
+    "trad": "Offerte",
+    "statut": "v1",
+    "source": "V1 it/corrext/"
+   },
    "corrext/gestion-de-projet/": {
     "trad": "Offerta",
     "statut": "v1",
@@ -59541,14 +59636,19 @@
  },
  "fca1ad85f8c752f8": {
   "fr": "{1}{/1} Aucune",
-  "trad": "{1}{/1} Nessuno",
-  "statut": "v1",
-  "source": "V1 it/sicurezza/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "comparatif/agence-ou-plateforme/": {
     "trad": "{1}{/1} Nessuna",
     "statut": "v1",
     "source": "V1 it/confronto/agenzia-o-piattaforma/"
+   },
+   "securite-souverainete/": {
+    "trad": "{1}{/1} Nessuno",
+    "statut": "v1",
+    "source": "V1 it/sicurezza/"
    }
   }
  },

@@ -2,9 +2,9 @@
  "langue": "it",
  "pages_alignees": 156,
  "pages_non_alignees": [],
- "segments_v1": 6772,
- "par_page_v1": 1275,
- "par_page_seulement": 814,
+ "segments_v1": 6753,
+ "par_page_v1": 1295,
+ "par_page_seulement": 833,
  "doublons_divergents": [
   {
    "fr": "Extraits de démonstration",
@@ -256,7 +256,7 @@
    ]
   }
  ],
- "couverture_mots": 76.7,
+ "couverture_mots": 76.6,
  "couverture_page": 78.1,
  "couverture_texte": 82.6,
  "refus": {

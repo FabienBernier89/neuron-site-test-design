@@ -37,7 +37,7 @@ def afficher_memoire(rapport):
     lignes = [f"Mémoire V1 {rapport['langue']} : {rapport['pages_alignees']} pages alignées, "
               f"{len(rapport['pages_non_alignees'])} non alignées",
               f"Textes posés au statut v1 : {rapport['segments_v1']} (dont {rapport['par_page_v1']} traductions propres à "
-              f"une page), {rapport['par_page_seulement']} textes identiques au français posés pour leurs pages seulement, "
+              f"une page), {rapport['par_page_seulement']} textes posés pour leurs pages seulement (identiques au français ou doublons divergents), "
               f"{len(rapport['doublons_divergents'])} doublons divergents",
               f"Couverture des mots : {rapport['couverture_mots']} % du contenu (main), "
               f"{rapport['couverture_page']} % de la page entière ; {rapport['couverture_texte']} % du contenu balises "

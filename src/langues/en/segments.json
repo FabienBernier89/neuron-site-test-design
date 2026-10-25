@@ -4134,10 +4134,15 @@
  },
  "0e923facee435f17": {
   "fr": "{1}R&D{/1}{2}Innosuisse{3}Projet d'innovation soutenu par la Confédération, mené avec l'institut iCoSys de la HEIA-FR{/3}{/2}{4}Innovation{/4}",
-  "trad": "{1}R&D{/1}{2}Innosuisse{3}Innovation project supported by the Confederation, with the iCoSys institute of the School of Engineering and Architecture of Fribourg (HEIA-FR){/3}{/2}{4}Innovation{/4}",
-  "statut": "v1",
-  "source": "V1 en/about/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "a-propos/": {
+    "trad": "{1}R&D{/1}{2}Innosuisse{3}Innovation project supported by the Confederation, with the iCoSys institute of the School of Engineering and Architecture of Fribourg (HEIA-FR){/3}{/2}{4}Innovation{/4}",
+    "statut": "v1",
+    "source": "V1 en/about/"
+   },
    "a-propos/presse/": {
     "trad": "{1}R&D{/1}{2}Innosuisse{3}Innovation project supported by the Confederation, with the iCoSys institute of HEIA-FR{/3}{/2}{4}Innovation{/4}",
     "statut": "v1",
@@ -4626,14 +4631,19 @@
  },
  "1050b2f57eb40c94": {
   "fr": "Propriété intellectuelle",
-  "trad": "Intellectual property",
-  "statut": "v1",
-  "source": "V1 en/translation/intellectual-property/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "mentions-legales/": {
     "trad": "Intellectual Property",
     "statut": "v1",
     "source": "V1 en/impressum/"
+   },
+   "traduction/propriete-intellectuelle/": {
+    "trad": "Intellectual property",
+    "statut": "v1",
+    "source": "V1 en/translation/intellectual-property/"
    }
   }
  },
@@ -5164,13 +5174,6 @@
   "trad": "Do not track declared satisfaction: it is stable and tells you nothing. Do not track unit cost on its own either, because it falls mechanically when quality falls. Indicators 3, 4 and 5, read together, give a far more faithful picture of what translation really costs the firm.",
   "statut": "v1",
   "source": "V1 en/resources/guides/law-firm-translation-workflow/",
-  "par_page": {}
- },
- "1323a3525725f8d9": {
-  "fr": "art. 188 Cst. et art. 1 LTF · source : Fedlex, loi sur le Tribunal fédéral",
-  "trad": "Art. 188 Cst. and Art. 1 Federal Supreme Court Act · source: Fedlex, Federal Constitution",
-  "statut": "v1",
-  "source": "V1 en/resources/glossary/bundesgericht/",
   "par_page": {}
  },
  "1329cb159d7f677f": {
@@ -23272,10 +23275,15 @@
  },
  "5ddb9129b96667ff": {
   "fr": "{1}Autorités{/1}",
-  "trad": "{1}Public authorities{/1}",
-  "statut": "v1",
-  "source": "V1 en/security/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "securite-souverainete/": {
+    "trad": "{1}Public authorities{/1}",
+    "statut": "v1",
+    "source": "V1 en/security/"
+   },
    "traduction/allemand-francais/": {
     "trad": "{1}Authorities{/1}",
     "statut": "v1",
@@ -23484,10 +23492,15 @@
  },
  "5eb14dac37055425": {
   "fr": "Fusions et acquisitions",
-  "trad": "M&A",
-  "statut": "v1",
-  "source": "V1 en/corrext/translation-projects/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/gestion-de-projet/": {
+    "trad": "M&A",
+    "statut": "v1",
+    "source": "V1 en/corrext/translation-projects/"
+   },
    "traduction/fusions-acquisitions/": {
     "trad": "Mergers and acquisitions",
     "statut": "v1",
@@ -27614,13 +27627,6 @@
   "source": "V1 en/about/",
   "par_page": {}
  },
- "70c385803bc04504": {
-  "fr": "Source : Fedlex, {1}loi sur le Tribunal fédéral{/1}. Dans Corrext, ce segment et ceux qui l'entourent s'affichent dans {2}Fast lookup CHnell{/2}, chacun avec sa référence.",
-  "trad": "Source: Fedlex, {1}Federal Constitution{/1}. In Corrext, this segment and the ones around it appear in {2}Fast lookup CHnell{/2}, each with its reference.",
-  "statut": "v1",
-  "source": "V1 en/resources/glossary/bundesgericht/",
-  "par_page": {}
- },
  "70f31451836cc03d": {
   "fr": "{1}Contentieux et arbitrage{/1}",
   "trad": "{1}Litigation and arbitration{/1}",
@@ -29163,10 +29169,20 @@
  },
  "770265db3abc1fd8": {
   "fr": "BILANZ, classement des entreprises les plus innovantes de Suisse 2024 (13e rang)",
-  "trad": "BILANZ ranking of the most innovative companies in Switzerland, 2024 (13th place)",
-  "statut": "v1",
-  "source": "V1 en/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "": {
+    "trad": "BILANZ ranking of the most innovative companies in Switzerland, 2024 (13th place)",
+    "statut": "v1",
+    "source": "V1 en/"
+   },
+   "a-propos/": {
+    "trad": "BILANZ ranking of the most innovative companies in Switzerland, 2024 (13th place)",
+    "statut": "v1",
+    "source": "V1 en/about/"
+   },
    "a-propos/presse/": {
     "trad": "BILANZ, ranking of the most innovative companies in Switzerland 2024 (13th place)",
     "statut": "v1",
@@ -31801,10 +31817,15 @@
  },
  "8393169e23f721b5": {
   "fr": "Droit des sociétés",
-  "trad": "Company Law",
-  "statut": "v1",
-  "source": "V1 en/corrext/translation-projects/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/gestion-de-projet/": {
+    "trad": "Company Law",
+    "statut": "v1",
+    "source": "V1 en/corrext/translation-projects/"
+   },
    "traduction/droit-des-societes/": {
     "trad": "Corporate law",
     "statut": "v1",
@@ -34872,10 +34893,15 @@
  },
  "9105d684026c174a": {
   "fr": "{1}Délai{/1}",
-  "trad": "{1}Delivery time{/1}",
-  "statut": "v1",
-  "source": "V1 en/corrext/commercial-register-extracts/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/extraits-registre-commerce/": {
+    "trad": "{1}Delivery time{/1}",
+    "statut": "v1",
+    "source": "V1 en/corrext/commercial-register-extracts/"
+   },
    "traduction/droit-penal/": {
     "trad": "{1}Time limit{/1}",
     "statut": "v1",
@@ -36028,14 +36054,19 @@
  },
  "95e3a36e083c9938": {
   "fr": "{1}{2}Pseudonymisation exigée.{/2} Noms de clients, parties et objet du dossier retirés avant tout envoi à un moteur étranger.{/1}",
-  "trad": "{1}{2}Pseudonymisation required.{/2} Client names, parties and subject matter are removed before anything is sent to a foreign engine.{/1}",
-  "statut": "v1",
-  "source": "V1 en/corrext/document-translation/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "comparatif/deepl-traduction-juridique/": {
     "trad": "{1}{2}Pseudonymisation required.{/2} Client names, parties and the subject matter are removed before anything is sent to a foreign engine.{/1}",
     "statut": "v1",
     "source": "V1 en/comparison/deepl-legal-translation/"
+   },
+   "corrext/traduction-texte-et-document/": {
+    "trad": "{1}{2}Pseudonymisation required.{/2} Client names, parties and subject matter are removed before anything is sent to a foreign engine.{/1}",
+    "statut": "v1",
+    "source": "V1 en/corrext/document-translation/"
    }
   }
  },
@@ -40394,10 +40425,15 @@
  },
  "a6f0f0b3fbf3e71a": {
   "fr": "2 min de lecture",
-  "trad": "1 min read",
-  "statut": "v1",
-  "source": "V1 en/resources/blog/ai-act-grand-challenge-st-gallen/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "ressources/blog/ai-act-grand-challenge-universite-saint-gall/": {
+    "trad": "1 min read",
+    "statut": "v1",
+    "source": "V1 en/resources/blog/ai-act-grand-challenge-st-gallen/"
+   },
    "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/": {
     "trad": "2 min read",
     "statut": "v1",
@@ -40412,6 +40448,11 @@
     "trad": "2 min read",
     "statut": "v1",
     "source": "V1 en/resources/blog/legaltechtalk-2024-law-firm-operating-model/"
+   },
+   "ressources/blog/neuron-gen-ai-summit-2024-lausanne/": {
+    "trad": "1 min read",
+    "statut": "v1",
+    "source": "V1 en/resources/blog/gen-ai-summit-2024-lausanne/"
    },
    "ressources/blog/paula-reichenberg-conseil-strategique-hes-so/": {
     "trad": "2 min read",
@@ -46346,14 +46387,24 @@
  },
  "c1708ffdc0bc316e": {
   "fr": "{1}Recherche{/1}",
-  "trad": "{1}Search{/1}",
-  "statut": "v1",
-  "source": "V1 en/corrext/chnell/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "a-propos/presse/": {
     "trad": "{1}Research{/1}",
     "statut": "v1",
     "source": "V1 en/about/press/"
+   },
+   "corrext/chnell/": {
+    "trad": "{1}Search{/1}",
+    "statut": "v1",
+    "source": "V1 en/corrext/chnell/"
+   },
+   "corrext/extraits-registre-commerce/": {
+    "trad": "{1}Search{/1}",
+    "statut": "v1",
+    "source": "V1 en/corrext/commercial-register-extracts/"
    },
    "solutions/editeurs-legaltech/": {
     "trad": "{1}Research{/1}",
@@ -47684,10 +47735,15 @@
  },
  "c7f90e2713429ff0": {
   "fr": "Un déploiement sur nos propres serveurs est-il possible ?",
-  "trad": "Can we run the platform on our own servers?",
-  "statut": "v1",
-  "source": "V1 en/security/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "securite-souverainete/": {
+    "trad": "Can we run the platform on our own servers?",
+    "statut": "v1",
+    "source": "V1 en/security/"
+   },
    "solutions/autorites-administration/": {
     "trad": "Is deployment on our own servers possible?",
     "statut": "v1",
@@ -47836,10 +47892,15 @@
  },
  "c88d8a06e7f4ff6d": {
   "fr": "{1}2023{/1}{2}Le Temps · Forum des 100{3}La fondatrice parmi les 100 personnalités de Suisse romande{/3}{/2}{4}Distinction{/4}",
-  "trad": "{1}2023{/1}{2}Le Temps · Forum des 100{3}The founder named among the 100 personalities of French-speaking Switzerland{/3}{/2}{4}Award{/4}",
-  "statut": "v1",
-  "source": "V1 en/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "": {
+    "trad": "{1}2023{/1}{2}Le Temps · Forum des 100{3}The founder named among the 100 personalities of French-speaking Switzerland{/3}{/2}{4}Award{/4}",
+    "statut": "v1",
+    "source": "V1 en/"
+   },
    "a-propos/": {
     "trad": "{1}2023{/1}{2}Le Temps · Forum des 100{3}The founder among the 100 personalities of French-speaking Switzerland{/3}{/2}{4}Award{/4}",
     "statut": "v1",
@@ -48115,9 +48176,9 @@
  },
  "c96011c0410e2318": {
   "fr": "{1}Conditions générales{/1}",
-  "trad": "{1}General Terms and Conditions{/1}",
-  "statut": "v1",
-  "source": "V1 en/translation/contracts/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "traduction/assurance/": {
     "trad": "{1}General conditions{/1}",
@@ -48128,6 +48189,11 @@
     "trad": "{1}General terms and conditions{/1}",
     "statut": "v1",
     "source": "V1 en/translation/banking-and-finance/"
+   },
+   "traduction/contrats/": {
+    "trad": "{1}General Terms and Conditions{/1}",
+    "statut": "v1",
+    "source": "V1 en/translation/contracts/"
    }
   }
  },
@@ -48230,10 +48296,15 @@
  },
  "ca0cc223d145816b": {
   "fr": "Le mode Highly sensitive content impose un stockage et un traitement exclusivement en Suisse, sans réutilisation du contenu en mémoire de traduction.{1}Disponible en allemand, français, italien et anglais.{/1}",
-  "trad": "Highly sensitive content mode means storage and processing in Switzerland only, with no reuse of the content as translation memory.{1}Available in German, French, Italian and English.{/1}",
-  "statut": "v1",
-  "source": "V1 en/solutions/law-firms/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "solutions/cabinets-avocats/": {
+    "trad": "Highly sensitive content mode means storage and processing in Switzerland only, with no reuse of the content as translation memory.{1}Available in German, French, Italian and English.{/1}",
+    "statut": "v1",
+    "source": "V1 en/solutions/law-firms/"
+   },
    "traduction/contrats/": {
     "trad": "Highly sensitive content mode requires storage and processing in Switzerland only, with no reuse of the content in a translation memory.{1}Available in German, French, Italian and English.{/1}",
     "statut": "v1",
@@ -49920,10 +49991,15 @@
  },
  "d0e82d2d149aa724": {
   "fr": "10 min de lecture",
-  "trad": "10 min read",
-  "statut": "v1",
-  "source": "V1 en/resources/blog/legal-translation-quotes/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "ressources/blog/comprendre-devis-traduction-juridique/": {
+    "trad": "10 min read",
+    "statut": "v1",
+    "source": "V1 en/resources/blog/legal-translation-quotes/"
+   },
    "ressources/blog/secret-professionnel-outils-traduction/": {
     "trad": "9 min read",
     "statut": "v1",
@@ -50552,14 +50628,19 @@
  },
  "d34e291e68f861ba": {
   "fr": "La mise en page est-elle conservée ?",
-  "trad": "Is the layout preserved?",
-  "statut": "v1",
-  "source": "V1 en/languages-and-formats/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
    "aide/formats-et-langues/": {
     "trad": "Is the layout preserved when I translate a file?",
     "statut": "v1",
     "source": "V1 en/help/formats-and-languages/"
+   },
+   "langues-et-formats/": {
+    "trad": "Is the layout preserved?",
+    "statut": "v1",
+    "source": "V1 en/languages-and-formats/"
    }
   }
  },
@@ -52084,10 +52165,15 @@
  },
  "da0769034919c799": {
   "fr": "Banque et finance",
-  "trad": "Banking & Finance",
-  "statut": "v1",
-  "source": "V1 en/corrext/translation-projects/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "corrext/gestion-de-projet/": {
+    "trad": "Banking & Finance",
+    "statut": "v1",
+    "source": "V1 en/corrext/translation-projects/"
+   },
    "traduction/banque-finance/": {
     "trad": "Banking and finance",
     "statut": "v1",
@@ -56539,10 +56625,15 @@
  },
  "ed03f4317f30a78c": {
   "fr": "Traduction assermentée et légalisée, via un réseau de traducteurs experts, pour les dossiers officiels.",
-  "trad": "Certified and legalised translation through a network of expert translators, for official documents.",
-  "statut": "v1",
-  "source": "V1 en/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "": {
+    "trad": "Certified and legalised translation through a network of expert translators, for official documents.",
+    "statut": "v1",
+    "source": "V1 en/"
+   },
    "a-propos/": {
     "trad": "Certified and legalised translation, through a network of expert translators, for official files.",
     "statut": "v1",
@@ -58370,14 +58461,24 @@
  },
  "f48765356710d39d": {
   "fr": "{1}Pièces scannées{/1}",
-  "trad": "{1}Scanned documents{/1}",
-  "statut": "v1",
-  "source": "V1 en/solutions/law-firms/",
+  "trad": null,
+  "statut": null,
+  "source": null,
   "par_page": {
+   "solutions/cabinets-avocats/": {
+    "trad": "{1}Scanned documents{/1}",
+    "statut": "v1",
+    "source": "V1 en/solutions/law-firms/"
+   },
    "traduction/contentieux-arbitrage/": {
     "trad": "{1}Scanned exhibits{/1}",
     "statut": "v1",
     "source": "V1 en/translation/litigation-and-arbitration/"
+   },
+   "traduction/fusions-acquisitions/": {
+    "trad": "{1}Scanned documents{/1}",
+    "statut": "v1",
+    "source": "V1 en/translation/mergers-and-acquisitions/"
    }
   }
  },
