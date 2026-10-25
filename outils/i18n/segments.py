@@ -518,47 +518,53 @@ def _ecrire_json(valeur):
 def _remplacer_dans_passage(texte, attributs):
     """Dans le HTML restauré d'un passage, remplace chaque valeur d'attribut d'origine par sa traduction.
     attributs : [(unité d'attribut, valeur écrite)] ; les balises du passage viennent de sa table, donc portent la
-    valeur d'origine telle qu'elle est dans la source."""
+    valeur d'origine telle qu'elle est dans la source. Lève ValueError si l'attribut n'est pas retrouvé (la traduction
+    serait perdue en silence)."""
     for u, nouvelle in attributs:
         guillemet = u["guillemet"]
         fin = re.escape(guillemet) if guillemet else r"(?=[\s/>])"
         motif = re.compile(r"(\s%s\s*=\s*%s)%s(%s)" % (re.escape(u["attr"]), re.escape(guillemet), re.escape(u["html"]), fin))
-        texte = motif.sub(lambda m: m.group(1) + nouvelle + m.group(2) if guillemet else m.group(1) + nouvelle, texte, count=1)
+        texte, n = motif.subn(lambda m: m.group(1) + nouvelle + m.group(2) if guillemet else m.group(1) + nouvelle, texte, count=1)
+        if not n:
+            raise ValueError(f"attribut {u['attr']}=\"{u['html']}\" introuvable dans le passage traduit : {texte[:80]}")
     return texte
 
 
 def reinjecter_page(source, traductions):
     """traductions : {id: valeur traduite}, la valeur étant celle que renvoie restaurer_unite (HTML restauré pour un
     passage, texte brut sinon). Une unité absente, ou dont la valeur est celle du français, garde sa source telle
-    quelle : réinjecter la restauration du texte FR rend donc la page à l'identique, octet pour octet."""
+    quelle : réinjecter la restauration du texte FR rend donc la page à l'identique, octet pour octet. Un attribut
+    porté par une balise en ligne d'un passage s'écrit dans les balises du passage traduit, ou à sa place dans la source
+    si le passage est gardé tel quel."""
     unites = extraire_page(source)
     passages = [u for u in unites if u["genre"] == "bloc"]
     debuts = [p["debut"] for p in passages]
-    modifs = []                 # (debut, fin, texte écrit) des unités traduites hors d'un passage
+    modifs = []                 # (debut, fin, texte écrit), sans recouvrement
     internes = {}               # id du passage -> [(unité d'attribut, valeur écrite)]
+    passages_traduits = {}      # id du passage -> HTML traduit
     for u in unites:
         t = traductions.get(u["id"])
         if t is None or t == restaurer_unite(u["texte"], u):
             continue
-        if u["genre"] == "attr":
+        if u["genre"] == "bloc":
+            passages_traduits[u["id"]] = t
+        elif u["genre"] == "attr":
             q = source[u["debut"] - 1] if u["debut"] > 0 and source[u["debut"] - 1] in "\"'" else ""
             u["guillemet"] = q
             ecrit = _ecrire_attribut(t, q)
             k = bisect.bisect_right(debuts, u["debut"]) - 1
             if k >= 0 and u["fin"] <= passages[k]["fin"]:
                 internes.setdefault(passages[k]["id"], []).append((u, ecrit))
-                continue
+            else:
+                modifs.append((u["debut"], u["fin"], ecrit))
         else:
-            ecrit = _ecrire_json(t) if u["genre"] in ("ld", "json") else t
-        modifs.append((u["debut"], u["fin"], ecrit))
-    par_id = {u["id"]: u for u in passages}
-    for pid, attributs in internes.items():
+            modifs.append((u["debut"], u["fin"], _ecrire_json(t)))
+    par_id = {p["id"]: p for p in passages}
+    for pid, t in passages_traduits.items():
         p = par_id[pid]
-        t = traductions.get(pid)
-        if t is not None and t != restaurer_unite(p["texte"], p):
-            modifs.append((p["debut"], p["fin"], _remplacer_dans_passage(t, attributs)))
-        else:  # passage gardé tel quel : les attributs s'écrivent à leur place dans la source
-            modifs += [(u["debut"], u["fin"], ecrit) for u, ecrit in attributs]
+        modifs.append((p["debut"], p["fin"], _remplacer_dans_passage(t, internes.pop(pid, []))))
+    for pid, attributs in internes.items():  # passages gardés tels quels
+        modifs += [(u["debut"], u["fin"], ecrit) for u, ecrit in attributs]
     out = source
     for d, f, t in sorted(modifs, key=lambda m: -m[0]):
         out = out[:d] + t + out[f:]

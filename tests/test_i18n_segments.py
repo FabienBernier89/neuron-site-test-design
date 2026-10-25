@@ -308,17 +308,54 @@ class TestReinjection(unittest.TestCase):
         bloc = u[0]
         self.assertEqual(bloc["texte"], "Le {1}CO{/1} règle le cas, selon le {2}CO{/2}.")
         t_attr = {x["id"]: "Obligationenrecht" for x in u if x["genre"] == "attr"}
+        h2 = h.replace("</p></body>", "</p><p>Fin</p></body>")   # un passage après : les décalages se voient
+        self.assertNotEqual(h2, h)
         # passage inchangé, attributs traduits
         sortie = S.reinjecter_page(h, {u[0]["id"]: identite(u[0]), **t_attr})
         self.assertEqual(sortie.count('title="Obligationenrecht"'), 2)
         self.assertNotIn("Code des obligations", sortie)
-        # passage et attributs traduits ensemble
-        sortie = S.reinjecter_page(h, {bloc["id"]: S.restaurer_unite("Das {1}OR{/1} regelt den Fall, laut {2}OR{/2}.", bloc), **t_attr})
-        self.assertEqual(sortie, doc('<p>Das <abbr title="Obligationenrecht">OR</abbr> regelt den Fall, laut <abbr title="Obligationenrecht">OR</abbr>.</p>'))
+        # passage et attributs traduits ensemble, texte plus court ou plus long que le français (offsets décalés)
+        for de in ("Das {1}OR{/1} regelt den Fall, laut {2}OR{/2}.",
+                   "Das {1}OR{/1} regelt in dem hier vorliegenden Fall ausdrücklich und abschliessend, laut {2}OR{/2}, die Sache."):
+            sortie = S.reinjecter_page(h2, {bloc["id"]: S.restaurer_unite(de, bloc), **t_attr})
+            attendu = de.replace("{1}", '<abbr title="Obligationenrecht">').replace("{2}", '<abbr title="Obligationenrecht">')
+            attendu = attendu.replace("{/1}", "</abbr>").replace("{/2}", "</abbr>")
+            self.assertEqual(sortie, doc(f"<p>{attendu}</p><p>Fin</p>"))
         # attribut seul, passage absent
         sortie = S.reinjecter_page(h, t_attr)
         self.assertEqual(sortie.count('title="Obligationenrecht"'), 2)
         self.assertIn("Le <abbr", sortie)
+
+
+    def test_passage_et_attribut_traduits_longueurs_differentes(self):
+        # cas de la relecture : le passage traduit n'a pas la longueur du français, un passage suit
+        h = doc('<p>Le <abbr title="Code des obligations">CO</abbr> règle le cas.</p><p>Fin</p>')
+        bloc, attr, fin = S.extraire_page(h)
+        sortie = S.reinjecter_page(h, {bloc["id"]: S.restaurer_unite("Das {1}OR{/1} regelt den Fall.", bloc), attr["id"]: "Obligationenrecht"})
+        self.assertEqual(sortie, doc('<p>Das <abbr title="Obligationenrecht">OR</abbr> regelt den Fall.</p><p>Fin</p>'))
+
+    def test_attribut_introuvable_dans_le_passage(self):
+        # un attribut qui ne se retrouve pas dans les balises du passage traduit : erreur, jamais une perte silencieuse
+        h = doc('<p>Le <abbr title="Code des obligations">CO</abbr> règle le cas.</p>')
+        bloc, attr = S.extraire_page(h)
+        # balise du passage qui ne porte plus la valeur d'origine de l'attribut
+        faux = dict(bloc, table={1: {"ouvre": '<abbr title="Autre valeur">', "ferme": "</abbr>"}})
+        with self.assertRaises(ValueError):
+            S.reinjecter_page(h, {bloc["id"]: S.restaurer("Das {1}OR{/1} regelt den Fall.", faux["table"]), attr["id"]: "Obligationenrecht"})
+
+    def test_tout_traduit_sur_le_site_complet(self):
+        # toutes les unités, marqueurs compris, préfixées de « ZZ » puis réinjectées : la ré-extraction rend chaque texte
+        # préfixé (espaces normalisées) et la page garde la même suite de balises, donc reste bien formée
+        for chemin, h in pages_du_site():
+            unites = unites_du_site(h)
+            trad = {u["id"]: S.restaurer_unite("ZZ " + u["texte"], u) for u in unites}
+            sortie = S.reinjecter_page(h, trad)
+            with self.subTest(page=chemin):
+                reunites = S.extraire_page(sortie)
+                self.assertEqual(len(reunites), len(unites))
+                for u, r in zip(unites, reunites):
+                    self.assertEqual(_normaliser(r["texte"]), _normaliser("ZZ " + u["texte"]), u["html"][:80])
+                self.assertEqual(_suite_de_balises(sortie), _suite_de_balises(h))
 
 
 class TestClassement(unittest.TestCase):
@@ -429,6 +466,17 @@ def _lecteur_espace(h):
     lecteur.feed(re.sub(r'<script type="application/ld\+json">.*?</script>', "", h, flags=re.S))
     lecteur.close()
     return lecteur.fin()
+
+
+def _normaliser(texte):
+    """Espaces normalisées ; celles qui touchent un marqueur sont retirées (restaurer, copié de la V1, rogne les espaces
+    à l'intérieur d'une paire de marqueurs)."""
+    return re.sub(r"\s*(\{/?\d+\})\s*", r"\1", " ".join(texte.split()))
+
+
+def _suite_de_balises(h):
+    """Noms des balises ouvrantes et fermantes, dans l'ordre : deux pages bien formées de même structure ont la même."""
+    return re.findall(r"</?([a-zA-Z][\w:-]*)", re.sub(r"<(script|style)\b[^>]*>.*?</\1\s*>", "<\\1>", h, flags=re.S))
 
 
 def attributs_non_classes(pages):
