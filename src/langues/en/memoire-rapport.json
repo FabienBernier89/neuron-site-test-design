@@ -1,0 +1,267 @@
+{
+ "langue": "en",
+ "pages_alignees": 156,
+ "pages_non_alignees": [],
+ "segments_v1": 7554,
+ "par_page_v1": 27,
+ "doublons_divergents": [
+  {
+   "fr": "BILANZ, classement des entreprises les plus innovantes de Suisse 2024 (13e rang)",
+   "trads": [
+    "BILANZ ranking of the most innovative companies in Switzerland, 2024 (13th place)",
+    "BILANZ, ranking of the most innovative companies in Switzerland 2024 (13th place)"
+   ],
+   "pages": [
+    "",
+    "a-propos/",
+    "a-propos/presse/"
+   ]
+  },
+  {
+   "fr": "Traduction assermentée et légalisée, via un réseau de traducteurs experts, pour les dossiers officiels.",
+   "trads": [
+    "Certified and legalised translation through a network of expert translators, for official documents.",
+    "Certified and legalised translation, through a network of expert translators, for official files."
+   ],
+   "pages": [
+    "",
+    "a-propos/"
+   ]
+  },
+  {
+   "fr": "{1}2023{/1}{2}Le Temps · Forum des 100{3}La fondatrice parmi les 100 personnalités de Suisse romande{/3}{/2}{4}Distinction{/4}",
+   "trads": [
+    "{1}2023{/1}{2}Le Temps · Forum des 100{3}The founder named among the 100 personalities of French-speaking Switzerland{/3}{/2}{4}Award{/4}",
+    "{1}2023{/1}{2}Le Temps · Forum des 100{3}The founder among the 100 personalities of French-speaking Switzerland{/3}{/2}{4}Award{/4}"
+   ],
+   "pages": [
+    "",
+    "a-propos/",
+    "a-propos/presse/"
+   ]
+  },
+  {
+   "fr": "{1}{2}Pseudonymisation exigée.{/2} Noms de clients, parties et objet du dossier retirés avant tout envoi à un moteur étranger.{/1}",
+   "trads": [
+    "{1}{2}Pseudonymisation required.{/2} Client names, parties and subject matter are removed before anything is sent to a foreign engine.{/1}",
+    "{1}{2}Pseudonymisation required.{/2} Client names, parties and the subject matter are removed before anything is sent to a foreign engine.{/1}"
+   ],
+   "pages": [
+    "corrext/traduction-texte-et-document/",
+    "comparatif/deepl-traduction-juridique/"
+   ]
+  },
+  {
+   "fr": "Banque et finance",
+   "trads": [
+    "Banking & Finance",
+    "Banking and finance"
+   ],
+   "pages": [
+    "corrext/gestion-de-projet/",
+    "traduction/banque-finance/"
+   ]
+  },
+  {
+   "fr": "Droit des sociétés",
+   "trads": [
+    "Company Law",
+    "Corporate law"
+   ],
+   "pages": [
+    "corrext/gestion-de-projet/",
+    "traduction/droit-des-societes/"
+   ]
+  },
+  {
+   "fr": "Fusions et acquisitions",
+   "trads": [
+    "M&A",
+    "Mergers and acquisitions"
+   ],
+   "pages": [
+    "corrext/gestion-de-projet/",
+    "traduction/fusions-acquisitions/"
+   ]
+  },
+  {
+   "fr": "{1}Recherche{/1}",
+   "trads": [
+    "{1}Search{/1}",
+    "{1}Research{/1}"
+   ],
+   "pages": [
+    "corrext/chnell/",
+    "corrext/extraits-registre-commerce/",
+    "solutions/editeurs-legaltech/",
+    "a-propos/presse/"
+   ]
+  },
+  {
+   "fr": "{1}Délai{/1}",
+   "trads": [
+    "{1}Delivery time{/1}",
+    "{1}Time limit{/1}"
+   ],
+   "pages": [
+    "corrext/extraits-registre-commerce/",
+    "traduction/droit-penal/"
+   ]
+  },
+  {
+   "fr": "La mise en page est-elle conservée ?",
+   "trads": [
+    "Is the layout preserved?",
+    "Is the layout preserved when I translate a file?"
+   ],
+   "pages": [
+    "langues-et-formats/",
+    "aide/formats-et-langues/"
+   ]
+  },
+  {
+   "fr": "Un déploiement sur nos propres serveurs est-il possible ?",
+   "trads": [
+    "Can we run the platform on our own servers?",
+    "Is deployment on our own servers possible?"
+   ],
+   "pages": [
+    "securite-souverainete/",
+    "solutions/autorites-administration/"
+   ]
+  },
+  {
+   "fr": "{1}Autorités{/1}",
+   "trads": [
+    "{1}Public authorities{/1}",
+    "{1}Authorities{/1}"
+   ],
+   "pages": [
+    "securite-souverainete/",
+    "traduction/allemand-francais/",
+    "traduction/francais-allemand/"
+   ]
+  },
+  {
+   "fr": "{1}Pièces scannées{/1}",
+   "trads": [
+    "{1}Scanned documents{/1}",
+    "{1}Scanned exhibits{/1}"
+   ],
+   "pages": [
+    "solutions/cabinets-avocats/",
+    "traduction/fusions-acquisitions/",
+    "traduction/contentieux-arbitrage/"
+   ]
+  },
+  {
+   "fr": "Le mode Highly sensitive content impose un stockage et un traitement exclusivement en Suisse, sans réutilisation du contenu en mémoire de traduction.{1}Disponible en allemand, français, italien et anglais.{/1}",
+   "trads": [
+    "Highly sensitive content mode means storage and processing in Switzerland only, with no reuse of the content as translation memory.{1}Available in German, French, Italian and English.{/1}",
+    "Highly sensitive content mode requires storage and processing in Switzerland only, with no reuse of the content in a translation memory.{1}Available in German, French, Italian and English.{/1}"
+   ],
+   "pages": [
+    "solutions/cabinets-avocats/",
+    "traduction/contrats/"
+   ]
+  },
+  {
+   "fr": "{1}Conditions générales{/1}",
+   "trads": [
+    "{1}General Terms and Conditions{/1}",
+    "{1}General terms and conditions{/1}",
+    "{1}General conditions{/1}"
+   ],
+   "pages": [
+    "traduction/contrats/",
+    "traduction/banque-finance/",
+    "traduction/assurance/"
+   ]
+  },
+  {
+   "fr": "Propriété intellectuelle",
+   "trads": [
+    "Intellectual property",
+    "Intellectual Property"
+   ],
+   "pages": [
+    "traduction/propriete-intellectuelle/",
+    "mentions-legales/"
+   ]
+  },
+  {
+   "fr": "10 min de lecture",
+   "trads": [
+    "10 min read",
+    "9 min read"
+   ],
+   "pages": [
+    "ressources/blog/comprendre-devis-traduction-juridique/",
+    "ressources/blog/secret-professionnel-outils-traduction/"
+   ]
+  },
+  {
+   "fr": "2 min de lecture",
+   "trads": [
+    "1 min read",
+    "2 min read"
+   ],
+   "pages": [
+    "ressources/blog/ai-act-grand-challenge-universite-saint-gall/",
+    "ressources/blog/neuron-gen-ai-summit-2024-lausanne/",
+    "ressources/blog/legaltech-avocats-allies-ou-concurrents/",
+    "ressources/blog/paula-reichenberg-conseil-strategique-hes-so/",
+    "ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/",
+    "ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/",
+    "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/"
+   ]
+  },
+  {
+   "fr": "{1}R&D{/1}{2}Innosuisse{3}Projet d'innovation soutenu par la Confédération, mené avec l'institut iCoSys de la HEIA-FR{/3}{/2}{4}Innovation{/4}",
+   "trads": [
+    "{1}R&D{/1}{2}Innosuisse{3}Innovation project supported by the Confederation, with the iCoSys institute of the School of Engineering and Architecture of Fribourg (HEIA-FR){/3}{/2}{4}Innovation{/4}",
+    "{1}R&D{/1}{2}Innosuisse{3}Innovation project supported by the Confederation, with the iCoSys institute of HEIA-FR{/3}{/2}{4}Innovation{/4}"
+   ],
+   "pages": [
+    "a-propos/",
+    "a-propos/presse/"
+   ]
+  }
+ ],
+ "couverture_mots": 77.1,
+ "couverture_page": 78.5,
+ "couverture_texte": 82.6,
+ "refus": {
+  "divergence dans une même page": {
+   "unites": 4,
+   "textes": 4,
+   "mots": 45
+  },
+  "identique au français dans les données structurées (oubli probable de la V1)": {
+   "unites": 296,
+   "textes": 179,
+   "mots": 365
+  },
+  "libellé d'un passage en français que la V1 remplace": {
+   "unites": 46,
+   "textes": 1,
+   "mots": 1
+  },
+  "voisin d'un écart, même signature": {
+   "unites": 2,
+   "textes": 2,
+   "mots": 6
+  },
+  "écart de structure": {
+   "unites": 356,
+   "textes": 43,
+   "mots": 272
+  }
+ },
+ "refus_non_rattrapes": {
+  "textes": 222,
+  "mots": 676
+ },
+ "404_non_posee": 18,
+ "i18n_hors_pages": 105
+}

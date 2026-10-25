@@ -1,0 +1,343 @@
+{
+ "langue": "de",
+ "pages_alignees": 156,
+ "pages_non_alignees": [],
+ "segments_v1": 7538,
+ "par_page_v1": 34,
+ "doublons_divergents": [
+  {
+   "fr": "Traduction assermentée et légalisée, via un réseau de traducteurs experts, pour les dossiers officiels.",
+   "trads": [
+    "Beglaubigte und legalisierte Übersetzung über ein Netz von Fachübersetzerinnen und Fachübersetzern, für amtliche Dossiers.",
+    "Beglaubigte und legalisierte Übersetzung für amtliche Dossiers, über ein Netzwerk erfahrener Übersetzerinnen und Übersetzer."
+   ],
+   "pages": [
+    "",
+    "a-propos/"
+   ]
+  },
+  {
+   "fr": "Devis",
+   "trads": [
+    "Offerten",
+    "Offerte"
+   ],
+   "pages": [
+    "corrext/",
+    "corrext/gestion-de-projet/"
+   ]
+  },
+  {
+   "fr": "{1}Gestion de projet.{/1} De la demande au devis, en trois étapes",
+   "trads": [
+    "{1}Projektmanagement.{/1} Von der Anfrage zur Offerte in drei Schritten",
+    "{1}Projektmanagement.{/1} Von der Anfrage zur Offerte, in drei Schritten"
+   ],
+   "pages": [
+    "corrext/",
+    "corrext/gestion-de-projet/"
+   ]
+  },
+  {
+   "fr": "{1}{2}Pseudonymisation exigée.{/2} Noms de clients, parties et objet du dossier retirés avant tout envoi à un moteur étranger.{/1}",
+   "trads": [
+    "{1}{2}Pseudonymisierung verlangt.{/2} Kundennamen, Parteien und Gegenstand des Dossiers werden vor jedem Versand an einen ausländischen Motor entfernt.{/1}",
+    "{1}{2}Pseudonymisierung verlangt.{/2} Namen der Klientschaft, Parteien und Gegenstand des Dossiers werden vor jedem Versand an einen ausländischen Motor entfernt.{/1}"
+   ],
+   "pages": [
+    "corrext/traduction-texte-et-document/",
+    "comparatif/deepl-traduction-juridique/"
+   ]
+  },
+  {
+   "fr": "Banque et finance",
+   "trads": [
+    "Bank und Finanzen",
+    "Bank- und Finanzrecht"
+   ],
+   "pages": [
+    "corrext/gestion-de-projet/",
+    "traduction/banque-finance/"
+   ]
+  },
+  {
+   "fr": "Fusions et acquisitions",
+   "trads": [
+    "Fusionen und Akquisitionen",
+    "Fusionen und Übernahmen"
+   ],
+   "pages": [
+    "corrext/gestion-de-projet/",
+    "traduction/fusions-acquisitions/"
+   ]
+  },
+  {
+   "fr": "{1}Recherche{/1}",
+   "trads": [
+    "{1}Suche{/1}",
+    "{1}Forschung{/1}"
+   ],
+   "pages": [
+    "corrext/chnell/",
+    "corrext/extraits-registre-commerce/",
+    "solutions/editeurs-legaltech/",
+    "a-propos/presse/"
+   ]
+  },
+  {
+   "fr": "{1}Délai{/1}",
+   "trads": [
+    "{1}Lieferfrist{/1}",
+    "{1}Frist{/1}"
+   ],
+   "pages": [
+    "corrext/extraits-registre-commerce/",
+    "traduction/droit-penal/"
+   ]
+  },
+  {
+   "fr": "Cadrons votre intégration",
+   "trads": [
+    "Planen wir Ihre Integration",
+    "Lassen Sie uns Ihre Integration planen"
+   ],
+   "pages": [
+    "corrext/api-on-premises/",
+    "solutions/editeurs-legaltech/"
+   ]
+  },
+  {
+   "fr": "Pour aller plus loin",
+   "trads": [
+    "Mehr zum Thema",
+    "Weiterführende Seiten"
+   ],
+   "pages": [
+    "lexmachina/",
+    "langues-et-formats/",
+    "niveaux-de-qualite/",
+    "securite-souverainete/",
+    "comparatif/",
+    "ressources/etudes/"
+   ]
+  },
+  {
+   "fr": "Un déploiement sur nos propres serveurs est-il possible ?",
+   "trads": [
+    "Ist ein Betrieb auf unseren eigenen Servern möglich?",
+    "Ist eine Installation auf unseren eigenen Servern möglich?"
+   ],
+   "pages": [
+    "securite-souverainete/",
+    "solutions/autorites-administration/"
+   ]
+  },
+  {
+   "fr": "{1}{/1} Aucune",
+   "trads": [
+    "{1}{/1} Keine",
+    "{1}{/1} Keines"
+   ],
+   "pages": [
+    "securite-souverainete/",
+    "comparatif/agence-ou-plateforme/"
+   ]
+  },
+  {
+   "fr": "{1}{/1}{2}DeepL Pro seul{/2}{3}Corrext{/3}",
+   "trads": [
+    "{1}{/1}{2}DeepL Pro allein{/2}{3}Corrext{/3}",
+    "{1}{/1}{2}Nur DeepL Pro{/2}{3}Corrext{/3}"
+   ],
+   "pages": [
+    "comparatif/",
+    "comparatif/deepl-traduction-juridique/"
+   ]
+  },
+  {
+   "fr": "{1}{/1}{2}LLM seul{/2}{3}Corrext{/3}",
+   "trads": [
+    "{1}{/1}{2}LLM allein{/2}{3}Corrext{/3}",
+    "{1}{/1}{2}Nur ein LLM{/2}{3}Corrext{/3}"
+   ],
+   "pages": [
+    "comparatif/",
+    "comparatif/chatgpt-traduction-juridique/"
+   ]
+  },
+  {
+   "fr": "{1}{/1}{2}Agence seule{/2}{3}Corrext{/3}",
+   "trads": [
+    "{1}{/1}{2}Büro allein{/2}{3}Corrext{/3}",
+    "{1}{/1}{2}Nur Übersetzungsbüro{/2}{3}Corrext{/3}"
+   ],
+   "pages": [
+    "comparatif/",
+    "comparatif/agence-ou-plateforme/"
+   ]
+  },
+  {
+   "fr": "Quelle différence entre Light review, Full review et Double review ?",
+   "trads": [
+    "Was unterscheidet Light review, Full review und Double review?",
+    "Was ist der Unterschied zwischen Light review, Full review und Double review?"
+   ],
+   "pages": [
+    "comparatif/agence-ou-plateforme/",
+    "ressources/blog/comprendre-devis-traduction-juridique/"
+   ]
+  },
+  {
+   "fr": "400 pages de pièces avant l'audience",
+   "trads": [
+    "400 Seiten Akten vor der Verhandlung",
+    "400 Seiten Beilagen vor der Verhandlung"
+   ],
+   "pages": [
+    "solutions/cabinets-avocats/",
+    "traduction/contentieux-arbitrage/"
+   ]
+  },
+  {
+   "fr": "{1}Pièces scannées{/1}",
+   "trads": [
+    "{1}Gescannte Akten{/1}",
+    "{1}Gescannte Unterlagen{/1}",
+    "{1}Gescannte Beilagen{/1}"
+   ],
+   "pages": [
+    "solutions/cabinets-avocats/",
+    "traduction/fusions-acquisitions/",
+    "traduction/contentieux-arbitrage/"
+   ]
+  },
+  {
+   "fr": "Le mode Highly sensitive content impose un stockage et un traitement exclusivement en Suisse, sans réutilisation du contenu en mémoire de traduction.{1}Disponible en allemand, français, italien et anglais.{/1}",
+   "trads": [
+    "Der Modus Highly sensitive content verlangt Speicherung und Verarbeitung ausschliesslich in der Schweiz, ohne Wiederverwendung des Inhalts als Translation Memory.{1}Verfügbar auf Deutsch, Französisch, Italienisch und Englisch.{/1}",
+    "Der Modus Highly sensitive content schreibt Speicherung und Verarbeitung ausschliesslich in der Schweiz vor, ohne Wiederverwendung des Inhalts im Translation Memory.{1}Verfügbar auf Deutsch, Französisch, Italienisch und Englisch.{/1}"
+   ],
+   "pages": [
+    "solutions/cabinets-avocats/",
+    "traduction/contrats/"
+   ]
+  },
+  {
+   "fr": "{1}Moteurs étrangers{/1}",
+   "trads": [
+    "{1}Ausländische Übersetzungsmotoren{/1}",
+    "{1}Übersetzungsmotoren im Ausland{/1}"
+   ],
+   "pages": [
+    "solutions/cabinets-avocats/",
+    "traduction/banque-finance/",
+    "traduction/compliance-finma/"
+   ]
+  },
+  {
+   "fr": "{1}Arbitrage international{/1}",
+   "trads": [
+    "{1}Internationale Schiedsverfahren{/1}",
+    "{1}Internationale Schiedsgerichtsbarkeit{/1}"
+   ],
+   "pages": [
+    "solutions/cabinets-avocats/",
+    "traduction/contentieux-arbitrage/",
+    "traduction/anglais-allemand/",
+    "traduction/francais-anglais/"
+   ]
+  },
+  {
+   "fr": "{1}Certification{/1}",
+   "trads": [
+    "{1}Beglaubigung{/1}",
+    "{1}Zertifizierung{/1}"
+   ],
+   "pages": [
+    "solutions/banques-finance/",
+    "a-propos/presse/"
+   ]
+  },
+  {
+   "fr": "{1}Fiscalité{/1}",
+   "trads": [
+    "{1}Steuern{/1}",
+    "{1}Steuerrecht{/1}"
+   ],
+   "pages": [
+    "solutions/fiduciaires-conseil/",
+    "traduction/fiscalite/"
+   ]
+  },
+  {
+   "fr": "{1}Éditeurs juridiques{/1}",
+   "trads": [
+    "{1}Juristische Verlage{/1}",
+    "{1}Juristische Fachverlage{/1}"
+   ],
+   "pages": [
+    "solutions/editeurs-legaltech/",
+    "a-propos/"
+   ]
+  },
+  {
+   "fr": "{1}Conditions générales{/1}",
+   "trads": [
+    "{1}Allgemeine Geschäftsbedingungen{/1}",
+    "{1}Allgemeine Versicherungsbedingungen{/1}"
+   ],
+   "pages": [
+    "traduction/contrats/",
+    "traduction/banque-finance/",
+    "traduction/assurance/"
+   ]
+  },
+  {
+   "fr": "2 min de lecture",
+   "trads": [
+    "1 Min. Lesezeit",
+    "2 Min. Lesezeit"
+   ],
+   "pages": [
+    "ressources/blog/ai-act-grand-challenge-universite-saint-gall/",
+    "ressources/blog/neuron-gen-ai-summit-2024-lausanne/",
+    "ressources/blog/legaltech-avocats-allies-ou-concurrents/",
+    "ressources/blog/paula-reichenberg-conseil-strategique-hes-so/",
+    "ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/",
+    "ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/",
+    "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/"
+   ]
+  }
+ ],
+ "couverture_mots": 77.0,
+ "couverture_page": 78.4,
+ "couverture_texte": 82.6,
+ "refus": {
+  "divergence dans une même page": {
+   "unites": 3,
+   "textes": 3,
+   "mots": 63
+  },
+  "identique au français dans les données structurées (oubli probable de la V1)": {
+   "unites": 333,
+   "textes": 224,
+   "mots": 523
+  },
+  "permutation probable dans la page": {
+   "unites": 18,
+   "textes": 18,
+   "mots": 18
+  },
+  "écart de structure": {
+   "unites": 323,
+   "textes": 10,
+   "mots": 176
+  }
+ },
+ "refus_non_rattrapes": {
+  "textes": 238,
+  "mots": 762
+ },
+ "404_non_posee": 18,
+ "i18n_hors_pages": 104
+}

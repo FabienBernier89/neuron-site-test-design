@@ -1,0 +1,289 @@
+{
+ "langue": "it",
+ "pages_alignees": 156,
+ "pages_non_alignees": [],
+ "segments_v1": 7586,
+ "par_page_v1": 58,
+ "doublons_divergents": [
+  {
+   "fr": "Extraits de démonstration",
+   "trads": [
+    "Estratti della demo",
+    "Estratti dimostrativi"
+   ],
+   "pages": [
+    "",
+    "corrext/traduction-texte-et-document/"
+   ]
+  },
+  {
+   "fr": "Traduction assermentée et légalisée, via un réseau de traducteurs experts, pour les dossiers officiels.",
+   "trads": [
+    "Traduzione certificata e legalizzata, tramite una rete di traduttori specializzati, per i dossier ufficiali.",
+    "Traduzione certificata e legalizzata, tramite una rete di traduttori esperti, per i dossier ufficiali."
+   ],
+   "pages": [
+    "",
+    "a-propos/"
+   ]
+  },
+  {
+   "fr": "{1}2024{/1}{2}UBS Female Founder Award{3}Finaliste parmi dix candidates, distinction de la fondatrice{/3}{/2}{4}Distinction{/4}",
+   "trads": [
+    "{1}2024{/1}{2}UBS Female Founder Award{3}Finalista tra dieci candidate, riconoscimento della fondatrice{/3}{/2}{4}Riconoscimento{/4}",
+    "{1}2024{/1}{2}UBS Female Founder Award{3}Finalista tra dieci candidate, riconoscimento alla fondatrice{/3}{/2}{4}Riconoscimento{/4}"
+   ],
+   "pages": [
+    "",
+    "a-propos/",
+    "a-propos/presse/"
+   ]
+  },
+  {
+   "fr": "{1}2023{/1}{2}Digital Shapers{3}BILANZ, distinction de la fondatrice{/3}{/2}{4}Distinction{/4}",
+   "trads": [
+    "{1}2023{/1}{2}Digital Shapers{3}BILANZ, riconoscimento della fondatrice{/3}{/2}{4}Riconoscimento{/4}",
+    "{1}2023{/1}{2}Digital Shapers{3}BILANZ, riconoscimento alla fondatrice{/3}{/2}{4}Riconoscimento{/4}"
+   ],
+   "pages": [
+    "",
+    "a-propos/",
+    "a-propos/presse/"
+   ]
+  },
+  {
+   "fr": "Devis",
+   "trads": [
+    "Offerte",
+    "Offerta"
+   ],
+   "pages": [
+    "corrext/",
+    "corrext/gestion-de-projet/"
+   ]
+  },
+  {
+   "fr": "Voyez Corrext sur vos propres documents",
+   "trads": [
+    "Vedete Corrext all'opera sui vostri documenti",
+    "Guardate Corrext all'opera sui vostri documenti"
+   ],
+   "pages": [
+    "corrext/",
+    "ressources/blog/actualites/",
+    "ressources/blog/paula-reichenberg-pitch-epfl-investor-day-2024/",
+    "ressources/blog/neuron-swisscom-collaboration-kickstart-2024/",
+    "ressources/blog/neuron-tltf-summit-2024-miami-startups-showcase/",
+    "ressources/blog/legaltechtalk-2024-londres-enseignements/",
+    "ressources/blog/table-ronde-ia-juridique-slta-zurich-2024/",
+    "ressources/blog/kilian-marty-rejoint-conseil-consultatif-neuron/",
+    "ressources/blog/ai-act-grand-challenge-universite-saint-gall/",
+    "ressources/blog/paula-reichenberg-pwc-legaltech-fund-londres/",
+    "ressources/blog/neuron-ai-days-2025-geneve-llm-traduction/",
+    "ressources/blog/ejustice-40-ans-kamingesprach-neuron/",
+    "ressources/blog/panel-ai-in-business-zurich-2024/",
+    "ressources/blog/neuron-gen-ai-summit-2024-lausanne/",
+    "ressources/blog/neuron-quatre-finalistes-swiss-fintech-awards-2024/",
+    "ressources/blog/trust-valley-day-2023-risques-cyber-pme/",
+    "ressources/blog/legaltech-avocats-allies-ou-concurrents/",
+    "ressources/blog/paula-reichenberg-female-founder-project-ubs-2025/",
+    "ressources/blog/paula-reichenberg-panel-gilw25-geneve-ia/",
+    "ressources/blog/paula-reichenberg-conseil-strategique-hes-so/",
+    "ressources/blog/neuron-cohorte-kickstart-innovation-2024/",
+    "ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/",
+    "ressources/blog/neuron-amld-epfl-2024-lausanne/",
+    "ressources/blog/orane-laeri-parcours-orientation-ch/",
+    "ressources/blog/etat-fribourg-soutien-neuron-traduction-juridique-ia/",
+    "ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/",
+    "ressources/blog/paula-reichenberg-jury-weblaw-forum-2024/",
+    "ressources/blog/neuron-finaliste-early-stage-swiss-fintech-awards-2024/",
+    "ressources/blog/neuron-top-10-startups-fintech-suisses-2024/",
+    "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/",
+    "ressources/blog/paula-reichenberg-conference-mids-geneve-2023/",
+    "ressources/blog/paula-reichenberg-digital-shaper-2023-bilanz/",
+    "ressources/blog/paula-reichenberg-table-ronde-bdu-2022/"
+   ]
+  },
+  {
+   "fr": "{1}{2}Pseudonymisation exigée.{/2} Noms de clients, parties et objet du dossier retirés avant tout envoi à un moteur étranger.{/1}",
+   "trads": [
+    "{1}{2}Pseudonimizzazione obbligatoria.{/2} Nomi dei clienti, delle parti e oggetto del dossier rimossi prima di ogni invio a un motore estero.{/1}",
+    "{1}{2}Pseudonimizzazione obbligatoria.{/2} Nomi dei clienti, delle parti e oggetto del dossier vanno rimossi prima di ogni invio a un motore estero.{/1}"
+   ],
+   "pages": [
+    "corrext/traduction-texte-et-document/",
+    "comparatif/deepl-traduction-juridique/"
+   ]
+  },
+  {
+   "fr": "{1}Délai{/1}",
+   "trads": [
+    "{1}Termine di consegna{/1}",
+    "{1}Termine{/1}"
+   ],
+   "pages": [
+    "corrext/extraits-registre-commerce/",
+    "traduction/droit-penal/"
+   ]
+  },
+  {
+   "fr": "Cadrons votre intégration",
+   "trads": [
+    "Pianifichiamo la vostra integrazione",
+    "Definiamo insieme la vostra integrazione"
+   ],
+   "pages": [
+    "corrext/api-on-premises/",
+    "solutions/editeurs-legaltech/"
+   ]
+  },
+  {
+   "fr": "La mise en page est-elle conservée ?",
+   "trads": [
+    "Il layout del documento viene mantenuto?",
+    "L'impaginazione viene mantenuta?"
+   ],
+   "pages": [
+    "langues-et-formats/",
+    "aide/formats-et-langues/"
+   ]
+  },
+  {
+   "fr": "Le tunnel projet, étape par étape",
+   "trads": [
+    "Il percorso del progetto, fase per fase",
+    "Il percorso del progetto, passo dopo passo"
+   ],
+   "pages": [
+    "niveaux-de-qualite/",
+    "solutions/directions-juridiques/"
+   ]
+  },
+  {
+   "fr": "{1}{/1} Aucune",
+   "trads": [
+    "{1}{/1} Nessuno",
+    "{1}{/1} Nessuna"
+   ],
+   "pages": [
+    "securite-souverainete/",
+    "comparatif/agence-ou-plateforme/"
+   ]
+  },
+  {
+   "fr": "Comment obtenir un devis et un délai ?",
+   "trads": [
+    "Come si ottengono un'offerta e un termine di consegna?",
+    "Come ottengo un'offerta e un termine di consegna?"
+   ],
+   "pages": [
+    "comparatif/agence-ou-plateforme/",
+    "aide/gestion-de-projet/"
+   ]
+  },
+  {
+   "fr": "{1}Découvrir Gestion de projet{/1}",
+   "trads": [
+    "{1}Scoprire lo strumento{/1}",
+    "{1}Gestione dei progetti{/1}"
+   ],
+   "pages": [
+    "comparatif/agence-ou-plateforme/",
+    "ressources/guides/",
+    "ressources/blog/comprendre-devis-traduction-juridique/"
+   ]
+  },
+  {
+   "fr": "400 pages de pièces avant l'audience",
+   "trads": [
+    "400 pagine di atti prima dell'udienza",
+    "400 pagine di documenti prima dell'udienza"
+   ],
+   "pages": [
+    "solutions/cabinets-avocats/",
+    "traduction/contentieux-arbitrage/"
+   ]
+  },
+  {
+   "fr": "{1}Pièces scannées{/1}",
+   "trads": [
+    "{1}Atti scansionati{/1}",
+    "{1}Documenti scansionati{/1}"
+   ],
+   "pages": [
+    "solutions/cabinets-avocats/",
+    "traduction/fusions-acquisitions/",
+    "traduction/contentieux-arbitrage/"
+   ]
+  },
+  {
+   "fr": "Le mode Highly sensitive content impose un stockage et un traitement exclusivement en Suisse, sans réutilisation du contenu en mémoire de traduction.{1}Disponible en allemand, français, italien et anglais.{/1}",
+   "trads": [
+    "La modalità Highly sensitive content impone archiviazione e trattamento esclusivamente in Svizzera, senza riutilizzo del contenuto in una memoria di traduzione.{1}Disponibile in tedesco, francese, italiano e inglese.{/1}",
+    "La modalità Highly sensitive content impone archiviazione e trattamento esclusivamente in Svizzera, senza riutilizzare il contenuto nella memoria di traduzione.{1}Disponibile in tedesco, francese, italiano e inglese.{/1}"
+   ],
+   "pages": [
+    "solutions/cabinets-avocats/",
+    "traduction/contrats/"
+   ]
+  },
+  {
+   "fr": "10 min de lecture",
+   "trads": [
+    "Lettura: 10 min",
+    "Lettura: 9 min"
+   ],
+   "pages": [
+    "ressources/blog/comprendre-devis-traduction-juridique/",
+    "ressources/blog/secret-professionnel-outils-traduction/"
+   ]
+  },
+  {
+   "fr": "2 min de lecture",
+   "trads": [
+    "Lettura: 1 min",
+    "Lettura: 2 min"
+   ],
+   "pages": [
+    "ressources/blog/ai-act-grand-challenge-universite-saint-gall/",
+    "ressources/blog/neuron-gen-ai-summit-2024-lausanne/",
+    "ressources/blog/legaltech-avocats-allies-ou-concurrents/",
+    "ressources/blog/paula-reichenberg-conseil-strategique-hes-so/",
+    "ressources/blog/legaltechtalk-2024-londres-modele-operationnel-cabinets/",
+    "ressources/blog/registre-commerce-schwyz-traduction-ia-extraits-anglais/",
+    "ressources/blog/cybersecurite-souverainete-donnees-pme-trust-valley/"
+   ]
+  }
+ ],
+ "couverture_mots": 77.0,
+ "couverture_page": 78.5,
+ "couverture_texte": 82.6,
+ "refus": {
+  "divergence dans une même page": {
+   "unites": 8,
+   "textes": 8,
+   "mots": 190
+  },
+  "identique au français dans les données structurées (oubli probable de la V1)": {
+   "unites": 317,
+   "textes": 208,
+   "mots": 429
+  },
+  "libellé d'un passage en français que la V1 remplace": {
+   "unites": 52,
+   "textes": 1,
+   "mots": 1
+  },
+  "écart de structure": {
+   "unites": 323,
+   "textes": 10,
+   "mots": 176
+  }
+ },
+ "refus_non_rattrapes": {
+  "textes": 190,
+  "mots": 720
+ },
+ "404_non_posee": 18,
+ "i18n_hors_pages": 105
+}

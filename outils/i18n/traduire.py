@@ -159,14 +159,13 @@ def _resume(manquants):
     return {"publiable": not manquants, "manquants": len(manquants), "mots": sum(mots(t) for t in distincts.values())}
 
 
-def etat_detaille(langue, mode):
-    """État de la traduction d'une langue sur tout le site, tel que le build le verrait : (etat, a_traduire), etat
-    ayant la forme de etat() et a_traduire étant {clé: texte FR} de tous les manquants. Les pages sont assemblées
-    comme par build.py (langues fr et `langue`, mode demandé) dans un dossier temporaire ; rien n'est écrit dans docs/."""
+def pages_assemblees(langue, mode):
+    """Pages françaises assemblées telles que TRADUIRE les reçoit dans le build ({page: html}, 404 comprise sous la clé
+    « 404 ») : assemblées comme par build.py (langues fr et `langue`, mode demandé) dans un dossier temporaire ; rien
+    n'est écrit dans docs/."""
     import build  # import tardif : build importe ce module
     if mode not in MODES:
         raise ValueError(f"mode inconnu : « {mode} » (attendu : {', '.join(MODES)})")
-    table = Table(langue, build.DOSSIER_LANGUES)
     docs, config = build.DOCS, build.CONFIG
     tmp = Path(tempfile.mkdtemp(prefix="neuron-etat-"))
     try:
@@ -179,6 +178,15 @@ def etat_detaille(langue, mode):
     finally:
         build.DOCS, build.CONFIG = docs, config
         shutil.rmtree(tmp, ignore_errors=True)
+    return assemblees
+
+
+def etat_detaille(langue, mode):
+    """État de la traduction d'une langue sur tout le site, tel que le build le verrait : (etat, a_traduire), etat
+    ayant la forme de etat() et a_traduire étant {clé: texte FR} de tous les manquants. Pages : pages_assemblees."""
+    import build  # import tardif : build importe ce module
+    assemblees = pages_assemblees(langue, mode)
+    table = Table(langue, build.DOSSIER_LANGUES)
     pages, statuts, a_traduire = {}, {}, {}
     for page, html in assemblees.items():
         r = analyser(html, page, langue, table, mode)
