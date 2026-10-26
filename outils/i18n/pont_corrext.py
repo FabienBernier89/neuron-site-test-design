@@ -5,9 +5,12 @@
 
 serve : sert à l'onglet Corrext les textes français de src/langues/<langue>/a_traduire.json (liste écrite par
 « python3 -m outils.i18n etat <langue> ») par lots de 8000 caractères au plus et enregistre les traductions reçues, brutes,
-dans src/langues/<langue>/brut/traductions.json (fichier de travail, ignoré par git). --pages ne sert que les textes manquants
-des pages données (clés de page de build.PAGES, « » ou « accueil » pour l'accueil) : c'est ce qui permet de ne traduire que le
-pilote. Un texte déjà traduit dans la table (quel que soit son statut) n'est jamais renvoyé à LexMachina.
+dans src/langues/<langue>/brut/traductions.json (fichier de travail, ignoré par git). Une liste plus ancienne que la table ou
+que le dernier build est refusée (verifier_fraicheur). --pages ne sert que les textes manquants des pages données (clés de
+page de build.PAGES, « » ou « accueil » pour l'accueil), relevés à l'instant : c'est ce qui permet de ne traduire que le
+pilote. Un texte déjà traduit dans la table (quel que soit son statut) n'est jamais renvoyé à LexMachina. Un texte de plus
+de 10 000 caractères, ou servi trois fois sans traduction non vide, est écarté et listé (brut/ecartes.json). Seule l'origine
+https://corrext.com peut poster des résultats (un en-tête Origin autre est refusé).
 
 reinjecter : pose les traductions brutes dans la table de la langue (src/langues/<langue>/segments.json) au statut mt, source
 « LexMachina <date> ». Un texte déjà traduit à un autre statut que mt n'est jamais écrasé. Avant la pose :
@@ -41,6 +44,8 @@ PORT = 8812
 LOT_MAX_CARACTERES = 8000   # taille d'un lot de textes envoyé en un appel (la limite de l'interface est de 10 000 par texte)
 LOT_MAX_TEXTES = 25
 DELAI_EN_COURS = 180        # secondes : un texte servi sans réponse revient dans les lots suivants
+TEXTE_MAX = 10000           # caractères : limite de l'interface par texte ; un texte plus long est écarté, jamais servi
+ESSAIS_MAX = 3              # un texte servi autant de fois sans traduction non vide est écarté (listé dans brut/ecartes.json)
 ORIGINE = "https://corrext.com"
 # Identifiants relevés dans la V1 (Sites/neuron/outils/CORREXT-MT.md, 2026-10-02) : à revérifier dans la page « Fast translation »
 # de Corrext avant le premier envoi.
@@ -52,6 +57,7 @@ BRUT = "brut"
 TRADUCTIONS = "traductions.json"
 A_REVOIR = "a_revoir.json"
 A_TRADUIRE = "a_traduire.json"
+ECARTES = "ecartes.json"
 
 _MARQ = re.compile(r"\{\s*(/?)\s*(\d+)\s*\}")
 _BLANCS = "[ \t\r\n]+"  # pas \s : l'espace insécable du français est voulue
@@ -74,26 +80,34 @@ class Pont:
     """Textes à traduire d'une langue, lots servis, traductions brutes reçues (état en mémoire, traductions écrites à chaque
     réception dans <dossier>/<langue>/brut/traductions.json). Les appels viennent de plusieurs fils : un verrou."""
 
-    def __init__(self, langue, dossier=SRC_LANGUES, cles=None, table=None, horloge=time.time):
+    def __init__(self, langue, dossier=SRC_LANGUES, cles=None, table=None, horloge=time.time, textes=None):
         """cles : ensemble de clés à servir seulement (cles_des_pages) ; table : les textes déjà traduits dans la table ne
-        sont pas servis ; horloge : secondes, remplaçable pour un test."""
+        sont pas servis ; horloge : secondes, remplaçable pour un test ; textes : {clé: texte FR} à servir à la place de
+        a_traduire.json (textes_des_pages, option --pages : relevés à l'instant, jamais périmés). Un texte de plus de
+        TEXTE_MAX caractères est écarté d'emblée (listé dans brut/ecartes.json)."""
         if langue not in CIBLES:
             raise ValueError(f"langue inconnue : « {langue} » (attendu : {', '.join(CIBLES)})")
         self.langue = langue
         self.dossier = Path(dossier) / langue
-        liste = self.dossier / A_TRADUIRE
-        if not liste.is_file():
-            raise ValueError(f"{liste} introuvable : lancer d'abord « python3 -m outils.i18n etat {langue} »")
+        if textes is None:
+            liste = self.dossier / A_TRADUIRE
+            if not liste.is_file():
+                raise ValueError(f"{liste} introuvable : lancer d'abord « python3 -m outils.i18n etat {langue} »")
+            textes = {k: e["fr"] for k, e in json.loads(liste.read_text(encoding="utf-8")).items()}
         self.horloge = horloge
         self.verrou = threading.Lock()
         self.fichier = self.dossier / BRUT / TRADUCTIONS
         self.faits = _lire_json(self.fichier)
-        self.a_traduire = {}
-        for k, e in json.loads(liste.read_text(encoding="utf-8")).items():
+        self.a_traduire, self.ecartes = {}, {}
+        for k, fr in textes.items():
             traduit = table is not None and table.entrees.get(k, {}).get("trad") is not None
             if (cles is None or k in cles) and not traduit:
-                self.a_traduire[k] = e["fr"]
-        self.en_cours = {}
+                self.a_traduire[k] = fr
+                if len(fr) > TEXTE_MAX:
+                    self.ecartes[k] = f"texte de {len(fr)} caractères, au-delà de la limite de {TEXTE_MAX} de l'interface"
+        self.en_cours, self.essais = {}, {}
+        if self.ecartes:
+            self._ecrire_ecartes()
 
     def lot(self, n=LOT_MAX_TEXTES):
         """Prochain lot : au plus n textes et LOT_MAX_CARACTERES caractères (un texte plus long part seul). Les textes servis
@@ -103,14 +117,24 @@ class Pont:
         with self.verrou:
             for k, texte in self.a_traduire.items():
                 servi = self.en_cours.get(k)
-                if k in self.faits or (servi is not None and maintenant - servi < DELAI_EN_COURS):
+                if k in self.faits or k in self.ecartes or (servi is not None and maintenant - servi < DELAI_EN_COURS):
+                    continue
+                if self.essais.get(k, 0) >= ESSAIS_MAX:  # servi ESSAIS_MAX fois sans traduction : écarté
+                    self.ecartes[k] = f"aucune traduction non vide après {ESSAIS_MAX} envois"
+                    self._ecrire_ecartes()
                     continue
                 if lot and (len(lot) >= n or taille + len(texte) > LOT_MAX_CARACTERES):
                     break
                 lot.append({"k": k, "texte": texte})
                 taille += len(texte)
                 self.en_cours[k] = maintenant
+                self.essais[k] = self.essais.get(k, 0) + 1
         return {"lot": lot, "source": LANGUE_SOURCE, "cible": CIBLES[self.langue], "fournisseur": FOURNISSEUR_LEXMACHINA}
+
+    def _ecrire_ecartes(self):
+        """brut/ecartes.json : [{cle, fr (début), raison}] des textes écartés (à traduire à la main, ou à découper)."""
+        _ecrire_json(self.dossier / BRUT / ECARTES, [{"cle": k, "fr": self.a_traduire[k][:200], "raison": r}
+                                                     for k, r in sorted(self.ecartes.items())])
 
     def resultat(self, corps):
         """Enregistre les traductions reçues ([{k, traduction}]) : seules comptent une clé de la liste et une traduction
@@ -118,14 +142,20 @@ class Pont:
         reçues pour la liste."""
         with self.verrou:
             for r in corps if isinstance(corps, list) else []:
-                if (isinstance(r, dict) and r.get("k") in self.a_traduire and isinstance(r.get("traduction"), str)
-                        and r["traduction"].strip()):
+                if not (isinstance(r, dict) and isinstance(r.get("k"), str) and r["k"] in self.a_traduire):
+                    continue
+                if r["k"] in self.ecartes:
+                    continue
+                if isinstance(r.get("traduction"), str) and r["traduction"].strip():
                     self.faits[r["k"]] = r["traduction"]
+                else:  # texte vide renvoyé : le texte revient au lot suivant, jusqu'à ESSAIS_MAX envois
+                    self.en_cours.pop(r["k"], None)
             _ecrire_json(self.fichier, self.faits)
             return self.etat_sans_verrou()["faits"]
 
     def etat_sans_verrou(self):
-        return {"total": len(self.a_traduire), "faits": sum(1 for k in self.a_traduire if k in self.faits)}
+        return {"total": len(self.a_traduire), "faits": sum(1 for k in self.a_traduire if k in self.faits),
+                "ecartes": len(self.ecartes)}
 
     def etat(self):
         with self.verrou:
@@ -179,6 +209,10 @@ def creer_serveur(pont, port=PORT):
             if not self.path.startswith("/resultat"):
                 self._repondre(404, {"err": "inconnu"})
                 return
+            origine = self.headers.get("Origin")
+            if origine is not None and origine != ORIGINE:  # une autre page du navigateur n'écrit jamais ici
+                self._repondre(403, {"err": "origine refusée"})
+                return
             try:
                 corps = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))) or b"[]")
             except (ValueError, UnicodeDecodeError):
@@ -193,11 +227,16 @@ def creer_serveur(pont, port=PORT):
 
 
 def cles_des_pages(langue, pages, table, assemblees=None):
+    """Clés de textes_des_pages (même contrat)."""
+    return set(textes_des_pages(langue, pages, table, assemblees))
+
+
+def textes_des_pages(langue, pages, table, assemblees=None):
     """Clés des textes manquants des pages données (clés de page de build.PAGES ; « accueil » pour l'accueil, « llms » pour
     les libellés fixes des llms.txt) : ce que traduire.analyser relève, tous statuts de refus compris, dans les deux modes
     (le bandeau de consentement de la production compris). Le libellé du bandeau de l'aperçu, que toute page traduite non
     relue porte, en fait toujours partie s'il manque : un seul passage du pont suffit. assemblees : {page: html} ou
-    {page: {mode: html}} (traduire.pages_union si absent). ValueError pour une page inconnue."""
+    {page: {mode: html}} (traduire.pages_union si absent). Rend {clé: texte FR}. ValueError pour une page inconnue."""
     assemblees = assemblees if assemblees is not None else traduire.pages_union(langue)
     pages = ["" if p == echanges.ACCUEIL else p for p in pages]
     inconnues = [p for p in pages if p not in assemblees and p not in echanges.PSEUDO_PAGES]
@@ -210,7 +249,24 @@ def cles_des_pages(langue, pages, table, assemblees=None):
         elif page != echanges.BANDEAU:
             for html in traduire.variantes(assemblees[page]):
                 manquants += traduire.analyser(html, page, langue, table, "apercu")["manquants"]
-    return {m["cle"] for m in manquants if m["cle"]}
+    return {m["cle"]: m["fr"] for m in manquants if m["cle"]}
+
+
+def verifier_fraicheur(langue, dossier=SRC_LANGUES, sortie=None):
+    """ValueError si a_traduire.json est plus ancien que la table (segments.json) ou que le dernier build (sortie :
+    docs/index.html par défaut) : la liste ne dit plus ce qui manque, il faut relancer « etat ». L'option --pages, qui
+    relève les textes à l'instant, s'en passe."""
+    liste = Path(dossier) / langue / A_TRADUIRE
+    if not liste.is_file():
+        raise ValueError(f"{liste} introuvable : lancer d'abord « python3 -m outils.i18n etat {langue} »")
+    if sortie is None:
+        import build  # import tardif : build.DOCS, dossier du dernier build
+        sortie = build.DOCS
+    for repere, nom in ((Path(dossier) / langue / "segments.json", "la table segments.json"),
+                        (Path(sortie) / "index.html", "le dernier build")):
+        if repere.is_file() and repere.stat().st_mtime > liste.stat().st_mtime:
+            raise ValueError(f"{liste.name} est plus ancien que {nom} : relancer « python3 -m outils.i18n etat {langue} » "
+                             "(ou servir des pages précises avec --pages)")
 
 
 # ---------- réinjection ----------
@@ -316,8 +372,11 @@ def main(argv=None):
         print(f"Table : {table.fichier}")
         return 0
     try:
-        cles = cles_des_pages(args.langue, args.pages, table) if args.pages else None
-        pont = Pont(args.langue, SRC_LANGUES, cles=cles, table=table)
+        if args.pages:
+            pont = Pont(args.langue, SRC_LANGUES, table=table, textes=textes_des_pages(args.langue, args.pages, table))
+        else:
+            verifier_fraicheur(args.langue, SRC_LANGUES)
+            pont = Pont(args.langue, SRC_LANGUES, table=table)
     except ValueError as e:
         print(f"Pont non lancé : {e}", file=sys.stderr)
         return 1
@@ -327,6 +386,8 @@ def main(argv=None):
           + (f" (pages : {', '.join(p or echanges.ACCUEIL for p in args.pages)})" if args.pages else ""))
     print(f"Identifiants envoyés à l'onglet : français {LANGUE_SOURCE}, cible {CIBLES[args.langue]}, fournisseur "
           f"{FOURNISSEUR_LEXMACHINA} (à revérifier dans Fast translation avant le premier envoi)")
+    if pont.ecartes:
+        print(f"{len(pont.ecartes)} texte(s) écarté(s), jamais servi(s) : {pont.dossier / BRUT / ECARTES}")
     try:
         serveur.serve_forever()
     except KeyboardInterrupt:

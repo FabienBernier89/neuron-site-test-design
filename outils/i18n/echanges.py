@@ -685,6 +685,34 @@ def nom_pour_fichier(texte):
     return re.sub(r"[^A-Za-z0-9]+", "-", ascii_).strip("-") or "relecteur"
 
 
+# ---------- lot d'adaptation (Ruling 32) ----------
+
+def preparer_lot(table, a_traduire, contextes, glossaire, textes=None):
+    """Lot d'adaptation d'une langue (commande preparer, Ruling 32 ; consigne : BRIEF-ADAPTATION.md) : (lot, sans_mt).
+    lot : [{"cle", "fr", "mt", "contexte_v1", "glossaire"}], dans l'ordre des clés, pour chaque texte à traduire qui a
+    une sortie brute de LexMachina dans la table (statut mt) ; « contexte_v1 » : le contexte de contextes.json, sinon celui
+    de a_traduire.json, sinon None ; « glossaire » : [{"fr", "terme"}] des termes du glossaire de projet présents dans le
+    texte (controles.termes_presents). sans_mt : {clé: texte FR} des textes sans sortie brute (à passer d'abord par le
+    pont). a_traduire : contenu de a_traduire.json ({clé: {"fr", "contexte"}}) ; contextes : contenu de contextes.json ;
+    glossaire : {fr: {langue: {terme, ...}}} ; textes : {clé: texte FR} qui remplacent a_traduire (pages données,
+    pont_corrext.textes_des_pages)."""
+    if textes is not None:
+        a_traduire = {k: {"fr": fr, **({"contexte": a_traduire[k]["contexte"]} if a_traduire.get(k, {}).get("contexte")
+                                       else {})} for k, fr in textes.items()}
+    glossaire = _glossaire_de(table.langue, glossaire)
+    lot, sans_mt = [], {}
+    for k in sorted(a_traduire):
+        fr = a_traduire[k]["fr"]
+        entree = table.entrees.get(k)
+        if entree is None or entree["statut"] != "mt" or entree["trad"] is None:
+            sans_mt[k] = fr
+            continue
+        contexte = (contextes.get(k) or {}).get("contexte") or a_traduire[k].get("contexte")
+        lot.append({"cle": k, "fr": fr, "mt": entree["trad"], "contexte_v1": contexte,
+                    "glossaire": [{"fr": t, "terme": eq} for t, eq in controles.termes_presents(fr, table.langue, glossaire)]})
+    return lot, sans_mt
+
+
 # ---------- fusion des adaptations ----------
 
 STATUT_FUSION = "adapte"  # seul statut que la fusion pose : relu vient toujours d'un relecteur humain (importer)

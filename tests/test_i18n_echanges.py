@@ -823,6 +823,49 @@ class TestImportCsv(Base):
             self.importer_csv(f)
 
 
+class TestPreparer(Base):
+    """Vague finale, point 7 (Ruling 32) : lot d'adaptation {cle, fr, mt, contexte_v1, glossaire} hors du dépôt."""
+
+    def a_traduire(self):
+        contexte = {"nature": "morceau", "page_v1": "de/", "fr_complet": "Le capital-actions de la société anonyme",
+                    "trad_complete": "Das Aktienkapital der Aktiengesellschaft"}
+        return {cle(CAPITAL): {"fr": CAPITAL, "contexte": contexte}, cle(ADRESSE): {"fr": ADRESSE},
+                cle("Texte neuf"): {"fr": "Texte neuf"}}, contexte
+
+    def test_lot(self):
+        self.table.poser(CAPITAL, "Das {1}Aktienkapital{/1} der Firma", "mt", "LexMachina")
+        a_traduire, contexte = self.a_traduire()
+        lot, sans_mt = E.preparer_lot(self.table, a_traduire, {}, GLOSSAIRE)
+        self.assertEqual([x["cle"] for x in lot], sorted([cle(CAPITAL), cle(ADRESSE)]))
+        capital = next(x for x in lot if x["cle"] == cle(CAPITAL))
+        self.assertEqual(capital, {"cle": cle(CAPITAL), "fr": CAPITAL, "mt": "Das {1}Aktienkapital{/1} der Firma",
+                                   "contexte_v1": contexte, "glossaire": [{"fr": "capital-actions", "terme": "Aktienkapital"}]})
+        self.assertEqual(next(x for x in lot if x["cle"] == cle(ADRESSE))["contexte_v1"], None)
+        self.assertEqual(sans_mt, {cle("Texte neuf"): "Texte neuf"})
+        # contextes.json l'emporte ; des textes relevés à l'instant (--pages) remplacent a_traduire.json
+        autre = {"nature": "variante de balisage"}
+        lot, _ = E.preparer_lot(self.table, a_traduire, {cle(CAPITAL): {"fr": CAPITAL, "contexte": autre}}, GLOSSAIRE,
+                                textes={cle(CAPITAL): CAPITAL})
+        self.assertEqual([(x["cle"], x["contexte_v1"]) for x in lot], [(cle(CAPITAL), autre)])
+
+    def test_commande_hors_depot(self):
+        self.table.poser(CAPITAL, "Das {1}Aktienkapital{/1} der Firma", "mt", "LexMachina")
+        self.table.enregistrer()
+        a_traduire, _ = self.a_traduire()
+        (self.langues / "de" / "a_traduire.json").write_text(json.dumps(a_traduire), encoding="utf-8")
+        sortie = io.StringIO()
+        with contextlib.redirect_stdout(sortie), mock.patch.object(build, "DOSSIER_LANGUES", self.langues), \
+                mock.patch.object(cli.chnell, "charger_glossaire", lambda *a, **k: GLOSSAIRE):
+            self.assertEqual(cli.main(["preparer", "de", "--sortie", str(self.sortie / "lot")]), 0)
+            lot = json.loads((self.sortie / "lot" / "lot-de.json").read_text(encoding="utf-8"))
+            self.assertEqual([x["cle"] for x in lot], sorted([cle(CAPITAL), cle(ADRESSE)]))
+            self.assertIn("1 texte(s) sans sortie brute", sortie.getvalue())
+            with contextlib.redirect_stderr(io.StringIO()) as erreur:
+                self.assertEqual(cli.main(["preparer", "de", "--sortie", str(ICI / "lot-refuse-test")]), 1)
+            self.assertIn("dépôt", erreur.getvalue())
+        self.assertFalse((ICI / "lot-refuse-test").exists())
+
+
 class TestCommandes(Base):
     """Commandes exporter et importer de outils/i18n/__main__.py, tables et sorties dans des dossiers temporaires."""
 

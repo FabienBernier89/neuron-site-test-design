@@ -47,8 +47,12 @@ class Base(unittest.TestCase):
         return json.loads(f.read_text(encoding="utf-8")) if f.is_file() else {}
 
 
+# client sans mandataire : une variable http_proxy de la machine ne détourne jamais une requête vers 127.0.0.1
+CLIENT = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+
+
 class Serveur(Base):
-    """Le pont servi sur 127.0.0.1, port libre ; le client est urllib (rien ne sort de la machine)."""
+    """Le pont servi sur 127.0.0.1, port libre ; le client est urllib sans mandataire (rien ne sort de la machine)."""
 
     def demarrer(self, pont):
         serveur = P.creer_serveur(pont, port=0)
@@ -61,14 +65,14 @@ class Serveur(Base):
         return serveur
 
     def lot(self, n=None):
-        with urllib.request.urlopen(self.base + "/lot" + (f"?n={n}" if n else "")) as r:
+        with CLIENT.open(self.base + "/lot" + (f"?n={n}" if n else "")) as r:
             return json.loads(r.read().decode("utf-8"))
 
-    def envoyer(self, donnees):
+    def envoyer(self, donnees, origine=None):
+        entetes = {"Content-Type": "application/json", **({"Origin": origine} if origine else {})}
         requete = urllib.request.Request(self.base + "/resultat", data=donnees if isinstance(donnees, bytes)
-                                         else json.dumps(donnees).encode("utf-8"),
-                                         headers={"Content-Type": "application/json"}, method="POST")
-        with urllib.request.urlopen(requete) as r:
+                                         else json.dumps(donnees).encode("utf-8"), headers=entetes, method="POST")
+        with CLIENT.open(requete) as r:
             return json.loads(r.read().decode("utf-8"))
 
 
@@ -119,17 +123,17 @@ class TestLots(Serveur):
     def test_etat(self):
         self.ecrire("de", [DEMO, "Contact"])
         self.demarrer(P.Pont("de", self.langues))
-        with urllib.request.urlopen(self.base + "/etat") as r:
-            self.assertEqual(json.loads(r.read().decode("utf-8")), {"total": 2, "faits": 0})
+        with CLIENT.open(self.base + "/etat") as r:
+            self.assertEqual(json.loads(r.read().decode("utf-8")), {"total": 2, "faits": 0, "ecartes": 0})
         self.envoyer([{"k": cle(DEMO), "traduction": "Demo anfragen"}])
-        with urllib.request.urlopen(self.base + "/etat") as r:
-            self.assertEqual(json.loads(r.read().decode("utf-8")), {"total": 2, "faits": 1})
+        with CLIENT.open(self.base + "/etat") as r:
+            self.assertEqual(json.loads(r.read().decode("utf-8")), {"total": 2, "faits": 1, "ecartes": 0})
 
     def test_chemin_inconnu_donne_404(self):
         self.ecrire("de", [DEMO])
         self.demarrer(P.Pont("de", self.langues))
         with self.assertRaises(urllib.error.HTTPError) as c:
-            urllib.request.urlopen(self.base + "/autre")
+            CLIENT.open(self.base + "/autre")
         self.assertEqual(c.exception.code, 404)
 
     def test_le_pont_ne_sert_que_la_boucle_locale(self):
@@ -179,6 +183,25 @@ class TestResultats(Serveur):
         self.assertNotIn(TIRET_CADRATIN, fichier.read_text(encoding="utf-8"))
         self.assertEqual(self.brut()[cle(DEMO)], f"Demo {TIRET_CADRATIN} anfragen")  # relu tel quel par json
 
+    def test_origine_etrangere_refusee(self):
+        """Vague finale, point 6 : un en-tête Origin présent et autre que https://corrext.com est refusé (403) ; sans
+        en-tête (client local) ou depuis Corrext, le résultat est reçu."""
+        self.ecrire("de", [DEMO, "Contact"])
+        self.demarrer(P.Pont("de", self.langues))
+        with self.assertRaises(urllib.error.HTTPError) as c:
+            self.envoyer([{"k": cle(DEMO), "traduction": "Demo anfragen"}], origine="https://exemple.org")
+        self.assertEqual(c.exception.code, 403)
+        self.assertEqual(self.brut(), {})
+        self.assertEqual(self.envoyer([{"k": cle(DEMO), "traduction": "Demo anfragen"}], origine=P.ORIGINE), {"ok": 1})
+        self.assertEqual(self.envoyer([{"k": cle("Contact"), "traduction": "Kontakt"}]), {"ok": 2})
+
+    def test_cle_qui_n_est_pas_une_chaine_ignoree(self):
+        self.ecrire("de", [DEMO])
+        self.demarrer(P.Pont("de", self.langues))
+        rep = self.envoyer([{"k": [cle(DEMO)], "traduction": "x"}, {"k": {"a": 1}, "traduction": "y"}, {"k": 5, "traduction": "z"},
+                            {"k": cle(DEMO), "traduction": "Demo anfragen"}])
+        self.assertEqual(rep, {"ok": 1})
+
     def test_corps_illisible_refuse_sans_rien_ecrire(self):
         self.ecrire("de", [DEMO])
         self.demarrer(P.Pont("de", self.langues))
@@ -197,12 +220,66 @@ class TestResultats(Serveur):
                 self.assertNotIn("secret-123", f.read_text(encoding="utf-8"))
 
 
+class TestLimites(Base):
+    """Vague finale, point 6 : limite d'essais par clé, texte trop long, fraîcheur de a_traduire.json."""
+
+    def test_texte_vide_trois_fois_puis_ecarte(self):
+        self.ecrire("de", [DEMO])
+        pont = P.Pont("de", self.langues)
+        for _ in range(P.ESSAIS_MAX):
+            self.assertEqual([x["k"] for x in pont.lot()["lot"]], [cle(DEMO)])
+            pont.resultat([{"k": cle(DEMO), "traduction": "  "}])  # LexMachina rend un texte vide : resservi aussitôt
+        self.assertEqual(pont.lot()["lot"], [])
+        self.assertEqual(pont.etat(), {"total": 1, "faits": 0, "ecartes": 1})
+        [e] = json.loads((self.langues / "de" / "brut" / P.ECARTES).read_text(encoding="utf-8"))
+        self.assertEqual((e["cle"], e["fr"]), (cle(DEMO), DEMO))
+        self.assertIn(str(P.ESSAIS_MAX), e["raison"])
+
+    def test_texte_trop_long_ecarte_d_emblee(self):
+        long = "Mot " * 2600  # plus de 10 000 caractères
+        self.ecrire("de", [DEMO, long])
+        pont = P.Pont("de", self.langues)
+        self.assertEqual([x["k"] for x in pont.lot()["lot"]], [cle(DEMO)])
+        self.assertEqual(pont.etat()["ecartes"], 1)
+        [e] = json.loads((self.langues / "de" / "brut" / P.ECARTES).read_text(encoding="utf-8"))
+        self.assertEqual(e["cle"], cle(long))
+        self.assertIn("10000", e["raison"])
+
+    def test_fraicheur_de_la_liste(self):
+        import os
+        self.ecrire("de", [DEMO])
+        sortie = self.langues / "docs"
+        sortie.mkdir()
+        P.verifier_fraicheur("de", self.langues, sortie)  # aucune exception : rien de plus récent
+        liste = self.langues / "de" / P.A_TRADUIRE
+        t = liste.stat().st_mtime
+        table = Table("de", self.langues)
+        table.poser("Contact", "Kontakt", "mt", "LexMachina")
+        table.enregistrer()
+        os.utime(self.langues / "de" / "segments.json", (t + 10, t + 10))
+        with self.assertRaises(ValueError) as e:
+            P.verifier_fraicheur("de", self.langues, sortie)
+        self.assertIn("segments.json", str(e.exception))
+        os.utime(self.langues / "de" / "segments.json", (t - 10, t - 10))
+        (sortie / "index.html").write_text("x", encoding="utf-8")
+        os.utime(sortie / "index.html", (t + 10, t + 10))
+        with self.assertRaises(ValueError) as e:
+            P.verifier_fraicheur("de", self.langues, sortie)
+        self.assertIn("dernier build", str(e.exception))
+
+    def test_pages_relevees_a_l_instant_sans_liste(self):
+        """--pages : les textes viennent de l'analyse des pages, pas de a_traduire.json (absent ici)."""
+        (self.langues / "de").mkdir(parents=True)
+        pont = P.Pont("de", self.langues, textes={cle(DEMO): DEMO})
+        self.assertEqual(pont.lot()["lot"], [{"k": cle(DEMO), "texte": DEMO}])
+
+
 class TestPortee(Base):
     def test_pages_limite_les_textes_servis(self):
         self.ecrire("de", [DEMO, "Contact", "Notre équipe"])
         pont = P.Pont("de", self.langues, cles={cle(DEMO), cle("Contact")})
         self.assertEqual({x["k"] for x in pont.lot()["lot"]}, {cle(DEMO), cle("Contact")})
-        self.assertEqual(pont.etat(), {"total": 2, "faits": 0})
+        self.assertEqual(pont.etat(), {"total": 2, "faits": 0, "ecartes": 0})
 
     def test_un_texte_deja_traduit_dans_la_table_n_est_pas_renvoye(self):
         self.ecrire("de", [DEMO, "Contact"])

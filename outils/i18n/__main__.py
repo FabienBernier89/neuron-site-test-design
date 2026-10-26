@@ -8,6 +8,7 @@
     python3 -m outils.i18n glossaire --langue de [--arbitrages]
     python3 -m outils.i18n exporter de [--pages accueil contact/] [--statuts mt adapte v1 invariant] [--sortie DOSSIER]
     python3 -m outils.i18n importer de fichier.xlf --relecteur "Prénom Nom" [--sortie DOSSIER] [--sans-etat]
+    python3 -m outils.i18n preparer de [--pages accueil corrext/plugin-word/] [--sortie DOSSIER]
     python3 -m outils.i18n fusionner de propositions.json [--simuler]
 
 etat : état de la traduction d'une langue, page par page (outils/i18n/traduire.py, etat), en aperçu par défaut ou selon
@@ -46,6 +47,12 @@ exporter : fichiers pour les traducteurs experts (outils/i18n/echanges.py, tâch
 v1 (neur-on-<langue>-v1.tmx) et glossaire CSV (neur-on-<langue>-glossaire.csv). Dossier par défaut :
 Bibliotheque-Claude/07-Ressources-traduction/Neuron/site-v2/<date>-<langue>/ ; un dossier du dépôt est refusé. Produit des
 fichiers, n'envoie rien.
+
+preparer : lot d'adaptation d'une langue (Ruling 32, echanges.preparer_lot) : lot-<langue>.json, liste de {cle, fr, mt,
+contexte_v1, glossaire} des textes à traduire (a_traduire.json, ou les pages données par --pages, relevées à l'instant) qui
+ont une sortie brute de LexMachina dans la table, avec leur contexte (contextes.json) et les lignes utiles du glossaire de
+projet. Le fichier va hors du dépôt public (verifier_hors_depot ; par défaut <dossier d'export du jour>/adaptation/) ; les
+textes sans sortie brute sont signalés (à passer d'abord par le pont).
 
 fusionner : fusionne dans la table de la langue les propositions d'un agent d'adaptation ou de relecture croisée (fichier JSON
 [{"cle", "trad", "note"}], echanges.fusionner, tâche 6.2) au statut adapte (outils/i18n/BRIEF-ADAPTATION.md). Refusés, avec leur
@@ -256,6 +263,40 @@ def afficher_fusion(langue, rapport, fichier):
     return "\n".join(lignes)
 
 
+def commande_preparer(args, build):
+    """preparer : lot d'adaptation (FR, sortie brute, contexte V1, glossaire) hors du dépôt public."""
+    from outils.i18n import pont_corrext
+    table = Table(args.langue, build.DOSSIER_LANGUES)
+    dossier = Path(args.sortie) if args.sortie else echanges.dossier_export(args.langue) / "adaptation"
+    fichier = dossier / f"lot-{args.langue}.json"
+    langue = build.DOSSIER_LANGUES / args.langue
+    try:
+        echanges.verifier_hors_depot(fichier)
+        a_traduire = json.loads((langue / "a_traduire.json").read_text(encoding="utf-8")) \
+            if (langue / "a_traduire.json").is_file() else {}
+        if not a_traduire and not args.pages:
+            raise ValueError(f"{langue / 'a_traduire.json'} introuvable ou vide : lancer d'abord « etat {args.langue} »")
+        contextes = json.loads((langue / traduire.CONTEXTES).read_text(encoding="utf-8")) \
+            if (langue / traduire.CONTEXTES).is_file() else {}
+        textes = pont_corrext.textes_des_pages(args.langue, args.pages, table) if args.pages else None
+        glossaire = {fr: l for fr, l in chnell.charger_glossaire().items() if args.langue in l}
+        lot, sans_mt = echanges.preparer_lot(table, a_traduire, contextes, glossaire, textes)
+    except ValueError as e:
+        print(f"Lot non préparé : {e}", file=sys.stderr)
+        return 1
+    dossier.mkdir(parents=True, exist_ok=True)
+    fichier.write_text(json.dumps(lot, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"Lot d'adaptation {args.langue} : {len(lot)} segment(s), dont {sum(1 for x in lot if x['contexte_v1'])} avec un "
+          f"contexte et {sum(1 for x in lot if x['glossaire'])} avec des termes du glossaire : {fichier}")
+    if not glossaire:
+        print("Glossaire vide pour cette langue : aucune ligne de glossaire dans le lot (commande glossaire, après la "
+              "session CHnell)")
+    if sans_mt:
+        print(f"{len(sans_mt)} texte(s) sans sortie brute de LexMachina, hors du lot (passer d'abord par le pont) : "
+              + ", ".join(sorted(sans_mt)[:10]) + (" ..." if len(sans_mt) > 10 else ""))
+    return 0
+
+
 def commande_fusionner(args, build):
     """fusionner : propositions d'un agent dans la table, au statut adapte."""
     table = Table(args.langue, build.DOSSIER_LANGUES)
@@ -427,6 +468,10 @@ def main(argv=None):
                    help="tout segment valide vaut confirmation, sans lire state ni approved (outil qui n'écrit pas les états)")
     p.add_argument("--export", help="XLIFF d'origine, pour lister ses unités absentes du fichier rendu "
                                     "(par défaut neur-on-<langue>.xlf à côté du fichier rendu, s'il existe)")
+    p = sous.add_parser("preparer", help="lot d'adaptation d'une langue (FR, sortie brute, contexte V1, glossaire)")
+    p.add_argument("langue", choices=LANGUES)
+    p.add_argument("--pages", nargs="+", help="ne prendre que les textes de ces pages (accueil, contact/, ...)")
+    p.add_argument("--sortie", help="dossier du lot, hors du dépôt (<dossier d'export du jour>/adaptation/ par défaut)")
     p = sous.add_parser("fusionner", help="fusionner les propositions d'un agent d'adaptation (JSON [{cle, trad, note}])")
     p.add_argument("langue", choices=LANGUES)
     p.add_argument("fichier", help="propositions.json ou relecture.json")
@@ -442,6 +487,8 @@ def main(argv=None):
         return commande_importer(args, build)
     if args.commande == "fusionner":
         return commande_fusionner(args, build)
+    if args.commande == "preparer":
+        return commande_preparer(args, build)
     if args.commande == "glossaire":
         fichier_v1 = build.NEURON / "src/i18n" / f"termes-{args.langue}.json"
         if not fichier_v1.is_file():
