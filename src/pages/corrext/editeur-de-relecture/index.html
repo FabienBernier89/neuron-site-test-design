@@ -610,6 +610,10 @@ styles: skin-editeur-de-relecture.css
   /* Langue d'un passage (WCAG 3.1.2) : posée si elle diffère de celle de la page */
   var PL=(document.documentElement.getAttribute('lang')||'fr').slice(0,2);
   function lg(c){return c===PL?'':' lang="'+c+'"';}
+  /* Texte échappé dans sa langue : enveloppé d'un <span lang> s'il n'est pas dans celle de la page */
+  function enLangue(x,c){return c===PL?esc(x):'<span lang="'+c+'">'+esc(x)+'</span>';}
+  /* Gabarit de la page en HTML : texte échappé, variables remplacées par du HTML déjà construit */
+  function th(k,v){return esc(TX[k]||'').replace(/\{(\w+)\}/g,function(m,n){return v&&n in v?v[n]:m;});}
   function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
   function norm(s){return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
   var liveEl=$('cxeLive'),lt;
@@ -745,7 +749,8 @@ styles: skin-editeur-de-relecture.css
     if(v){hit=side==='src'?(v.indexOf('moratoire')>=0||v.indexOf('interet')>=0):(v.indexOf('verzug')>=0);}
     var h='<p class="cxe-h">Translation memories</p>'+(hit?block(LK.tm):'<p class="cxe-nr">No result</p>');
     h+='<p class="cxe-h">CHnell</p>'+(hit?block(LK.ch):'<p class="cxe-nr">No result</p>');
-    if(!hit&&v){h+='<p class="cx-note">'+esc(t('recherche_essai',{source:R.source,cible:R.cible}))+'</p>';}
+    /* termes à taper dans leur langue : source française, cible allemande (WCAG 3.1.2) */
+    if(!hit&&v){h+='<p class="cx-note">'+th('recherche_essai',{source:enLangue(R.source,'fr'),cible:enLangue(R.cible,'de')})+'</p>';}
     lk.innerHTML=h;
     if(announce){say(hit?t('recherche_trouvee'):t('recherche_vide'));}
   }
