@@ -29,7 +29,7 @@ from outils.i18n.segments import VARIABLE, litteraux_js  # noqa: E402
 DOSSIER = Path(__file__).resolve().parent / "demos"
 OUTILS = {"corrext/chnell/": "chnell", "corrext/editeur-de-relecture/": "editeur-de-relecture",
           "corrext/gestion-de-projet/": "gestion-de-projet"}
-# sha256 du script de la page V1 (contenu de la balise <script>, tel que generique.scripts_demo le lit)
+# 16 premiers caractères du sha256 de « <script>…</script>\n », script de la page V1 tel que generique.scripts_demo le lit
 EMPREINTES_V1 = {"corrext/chnell/": "67bea932f56ef295",
                  "corrext/editeur-de-relecture/": "3bd60cdb35a03d6b",
                  "corrext/gestion-de-projet/": "5eacc8f31f257f5e"}

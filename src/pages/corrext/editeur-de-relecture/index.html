@@ -737,7 +737,7 @@ styles: skin-editeur-de-relecture.css
   function mark(text,rx){return esc(text).replace(rx,function(x){return '<mark>'+x+'</mark>';});}
   function block(list){
     return '<div class="cxe-res"><div class="cxe-rh"><span>Source</span><span>Target</span></div>'+list.map(function(r){
-      return '<div class="cxe-rr"><p'+lg('fr')+'>'+mark(r.s,RX.src)+'</p><p lang="de">'+mark(r.t,RX.tgt)+'</p><p class="doc">'+esc(r.d)+'</p></div>';
+      return '<div class="cxe-rr"><p '+lg('fr').trim()+'>'+mark(r.s,RX.src)+'</p><p lang="de">'+mark(r.t,RX.tgt)+'</p><p class="doc">'+esc(r.d)+'</p></div>';
     }).join('')+'</div>';
   }
   function lookup(announce){
