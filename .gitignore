@@ -7,3 +7,5 @@ SUJETS-GUIDES.md
 .claude/
 # liste des textes à traduire, régénérée par python3 -m outils.i18n etat <langue>
 src/langues/*/a_traduire.json
+# sorties brutes de LexMachina et segments à revoir, fichiers de travail du pont (outils/i18n/pont_corrext.py)
+src/langues/*/brut/
