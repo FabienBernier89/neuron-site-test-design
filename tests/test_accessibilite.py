@@ -249,5 +249,64 @@ class TestLanguesAnnoncesOnglets(Base):
                     self.assertIn(f'id="{nom.group(1)}"', h, p)
 
 
+class TestEcransAnglais(Base):
+    """Vague finale, point 3 : les textes anglais des écrans de l'application (zones data-ui) et les sorties de démo
+    anglaises portent lang="en" : hors traduction, en anglais dans toutes les langues (comme le Ruling 26 pour CHnell)."""
+    # relevé du 2026-10-26 : textes d'écran anglais sans traduction, dont les 28 des deux pages pilotes
+    ANGLAIS = ("powered by Neur.on", "Detect language", "Detected language (French)", "Detected language (English)",
+               "Translation target language", "Upload your file(s)", "Generating alternatives…", "Corrext editor",
+               "AI Assistant", "Matches", "Sync", "Live search", "Search", "Source", "Target", "Translation memories",
+               "From this project's TM", "Apply", "Reset", "Settings", "Find the company", "Select the certification level",
+               "Choose the level required by the recipient of the translation.", "Standard Corrext Certification",
+               "Notarized Certification", "Your order", "Company", "Target language", "Certification level", "Home", "AM",
+               "MT", "TM")
+    MOTIFS = (r"\d[\d+]* results", r"Click to upload", r"The debtor in default", r"The company must deduct",
+              r"A debtor who is in default", r"\d+(?:\.\d+)? [KM]B · ")
+
+    def textes_d_ecran(self, pages, sans_traduction=False):
+        """Textes d'écran à traduire des pages (morceaux entre marqueurs) ; sans_traduction : seulement ceux que la table
+        allemande ne traduit pas (les écrans anglais que la V1 gardait en anglais y sont, statut v1, identiques)."""
+        from outils.i18n import segments as S, traduire as T
+        from outils.i18n.table import Table
+        table = Table("de")
+        textes = {}
+        for p in pages:
+            for u in S.extraire_page(self.pages[p]):
+                if sans_traduction and (table.chercher(u["texte"], p) is not None or T._invariant(u["texte"], "de")):
+                    continue
+                if u["ui"] and not u["lang_fr"]:
+                    for morceau in re.split(r"\{/?\d+\}", u["texte"]):
+                        if morceau.strip():
+                            textes.setdefault(" ".join(morceau.split()), set()).add(p)
+        return textes
+
+    def test_aucun_texte_d_ecran_anglais_a_traduire(self):
+        for nom, pages, absents in (("pages pilotes", ("", "corrext/plugin-word/"), False), ("site", build.PAGES, True)):
+            textes = self.textes_d_ecran(pages, absents)
+            restes = sorted(t for t in textes if t in self.ANGLAIS or any(re.search(m, t) for m in self.MOTIFS))
+            self.assertEqual(restes, [], nom)
+
+    def test_ecrans_francais_toujours_traduits(self):
+        """Les écrans en français (parcours de devis, onglets) restent des textes à traduire."""
+        textes = self.textes_d_ecran(build.PAGES)
+        for francais in ("Créer un projet", "Relecture interne", "Projets", "Terminologie"):
+            self.assertIn(francais, textes)
+
+    def test_poses_sur_les_zones(self):
+        from outils.post import y_accessibilite as Y
+        h = ('<main id="main"><div data-ui><div class="cr-top"><span>Home</span></div>'
+             '<p class="cr-out">The debtor in default shall owe interest.</p><p class="cr-out">Le débiteur doit des intérêts.</p>'
+             '<span class="cr-lang lk-l1">German</span><span class="cr-lang">Français</span><span>AI Assistant</span>'
+             '<b class="wd-q">Verzugszins</b><p lang="de">Zins</p><p class="ap-h"><b>POST</b> /v1/translate</p></div>'
+             '<p class="cr-out">The text of the page, outside any screen.</p></main>')
+        sortie = Y.langues_ecrans(h)
+        for attendu in ('<div class="cr-top" lang="en">', '<p class="cr-out" lang="en">The debtor',
+                        '<p class="cr-out">Le débiteur', '<span class="cr-lang lk-l1" lang="en">German',
+                        '<span class="cr-lang">Français', '<span lang="en">AI Assistant', '<b class="wd-q" lang="de">',
+                        '<p class="ap-h" translate="no">', '</div><p class="cr-out">The text'):
+            self.assertIn(attendu, sortie)
+        self.assertEqual(Y.langues_ecrans(sortie), sortie)  # idempotent
+
+
 if __name__ == "__main__":
     unittest.main()

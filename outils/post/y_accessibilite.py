@@ -14,6 +14,9 @@ après les post-traitements qui posent les blocs concernés (cartes .fx-g de fon
   Data Set: Neur.on ») translate="no" ; les sources françaises des écrans de démo et les réécritures Rephrasing (françaises, comme dans la V1,
   où elles s'affichaient en français dans chaque langue) portent lang="fr" (Ruling 14). Un passage lang="fr" explicite
   n'est jamais traduit ; il ne change rien à la page française.
+- Écrans de l'application reproduits (zones data-ui, vague finale, point 3) : les textes de l'interface en anglais
+  (barres, menus, panneau de Word, commande d'extraits) et les sorties de démo anglaises portent lang="en" : en anglais
+  dans toutes les langues du site, comme dans l'application et dans la V1, hors traduction (langues_ecrans).
 
 Aucun texte affiché n'est ajouté ici. Idempotent : repasser une page déjà traitée ne la change pas."""
 import html as H
@@ -200,6 +203,97 @@ def langues_interface(html):
     return re.sub(r'(<div class="cr-hint"><div class="cr-ill"[^>]*>(?:[^<]|</?mark>)*</div>)<div>', r'\1<div lang="en">', html)
 
 
+# Écrans de l'application reproduits (zones data-ui) : textes de l'interface, en anglais dans l'application et donc dans
+# toutes les langues du site, comme les colonnes CHnell (Ruling 26) et comme la V1, qui les gardait en anglais. Relevé du
+# 2026-10-26 (vague finale, point 3) : 96 textes d'écran sans traduction sur le site, dont 28 sur les deux pages pilotes ;
+# les anglais sont repérés par leur classe (zone toujours anglaise), par leur texte exact (libellé dont la classe sert aussi
+# à des écrans en français) ou, pour les sorties de démo, par leur langue (_anglais). Les écrans en français (parcours
+# de devis, ruban de Word, onglets Projets) gardent leur texte, traduit comme le reste.
+CLASSES_EN = frozenset((
+    "cr-ch-h", "sp-pw", "sp-top", "sp-bar", "sp-lkb", "sp-cnt", "sp-dom", "lk-c",        # CHnell et Corrext du schéma
+    "cr-top", "cr-src", "cr-set", "cr-tgtsel", "cr-drop", "cr-file", "cr-alt-ph",        # Corrext : barres et menus
+    "vw-ord", "vw-niv-c", "vw-tag",                                                       # commande d'extraits du registre
+    "wd-ph", "wd-live", "wd-go", "wd-seg", "wd-rh", "wd-ml", "wd-ma", "wd-o"))            # panneau Corrext de Word
+TEXTES_EN = re.compile("|".join((
+    r"powered by Neur\.on", r"Home", r"Upload your file\(s\)", r"Translation target language", r"AI Assistant", r"Matches", r"Sync",
+    r"Find the company", r"Select the certification level", r"Choose the delivery method", r"Set the delivery timeline",
+    r"Choose the level required by the recipient of the translation\.")))
+LANGUES_EN = {"German": "en", "French": "en", "English": "en", "Italian": "en"}  # noms anglais des langues de l'interface
+CLASSES_LANGUE = frozenset(("cr-lang", "sp-lg"))  # nom d'une langue : anglais dans l'interface, sinon laissé (« Français »)
+SORTIES = frozenset(("cr-out", "cr-alt", "cr-txt", "sp-out", "sp-txt"))  # sorties et sources de démo : selon leur langue
+CLASSES_CODE = frozenset(("ap-h", "ap-req", "ap-st"))  # requête et réponse de l'exemple d'API : du code, translate="no"
+_MOTS_EN = {"the", "of", "to", "in", "and", "a", "an", "shall", "be", "is", "with", "for", "by", "at", "from", "it", "its",
+            "must", "when", "has", "been", "per", "without", "who", "which", "on"}
+_BALISE = re.compile(r"<(/?)([a-zA-Z][a-zA-Z0-9-]*)\b([^>]*)>")
+_VIDES = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr",
+          "path", "circle", "rect", "line", "polyline", "polygon", "ellipse", "use", "stop"}
+
+
+def _anglais(texte):
+    """Texte anglais d'une sortie de démo : au moins deux mots outils anglais et plus que de mots outils français
+    (« The debtor in default shall owe... », jamais « Le débiteur en demeure doit... »)."""
+    mots = re.findall(r"[^\W\d_]+", H.unescape(re.sub(r"<[^>]+>", " ", texte)).lower())
+    en, fr = sum(m in _MOTS_EN for m in mots), sum(m in _MOTS_FR for m in mots)
+    return en >= 2 and en > fr
+
+
+def _elements_ecran(html):
+    """Éléments à l'intérieur d'une zone data-ui : [(début de la balise ouvrante, fin de celle-ci, début de la fermante,
+    attributs)], dans l'ordre du document."""
+    pile, sortie = [], []
+    for m in _BALISE.finditer(html):
+        fermant, nom, attrs = m.group(1), m.group(2).lower(), m.group(3)
+        if nom in _VIDES or attrs.rstrip().endswith("/"):
+            continue
+        if not fermant:
+            ui = (pile[-1][3] if pile else False) or re.search(r"\sdata-ui(?:[\s=>]|$)", attrs) is not None
+            pile.append((nom, m.start(), m.end(), ui, attrs, pile[-1][3] if pile else False))
+            continue
+        for i in range(len(pile) - 1, -1, -1):
+            if pile[i][0] == nom:
+                _, debut, fin_ouvrante, _, attributs, dans_ui = pile[i]
+                del pile[i:]
+                if dans_ui:
+                    sortie.append((debut, fin_ouvrante, m.start(), attributs))
+                break
+    return sorted(sortie)
+
+
+def langues_ecrans(html):
+    """lang="en" sur les textes anglais des écrans de l'application (zones data-ui) : CLASSES_EN, TEXTES_EN, noms anglais
+    des langues (CLASSES_LANGUE), sorties de démo anglaises (SORTIES, _anglais). Le terme cherché dans le panneau Word
+    (wd-q) prend la langue des résultats qui le suivent ; la requête et la réponse de l'exemple d'API (CLASSES_CODE), du
+    code, prennent translate="no". Un élément qui porte déjà lang ou translate est laissé ; ses descendants aussi."""
+    poses, couverts = [], []
+    for debut, fin_ouvrante, fermante, attrs in _elements_ecran(html):
+        if any(a <= debut < b for a, b in couverts):
+            continue
+        if re.search(r"\s(?:lang|translate)=", attrs):
+            couverts.append((debut, fermante))
+            continue
+        classes = set((re.search(r'\sclass="([^"]*)"', attrs) or [None, ""])[1].split())
+        texte = " ".join(H.unescape(re.sub(r"<[^>]+>", " ", html[fin_ouvrante:fermante])).split())
+        code = None
+        if classes & CLASSES_EN or (texte and TEXTES_EN.fullmatch(texte)):
+            code = "en"
+        elif classes & CLASSES_LANGUE:
+            code = LANGUES_EN.get(texte)
+        elif classes & SORTIES and _anglais(texte):
+            code = "en"
+        elif classes & CLASSES_CODE:
+            code = "code"
+        elif "wd-q" in classes:
+            suite = re.search(r'\slang="(de|it|en)"', html[fermante:fermante + 3000])
+            code = suite.group(1) if suite else None
+        if code:
+            poses.append((fin_ouvrante, code))
+            couverts.append((debut, fermante))
+    for fin_ouvrante, code in sorted(poses, reverse=True):
+        attribut = ' translate="no"' if code == "code" else f' lang="{code}"'
+        html = html[:fin_ouvrante - 1] + attribut + html[fin_ouvrante - 1:]
+    return html
+
+
 def traiter(html, page):
     # résultats CHnell (exemple de loi du glossaire compris) : le français y reste du français sur les pages traduites
     # (glossaire, allemand : l'exemple est allemand et français ; italien et anglais : le français est remplacé par la
@@ -216,4 +310,5 @@ def traiter(html, page):
     corps = sources_francaises(corps)
     corps = langues_tableaux(corps)
     corps = langues_interface(corps)
+    corps = langues_ecrans(corps)
     return tete + corps

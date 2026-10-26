@@ -325,9 +325,11 @@ class TestDocuments(unittest.TestCase):
                 # décisions et rulings
                 'lang="fr"', "Ruling 14", "Fedlex", "Ruling 22", "V11", "AI-powered translation software for legal, tax and finance",
                 "guide-<langue>.md",
-                # vague finale, points 7 et 10
+                # vague finale, points 7 et 10 (lot, réseau, dépôt public)
                 "aucun accès réseau", "Aucun outil de traduction tiers", "restent hors du dépôt public",
-                "preparer <langue>", "contexte_v1"):
+                "preparer <langue>", "contexte_v1",
+                # vague finale, point 3 : écrans de l'application en anglais
+                'lang="en"', "Écrans de l'application en anglais"):
             self.assertIn(attendu, t, attendu)
 
     def test_brief_sans_tiret_long_ni_reference_aux_pages_v1(self):
