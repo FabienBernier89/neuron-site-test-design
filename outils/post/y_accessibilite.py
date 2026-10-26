@@ -212,12 +212,16 @@ def langues_interface(html):
 CLASSES_EN = frozenset((
     "cr-ch-h", "sp-pw", "sp-top", "sp-bar", "sp-lkb", "sp-cnt", "sp-dom", "lk-c",        # CHnell et Corrext du schéma
     "cr-top", "cr-src", "cr-set", "cr-tgtsel", "cr-drop", "cr-file", "cr-alt-ph",        # Corrext : barres et menus
-    "vw-ord", "vw-niv-c", "vw-tag",                                                       # commande d'extraits du registre
+    "vw-ord", "vw-niv-c",                                                                 # commande d'extraits du registre
     "wd-ph", "wd-live", "wd-go", "wd-seg", "wd-rh", "wd-ml", "wd-ma", "wd-o"))            # panneau Corrext de Word
 TEXTES_EN = re.compile("|".join((
-    r"powered by Neur\.on", r"Home", r"Upload your file\(s\)", r"Translation target language", r"AI Assistant", r"Matches", r"Sync",
+    r"powered by Neur\.on", r"Home", r"Upload your file\(s\)", r"Translation target language", r"Selected",
     r"Find the company", r"Select the certification level", r"Choose the delivery method", r"Set the delivery timeline",
     r"Choose the level required by the recipient of the translation\.")))
+# onglets du panneau Corrext de Word : seulement dans une barre d'onglets cr-tl (« Sync » est aussi le bouton de l'éditeur,
+# dont la V1 traduit l'unité entière avec son état, « Sync, 3 éléments en attente » : Ruling 35)
+ONGLETS_EN = re.compile(r"AI Assistant|Matches|Sync")
+# « vw-tag » n'est pas une classe anglaise : elle porte aussi l'étiquette française « Externe » (Ruling 35)
 LANGUES_EN = {"German": "en", "French": "en", "English": "en", "Italian": "en"}  # noms anglais des langues de l'interface
 CLASSES_LANGUE = frozenset(("cr-lang", "sp-lg"))  # nom d'une langue : anglais dans l'interface, sinon laissé (« Français »)
 SORTIES = frozenset(("cr-out", "cr-alt", "cr-txt", "sp-out", "sp-txt"))  # sorties et sources de démo : selon leur langue
@@ -237,24 +241,30 @@ def _anglais(texte):
     return en >= 2 and en > fr
 
 
+def _classes(attrs):
+    return frozenset((re.search(r'\sclass="([^"]*)"', attrs) or [None, ""])[1].split())
+
+
 def _elements_ecran(html):
     """Éléments à l'intérieur d'une zone data-ui : [(début de la balise ouvrante, fin de celle-ci, début de la fermante,
-    attributs)], dans l'ordre du document."""
+    attributs, classes des ancêtres)], dans l'ordre du document."""
     pile, sortie = [], []
     for m in _BALISE.finditer(html):
         fermant, nom, attrs = m.group(1), m.group(2).lower(), m.group(3)
         if nom in _VIDES or attrs.rstrip().endswith("/"):
             continue
         if not fermant:
-            ui = (pile[-1][3] if pile else False) or re.search(r"\sdata-ui(?:[\s=>]|$)", attrs) is not None
-            pile.append((nom, m.start(), m.end(), ui, attrs, pile[-1][3] if pile else False))
+            parent = pile[-1] if pile else None
+            ui = (parent[3] if parent else False) or re.search(r"\sdata-ui(?:[\s=>]|$)", attrs) is not None
+            ancetres = parent[6] | _classes(parent[4]) if parent else frozenset()
+            pile.append((nom, m.start(), m.end(), ui, attrs, parent[3] if parent else False, ancetres))
             continue
         for i in range(len(pile) - 1, -1, -1):
             if pile[i][0] == nom:
-                _, debut, fin_ouvrante, _, attributs, dans_ui = pile[i]
+                _, debut, fin_ouvrante, _, attributs, dans_ui, ancetres = pile[i]
                 del pile[i:]
                 if dans_ui:
-                    sortie.append((debut, fin_ouvrante, m.start(), attributs))
+                    sortie.append((debut, fin_ouvrante, m.start(), attributs, ancetres))
                 break
     return sorted(sortie)
 
@@ -265,16 +275,17 @@ def langues_ecrans(html):
     (wd-q) prend la langue des résultats qui le suivent ; la requête et la réponse de l'exemple d'API (CLASSES_CODE), du
     code, prennent translate="no". Un élément qui porte déjà lang ou translate est laissé ; ses descendants aussi."""
     poses, couverts = [], []
-    for debut, fin_ouvrante, fermante, attrs in _elements_ecran(html):
+    for debut, fin_ouvrante, fermante, attrs, ancetres in _elements_ecran(html):
         if any(a <= debut < b for a, b in couverts):
             continue
         if re.search(r"\s(?:lang|translate)=", attrs):
             couverts.append((debut, fermante))
             continue
-        classes = set((re.search(r'\sclass="([^"]*)"', attrs) or [None, ""])[1].split())
+        classes = _classes(attrs)
         texte = " ".join(H.unescape(re.sub(r"<[^>]+>", " ", html[fin_ouvrante:fermante])).split())
         code = None
-        if classes & CLASSES_EN or (texte and TEXTES_EN.fullmatch(texte)):
+        if classes & CLASSES_EN or (texte and TEXTES_EN.fullmatch(texte)) or \
+                ("cr-tl" in ancetres and ONGLETS_EN.fullmatch(texte)):
             code = "en"
         elif classes & CLASSES_LANGUE:
             code = LANGUES_EN.get(texte)

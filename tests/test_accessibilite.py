@@ -292,17 +292,52 @@ class TestEcransAnglais(Base):
         for francais in ("Créer un projet", "Relecture interne", "Projets", "Terminologie"):
             self.assertIn(francais, textes)
 
+    def test_aucune_traduction_v1_perdue(self):
+        """Garde-fou de la liste (Ruling 35) : chaque texte que langues_ecrans sort de la traduction (unité de la page
+        sans langues_ecrans, absente avec) n'a aucune traduction V1 (statut v1, par défaut ou par page, dans les trois
+        tables) différente du français : la V1 le gardait tel quel. Échoue en listant les fautifs."""
+        from unittest import mock
+        from outils.i18n import segments as S, traduire as T
+        from outils import post
+        from outils.i18n.table import LANGUES, Table, cle
+        # le module tel que le build l'applique (outils/post le charge lui-même)
+        Y = next(m for m in post.modules() if m.__name__.endswith(".y_accessibilite"))
+        avec = T.pages_assemblees("de", "apercu")
+        with mock.patch.object(Y, "langues_ecrans", lambda html: html):
+            sans = T.pages_assemblees("de", "apercu")
+        tables = [Table(l) for l in LANGUES]
+        fautifs = []
+        def morceaux(texte):
+            return {" ".join(m.split()) for m in re.split(r"\{/?\d+\}", texte) if m.strip()}
+        for page, html in sans.items():
+            restes = [u["texte"] for u in S.extraire_page(avec[page]) if not u["lang_fr"]]
+            gardes, morceaux_gardes = set(restes), set().union(*map(morceaux, restes))
+            for u in S.extraire_page(html):
+                if u["lang_fr"] or u["texte"] in gardes:
+                    continue
+                # l'unité entière, et ceux de ses morceaux entre marqueurs qui ne sont plus nulle part dans la page (un
+                # libellé seul que la V1 traduisait, sorti de la traduction)
+                for fr in {" ".join(u["texte"].split())} | (morceaux(u["texte"]) - morceaux_gardes):
+                    for t in tables:
+                        e = t.entrees.get(cle(fr))
+                        for v in ([e, *e["par_page"].values()] if e else []):
+                            if v.get("statut") == "v1" and v.get("trad") and " ".join(v["trad"].split()) != fr:
+                                fautifs.append((page or "accueil", t.langue, fr[:70], v["trad"][:50]))
+        self.assertEqual(sorted(set(fautifs)), [])
+
     def test_poses_sur_les_zones(self):
         from outils.post import y_accessibilite as Y
         h = ('<main id="main"><div data-ui><div class="cr-top"><span>Home</span></div>'
              '<p class="cr-out">The debtor in default shall owe interest.</p><p class="cr-out">Le débiteur doit des intérêts.</p>'
-             '<span class="cr-lang lk-l1">German</span><span class="cr-lang">Français</span><span>AI Assistant</span>'
-             '<b class="wd-q">Verzugszins</b><p lang="de">Zins</p><p class="ap-h"><b>POST</b> /v1/translate</p></div>'
+             '<span class="cr-lang lk-l1">German</span><span class="cr-lang">Français</span>'
+             '<div class="cr-tl"><span>AI Assistant</span></div><button><span class="l">Sync</span><span>, 3 en attente</span>'
+             '</button><em class="vw-tag">Externe</em><em class="vw-tag">Selected</em><b class="wd-q">Verzugszins</b><p lang="de">Zins</p><p class="ap-h"><b>POST</b> /v1/translate</p></div>'
              '<p class="cr-out">The text of the page, outside any screen.</p></main>')
         sortie = Y.langues_ecrans(h)
         for attendu in ('<div class="cr-top" lang="en">', '<p class="cr-out" lang="en">The debtor',
                         '<p class="cr-out">Le débiteur', '<span class="cr-lang lk-l1" lang="en">German',
                         '<span class="cr-lang">Français', '<span lang="en">AI Assistant', '<b class="wd-q" lang="de">',
+                        '<span class="l">Sync', '<em class="vw-tag">Externe', '<em class="vw-tag" lang="en">Selected',
                         '<p class="ap-h" translate="no">', '</div><p class="cr-out">The text'):
             self.assertIn(attendu, sortie)
         self.assertEqual(Y.langues_ecrans(sortie), sortie)  # idempotent
