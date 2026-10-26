@@ -286,7 +286,14 @@ REFORMULATIONS = {  # (texte V1, texte du guide du dépôt)
     "de": (("« Zusammenschluss » ou toute allusion au rapprochement.",
             "« Zusammenschluss » ou toute allusion à une opération de reprise."),),
     "en": (("« merger » au sens du rapprochement, ou toute allusion au rapprochement.",
-            "« merger » au sens d'une opération de reprise, ou toute allusion à une telle opération."),),
+            "« merger » au sens d'une opération de reprise, ou toute allusion à une telle opération."),
+           # vague finale, point 10 : le chemin d'un dossier de travail temporaire n'a rien à faire dans le dépôt public
+           ("Les originaux extraits sont dans le scratchpad de la session ce992fec : "
+            "`/private/tmp/claude-501/-Users-fabienbernier-Claude-project/ce992fec-3d03-4df9-a989-fe30aa564320/scratchpad/"
+            "blog-source/`. Ce dossier est **temporaire** : à archiver avant la tâche 13, hors du dépôt public (par exemple "
+            "dans `Bibliotheque-Claude/`).",
+            "Les originaux extraits ont été rassemblés hors du dépôt public, dans un dossier de travail temporaire de la V1 "
+            "(à archiver dans `Bibliotheque-Claude/`).")),
     "it": (("« fusione » au sens du rapprochement, ou toute allusion à celui-ci.",
             "« fusione » au sens d'une opération de reprise, ou toute allusion à celle-ci."),)}
 
@@ -317,7 +324,10 @@ class TestDocuments(unittest.TestCase):
                 "Rien d'inventé", "relu",
                 # décisions et rulings
                 'lang="fr"', "Ruling 14", "Fedlex", "Ruling 22", "V11", "AI-powered translation software for legal, tax and finance",
-                "guide-<langue>.md"):
+                "guide-<langue>.md",
+                # vague finale, points 7 et 10
+                "aucun accès réseau", "Aucun outil de traduction tiers", "restent hors du dépôt public",
+                "preparer <langue>", "contexte_v1"):
             self.assertIn(attendu, t, attendu)
 
     def test_brief_sans_tiret_long_ni_reference_aux_pages_v1(self):
@@ -344,6 +354,12 @@ class TestDocuments(unittest.TestCase):
         t = BRIEF.read_text(encoding="utf-8")
         for attendu in ("title", "62", "description", "160", "une idée par phrase", "calque"):
             self.assertIn(attendu, t, attendu)
+
+    def test_guides_sans_chemin_de_travail_temporaire(self):
+        for langue in ("de", "en", "it"):
+            t = (GUIDES / f"guide-{langue}.md").read_text(encoding="utf-8")
+            self.assertNotIn("/private/tmp", t, langue)
+            self.assertNotIn("scratchpad/blog-source", t, langue)
 
     def test_guides_sans_tiret_long(self):
         for langue in ("de", "en", "it"):

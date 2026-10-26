@@ -108,6 +108,13 @@ class TestReferencesLegales(Base):
         self.assertIsNotNone(self.trouver(r, "art. 104 al. 1 CO"))
         self.assertIsNotNone(self.trouver(r, "art. 37a LB"))
 
+    def test_reference_avec_chiffre_virgules_et_majuscule(self):
+        """Vague finale, point 14 : « ch. », virgules et « Art. » en début de phrase."""
+        r = self.candidats({"a/": page("Voir l'art. 6, al. 1, ch. 2 LB.", "Art. 24 CO : le principe.",
+                                       "Selon l'art. 3 al. 1 ch. 4 LB, rien.")})
+        for attendu in ("art. 6, al. 1, ch. 2 LB", "Art. 24 CO", "art. 3 al. 1 ch. 4 LB"):
+            self.assertIsNotNone(self.trouver(r, attendu), attendu)
+
     def test_reference_sous_balise_en_ligne(self):
         r = self.candidats({"a/": page("Selon l'art. 47 <abbr>LB</abbr>, le secret est protégé.")})
         self.assertIsNotNone(self.trouver(r, "art. 47 LB"))
@@ -230,6 +237,17 @@ class TestMarquesExclues(Base):
         r = self.candidats(self.deux("Cliquez sur Alternatives fiables."))
         self.assertNotIn("Alternatives fiables", {e["fr"] for e in r})  # libellé de l'application, casse exacte
 
+    def test_variante_partielle_d_un_libelle_protege_exclue(self):
+        """Vague finale, point 14 : « Highly sensitive » (marque « Highly sensitive content ») et « Double review »
+        (libellé « Double review & certified translation ») ne sont jamais candidats."""
+        r = self.candidats(self.deux("Activez Highly sensitive pour vos actes. Optez pour Double review ensuite."))
+        fr = {e["fr"].lower() for e in r}
+        self.assertNotIn("highly sensitive", fr)
+        self.assertNotIn("double review", fr)
+        self.assertTrue(TM._partie_protegee("Certified translation"))
+        self.assertFalse(TM._partie_protegee("review"))  # un mot seul : jamais une variante partielle
+        self.assertFalse(TM._partie_protegee("droit des sociétés"))
+
     def test_ngramme_ne_traverse_pas_une_marque(self):
         texte = "Le moteur LexMachina neuronal rapide."
         r = self.candidats(self.deux(texte))
@@ -299,6 +317,27 @@ class TestFichier(unittest.TestCase):
         self.assertEqual(c["priorites"], {1: 2, 2: 1, 3: 1})
         self.assertEqual(c["origines"], {"ngramme": 2, "segments-nouveaux": 1, "v1:termes-de": 2})
         self.assertEqual(c["total"], 4)
+
+
+class TestCommandeLexique(unittest.TestCase):
+    def test_table_vide_avertit(self):
+        """Vague finale, point 14 : lancer lexique sur une table vide le dit (tous les textes passeraient pour nouveaux)."""
+        import contextlib
+        import io
+        from unittest import mock
+        import build
+        from outils.i18n import __main__ as cli
+        if not (build.NEURON / "src/i18n/termes-de.json").is_file():
+            self.skipTest("site V1 absent (NEURON_SRC)")
+        with tempfile.TemporaryDirectory() as tmp:
+            erreur, sortie = io.StringIO(), io.StringIO()
+            with mock.patch.object(build, "DOSSIER_LANGUES", Path(tmp) / "langues"), \
+                    mock.patch.object(TM, "candidats", lambda *a, **k: []), \
+                    mock.patch.object(TM, "TERMINOLOGIE", Path(tmp) / "terminologie"), \
+                    contextlib.redirect_stderr(erreur), contextlib.redirect_stdout(sortie):
+                self.assertEqual(cli.main(["lexique", "de"]), 0)
+            self.assertIn("table de vide", erreur.getvalue())
+            self.assertIn("memoire de", erreur.getvalue())
 
 
 class TestHorsDepot(unittest.TestCase):

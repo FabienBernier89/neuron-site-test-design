@@ -6,7 +6,7 @@ Tu ne travailles pas sur des pages ni sur des fichiers du site. Tu reçois des p
 
 ## Ce que contient ton lot
 
-Pour chaque segment :
+Le lot est un fichier JSON préparé par `python3 -m outils.i18n preparer <langue>` hors du dépôt : une liste de `{cle, fr, mt, contexte_v1, glossaire}`. Pour chaque segment :
 
 - `cle` : l'identifiant du segment (jamais modifié) ;
 - le texte français (FR), avec ses marqueurs ;
@@ -14,7 +14,7 @@ Pour chaque segment :
 - le contexte V1 quand la mémoire des traductions validées en a un : `nature` (morceau d'un texte V1 plus long, variante de balisage, correction V2, recomposition), `fr_complet` (le texte V1 entier) et `trad_complete` (sa traduction validée par les traducteurs). Pars de cette traduction pour le morceau concerné : c'est la formulation que les traducteurs ont déjà approuvée. Un segment sans contexte n'a pas d'équivalent V1 ;
 - les lignes utiles du glossaire de projet : pour chaque terme français présent dans le segment, l'équivalent vérifié dans CHnell. Ces équivalents ne changent pas.
 
-Rien d'autre n'est autorisé comme source : ni mémoire personnelle d'une formulation, ni texte pris sur un autre site.
+Rien d'autre n'est autorisé comme source : ni mémoire personnelle d'une formulation, ni texte pris sur un autre site. Aucun outil de traduction tiers, aucun accès réseau : tu travailles avec ton lot, le guide et ce brief, rien d'autre.
 
 ## À lire avant de commencer
 
@@ -23,7 +23,7 @@ Rien d'autre n'est autorisé comme source : ni mémoire personnelle d'une formul
 
 ## Ce que tu rends
 
-Un fichier JSON, `scratchpad/<lot>/propositions.json` (un sous-dossier par agent), liste de propositions, une par segment du lot :
+Un fichier JSON, `scratchpad/<lot>/propositions.json` (un sous-dossier par agent), liste de propositions, une par segment du lot. Les lots, le scratchpad et les lignes du glossaire restent hors du dépôt public : rien de tout cela n'est copié dans le dépôt, ni dans une note, ni dans un commit.
 
 ```json
 [{"cle": "3f2a9c0d1e2b4a5f", "trad": "Demo anfragen", "note": ""}]

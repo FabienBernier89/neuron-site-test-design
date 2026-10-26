@@ -105,9 +105,17 @@ class TestJournal(unittest.TestCase):
         for champs in ({"date": "26/10/2026"}, {"langue": "fr"}, {"resultats": -1}, {"resultats": "12"},
                        {"resultats": True}, {"sources": "Fedlex"}, {"sources": [3]}, {"fr": ""}, {"retenu": ""},
                        {"verifie_par": ""}, {"url": "https://exemple.org/?q=1"}, {"retenu": None},
-                       {"justification": "x" * 400}, {"retenu": "Schloß"}):
+                       {"justification": "x" * 400}, {"retenu": "Schloß"},
+                       # vague finale, point 14 : date AAAA-MM-JJ stricte, verifie_par en liste fermée
+                       {"date": "20261026"}, {"date": "2026-W43-1"}, {"date": "2026-10-26T10:00"},
+                       {"verifie_par": "quelqu'un"}, {"verifie_par": "fabien"}, {"verifie_par": None}):
             with self.subTest(champs=champs), self.assertRaises(ValueError):
                 chnell.ajouter(self.journal, {**ligne("capital-actions"), **champs})
+
+    def test_verificateurs_admis(self):
+        for qui in chnell.VERIFICATEURS:
+            chnell.ajouter(self.journal, ligne("capital-actions", verifie_par=qui))
+        self.assertEqual([e["verifie_par"] for e in chnell.charger_journal(self.journal.parent)], ["agent", "Fabien"])
 
     def test_absent_sans_retenu(self):
         chnell.ajouter(self.journal, ligne("capital-actions", statut="absent", retenu=None, resultats=0, sources=[]))

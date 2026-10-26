@@ -30,6 +30,7 @@ la page CHnell, relevée avec Fabien à la première session (tâche 4.2, step 1
 
 Bibliothèque standard seulement."""
 import json
+import re
 from datetime import date
 from pathlib import Path
 from urllib.parse import quote
@@ -52,6 +53,8 @@ LONGUEUR_MAX = {"fr": 120, "retenu": 120, "justification": 300, "verifie_par": 6
 LONGUEUR_SOURCE_MAX = 120
 SOURCE_PAR_DEFAUT = "CHnell"
 ARBITRE_PAR = "fabien"
+VERIFICATEURS = ("agent", "Fabien")  # verifie_par : liste fermée (vague finale, point 14)
+DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
 def url_chnell(terme, langue, fedlex=False):
@@ -105,10 +108,14 @@ def _valider(entree):
         raise ValueError("champs du journal : " + "; ".join(
             ([f"manquant(s) : {', '.join(manquants)}"] if manquants else [])
             + ([f"en trop (aucun extrait de texte) : {', '.join(en_trop)}"] if en_trop else [])))
-    try:
+    try:  # fromisoformat accepte aussi « 20261026 » ou « 2026-W43-1 » : la forme est d'abord imposée
+        if not (isinstance(entree["date"], str) and DATE.fullmatch(entree["date"])):
+            raise ValueError
         date.fromisoformat(entree["date"])
     except (TypeError, ValueError):
         raise ValueError(f"date : AAAA-MM-JJ attendu, reçu « {entree['date']} »") from None
+    if entree["verifie_par"] not in VERIFICATEURS:
+        raise ValueError(f"verifie_par : « {entree['verifie_par']} » inconnu (attendu : {', '.join(VERIFICATEURS)})")
     for champ in ("fr", "justification", "verifie_par"):
         _texte_court(champ, entree[champ], LONGUEUR_MAX[champ])
     langue = entree["langue"]

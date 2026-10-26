@@ -86,6 +86,21 @@ class TestControles(unittest.TestCase):
         self.assertTrue(controles.interdits("Le moteur Neur.on LLM"))
         self.assertFalse(controles.interdits("Ein Lexikon"))
 
+    def test_interdits_espace_insecable_ou_fine(self):
+        """Vague finale, point 11 : un terme interdit de plusieurs mots écrit avec une espace insécable ou fine."""
+        for espace in ("\u00a0", "\u202f", "&nbsp;", "  "):
+            self.assertTrue(controles.interdits(f"Partenaire : Legal{espace}230"), repr(espace))
+            self.assertTrue(controles.interdits(f"Le moteur Neur.on{espace}LLM"), repr(espace))
+        self.assertFalse(controles.interdits("Legal2300 et Neur.onLLM"))
+
+    def test_marqueur_au_milieu_d_un_mot_pour_la_terminologie(self):
+        """Vague finale, point 14 : « Aktien{1}kapital{/1} » est un seul mot ; un marqueur entre deux mots reste une
+        espace."""
+        glossaire = {"capital-actions": {"de": {"terme": "Aktienkapital", "source": "CHnell", "statut": "confirme"}}}
+        self.assertEqual(controles.terminologie("Le capital-actions", "Das Aktien{1}kapital{/1}", "de", glossaire), [])
+        self.assertEqual(controles._normaliser_terminologie("Das {1}Aktienkapital{/1}, der"), "Das Aktienkapital , der")
+        self.assertEqual(controles._normaliser_terminologie("Aktien{1}{2}kapital{/2}{/1}"), "Aktienkapital")
+
     def test_interdits_mots_entiers(self):
         self.assertTrue(controles.interdits("Wir nutzen Lexa."))
         self.assertTrue(controles.interdits("Partenaire : Legal 230"))

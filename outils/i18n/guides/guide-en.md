@@ -273,7 +273,7 @@ Les trois points faux connus de la politique de confidentialité (certification 
 
 ## Annexe B. Actualités : les textes anglais d'origine
 
-La plupart des actualités FR sont des traductions retravaillées et anonymisées de textes anglais de l'ancien site (page `/news/`). Les originaux extraits sont dans le scratchpad de la session ce992fec : `/private/tmp/claude-501/-Users-fabienbernier-Claude-project/ce992fec-3d03-4df9-a989-fe30aa564320/scratchpad/blog-source/`. Ce dossier est **temporaire** : à archiver avant la tâche 13, hors du dépôt public (par exemple dans `Bibliotheque-Claude/`).
+La plupart des actualités FR sont des traductions retravaillées et anonymisées de textes anglais de l'ancien site (page `/news/`). Les originaux extraits ont été rassemblés hors du dépôt public, dans un dossier de travail temporaire de la V1 (à archiver dans `Bibliotheque-Claude/`).
 
 Structure :
 - `lots/articles-1.json` à `articles-4.json` : les 31 originaux devenus des articles (champs `num`, `titre`, `date`, `langue`, `corps_html`, `images`, `liens_externes`, `signalements`, `notes`) ;

@@ -77,7 +77,9 @@ _FRONTIERE_CELLULES = re.compile(r"\{/\d+\}(?:\{/?\d+\})*\{\d+\}")  # fin d'un �
 # mot (composé avec traits d'union, élision comprise : « l' » est un mot à part) ou jeton à chiffre (rupture)
 _JETON = re.compile(r"\w*\d\w*|[^\W\d_]+(?:-[^\W\d_]+)*'?")
 _ABREVIATION = re.compile(r"^(?=(?:.*[A-Z]){2}|.*\.$)[A-Za-z]+\.?$")  # CC, LBA, nLPD, Cst.
-_ARTICLE = r"art\. \d+[a-z]*(?: al\. \d+)? "
+# « art. 47 », « Art. 24 », « art. 104 al. 1 », « art. 6, al. 1, ch. 2 » : majuscule de début de phrase, alinéa,
+# chiffre et virgules (vague finale, point 14)
+_ARTICLE = r"[Aa]rt\. \d+[a-z]*(?:,? (?:al|ch)\. \d+[a-z]*)*,? "
 
 
 def _normal(texte):
@@ -112,8 +114,30 @@ def _motif_protege(libelles):
 
 
 def _est_protege(texte):
-    """Vrai si le texte est une marque ou un libellé de l'application, ou en contient un."""
-    return bool(_motif_protege(False).search(texte) or _motif_protege(True).search(texte))
+    """Vrai si le texte est une marque ou un libellé de l'application, en contient un, ou n'en est qu'un morceau de
+    plusieurs mots (« Highly sensitive », « Double review » : _partie_protegee)."""
+    return bool(_motif_protege(False).search(texte) or _motif_protege(True).search(texte)) or _partie_protegee(texte)
+
+
+_MOTS_PROTEGES = re.compile(r"[^\W_]+(?:['’][^\W_]+)*")
+
+
+@lru_cache(maxsize=1)
+def _noms_proteges():
+    """Mots (en minuscules) de chaque marque ou libellé de l'application de plusieurs mots."""
+    p = controles.proteges()
+    return tuple(m for m in (tuple(x.lower() for x in _MOTS_PROTEGES.findall(n)) for n in p["marques"] + p["libelles_application"])
+                 if len(m) > 1)
+
+
+def _partie_protegee(texte):
+    """Vrai si les mots du texte (deux au moins) sont une suite de mots d'une marque ou d'un libellé de l'application
+    (variante partielle : « Highly sensitive » de « Highly sensitive content », « Double review » de « Double review &
+    certified translation ») : jamais candidat au lexique (vague finale, point 14)."""
+    mots = tuple(m.lower() for m in _MOTS_PROTEGES.findall(texte))
+    if len(mots) < 2:
+        return False
+    return any(nom[i:i + len(mots)] == mots for nom in _noms_proteges() for i in range(len(nom) - len(mots) + 1))
 
 
 # ---------- segments V2 ----------
@@ -281,7 +305,7 @@ def _candidats_ngrammes(segments, exclus):
             continue
         # graphie la plus fréquente en milieu de phrase (celle des noms propres), sinon en début de phrase
         fr = sorted((formes.get(gram) or formes_debut[gram]).items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
-        if fr.lower() in exclus:
+        if fr.lower() in exclus or _partie_protegee(fr):
             continue
         sortie[fr] = {"fr": fr, "origine": {"ngramme"}, "priorite": 1, "pages": pages[gram], "occurrences": n,
                       "retenu": None}

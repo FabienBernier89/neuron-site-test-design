@@ -245,11 +245,13 @@ def tirets(texte):
 
 
 def interdits(texte):
-    """Mots entiers de proteges()["interdits"] (« Lexikon » ne contient pas « Lexa »), sans tenir compte de la casse."""
+    """Mots entiers de proteges()["interdits"] (« Lexikon » ne contient pas « Lexa »), sans tenir compte de la casse. Dans
+    un terme de plusieurs mots, l'espace peut être insécable ou fine (« Legal 230 » écrit avec U+00A0 ou U+202F : vague
+    finale, point 11)."""
     texte = H.unescape(texte)
     problemes = []
     for terme in proteges()["interdits"]:
-        motif = re.compile(_MOT_ENTIER[0] + re.escape(terme) + _MOT_ENTIER[1], re.I)
+        motif = re.compile(_MOT_ENTIER[0] + r"\s+".join(re.escape(m) for m in terme.split()) + _MOT_ENTIER[1], re.I)
         for m in motif.finditer(texte):
             problemes.append(probleme("interdits", f"terme interdit : « {terme} »", _autour(texte, m.start(), m.end())))
     return problemes
@@ -300,7 +302,13 @@ _MARQUEURS_EN_LIGNE = re.compile(r"\{/?\d+\}")  # marqueurs {n}…{/n} des balis
 _AVANT_LETTRE, _APRES_LETTRE = r"(?<![^\W\d_])", r"(?![^\W\d_])"  # bord de mot de la V1 : ni lettre avant, ni lettre après
 
 
+_MARQUEURS_DANS_LE_MOT = re.compile(r"(?<=[^\W_])(?:\{/?\d+\})+(?=[^\W_])")  # « Aktien{1}kapital{/1} » : un seul mot
+
+
 def _normaliser_terminologie(texte):
+    """Texte sans marqueurs : un marqueur au milieu d'un mot disparaît (le mot reste entier), un autre devient une
+    espace (vague finale, point 14)."""
+    texte = _MARQUEURS_DANS_LE_MOT.sub("", texte)
     return " ".join(H.unescape(_MARQUEURS_EN_LIGNE.sub(" ", texte)).split())
 
 

@@ -514,7 +514,11 @@ def main(argv=None):
             print(f"Termes V1 introuvables : {fichier_v1} (NEURON_SRC ?)", file=sys.stderr)
             return 1
         termes = json.loads(fichier_v1.read_text(encoding="utf-8"))
-        entrees = terminologie.candidats(args.langue, Table(args.langue, build.DOSSIER_LANGUES), termes)
+        table = Table(args.langue, build.DOSSIER_LANGUES)
+        if not table.entrees:
+            print(f"Avertissement : table {args.langue} vide ({table.fichier}) : aucun texte n'a de traduction V1, tous "
+                  f"comptent comme nouveaux (lancer d'abord « memoire {args.langue} »)", file=sys.stderr)
+        entrees = terminologie.candidats(args.langue, table, termes)
         entrees = terminologie.conserver_decisions(entrees, terminologie.charger_lexique(args.langue))
         fichier = terminologie.ecrire_lexique(args.langue, entrees)
         print(afficher_lexique(args.langue, entrees, fichier))
