@@ -157,6 +157,21 @@ class TestControles(unittest.TestCase):
         self.assertEqual([p["detail"] for p in controles.langue_page(fautive, "it")],
                          ["inLanguage « fr-CH » dans le JSON-LD : « it » attendu"])
 
+    def test_milliers_hors_citations_de_la_loi(self):
+        """Ruling 27 : la zone d'exemple de loi du glossaire (lignes de la fenêtre CHnell) et les résultats CHnell cités
+        tels quels gardent la graphie officielle (« 100 000 franchi ») ; le reste de la page est contrôlé."""
+        fenetre = ('<div class="cr-ch"><div class="lk-r"><div style="--i:0"><p lang="it">fino a 100 000 franchi</p>'
+                   '<p lang="de">bis zu 100 000 Franken</p></div></div><div class="cr-ch-f"><span>Close</span></div></div>')
+        schema = '<span class="sp-res"><span class="sp-seg" lang="it">multa fino a 20 000 franchi</span></span>'
+        for langue in ("it", "de"):
+            with self.subTest(langue=langue):
+                page = f'<html lang="{langue}"><body><main>{fenetre}{schema}</main></body></html>'
+                self.assertEqual([p for p in controles.controler_page(page, langue) if p["regle"] == "milliers"], [])
+                hors = page.replace("</main>", "<p>Mehr als 15 000 Dokumente</p></main>")
+                self.assertEqual([p["regle"] for p in controles.controler_page(hors, langue) if p["regle"] == "milliers"],
+                                 ["milliers"])
+        self.assertNotIn("100 000", controles.sans_citations(fenetre))
+
     def test_page_fautive(self):
         regles = {p["regle"] for p in controles.controler_page(FAUTIVE, "de")}
         self.assertEqual(regles, {"tirets", "interdits", "langue", "restes_fr", "milliers"})

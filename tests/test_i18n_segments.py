@@ -469,6 +469,27 @@ class TestScripts(unittest.TestCase):
         trouves = {chemin for chemin, h in pages_du_site() if S.scripts_a_traduire(h)}
         self.assertEqual(trouves, self.SCRIPTS_CONNUS)
 
+    def test_element_en_ligne_francais_coupe_le_passage(self):
+        """Tâche 7.3 : une source française de démo (lang="fr") dans une barre d'interface en ligne forme son unité
+        lang_fr, sans entraîner les libellés voisins (traduits) ni y être entraînée."""
+        h = ('<p><span>English</span><span>LexMachina</span><span lang="fr">Le débiteur <mark>doit</mark> des intérêts</span>'
+             '<span>Fast Lookup</span></p>')
+        self.assertEqual([(u["texte"], u["lang_fr"]) for u in S.extraire_page(h)],
+                         [("{1}English{/1}{2}LexMachina{/2}", False), ("Le débiteur {1}doit{/1} des intérêts", True),
+                          ("{1}Fast Lookup{/1}", False)])
+        u = S.extraire_page(h)[0]
+        traduit = S.reinjecter_page(h, {u["id"]: S.restaurer_unite("{1}Englisch{/1}{2}LexMachina{/2}", u)})
+        self.assertEqual(traduit, h.replace("English", "Englisch"))
+
+    def test_attributs_d_un_element_francais_voulu(self):
+        """Le lang="fr" d'une source de démo ne gèle pas ses attributs d'interface (aria-label traduit), seulement le
+        texte qu'elle rejoue (data-def)."""
+        h = ('<p><input type="text" value="intérêt moratoire" aria-label="Rechercher un terme" lang="fr"></p>'
+             '<p class="cr-rout" lang="fr" data-def="Le débiteur en &lt;u&gt;retard&lt;/u&gt;">Celui qui ne paie pas</p>')
+        self.assertEqual([(u["attr"], u["texte"], u["lang_fr"]) for u in S.extraire_page(h)],
+                         [("aria-label", "Rechercher un terme", False), ("data-def", "Le débiteur en {1}retard{/1}", True),
+                          (None, "Celui qui ne paie pas", True)])
+
     def test_script_de_donnees_translate_no_non_lu(self):
         """Données des démos (tâche 7.3) : un bloc JSON translate="no" ne donne aucune unité ; le bloc des textes, si."""
         h = ('<p>Bonjour</p><script type="application/json" data-donnees translate="no">{"phrase": "Le débiteur en demeure"}'

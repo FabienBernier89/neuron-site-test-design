@@ -6,9 +6,14 @@ après les post-traitements qui posent les blocs concernés (cartes .fx-g de fon
   le script l'affiche, sauf en mouvement réduit, où rien ne bouge. Libellés lus dans src/data/contenus-v2.
 - Listes d'onglets (role="tablist") : nommées par le titre h2 de leur section (aria-labelledby).
 - Passages en allemand, anglais ou italien dont la langue est connue (WCAG 3.1.2) : lignes alignées de CHnell (langues
-  affichées dans la barre de recherche ; sur les pages du glossaire, le français de l'exemple de loi porte lang="fr"
-  explicite, pour rester français sur une page traduite), cellules des tableaux de termes (data-m="Allemand"...), tuiles
-  « quatre langues » et terme du h1 du glossaire, avis et encart d'aide en anglais des écrans Corrext reproduits.
+  affichées dans la barre de recherche), cellules des tableaux de termes (data-m="Allemand"...), tuiles « quatre langues »
+  et terme du h1 du glossaire, avis et encart d'aide en anglais des écrans Corrext reproduits.
+- Données des démos gardées dans leur langue sur toutes les versions du site (tâche 7.3) : les résultats réels de CHnell
+  (Ruling 26 ; exemple de loi du glossaire, tâche 3.3, et démos des autres pages : fenêtre CHnell et schéma de
+  l'accueil, résultats du panneau Word) portent un lang explicite, français compris, et leur référence (« SR-220 ...
+  Data Set: Neur.on ») translate="no" ; les sources françaises des écrans de démo et les réécritures Rephrasing (françaises, comme dans la V1,
+  où elles s'affichaient en français dans chaque langue) portent lang="fr" (Ruling 14). Un passage lang="fr" explicite
+  n'est jamais traduit ; il ne change rien à la page française.
 
 Aucun texte affiché n'est ajouté ici. Idempotent : repasser une page déjà traitée ne la change pas."""
 import html as H
@@ -77,8 +82,8 @@ LIGNE =re.compile(r'(<div style="--i:\d+">)(<p>)(.*?</p>)(<p>)')
 
 def langues_chnell(html, francais=False):
     """Lignes alignées de CHnell : la 1re colonne dans la langue de gauche (lk-l1), la 2e dans celle de droite (lk-l2) ;
-    le terme recherché (lk-q) dans la langue de gauche. francais : le français d'une ligne porte lang="fr" explicite
-    (exemple de loi du glossaire)."""
+    le terme recherché (lk-q) dans la langue de gauche ; la référence de chaque ligne translate="no". francais : le
+    français d'une ligne et du terme porte lang="fr" explicite (résultats gardés en français sur une page traduite)."""
     sortie, pos = [], 0
     for q in re.finditer(r'<div class="cr-ch-q">', html):
         if q.start() < pos:
@@ -95,12 +100,75 @@ def langues_chnell(html, francais=False):
         bornes = [html.find(b, lr) for b in ('<div class="cr-ch-f">', '<div class="cr-ch-q">', "</section>")]
         fin = min([b for b in bornes if b >= 0] or [len(html)])
         bloc = html[q.start():fin]
-        bloc = re.sub(r'<b class="lk-q">', lambda m: _lang(m.group(0), a), bloc, count=1)
+        bloc = re.sub(r'<b class="lk-q">', lambda m: _lang(m.group(0), a, francais), bloc, count=1)
         bloc = LIGNE.sub(lambda m: m.group(1) + _lang(m.group(2), a, francais) + m.group(3) + _lang(m.group(4), b, francais),
                          bloc)
+        bloc = bloc.replace("</p><small>", '</p><small translate="no">')  # référence du segment (source, jeu de données)
         sortie.append(html[pos:q.start()] + bloc)
         pos = fin
     return "".join(sortie) + html[pos:]
+
+
+def langues_schema(html):
+    """Fenêtre CHnell du schéma « qui fait quoi » (sp-app-ch) : chaque segment (sp-seg) dans la langue de sa colonne
+    (sp-lg, dans l'ordre), le terme recherché dans la première, la référence translate="no" (Ruling 26)."""
+    sortie, pos = [], 0
+    for m in re.finditer(r'<div class="sp-app sp-app-ch">', html):
+        fin = html.find("</dd>", m.start())
+        fin = len(html) if fin < 0 else fin
+        bloc = html[m.start():fin]
+        codes = [CODES.get(x.strip()) for x in re.findall(r'<span class="sp-lg">([^<]*)</span>', bloc)]
+        if codes and all(codes):
+            rang = iter(codes)
+            bloc = re.sub(r'<span class="sp-seg">', lambda s: _lang(s.group(0), next(rang, None), True), bloc)
+            bloc = re.sub(r'(<span class="sp-box">(?:(?!</span>).)*?)<b>', lambda s: s.group(1) + _lang("<b>", codes[0], True),
+                          bloc, count=1, flags=re.S)
+        bloc = bloc.replace('<small class="sp-src">', '<small class="sp-src" translate="no">')
+        sortie.append(html[pos:m.start()] + bloc)
+        pos = fin
+    return "".join(sortie) + html[pos:]
+
+
+def langues_word(html):
+    """Résultats du Fast Lookup du panneau Word (wd-r : mémoire de traduction et CHnell, démo du français vers
+    l'allemand) : la source française lang="fr", la référence (document, source CHnell) translate="no" (Ruling 26)."""
+    def ligne(m):
+        r = re.sub(r"^(<div[^>]*>)(<p>)", lambda p: p.group(1) + _lang(p.group(2), "fr", True), m.group(0))
+        return r.replace("<small>", '<small translate="no">')
+    return re.sub(r'<div class="wd-r" style="--i:\d+">(?:(?!</div>).)*</div>', ligne, html, flags=re.S)
+
+
+# Sources françaises des écrans de démo et réécritures Rephrasing (toujours françaises) : lang="fr" (Ruling 14)
+SOURCES_FR = ("cr-rtxt", "cr-rout", "cr-ill", "ap-src", "wd-s", "wd-ms", "cxe-src")
+# Zones de texte d'une démo dont la source est française ou anglaise selon l'écran : lang="fr" si le texte est français
+TEXTES_SOURCE = ("cr-txt", "sp-txt")
+_OUVRANTE = re.compile(r'<(p|span|div|td)\b[^>]*\bclass="([^"]*)"[^>]*>')
+_MOTS_FR = {"le", "la", "les", "des", "du", "de", "au", "aux", "l", "d", "à", "un", "une", "et", "en"}
+
+
+def _francais(texte):
+    """Texte français d'une zone source : au moins deux mots outils français (« Le débiteur en demeure doit des... »,
+    jamais « The company must deduct... »)."""
+    mots = re.findall(r"[^\W\d_]+", H.unescape(re.sub(r"<[^>]+>", " ", texte)).lower())
+    return sum(m in _MOTS_FR for m in mots) >= 2
+
+
+def sources_francaises(html):
+    """lang="fr" sur les sources françaises des démos (SOURCES_FR, TEXTES_SOURCE dont le texte est français, source de
+    l'exemple de traduction d'un comparatif)."""
+    def poser(m):
+        classes = set(m.group(2).split())
+        if classes & set(SOURCES_FR):
+            return _lang(m.group(0), "fr", True)
+        if classes & set(TEXTES_SOURCE):
+            fin = html.find("</" + m.group(1), m.end())
+            if fin > m.end() and _francais(html[m.end():fin]):
+                return _lang(m.group(0), "fr", True)
+        return m.group(0)
+    html = _OUVRANTE.sub(poser, html)
+    # exemple de traduction d'un comparatif (« Source · français », puis les sorties des moteurs, déjà lang="it")
+    return re.sub(r'(<div class="cp-xs"><p class="cp-xe">[^<]*</p>)(<p>)', lambda m: m.group(1) + _lang(m.group(2), "fr", True),
+                  html)
 
 
 def langues_tableaux(html):
@@ -129,20 +197,23 @@ def langues_tableaux(html):
 def langues_interface(html):
     """Avis et encart d'aide de l'écran Corrext reproduit : phrases de l'interface, en anglais dans l'application."""
     html = html.replace('<div class="cr-notice">', '<div class="cr-notice" lang="en">')
-    return re.sub(r'(<div class="cr-hint"><div class="cr-ill">(?:[^<]|</?mark>)*</div>)<div>', r'\1<div lang="en">', html)
+    return re.sub(r'(<div class="cr-hint"><div class="cr-ill"[^>]*>(?:[^<]|</?mark>)*</div>)<div>', r'\1<div lang="en">', html)
 
 
 def traiter(html, page):
-    # exemple de loi du glossaire : le français y reste du français sur les pages traduites (allemand : l'exemple est
-    # allemand et français ; italien et anglais : le français est remplacé par la langue de la page, tâche 3.3)
-    glossaire = re.fullmatch(r"ressources/glossaire/[^/]+/", page) is not None
+    # résultats CHnell (exemple de loi du glossaire compris) : le français y reste du français sur les pages traduites
+    # (glossaire, allemand : l'exemple est allemand et français ; italien et anglais : le français est remplacé par la
+    # langue de la page, tâche 3.3 ; ailleurs : résultats réels de l'application, Ruling 26)
     debut = html.find('<main id="main">')
     if debut < 0:
         return html
     tete, corps = html[:debut], html[debut:]
     corps = boutons_pause(corps)
     corps = onglets_nommes(corps)
-    corps = langues_chnell(corps, glossaire)
+    corps = langues_chnell(corps, francais=True)
+    corps = langues_schema(corps)
+    corps = langues_word(corps)
+    corps = sources_francaises(corps)
     corps = langues_tableaux(corps)
     corps = langues_interface(corps)
     return tete + corps

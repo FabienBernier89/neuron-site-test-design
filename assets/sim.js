@@ -8,12 +8,16 @@
   var EX = window.SIM_EX || {};
   var SCENES = {};
 
-  /* Langue des textes non français (WCAG 3.1.2) : nom affiché par l'interface, puis code de langue */
+  /* Langue des textes qui ne sont pas dans celle de la page (WCAG 3.1.2) : nom affiché par l'interface, puis code de
+     langue. Les données des démos gardent leur langue sur toutes les versions du site (source française, résultats
+     CHnell) : sur une page allemande, le français reçoit lang="fr". */
   var CODES = { German: "de", Allemand: "de", English: "en", Anglais: "en", Italian: "it", Italien: "it", French: "fr", "Français": "fr" };
+  var PAGE = (document.documentElement.getAttribute("lang") || "fr").slice(0, 2);
   function poserLangue(el, nom) {
     var code = CODES[(nom || "").trim()];
     if (!el) return;
-    if (code && code !== "fr") el.setAttribute("lang", code); else el.removeAttribute("lang");
+    if (!code) return;  /* langue non affichée (« Detect language ») : celle du HTML reste */
+    if (code !== PAGE) el.setAttribute("lang", code); else el.removeAttribute("lang");
   }
   /* Textes d'une scène : la source dans la langue détectée affichée (« Detected language (English) »), les sorties de
      traduction dans la langue cible affichée (anglais par défaut, comme la démo) */

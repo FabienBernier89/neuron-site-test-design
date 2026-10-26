@@ -589,10 +589,24 @@ def hreflang(sortie):
     return problemes
 
 
+# Citations exactes d'un texte officiel, gardées telles quelles : lignes de résultats CHnell (zone d'exemple de loi du
+# glossaire, Ruling 27 ; résultats réels des démos, Ruling 26), dans la fenêtre CHnell ou le schéma de l'accueil
+_CITATIONS = (re.compile(r'(<div class="lk-r">).*?(?=</div><div class="cr-ch-f">)', re.S),
+              re.compile(r'(<span class="sp-seg"[^>]*>).*?(?=</span>)', re.S))
+
+
+def sans_citations(html):
+    """Page sans le texte des citations exactes de la loi (_CITATIONS) : le contrôle des milliers ne les lit pas
+    (« 100 000 franchi » reste la graphie officielle)."""
+    for motif in _CITATIONS:
+        html = motif.sub(lambda m: m.group(1), html)
+    return html
+
+
 def controler_page(html, langue):
-    """Contrôles d'une page construite : tirets, interdits, langue_page, restes_fr, et milliers (de, it). Les contrôles
-    qui comparent au français (marques, eszett) et ceux qui regardent la sortie entière (liens_langue, hreflang) se
-    lancent à part."""
-    visible = "\n".join(texte_visible(html, langue))
+    """Contrôles d'une page construite : tirets, interdits, langue_page, restes_fr, et milliers (de, it ; hors citations
+    exactes de la loi, sans_citations). Les contrôles qui comparent au français (marques, eszett) et ceux qui regardent la
+    sortie entière (liens_langue, hreflang) se lancent à part."""
+    visible = "\n".join(texte_visible(sans_citations(html), langue))
     return (tirets(html) + interdits(html) + langue_page(html, langue) + restes_fr(html, langue)
             + milliers(visible, langue))

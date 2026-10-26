@@ -6,7 +6,8 @@ par des marqueurs {n}…{/n}, restauration), étendue pour la page complète tel
 - le JSON-LD (sans alternateName) et les JSON de données (index du centre d'aide) ;
 - les exclusions : sous-arbres dont le lang n'est pas fr, éléments translate="no" ou de CLASSES_NON_TRADUITES,
   attributs classés « jamais » ;
-- le drapeau ui (écran d'application, ancêtre [data-ui]) et le drapeau lang_fr (passage en français voulu).
+- le drapeau ui (écran d'application, ancêtre [data-ui]) et le drapeau lang_fr (passage en français voulu ; un élément en
+  ligne lang="fr" coupe le passage qui l'entoure, comme un élément étranger).
 
 Un segment est une unité {id, genre, debut, fin, html, texte, table, ui, attr, lang_fr} :
 - genre « bloc » : passage de texte continu avec ses balises en ligne, remplacées par des marqueurs (texte, table) ;
@@ -557,15 +558,14 @@ def extraire_page(source):
                     script(j, d)
         elif j.startswith("</"):
             nom = _nom(j)
+            ferme = next((k for k in range(len(pile) - 1, -1, -1) if pile[k]["nom"] == nom), None)
             if not haut()["exclu"]:
-                if nom in EN_LIGNE:
+                if nom in EN_LIGNE and not (ferme is not None and pile[ferme].get("coupe")):
                     run.append((d, f))
                 else:
                     vide_run()
-            for k in range(len(pile) - 1, -1, -1):
-                if pile[k]["nom"] == nom:
-                    del pile[k:]
-                    break
+            if ferme is not None:
+                del pile[ferme:]
         elif j.startswith("<!"):  # doctype
             vide_run()
         elif j.startswith("<"):
@@ -576,7 +576,10 @@ def extraire_page(source):
             entree = _entree(parent, nom, attrs)
             if not (parent["exclu"] or entree["non_traduit"]):
                 # un lang étranger sur l'élément exclut son contenu, pas ses attributs : l'étiquette data-m d'une cellule
-                # lang="de" est du français de l'interface
+                # lang="de" est du français de l'interface. De même, le lang="fr" voulu d'un élément (source d'une démo)
+                # ne s'étend pas à ses attributs d'interface (aria-label du champ de recherche de l'éditeur, traduit),
+                # sauf au texte qu'il rejoue lui-même (data-def, ATTRS_HTML : réécriture française de la démo)
+                interface = dict(entree, lang_fr=parent["lang_fr"])
                 for n, v, a, b, _ in attrs_pos:
                     if v is None or classer_attribut(nom, attrs, n) != "texte":
                         continue
@@ -587,8 +590,11 @@ def extraire_page(source):
                         texte, table = proteger(brut)
                     else:
                         texte, table = brut, {}
-                    ajoute("attr", a, b, texte, table, attr=n, ctx=entree)
-            if entree["exclu"]:
+                    ajoute("attr", a, b, texte, table, attr=n, ctx=entree if n in ATTRS_HTML else interface)
+            # un élément en ligne qui ouvre un passage français voulu (lang="fr" explicite, source d'une démo) coupe le
+            # passage comme un élément étranger : son texte est une unité lang_fr à part, jamais traduite (tâche 7.3)
+            entree["coupe"] = nom in EN_LIGNE and entree["lang_fr"] and not parent["lang_fr"]
+            if entree["exclu"] or entree["coupe"]:
                 vide_run()
             elif nom in EN_LIGNE:
                 run.append((d, f))

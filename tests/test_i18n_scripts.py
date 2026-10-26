@@ -463,5 +463,119 @@ class TestDemos(unittest.TestCase):
                 self.assertTrue(all(v.startswith("DE ") for v in textes_de(html).values()))
 
 
+class TestLanguesDesDemos(unittest.TestCase):
+    """Données des démos gardées dans leur langue sur toutes les versions du site : résultats réels de CHnell, paires
+    allemand-français avec leur référence (Ruling 26), et sources françaises des démos (Ruling 14 ; réécritures
+    Rephrasing comprises, comme la V1 qui les montrait en français dans chaque langue). Posé par
+    outils/post/y_accessibilite.py : lang sur chaque passage, translate="no" sur les références ; hors extraction."""
+
+    # pages hors glossaire dont une fenêtre CHnell montre des résultats (relevé du 2026-10-26)
+    PAGES_CHNELL = ["", "comparatif/chatgpt-traduction-juridique/", "corrext/", "corrext/chnell/",
+                    "solutions/autorites-administration/", "solutions/banques-finance/", "solutions/cabinets-avocats/",
+                    "solutions/directions-juridiques/", "solutions/editeurs-legaltech/", "traduction/allemand-anglais/",
+                    "traduction/allemand-francais/", "traduction/anglais-allemand/", "traduction/assurance/",
+                    "traduction/banque-finance/", "traduction/compliance-finma/", "traduction/contentieux-arbitrage/",
+                    "traduction/contrats/", "traduction/droit-des-societes/", "traduction/droit-du-travail/",
+                    "traduction/droit-penal/", "traduction/fiscalite/", "traduction/francais-allemand/",
+                    "traduction/francais-anglais/", "traduction/fusions-acquisitions/", "traduction/italien-francais/",
+                    "traduction/propriete-intellectuelle/", "traduction/rapports-annuels-financiers/"]
+    ZONES = (re.compile(r'<div class="lk-r">.*?(?=</div><div class="cr-ch-f">)', re.S),
+             re.compile(r'<span class="sp-res">.*?</small></span>', re.S))
+    # sources françaises des écrans de démo (et réécritures Rephrasing, toujours françaises)
+    SOURCES = ("cr-rtxt", "cr-rout", "cr-ill", "ap-src", "wd-s", "wd-ms", "cxe-src", "sp-txt")
+
+    @classmethod
+    def setUpClass(cls):
+        cls.sortie = support.site_complet()
+        cls.pages = {}
+        for f in sorted((cls.sortie / "fr").rglob("index.html")):
+            page = f.parent.relative_to(cls.sortie / "fr").as_posix() + "/"
+            cls.pages["" if page == "./" else page] = f.read_text(encoding="utf-8")
+
+    def zones(self, h):
+        return [(m.start(), m.end(), m.group(0)) for motif in self.ZONES for m in motif.finditer(h)]
+
+    def test_pages_chnell_relevees(self):
+        trouvees = sorted(p for p, h in self.pages.items() if not p.startswith("ressources/glossaire/") and self.zones(h)
+                          and any(re.search(r"<p\b|sp-seg", z) for _, _, z in self.zones(h)))
+        self.assertEqual(trouvees, self.PAGES_CHNELL)
+
+    def test_cellules_chnell_dans_leur_langue(self):
+        for page in self.PAGES_CHNELL:
+            h = self.pages[page]
+            for _, _, z in self.zones(h):
+                with self.subTest(page=page, zone=z[:60]):
+                    for balise in re.findall(r"<(?:p|span class=\"sp-seg\")\b[^>]*>", z):
+                        self.assertRegex(balise, r' lang="(de|fr|it|en)"')
+                    for balise in re.findall(r"<small\b[^>]*>", z):
+                        if "sp-dom" not in balise:
+                            self.assertIn('translate="no"', balise)
+
+    def test_cellules_chnell_hors_traduction(self):
+        """Aucune unité à traduire ne vient d'une ligne de résultats CHnell : les cellules françaises sont lang="fr"
+        (gardées telles quelles), les autres et les références sont exclues."""
+        for page in self.PAGES_CHNELL:
+            h = self.pages[page]
+            zones = self.zones(h)
+            for u in S.extraire_page(h):
+                if u["lang_fr"]:
+                    continue
+                with self.subTest(page=page, texte=u["texte"][:60]):
+                    self.assertFalse(any(a <= u["debut"] < b for a, b, _ in zones) and "sp-dom" not in h[u["debut"] - 40:u["debut"]])
+
+    def test_sources_francaises_des_demos(self):
+        vus = set()
+        for page, h in self.pages.items():
+            for m in re.finditer(r'<(p|span|div|td)\b([^>]*\bclass="([^"]*)"[^>]*)>', h):
+                classes = set(m.group(3).split())
+                if classes & set(self.SOURCES):
+                    vus |= classes & set(self.SOURCES)
+                    with self.subTest(page=page, balise=m.group(0)[:80]):
+                        self.assertIn(' lang="fr"', m.group(0))
+                elif "cr-txt" in classes:
+                    texte = h[m.end():h.index("</" + m.group(1), m.end())]
+                    attendu = texte.startswith(("Le débiteur", "L'établissement", "L&#x27;établissement"))
+                    with self.subTest(page=page, texte=texte[:60]):
+                        self.assertEqual(' lang="fr"' in m.group(0), attendu)
+        self.assertEqual(vus, set(self.SOURCES))
+
+    def test_sources_francaises_hors_traduction(self):
+        """Sur tout le site, aucune unité à traduire ne porte une source française de démo, une réécriture Rephrasing ou
+        une cellule française de CHnell : elles sont toutes lang_fr, jamais envoyées à la traduction (Rulings 14 et 26)."""
+        sources = ("La Mandataire fournit", "Le débiteur en demeure", "Le débiteur en {1}retard", "L'établissement assujetti",
+                   "Toute facture impayée", "Le présent contrat est soumis", "Celui qui ne paie pas", "Si l'agent payeur",
+                   "Art. 24 {1}Intérêt moratoire", "Le {1}secret bancaire{/1}")
+        for page, h in self.pages.items():
+            for u in S.extraire_page(h):
+                if not u["lang_fr"]:
+                    with self.subTest(page=page, texte=u["texte"][:60]):
+                        self.assertFalse([x for x in sources if x in u["texte"]])
+
+    def test_encart_d_aide_reste_anglais(self):
+        """L'illustration de l'encart d'aide est la source française (lang="fr") ; le texte qui la suit reste l'anglais de
+        l'interface (lang="en", y_accessibilite.langues_interface)."""
+        encarts = [(p, m) for p, h in self.pages.items() for m in re.findall(r'<div class="cr-hint">.*?</div><div[^>]*>', h)]
+        self.assertGreaterEqual(len(encarts), 2)
+        for page, m in encarts:
+            with self.subTest(page=page):
+                self.assertRegex(m, r'<div class="cr-ill" lang="fr">.*</div><div lang="en">$')
+
+    def test_resultats_du_panneau_word(self):
+        """Fast Lookup du panneau Word (plugin Word, éditeur) : source française lang="fr", cible allemande lang="de",
+        référence du document translate="no"."""
+        for page in (EDITEUR, "corrext/plugin-word/"):
+            lignes = re.findall(r'<div class="wd-r" style="--i:\d+">(.*?)</div>', self.pages[page], re.S)
+            self.assertEqual(len(lignes), 3, page)
+            for l in lignes:
+                with self.subTest(page=page, ligne=l[:50]):
+                    self.assertRegex(l, r'^<p lang="fr">.*</p><p lang="de">.*</p><small translate="no">[^<]+</small>$')
+
+    def test_champ_de_recherche_de_l_editeur(self):
+        """« intérêt moratoire » est le terme de la source française de la démo FR vers DE : lang="fr" (Ruling 14)."""
+        self.assertRegex(self.pages[EDITEUR], r'<input [^>]*id="cxeQ" value="intérêt moratoire"[^>]* lang="fr"')
+        nom = [u for u in S.extraire_page(self.pages[EDITEUR]) if u["texte"].startswith("Rechercher un terme dans les mémoires")]
+        self.assertEqual([(u["attr"], u["lang_fr"]) for u in nom], [("aria-label", False)])  # nom accessible : traduit
+
+
 if __name__ == "__main__":
     unittest.main()
