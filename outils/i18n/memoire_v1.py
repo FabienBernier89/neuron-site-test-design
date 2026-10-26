@@ -299,8 +299,7 @@ def couverture(table, pages, zone="main", balises=True):
     sans = ({_sans_balises(e["fr"]) for e in table.entrees.values()
              if e["statut"] in MEMOIRE or any(v["statut"] in MEMOIRE for v in e["par_page"].values())}
             if not balises else set())
-    for page, html in pages.items():
-        html = T.retirer_avis_fictifs(html)
+    for page, html in ((p, T.retirer_avis_fictifs(h)) for p, v in pages.items() for h in T.variantes(v)):
         debut, fin = 0, len(html)
         if zone == "main":
             m = re.search(r"<main\b", html)
@@ -395,9 +394,9 @@ def prefill(langue, neuron, table, pages=None):
      "couverture_texte" (main, balises ignorées : définition de l'audit),
      "refus": {cause: {"unites", "textes", "mots"}}, "refus_non_rattrapes": {"textes", "mots"}, "404_non_posee",
      "i18n_hors_pages"}.
-    pages : pages FR assemblées de la V2 ({page: html}) pour la couverture ; par défaut celles du build
-    (traduire.pages_assemblees). Les traductions d'une mémoire V1 précédente sont d'abord retirées (_retirer_v1). La
-    table n'est pas écrite sur disque (Table.enregistrer)."""
+    pages : pages FR assemblées de la V2 ({page: html} ou {page: {mode: html}}) pour la couverture ; par défaut celles
+    des deux modes du build (traduire.pages_union). Les traductions d'une mémoire V1 précédente sont d'abord retirées
+    (_retirer_v1). La table n'est pas écrite sur disque (Table.enregistrer)."""
     neuron = Path(neuron)
     routes = json.loads((neuron / "src/routes.json").read_text(encoding="utf-8"))
     _retirer_v1(table)
@@ -493,7 +492,7 @@ def prefill(langue, neuron, table, pages=None):
     hors_pages = [k for k in (json.loads(i18n.read_text(encoding="utf-8")) if i18n.is_file() else {})
                   if _normal(k) not in occurrences]
     if pages is None:
-        pages = T.pages_assemblees(langue, "apercu")
+        pages = T.pages_union(langue)
     return {"langue": langue, "pages_alignees": alignees, "pages_non_alignees": non_alignees, "segments_v1": poses,
             "par_page_v1": par_page, "par_page_seulement": seulement, "doublons_divergents": doublons,
             "couverture_mots": couverture(table, pages), "couverture_page": couverture(table, pages, "page"),

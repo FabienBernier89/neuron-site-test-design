@@ -13,7 +13,9 @@
 etat : état de la traduction d'une langue, page par page (outils/i18n/traduire.py, etat), en aperçu par défaut ou selon
 les règles de la production ; écrit la liste des textes français à traduire dans src/langues/<langue>/a_traduire.json
 ({clé: {"fr": texte FR, "contexte": contexte V1 s'il y en a un}}, traduire.fichier_a_traduire), fichier régénéré à
-chaque appel.
+chaque appel. Comme exporter, importer, lexique et memoire, etat lit les pages des deux modes (traduire.pages_union) :
+le bandeau de consentement de la production et, en aperçu, le libellé du bandeau de travail sont listés dès le premier
+tour.
 
 memoire : pré-remplit la table de la langue (src/langues/<langue>/segments.json) avec les traductions validées de la V1
 (outils/i18n/memoire_v1.py, prefill), au statut v1, puis la complète des blocs recomposés et des variantes de balisage
@@ -259,9 +261,9 @@ def commande_exporter(args, build):
     dossier = Path(args.sortie) if args.sortie else echanges.dossier_export(args.langue)
     try:
         echanges.verifier_hors_depot(dossier)
-        assemblees = traduire.pages_assemblees(args.langue, "apercu")
+        assemblees = traduire.pages_union(args.langue)
         pages = [("" if p == echanges.ACCUEIL else p) for p in args.pages] if args.pages else None
-        inconnues = [p for p in pages or [] if p not in assemblees and p != echanges.LLMS]
+        inconnues = [p for p in pages or [] if p not in assemblees and p not in echanges.PSEUDO_PAGES]
         if inconnues:
             raise ValueError("page(s) inconnue(s) : " + ", ".join(inconnues) + " (clés de page : accueil, contact/, ...)")
         glossaire = {fr: l for fr, l in chnell.charger_glossaire().items() if args.langue in l}
@@ -442,7 +444,7 @@ def main(argv=None):
         return 0
     if args.commande == "memoire":
         table = Table(args.langue, build.DOSSIER_LANGUES)
-        pages = traduire.pages_assemblees(args.langue, "apercu")
+        pages = traduire.pages_union(args.langue)
         recomposition.retirer_recompositions(table)  # passe précédente retirée avant prefill : commande idempotente
         rapport = memoire_v1.prefill(args.langue, build.NEURON, table, pages=pages)
         resultat = recomposition.recomposer(args.langue, build.NEURON, table, pages=pages)

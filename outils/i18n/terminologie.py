@@ -121,10 +121,11 @@ def _est_protege(texte):
 def segments_v2(langue, table, pages):
     """Segments distincts du site tel que la langue le verrait : {texte brut: {"pages": {page}, "nouveau": {page}}},
     texte brut = texte de l'unité sans marqueurs, aux espaces normalisés. « nouveau » : pages où le texte n'a pas de
-    traduction V1 (ni invariant). pages : {clé de page: HTML assemblé} (traduire.pages_assemblees)."""
+    traduction V1 (ni invariant). pages : {clé de page: HTML assemblé} ou {clé de page: {mode: html}}
+    (traduire.pages_union : textes des deux modes)."""
     segments = {}
-    for page, html in sorted(pages.items()):
-        for u in S.extraire_page(traduire.retirer_avis_fictifs(html)):
+    for page, valeur in sorted(pages.items()):
+        for u in (u for html in traduire.variantes(valeur) for u in S.extraire_page(traduire.retirer_avis_fictifs(html))):
             if u["lang_fr"]:
                 continue
             brut = u["texte"]
@@ -314,11 +315,11 @@ def _fusionner(sources):
 def candidats(langue, table, termes_v1, pages=None):
     """Lexique des termes à vérifier pour une langue : liste d'entrées {fr, origine, priorite, pages, occurrences,
     retenu}, triée par priorité puis par terme français. termes_v1 : contenu de Sites/neuron/src/i18n/termes-<langue>.json.
-    pages : {clé de page: HTML FR assemblé} ; traduire.pages_assemblees(langue, "apercu") si absent."""
+    pages : {clé de page: HTML FR assemblé} ou {clé de page: {mode: html}} ; traduire.pages_union(langue) si absent."""
     if langue not in LANGUES:
         raise ValueError(f"langue inconnue : « {langue} » (attendu : {', '.join(LANGUES)})")
     if pages is None:
-        pages = traduire.pages_assemblees(langue, "apercu")
+        pages = traduire.pages_union(langue)
     segments = segments_v2(langue, table, pages)
     v1 = _candidats_v1(langue, termes_v1, segments)
     references = _candidats_references(termes_v1, segments)

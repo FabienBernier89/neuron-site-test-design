@@ -14,7 +14,7 @@ import urllib.request
 from pathlib import Path
 from unittest import mock
 
-from outils.i18n import pont_corrext as P
+from outils.i18n import pont_corrext as P, traduire
 from outils.i18n.table import Table, cle
 
 ICI = Path(__file__).resolve().parent.parent
@@ -223,10 +223,16 @@ class TestPortee(Base):
                  "corrext/plugin-word/": "<!DOCTYPE html>\n<html lang=\"fr\"><head><meta charset=\"utf-8\"></head><body>\n<main id=\"main\"><p>Un plugin pour Word</p></main>\n</body></html>",
                  "contact/": "<!DOCTYPE html>\n<html lang=\"fr\"><head><meta charset=\"utf-8\"></head><body>\n<main id=\"main\"><p>Contact</p></main>\n</body></html>"}
         table = Table("de", self.langues)
+        bandeau = cle(traduire.LIBELLE_BANDEAU)  # toujours servi s'il manque (vague finale, point 8)
         cles = P.cles_des_pages("de", ["", "corrext/plugin-word/"], table, pages)
-        self.assertEqual(cles, {cle("Demander une démo"), cle("Un plugin pour Word")})
+        self.assertEqual(cles, {cle("Demander une démo"), cle("Un plugin pour Word"), bandeau})
         # « accueil » désigne la page d'accueil, comme dans la commande exporter
+        self.assertEqual(P.cles_des_pages("de", ["accueil"], table, pages), {cle("Demander une démo"), bandeau})
+        table.poser(traduire.LIBELLE_BANDEAU, "Arbeitsversion", "adapte", "test")
         self.assertEqual(P.cles_des_pages("de", ["accueil"], table, pages), {cle("Demander une démo")})
+        # union des modes : un texte de la production seule (bandeau de consentement) est servi aussi
+        union = {"": {"apercu": pages[""], "production": pages[""].replace("<main", "<div>Refuser</div><main")}}
+        self.assertEqual(P.cles_des_pages("de", ["accueil"], table, union), {cle("Demander une démo"), cle("Refuser")})
         with self.assertRaises(ValueError) as e:
             P.cles_des_pages("de", ["nexiste/pas/"], table, pages)
         self.assertIn("nexiste/pas/", str(e.exception))

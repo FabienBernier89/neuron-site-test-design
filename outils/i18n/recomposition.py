@@ -84,8 +84,8 @@ def _manquants_v2(langue, table, pages):
     """{texte: [pages V2]} des textes sans traduction pour leur page, comme traduire.analyser les verrait (avis
     fictifs retirés ; unités lang="fr" et invariants exclus)."""
     sortie = {}
-    for page, html in pages.items():
-        for u in S.extraire_page(T.retirer_avis_fictifs(html)):
+    for page, valeur in pages.items():
+        for u in (u for html in T.variantes(valeur) for u in S.extraire_page(T.retirer_avis_fictifs(html))):
             texte = _normal(u["texte"])
             if not u["lang_fr"] and table.chercher(texte, page) is None and not T._invariant(texte, langue):
                 sortie.setdefault(texte, [])
@@ -419,11 +419,11 @@ def recomposer(langue, neuron, table, pages=None, corrections=None):
       entrées « remplace » : l'ancienne phrase V1 et sa traduction), variante refusée, recomposition non posée sur la
       page, morceau (texte contenu dans un texte V1 plus long).
 
-    pages : pages FR assemblées de la V2 ({page: html}), par défaut traduire.pages_assemblees. corrections : liste
-    [(page ou None, ancien, nouveau)], par défaut _corrections(). Les traductions d'une recomposition précédente sont
+    pages : pages FR assemblées de la V2 ({page: html} ou {page: {mode: html}}), par défaut traduire.pages_union.
+    corrections : liste [(page ou None, ancien, nouveau)], par défaut _corrections(). Les traductions d'une recomposition précédente sont
     d'abord retirées. La table n'est pas écrite sur disque."""
     if pages is None:
-        pages = T.pages_assemblees(langue, "apercu")
+        pages = T.pages_union(langue)
     if corrections is None:
         corrections = _corrections()
     retirer_recompositions(table)

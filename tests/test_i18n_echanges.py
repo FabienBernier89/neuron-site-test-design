@@ -154,7 +154,8 @@ class TestExportXliff(Base):
     def test_sans_traduction(self):
         pages = {"": page(DEMO, "Texte jamais traduit", "Neur.on"), "contact/": page("Texte jamais traduit", "12 345")}
         m = E.sans_traduction("de", self.table, {"", "contact/"}, pages)
-        self.assertEqual(m, {cle("Texte jamais traduit"): {"fr": "Texte jamais traduit", "pages": ["", "contact/"]}})
+        self.assertEqual(m, {cle("Texte jamais traduit"): {"fr": "Texte jamais traduit", "pages": ["", "contact/"]},
+                             cle(traduire.LIBELLE_BANDEAU): {"fr": traduire.LIBELLE_BANDEAU, "pages": ["bandeau"]}})
         self.assertEqual(E.sans_traduction("de", self.table, {"contact/"}, pages)[cle("Texte jamais traduit")]["pages"],
                          ["contact/"])
         self.assertIn("Accueil", {x["fr"] for x in E.sans_traduction("de", self.table, None, pages).values()})  # llms
@@ -216,6 +217,26 @@ class TestExportXliff(Base):
         fichier, n = self.exporter(pages=["contact/"], nom="contact.xlf")
         self.assertEqual(set(self.unites(fichier)), {f"{cle(CONTACT)}@contact/", cle(DEMO), cle("Neur.on")})
         self.assertIn("Pages : contact/", self.unites(fichier)[cle(DEMO)].find(NS + "note").text)
+
+    def test_libelle_du_bandeau_toujours_exporte(self):
+        """Vague finale, point 8 : le libellé du bandeau de l'aperçu part avec toute sélection de pages (pseudo-page
+        « bandeau »), pour être relu dès le premier tour."""
+        self.table.poser(traduire.LIBELLE_BANDEAU, "Arbeitsversion, Übersetzung nicht geprüft", "adapte", "test")
+        fichier, _ = self.exporter(pages=["a-propos/"])
+        u = self.unites(fichier)
+        self.assertEqual(set(u), {cle("Notre équipe"), cle(traduire.LIBELLE_BANDEAU)})
+        self.assertIn("Pages : bandeau", u[cle(traduire.LIBELLE_BANDEAU)].find(NS + "note").text)
+
+    def test_textes_des_deux_modes_exportes(self):
+        """Vague finale, point 1 : {page: {mode: html}} (traduire.pages_union) : un texte de la seule production est
+        exporté, une seule unité par texte présent dans les deux modes."""
+        self.table.poser("Préférences cookies", "Cookie-Einstellungen", "adapte", "test")
+        union = {"": {"apercu": PAGES[""], "production": PAGES[""].replace("</main>", "<p>Préférences cookies</p></main>")}}
+        sortie = self.sortie / "union.xlf"
+        E.exporter_xliff("de", self.table, None, {"adapte", "v1"}, sortie, assemblees=union, glossaire={})
+        u = self.unites(sortie)
+        self.assertIn(cle("Préférences cookies"), u)
+        self.assertEqual(sum(1 for k in u if k == cle(DEMO)), 1)
 
     def test_variante_de_page_a_son_unite(self):
         fichier, _ = self.exporter()
@@ -781,7 +802,8 @@ class TestCommandes(Base):
                     mock.patch.object(cli.chnell, "charger_glossaire", lambda *a, **k: GLOSSAIRE):
                 code = cli.main(["exporter", "de", "--pages", "nouveau/", "--sortie", str(self.sortie)])
         self.assertEqual(code, 0)
-        self.assertIn("2 texte(s) sans traduction, non exportés, sur 1 page(s) : nouveau/ (2)", sortie.getvalue())
+        # le libellé du bandeau de l'aperçu, absent de la table, est toujours compté (vague finale, point 8)
+        self.assertIn("3 texte(s) sans traduction, non exportés, sur 2 page(s) : nouveau/ (2), bandeau (1)", sortie.getvalue())
 
     def test_exporter_refuse_le_depot(self):
         code, _, erreur = self.lancer("exporter", "de", "--sortie", str(ICI / "export-refuse-test"))

@@ -10,7 +10,9 @@ termes du glossaire de projet présents dans le texte et le contexte V1 (context
 v1 et invariant sont marqués approved="yes" et state="final" (décision V2 : visibles et corrigeables, sans nouvelle relecture) ;
 mt et adapte portent state="needs-review-translation", relu state="signed-off". Un caractère interdit en XML 1.0 (contrôles C0
 hors tabulation, saut de ligne et retour chariot) fait refuser l'export. La source
-des traductions (« V1 de/kontakt/ », nom du moteur) n'est jamais écrite : l'export part chez un tiers.
+des traductions (« V1 de/kontakt/ », nom du moteur) n'est jamais écrite : l'export part chez un tiers. Les textes sont ceux
+des pages assemblées dans les deux modes (traduire.pages_union : le bandeau de consentement n'existe qu'en production) ; le
+libellé du bandeau de l'aperçu a sa pseudo-page « bandeau », exportée avec toute sélection de pages.
 
 Export TMX 1.4 (exporter_tmx) : les traductions des statuts demandés (les segments v1 approuvés, décision V12), source
 fr-CH, marqueurs en <bpt>/<ept>/<ph>. Glossaire CSV (exporter_glossaire_csv) : fr;<langue>;source;statut, UTF-8 avec BOM,
@@ -71,6 +73,8 @@ ETATS_CONFIRMES = ("translated", "final", "signed-off")  # états d'une cible qu
 _XML_INTERDIT = re.compile("[\x00-\x08\x0b\x0c\x0e-\x1f\ufffe\uffff\ud800-\udfff]")  # hors XML 1.0
 ACCUEIL = "accueil"  # la page d'accueil (clé de page « ») dans les notes et les identifiants
 LLMS = "llms"        # pseudo-page des libellés fixes des fichiers llms.txt
+BANDEAU = traduire.PAGE_BANDEAU  # pseudo-page du libellé du bandeau de l'aperçu (« Version de travail... »)
+PSEUDO_PAGES = (LLMS, BANDEAU)
 PAGES_VISIBLES = 8
 COLONNES_CSV = ("cle", "fr", "trad")
 
@@ -225,17 +229,21 @@ def _contextes(table):
 
 def _textes(pages, assemblees):
     """Textes français à traduire des pages choisies (None : tout le site), dans l'ordre du site : couples (page, texte).
-    Hors unités lang="fr" et avis fictifs ; les libellés fixes des llms.txt viennent en dernier sous la page « llms »."""
+    assemblees : {page: html} ou {page: {mode: html}} (traduire.pages_union : les textes des deux modes). Hors unités
+    lang="fr" et avis fictifs ; les libellés fixes des llms.txt viennent ensuite sous la page « llms », puis le libellé du
+    bandeau de l'aperçu sous la page « bandeau », toujours (toute page traduite non relue le porte en aperçu)."""
     from outils import llms
-    for page, html in assemblees.items():
+    for page, valeur in assemblees.items():
         if pages is not None and page not in pages:
             continue
-        for u in S.extraire_page(traduire.retirer_avis_fictifs(html)):
-            if not u["lang_fr"]:
-                yield page, u["texte"]
+        for html in traduire.variantes(valeur):
+            for u in S.extraire_page(traduire.retirer_avis_fictifs(html)):
+                if not u["lang_fr"]:
+                    yield page, u["texte"]
     if pages is None or LLMS in pages:
         for texte in llms.libelles_fixes():
             yield LLMS, texte
+    yield BANDEAU, traduire.LIBELLE_BANDEAU
 
 
 def _unites(table, pages, statuts, assemblees):
@@ -304,14 +312,15 @@ def _note(u, termes, contexte, avertissement):
 def exporter_xliff(langue, table, pages, statuts, sortie, assemblees=None, glossaire=None):
     """Écrit l'XLIFF 1.2 de la langue dans sortie (un fichier .xlf) : un <trans-unit> par texte dont le statut est dans
     statuts, restreint aux pages données (clés de page, « » pour l'accueil ; None : tout le site, libellés des llms.txt
-    compris). Rend le nombre d'unités. assemblees : {page: HTML français assemblé} (traduire.pages_assemblees, aperçu par
-    défaut) ; glossaire : {fr: {langue: {terme, ...}}} (chnell.charger_glossaire par défaut). ValueError si la sortie est
-    dans le dépôt ou si la langue n'est pas celle de la table."""
+    compris ; le libellé du bandeau de l'aperçu est toujours exporté). Rend le nombre d'unités. assemblees : {page: HTML
+    français assemblé} ou {page: {mode: html}} (traduire.pages_union par défaut : textes des deux modes) ; glossaire :
+    {fr: {langue: {terme, ...}}} (chnell.charger_glossaire par défaut). ValueError si la sortie est dans le dépôt ou si
+    la langue n'est pas celle de la table."""
     if langue not in LANGUES or table.langue != langue:
         raise ValueError(f"langue « {langue} » : la table est celle de « {table.langue} »")
     verifier_hors_depot(sortie)
     if assemblees is None:
-        assemblees = traduire.pages_assemblees(langue, "apercu")
+        assemblees = traduire.pages_union(langue)
     glossaire = _glossaire_de(langue, glossaire)
     contextes = _contextes(table)
     cible = HREFLANG[langue]

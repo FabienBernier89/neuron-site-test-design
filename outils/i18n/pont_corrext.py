@@ -194,21 +194,23 @@ def creer_serveur(pont, port=PORT):
 
 def cles_des_pages(langue, pages, table, assemblees=None):
     """Clés des textes manquants des pages données (clés de page de build.PAGES ; « accueil » pour l'accueil, « llms » pour
-    les libellés fixes des llms.txt) : ce que traduire.analyser relève, tous statuts de refus compris. assemblees : {page:
-    html} (traduire.pages_assemblees, assemblées par build.py, si absent). ValueError pour une page inconnue."""
-    assemblees = assemblees if assemblees is not None else traduire.pages_assemblees(langue, "apercu")
+    les libellés fixes des llms.txt) : ce que traduire.analyser relève, tous statuts de refus compris, dans les deux modes
+    (le bandeau de consentement de la production compris). Le libellé du bandeau de l'aperçu, que toute page traduite non
+    relue porte, en fait toujours partie s'il manque : un seul passage du pont suffit. assemblees : {page: html} ou
+    {page: {mode: html}} (traduire.pages_union si absent). ValueError pour une page inconnue."""
+    assemblees = assemblees if assemblees is not None else traduire.pages_union(langue)
     pages = ["" if p == echanges.ACCUEIL else p for p in pages]
-    inconnues = [p for p in pages if p not in assemblees and p != echanges.LLMS]
+    inconnues = [p for p in pages if p not in assemblees and p not in echanges.PSEUDO_PAGES]
     if inconnues:
         raise ValueError("page(s) inconnue(s) : " + ", ".join(inconnues) + " (clés de page : accueil, contact/, ...)")
-    cles = set()
+    manquants = traduire.manquants_bandeau(table, "apercu")
     for page in pages:
         if page == echanges.LLMS:
-            manquants = traduire.verifier_libelles(table, "apercu")
-        else:
-            manquants = traduire.analyser(assemblees[page], page, langue, table, "apercu")["manquants"]
-        cles |= {m["cle"] for m in manquants if m["cle"]}
-    return cles
+            manquants += traduire.verifier_libelles(table, "apercu")
+        elif page != echanges.BANDEAU:
+            for html in traduire.variantes(assemblees[page]):
+                manquants += traduire.analyser(html, page, langue, table, "apercu")["manquants"]
+    return {m["cle"] for m in manquants if m["cle"]}
 
 
 # ---------- réinjection ----------

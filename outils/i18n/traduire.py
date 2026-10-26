@@ -25,6 +25,12 @@ fictifs des pages métier sont retirés avant l'extraction (décision V8, Ruling
 traduction non relue (statut adapte) reçoit le bandeau « Version de travail, traduction non relue » (décision V4,
 Ruling 2), traduit par la table ; jamais en production.
 
+Pages françaises de la chaîne (pages_union) : les commandes qui listent, envoient, exportent ou réimportent les textes
+(etat, pont, exporter, importer, lexique, memoire) partent de l'union des pages assemblées en aperçu et en production : le
+bandeau de consentement des cookies n'existe qu'en production, la note « Formulaire de démonstration » qu'en aperçu. Le
+libellé du bandeau de l'aperçu (LIBELLE_BANDEAU) est un texte à traduire comme les autres, listé dès le premier tour
+(pseudo-page « bandeau »), pour ne pas demander un second passage du pont.
+
 Commande : python3 -m outils.i18n etat de [--production] (outils/i18n/__main__.py).
 
 Bibliothèque standard seulement."""
@@ -42,6 +48,7 @@ MODES = ("apercu", "production")
 RELUS = {"v1", "invariant", "relu"}  # statuts qui ne demandent pas le bandeau de l'aperçu
 IDENTIQUES = {"invariant", "v1"}      # statuts d'une traduction identique au français admise par l'exhaustivité
 LIBELLE_BANDEAU = "Version de travail, traduction non relue"
+PAGE_BANDEAU = "bandeau"  # pseudo-page du libellé du bandeau (etat, export, pont), comme « llms » pour les llms.txt
 CONTEXTES = "contextes.json"  # contextes V1 des textes à traduire, par langue (recomposition.recomposer, commande memoire)
 BANDEAU = '<div class="bandeau-travail" role="note">{}</div>\n'
 # Avis fictifs des pages métier (outils/composer/metier_modele.py, avis) : la section qui les porte, ou l'avis seul
@@ -49,6 +56,7 @@ _SECTION_AVIS = re.compile(r'<section class="sec mt-avis">(?:(?!</section>).)*?\
 _AVIS = re.compile(r"<figure\b[^>]*\bdata-avis-fictif\b[^>]*>.*?</figure>", re.S)
 _MOT = re.compile(r"[^\W\d_]+")
 _MARQUEUR = re.compile(r"\{/?\d+\}")
+_BODY = re.compile(r"<body\b[^>]*>\n?")
 
 
 def _normal(texte):
@@ -164,8 +172,18 @@ def analyser(html, page, langue, table, mode, neuron=None):
         if m:
             signaler(m)
         else:
-            traduit = traduit.replace("<body>\n", "<body>\n" + BANDEAU.format(H.escape(texte, quote=False)), 1)
+            traduit = _poser_bandeau(traduit, texte)
     return {"html": "" if manquants else traduit, "manquants": manquants, "statuts": statuts}
+
+
+def _poser_bandeau(html, texte):
+    """Bandeau de l'aperçu juste après l'ouverture de <body> (attributs permis) ; ValueError si <body> est introuvable :
+    une page traduite non relue ne se publie jamais sans son bandeau."""
+    m = _BODY.search(html)
+    if m is None:
+        raise ValueError("bandeau de l'aperçu : balise <body> introuvable dans la page traduite")
+    ouverture = m.group(0) if m.group(0).endswith("\n") else m.group(0) + "\n"
+    return html[:m.start()] + ouverture + BANDEAU.format(H.escape(texte, quote=False)) + html[m.end():]
 
 
 def traduire(html, page, langue, table, mode, neuron=None):
@@ -205,21 +223,68 @@ def pages_assemblees(langue, mode):
     return assemblees
 
 
+def pages_union(langue):
+    """Pages françaises assemblées des deux modes, pour la chaîne de traduction (etat, pont, exporter, importer, lexique,
+    memoire) : {page: {"apercu": html, "production": html}}, 404 comprise sous la clé « 404 ». Une page n'existe que
+    dans un mode : elle n'a que celui-là. Le bandeau de consentement (production seulement) et la note des formulaires de
+    démonstration (aperçu seulement) sont ainsi listés, exportés et réimportés comme le reste ; sans cela, une langue
+    entièrement relue resterait bloquée en production. Rien n'est écrit dans docs/."""
+    union = {}
+    for mode in MODES:
+        for page, html in pages_assemblees(langue, mode).items():
+            union.setdefault(page, {})[mode] = html
+    return union
+
+
+def variantes(valeur):
+    """Variantes distinctes d'une page de pages_union ({mode: html}), dans l'ordre des modes ; une chaîne seule (pages
+    assemblées d'un seul mode) en est l'unique variante."""
+    if not isinstance(valeur, dict):
+        return [valeur]
+    sortie = []
+    for m in MODES:
+        if m in valeur and valeur[m] not in sortie:
+            sortie.append(valeur[m])
+    return sortie
+
+
+def page_du_mode(valeur, mode):
+    """Page assemblée dans le mode donné (valeur de pages_union, ou chaîne seule) ; à défaut, la première variante."""
+    if isinstance(valeur, dict):
+        return valeur.get(mode) or variantes(valeur)[0]
+    return valeur
+
+
+def manquants_bandeau(table, mode):
+    """Manquants du libellé du bandeau de l'aperçu : seul l'aperçu l'affiche, la production ne le demande jamais."""
+    if mode != "apercu":
+        return []
+    return [m for m in (libelle(table, LIBELLE_BANDEAU, mode)[1],) if m]
+
+
 def etat_detaille(langue, mode):
-    """État de la traduction d'une langue sur tout le site, tel que le build le verrait : (etat, a_traduire), etat
-    ayant la forme de etat() et a_traduire étant {clé: texte FR} de tous les manquants. Pages : pages_assemblees."""
+    """État de la traduction d'une langue sur tout le site : (etat, a_traduire), etat ayant la forme de etat() et
+    a_traduire étant {clé: texte FR} de tous les manquants. Pages : pages_union ; chaque page est jugée publiable sur sa
+    version du mode demandé, telle que le build la verrait, mais a_traduire et les comptes par statut réunissent les
+    textes des deux modes (le bandeau de consentement de la production est listé dès l'aperçu). En aperçu, le libellé du
+    bandeau de travail a sa ligne (« bandeau »)."""
     import build  # import tardif : build importe ce module
-    assemblees = pages_assemblees(langue, mode)
+    assemblees = pages_union(langue)
     table = Table(langue, build.DOSSIER_LANGUES)
     pages, statuts, a_traduire = {}, {}, {}
-    for page, html in assemblees.items():
-        r = analyser(html, page, langue, table, mode)
-        pages[page] = _resume(r["manquants"])
-        statuts.update(r["statuts"])
-        a_traduire.update((m["cle"], m["fr"]) for m in r["manquants"] if m["cle"])
-    manquants_llms = verifier_libelles(table, mode)
-    pages["llms"] = _resume(manquants_llms)
-    a_traduire.update((m["cle"], m["fr"]) for m in manquants_llms)
+    for page, valeur in assemblees.items():
+        propre = page_du_mode(valeur, mode)
+        for html in variantes(valeur):
+            r = analyser(html, page, langue, table, mode)
+            if html == propre:
+                pages[page] = _resume(r["manquants"])
+            statuts.update(r["statuts"])
+            a_traduire.update((m["cle"], m["fr"]) for m in r["manquants"] if m["cle"])
+    fixes = [("llms", verifier_libelles(table, mode))] + ([(PAGE_BANDEAU, manquants_bandeau(table, mode))]
+                                                          if mode == "apercu" else [])
+    for nom, manquants in fixes:
+        pages[nom] = _resume(manquants)
+        a_traduire.update((m["cle"], m["fr"]) for m in manquants)
     compte = {}
     for s in statuts.values():
         compte[s] = compte.get(s, 0) + 1
@@ -230,7 +295,8 @@ def etat_detaille(langue, mode):
 
 def etat(langue, mode):
     """{"pages": {page: {"publiable", "manquants", "mots"}}, "segments": {statut: nombre de textes}, "mots_a_traduire"}.
-    pages : chaque page de build.PAGES, plus « 404 » et « llms » (libellés fixes des llms.txt) ; mots : mots français
+    pages : chaque page de build.PAGES, plus « 404 », « llms » (libellés fixes des llms.txt) et, en aperçu, « bandeau »
+    (libellé du bandeau de travail) ; mots : mots français
     des textes manquants. segments : textes français distincts du site par statut (« absent » : sans entrée)."""
     return etat_detaille(langue, mode)[0]
 

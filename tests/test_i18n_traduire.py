@@ -4,6 +4,7 @@ build.py (passe 2), commande d'état.
 Les tables des tests sont synthétiques : la fixture tests/fixtures/i18n/segments-de.json (traduction allemande de la
 fixture de la tâche 2.1, écrite pour les tests) ou des tables « DE <texte FR> » tirées des pages assemblées."""
 import contextlib
+import html as H
 import io
 import json
 import re
@@ -66,13 +67,15 @@ def assemblees(pages, apercu=True):
     return vues
 
 
-def table_complete(dossier, pages, statut="relu", apercu=True, avec_libelles=True, sauf=()):
+def table_complete(dossier, pages, statut="relu", apercu=True, avec_libelles=True, sauf=(), deux_modes=False):
     """Table allemande écrite dans <dossier>/de/segments.json, qui traduit les pages données et leur 404 (« DE <texte> »),
-    plus les libellés fixes ; sauf : clés de page laissées sans traduction."""
+    plus les libellés fixes ; sauf : clés de page laissées sans traduction ; deux_modes : les pages des deux modes (textes
+    de l'aperçu et de la production, comme la chaîne les liste : traduire.pages_union)."""
     t = Table("de", dossier)
-    for page, html in assemblees(pages, apercu).items():
-        if page not in sauf:
-            pseudo(t, html, statut)
+    for mode in ((True, False) if deux_modes else (apercu,)):
+        for page, html in assemblees(pages, mode).items():
+            if page not in sauf:
+                pseudo(t, html, statut)
     if avec_libelles:
         libelles(t, statut)
     t.enregistrer()
@@ -245,6 +248,28 @@ class TestBandeau(unittest.TestCase):
         self.assertEqual(html, "")
         self.assertEqual([(m["fr"], m["raison"]) for m in manquants], [(T.LIBELLE_BANDEAU, "absent")])
 
+    def test_body_a_attributs_ou_introuvable(self):
+        """Vague finale, point 8 : <body> à attributs reçoit le bandeau ; sans <body>, ValueError (jamais de page non
+        relue publiée sans son bandeau)."""
+        page = PAGE.replace("<body>", '<body class="x">', 1)
+        html, _ = T.traduire(page, "contact/", "de", self.table(), "apercu")
+        self.assertIn('<body class="x">\n<div class="bandeau-travail" role="note">' + BANDEAU_DE + "</div>\n", html)
+        with self.assertRaises(ValueError) as e:
+            T.traduire(re.sub(r"</?body[^>]*>", "", PAGE), "contact/", "de", self.table(), "apercu")
+        self.assertIn("<body>", str(e.exception))
+
+    def test_libelle_du_bandeau_liste_par_etat_des_le_premier_tour(self):
+        """Vague finale, point 8 : etat (aperçu) a une ligne « bandeau » et met le libellé dans a_traduire, même quand
+        aucune page n'est encore traduite ; la production ne le demande pas."""
+        with tempfile.TemporaryDirectory() as tmp:
+            dossier = Path(tmp) / "langues"
+            with mock.patch.object(build, "PAGES", ["contact/"]), mock.patch.object(build, "DOSSIER_LANGUES", dossier):
+                etat, a_traduire = T.etat_detaille("de", "apercu")
+                production = T.etat("de", "production")
+        self.assertFalse(etat["pages"][T.PAGE_BANDEAU]["publiable"])
+        self.assertIn(cle(T.LIBELLE_BANDEAU), a_traduire)
+        self.assertNotIn(T.PAGE_BANDEAU, production["pages"])
+
 
 class TestAvisFictifs(unittest.TestCase):
     """Ruling 4 (V8) : hors FR, les avis fictifs des pages métier sont retirés avant l'extraction."""
@@ -399,7 +424,7 @@ class TestEtat(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             dossier = Path(tmp) / "langues"
             with mock.patch.object(build, "PAGES", ["contact/"]):
-                table_complete(dossier, ("contact/",))
+                table_complete(dossier, ("contact/",), deux_modes=True)
             original = build.lire_page
 
             def lire_page(page):
@@ -409,7 +434,7 @@ class TestEtat(unittest.TestCase):
                 complet = T.etat("de", "apercu")
                 with mock.patch.object(build, "lire_page", lire_page):
                     etat, a_traduire = T.etat_detaille("de", "apercu")
-            self.assertEqual(set(complet["pages"]), {"contact/", "404", "llms"})
+            self.assertEqual(set(complet["pages"]), {"contact/", "404", "llms", T.PAGE_BANDEAU})
             self.assertTrue(all(e["publiable"] for e in complet["pages"].values()), complet["pages"])
             self.assertEqual(complet["mots_a_traduire"], 0)
             contact = etat["pages"]["contact/"]
@@ -448,6 +473,52 @@ class TestEtat(unittest.TestCase):
             self.assertEqual(a_traduire[cle("Demander une démonstration")]["contexte"], contexte)
             self.assertNotIn("contexte", a_traduire[cle(llms.SOURCE)])
             self.assertNotIn(chr(0x2014), texte)
+
+
+class TestUnionDesModes(unittest.TestCase):
+    """Vague finale, point 1 : la chaîne (etat, export, pont, lexique, mémoire) lit l'union des pages des deux modes ; le
+    bandeau de consentement (production seulement) est listé et exporté, et une langue entièrement relue par cette chaîne
+    se construit en production sans intervention."""
+    COOKIES = ("Cookies de mesure d'audience", "Préférences cookies", "Refuser", "Accepter")
+
+    def test_union_et_variantes(self):
+        faux = {"apercu": {"": "A", "404": "N"}, "production": {"": "P", "404": "N"}}
+        with mock.patch.object(T, "pages_assemblees", lambda langue, mode: faux[mode]):
+            union = T.pages_union("de")
+        self.assertEqual(union, {"": {"apercu": "A", "production": "P"}, "404": {"apercu": "N", "production": "N"}})
+        self.assertEqual(T.variantes(union[""]), ["A", "P"])
+        self.assertEqual(T.variantes(union["404"]), ["N"])  # deux modes identiques : une seule variante
+        self.assertEqual(T.variantes("seule"), ["seule"])
+        self.assertEqual((T.page_du_mode(union[""], "production"), T.page_du_mode("seule", "apercu")), ("P", "seule"))
+
+    def test_bandeau_cookies_liste_exporte_puis_production_construite(self):
+        from outils.i18n import echanges
+        with tempfile.TemporaryDirectory() as tmp:
+            dossier = Path(tmp) / "langues"
+            with mock.patch.object(build, "PAGES", ["contact/"]):
+                table = table_complete(dossier, ("contact/",))  # aperçu entièrement relu, comme après un premier tour
+                with mock.patch.object(build, "DOSSIER_LANGUES", dossier):
+                    etat, a_traduire = T.etat_detaille("de", "apercu")
+                    self.assertTrue(etat["pages"]["contact/"]["publiable"])  # jugée sur sa version de l'aperçu
+                    for texte in self.COOKIES:
+                        self.assertIn(texte, a_traduire.values())
+                    # export : les textes de la production seule sont dans le fichier du relecteur
+                    for k, fr in a_traduire.items():
+                        table.poser(fr, "DE " + fr, "adapte", "test")
+                    xlf = Path(tmp) / "export" / "de.xlf"
+                    echanges.exporter_xliff("de", table, None, {"adapte"}, xlf, glossaire={})
+                    contenu = xlf.read_text(encoding="utf-8")
+                    for texte in self.COOKIES:
+                        self.assertIn(H.escape(texte, quote=False), contenu)
+                    # le relecteur confirme tout : la production se construit, bandeau de consentement traduit
+                    for fr in a_traduire.values():
+                        table.poser(fr, "DE " + fr, "relu", "test")
+                    table.enregistrer()
+            sortie, console = TestBuild().construire(tmp, ("contact/",), apercu=False)
+            self.assertNotIn("non publiée", console)
+            html = (sortie / "de/kontakt/index.html").read_text(encoding="utf-8")
+            self.assertIn("DE Préférences cookies", html)
+            self.assertIn('id="cc"', html)
 
 
 if __name__ == "__main__":
