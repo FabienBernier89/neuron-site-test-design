@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Débordements de texte et de mise en page d'un site déjà construit, mesurés dans Chrome sans interface (tâche 6.3 de la traduction).
 //
-//   node outils/debordements.mjs --racine <sortie> --pages de/,de/corrext/word-plugin/ --largeurs 390,1440 [--json] [--captures <dossier>] [--regles <fichier.json>]
+//   node outils/debordements.mjs --racine <sortie> --pages de/,de/corrext/word-plugin/ --largeurs 390,1440 [--json] [--captures <dossier>] [--regles <fichier.json>] [--reference <rapport.json>]
+//   node outils/debordements.mjs --help
 //
 // --racine    dossier du site construit (par exemple celui de SORTIE=... python3 build.py) ; servi en local sur 127.0.0.1.
 // --pages     adresses des pages à mesurer, relatives à la racine (« de/ », « fr/corrext/plugin-word/ »), séparées par des virgules.
@@ -11,6 +12,8 @@
 // --json      rapport en JSON sur la sortie standard, au lieu du texte lisible.
 // --captures  dossier où écrire une capture pleine page par page et par largeur, les éléments en cause cernés de rouge.
 // --regles    nombre de lignes maximal par sélecteur (par défaut outils/debordements.json : {"sélecteur CSS": lignes max}).
+// --reference rapport JSON d'une mesure précédente (celle des pages françaises, --json) : un relevé qui y figure déjà (même
+//             genre, même largeur, même sélecteur) n'est pas un défaut de la traduction (Ruling 33) ; il est compté à part.
 //
 // Pour chaque page et chaque largeur, le script relève :
 //  1. les éléments dont le contenu dépasse la boîte (scrollWidth > clientWidth + 1) ET dont un texte visible dépasse
@@ -24,7 +27,11 @@
 // Les menus sont mesurés ouverts : un par un le méga-menu à partir de 1024 px, le menu mobile déplié en dessous.
 // Les animations sont réduites (prefers-reduced-motion) et la page est parcourue d'un bout à l'autre avant la mesure.
 //
+// Une ressource demandée par la page et absente de la racine (404 du serveur local) est un problème, listée avec la page
+// (la demande automatique de /favicon.ico par Chrome exceptée).
+//
 // Code de sortie : 0 aucun problème, 1 au moins un problème, 2 erreur d'usage ou d'environnement (Chrome, page absente).
+// Chrome est arrêté et son profil temporaire supprimé dans tous les cas, y compris sur Ctrl+C (SIGINT) ou SIGTERM.
 // Chrome : /Applications/Google Chrome.app sur macOS, ou le programme donné par la variable CHROME. Aucune dépendance npm :
 // le WebSocket de Node pilote Chrome par le protocole CDP.
 import { spawn } from "node:child_process";
@@ -36,6 +43,7 @@ import { fileURLToPath } from "node:url";
 
 const ICI = dirname(fileURLToPath(import.meta.url));
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const DELAI_CHROME = parseInt(process.env.DEBORDEMENTS_DELAI_CHROME || "20000", 10);  // ms pour ouvrir le port de pilotage
 const HAUTEUR = 900;          // hauteur de la fenêtre émulée
 const HAUTEUR_CAPTURE_MAX = 16000;
 const attendre = ms => new Promise(r => setTimeout(r, ms));
@@ -46,17 +54,27 @@ function echec(message) {
 }
 
 // ---------- arguments ----------
+function aide() {
+  // l'en-tête de ce fichier, sans les marques de commentaire
+  const lignes = readFileSync(fileURLToPath(import.meta.url), "utf8").split("\n").slice(1);
+  console.log(lignes.slice(0, lignes.findIndex(l => !l.startsWith("//"))).map(l => l.replace(/^\/\/ ?/, "")).join("\n"));
+  process.exit(0);
+}
+
 function lireArguments(argv) {
-  const a = { racine: null, pages: [], largeurs: [390, 1440], json: false, captures: null, regles: join(ICI, "debordements.json") };
+  const a = { racine: null, pages: [], largeurs: [390, 1440], json: false, captures: null, regles: join(ICI, "debordements.json"),
+    reference: null };
   for (let i = 0; i < argv.length; i++) {
     const cle = argv[i];
     const valeur = () => { if (i + 1 >= argv.length) echec(`${cle} attend une valeur`); return argv[++i]; };
-    if (cle === "--racine") a.racine = resolve(valeur());
+    if (cle === "--help" || cle === "-h") aide();
+    else if (cle === "--racine") a.racine = resolve(valeur());
     else if (cle === "--pages") a.pages = valeur().split(",").map(s => s.trim()).filter(Boolean);
     else if (cle === "--largeurs") a.largeurs = valeur().split(",").map(s => parseInt(s, 10)).filter(n => n > 0);
     else if (cle === "--json") a.json = true;
     else if (cle === "--captures") a.captures = resolve(valeur());
     else if (cle === "--regles") a.regles = resolve(valeur());
+    else if (cle === "--reference") a.reference = resolve(valeur());
     else echec(`option inconnue : ${cle}`);
   }
   if (!a.racine || !a.pages.length || !a.largeurs.length) echec("usage : node outils/debordements.mjs --racine <sortie> --pages de/,de/corrext/word-plugin/ --largeurs 390,1440 [--json] [--captures <dossier>]");
@@ -70,40 +88,55 @@ const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=
   ".jpeg": "image/jpeg", ".webp": "image/webp", ".ico": "image/x-icon", ".woff2": "font/woff2", ".woff": "font/woff",
   ".txt": "text/plain; charset=utf-8", ".xml": "application/xml" };
 
+const introuvables = [];  // chemins servis en 404, dans l'ordre (mesurer prend ceux de sa page)
+
 function servir(racine) {
   const serveur = createServer((req, rep) => {
-    let chemin = normalize(decodeURIComponent(new URL(req.url, "http://x").pathname));
+    let chemin;
+    try { chemin = normalize(decodeURIComponent(new URL(req.url, "http://x").pathname)); }
+    catch (e) { rep.writeHead(400).end("adresse illisible"); introuvables.push(req.url + " (adresse illisible)"); return; }
     let fichier = join(racine, chemin);
     if (fichier !== racine && !fichier.startsWith(racine + sep)) { rep.writeHead(403).end(); return; }
     if (existsSync(fichier) && statSync(fichier).isDirectory()) fichier = join(fichier, "index.html");
-    if (!existsSync(fichier)) { rep.writeHead(404).end("introuvable"); return; }
+    if (!existsSync(fichier)) {
+      if (chemin !== "/favicon.ico") introuvables.push(chemin);  // demande automatique de Chrome : pas une ressource de la page
+      rep.writeHead(404).end("introuvable");
+      return;
+    }
     rep.writeHead(200, { "Content-Type": TYPES[extname(fichier)] || "application/octet-stream" }).end(readFileSync(fichier));
   });
   return new Promise(ok => serveur.listen(0, "127.0.0.1", () => ok(serveur)));
 }
 
 // ---------- Chrome et protocole CDP ----------
+let arreterChrome = null;  // arrêt de Chrome et suppression du profil, une seule fois (fin normale, erreur ou signal)
+
 async function lancerChrome() {
   if (!existsSync(CHROME)) echec(`Chrome introuvable : ${CHROME} (variable CHROME)`);
   const profil = mkdtempSync(join(tmpdir(), "neuron-debordements-"));
   const chrome = spawn(CHROME, ["--headless=new", "--disable-gpu", "--hide-scrollbars", "--remote-debugging-port=0",
     `--user-data-dir=${profil}`, "--no-first-run", "--no-default-browser-check", "about:blank"], { stdio: ["ignore", "ignore", "pipe"] });
   const fin = new Promise(ok => chrome.once("exit", ok));
+  let fait = false;
+  const nettoyer = async () => {
+    if (fait) return;
+    fait = true;
+    chrome.kill();
+    await Promise.race([fin, attendre(5000)]);
+    rmSync(profil, { recursive: true, force: true });
+  };
+  arreterChrome = nettoyer;
   const adresse = await new Promise((ok, ko) => {
     let journal = "";
-    const delai = setTimeout(() => ko(new Error("Chrome n'a pas ouvert son port de pilotage en 20 s : " + journal.slice(-200))), 20000);
+    const delai = setTimeout(() => ko(new Error(`Chrome n'a pas ouvert son port de pilotage en ${DELAI_CHROME / 1000} s : `
+      + journal.slice(-200))), DELAI_CHROME);
     chrome.stderr.on("data", d => {
       journal += d;
       const m = /DevTools listening on (ws:\/\/\S+)/.exec(journal);
       if (m) { clearTimeout(delai); ok(m[1]); }
     });
     chrome.once("exit", () => { clearTimeout(delai); ko(new Error("Chrome s'est arrêté au lancement : " + journal.slice(-200))); });
-  });
-  const nettoyer = async () => {
-    chrome.kill();
-    await Promise.race([fin, attendre(5000)]);
-    rmSync(profil, { recursive: true, force: true });
-  };
+  }).catch(async e => { await nettoyer(); throw e; });  // port jamais ouvert : Chrome arrêté, profil supprimé
   return { adresse, nettoyer };
 }
 
@@ -279,6 +312,7 @@ async function mesurer(session, url, largeur, regles, captures, nomCapture) {
   const { cdp, evenement } = session;
   await cdp("Emulation.setDeviceMetricsOverride", { width: largeur, height: HAUTEUR, deviceScaleFactor: 1, mobile: false });
   const charge = evenement("Page.loadEventFired");
+  const debut404 = introuvables.length;
   await cdp("Page.navigate", { url });
   await charge;
   const hauteurPage = await evaluer(cdp, `(${parcourirDansPage})()`);
@@ -301,8 +335,33 @@ async function mesurer(session, url, largeur, regles, captures, nomCapture) {
       writeFileSync(join(captures, nomCapture), Buffer.from(img.data, "base64"));
     }
   }
+  cumul.introuvables = [...new Set(introuvables.slice(debut404))];
   return cumul;
 }
+
+// Relevés déjà présents dans le rapport de référence (pages françaises, Ruling 33) : retirés des problèmes, comptés à part.
+const GENRES = ["debordements", "hors_fenetre", "lignes"];
+const cleReference = (genre, largeur, o) => JSON.stringify([genre, largeur, o.selecteur, o.element || ""]);
+
+function lireReference(fichier) {
+  let r;
+  try { r = JSON.parse(readFileSync(fichier, "utf8")); } catch (e) { echec(`rapport de référence illisible : ${fichier} (${e.message})`); }
+  const connus = new Set();
+  for (const p of r.pages || []) for (const g of GENRES) for (const o of p[g] || []) connus.add(cleReference(g, p.largeur, o));
+  return connus;
+}
+
+function retirerConnus(resultat, connus) {
+  resultat.connus = 0;
+  for (const g of GENRES) {
+    const avant = resultat[g].length;
+    resultat[g] = resultat[g].filter(o => !connus.has(cleReference(g, resultat.largeur, o)));
+    resultat.connus += avant - resultat[g].length;
+  }
+  return resultat;
+}
+
+const problemes = r => r.debordements.length + r.hors_fenetre.length + r.lignes.length + (r.introuvables || []).length;
 
 // ---------- rapport ----------
 function regrouper(liste) {
@@ -318,11 +377,13 @@ function regrouper(liste) {
 function texteRapport(resultats) {
   const lignes = [];
   for (const r of resultats) {
-    const n = r.debordements.length + r.hors_fenetre.length + r.lignes.length;
-    lignes.push(`${r.page} à ${r.largeur} px : ${n ? n + " problème(s)" : "aucun débordement"}`);
+    const n = problemes(r);
+    lignes.push(`${r.page} à ${r.largeur} px : ${n ? n + " problème(s)" : "aucun débordement"}`
+      + (r.connus ? ` (${r.connus} relevé(s) déjà présent(s) dans la référence, ignoré(s))` : ""));
     for (const o of regrouper(r.debordements)) lignes.push(`  contenu plus large que sa boîte : ${o.selecteur} (${o.nombre}) : ${o.scrollWidth} px pour ${o.clientWidth} px [${o.etat}] « ${o.texte} »`);
     for (const o of regrouper(r.hors_fenetre)) lignes.push(`  hors de la fenêtre : ${o.selecteur} (${o.nombre}) : de ${o.gauche} à ${o.droite} px pour ${o.fenetre} px [${o.etat}] « ${o.texte} »`);
     for (const o of regrouper(r.lignes)) lignes.push(`  trop de lignes : ${o.selecteur} (${o.nombre}) : ${o.lignes} lignes pour ${o.max} au plus [${o.etat}] « ${o.texte} »`);
+    for (const c of r.introuvables || []) lignes.push(`  ressource introuvable (404) : ${c}`);
   }
   return lignes.join("\n");
 }
@@ -339,8 +400,16 @@ for (const p of arg.pages) {
 }
 if (arg.captures) mkdirSync(arg.captures, { recursive: true });
 
+const connus = arg.reference ? lireReference(arg.reference) : null;
 const serveur = await servir(arg.racine);
 const base = `http://127.0.0.1:${serveur.address().port}/`;
+for (const signal of ["SIGINT", "SIGTERM"]) {
+  process.once(signal, async () => {  // Ctrl+C ou arrêt : jamais de Chrome orphelin ni de profil laissé dans /tmp
+    if (arreterChrome) await arreterChrome();
+    serveur.close();
+    process.exit(signal === "SIGINT" ? 130 : 143);
+  });
+}
 let chrome = null, session = null, code = 0;
 try {
   chrome = await lancerChrome();
@@ -349,11 +418,11 @@ try {
   for (const page of arg.pages) {
     for (const largeur of arg.largeurs) {
       const nom = (page.replace(/\/+$/, "").replace(/\//g, "-") || "racine") + "_" + largeur + ".png";
-      const r = await mesurer(session, base + page, largeur, regles, arg.captures, nom);
-      resultats.push({ page, largeur, ...r });
+      const r = { page, largeur, ...(await mesurer(session, base + page, largeur, regles, arg.captures, nom)) };
+      resultats.push(connus ? retirerConnus(r, connus) : r);
     }
   }
-  const total = resultats.reduce((n, r) => n + r.debordements.length + r.hors_fenetre.length + r.lignes.length, 0);
+  const total = resultats.reduce((n, r) => n + problemes(r), 0);
   console.log(arg.json ? JSON.stringify({ total, pages: resultats }, null, 1) : texteRapport(resultats));
   code = total ? 1 : 0;
 } catch (e) {
@@ -361,7 +430,7 @@ try {
   code = 2;
 } finally {
   if (session) session.fermer();
-  if (chrome) await chrome.nettoyer();
+  if (arreterChrome) await arreterChrome();
   serveur.close();
 }
 process.exit(code);

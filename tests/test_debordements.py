@@ -126,6 +126,55 @@ class TestDebordements(unittest.TestCase):
         self.assertIn("aucun débordement", r.stdout)
         self.assertEqual(len(r.stdout.strip().splitlines()), 2)
 
+    def test_reference_ignore_les_releves_francais(self):
+        """Vague finale, point 12 (Ruling 33) : --reference <rapport.json> ignore les relevés déjà présents dans le rapport
+        de référence (même genre, largeur et sélecteur) et les compte à part."""
+        self.ecrire("fr", page('<div id="b" style="width:200px;overflow:hidden"><span style="white-space:nowrap">'
+                               "Texte trop long pour sa boîte</span></div>"))
+        self.ecrire("de", page('<div id="b" style="width:200px;overflow:hidden"><span style="white-space:nowrap">'
+                               "Ein viel zu langer Text für die Box</span></div><p id='n' style='width:50px;white-space:nowrap'>"
+                               "Neuer Überlauf nur auf Deutsch</p>"))
+        code, fr = self.mesurer("fr/", largeurs="390")
+        self.assertEqual(code, 1)
+        reference = Path(self._tmp.name) / "reference.json"
+        reference.write_text(json.dumps(fr), encoding="utf-8")
+        code, de = self.mesurer("de/", largeurs="390", extra=("--reference", str(reference)))
+        p = de["pages"][0]
+        self.assertGreaterEqual(p["connus"], 1)
+        self.assertNotIn("#b", [o["selecteur"] for o in p["debordements"]])
+        self.assertTrue(any("#n" in o["selecteur"] for o in p["hors_fenetre"] + p["debordements"]), p)
+        self.assertEqual(code, 1)
+
+    def test_ressource_introuvable_signalee(self):
+        """Vague finale, point 12 : un 404 du serveur (image absente) est un problème listé avec la page ; une adresse
+        mal encodée ne fait pas tomber le serveur (decodeURIComponent rattrapé)."""
+        self.ecrire("de", page('<img src="manque.png" alt="" width="10" height="10"><img src="x%E0%A4%A.png" alt="">'))
+        code, rapport = self.mesurer("de/", largeurs="1440")
+        self.assertEqual(code, 1)
+        introuvables = rapport["pages"][0]["introuvables"]
+        self.assertIn("/de/manque.png", introuvables)
+        self.assertEqual(rapport["total"], len(introuvables))
+
+    def test_aide_code_zero(self):
+        r = subprocess.run([NODE, str(OUTIL), "--help"], capture_output=True, text=True, timeout=60)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn("--reference", r.stdout)
+
+    def test_chrome_sans_port_arrete_et_profil_supprime(self):
+        """Vague finale, point 12 : Chrome qui n'ouvre jamais son port est arrêté et son profil temporaire supprimé."""
+        self.ecrire("de", page("<p>Inhalt</p>"))
+        trace = Path(self._tmp.name) / "profil.txt"
+        faux = Path(self._tmp.name) / "faux-chrome.sh"
+        faux.write_text("#!/bin/sh\nfor a in \"$@\"; do case $a in --user-data-dir=*) echo \"${a#--user-data-dir=}\" > "
+                        f"'{trace}';; esac; done\nexec sleep 60\n", encoding="utf-8")
+        faux.chmod(0o755)
+        r = subprocess.run([NODE, str(OUTIL), "--racine", str(self.racine), "--pages", "de/"], capture_output=True, text=True,
+                           timeout=60, env={**__import__("os").environ, "CHROME": str(faux), "DEBORDEMENTS_DELAI_CHROME": "1500"})
+        self.assertEqual(r.returncode, 2, r.stderr)
+        self.assertIn("port de pilotage", r.stderr)
+        profil = Path(trace.read_text(encoding="utf-8").strip())
+        self.assertFalse(profil.exists(), profil)
+
     def test_erreur_d_usage(self):
         """Page absente de la racine : code 2 et message en français, sans lancer Chrome."""
         self.racine.mkdir(parents=True)
