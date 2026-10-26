@@ -2,10 +2,12 @@
 
 Tout est synthétique : lexique, journal et termes V1 écrits ici, dossiers temporaires pour les fichiers. Aucun test ne lit
 ni n'écrit le dossier réel de la terminologie (Bibliotheque-Claude, Ruling 5), aucune requête réseau, aucune capture de
-CHnell (la zone de résultats et sa lecture attendent la session avec Fabien, tâche 4.2 step 1)."""
+CHnell : la lecture des résultats s'appuie sur une fixture JSON synthétique (textes de remplissage), qui reprend la
+structure relevée avec Fabien le 2026-10-26 sans aucun texte réel de CHnell (le dépôt est public)."""
 import contextlib
 import io
 import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,6 +18,17 @@ from outils.i18n import __main__ as commandes
 from outils.i18n import chnell, terminologie
 
 TIRET_CADRATIN, DEMI_CADRATIN = chr(0x2014), chr(0x2013)
+FIXTURE = Path(__file__).resolve().parent / "fixtures" / "i18n" / "chnell-resultats.json"
+
+
+def page(etat="resultats", resultats=(), total=""):
+    """Sortie JSON du script d'extraction, telle que la renvoie l'outil JavaScript."""
+    return json.dumps({"etat": etat, "total": total, "resultats": list(resultats)})
+
+
+def resultat(source, cible, reference="Référence de remplissage"):
+    return {"domaine": "DOMAINE", "reference": reference, "source": source, "surlignes_source": [],
+            "surlignes_cible": cible}
 
 
 def lex(fr, priorite, retenu=True):
@@ -136,11 +149,114 @@ class TestJournal(unittest.TestCase):
 
 
 class TestLireResultats(unittest.TestCase):
-    def test_lecture_attend_la_capture_de_chnell(self):
-        """Ni ZONE ni lire_resultats ne sont inventés : ils viennent de la session avec Fabien (tâche 4.2 step 1)."""
-        self.assertIsNone(chnell.ZONE)
-        with self.assertRaisesRegex(NotImplementedError, "capture CHnell à faire avec Fabien"):
-            chnell.lire_resultats("<html></html>")
+    def test_lire_resultats_fixture(self):
+        resultats = chnell.lire_resultats(FIXTURE.read_text(encoding="utf-8"))
+        self.assertEqual(len(resultats), 5)
+        for r in resultats[:4]:
+            for champ in ("domaine", "reference", "source"):
+                self.assertTrue(r[champ], champ)
+            self.assertTrue(r["surlignes_source"] and r["surlignes_cible"])
+        self.assertEqual(resultats[0]["source"], "fedlex.admin.ch")
+        self.assertEqual(resultats[0]["surlignes_cible"], ["Zielwort Alpha", "Nebenwort", "Zielwort Alpha"])
+        self.assertEqual(chnell.lire_page(FIXTURE.read_text(encoding="utf-8"))["total"], "42 results")
+
+    def test_page_de_connexion_refusee(self):
+        with self.assertRaisesRegex(ValueError, "page de connexion : prévenir Fabien"):
+            chnell.lire_resultats(page("connexion"))
+
+    def test_page_en_chargement_refusee(self):
+        with self.assertRaisesRegex(ValueError, "chargement"):
+            chnell.lire_resultats(page("chargement"))
+
+    def test_aucun_resultat_rend_une_liste_vide(self):
+        self.assertEqual(chnell.lire_resultats(page("aucun")), [])
+
+    def test_sortie_doublement_encodee_acceptee(self):
+        """L'outil JavaScript peut renvoyer la chaîne JSON elle-même encodée en JSON."""
+        brut = FIXTURE.read_text(encoding="utf-8")
+        self.assertEqual(chnell.lire_resultats(json.dumps(brut)), chnell.lire_resultats(brut))
+
+    def test_schema_refuse(self):
+        bon = resultat("fedlex.admin.ch", ["Zielwort"])
+        for texte in ("", "pas du json", "[]", json.dumps({"etat": "inconnu", "total": "", "resultats": []}),
+                      json.dumps({"etat": "resultats", "total": "", "resultats": [{"source": "x"}]}),
+                      json.dumps({"etat": "resultats", "total": "", "resultats": "aucun"}),
+                      json.dumps({"etat": "resultats", "total": 3, "resultats": [bon]}),
+                      page("resultats", [{**bon, "surlignes_cible": "Zielwort"}]),
+                      page("resultats", [{**bon, "surlignes_cible": [3]}]),
+                      page("resultats", [{**bon, "source": None}]),
+                      # jamais de texte complet : un champ en trop est refusé
+                      page("resultats", [{**bon, "phrase": "texte complet d'un résultat"}])):
+            with self.subTest(texte=texte[:50]), self.assertRaises(ValueError):
+                chnell.lire_resultats(texte)
+
+
+class TestEquivalents(unittest.TestCase):
+    def test_equivalents_fedlex_dabord(self):
+        """Le plan : Fedlex d'abord, même si un autre terme est plus fréquent hors Fedlex."""
+        resultats = chnell.lire_resultats(FIXTURE.read_text(encoding="utf-8"))
+        eq = chnell.equivalents(resultats)
+        self.assertEqual([e[0] for e in eq], ["Zielwort Alpha", "Nebenwort", "Zielwort Beta", "Zielwort Gamma"])
+        # Zielwort Beta compte 4 occurrences (casse fusionnée), plus que Zielwort Alpha (3), mais hors Fedlex
+        self.assertEqual([e[1] for e in eq], [3, 2, 4, 1])
+        self.assertEqual(eq[0][2], ["fedlex.admin.ch"])
+        self.assertEqual(eq[2][2], ["autorite-exemple.example"])
+
+    def test_classement_par_frequence_puis_ordre_d_apparition(self):
+        eq = chnell.equivalents([resultat("exemple.example", ["Bb", "Aa", "Cc", "Aa", "Cc", "Dd"])])
+        self.assertEqual([(e[0], e[1]) for e in eq], [("Aa", 2), ("Cc", 2), ("Bb", 1), ("Dd", 1)])
+
+    def test_casse_normalisee_flexions_non_fusionnees(self):
+        eq = chnell.equivalents([resultat("exemple.example", ["Kapital", "kapital", " Kapital. ", "Kapitals"])])
+        self.assertEqual([(e[0], e[1]) for e in eq], [("Kapital", 3), ("Kapitals", 1)])
+
+    def test_sources_distinctes_fedlex_en_premier(self):
+        eq = chnell.equivalents([resultat("exemple.example", ["Terme"]), resultat("fedlex.admin.ch", ["Terme", "Terme"]),
+                                 resultat("exemple.example", ["Terme"])])
+        self.assertEqual(eq, [("Terme", 4, ["fedlex.admin.ch", "exemple.example"])])
+
+    def test_sans_resultat(self):
+        self.assertEqual(chnell.equivalents([]), [])
+        self.assertEqual(chnell.equivalents([resultat("fedlex.admin.ch", [])]), [])
+
+
+class TestExtractionJs(unittest.TestCase):
+    """Le script d'extraction ne dépend pas du suffixe haché des classes CSS Modules (il change à chaque déploiement)."""
+
+    def test_selecteurs_par_prefixe_seulement(self):
+        for script in (chnell.EXTRACTION_JS, chnell.EXTRACTION_JS_PLUS):
+            attributs = re.findall(r"\[class([^\]=]*)=\"([^\"]*)\"\]", script)
+            self.assertGreaterEqual(len(attributs), 7)
+            for operateur, valeur in attributs:
+                self.assertEqual(operateur, "^", f"[class{operateur}={valeur}] : sélecteur par préfixe attendu")
+                self.assertNotIn("__", valeur, "suffixe haché dans un sélecteur")
+            self.assertFalse(re.findall(r"\.[A-Za-z]+_[A-Za-z]+__", script), "classe hachée écrite en entier")
+
+    def test_selecteurs_releves_avec_fabien(self):
+        self.assertEqual(chnell.ZONE, '[class^="SearchResults_container"]')
+        for script in (chnell.EXTRACTION_JS, chnell.EXTRACTION_JS_PLUS):
+            for selecteur in (chnell.ZONE, '[class^="AlignmentResult_container"]', '[class^="AlignmentResult_domain"]',
+                              '[class^="AlignmentResult_rest"]',
+                              '[class^="AlignmentResult_alignment"] > div:nth-child(1) span.bg-highlight',
+                              '[class^="AlignmentResult_alignment"] > div:nth-child(2) span.bg-highlight'):
+                self.assertIn(selecteur, script)
+        self.assertIn('[class^="SearchResults_showMore"] button', chnell.EXTRACTION_JS_PLUS)
+        self.assertNotIn("showMore", chnell.EXTRACTION_JS)
+
+    def test_aucun_texte_complet_dans_la_sortie(self):
+        """Seuls les surlignés, la référence, la source et le domaine sortent : pas de HTML, pas de phrase."""
+        for script in (chnell.EXTRACTION_JS, chnell.EXTRACTION_JS_PLUS):
+            self.assertNotIn("innerHTML", script)
+            self.assertNotIn("outerHTML", script)
+            self.assertIn("JSON.stringify", script)
+            for champ in ("etat", "total", "resultats", "domaine", "reference", "source", "surlignes_source",
+                          "surlignes_cible"):
+                self.assertIn(champ, script)
+
+    def test_sans_tiret_long(self):
+        for script in (chnell.EXTRACTION_JS, chnell.EXTRACTION_JS_PLUS):
+            self.assertNotIn(TIRET_CADRATIN, script)
+            self.assertNotIn(DEMI_CADRATIN, script)
 
 
 V1_DE = [{"fr": "capital-actions", "de": "Aktienkapital", "type": "glossaire", "source": "V1"},
@@ -286,10 +402,36 @@ class TestCommandesChnell(Commandes):
         self.assertEqual(code, 0, erreur)
         self.assertIsNone(chnell.charger_journal(self.dossier)[0]["retenu"])
 
-    def test_lire_dit_que_la_capture_est_a_faire(self):
-        code, sortie, erreur = self.lancer("chnell", "lire", "inexistant.html", "--fr", "capital-actions", "--langue", "de")
+    def test_lire_affiche_les_equivalents_classes_et_leurs_sources(self):
+        code, sortie, erreur = self.lancer("chnell", "lire", str(FIXTURE), "--fr", "terme de test", "--langue", "de")
+        self.assertEqual(code, 0, erreur)
+        self.assertIn("« terme de test »", sortie)
+        self.assertIn("5 résultat(s) lu(s) sur 42 results", sortie)
+        self.assertIn("1. Zielwort Alpha : 3 occurrence(s), sources : fedlex.admin.ch", sortie)
+        self.assertIn("3. Zielwort Beta : 4 occurrence(s), sources : autorite-exemple.example", sortie)
+        self.assertLess(sortie.index("Zielwort Alpha"), sortie.index("Zielwort Beta"))
+        self.assertIn(chnell.url_chnell("terme de test", "de"), sortie)
+        self.assertEqual(chnell.charger_journal(self.dossier), [], "lire n'écrit rien dans le journal")
+
+    def test_lire_refuse_la_page_de_connexion_avec_un_message_en_francais(self):
+        fichier = self.dossier.parent / "connexion.json"
+        fichier.write_text(page("connexion"), encoding="utf-8")
+        code, sortie, erreur = self.lancer("chnell", "lire", str(fichier), "--fr", "capital-actions", "--langue", "de")
         self.assertEqual(code, 1)
-        self.assertIn("capture CHnell à faire avec Fabien (tâche 4.2 step 1)", sortie + erreur)
+        self.assertIn("page de connexion : prévenir Fabien", erreur)
+        self.assertEqual(sortie, "")
+
+    def test_lire_aucun_resultat(self):
+        fichier = self.dossier.parent / "aucun.json"
+        fichier.write_text(page("aucun"), encoding="utf-8")
+        code, sortie, _ = self.lancer("chnell", "lire", str(fichier), "--fr", "capital-actions", "--langue", "de")
+        self.assertEqual(code, 0)
+        self.assertIn("aucun résultat", sortie)
+
+    def test_lire_fichier_introuvable(self):
+        code, _, erreur = self.lancer("chnell", "lire", "inexistant.json", "--fr", "capital-actions", "--langue", "de")
+        self.assertEqual(code, 1)
+        self.assertIn("introuvable", erreur)
 
     def test_file_liste_les_termes_restants(self):
         terminologie.ecrire_lexique("de", [lex("capital-actions", 2), lex("prescription", 3), lex("hors seuil", 4)],

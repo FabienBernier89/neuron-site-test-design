@@ -1,0 +1,16 @@
+{
+  "etat": "resultats",
+  "total": "42 results",
+  "resultats": [
+    {"domaine": "DOMAINE A", "reference": "Référence de remplissage 1", "source": "fedlex.admin.ch",
+     "surlignes_source": ["terme source un"], "surlignes_cible": ["Zielwort Alpha", "Nebenwort", "Zielwort Alpha"]},
+    {"domaine": "DOMAINE A", "reference": "Référence de remplissage 2", "source": "fedlex.admin.ch",
+     "surlignes_source": ["terme source un"], "surlignes_cible": ["Zielwort Alpha", "Nebenwort"]},
+    {"domaine": "DOMAINE B", "reference": "Référence de remplissage 3", "source": "autorite-exemple.example",
+     "surlignes_source": ["terme source un", "terme source deux"], "surlignes_cible": ["Zielwort Beta", "Zielwort Beta", "Zielwort Beta"]},
+    {"domaine": "DOMAINE B", "reference": "Référence de remplissage 4", "source": "autorite-exemple.example",
+     "surlignes_source": ["terme source un"], "surlignes_cible": ["zielwort beta", "Zielwort Gamma"]},
+    {"domaine": "DOMAINE C", "reference": "Référence de remplissage 5", "source": "exemple.example",
+     "surlignes_source": [], "surlignes_cible": []}
+  ]
+}

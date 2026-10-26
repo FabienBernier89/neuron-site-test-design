@@ -5,6 +5,7 @@
     python3 -m outils.i18n lexique de
     python3 -m outils.i18n chnell file de [--priorite-max 3]
     python3 -m outils.i18n chnell ajouter de capital-actions --retenu Aktienkapital --statut confirme ...
+    python3 -m outils.i18n chnell lire resultats.json --fr capital-actions --langue de
     python3 -m outils.i18n glossaire --langue de [--arbitrages]
     python3 -m outils.i18n exporter de [--pages accueil contact/] [--statuts mt adapte v1 invariant] [--sortie DOSSIER]
     python3 -m outils.i18n importer de fichier.xlf --relecteur "Prénom Nom" [--sortie DOSSIER] [--sans-etat]
@@ -31,7 +32,9 @@ NEURON_TERMINOLOGIE), en gardant les décisions « retenu » déjà prises.
 chnell : session de vérification dans CHnell (outils/i18n/chnell.py, tâches 4.2 et 4.3). « chnell file » liste les termes
 retenus du lexique qui n'ont pas encore de ligne de journal, avec leurs adresses CHnell (priorité 3 au plus par défaut,
 décision V5) ; « chnell ajouter » ajoute une ligne au journal.jsonl du dossier de la terminologie (schéma validé, aucun
-extrait de texte) ; « chnell lire » lira les résultats d'une page capturée : à faire avec la structure réelle de CHnell.
+extrait de texte) ; « chnell lire <fichier.json> --fr <terme> --langue <l> » lit la sortie JSON du script d'extraction
+(chnell.EXTRACTION_JS, exécuté dans l'onglet CHnell par l'outil JavaScript de Claude in Chrome) et affiche les équivalents
+classés (Fedlex d'abord) avec leurs sources ; elle n'écrit rien dans le journal.
 
 glossaire : construit le glossaire de projet d'une langue d'après le journal (glossaire.json du dossier de la terminologie,
 les autres langues sont gardées) : seules les lignes confirme et corrige y entrent, toute divergence avec les termes V1 et
@@ -139,6 +142,24 @@ def afficher_file(langue, file, priorite_max):
     lignes = [f"File CHnell {langue} : {len(file)} terme(s) retenu(s) de priorité 1 à {priorite_max} sans ligne de journal",
               "Concordances de Fedlex seules : ajouter « &sources=60 » à l'adresse (url_fedlex de chnell.file_attente)"]
     lignes += [f"  P{e['priorite']} {e['fr']} : {e['url']}" for e in file]
+    return "\n".join(lignes)
+
+
+def afficher_lecture(fr, langue, page):
+    """Équivalents classés d'une page de résultats CHnell (chnell.lire_page) : une ligne par équivalent, avec ses sources,
+    puis les références des résultats lus. Le résumé n'est pas écrit dans le journal (« chnell ajouter »)."""
+    resultats = page["resultats"]
+    lignes = [f"CHnell fr vers {langue}, « {fr} » : "
+              + (f"{len(resultats)} résultat(s) lu(s) sur {page['total'] or 'total inconnu'}" if resultats else "aucun résultat"),
+              f"Adresse : {chnell.url_chnell(fr, langue)}"]
+    if resultats:
+        lignes.append("Équivalents surlignés, Fedlex d'abord puis par fréquence :")
+        lignes += [f"  {i}. {terme} : {n} occurrence(s), sources : {', '.join(sources) or 'inconnues'}"
+                   for i, (terme, n, sources) in enumerate(chnell.equivalents(resultats), 1)]
+        lignes.append("Références lues :")
+        lignes += [f"  {i}. {r['source'] or 'source inconnue'} : {r['reference']} ({r['domaine']})"
+                   for i, r in enumerate(resultats, 1)]
+        lignes.append("Rien n'est écrit dans le journal : « chnell ajouter » enregistre la décision (statut, équivalent retenu).")
     return "\n".join(lignes)
 
 
@@ -391,11 +412,15 @@ def commande_chnell(args):
     """chnell file, ajouter et lire : n'ont besoin ni du site V1 ni de build.py."""
     if args.action == "lire":
         fichier = Path(args.fichier)
-        try:  # le fichier n'est lu qu'une fois lire_resultats écrite : d'ici là, seul le message de 4.2 compte
-            chnell.lire_resultats(fichier.read_text(encoding="utf-8") if fichier.is_file() else "")
-        except NotImplementedError as e:
-            print(e, file=sys.stderr)
+        if not fichier.is_file():
+            print(f"Fichier introuvable : {fichier} (sortie JSON du script d'extraction, chnell.EXTRACTION_JS)", file=sys.stderr)
             return 1
+        try:
+            page = chnell.lire_page(fichier.read_text(encoding="utf-8"))
+        except ValueError as e:
+            print(f"Lecture impossible : {e}", file=sys.stderr)
+            return 1
+        print(afficher_lecture(args.fr, args.langue, page))
         return 0
     if args.action == "file":
         lexique = terminologie.charger_lexique(args.langue)
@@ -444,8 +469,8 @@ def main(argv=None):
     a.add_argument("--verifie-par", default="agent", help="agent ou Fabien (un arbitrage de Fabien)")
     a.add_argument("--date", default=date.today().isoformat(), help="AAAA-MM-JJ (aujourd'hui par défaut)")
     a.add_argument("--url", help="adresse CHnell consultée (url_chnell par défaut)")
-    a = actions.add_parser("lire", help="lire une page de résultats capturée (à faire avec Fabien)")
-    a.add_argument("fichier")
+    a = actions.add_parser("lire", help="lire la sortie JSON du script d'extraction CHnell et classer les équivalents")
+    a.add_argument("fichier", help="fichier JSON écrit à partir de la sortie de chnell.EXTRACTION_JS")
     a.add_argument("--fr", required=True)
     a.add_argument("--langue", required=True, choices=LANGUES)
     p = sous.add_parser("glossaire", help="construire le glossaire de projet d'une langue d'après le journal")

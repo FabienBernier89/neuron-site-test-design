@@ -25,12 +25,22 @@ Fabien (verifie_par « Fabien » : arbitrage tranché). arbitrages() les liste p
 Ruling 5 (décision V6) : journal.jsonl et glossaire.json vivent dans le dossier de la terminologie (hors dépôt, voir
 terminologie.TERMINOLOGIE), jamais dans le dépôt public.
 
-ZONE (sélecteur CSS de la zone de résultats) et lire_resultats() restent à faire : ils dépendent de la structure réelle de
-la page CHnell, relevée avec Fabien à la première session (tâche 4.2, step 1). Aucune structure n'est inventée d'ici là.
+Lecture des résultats (structure relevée avec Fabien le 2026-10-26, Ruling 36). L'extension Chrome refuse de renvoyer le
+HTML brut de la page : EXTRACTION_JS (ou EXTRACTION_JS_PLUS, qui clique d'abord sur « show more » pour lire jusqu'à 20
+résultats) s'exécute dans l'onglet CHnell, par l'outil JavaScript de Claude in Chrome, et renvoie du JSON :
+
+    {"etat": "resultats"|"aucun"|"chargement"|"connexion", "total": "442 results",
+     "resultats": [{"domaine", "reference", "source", "surlignes_source": [...], "surlignes_cible": [...]}]}
+
+Aucune phrase entière dans cette sortie : seulement les mots surlignés, la référence, la source et le domaine. Les
+sélecteurs sont par préfixe de classe (CSS Modules : le suffixe haché change à chaque déploiement de CHnell).
+lire_resultats(texte_json) valide ce JSON (ValueError pour la page de connexion et le chargement), equivalents() classe les
+mots surlignés de la langue cible (Fedlex d'abord). La commande « chnell lire » affiche ce classement.
 
 Bibliothèque standard seulement."""
 import json
 import re
+from collections import Counter
 from datetime import date
 from pathlib import Path
 from urllib.parse import quote
@@ -39,8 +49,7 @@ from outils.i18n import controles, terminologie
 from outils.i18n.table import LANGUES
 
 URL = "https://corrext.com/chnell/search"
-ZONE = None  # sélecteur CSS de la zone de résultats : à relever dans CHnell avec Fabien (tâche 4.2, step 1)
-MESSAGE_CAPTURE = "capture CHnell à faire avec Fabien (tâche 4.2 step 1)"
+ZONE = '[class^="SearchResults_container"]'  # zone de résultats de la page CHnell (relevée le 2026-10-26)
 PRIORITE_MAX = 3  # décision V5 : les trois priorités sont vérifiées
 
 JOURNAL = "journal.jsonl"
@@ -55,6 +64,58 @@ SOURCE_PAR_DEFAUT = "CHnell"
 ARBITRE_PAR = "fabien"
 VERIFICATEURS = ("agent", "Fabien")  # verifie_par : liste fermée (vague finale, point 14)
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+ETATS_PAGE = ("resultats", "aucun", "chargement", "connexion")
+CHAMPS_RESULTAT = ("domaine", "reference", "source", "surlignes_source", "surlignes_cible")
+SOURCE_FEDLEX = "fedlex.admin.ch"  # critère du plan : les concordances de Fedlex comptent en premier
+PONCTUATION_DE_BORD = " .,;:!?()[]\u00ab\u00bb\"'\u2019"
+
+# Script d'extraction exécuté dans l'onglet CHnell. La lecture est une fonction commune aux deux variantes.
+_LECTURE_JS = r"""
+const txt = (el) => (el ? el.textContent : "").replace(/\s+/g, " ").trim();
+const tous = (racine, sel) => Array.from(racine.querySelectorAll(sel)).map(txt).filter(Boolean);
+const lire = () => {
+  const zone = document.querySelector('[class^="SearchResults_container"]');
+  const cartes = zone ? Array.from(zone.querySelectorAll('[class^="AlignmentResult_container"]')) : [];
+  const resultats = cartes.map((carte) => {
+    // « <référence> - Source: <domaine web> - Data Set: Neur.on »
+    const reste = txt(carte.querySelector('[class^="AlignmentResult_rest"]'));
+    const m = reste.match(/^(.*?)\s*-\s*Source:\s*(.*?)\s*-\s*Data Set:.*$/i);
+    return {
+      domaine: txt(carte.querySelector('[class^="AlignmentResult_domain"]')),
+      reference: m ? m[1] : reste,
+      source: m ? m[2] : "",
+      surlignes_source: tous(carte, '[class^="AlignmentResult_alignment"] > div:nth-child(1) span.bg-highlight'),
+      surlignes_cible: tous(carte, '[class^="AlignmentResult_alignment"] > div:nth-child(2) span.bg-highlight'),
+    };
+  });
+  const compteur = zone ? txt(zone.querySelector('[class^="SearchResults_tabs"]')).match(/\d[\d\s',.\u2019]*\+?\s*results?/i) : null;
+  let etat;
+  if (!zone) etat = document.querySelector('input[type="password"]') ? "connexion" : "chargement";
+  else if (resultats.length) etat = "resultats";
+  else etat = document.querySelector('[role="progressbar"], [aria-busy="true"], .animate-spin') ? "chargement" : "aucun";
+  return JSON.stringify({etat, total: compteur ? compteur[0].replace(/\s+/g, " ").trim() : "", resultats});
+};
+"""
+# Variante qui attend le chargement, puis clique sur « show more » (3 fois au plus) jusqu'à 20 résultats
+_CLICS_JS = r"""
+const attendre = (ms) => new Promise((r) => setTimeout(r, ms));
+const nombre = () => document.querySelectorAll('[class^="AlignmentResult_container"]').length;
+const attendrePlusDe = async (n, delai) => {
+  const fin = Date.now() + delai;
+  while (Date.now() < fin && nombre() <= n) await attendre(200);
+};
+if (!document.querySelector('input[type="password"]')) await attendrePlusDe(0, 8000);
+for (let i = 0; i < 3 && nombre() < 20; i++) {
+  const bouton = document.querySelector('[class^="SearchResults_showMore"] button');
+  if (!bouton) break;
+  const avant = nombre();
+  bouton.click();
+  await attendrePlusDe(avant, 5000);
+}
+"""
+EXTRACTION_JS = "(() => {" + _LECTURE_JS + "return lire();\n})()"
+EXTRACTION_JS_PLUS = "(async () => {" + _LECTURE_JS + _CLICS_JS + "return lire();\n})()"
 
 
 def url_chnell(terme, langue, fedlex=False):
@@ -80,10 +141,94 @@ def file_attente(langue, lexique, journal, priorite_max):
             for e in sorted(restants, key=lambda e: (e["priorite"], e["fr"]))]
 
 
-def lire_resultats(html):
-    """Équivalents lus dans la page de résultats de CHnell : [{source, reference, extrait_fr, extrait_cible}]. À faire avec
-    la structure réelle de la page (ZONE) ; ValueError prévu si la zone manque (page de connexion, erreur)."""
-    raise NotImplementedError(MESSAGE_CAPTURE)
+def _decoder(texte):
+    """Objet JSON de la sortie du script d'extraction (ValueError, message en français, s'il est illisible). L'outil
+    JavaScript peut rendre la chaîne JSON encodée une seconde fois : elle est alors décodée deux fois."""
+    try:
+        page = json.loads(texte)
+        if isinstance(page, str):
+            page = json.loads(page)
+    except (TypeError, ValueError):
+        raise ValueError("sortie du script d'extraction illisible : JSON attendu (EXTRACTION_JS)") from None
+    if not isinstance(page, dict):
+        raise ValueError("sortie du script d'extraction : objet JSON attendu")
+    return page
+
+
+def _liste_de_textes(valeur):
+    return isinstance(valeur, list) and all(isinstance(t, str) for t in valeur)
+
+
+def _valider_resultat(i, r):
+    """ValueError si un résultat n'a pas exactement les champs du script d'extraction (jamais de texte complet en plus)."""
+    if not isinstance(r, dict) or set(r) != set(CHAMPS_RESULTAT):
+        raise ValueError(f"résultat {i} : champs exacts attendus ({', '.join(CHAMPS_RESULTAT)}), aucun texte complet")
+    for champ in ("domaine", "reference", "source"):
+        if not isinstance(r[champ], str):
+            raise ValueError(f"résultat {i} : {champ} doit être un texte")
+    for champ in ("surlignes_source", "surlignes_cible"):
+        if not _liste_de_textes(r[champ]):
+            raise ValueError(f"résultat {i} : {champ} doit être une liste de textes")
+
+
+def lire_page(texte_json):
+    """Page de résultats lue par le script d'extraction : {"total": texte du compteur, "resultats": [...]}.
+    ValueError : page de connexion (prévenir Fabien), page en chargement (relire plus tard) ou sortie invalide.
+    Aucun résultat : liste vide (état « aucun »)."""
+    page = _decoder(texte_json)
+    etat = page.get("etat")
+    if etat not in ETATS_PAGE:
+        raise ValueError(f"etat : « {etat} » inconnu (attendu : {', '.join(ETATS_PAGE)})")
+    if etat == "connexion":
+        raise ValueError("page de connexion : prévenir Fabien")
+    if etat == "chargement":
+        raise ValueError("page CHnell encore en chargement : relancer le script dans quelques secondes")
+    total = page.get("total")
+    if not isinstance(total, str):
+        raise ValueError("total : texte attendu (compteur de la page, vide s'il manque)")
+    resultats = page.get("resultats")
+    if not isinstance(resultats, list):
+        raise ValueError("resultats : liste attendue")
+    if etat == "aucun":
+        return {"total": total, "resultats": []}
+    for i, r in enumerate(resultats, 1):
+        _valider_resultat(i, r)
+    return {"total": total, "resultats": resultats}
+
+
+def lire_resultats(texte_json):
+    """Résultats lus par EXTRACTION_JS : [{domaine, reference, source, surlignes_source, surlignes_cible}], liste vide si
+    CHnell ne trouve rien. ValueError sur la page de connexion, le chargement ou une sortie invalide (lire_page)."""
+    return lire_page(texte_json)["resultats"]
+
+
+def _cle(terme):
+    """Forme de comparaison d'un mot surligné : espaces réduits, ponctuation de bord retirée, casse ignorée. Les flexions
+    (Kapital, Kapitals) ne sont pas fusionnées."""
+    return _normal(terme).strip(PONCTUATION_DE_BORD).casefold()
+
+
+def equivalents(resultats):
+    """Mots surlignés de la langue cible, classés : [(équivalent, occurrences, sources)]. Les concordances de Fedlex comptent
+    en premier (critère du plan : Fedlex d'abord), puis le nombre total d'occurrences surlignées, puis l'ordre d'apparition.
+    Les variantes de casse sont comptées ensemble et affichées sous leur forme la plus fréquente. sources : sources
+    distinctes où le mot apparaît, Fedlex en premier."""
+    termes = {}
+    for r in resultats:
+        fedlex = SOURCE_FEDLEX in r["source"].casefold()
+        for surligne in r["surlignes_cible"]:
+            cle = _cle(surligne)
+            if not cle:
+                continue
+            t = termes.setdefault(cle, {"formes": Counter(), "total": 0, "fedlex": 0, "sources": []})
+            t["formes"][_normal(surligne).strip(PONCTUATION_DE_BORD)] += 1
+            t["total"] += 1
+            t["fedlex"] += fedlex
+            if r["source"] and r["source"] not in t["sources"]:
+                t["sources"].append(r["source"])
+    classes = sorted(termes.values(), key=lambda t: (-t["fedlex"], -t["total"]))  # tri stable : ordre d'apparition
+    return [(t["formes"].most_common(1)[0][0], t["total"],
+             sorted(t["sources"], key=lambda src: SOURCE_FEDLEX not in src.casefold())) for t in classes]
 
 
 # ---------- journal ----------
