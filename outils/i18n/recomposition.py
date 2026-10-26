@@ -23,6 +23,7 @@ ADAPTE = "adapte"
 VALIDES = ("v1", "invariant", "relu")  # traductions dont une recomposition ou une variante peut partir
 SOURCE_RECOMPOSITION = "recomposition V1 "
 SOURCE_VARIANTE = "variante de balisage "  # suivi de la source de la traduction V1 (« V1 de/kontakt/ »)
+ADAPTE_LE = "adapté le "  # marque de echanges.fusionner dans la source : la traduction a été adaptée depuis
 MOTS_MORCEAU = 2  # un morceau plus court n'a pas de contexte : un mot isolé se retrouve dans trop de textes V1
 _JETON = re.compile(r"\{(/?)(\d+)\}")
 _BALISE = re.compile(r"<[^>]+>")
@@ -96,9 +97,13 @@ def _manquants_v2(langue, table, pages):
 
 def retirer_recompositions(table):
     """Retire les traductions posées par une recomposition précédente (statut adapte, source « recomposition V1 … »
-    ou « variante de balisage … ») : elles se recalculent entièrement à chaque appel, comme la mémoire V1."""
+    ou « variante de balisage … ») : elles se recalculent entièrement à chaque appel, comme la mémoire V1. Une
+    traduction adaptée depuis par un agent (source « … ; adapté le <jour> », echanges.fusionner) ou relue n'est plus
+    une recomposition : elle est gardée (vague finale, point 4)."""
     def d_ici(e):
-        return e["statut"] == ADAPTE and (e["source"] or "").startswith((SOURCE_RECOMPOSITION, SOURCE_VARIANTE))
+        source = e["source"] or ""
+        return (e["statut"] == ADAPTE and source.startswith((SOURCE_RECOMPOSITION, SOURCE_VARIANTE))
+                and ADAPTE_LE not in source)
     for k in list(table.entrees):
         e = table.entrees[k]
         e["par_page"] = {p: v for p, v in e["par_page"].items() if not d_ici(v)}

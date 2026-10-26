@@ -529,6 +529,26 @@ class TestRecomposition(unittest.TestCase):
         # main : « Découvrir Corrext 8 questions » (adapte, non compté) et « Un texte nouveau ici » : 0 % de mémoire V1
         self.assertEqual(rapport["couverture_mots"], 0.0)
 
+    def test_relance_garde_les_adaptations_des_recompositions(self):
+        """Vague finale, point 4 : une recomposition adaptée par un agent (source « ; adapté le ») ou relue n'est plus
+        une recomposition à recalculer : relancer memoire la garde."""
+        from outils.i18n import echanges
+        t = Table("de", self.dossier / "tables")
+        t.poser("Découvrir Corrext 8 questions", "Corrext entdecken 8 Fragen", "adapte", "recomposition V1 de/a-de/")
+        t.poser("Autre recomposition", "Andere", "adapte", "recomposition V1 de/a-de/")
+        t.poser("Autre recomposition", "Andere hier", "adapte", "variante de balisage V1 de/a-de/", page="b/")
+        t.poser("Relue", "Geprüft", "relu", "recomposition V1 de/a-de/ ; relu par Alice le 2026-10-26")
+        propositions = self.dossier / "propositions.json"
+        propositions.write_text(json.dumps([{"cle": cle("Découvrir Corrext 8 questions"),
+                                             "trad": "Entdecken Sie Corrext in 8 Fragen"}]), encoding="utf-8")
+        self.assertEqual(echanges.fusionner(propositions, t, glossaire={}, jour="2026-10-26")["poses"], 1)
+        R.retirer_recompositions(t)
+        e = t.entrees[cle("Découvrir Corrext 8 questions")]
+        self.assertEqual((e["trad"], e["statut"]), ("Entdecken Sie Corrext in 8 Fragen", "adapte"))
+        self.assertTrue(e["source"].endswith("adapté le 2026-10-26"))
+        self.assertEqual(t.entrees[cle("Relue")]["trad"], "Geprüft")
+        self.assertNotIn(cle("Autre recomposition"), t.entrees)  # recomposition jamais adaptée : recalculée
+
     def test_variante_defaut_unique_par_la_traduction(self):
         # relecture 3.2, mineur (a) : deux textes V1 candidats, même traduction recalée, sources différentes : la
         # traduction par défaut est unique, elle est posée (source de la première page)
