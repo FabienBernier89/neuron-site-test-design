@@ -3,7 +3,8 @@ l'encart newsletter qu'un autre lot insère.
 
 - Tout formulaire dont l'action finit par « envoi.php » reçoit l'action absolue /envoi.php, la méthode POST (imposée),
   les champs cachés de suivi (remplis dans le navigateur par assets/global/suivi.js, dont « duree », le temps passé sur
-  la page au moment de l'envoi) et le champ piège. Sur l'aperçu, il porte
+  la page au moment de l'envoi), le champ caché « langue » (« fr » : le build le règle sur la langue des pages traduites)
+  et le champ piège. Sur l'aperçu, il porte
   data-demo : nav.js bloque l'envoi. En production, data-demo, novalidate et l'avis « aucun envoi » disparaissent :
   le formulaire part, après le contrôle des champs obligatoires par le navigateur.
 - Le formulaire de démo de la page contact reçoit son action et le champ Secteur (les 6 pages secteur, plus « Autre »).
@@ -28,7 +29,11 @@ SECTEURS = (("cabinets-avocats", "Cabinets d'avocats"), ("banques-finance", "Ban
             ("fiduciaires-conseil", "Fiduciaires et conseil"), ("editeurs-legaltech", "LegalTechs et éditeurs"))
 # Champs cachés, remplis par suivi.js ; « type » vaut « demo » sauf si le formulaire le fixe (« newsletter »).
 # « duree » (millisecondes sur la page) sert au délai minimal de envoi.php ; « t0 » (horodatage) reste pour l'interface.
-CACHES = ("type", "t0", "duree", "page_entree", "page_origine", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content")
+# « langue » : langue de la page (« fr » ici ; outils/i18n/localiser.py la remplace dans les pages traduites), qui décide de
+# la page de remerciement de envoi.php et figure dans l'e-mail.
+CACHES = ("type", "t0", "duree", "page_entree", "page_origine", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
+          "langue")
+VALEURS_CACHEES = {"type": "demo", "langue": "fr"}  # les autres champs cachés partent vides
 PIEGE = '<div class="piege" aria-hidden="true"><input type="text" name="site_url" tabindex="-1" autocomplete="off"></div>'
 FORMULAIRE = re.compile(r"(<form\b[^>]*>)(.*?)(</form>)", re.S)
 AVIS = re.compile(r'<p class="avis"[^>]*>.*?</p>', re.S)
@@ -78,7 +83,7 @@ def _ouverture(o, apercu):
 
 
 def _corps(corps, apercu):
-    ajout = "".join(f'<input type="hidden" name="{n}" value="{"demo" if n == "type" else ""}">'
+    ajout = "".join(f'<input type="hidden" name="{n}" value="{VALEURS_CACHEES.get(n, "")}">'
                     for n in CACHES if not re.search(r'\sname="' + n + '"', corps))
     if 'name="site_url"' not in corps:
         ajout += PIEGE

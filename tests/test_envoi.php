@@ -269,5 +269,48 @@ verifier(adresse_retour('newsletter', 'refus') === '/fr/contact/merci/?erreur=re
 verifier(expediteur('', 'neur-on.ai') === 'noreply@neur-on.ai', 'expéditeur par défaut : noreply@ + domaine du site');
 verifier(expediteur('contact@neur-on.ai', 'neur-on.ai') === 'contact@neur-on.ai', 'expéditeur de la configuration');
 
+// Langue de la page (tâche 7.1) : la page de remerciement et ses variantes d'erreur suivent la table MERCI.
+// La source porte les quatre langues (adresses de src/data/routes.json) ; le build n'en garde que les langues construites.
+verifier(adresse_retour('demo', 'ok', 'de') === '/de/kontakt/danke/', 'retour démo en allemand : /de/kontakt/danke/');
+verifier(adresse_retour('demo', 'ok', 'en') === '/en/contact/thank-you/', 'retour démo en anglais : /en/contact/thank-you/');
+verifier(adresse_retour('demo', 'ok', 'it') === '/it/contatto/grazie/', 'retour démo en italien : /it/contatto/grazie/');
+verifier(adresse_retour('demo', 'ok', 'fr') === '/fr/contact/merci/', 'retour démo en français : /fr/contact/merci/');
+verifier(adresse_retour('demo', 'ok', 'es') === '/fr/contact/merci/', 'langue inconnue : page de remerciement française');
+verifier(adresse_retour('demo', 'ok', '') === '/fr/contact/merci/', 'langue vide : page de remerciement française');
+verifier(adresse_retour('demo', 'champs', 'de') === '/de/kontakt/danke/?erreur=champs', 'erreur champs en allemand');
+verifier(adresse_retour('demo', 'refus', 'de') === '/de/kontakt/danke/?erreur=refus', 'erreur refus en allemand');
+verifier(adresse_retour('demo', 'champs', 'es') === '/fr/contact/merci/?erreur=champs', 'erreur champs, langue inconnue : français');
+verifier(adresse_retour('demo', 'refus', 'es') === '/fr/contact/merci/?erreur=refus', 'erreur refus, langue inconnue : français');
+verifier(adresse_retour('newsletter', 'ok', 'de') === '/de/kontakt/danke/?type=newsletter', 'retour newsletter en allemand');
+verifier(adresse_retour('newsletter', 'refus', 'it') === '/it/contatto/grazie/?erreur=refus&type=newsletter', 'refus newsletter en italien');
+verifier(adresse_retour('documentation', 'ok', 'en') === '/en/contact/thank-you/', 'retour documentation API en anglais');
+
+// langue_demandee : seul un code de la table est repris, tout le reste redevient le français
+verifier(langue_demandee(['langue' => 'de']) === 'de', 'langue_demandee : un code de la table est repris');
+verifier(langue_demandee([]) === 'fr', 'langue absente : français');
+verifier(langue_demandee(['langue' => '']) === 'fr', 'langue vide : français');
+verifier(langue_demandee(['langue' => ['de']]) === 'fr', 'langue en tableau : français');
+verifier(langue_demandee(['langue' => 'es']) === 'fr', 'langue hors table : français');
+verifier(langue_demandee(['langue' => 'DE']) === 'fr', 'langue en majuscules (hors table) : français');
+verifier(langue_demandee(['langue' => "de\r\nLocation: https://exemple.ch"]) === 'fr', 'langue avec saut de ligne : français, rien ne passe dans l\'adresse');
+verifier(langue_demandee(['langue' => '../../exemple']) === 'fr', 'langue en chemin : français');
+verifier(langue_demandee(['langue' => 0]) === 'fr', 'langue entière : français');
+
+// La langue n'est jamais un motif de refus, et son code, validé, figure dans le courriel
+verifier(motif(['langue' => 'de'] + $demande) === 'ok', 'demande en allemand acceptée');
+verifier(motif(['langue' => 'xx'] + $demande) === 'ok', 'langue inconnue : demande acceptée, jamais refusée pour la langue');
+verifier(motif(['langue' => ['de']] + $demande) === 'ok', 'langue en tableau : demande acceptée');
+verifier(valider(['langue' => 'de'] + $demande)['donnees']['langue'] === 'de', 'langue reprise dans les données');
+verifier(valider(['langue' => 'xx'] + $demande)['donnees']['langue'] === 'fr', 'langue inconnue : « fr » dans les données');
+verifier(valider($demande)['donnees']['langue'] === 'fr', 'langue absente : « fr » dans les données');
+$courriel_de = composer('demo', valider(['langue' => 'de'] + $demande)['donnees'], 'noreply@neur-on.ai');
+$corps_de = base64_decode(str_replace("\r\n", '', $courriel_de['corps']));
+verifier(substr_count($corps_de, "Langue de la page : de\r\n") === 1, 'langue dans le courriel : une ligne « Langue de la page : de »');
+verifier(strpos($corps_de, "Parcours sur le site\r\n") !== false && strpos($corps_de, "Langue de la page : de") > strpos($corps_de, "Parcours sur le site"), 'langue dans le courriel : sous « Parcours sur le site »');
+$courriel_fr = composer('demo', valider($demande)['donnees'], 'noreply@neur-on.ai');
+verifier(strpos(base64_decode(str_replace("\r\n", '', $courriel_fr['corps'])), "Langue de la page : fr\r\n") !== false, 'langue dans le courriel : « fr » sans champ langue');
+verifier($courriel_de['entetes'] === $courriel_fr['entetes'] && $courriel_de['objet'] === $courriel_fr['objet'], 'en-têtes et objet du courriel inchangés par la langue');
+verifier(stripos($courriel_de['entetes'], "\r\nTo:") === false && stripos($courriel_de['entetes'], 'bcc') === false, 'aucun destinataire ajouté par la langue');
+
 echo $echecs === 0 ? "\nTous les cas passent.\n" : "\n$echecs cas en échec.\n";
 exit($echecs === 0 ? 0 : 1);

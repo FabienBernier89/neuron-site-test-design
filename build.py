@@ -784,7 +784,10 @@ def main():
     ecrire_llms(metas, construites, libelles)  # résumé et texte intégral pour les moteurs IA, un jeu par langue construite
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
     ecrire_redirections()
-    envoi.ecrire(DOCS / "envoi.php", CONFIG)  # envoi des formulaires sur Hostpoint, réglé par la configuration
+    # envoi des formulaires sur Hostpoint, réglé par la configuration ; sa table des pages de remerciement ne garde
+    # que les langues dont cette page est construite, le français toujours (une langue absente renvoie vers lui)
+    envoi.ecrire(DOCS / "envoi.php", CONFIG,
+                 [l for l in langues.LANGUES if l == "fr" or envoi.PAGE_MERCI in construites.get(l, ())])
     print(f"{len(PAGES)} pages écrites dans {DOCS}")
     for langue in autres:
         print(f"{len(construites[langue])} pages {langue} écrites")

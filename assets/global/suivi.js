@@ -18,6 +18,15 @@
   var LONGUEURS = { page_entree: 500, page_origine: 500, utm_source: 200, utm_medium: 200, utm_campaign: 200, utm_term: 200, utm_content: 200 };
   var chemin = location.pathname;
 
+  /* Les repères pris sur l'adresse (page secteur, page de remerciement) se lisent sur la version française de la page :
+     une page traduite (/de/kontakt/danke/) a sa propre adresse, mais annonce la française dans sa tête (hreflang fr-CH).
+     Sans cette balise, l'adresse affichée sert. */
+  function cheminFr() {
+    var l = document.querySelector('link[rel="alternate"][hreflang="fr-CH"]');
+    try { if (l) return new URL(l.getAttribute("href"), location.href).pathname; } catch (e) { /* adresse illisible */ }
+    return chemin;
+  }
+
   function lire() {
     try { return JSON.parse(sessionStorage.getItem(CLE)) || {}; } catch (e) { return {}; }
   }
@@ -47,7 +56,7 @@
     etat.precedente = etat.derniere || "";
     etat.derniere = chemin;
   }
-  var secteur = chemin.match(/\/solutions\/([a-z0-9-]+)\/$/);
+  var secteur = cheminFr().match(/\/solutions\/([a-z0-9-]+)\/$/);
   if (secteur) etat.secteur = secteur[1];
   garder(etat);
 
@@ -105,7 +114,7 @@
 
   /* Page de remerciement après un envoi réussi : generate_lead ou sign_up, une fois (pas au rechargement ni au retour
      arrière, pas sans envoi : visite venue d'une page du site ou envoi noté dans la visite) */
-  if (/\/contact\/merci\/$/.test(chemin)) {
+  if (/\/contact\/merci\/$/.test(cheminFr())) {
     var navigation = window.performance && performance.getEntriesByType ? performance.getEntriesByType("navigation")[0] : null;
     var premiere = !navigation || navigation.type === "navigate";
     var interne = false;

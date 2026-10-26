@@ -12,17 +12,20 @@
  * /64), sur 10 minutes et sur une heure, et pour tout le site, dans un fichier verrouillé par flock.
  * Le nom du visiteur et l'objet sont entièrement encodés en mots base64 (RFC 2047) : rien n'y reste interprétable.
  *
- * Réponses (aucune donnée saisie n'y est renvoyée) :
+ * Réponses (aucune donnée saisie n'y est renvoyée). La page de réponse est celle de la langue du formulaire (champ
+ * caché « langue », table MERCI : une adresse par langue construite) ; une langue absente, mal formée ou hors table
+ * redevient le français. Ci-dessous, la page française :
  * - 405 à toute autre méthode que POST ;
  * - 303 vers /fr/contact/merci/ (avec ?type=newsletter pour la lettre d'information) après l'envoi ; de même quand
  *   le champ piège est rempli : un robot ne reçoit aucun signal, et rien n'est envoyé ;
  * - 303 vers /fr/contact/merci/?erreur=champs si un champ est invalide ;
  * - 303 vers /fr/contact/merci/?erreur=refus pour tout autre refus (origine, durée, type, plafond) ou si le serveur
  *   n'a pas pu envoyer l'e-mail, sans détail. Avec &type=newsletter pour la lettre d'information.
+ * La langue de la page figure dans l'e-mail (rubrique « Parcours sur le site ») ; destinataire et contenu inchangés.
  *
- * Les fonctions pures (nettoyer_entete, valider, origine_autorisee, reseau_ip, cle_ip, limiter, encoder_entete,
- * composer, adresse_retour, expediteur), ainsi que compter et preparer_dossier sur un fichier ou un dossier donnés,
- * sont testées par tests/test_envoi.php : php tests/test_envoi.php
+ * Les fonctions pures (nettoyer_entete, valider, langue_demandee, origine_autorisee, reseau_ip, cle_ip, limiter,
+ * encoder_entete, composer, adresse_retour, expediteur), ainsi que compter et preparer_dossier sur un fichier ou un
+ * dossier donnés, sont testées par tests/test_envoi.php : php tests/test_envoi.php
  */
 declare(strict_types=1);
 
@@ -51,8 +54,15 @@ const DOSSIER_LIMITES = __DIR__ . '/../envoi-limites';
 // Octets de texte par mot encodé d'un en-tête : 39 octets donnent 52 caractères base64, soit 64 avec
 // « =?UTF-8?B?…?= » ; la première ligne, préfixe « Reply-To: » compris, tient en 75 caractères.
 const OCTETS_PAR_MOT = 39;
-// Page de réponse (chemin absolu du site).
-const MERCI = '/fr/contact/merci/';
+// Pages de réponse par langue (chemins absolus du site, adresses de src/data/routes.json). Cette source les porte
+// toutes, pour que tests/test_envoi.php les exerce ; le build (outils/envoi.py) n'en garde que les langues construites
+// dont la page de remerciement existe, le français toujours : une langue absente de la table renvoie au français.
+const MERCI = [
+    'fr' => '/fr/contact/merci/',
+    'de' => '/de/kontakt/danke/',
+    'it' => '/it/contatto/grazie/',
+    'en' => '/en/contact/thank-you/',
+];
 
 // Champs acceptés : nom => [longueur maximale en caractères, libellé dans l'e-mail]. Tout autre champ est ignoré.
 const CHAMPS = [
@@ -75,9 +85,11 @@ const CHAMPS = [
     'utm_campaign' => [200, 'utm_campaign'],
     'utm_term' => [200, 'utm_term'],
     'utm_content' => [200, 'utm_content'],
+    // Langue de la page du formulaire : jamais refusée (langue_demandee), donc sans limite de longueur utile
+    'langue' => [2, 'Langue de la page'],
 ];
 // Champs du parcours, regroupés en fin d'e-mail.
-const PARCOURS = ['page_entree', 'page_origine', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+const PARCOURS = ['page_entree', 'page_origine', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'langue'];
 // Champs obligatoires par type de formulaire.
 const OBLIGATOIRES = [
     'demo' => ['prenom', 'nom', 'email', 'organisation', 'fonction', 'consentement'],
@@ -115,6 +127,17 @@ function nettoyer_entete(string $valeur): ?string
 }
 
 /**
+ * Langue de la page d'où part le formulaire (champ caché « langue ») : un code de la table MERCI, sinon le français.
+ * Une valeur absente, d'un autre type (tableau) ou d'une langue hors table redevient « fr » : la redirection ne mène
+ * jamais à une page qui n'existe pas, et rien de ce que le visiteur envoie n'entre dans l'adresse.
+ */
+function langue_demandee(array $post): string
+{
+    $langue = $post['langue'] ?? '';
+    return (is_string($langue) && array_key_exists($langue, MERCI)) ? $langue : 'fr';
+}
+
+/**
  * Contrôle d'une demande. $post : champs reçus ($_POST).
  * Renvoie ['ok' => bool, 'motif' => string, 'type' => 'demo'|'documentation'|'newsletter', 'donnees' => [nom => valeur]].
  * Motifs d'échec : piege (champ piège rempli), type (type inconnu), delai (duree mal formée ou inférieure à
@@ -142,6 +165,10 @@ function valider(array $post): array
 
     $donnees = [];
     foreach (CHAMPS as $nom => $definition) {
+        if ($nom === 'langue') {  // jamais refusée : un code hors table redevient le français
+            $donnees[$nom] = langue_demandee($post);
+            continue;
+        }
         $brut = $post[$nom] ?? '';
         if ($nom === 'langues' && is_array($brut)) {
             if (count($brut) > LANGUES_MAX) {
@@ -401,8 +428,11 @@ function composer(string $type, array $donnees, string $expediteur): array
     ];
 }
 
-/** Adresse de la page de réponse (redirection 303). $statut : ok, champs (champ invalide) ou refus (tout autre refus). */
-function adresse_retour(string $type, string $statut): string
+/**
+ * Adresse de la page de réponse (redirection 303), dans la langue du formulaire ; une langue absente de MERCI donne
+ * la page française. $statut : ok, champs (champ invalide) ou refus (tout autre refus).
+ */
+function adresse_retour(string $type, string $statut, string $langue = 'fr'): string
 {
     $parametres = [];
     if ($statut !== 'ok') {
@@ -411,7 +441,7 @@ function adresse_retour(string $type, string $statut): string
     if ($type === 'newsletter') {
         $parametres[] = 'type=newsletter';
     }
-    return MERCI . ($parametres ? '?' . implode('&', $parametres) : '');
+    return (MERCI[$langue] ?? MERCI['fr']) . ($parametres ? '?' . implode('&', $parametres) : '');
 }
 
 /** Expéditeur : celui de la configuration, sinon noreply@ suivi du domaine du site. */
@@ -438,26 +468,27 @@ function traiter(): void
     }
     $resultat = valider($_POST);
     $type = $resultat['type'];
+    $langue = langue_demandee($_POST);
     if ($resultat['motif'] === 'piege') {
-        repondre(adresse_retour($type, 'ok'));
+        repondre(adresse_retour($type, 'ok', $langue));
         return;
     }
     if (!origine_autorisee((string) ($_SERVER['HTTP_ORIGIN'] ?? ''), (string) ($_SERVER['HTTP_REFERER'] ?? ''), DOMAINE)) {
-        repondre(adresse_retour($type, 'refus'));
+        repondre(adresse_retour($type, 'refus', $langue));
         return;
     }
     if (!$resultat['ok']) {
-        repondre(adresse_retour($type, strpos($resultat['motif'], 'champ:') === 0 ? 'champs' : 'refus'));
+        repondre(adresse_retour($type, strpos($resultat['motif'], 'champ:') === 0 ? 'champs' : 'refus', $langue));
         return;
     }
     $sel = preparer_dossier(DOSSIER_LIMITES) ? sel(DOSSIER_LIMITES) : null;
     if ($sel === null) {
         error_log('envoi.php : dossier des compteurs inutilisable, envoi refusé');
-        repondre(adresse_retour($type, 'refus'));
+        repondre(adresse_retour($type, 'refus', $langue));
         return;
     }
     if (!compter(DOSSIER_LIMITES . '/compteurs.json', cle_ip((string) ($_SERVER['REMOTE_ADDR'] ?? ''), $sel), time())) {
-        repondre(adresse_retour($type, 'refus'));
+        repondre(adresse_retour($type, 'refus', $langue));
         return;
     }
     $expediteur = expediteur(EXPEDITEUR, DOMAINE);
@@ -469,7 +500,7 @@ function traiter(): void
     if (!$reussi) {
         error_log('envoi.php : e-mail non envoyé (destinataire, expéditeur ou fonction mail() du serveur)');
     }
-    repondre(adresse_retour($type, $reussi ? 'ok' : 'refus'));
+    repondre(adresse_retour($type, $reussi ? 'ok' : 'refus', $langue));
 }
 
 // Exécuté seulement comme script appelé par le serveur, pas quand un test inclut ce fichier.
