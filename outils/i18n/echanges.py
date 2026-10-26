@@ -31,11 +31,19 @@ traduction v1 qui passe relu sans changement garde le champ « v1 ». Un fichier
 écrit pour une autre langue est refusé en entier (ValueError). L'import ne modifie que la table en mémoire : enregistrer()
 reste à l'appelant.
 
+Fusion des adaptations (fusionner, tâche 6.2) : propositions [{"cle", "trad", "note"}] d'un agent d'adaptation ou de relecture
+croisée, posées au statut adapte dans la table. Mêmes contrôles que le réimport : clé inconnue, balisage faux (marqueurs),
+« tirets », « eszett », « marques », « interdits » ; la terminologie n'avertit que. S'y ajoutent trois refus : « déjà relu »
+(une entrée relue par un traducteur expert, ou portant le champ « v1 », n'est jamais réécrite), « déjà validé » (statut v1 ou
+invariant : validé avant) et « format » (proposition mal formée). Une entrée au statut mt ou adapte, avec ou sans traduction
+par défaut, est remplacée ; ses traductions par page restent. Les notes de l'agent remontent dans le rapport, jamais dans la
+table (elles ne sortent pas dans les exports).
+
 Les exports vont hors du dépôt public (verifier_hors_depot : un dossier du dépôt est refusé sauf s'il est ignoré par git),
 par défaut dans ~/Claude project/Bibliotheque-Claude/07-Ressources-traduction/Neuron/site-v2/<date>-<langue>/.
 
-Commandes : python3 -m outils.i18n exporter <langue> ... et importer <langue> <fichier> --relecteur <nom>
-(outils/i18n/__main__.py). Bibliothèque standard seulement."""
+Commandes : python3 -m outils.i18n exporter <langue> ..., importer <langue> <fichier> --relecteur <nom> et fusionner <langue>
+<propositions.json> (outils/i18n/__main__.py). Bibliothèque standard seulement."""
 import csv
 import json
 import re
@@ -570,3 +578,83 @@ def nom_pour_fichier(texte):
     « Alice-Muller »)."""
     ascii_ = unicodedata.normalize("NFKD", texte).encode("ascii", "ignore").decode()
     return re.sub(r"[^A-Za-z0-9]+", "-", ascii_).strip("-") or "relecteur"
+
+
+# ---------- fusion des adaptations ----------
+
+STATUT_FUSION = "adapte"  # seul statut que la fusion pose : relu vient toujours d'un relecteur humain (importer)
+
+
+def fusionner(fichier, table, statut=STATUT_FUSION, glossaire=None, jour=None):
+    """Fusionne dans la table (en mémoire : l'appelant fait enregistrer()) les propositions d'un fichier JSON, liste de
+    {"cle": clé du texte français (table.cle), "trad": traduction à marqueurs {n}, "note": remarque facultative}. Chaque
+    proposition passe les contrôles ci-dessous ; une proposition refusée laisse la table intacte et les autres sont posées.
+    Rend {"poses": int, "refuses": [{cle, raison, detail, fr}], "avertissements": [{cle, detail}], "notes": [{cle, fr, note}]}.
+    Raisons de refus : « format », « doublon » (clé déjà vue dans le fichier), « clé inconnue » (aucun texte de la table),
+    « déjà relu » (statut relu ou champ « v1 »), « déjà validé » (v1 ou invariant), « traduction vide », « marqueurs »
+    (segments.restaurer contre les marqueurs du français), puis la première règle bloquante de controles : « tirets »,
+    « eszett » (allemand), « marques », « interdits ». La source de l'entrée reçoit « ; adapté le <jour> ».
+    statut : « adapte » seulement. glossaire : {fr: {langue: {terme, ...}}} (chnell.charger_glossaire par défaut). ValueError
+    si le statut n'est pas permis ou si le fichier est introuvable, illisible ou n'est pas une liste."""
+    if statut != STATUT_FUSION:
+        raise ValueError(f"statut « {statut} » refusé : la fusion ne pose que « {STATUT_FUSION} » (« relu » vient d'un "
+                         "relecteur humain, commande importer)")
+    fichier = Path(fichier)
+    try:
+        propositions = json.loads(fichier.read_text(encoding="utf-8"))
+    except OSError:
+        raise ValueError(f"fichier introuvable : {fichier}") from None
+    except ValueError as e:
+        raise ValueError(f"fichier JSON illisible : {fichier} ({e})") from None
+    if not isinstance(propositions, list):
+        raise ValueError(f"{fichier} : une liste de propositions [{{\"cle\", \"trad\", \"note\"}}] est attendue")
+    glossaire = _glossaire_de(table.langue, glossaire)
+    suite = f"adapté le {jour or date.today().isoformat()}"
+    rapport = {"poses": 0, "refuses": [], "avertissements": [], "notes": []}
+    vus = set()
+    for p in propositions:
+        ident = p.get("cle") if isinstance(p, dict) and isinstance(p.get("cle"), str) else None
+        entree = table.entrees.get(ident)
+
+        def refuser(raison, detail=""):
+            rapport["refuses"].append({"cle": ident, "raison": raison, "detail": detail,
+                                       "fr": _normal(entree["fr"]) if entree else ""})
+
+        if ident is None or not isinstance(p.get("trad"), str) or not isinstance(p.get("note", ""), (str, type(None))):
+            refuser("format", 'proposition attendue : {"cle": "...", "trad": "...", "note": "..."}')
+            continue
+        trad, note = p["trad"], (p.get("note") or "").strip()
+        if ident in vus:
+            refuser("doublon", "clé présente plusieurs fois dans le fichier")
+            continue
+        vus.add(ident)
+        if entree is None:
+            refuser("clé inconnue", "aucun texte français de la table n'a cette clé")
+            continue
+        if entree["statut"] == "relu" or entree.get("v1"):
+            refuser("déjà relu", "traduction relue par un traducteur expert : jamais réécrite")
+            continue
+        if entree["statut"] in ("v1", "invariant"):
+            refuser("déjà validé", f"statut {entree['statut']} : validé avant la V2")
+            continue
+        if not trad.strip():
+            refuser("traduction vide")
+            continue
+        try:
+            S.restaurer(trad, _table_marqueurs(entree["fr"]))
+        except ValueError as e:
+            refuser("marqueurs", str(e))
+            continue
+        problemes = (controles.tirets(trad) + (controles.eszett(entree["fr"], trad) if table.langue == "de" else [])
+                     + controles.marques(entree["fr"], trad) + controles.interdits(trad))
+        if problemes:
+            refuser(problemes[0]["regle"], "; ".join(f"{q['detail']} : {q['extrait']}" for q in problemes))
+            continue
+        base = entree["source"] or ""
+        table.poser(entree["fr"], trad, statut, base if base.endswith(suite) else (f"{base} ; {suite}" if base else suite))
+        rapport["poses"] += 1
+        if note:
+            rapport["notes"].append({"cle": ident, "fr": _normal(entree["fr"]), "note": note})
+        for q in controles.terminologie(entree["fr"], trad, table.langue, glossaire):
+            rapport["avertissements"].append({"cle": ident, "detail": q["detail"]})
+    return rapport

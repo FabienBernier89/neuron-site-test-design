@@ -8,6 +8,7 @@
     python3 -m outils.i18n glossaire --langue de [--arbitrages]
     python3 -m outils.i18n exporter de [--pages accueil contact/] [--statuts mt adapte v1 invariant] [--sortie DOSSIER]
     python3 -m outils.i18n importer de fichier.xlf --relecteur "Prénom Nom" [--sortie DOSSIER] [--sans-etat]
+    python3 -m outils.i18n fusionner de propositions.json [--simuler]
 
 etat : état de la traduction d'une langue, page par page (outils/i18n/traduire.py, etat), en aperçu par défaut ou selon
 les règles de la production ; écrit la liste des textes français à traduire dans src/langues/<langue>/a_traduire.json
@@ -43,6 +44,13 @@ exporter : fichiers pour les traducteurs experts (outils/i18n/echanges.py, tâch
 v1 (neur-on-<langue>-v1.tmx) et glossaire CSV (neur-on-<langue>-glossaire.csv). Dossier par défaut :
 Bibliotheque-Claude/07-Ressources-traduction/Neuron/site-v2/<date>-<langue>/ ; un dossier du dépôt est refusé. Produit des
 fichiers, n'envoie rien.
+
+fusionner : fusionne dans la table de la langue les propositions d'un agent d'adaptation ou de relecture croisée (fichier JSON
+[{"cle", "trad", "note"}], echanges.fusionner, tâche 6.2) au statut adapte (outils/i18n/BRIEF-ADAPTATION.md). Refusés, avec leur
+raison, et sans toucher à la table : clé inconnue, marqueurs faux, entrée déjà relue ou validée, tirets, ß en allemand, marques,
+termes interdits ; la terminologie n'avertit que. Écrit la table (les propositions acceptées), liste les refus, les
+avertissements et les notes de l'agent. Code de sortie 1 s'il y a un refus. --simuler : tout contrôler et rapporter sans écrire la table (vérification avant de rendre
+d'un agent). Rejouer ensuite « controler <langue> » et « etat ».
 
 importer : réimporte les corrections d'un relecteur (XLIFF, ou CSV cle;fr;trad) dans la table (tâche 5.2) : segments acceptés
 au statut relu (invariant s'ils sont identiques au français), rejets listés avec leur raison, traduction précédente conservée.
@@ -212,6 +220,39 @@ def afficher_import(langue, rapport, fichier, relecteur):
     return "\n".join(lignes)
 
 
+def afficher_fusion(langue, rapport, fichier):
+    """Rapport de fusion en français : posées, refus avec leur raison, avertissements de terminologie, notes de l'agent."""
+    lignes = [f"Fusion {langue} : {rapport['poses']} proposition(s) posée(s) au statut adapte, {len(rapport['refuses'])} refusée(s), "
+              f"{len(rapport['avertissements'])} avertissement(s) de terminologie, {len(rapport['notes'])} note(s) de l'agent",
+              f"Fichier lu : {fichier}"]
+    if rapport["refuses"]:
+        lignes.append("Refusées (table inchangée pour ces propositions) :")
+        for r in rapport["refuses"]:
+            lignes.append(f"  {r['cle']} « {r['fr'][:60]} » : {r['raison']}" + (f", {r['detail']}" if r["detail"] else ""))
+    if rapport["avertissements"]:
+        lignes.append("Avertissements de terminologie (à revoir par un humain, rien n'est refusé) :")
+        lignes += [f"  {a['cle']} : {a['detail']}" for a in rapport["avertissements"]]
+    if rapport["notes"]:
+        lignes.append("Notes de l'agent (à faire trancher par un traducteur expert) :")
+        lignes += [f"  {n['cle']} « {n['fr'][:60]} » : {n['note']}" for n in rapport["notes"]]
+    return "\n".join(lignes)
+
+
+def commande_fusionner(args, build):
+    """fusionner : propositions d'un agent dans la table, au statut adapte."""
+    table = Table(args.langue, build.DOSSIER_LANGUES)
+    try:
+        rapport = echanges.fusionner(Path(args.fichier), table, args.statut)
+    except ValueError as e:
+        print(f"Fusion refusée, table inchangée : {e}", file=sys.stderr)
+        return 1
+    if not args.simuler:
+        table.enregistrer()
+    print(afficher_fusion(args.langue, rapport, args.fichier))
+    print("Simulation : table non écrite." if args.simuler else f"Table : {table.fichier}")
+    return 1 if rapport["refuses"] else 0
+
+
 def commande_exporter(args, build):
     """exporter : XLIFF, TMX et glossaire CSV dans un dossier hors du dépôt."""
     table = Table(args.langue, build.DOSSIER_LANGUES)
@@ -354,6 +395,11 @@ def main(argv=None):
     p.add_argument("--sortie", help="dossier du rapport (le dossier d'export du jour par défaut)")
     p.add_argument("--sans-etat", action="store_true",
                    help="tout segment valide vaut confirmation, sans lire state ni approved (outil qui n'écrit pas les états)")
+    p = sous.add_parser("fusionner", help="fusionner les propositions d'un agent d'adaptation (JSON [{cle, trad, note}])")
+    p.add_argument("langue", choices=LANGUES)
+    p.add_argument("fichier", help="propositions.json ou relecture.json")
+    p.add_argument("--statut", default=echanges.STATUT_FUSION, help="statut posé (adapte, le seul permis)")
+    p.add_argument("--simuler", action="store_true", help="contrôler et rapporter sans écrire la table")
     args = parser.parse_args(argv)
     if args.commande == "chnell":
         return commande_chnell(args)
@@ -362,6 +408,8 @@ def main(argv=None):
         return commande_exporter(args, build)
     if args.commande == "importer":
         return commande_importer(args, build)
+    if args.commande == "fusionner":
+        return commande_fusionner(args, build)
     if args.commande == "glossaire":
         fichier_v1 = build.NEURON / "src/i18n" / f"termes-{args.langue}.json"
         if not fichier_v1.is_file():
