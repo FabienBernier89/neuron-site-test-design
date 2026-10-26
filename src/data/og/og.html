@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{{LANGUE}}">
+<head>
+<meta charset="utf-8">
+<title>Image de partage Neur.on</title>
+<!-- Gabarit de l'image de partage (1200 x 630), reproduction de assets/img/og-neuron.jpg (V1), décision V10. Rempli et
+     capturé par outils/i18n/og_image.py, qui remplace les marqueurs à double accolade du document : la langue, le titre
+     (l'accent y est déjà dans un span), la signature, puis la police Inter et le logo blanc, intégrés en données pour que
+     la capture ne dépende d'aucun fichier voisin. -->
+<style>
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;src:url({{INTER}}) format("woff2")}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1200px;height:630px;overflow:hidden}
+body{position:relative;background:#001442;font-family:"Inter",sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+/* fond : dégradé navy et halo bleu en haut à droite */
+.fond{position:absolute;inset:0;background:
+  radial-gradient(ellipse 1000px 800px at 88% 10%,rgba(12,82,190,.58) 0,rgba(12,82,190,.42) 30%,rgba(12,82,190,.28) 50%,rgba(12,82,190,.13) 70%,rgba(12,82,190,0) 100%),
+  linear-gradient(180deg,#011842 0%,#011740 50%,#001334 100%)}
+/* trame de points : pas de 28 px, points d'environ 2 px, visibles seulement vers le halo */
+.points{position:absolute;inset:0;background:radial-gradient(circle at 14px 14px,rgba(255,255,255,.17) 0,rgba(255,255,255,.17) 1px,rgba(255,255,255,0) 1.5px) 0 0/28px 28px;
+  -webkit-mask-image:radial-gradient(ellipse 900px 600px at 90% 10%,#000 0%,rgba(0,0,0,0) 100%);mask-image:radial-gradient(ellipse 900px 600px at 90% 10%,#000 0%,rgba(0,0,0,0) 100%)}
+.logo{position:absolute;left:84px;top:78px;width:182px;height:auto}
+h1{position:absolute;left:84px;top:363px;width:880px;font:800 65px/69px "Inter",sans-serif;letter-spacing:-2.1px;color:#fff}
+h1 span{color:#7fb1ff}
+.signature{position:absolute;left:84px;top:527px;font:500 26px/32px "Inter",sans-serif;color:#cfdcf5}
+/* filet bleu en pied d'image : 8 px, dégradé du bleu vif au bleu clair */
+.filet{position:absolute;left:0;right:0;bottom:0;height:8px;background:linear-gradient(90deg,#397fff,#79acff)}
+</style>
+</head>
+<body>
+<div class="fond"></div>
+<div class="points"></div>
+<img class="logo" src="{{LOGO}}" alt="Neur.on">
+<h1>{{TITRE}}</h1>
+<p class="signature">{{SIGNATURE}}</p>
+<div class="filet"></div>
+</body>
+</html>

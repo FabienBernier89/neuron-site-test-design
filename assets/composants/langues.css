@@ -51,3 +51,9 @@
 /* Bandeau des pages de l'aperçu qui contiennent une traduction non relue (outils/i18n/traduire.py, décision V4), jamais en
    production. --ink sur --tile : #06122e sur #F5F8FF en clair, #ffffff sur #06246b en sombre (contraste AA largement). */
 .bandeau-travail{padding:10px 16px;background:var(--tile);border-bottom:2px solid var(--accent-d);font:600 14px/20px var(--sans);color:var(--ink);text-align:center}
+
+/* Débordements des langues autres que le français (outils/debordements.mjs, tâche 6.3) : chaque règle est limitée à la langue
+   concernée, jamais au français. Les titres de tuiles forcés sur une ligne (outils.css) passent à la ligne, équilibrés, quand
+   un mot composé ou une formule plus longue ne tient plus ; la césure automatique coupe les mots composés allemands. */
+html:not([lang="fr"]) .tf-3 .tf-t h3{white-space:normal;text-wrap:balance}
+html[lang="de"] main{hyphens:auto}
