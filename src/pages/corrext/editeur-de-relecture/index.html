@@ -332,7 +332,7 @@ styles: skin-editeur-de-relecture.css
             <div class="cxe-pan" id="cxeP1" role="tabpanel" aria-labelledby="cxeT1" tabindex="0" hidden>
               <button type="button" class="cx-switch cxe-live" id="cxeLiveSw" aria-pressed="true"><i aria-hidden="true"></i> Live search</button>
               <form class="cxe-q" id="cxeQForm" role="search" autocomplete="off">
-                <span class="cxe-qbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="text" enterkeyhint="search" id="cxeQ" value="intérêt moratoire" aria-label="Rechercher un terme dans les mémoires et dans CHnell"><button type="button" class="cxe-clr" id="cxeQClr" aria-label="Effacer la recherche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></span>
+                <span class="cxe-qbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="text" enterkeyhint="search" id="cxeQ" value="intérêt moratoire" aria-label="Rechercher un terme dans les mémoires et dans CHnell" lang="fr"><button type="button" class="cxe-clr" id="cxeQClr" aria-label="Effacer la recherche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></span>
                 <button type="submit" class="cx-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search</button>
               </form>
               <div class="cxe-seg" role="group" aria-label="Côté de la recherche">
@@ -418,59 +418,211 @@ styles: skin-editeur-de-relecture.css
 </div></section>
 <section class="sec"><div class="wrap fq"><h2 class="h2">Questions fréquentes sur <em>l'éditeur de relecture</em></h2><div><details><summary>Qu'est-ce qu'un outil de TAO ?</summary><div class="r"><p>TAO signifie traduction assistée par ordinateur (« CAT tool » en anglais). Un tel outil découpe le document en segments, c'est-à-dire en phrases ou en titres, et place chacun face à sa traduction. Le relecteur corrige puis confirme chaque segment, avec l'aide des mémoires et de la terminologie. Dans Corrext, cet outil s'appelle l'éditeur de relecture.</p></div></details><details><summary>Comment ouvrir l'éditeur de relecture ?</summary><div class="r"><p>Depuis le tableau de bord d'un projet. Chaque fichier y porte un bouton Open in CAT, qui ouvre le document dans l'éditeur. Le projet lui-même se crée dans Gestion de projet : langues, niveau de confidentialité, terminologie et moteur de traduction.</p></div></details><details><summary>Mes corrections servent-elles aux prochaines traductions ?</summary><div class="r"><p>Oui, en confidentialité standard. Vos projets sont conservés sur les serveurs suisses de Corrext et servent de mémoire de traduction à vous seul. Une correction faite aujourd'hui est reprise dans vos projets suivants. La traduction s'adapte ainsi à votre langue et reste cohérente d'un projet à l'autre.</p></div></details><details><summary>Et en mode contenu hautement sensible ?</summary><div class="r"><p>Dans ce mode (Highly sensitive content), les traductions ne nourrissent pas la mémoire. Les données sont stockées et traitées uniquement en Suisse. Le mode est disponible en français, en allemand, en italien et en anglais. Vous le choisissez à la création de chaque projet.</p></div></details><details><summary>Peut-on relire à plusieurs le même document ?</summary><div class="r"><p>Oui. L'onglet Sync gère le travail à plusieurs. Il présente les conflits entre deux versions d'une même phrase, à arbitrer. Il liste les modifications d'un collègue, à intégrer. Il propose enfin de répercuter une correction sur les phrases identiques du document : c'est la propagation. L'équipe du projet se gère depuis le tableau de bord.</p></div></details><details><summary>Faut-il Microsoft Word pour relire ?</summary><div class="r"><p>Non. L'éditeur de relecture s'utilise directement dans Corrext. Si vous préférez Word, exportez le document depuis le tableau de bord (Export docx), relisez-le avec le complément Corrext, puis réimportez-le (Reimport docx). Le complément demande une connexion, l'appartenance au projet et Office 2021 ou Microsoft 365.</p></div></details><details><summary>Les termes que je fixe sont-ils respectés ?</summary><div class="r"><p>Oui. À la création du projet, Corrext extrait lui-même les termes candidats du document. Vous fixez leur traduction, ou vous ajoutez vos propres termes. Un terme fixé est repris tel quel dans la traduction automatique, que vous relisez ensuite dans l'éditeur.</p></div></details><details><summary>Quels formats de fichiers puis-je relire ?</summary><div class="r"><p>Ceux que vous déposez dans un projet : .pdf, .doc, .docx, .xls, .xlsx, .ppt et .pptx, jusqu'à 50 Mo par fichier. L'application conseille le format original plutôt que le PDF. Depuis le tableau de bord, le document relu s'exporte en Word, et sa mémoire se télécharge au format TMX, le format standard d'échange des mémoires de traduction.</p></div></details></div></div></section>
 <section class="cta"><div class="wrap"><h2><span class="l1">Voyez l'éditeur de</span> <span class="l2">relecture sur vos propres documents</span></h2><a class="btn" href="{{ROOT}}fr/contact/">Demander une démo</a></div></section>
+<script type="application/json" data-textes>
+{
+ "segment_confirme": "Segment {n} confirmé.",
+ "segment_a_relire": "Segment {n} de nouveau à relire.",
+ "tous_confirmes": "Tous les segments sont confirmés.",
+ "aucun_confirme": "Aucun segment confirmé.",
+ "source_copiee": "Source copiée dans la traduction du segment {n}.",
+ "deplier": "Déplier le panneau",
+ "replier": "Replier le panneau",
+ "memoire_vide": "Démo : aucune traduction validée proche du segment {n}. Choisissez le segment 1, 2 ou 3.",
+ "memoire_note_1": "Démo : formulation validée lors d'un projet précédent.",
+ "memoire_note_2": "Démo : cette formulation a été corrigée et validée dans un projet précédent. Apply la reprend ici.",
+ "memoire_note_3": "Démo : la traduction de ce segment a été reprise telle quelle de la mémoire.",
+ "memoire_appliquee": "Traduction de la mémoire appliquée au segment {n}.",
+ "recherche_essai": "Démo : essayez « {source} » côté Source, ou « {cible} » côté Target.",
+ "recherche_trouvee": "1 résultat dans les mémoires, 2 dans CHnell.",
+ "recherche_vide": "Aucun résultat.",
+ "alternative_ajoutee": "Alternative ajoutée : {moteur}.",
+ "reformulation_regeneree": "Reformulation régénérée.",
+ "reformulation_appliquee": "Reformulation appliquée au segment {n}.",
+ "propagation_attente": "Le segment {n} est identique : une décision de propagation attend dans Sync.",
+ "attente_un": "{n} élément en attente",
+ "attente_plusieurs": "{n} éléments en attente",
+ "conflit_garde": "Conflit résolu : votre version est conservée.",
+ "conflit_applique": "Conflit résolu : la dernière version est appliquée au segment {n}.",
+ "entrante_appliquee": "Modification du collègue appliquée au segment {n}.",
+ "correction_propagee": "Correction propagée au segment {n}.",
+ "tel_quel": "Segment laissé tel quel."
+}
+</script>
+<script type="application/json" data-donnees translate="no">
+{
+ "alt": [
+  [
+   {
+    "e": "LexMachina",
+    "t": "Mandatsvertrag (fiktives Beispiel)"
+   },
+   {
+    "e": "DeepL Pro",
+    "t": "Auftragsvertrag (fiktives Beispiel)"
+   },
+   {
+    "e": "Azure OpenAI GPT",
+    "t": "Auftragsvertrag (fiktives Beispiel)"
+   }
+  ],
+  [
+   {
+    "e": "LexMachina",
+    "t": "Artikel 1 · Gegenstand"
+   },
+   {
+    "e": "DeepL Pro",
+    "t": "Artikel 1 · Gegenstand"
+   },
+   {
+    "e": "Azure OpenAI GPT",
+    "t": "Artikel 1 · Gegenstand"
+   }
+  ],
+  [
+   {
+    "e": "LexMachina",
+    "t": "Die Auftragnehmerin erbringt der Auftraggeberin gemäss beiliegendem Leistungsverzeichnis beratende Dienstleistungen in regulatorischer Hinsicht."
+   },
+   {
+    "e": "DeepL Pro",
+    "t": "Die Beauftragte erbringt für die Auftraggeberin Beratungsleistungen im Bereich der Einhaltung gesetzlicher Vorschriften gemäss dem im Anhang beigefügten Lastenheft."
+   },
+   {
+    "e": "Azure OpenAI GPT",
+    "t": "Die Beauftragte erbringt für die Auftraggeberin Beratungsleistungen im Bereich der regulatorischen Compliance gemäss dem beigefügten Pflichtenheft."
+   }
+  ],
+  [
+   {
+    "e": "LexMachina",
+    "t": "Jede bei Fälligkeit offene Rechnung wird mit einem Verzugszins von 5% p.a. verzinst."
+   },
+   {
+    "e": "DeepL Pro",
+    "t": "Für jede Rechnung, die bei Fälligkeit noch nicht beglichen ist, fallen Verzugszinsen in Höhe von 5 % pro Jahr an."
+   },
+   {
+    "e": "Azure OpenAI GPT",
+    "t": "Jede bei Fälligkeit unbezahlte Rechnung trägt einen Verzugszins von 5 % pro Jahr."
+   }
+  ],
+  [
+   {
+    "e": "LexMachina",
+    "t": "Dieser Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg."
+   },
+   {
+    "e": "DeepL Pro",
+    "t": "Der vorliegende Vertrag unterliegt schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg."
+   },
+   {
+    "e": "Azure OpenAI GPT",
+    "t": "Dieser Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Der ausschliessliche Gerichtsstand ist in Freiburg."
+   }
+  ]
+ ],
+ "mem": [
+  null,
+  {
+   "s": "Article 1 · Objet du contrat",
+   "t": "Artikel 1 · Vertragsgegenstand"
+  },
+  {
+   "s": "La Mandataire fournit à la Mandante des prestations de conseil en conformité réglementaire, conformément au cahier des charges annexé au présent contrat.",
+   "t": "Die Beauftragte erbringt für die Auftraggeberin Beratungsleistungen im Bereich der regulatorischen Compliance gemäss dem diesem Vertrag beigefügten Pflichtenheft."
+  },
+  {
+   "s": "Toute facture impayée à l'échéance porte intérêt moratoire à 5 % l'an.",
+   "t": "Für jede bei Fälligkeit unbezahlte Rechnung ist ein Verzugszins von 5 % pro Jahr geschuldet."
+  },
+  null,
+  null
+ ],
+ "reph": {
+  "4": {
+   "none": "Dieser Vertrag <u>ist dem schweizerischen<\/u> Recht <u>unterworfen<\/u>, <u>namentlich<\/u> dem Obligationenrecht. <u>Der ausschliessliche<\/u> Gerichtsstand ist Freiburg.",
+   "legal": "<u>Der vorliegende<\/u> Vertrag <u>unterliegt dem schweizerischen<\/u> Recht, <u>namentlich<\/u> dem Obligationenrecht. <u>Der ausschliessliche<\/u> Gerichtsstand ist Freiburg.",
+   "fin": "Dieser Vertrag <u>unterliegt dem Schweizer<\/u> Recht, insbesondere dem Obligationenrecht. <u>Der ausschliessliche<\/u> Gerichtsstand ist Freiburg.",
+   "simp": "Dieser Vertrag <u>richtet sich nach dem<\/u> Recht <u>der Schweiz<\/u>, <u>vor allem nach<\/u> dem Obligationenrecht. <u>Der alleinige<\/u> Gerichtsstand ist Freiburg.",
+   "formal": "Dieser Vertrag <u>unterliegt dem schweizerischen<\/u> Recht, <u>namentlich<\/u> dem Obligationenrecht. <u>Der ausschliessliche<\/u> Gerichtsstand ist Freiburg.",
+   "inf": "Dieser Vertrag <u>unterliegt dem Schweizer<\/u> Recht, <u>genauer gesagt<\/u> dem Obligationenrecht. <u>Der ausschliessliche<\/u> Gerichtsstand ist Freiburg.",
+   "short": "<u>Der<\/u> Vertrag <u>unterliegt dem schweizerischen<\/u> Recht, <u>vorrangig<\/u> dem Obligationenrecht. <u>Der ausschliessliche<\/u> Gerichtsstand ist Freiburg."
+  }
+ },
+ "lk": {
+  "tm": [
+   {
+    "s": "Toute facture impayée à l'échéance porte intérêt moratoire à 5 % l'an.",
+    "t": "Für jede bei Fälligkeit unbezahlte Rechnung ist ein Verzugszins von 5 % pro Jahr geschuldet.",
+    "d": "Contrat-cadre_conseil.docx"
+   }
+  ],
+  "ch": [
+   {
+    "s": "Si l'agent payeur ne peut plus prélever ultérieurement le montant manquant avec l'intérêt moratoire, notamment parce que la personne concernée n'est plus cliente de son établissement, il reste tenu de verser le montant correspondant.",
+    "t": "Kann die Zahlstelle den fehlenden Betrag zuzüglich Verzugszins nicht mehr der betroffenen Person nachbelasten, zum Beispiel weil diese nicht mehr ihre Kundin ist, so ist die Zahlstelle zur Leistung des fehlenden Betrages zuzüglich Verzugszins verpflichtet.",
+    "d": "Feuille Fédérale/Bundesblatt"
+   },
+   {
+    "s": "Art. 24 Intérêt moratoire Un intérêt moratoire est dû sans sommation dès l'échéance des délais fixés dans la présente loi sur les paiements uniques, les impôts libératoires et les paiements libératoires virés en retard à l'AFC et jusqu'à réception des sommes dues.",
+    "t": "Art. 24 Verzugszins Auf Einmalzahlungen, abgeltenden Steuern und Abgeltungszahlungen, die der ESTV verspätet überwiesen werden, ist ohne Mahnung ein Verzugszins nach Ablauf der in diesem Gesetz festgelegten Fristen bis zum Datum des Eingangs geschuldet.",
+    "d": "Bundesgesetz-über-die-internationale-Quellenbesteuerung-IQG"
+   }
+  ]
+ },
+ "recherche": {
+  "source": "intérêt moratoire",
+  "cible": "Verzugszins"
+ },
+ "sync": {
+  "conflict": {
+   "seg": 1,
+   "mine": "Artikel 1 · Gegenstand",
+   "last": "Artikel 1 · Vertragsgegenstand"
+  },
+  "incoming": {
+   "seg": 4,
+   "text": "Der vorliegende Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg."
+  },
+  "prop": {
+   "from": 0,
+   "to": 5,
+   "text": "Auftragsvertrag (fiktives Beispiel)"
+  }
+ }
+}
+</script>
 <script>
 /* Démo Éditeur de relecture · segments éditables, confirmation, filtres et panneau latéral à quatre onglets.
-   Contrat fictif ; les extraits CHnell reprennent des résultats réels déjà publiés sur le site. */
+   Contrat fictif ; les extraits CHnell reprennent des résultats réels déjà publiés sur le site.
+   Textes lus dans le bloc data-textes (traduit avec la page), données dans le bloc data-donnees (jamais traduit : la
+   source française et la traduction allemande du contrat restent celles de la démo dans toutes les langues). */
 (function(){
   var cx=document.getElementById('cx'); if(!cx){return;}
   var reduce=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   var $=function(id){return document.getElementById(id);};
   var each=function(list,fn){Array.prototype.forEach.call(list,fn);};
+  var lire=function(s){var e=document.querySelector('script['+s+']');return e?JSON.parse(e.textContent):{};};
+  var TX=lire('data-textes'),D=lire('data-donnees');
+  /* Texte de la page ; {variable} remplacée par sa valeur */
+  function t(k,v){return String(TX[k]||'').replace(/\{(\w+)\}/g,function(m,n){return v&&n in v?v[n]:m;});}
+  /* Langue d'un passage (WCAG 3.1.2) : posée si elle diffère de celle de la page */
+  var PL=(document.documentElement.getAttribute('lang')||'fr').slice(0,2);
+  function lg(c){return c===PL?'':' lang="'+c+'"';}
   function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
   function norm(s){return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
   var liveEl=$('cxeLive'),lt;
   function say(t){clearTimeout(lt);liveEl.textContent='';lt=setTimeout(function(){liveEl.textContent=t;},40);}
 
   /* ---------- Données de démonstration ---------- */
-  var ALT=[
-    [{e:'LexMachina',t:'Mandatsvertrag (fiktives Beispiel)'},{e:'DeepL Pro',t:'Auftragsvertrag (fiktives Beispiel)'},{e:'Azure OpenAI GPT',t:'Auftragsvertrag (fiktives Beispiel)'}],
-    [{e:'LexMachina',t:'Artikel 1 · Gegenstand'},{e:'DeepL Pro',t:'Artikel 1 · Gegenstand'},{e:'Azure OpenAI GPT',t:'Artikel 1 · Gegenstand'}],
-    [{e:'LexMachina',t:'Die Auftragnehmerin erbringt der Auftraggeberin gemäss beiliegendem Leistungsverzeichnis beratende Dienstleistungen in regulatorischer Hinsicht.'},
-     {e:'DeepL Pro',t:'Die Beauftragte erbringt für die Auftraggeberin Beratungsleistungen im Bereich der Einhaltung gesetzlicher Vorschriften gemäss dem im Anhang beigefügten Lastenheft.'},
-     {e:'Azure OpenAI GPT',t:'Die Beauftragte erbringt für die Auftraggeberin Beratungsleistungen im Bereich der regulatorischen Compliance gemäss dem beigefügten Pflichtenheft.'}],
-    [{e:'LexMachina',t:'Jede bei Fälligkeit offene Rechnung wird mit einem Verzugszins von 5% p.a. verzinst.'},
-     {e:'DeepL Pro',t:'Für jede Rechnung, die bei Fälligkeit noch nicht beglichen ist, fallen Verzugszinsen in Höhe von 5 % pro Jahr an.'},
-     {e:'Azure OpenAI GPT',t:'Jede bei Fälligkeit unbezahlte Rechnung trägt einen Verzugszins von 5 % pro Jahr.'}],
-    [{e:'LexMachina',t:'Dieser Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg.'},
-     {e:'DeepL Pro',t:'Der vorliegende Vertrag unterliegt schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg.'},
-     {e:'Azure OpenAI GPT',t:'Dieser Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Der ausschliessliche Gerichtsstand ist in Freiburg.'}]
-  ];
-
+  var ALT=D.alt;
   ALT[5]=ALT[0];
-  var MEM=[
-    null,
-    {s:'Article 1 · Objet du contrat',t:'Artikel 1 · Vertragsgegenstand',n:'Démo : formulation validée lors d\'un projet précédent.'},
-    {s:'La Mandataire fournit à la Mandante des prestations de conseil en conformité réglementaire, conformément au cahier des charges annexé au présent contrat.',t:'Die Beauftragte erbringt für die Auftraggeberin Beratungsleistungen im Bereich der regulatorischen Compliance gemäss dem diesem Vertrag beigefügten Pflichtenheft.',n:'Démo : cette formulation a été corrigée et validée dans un projet précédent. Apply la reprend ici.'},
-    {s:'Toute facture impayée à l\'échéance porte intérêt moratoire à 5 % l\'an.',t:'Für jede bei Fälligkeit unbezahlte Rechnung ist ein Verzugszins von 5 % pro Jahr geschuldet.',n:'Démo : la traduction de ce segment a été reprise telle quelle de la mémoire.'},
-    null,
-    null
-  ];
-  var REPH={4:{
-    none:'Dieser Vertrag <u>ist dem schweizerischen</u> Recht <u>unterworfen</u>, <u>namentlich</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.',
-    legal:'<u>Der vorliegende</u> Vertrag <u>unterliegt dem schweizerischen</u> Recht, <u>namentlich</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.',
-    fin:'Dieser Vertrag <u>unterliegt dem Schweizer</u> Recht, insbesondere dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.',
-    simp:'Dieser Vertrag <u>richtet sich nach dem</u> Recht <u>der Schweiz</u>, <u>vor allem nach</u> dem Obligationenrecht. <u>Der alleinige</u> Gerichtsstand ist Freiburg.',
-    formal:'Dieser Vertrag <u>unterliegt dem schweizerischen</u> Recht, <u>namentlich</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.',
-    inf:'Dieser Vertrag <u>unterliegt dem Schweizer</u> Recht, <u>genauer gesagt</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.',
-    short:'<u>Der</u> Vertrag <u>unterliegt dem schweizerischen</u> Recht, <u>vorrangig</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.'
-  }};
-  var LK={
-    tm:[{s:'Toute facture impayée à l\'échéance porte intérêt moratoire à 5 % l\'an.',t:'Für jede bei Fälligkeit unbezahlte Rechnung ist ein Verzugszins von 5 % pro Jahr geschuldet.',d:'Contrat-cadre_conseil.docx'}],
-    ch:[{s:'Si l\'agent payeur ne peut plus prélever ultérieurement le montant manquant avec l\'intérêt moratoire, notamment parce que la personne concernée n\'est plus cliente de son établissement, il reste tenu de verser le montant correspondant.',
-         t:'Kann die Zahlstelle den fehlenden Betrag zuzüglich Verzugszins nicht mehr der betroffenen Person nachbelasten, zum Beispiel weil diese nicht mehr ihre Kundin ist, so ist die Zahlstelle zur Leistung des fehlenden Betrages zuzüglich Verzugszins verpflichtet.',d:'Feuille Fédérale/Bundesblatt'},
-        {s:'Art. 24 Intérêt moratoire Un intérêt moratoire est dû sans sommation dès l\'échéance des délais fixés dans la présente loi sur les paiements uniques, les impôts libératoires et les paiements libératoires virés en retard à l\'AFC et jusqu\'à réception des sommes dues.',
-         t:'Art. 24 Verzugszins Auf Einmalzahlungen, abgeltenden Steuern und Abgeltungszahlungen, die der ESTV verspätet überwiesen werden, ist ohne Mahnung ein Verzugszins nach Ablauf der in diesem Gesetz festgelegten Fristen bis zum Datum des Eingangs geschuldet.',d:'Bundesgesetz-über-die-internationale-Quellenbesteuerung-IQG'}]
-  };
+  var MEM=D.mem;
+  var NOTE={1:t('memoire_note_1'),2:t('memoire_note_2'),3:t('memoire_note_3')};
+  var REPH=D.reph;
+  var LK=D.lk;
+  var R=D.recherche;
   var REP={0:5,5:0};
 
   /* ---------- Segments ---------- */
@@ -501,8 +653,8 @@ styles: skin-editeur-de-relecture.css
     pbar.style.transform='scaleX('+(p/100)+')';pnum.textContent=p+'%';
     all.checked=n===box.length;all.indeterminate=n>0&&n<box.length;
   }
-  box.forEach(function(b,i){b.addEventListener('change',function(){progress();say(b.checked?'Segment '+i+' confirmé.':'Segment '+i+' de nouveau à relire.');});});
-  all.addEventListener('change',function(){var v=all.checked;box.forEach(function(b){b.checked=v;});progress();say(v?'Tous les segments sont confirmés.':'Aucun segment confirmé.');});
+  box.forEach(function(b,i){b.addEventListener('change',function(){progress();say(b.checked?t('segment_confirme',{n:i}):t('segment_a_relire',{n:i}));});});
+  all.addEventListener('change',function(){var v=all.checked;box.forEach(function(b){b.checked=v;});progress();say(v?t('tous_confirmes'):t('aucun_confirme'));});
 
   /* Filtres source et traduction */
   var fs=$('cxeFs'),ft=$('cxeFt'),none=$('cxeNone');
@@ -523,18 +675,18 @@ styles: skin-editeur-de-relecture.css
     if(!noProp){checkProp(i);}
     filter();
   }
-  $('cxeCopy').addEventListener('click',function(){setT(sel,src[sel],'Source copiée dans la traduction du segment '+sel+'.');});
+  $('cxeCopy').addEventListener('click',function(){setT(sel,src[sel],t('source_copiee',{n:sel}));});
 
   /* Saisie directe : texte brut, pas de retour à la ligne, la case de confirmation se décoche */
   var editT={};
-  tg.forEach(function(t,i){
-    t.addEventListener('input',function(){
+  tg.forEach(function(el,i){
+    el.addEventListener('input',function(){
       if(box[i].checked){box[i].checked=false;progress();}
       clearTimeout(editT[i]);editT[i]=setTimeout(function(){edited(i);},900);
     });
-    t.addEventListener('blur',function(){clearTimeout(editT[i]);edited(i);});
-    t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();}});
-    t.addEventListener('paste',function(e){
+    el.addEventListener('blur',function(){clearTimeout(editT[i]);edited(i);});
+    el.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();}});
+    el.addEventListener('paste',function(e){
       e.preventDefault();
       var txt=((e.clipboardData||window.clipboardData).getData('text')||'').replace(/\s+/g,' ');
       var s=window.getSelection();if(!s.rangeCount){return;}
@@ -549,7 +701,7 @@ styles: skin-editeur-de-relecture.css
   function setFold(on){
     app.classList.toggle('fold',on);
     fold.setAttribute('aria-expanded',on?'false':'true');
-    fold.setAttribute('aria-label',on?'Déplier le panneau':'Replier le panneau');
+    fold.setAttribute('aria-label',on?t('deplier'):t('replier'));
   }
   fold.addEventListener('click',function(){setFold(!app.classList.contains('fold'));});
   function tab(k,focus){
@@ -573,9 +725,9 @@ styles: skin-editeur-de-relecture.css
   var memBox=$('cxeMem');
   function renderMem(){
     var m=MEM[sel];
-    if(!m){memBox.innerHTML='<p class="cxe-empty">Démo : aucune traduction validée proche du segment '+sel+'. Choisissez le segment 1, 2 ou 3.</p>';return;}
-    memBox.innerHTML='<div class="cxe-match"><p class="cxe-ml">From this project\'s TM</p><p class="cxe-ms">'+esc(m.s)+'</p><p class="cxe-mt" lang="de">'+esc(m.t)+'</p><div class="cxe-ma"><button type="button" class="cx-btn cxe-sm" id="cxeMemOk">Apply</button></div></div><p class="cx-note">'+esc(m.n)+'</p>';
-    $('cxeMemOk').addEventListener('click',function(){setT(sel,m.t,'Traduction de la mémoire appliquée au segment '+sel+'.');});
+    if(!m){memBox.innerHTML='<p class="cxe-empty">'+esc(t('memoire_vide',{n:sel}))+'</p>';return;}
+    memBox.innerHTML='<div class="cxe-match"><p class="cxe-ml">From this project\'s TM</p><p class="cxe-ms"'+lg('fr')+'>'+esc(m.s)+'</p><p class="cxe-mt" lang="de">'+esc(m.t)+'</p><div class="cxe-ma"><button type="button" class="cx-btn cxe-sm" id="cxeMemOk">Apply</button></div></div><p class="cx-note">'+esc(NOTE[sel])+'</p>';
+    $('cxeMemOk').addEventListener('click',function(){setT(sel,m.t,t('memoire_appliquee',{n:sel}));});
   }
 
   /* Onglet Fast Lookup : mémoires et CHnell, côté source ou cible */
@@ -585,7 +737,7 @@ styles: skin-editeur-de-relecture.css
   function mark(text,rx){return esc(text).replace(rx,function(x){return '<mark>'+x+'</mark>';});}
   function block(list){
     return '<div class="cxe-res"><div class="cxe-rh"><span>Source</span><span>Target</span></div>'+list.map(function(r){
-      return '<div class="cxe-rr"><p>'+mark(r.s,RX.src)+'</p><p lang="de">'+mark(r.t,RX.tgt)+'</p><p class="doc">'+esc(r.d)+'</p></div>';
+      return '<div class="cxe-rr"><p'+lg('fr')+'>'+mark(r.s,RX.src)+'</p><p lang="de">'+mark(r.t,RX.tgt)+'</p><p class="doc">'+esc(r.d)+'</p></div>';
     }).join('')+'</div>';
   }
   function lookup(announce){
@@ -593,9 +745,9 @@ styles: skin-editeur-de-relecture.css
     if(v){hit=side==='src'?(v.indexOf('moratoire')>=0||v.indexOf('interet')>=0):(v.indexOf('verzug')>=0);}
     var h='<p class="cxe-h">Translation memories</p>'+(hit?block(LK.tm):'<p class="cxe-nr">No result</p>');
     h+='<p class="cxe-h">CHnell</p>'+(hit?block(LK.ch):'<p class="cxe-nr">No result</p>');
-    if(!hit&&v){h+='<p class="cx-note">Démo : essayez « intérêt moratoire » côté Source, ou « Verzugszins » côté Target.</p>';}
+    if(!hit&&v){h+='<p class="cx-note">'+esc(t('recherche_essai',{source:R.source,cible:R.cible}))+'</p>';}
     lk.innerHTML=h;
-    if(announce){say(hit?'1 résultat dans les mémoires, 2 dans CHnell.':'Aucun résultat.');}
+    if(announce){say(hit?t('recherche_trouvee'):t('recherche_vide'));}
   }
   $('cxeQForm').addEventListener('submit',function(e){e.preventDefault();lookup(true);});
   q.addEventListener('input',function(){if(liveSw.getAttribute('aria-pressed')==='true'){clearTimeout(lkT);lkT=setTimeout(function(){lookup(true);},400);}});
@@ -604,7 +756,9 @@ styles: skin-editeur-de-relecture.css
   each(sideBtns,function(b){b.addEventListener('click',function(){
     side=b.getAttribute('data-side');
     each(sideBtns,function(o){var on=o===b;o.classList.toggle('on',on);o.setAttribute('aria-pressed',on?'true':'false');});
-    q.value=side==='src'?'intérêt moratoire':'Verzugszins';
+    /* terme de la source française (côté Source) ou de la traduction allemande (côté Target), dans sa langue */
+    q.value=side==='src'?R.source:R.cible;
+    q.setAttribute('lang',side==='src'?'fr':'de');
     lookup(true);
   });});
 
@@ -628,7 +782,7 @@ styles: skin-editeur-de-relecture.css
     more.disabled=true;
     altBox.insertAdjacentHTML('beforeend','<p class="cxe-alt"><span class="cx-shim" style="display:block"></span><span class="cx-shim" style="display:block;width:60%"></span></p>');
     clearTimeout(gt);
-    gt=setTimeout(function(){shown=3;renderAlt();say('Alternative ajoutée : Azure OpenAI GPT.');},reduce?0:700);
+    gt=setTimeout(function(){shown=3;renderAlt();say(t('alternative_ajoutee',{moteur:ALT[sel][2].e}));},reduce?0:700);
   });
 
   var style=null,shorten=false,pStyle=null,pShort=false,rt;
@@ -658,27 +812,23 @@ styles: skin-editeur-de-relecture.css
   each(chips,function(c){c.addEventListener('click',function(){var s=c.getAttribute('data-style');pStyle=pStyle===s?null:s;syncChips();});});
   shortChip.addEventListener('click',function(){pShort=!pShort;syncChips();});
   $('cxeReset').addEventListener('click',function(){pStyle=null;pShort=false;syncChips();});
-  $('cxeSetOk').addEventListener('click',function(){style=pStyle;shorten=pShort;openPop(false);setB.focus();renderReph(true);say('Reformulation régénérée.');});
+  $('cxeSetOk').addEventListener('click',function(){style=pStyle;shorten=pShort;openPop(false);setB.focus();renderReph(true);say(t('reformulation_regeneree'));});
   $('cxeRegen').addEventListener('click',function(){renderReph(true);});
-  $('cxeRApply').addEventListener('click',function(){if(REPH[sel]){setT(sel,rOut.textContent,'Reformulation appliquée au segment '+sel+'.');}});
+  $('cxeRApply').addEventListener('click',function(){if(REPH[sel]){setT(sel,rOut.textContent,t('reformulation_appliquee',{n:sel}));}});
   $('cxeGo4').addEventListener('click',function(){select(4);rows[4].scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});setB.focus();});
 
   /* Onglet Sync : conflits, modifications entrantes, propagation */
   var syncBox=$('cxeSync'),dot=$('cxeDot'),dotTxt=$('cxeDotTxt');
-  var S={
-    conflict:{seg:1,mine:'Artikel 1 · Gegenstand',last:'Artikel 1 · Vertragsgegenstand'},
-    incoming:{seg:4,text:'Der vorliegende Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg.'},
-    prop:{from:0,to:5,text:'Auftragsvertrag (fiktives Beispiel)'}
-  };
+  var S=D.sync;
   var OK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
   /* Une saisie réelle (texte différent du dernier connu) déclenche le contrôle des répétitions */
-  function edited(i){var t=tg[i].textContent;if(t===last[i]){return;}last[i]=t;checkProp(i);filter();}
+  function edited(i){var x=tg[i].textContent;if(x===last[i]){return;}last[i]=x;checkProp(i);filter();}
   function checkProp(i){
     if(!(i in REP)){return;}
     var j=REP[i];
     if(tg[i].textContent!==tg[j].textContent){
       S.prop={from:i,to:j,text:tg[i].textContent};renderSync();
-      say('Le segment '+j+' est identique : une décision de propagation attend dans Sync.');
+      say(t('propagation_attente',{n:j}));
     }else if(S.prop){S.prop=null;renderSync();}
   }
   function renderSync(focusSel){
@@ -700,17 +850,17 @@ styles: skin-editeur-de-relecture.css
     h+='</div>';
     syncBox.innerHTML=h;
     var pend=(S.conflict?1:0)+(S.incoming?1:0)+(S.prop?1:0);
-    dot.hidden=!pend;dotTxt.textContent=pend?', '+pend+(pend>1?' éléments':' élément')+' en attente':'';
+    dot.hidden=!pend;dotTxt.textContent=pend?', '+t(pend>1?'attente_plusieurs':'attente_un',{n:pend}):'';
     if(focusSel){var f=$(focusSel);if(f){f.focus();}}
   }
   syncBox.addEventListener('click',function(e){
     var b=e.target.closest('button[data-act]');if(!b){return;}
     var a=b.getAttribute('data-act');
-    if(a==='keep'){S.conflict=null;renderSync('cxeSh1');say('Conflit résolu : votre version est conservée.');}
-    else if(a==='applyall'){var c=S.conflict;S.conflict=null;setT(c.seg,c.last,'Conflit résolu : la dernière version est appliquée au segment '+c.seg+'.',true);renderSync('cxeSh1');}
-    else if(a==='incoming'){var n=S.incoming;S.incoming=null;setT(n.seg,n.text,'Modification du collègue appliquée au segment '+n.seg+'.',true);renderSync('cxeSh2');}
-    else if(a==='prop'){var p=S.prop,go=$('cxePropBox').checked;S.prop=null;if(go){setT(p.to,p.text,'Correction propagée au segment '+p.to+'.',true);}renderSync('cxeSh3');}
-    else if(a==='asis'){S.prop=null;renderSync('cxeSh3');say('Segment laissé tel quel.');}
+    if(a==='keep'){S.conflict=null;renderSync('cxeSh1');say(t('conflit_garde'));}
+    else if(a==='applyall'){var c=S.conflict;S.conflict=null;setT(c.seg,c.last,t('conflit_applique',{n:c.seg}),true);renderSync('cxeSh1');}
+    else if(a==='incoming'){var n=S.incoming;S.incoming=null;setT(n.seg,n.text,t('entrante_appliquee',{n:n.seg}),true);renderSync('cxeSh2');}
+    else if(a==='prop'){var p=S.prop,go=$('cxePropBox').checked;S.prop=null;if(go){setT(p.to,p.text,t('correction_propagee',{n:p.to}),true);}renderSync('cxeSh3');}
+    else if(a==='asis'){S.prop=null;renderSync('cxeSh3');say(t('tel_quel'));}
   });
 
   /* État initial */

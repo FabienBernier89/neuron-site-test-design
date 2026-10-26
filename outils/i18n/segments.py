@@ -128,15 +128,124 @@ def _a_du_texte(fragment):
     return bool(LETTRE.search(html.unescape(t)))
 
 
-def scripts_a_traduire(source):
-    """Vrai si un script contient des chaînes de texte que l'extraction ne voit pas (copie de la V1). Les scripts JSON
-    (JSON-LD, index du centre d'aide) sont extraits par extraire_page : ils ne comptent pas."""
+# ---------- texte français écrit par un script (tâche 7.3) ----------
+
+# Lettres accentuées du français (ni ä, ö, ü, ß : allemand) ; un seul de ces caractères suffit.
+_ACCENTS_FR = frozenset("éèêëàâçùûîïôœÉÈÊËÀÂÇÙÛÎÏÔŒ")
+# Mots du français sans accent, assez sûrs pour qu'un seul suffise : mots outils (sans « a », « on », « plus », « son »,
+# communs à l'anglais) et mots d'interface (« Retirer », « 1 jour ») qu'un libellé d'un seul mot peut porter.
+MOTS_FR = frozenset((
+    "le", "la", "les", "un", "une", "des", "du", "de", "au", "aux", "et", "ou", "est", "sont", "ce", "cet", "cette",
+    "ces", "qui", "que", "dont", "dans", "pour", "avec", "sans", "sur", "sous", "par", "vers", "chez", "entre", "ne",
+    "pas", "se", "sa", "ses", "leur", "leurs", "votre", "vos", "notre", "nos", "nous", "vous", "il", "ils", "elle",
+    "elles", "je", "tu", "en", "tout", "tous", "toute", "toutes", "aucun", "aucune",
+    "oui", "non", "retirer", "ajouter", "fermer", "ouvrir", "replier", "supprimer", "annuler", "valider", "confirmer",
+    "enregistrer", "rechercher", "copier", "effacer", "choisir", "choisissez", "cliquez", "appliquer", "calculer",
+    "suivant", "jour", "jours", "heure", "heures", "semaine", "mois", "fichier", "fichiers", "langue", "langues",
+    "projet", "projets", "devis", "relecture", "traduction", "traductions", "panneau"))
+# élision du français (« l'intérêt », « d'un ») : la lettre est un mot entier, suivi d'une apostrophe et d'une lettre ;
+# « project's » ou « I'd » n'en sont pas
+_ELISION = re.compile(r"(?<![^\W\d_])(?:l|d|qu|n|s|c|j)['’](?=[^\W\d_])", re.I)
+# Mots outils allemands : un texte allemand (« des Betrages ») n'est pas pris pour du français
+MOTS_DE = frozenset(("der", "die", "das", "und", "ist", "nicht", "mit", "von", "dem", "den", "ein", "eine", "zu",
+                     "im", "auf", "zum", "zur", "wird", "werden"))
+_MOT_FR = re.compile(r"[^\W\d_]+")
+_CODE = re.compile(r"[a-z][A-Za-z0-9_-]*")  # clé, code de langue, événement, classe : jamais du texte
+_CHEMIN_JS = re.compile(r"\S*/\S*")  # adresse ou chemin sans espace (« ../fr/protection-des-donnees/ »)
+# avant un « / », ces signes et ces mots ouvrent une expression régulière (sinon c'est une division)
+_AVANT_REGEX = set("(,=:[!&|?{};+-*%<>~^")
+_MOTS_AVANT_REGEX = {"return", "typeof", "instanceof", "in", "of", "new", "delete", "void", "throw", "case", "do", "else"}
+
+
+def litteraux_js(code):
+    """Chaînes littérales d'un code JavaScript ('…', "…", `…`), échappements résolus, sans les commentaires ni les
+    expressions régulières (/int[ée]r[êe]ts?/gi). Analyse lexicale simple, suffisante pour les scripts du site."""
+    sortie, i, n, dernier = [], 0, len(code), ""
+    while i < n:
+        c = code[i]
+        if code.startswith("//", i):
+            i = code.find("\n", i)
+            i = n if i < 0 else i
+        elif code.startswith("/*", i):
+            i = code.find("*/", i + 2)
+            i = n if i < 0 else i + 2
+        elif c in "'\"`":
+            j, morceaux = i + 1, []
+            while j < n and code[j] != c:
+                if code[j] == "\\" and j + 1 < n:
+                    suivant = code[j + 1]
+                    morceaux.append({"n": "\n", "t": "\t", "r": ""}.get(suivant, suivant))
+                    j += 2
+                else:
+                    morceaux.append(code[j])
+                    j += 1
+            sortie.append("".join(morceaux))
+            i, dernier = j + 1, "chaine"
+        elif c == "/" and (dernier in _AVANT_REGEX or dernier in _MOTS_AVANT_REGEX or not dernier):
+            j, classe = i + 1, False
+            while j < n and (classe or code[j] != "/") and code[j] != "\n":
+                if code[j] == "\\":
+                    j += 1
+                elif code[j] == "[":
+                    classe = True
+                elif code[j] == "]":
+                    classe = False
+                j += 1
+            j += 1
+            while j < n and code[j].isalpha():  # drapeaux
+                j += 1
+            i, dernier = j, "regex"
+        elif c.isspace():
+            i += 1
+        elif c.isalnum() or c in "_$":
+            j = i
+            while j < n and (code[j].isalnum() or code[j] in "_$"):
+                j += 1
+            dernier, i = code[i:j], j
+        else:
+            dernier, i = c, i + 1
+    return sortie
+
+
+def est_francais(texte):
+    """Vrai si une chaîne (HTML compris) porte du texte français : une lettre accentuée du français, ou un mot de MOTS_FR
+    ou une élision (« l'intérêt »), sans mot outil allemand. Une chaîne d'un seul mot en minuscules (clé, code « de »,
+    classe, événement) ou un chemin sans espace n'en est pas."""
+    t = html.unescape(re.sub(r"<[^>]*>", " ", texte))
+    if not LETTRE.search(t) or _CODE.fullmatch(t.strip()) or _CHEMIN_JS.fullmatch(t.strip()):
+        return False
+    if _ACCENTS_FR & set(t):
+        return True
+    mots = {m.lower() for m in _MOT_FR.findall(t)}
+    return bool(mots & MOTS_FR or _ELISION.search(t)) and not (mots & MOTS_DE)
+
+
+def francais_des_scripts(source):
+    """Chaînes françaises des scripts d'une page (hors JSON : JSON-LD, index de l'aide, textes et données des démos,
+    lus par extraire_page ou exclus par translate="no"), dans l'ordre de la page."""
+    trouves = []
     for m in re.finditer(r"<script\b([^>]*)>(.*?)</script>", source, re.S):
         if "json" in m.group(1):
             continue
-        if re.search(r"""(['"`])(?=[^'"`\n]*\s)(?=[^'"`\n]*[A-Za-zÀ-ÿ]{3})[^'"`\n]{4,}\1""", m.group(2)):
-            return True
-    return False
+        trouves += [s for s in litteraux_js(m.group(2)) if est_francais(s)]
+    return trouves
+
+
+def scripts_a_traduire(source):
+    """Vrai si un script de la page écrit du texte français que l'extraction ne voit pas (francais_des_scripts) ; un mot
+    seul compte (« Retirer »). Les libellés anglais de l'application et les données dans leur langue ne comptent pas."""
+    return bool(francais_des_scripts(source))
+
+
+# ---------- gabarits à variables nommées (tâche 7.3) ----------
+
+# « Segment {n} confirmé. » : variable nommée, en minuscules, jamais un marqueur {1} ni un jeton {{ROOT}}
+VARIABLE = re.compile(r"(?<!\{)\{([a-z][a-z0-9_]*)\}(?!\})")
+
+
+def variables(texte):
+    """Variables nommées d'un gabarit, triées (une variable répétée compte autant de fois)."""
+    return sorted(VARIABLE.findall(texte or ""))
 
 
 # ---------- classement des attributs ----------
@@ -441,7 +550,11 @@ def extraire_page(source):
         elif m.group(1):  # script ou style
             vide_run()
             if m.group(1).lower() == "script" and not haut()["exclu"]:
-                script(j, d)
+                # un script de données translate="no" ou d'une autre langue (données des démos, tâche 7.3) n'est pas lu
+                ouvrant = re.match(r"<script\b[^>]*>", j, re.I).group(0)
+                attrs = {n: (v if v is not None else "") for n, v, _, _, _ in _attributs(ouvrant, d)}
+                if not _entree(haut(), "script", attrs)["exclu"]:
+                    script(j, d)
         elif j.startswith("</"):
             nom = _nom(j)
             if not haut()["exclu"]:

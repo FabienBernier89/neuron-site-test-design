@@ -11,6 +11,7 @@ from pathlib import Path
 
 from blocs_communs import *  # noqa: F401,F403 (source, comp, commun, app)
 from blog_commun import carte_blog, grille, COUV, AUTEUR
+import demos
 import trame
 from trame import texte as texte_v2  # textes nouveaux (contenus-v2)
 
@@ -345,7 +346,7 @@ HAUTEUR_DEMO = {"chnell": 760, "gestion-de-projet": 760, "editeur-de-relecture":
 
 
 def h_tdemo(sec, ctx):
-    zone = "".join(blocs(sec, "div", "cx-ex")) + bloc(sec, "div", attr='id="cx"')
+    zone = demos.ajuster(ctx["P"], "".join(blocs(sec, "div", "cx-ex")) + bloc(sec, "div", attr='id="cx"'))
     ctx["demo"] = True
     outil = ctx["P"].rstrip("/").split("/")[-1]
     ctx["outil"] = outil
@@ -528,12 +529,18 @@ def entete(P):
 
 
 def scripts_demo(P):
-    """Styles et scripts propres à la page source (démos interactives), repris tels quels."""
+    """Styles et scripts propres à la page source (démos interactives), repris tels quels ; sauf le script des démos dont
+    les textes sortent du code (demos.py, tâche 7.3 de la traduction), remplacé par sa réécriture et ses blocs JSON."""
     src = (SOURCE_FR / P / "index.html").read_text(encoding="utf-8")
     tete_ = src[:src.index("</head>")]
     styles = "".join(f"<style>{s}</style>\n" for s in re.findall(r"<style>(.*?)</style>", tete_, re.S))
     corps = src[src.index("<body"):]
-    scripts = "".join(f"<script>{s}</script>\n" for s in re.findall(r"<script>(.*?)</script>", corps, re.S))
+    sources = re.findall(r"<script>(.*?)</script>", corps, re.S)
+    if demos.concerne(P):
+        if len(sources) != 1:
+            raise ValueError(f"{P} : un script de démo attendu dans la page V1, {len(sources)} trouvés")
+        return styles, demos.scripts(P, sources[0])
+    scripts = "".join(f"<script>{s}</script>\n" for s in sources)
     return styles, scripts
 
 

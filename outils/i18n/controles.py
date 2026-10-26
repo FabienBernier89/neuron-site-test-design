@@ -17,6 +17,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 from outils.i18n.segments import CLASSES_NON_TRADUITES  # éléments jamais traduits, comme translate="no"
+from outils.i18n.segments import variables as _variables
 
 ICI = Path(__file__).resolve().parent.parent.parent
 PROTEGES = ICI / "src/langues/proteges.json"
@@ -339,7 +340,18 @@ def terminologie(fr, tr, langue, glossaire):
     return problemes
 
 
-BLOQUANTS = ("tirets", "eszett", "marques", "interdits")  # règles de controler_traductions qui bloquent ; le reste avertit
+def variables(fr, tr):
+    """Gabarit à variables nommées (« Segment {n} confirmé. », textes des démos, tâche 7.3) : la traduction garde chaque
+    variable du français, ni plus ni moins, sans la traduire (« {n} », jamais « {nummer} »)."""
+    a, b = _variables(fr), _variables(tr)
+    if a == b:
+        return []
+    return [probleme("variables", f"variables du français : {', '.join('{%s}' % v for v in a) or 'aucune'} ; de la "
+                                  f"traduction : {', '.join('{%s}' % v for v in b) or 'aucune'}", tr)]
+
+
+# règles de controler_traductions qui bloquent ; le reste avertit
+BLOQUANTS = ("tirets", "eszett", "marques", "interdits", "variables")
 EXCLUS_DU_CONTROLE = ("v1", "invariant")  # statuts d'une traduction déjà validée ou jamais traduite
 
 
@@ -353,7 +365,7 @@ def controler_traductions(langue, entrees, glossaire):
     """Contrôle les traductions d'une table (Table.entrees) hors statuts v1 et invariant et hors champ « v1 » (exemptee), par
     défaut et par page.
     Rend (nombre de traductions contrôlées, problèmes) ; chaque problème : {lieu, regle, detail, extrait, gravite} avec
-    gravite « bloquant » (tirets, eszett, marques, interdits) ou « avertissement » (terminologie)."""
+    gravite « bloquant » (tirets, eszett, marques, interdits, variables) ou « avertissement » (terminologie)."""
     controlees, problemes = 0, []
     for cle in sorted(entrees):
         e = entrees[cle]
@@ -364,7 +376,8 @@ def controler_traductions(langue, entrees, glossaire):
             controlees += 1
             lieu = f"« {_extrait(e['fr'], 50)} » [{cle}" + (f", page {page or 'accueil'}" if page is not None else "") + "]"
             tr = v["trad"]
-            trouves = tirets(tr) + (eszett(e["fr"], tr) if langue == "de" else []) + marques(e["fr"], tr) + interdits(tr)
+            trouves = (tirets(tr) + (eszett(e["fr"], tr) if langue == "de" else []) + marques(e["fr"], tr) + interdits(tr)
+                       + variables(e["fr"], tr))
             trouves += terminologie(e["fr"], tr, langue, glossaire)
             problemes += [{"lieu": lieu, **p, "gravite": "bloquant" if p["regle"] in BLOQUANTS else "avertissement"}
                           for p in trouves]

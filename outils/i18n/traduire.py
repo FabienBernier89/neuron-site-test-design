@@ -7,9 +7,12 @@ langue que si elle est entièrement et correctement traduite ; sinon traduire re
 - « absent » : le texte français n'est pas dans la table (texte nouveau, ou modifié après la traduction) ;
 - « statut » : sa traduction a un statut refusé dans ce mode (Table.ACCEPTES : mt partout, adapte en production) ;
 - « balisage » : la traduction perd, double ou inverse un marqueur {n}…{/n} des balises en ligne ;
+- « variables » : la traduction d'un gabarit des démos (« Segment {n} confirmé. ») perd, ajoute ou renomme une variable
+  nommée (controles.variables, tâche 7.3) ;
 - « exhaustivite » : la page traduite, ré-extraite, garde un texte français de la page d'origine sans que ce soit
   voulu (condition de Fabien : ne jamais oublier un texte à traduire ; décision V2, Ruling 3) ;
-- « scripts » : un script de la page écrit du texte français que l'extraction ne voit pas (Ruling 13, tâche 7.3) ;
+- « scripts » : un script de la page écrit du texte français que l'extraction ne voit pas (Ruling 13 ; depuis la tâche
+  7.3, les démos lisent leurs textes dans un bloc JSON extrait : aucune page du site n'est concernée) ;
 - « exemples » : l'exemple de loi d'une page du glossaire ne se remplace pas de façon certaine par celui de la V1 (italien
   et anglais, tâche 3.3, exemples_glossaire.py) ; la page est alors non publiable, sans autre manquant relevé.
 
@@ -41,9 +44,6 @@ IDENTIQUES = {"invariant", "v1"}      # statuts d'une traduction identique au fr
 LIBELLE_BANDEAU = "Version de travail, traduction non relue"
 CONTEXTES = "contextes.json"  # contextes V1 des textes à traduire, par langue (recomposition.recomposer, commande memoire)
 BANDEAU = '<div class="bandeau-travail" role="note">{}</div>\n'
-# Pages dont les scripts inline n'écrivent que des libellés anglais de l'application (inventaire de la tâche 2.1,
-# tests/test_i18n_segments.py, SCRIPTS_CONNUS) : elles ne sont pas bloquées par la raison « scripts »
-SCRIPTS_ANGLAIS = {"corrext/extraits-registre-commerce/"}
 # Avis fictifs des pages métier (outils/composer/metier_modele.py, avis) : la section qui les porte, ou l'avis seul
 _SECTION_AVIS = re.compile(r'<section class="sec mt-avis">(?:(?!</section>).)*?\bdata-avis-fictif\b.*?</section>\n?', re.S)
 _AVIS = re.compile(r"<figure\b[^>]*\bdata-avis-fictif\b[^>]*>.*?</figure>", re.S)
@@ -137,9 +137,15 @@ def analyser(html, page, langue, table, mode, neuron=None):
         except ValueError:
             signaler(_manquant(texte, entree["statut"], "balisage"))
             continue
+        if controles.variables(texte, entree["trad"]):
+            traductions.pop(u["id"])
+            signaler(_manquant(texte, entree["statut"], "variables"))
+            continue
         utilises.add(entree["statut"])
-    if S.scripts_a_traduire(html) and page not in SCRIPTS_ANGLAIS:
-        manquants.append({"cle": None, "fr": "texte écrit par un script de la page (tâche 7.3)", "statut": None,
+    ecrits = S.francais_des_scripts(html)
+    if ecrits:
+        manquants.append({"cle": None, "fr": f"texte écrit par un script de la page : « {_normal(ecrits[0])[:60]} »"
+                          + (f" et {len(ecrits) - 1} autre(s)" if len(ecrits) > 1 else ""), "statut": None,
                           "raison": "scripts"})
     traduit = S.reinjecter_page(html, traductions)
     # exhaustivité : aucun texte français de la page d'origine ne doit rester tel quel dans la page traduite

@@ -1,0 +1,20 @@
+{
+ "textes": {
+  "note_langues": "Démo : sélectionnez une langue source et une langue cible.",
+  "note_paire": "Démo : segments disponibles pour la paire {langue_1} ↔ {langue_2} uniquement.",
+  "note_filtres": "Démo : deux requêtes et quatre segments réels sont disponibles.",
+  "contexte": "Démo : le contexte complet s'ouvre dans l'application.",
+  "note_requetes": "Démo : deux requêtes disponibles, {requete_1} et {requete_2}.",
+  "note_plus": "Démo : {affiches} des {total} résultats affichés ; l'application en propose davantage."
+ },
+ "donnees": {
+  "verzugszins": {"q": "Verzugszins", "count": 324, "rows": [
+   {"a": "Kann die Zahlstelle den fehlenden Betrag zuzüglich Verzugszins nicht mehr der betroffenen Person nachbelasten, zum Beispiel weil diese nicht mehr ihre Kundin ist, so ist die Zahlstelle zur Leistung des fehlenden Betrages zuzüglich Verzugszins verpflichtet.", "b": "Si l'agent payeur ne peut plus prélever ultérieurement le montant manquant avec l'intérêt moratoire, notamment parce que la personne concernée n'est plus cliente de son établissement, il reste tenu de verser le montant correspondant.", "dom": "OTHER", "src": "Feuille Fédérale/Bundesblatt - Source: Feuille Fédérale/Bundesblatt - Data Set: Neur.on"},
+   {"a": "Art. 24 Verzugszins Auf Einmalzahlungen, abgeltenden Steuern und Abgeltungszahlungen, die der ESTV verspätet überwiesen werden, ist ohne Mahnung ein Verzugszins nach Ablauf der in diesem Gesetz festgelegten Fristen bis zum Datum des Eingangs geschuldet.", "b": "5373 Art. 24 Intérêt moratoire Un intérêt moratoire est dû sans sommation dès l'échéance des délais fixés dans la présente loi sur les paiements uniques, les impôts libératoires et les paiements libératoires virés en retard à l'AFC et jusqu'à réception des sommes dues.", "dom": "TAX LAW & CUSTOMS", "src": "SIF FF20125365 Bundesgesetz-über-die-internationale-Quellenbesteuerung-IQG - Source: fedlex.admin.ch - Data Set: Neur.on"}],
+   "mark": ["Verzugszins", "intérêt moratoire"]},
+  "bankgeheimnis": {"q": "Bankgeheimnis", "count": 425, "rows": [
+   {"a": "Anlässlich dieses Treffens wurde der Kundenberater misstrauisch, da die Kundin auffällige Fragen über das Schweizer Bankgeheimnis und das Geldwäschereigesetz stellte.", "b": "Lors de l'entretien, le conseiller à la clientèle est devenu méfiant parce que la cliente posait des questions suspectes sur le secret bancaire suisse et sur la loi sur le blanchiment d'argent.", "dom": "BANKING & FINANCE", "src": "MROS - Source: fedpol.admin.ch - Data Set: Neur.on"},
+   {"a": "Obwohl der Begriff Bankgeheimnis im Initiativtext nicht und im Argumentarium nur sparsam verwendet wird, beabsichtigt die Initiative insbesondere die Verankerung des steuerlichen Bankgeheimnisses im Inland auf Verfassungsstufe.", "b": "Bien que le terme ne figure pas dans le texte de l'initiative et que l'argumentaire du comité d'initiative n'en fasse qu'un usage parcimonieux, un des buts principaux de l'initiative est d'inscrire la notion de secret bancaire dans la Constitution.", "dom": "TAX LAW & CUSTOMS", "src": "ESTV FF20156429 Botschaft-zur-Volksinitiative-Ja-zum-Schutz-der-Privatsphäre- - Source: fedlex.admin.ch - Data Set: Neur.on"}],
+   "mark": ["Bankgeheimnis", "secret bancaire"]}
+ }
+}

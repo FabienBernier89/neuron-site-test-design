@@ -460,15 +460,20 @@ class TestScripts(unittest.TestCase):
         self.assertFalse(S.scripts_a_traduire('<script type="application/json" id="aide-index">[{"q": "Une question ?"}]</script>'))
         self.assertFalse(S.scripts_a_traduire("<script>var etat = {etape: 1, ok: true};</script>"))
 
-    # Pages dont un script inline écrit du texte que l'extraction ne voit pas : démos Corrext (notes « Démo : », annonces
-    # aria-live, libellés de pagineur) et racine (aucun texte affiché). Le texte de ces scripts reste à traiter (rapport
-    # de la tâche 2.1) ; le test échoue si une nouvelle page en écrit, pour que rien n'échappe sans être vu.
-    SCRIPTS_CONNUS = {"index.html", "fr/corrext/chnell/index.html", "fr/corrext/editeur-de-relecture/index.html",
-                      "fr/corrext/extraits-registre-commerce/index.html", "fr/corrext/gestion-de-projet/index.html"}
+    # Pages dont un script inline écrit du texte français que l'extraction ne voit pas : aucune depuis la tâche 7.3 (les
+    # démos lisent leurs textes dans un bloc JSON extrait) ; le test échoue si une page en écrit, pour que rien
+    # n'échappe sans être vu.
+    SCRIPTS_CONNUS = set()
 
     def test_scripts_ecrivant_du_texte_sont_inventories(self):
         trouves = {chemin for chemin, h in pages_du_site() if S.scripts_a_traduire(h)}
         self.assertEqual(trouves, self.SCRIPTS_CONNUS)
+
+    def test_script_de_donnees_translate_no_non_lu(self):
+        """Données des démos (tâche 7.3) : un bloc JSON translate="no" ne donne aucune unité ; le bloc des textes, si."""
+        h = ('<p>Bonjour</p><script type="application/json" data-donnees translate="no">{"phrase": "Le débiteur en demeure"}'
+             '</script><script type="application/json" data-textes>{"vide": "Aucun résultat."}</script>')
+        self.assertEqual([u["texte"] for u in S.extraire_page(h)], ["Bonjour", "Aucun résultat."])
 
     def test_sim_data_et_scripts_externes_ne_sont_pas_dans_la_page(self):
         # les données de démo (window.SIM_EX) vivent dans assets/sim-data.js : jamais dans le HTML, donc jamais extraites

@@ -1,0 +1,75 @@
+{
+ "textes": {
+  "segment_confirme": "Segment {n} confirmé.",
+  "segment_a_relire": "Segment {n} de nouveau à relire.",
+  "tous_confirmes": "Tous les segments sont confirmés.",
+  "aucun_confirme": "Aucun segment confirmé.",
+  "source_copiee": "Source copiée dans la traduction du segment {n}.",
+  "deplier": "Déplier le panneau",
+  "replier": "Replier le panneau",
+  "memoire_vide": "Démo : aucune traduction validée proche du segment {n}. Choisissez le segment 1, 2 ou 3.",
+  "memoire_note_1": "Démo : formulation validée lors d'un projet précédent.",
+  "memoire_note_2": "Démo : cette formulation a été corrigée et validée dans un projet précédent. Apply la reprend ici.",
+  "memoire_note_3": "Démo : la traduction de ce segment a été reprise telle quelle de la mémoire.",
+  "memoire_appliquee": "Traduction de la mémoire appliquée au segment {n}.",
+  "recherche_essai": "Démo : essayez « {source} » côté Source, ou « {cible} » côté Target.",
+  "recherche_trouvee": "1 résultat dans les mémoires, 2 dans CHnell.",
+  "recherche_vide": "Aucun résultat.",
+  "alternative_ajoutee": "Alternative ajoutée : {moteur}.",
+  "reformulation_regeneree": "Reformulation régénérée.",
+  "reformulation_appliquee": "Reformulation appliquée au segment {n}.",
+  "propagation_attente": "Le segment {n} est identique : une décision de propagation attend dans Sync.",
+  "attente_un": "{n} élément en attente",
+  "attente_plusieurs": "{n} éléments en attente",
+  "conflit_garde": "Conflit résolu : votre version est conservée.",
+  "conflit_applique": "Conflit résolu : la dernière version est appliquée au segment {n}.",
+  "entrante_appliquee": "Modification du collègue appliquée au segment {n}.",
+  "correction_propagee": "Correction propagée au segment {n}.",
+  "tel_quel": "Segment laissé tel quel."
+ },
+ "donnees": {
+  "alt": [
+   [{"e": "LexMachina", "t": "Mandatsvertrag (fiktives Beispiel)"}, {"e": "DeepL Pro", "t": "Auftragsvertrag (fiktives Beispiel)"}, {"e": "Azure OpenAI GPT", "t": "Auftragsvertrag (fiktives Beispiel)"}],
+   [{"e": "LexMachina", "t": "Artikel 1 · Gegenstand"}, {"e": "DeepL Pro", "t": "Artikel 1 · Gegenstand"}, {"e": "Azure OpenAI GPT", "t": "Artikel 1 · Gegenstand"}],
+   [{"e": "LexMachina", "t": "Die Auftragnehmerin erbringt der Auftraggeberin gemäss beiliegendem Leistungsverzeichnis beratende Dienstleistungen in regulatorischer Hinsicht."},
+    {"e": "DeepL Pro", "t": "Die Beauftragte erbringt für die Auftraggeberin Beratungsleistungen im Bereich der Einhaltung gesetzlicher Vorschriften gemäss dem im Anhang beigefügten Lastenheft."},
+    {"e": "Azure OpenAI GPT", "t": "Die Beauftragte erbringt für die Auftraggeberin Beratungsleistungen im Bereich der regulatorischen Compliance gemäss dem beigefügten Pflichtenheft."}],
+   [{"e": "LexMachina", "t": "Jede bei Fälligkeit offene Rechnung wird mit einem Verzugszins von 5% p.a. verzinst."},
+    {"e": "DeepL Pro", "t": "Für jede Rechnung, die bei Fälligkeit noch nicht beglichen ist, fallen Verzugszinsen in Höhe von 5 % pro Jahr an."},
+    {"e": "Azure OpenAI GPT", "t": "Jede bei Fälligkeit unbezahlte Rechnung trägt einen Verzugszins von 5 % pro Jahr."}],
+   [{"e": "LexMachina", "t": "Dieser Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg."},
+    {"e": "DeepL Pro", "t": "Der vorliegende Vertrag unterliegt schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg."},
+    {"e": "Azure OpenAI GPT", "t": "Dieser Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Der ausschliessliche Gerichtsstand ist in Freiburg."}]
+  ],
+  "mem": [
+   null,
+   {"s": "Article 1 · Objet du contrat", "t": "Artikel 1 · Vertragsgegenstand"},
+   {"s": "La Mandataire fournit à la Mandante des prestations de conseil en conformité réglementaire, conformément au cahier des charges annexé au présent contrat.", "t": "Die Beauftragte erbringt für die Auftraggeberin Beratungsleistungen im Bereich der regulatorischen Compliance gemäss dem diesem Vertrag beigefügten Pflichtenheft."},
+   {"s": "Toute facture impayée à l'échéance porte intérêt moratoire à 5 % l'an.", "t": "Für jede bei Fälligkeit unbezahlte Rechnung ist ein Verzugszins von 5 % pro Jahr geschuldet."},
+   null,
+   null
+  ],
+  "reph": {"4": {
+   "none": "Dieser Vertrag <u>ist dem schweizerischen</u> Recht <u>unterworfen</u>, <u>namentlich</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.",
+   "legal": "<u>Der vorliegende</u> Vertrag <u>unterliegt dem schweizerischen</u> Recht, <u>namentlich</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.",
+   "fin": "Dieser Vertrag <u>unterliegt dem Schweizer</u> Recht, insbesondere dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.",
+   "simp": "Dieser Vertrag <u>richtet sich nach dem</u> Recht <u>der Schweiz</u>, <u>vor allem nach</u> dem Obligationenrecht. <u>Der alleinige</u> Gerichtsstand ist Freiburg.",
+   "formal": "Dieser Vertrag <u>unterliegt dem schweizerischen</u> Recht, <u>namentlich</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.",
+   "inf": "Dieser Vertrag <u>unterliegt dem Schweizer</u> Recht, <u>genauer gesagt</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg.",
+   "short": "<u>Der</u> Vertrag <u>unterliegt dem schweizerischen</u> Recht, <u>vorrangig</u> dem Obligationenrecht. <u>Der ausschliessliche</u> Gerichtsstand ist Freiburg."
+  }},
+  "lk": {
+   "tm": [{"s": "Toute facture impayée à l'échéance porte intérêt moratoire à 5 % l'an.", "t": "Für jede bei Fälligkeit unbezahlte Rechnung ist ein Verzugszins von 5 % pro Jahr geschuldet.", "d": "Contrat-cadre_conseil.docx"}],
+   "ch": [{"s": "Si l'agent payeur ne peut plus prélever ultérieurement le montant manquant avec l'intérêt moratoire, notamment parce que la personne concernée n'est plus cliente de son établissement, il reste tenu de verser le montant correspondant.",
+           "t": "Kann die Zahlstelle den fehlenden Betrag zuzüglich Verzugszins nicht mehr der betroffenen Person nachbelasten, zum Beispiel weil diese nicht mehr ihre Kundin ist, so ist die Zahlstelle zur Leistung des fehlenden Betrages zuzüglich Verzugszins verpflichtet.", "d": "Feuille Fédérale/Bundesblatt"},
+          {"s": "Art. 24 Intérêt moratoire Un intérêt moratoire est dû sans sommation dès l'échéance des délais fixés dans la présente loi sur les paiements uniques, les impôts libératoires et les paiements libératoires virés en retard à l'AFC et jusqu'à réception des sommes dues.",
+           "t": "Art. 24 Verzugszins Auf Einmalzahlungen, abgeltenden Steuern und Abgeltungszahlungen, die der ESTV verspätet überwiesen werden, ist ohne Mahnung ein Verzugszins nach Ablauf der in diesem Gesetz festgelegten Fristen bis zum Datum des Eingangs geschuldet.", "d": "Bundesgesetz-über-die-internationale-Quellenbesteuerung-IQG"}]
+  },
+  "recherche": {"source": "intérêt moratoire", "cible": "Verzugszins"},
+  "sync": {
+   "conflict": {"seg": 1, "mine": "Artikel 1 · Gegenstand", "last": "Artikel 1 · Vertragsgegenstand"},
+   "incoming": {"seg": 4, "text": "Der vorliegende Vertrag untersteht schweizerischem Recht, insbesondere dem Obligationenrecht. Ausschliesslicher Gerichtsstand ist Freiburg."},
+   "prop": {"from": 0, "to": 5, "text": "Auftragsvertrag (fiktives Beispiel)"}
+  }
+ }
+}

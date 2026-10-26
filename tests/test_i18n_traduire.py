@@ -281,17 +281,26 @@ class TestScripts(unittest.TestCase):
         html, manquants = T.traduire(self.H, "corrext/chnell/", "de", self.table(), "apercu")
         self.assertEqual(html, "")
         self.assertEqual([(m["cle"], m["raison"]) for m in manquants], [(None, "scripts")])
+        self.assertIn("Analyse en cours avec le moteur", manquants[0]["fr"])
+
+    def test_mot_seul_bloque(self):
+        """Relecture 2.1 : un libellé d'un seul mot écrit par un script (« Retirer ») bloque aussi la page."""
+        h = doc("<p>Bonjour</p><script>b.setAttribute('aria-label','Retirer '+l);</script>\n")
+        html, manquants = T.traduire(h, "corrext/gestion-de-projet/", "de", self.table(), "apercu")
+        self.assertEqual([(m["cle"], m["raison"]) for m in manquants], [(None, "scripts")])
 
     def test_page_a_script_anglais_non_bloquee(self):
-        html, manquants = T.traduire(self.H, "corrext/extraits-registre-commerce/", "de", self.table(), "apercu")
+        """Les libellés anglais de l'application écrits par un script (extraits du registre) ne bloquent pas la page."""
+        h = doc("<p>Bonjour</p><script>el.textContent = 'No results for these filters';</script>\n")
+        html, manquants = T.traduire(h, "corrext/extraits-registre-commerce/", "de", self.table(), "apercu")
         self.assertEqual(manquants, [])
 
     def test_inventaire_reel(self):
-        """Sur le site construit, les pages bloquées par leurs scripts sont exactement les trois de l'inventaire 2.1."""
+        """Sur le site construit, plus aucune page n'est bloquée par ses scripts (tâche 7.3 : les textes des démos sont
+        sortis des scripts)."""
         sortie = support.site_complet()
-        bloquees = {p for p in build.PAGES if p not in T.SCRIPTS_ANGLAIS
-                    and S.scripts_a_traduire(support.chemin(sortie, p).read_text(encoding="utf-8"))}
-        self.assertEqual(bloquees, {"corrext/chnell/", "corrext/editeur-de-relecture/", "corrext/gestion-de-projet/"})
+        bloquees = {p for p in build.PAGES if S.scripts_a_traduire(support.chemin(sortie, p).read_text(encoding="utf-8"))}
+        self.assertEqual(bloquees, set())
 
 
 class TestBuild(unittest.TestCase):

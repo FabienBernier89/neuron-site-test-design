@@ -76,10 +76,10 @@
     var q = function (s) { return l.q(s); };
     var nom = q("#cxpName"), defaut = q("#cxpDefault"), recherche = q("#cxpLangSearch"), pop = q("#cxpLangPop");
     var niveau = q("#cxpLevel"), info = q("#cxpInfo");
-    /* Langue cible : l'allemand, cohérent avec la paire FR → DE du tableau de devis. La case se vise par sa valeur (clé de
-       l'état de la démo, jamais traduite) ; la recherche tape le début du libellé affiché, que la démo filtre et qui suit
+    /* Langue cible : l'allemand, cohérent avec la paire FR → DE du tableau de devis. La case se vise par son code de
+       langue (data-code, jamais traduit) ; la recherche tape le début du libellé affiché, que la démo filtre et qui suit
        la langue de la page. */
-    var caseLangue = q('#cxpLangList input[value="Allemand"]');
+    var caseLangue = q('#cxpLangList input[data-code="de"]');
     var ligneLangue = caseLangue.closest("label");
     var libelle = ligneLangue.textContent.trim();
     function etape(n) { return q("#cxpStep" + n).classList.contains("on"); }
