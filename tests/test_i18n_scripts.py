@@ -396,7 +396,8 @@ class TestVariables(unittest.TestCase):
             t.poser(self.FR, "Segment {n} bestätigt.", "adapte", "adapté")
             f = Path(tmp) / "corrections.csv"
             f.write_text(f'cle;fr;trad\n{cle(self.FR)};"{self.FR}";"Segment bestätigt."\n', encoding="utf-8-sig")
-            r = E.importer_csv(f, t, "Alice", glossaire={}, jour="2026-10-26")
+            r = E.importer_csv(f, t, "Alice", glossaire={}, jour="2026-10-26",
+                               assemblees={"": f"<html><body><p>{self.FR}</p></body></html>"})
         self.assertEqual([x["raison"] for x in r["rejetes"]], ["variables"])
         self.assertEqual(t.entrees[cle(self.FR)]["statut"], "adapte")
 

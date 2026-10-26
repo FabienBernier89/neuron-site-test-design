@@ -58,7 +58,10 @@ importer : réimporte les corrections d'un relecteur (XLIFF, ou CSV cle;fr;trad)
 au statut relu (invariant s'ils sont identiques au français), rejets listés avec leur raison, traduction précédente conservée.
 Un segment relu doit être confirmé par le relecteur (state translated, final ou signed-off, ou approved="yes", Ruling 31) ; les
 autres restent tels quels et sont listés « non confirmé par le relecteur ». --sans-etat : tout segment valide vaut confirmation
-(à n'utiliser que pour un outil qui n'écrit pas les états, à décider au pilote). Écrit la table, affiche le rapport en français et l'enregistre dans le dossier d'export (rapport-import-<date>-<relecteur>.txt)."""
+(à n'utiliser que pour un outil qui n'écrit pas les états, à décider au pilote). Un segment dont le texte FR a changé sur le
+site depuis l'export est rejeté ; sa traduction rendue devient le contexte du nouveau texte (contextes.json) quand il est
+identifiable. --export : l'XLIFF d'origine (par défaut neur-on-<langue>.xlf à côté du fichier rendu), pour lister les unités
+que le fichier rendu a perdues. Écrit la table, affiche le rapport en français et l'enregistre dans le dossier d'export (rapport-import-<date>-<relecteur>.txt)."""
 import argparse
 import json
 import sys
@@ -199,7 +202,20 @@ def afficher_import(langue, rapport, fichier, relecteur):
               f"{len(rapport['rejetes'])} rejeté(s), {len(rapport['non_confirmes'])} non confirmé(s) par le relecteur, "
               f"{len(rapport['avertissements'])} avertissement(s) de terminologie",
               f"Dont {rapport['mt_adapte_intacts']} segment(s) mt ou adapte confirmé(s) sans aucune modification",
+              f"Dont {rapport['v1_intacts']} traduction(s) V1 confirmée(s) sans modification (provenance V1 gardée)",
               f"Fichier lu : {fichier}"]
+    absents = rapport.get("absents")
+    if absents is None:
+        lignes.append("Export d'origine non fourni (--export) : unités exportées absentes du fichier rendu non contrôlées")
+    elif absents:
+        lignes.append(f"Unités de l'export absentes du fichier rendu ({len(absents)}), laissées telles quelles :")
+        lignes += [f"  {a['cle']} « {a['fr'][:60]} »" for a in absents]
+    else:
+        lignes.append("Toutes les unités de l'export sont dans le fichier rendu")
+    if rapport.get("reorientes"):
+        lignes.append("Textes modifiés sur le site depuis l'export : traduction rendue gardée en contexte du nouveau texte "
+                      "(contextes.json), à adapter puis à relire :")
+        lignes += [f"  {r['cle']} -> {r['nouvelle_cle']} « {r['fr'][:60]} »" for r in rapport["reorientes"]]
     if rapport["modifies"]:
         lignes.append("Corrections appliquées :")
         for m in rapport["modifies"]:
@@ -298,12 +314,24 @@ def commande_importer(args, build):
         echanges.verifier_hors_depot(dossier)  # avant tout : un échec ne laisse rien d'écrit
         glossaire = {fr: l for fr, l in chnell.charger_glossaire().items() if args.langue in l}
         importer = echanges.importer_csv if fichier.suffix.lower() == ".csv" else echanges.importer_xliff
-        options = {"sans_etat": args.sans_etat} if importer is echanges.importer_xliff else {}
-        rapport = importer(fichier, table, args.relecteur, glossaire=glossaire, **options)
+        options = {}
+        if importer is echanges.importer_xliff:
+            export = Path(args.export) if args.export else fichier.parent / f"neur-on-{args.langue}.xlf"
+            options = {"sans_etat": args.sans_etat,
+                       "export": export if export.is_file() and export.resolve() != fichier.resolve() else None}
+            if args.export and options["export"] is None:
+                raise ValueError(f"export d'origine introuvable : {export}")
+        rapport = importer(fichier, table, args.relecteur, glossaire=glossaire,
+                           assemblees=traduire.pages_union(args.langue), **options)
     except ValueError as e:
         print(f"Import refusé, table inchangée : {e}", file=sys.stderr)
         return 1
     table.enregistrer()
+    if rapport["reorientes"]:
+        f_contextes = table.fichier.parent / traduire.CONTEXTES
+        contextes = json.loads(f_contextes.read_text(encoding="utf-8")) if f_contextes.is_file() else {}
+        f_contextes.write_text(json.dumps(echanges.contextes_reorientes(contextes, rapport), indent=1,
+                                          ensure_ascii=False) + "\n", encoding="utf-8")
     texte = afficher_import(args.langue, rapport, fichier, args.relecteur)
     jour = date.today().isoformat()
     base = f"rapport-import-{jour}-{echanges.nom_pour_fichier(args.relecteur)}"
@@ -397,6 +425,8 @@ def main(argv=None):
     p.add_argument("--sortie", help="dossier du rapport (le dossier d'export du jour par défaut)")
     p.add_argument("--sans-etat", action="store_true",
                    help="tout segment valide vaut confirmation, sans lire state ni approved (outil qui n'écrit pas les états)")
+    p.add_argument("--export", help="XLIFF d'origine, pour lister ses unités absentes du fichier rendu "
+                                    "(par défaut neur-on-<langue>.xlf à côté du fichier rendu, s'il existe)")
     p = sous.add_parser("fusionner", help="fusionner les propositions d'un agent d'adaptation (JSON [{cle, trad, note}])")
     p.add_argument("langue", choices=LANGUES)
     p.add_argument("fichier", help="propositions.json ou relecture.json")
@@ -454,8 +484,11 @@ def main(argv=None):
         dossier = build.DOSSIER_LANGUES / args.langue
         fichier = dossier / "memoire-rapport.json"
         fichier.write_text(json.dumps(rapport, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
-        (dossier / traduire.CONTEXTES).write_text(json.dumps(contextes, indent=1, ensure_ascii=False) + "\n",
-                                                  encoding="utf-8")
+        f_contextes = dossier / traduire.CONTEXTES
+        anciens = json.loads(f_contextes.read_text(encoding="utf-8")) if f_contextes.is_file() else {}
+        # les contextes posés par un réimport (texte FR modifié depuis l'export) survivent au recalcul de la mémoire
+        contextes = echanges.garder_contextes_relecture(anciens, contextes)
+        f_contextes.write_text(json.dumps(contextes, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
         print(afficher_memoire(rapport))
         print(f"Table : {table.fichier}\nRapport : {fichier}\nContextes : {dossier / traduire.CONTEXTES}")
         return 0

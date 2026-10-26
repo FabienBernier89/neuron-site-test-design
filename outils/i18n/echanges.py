@@ -20,7 +20,9 @@ séparateur point-virgule (ouverture directe dans Excel).
 
 Réimport (importer_xliff, importer_csv) : chaque unité rendue est contrôlée avant d'entrer dans la table. Un segment est
 rejeté, avec sa raison, et garde sa traduction et son statut précédents, si : « segment inconnu » (clé absente de la table),
-« segment FR modifié depuis l'export », « traduction vide », « balisage » (marqueur supprimé, ajouté, en double, inversé ou
+« segment plus présent sur le site » (le texte FR a changé sur le site depuis l'export, sa clé avec lui : la traduction
+rendue devient le contexte du nouveau texte quand il est identifiable), « segment FR modifié depuis l'export » (source
+retouchée dans le fichier), « traduction vide », « balisage » (marqueur supprimé, ajouté, en double, inversé ou
 élément XLIFF inconnu : segments.restaurer), « tirets », « eszett », « marques », « interdits », « variables » (variable
 nommée d'un gabarit des démos perdue, ajoutée ou renommée : « Segment {n} confirmé. » ; contrôles bloquants de controles.py)
 ou « doublon ». Une traduction v1, invariant ou à champ « v1 » (table.py) rendue sans modification n'est pas
@@ -48,6 +50,7 @@ par défaut dans ~/Claude project/Bibliotheque-Claude/07-Ressources-traduction/N
 Commandes : python3 -m outils.i18n exporter <langue> ..., importer <langue> <fichier> --relecteur <nom> et fusionner <langue>
 <propositions.json> (outils/i18n/__main__.py). Bibliothèque standard seulement."""
 import csv
+import difflib
 import json
 import re
 import subprocess
@@ -77,6 +80,9 @@ BANDEAU = traduire.PAGE_BANDEAU  # pseudo-page du libellé du bandeau de l'aper�
 PSEUDO_PAGES = (LLMS, BANDEAU)
 PAGES_VISIBLES = 8
 COLONNES_CSV = ("cle", "fr", "trad")
+PLUS_PRESENT = "segment plus présent sur le site"  # raison de rejet : la clé n'apparaît plus dans les pages assemblées
+NATURE_RELECTURE = "relecture d'une version précédente"  # contexte posé pour la nouvelle clé d'un texte FR modifié
+SEUIL_VOISIN = 0.6  # ressemblance minimale (difflib) entre l'ancien texte FR et le texte qui l'a remplacé sur sa page
 
 _MARQ = re.compile(r"\{(/?)(\d+)\}")
 _BLANCS = re.compile(r"[ \t\r\n\f]+")  # pas \s : l'espace insécable est une modification
@@ -294,6 +300,9 @@ def _liste_pages(pages):
 
 def _ligne_contexte(c):
     sans = lambda t: _MARQ.sub("", t or "")  # les marqueurs encombrent la lecture d'un contexte
+    if c.get("nature") == NATURE_RELECTURE:
+        return (f"Version précédente relue ({c.get('page_v1', '')}) : français d'alors : {sans(c.get('fr_complet'))} ; "
+                f"traduction rendue par le relecteur : {sans(c.get('trad_complete'))}")
     return (f"Contexte V1 ({c.get('nature', '')}, {c.get('page_v1', '')}) : texte français complet : "
             f"{sans(c.get('fr_complet'))} ; traduction V1 complète : {sans(c.get('trad_complete'))}")
 
@@ -403,6 +412,31 @@ def exporter_glossaire_csv(langue, glossaire, sortie):
 
 # ---------- réimport ----------
 
+def presents(assemblees):
+    """Clés des textes du site par page, d'après les pages assemblées des deux modes (traduire.pages_union) et les
+    pseudo-pages « llms » et « bandeau » : {page: {clé: texte FR}}."""
+    sortie = {}
+    for page, texte in _textes(None, assemblees):
+        sortie.setdefault(page, {})[cle(texte)] = _normal(texte)
+    return sortie
+
+
+def _voisin(fr_avant, pages, sur_le_site, table):
+    """Texte qui a remplacé fr_avant sur ses pages : parmi les textes de ces pages (toutes si elles sont inconnues) sans
+    traduction dans la table, le seul plus proche de fr_avant (difflib, SEUIL_VOISIN au moins) ; None si aucun ou si
+    deux textes sont aussi proches."""
+    plat = lambda t: " ".join(_MARQ.sub(" ", t).split())
+    candidats = {}
+    for page in (pages or list(sur_le_site)):
+        for texte in sur_le_site.get(page, {}).values():
+            if table.chercher(texte, page) is None and not traduire._invariant(texte, table.langue):
+                candidats[texte] = difflib.SequenceMatcher(None, plat(fr_avant), plat(texte)).ratio()
+    meilleurs = sorted(candidats.items(), key=lambda kv: -kv[1])
+    if not meilleurs or meilleurs[0][1] < SEUIL_VOISIN or (len(meilleurs) > 1 and meilleurs[1][1] == meilleurs[0][1]):
+        return None
+    return meilleurs[0][0]
+
+
 def _decouper_id(ident):
     """Identifiant d'unité -> (clé du texte, page ou None) : « <clé> » ou « <clé>@<page> » (« accueil » pour la page « »)."""
     if "@" not in ident:
@@ -476,7 +510,7 @@ def _lire_csv(fichier):
     return unites
 
 
-def _appliquer(unites, table, relecteur, glossaire, jour, sans_etat=False):
+def _appliquer(unites, table, relecteur, glossaire, jour, sans_etat=False, assemblees=None, attendues=None):
     """Contrôle chaque unité rendue et pose les acceptées dans la table (en mémoire). Voir importer_xliff."""
     if not relecteur or not relecteur.strip():
         raise ValueError("le nom du relecteur est obligatoire")
@@ -484,9 +518,12 @@ def _appliquer(unites, table, relecteur, glossaire, jour, sans_etat=False):
         raise ValueError("le nom du relecteur contient un tiret long")
     jour = jour or date.today().isoformat()
     glossaire = _glossaire_de(table.langue, glossaire)
+    sur_le_site = presents(traduire.pages_union(table.langue) if assemblees is None else assemblees)
+    toutes = set().union(*sur_le_site.values()) if sur_le_site else set()
     suite = f"relu par {relecteur.strip()} le {jour}"
-    rapport = {"relus": 0, "invariants": 0, "mt_adapte_intacts": 0, "modifies": [], "rejetes": [], "non_confirmes": [],
-               "avertissements": []}
+    rapport = {"relus": 0, "invariants": 0, "mt_adapte_intacts": 0, "v1_intacts": 0, "modifies": [], "rejetes": [],
+               "non_confirmes": [], "avertissements": [], "reorientes": [],
+               "absents": None if attendues is None else [], "export_controle": attendues is not None}
     vus = set()
     for u in unites:
         ident = u["id"]
@@ -504,6 +541,21 @@ def _appliquer(unites, table, relecteur, glossaire, jour, sans_etat=False):
         if (entree is None or (page is not None and page not in entree["par_page"])
                 or (page is None and entree["trad"] is None)):
             rejeter("segment inconnu", "aucun texte français de la table n'a cette clé")
+            continue
+        if k not in (toutes if page is None else sur_le_site.get(page, {})):
+            # le texte français a changé sur le site depuis l'export (sa clé avec lui) : rien n'est posé ; la traduction
+            # rendue sert de contexte au texte qui l'a remplacé, s'il est identifiable sur ses pages, sinon au rapport
+            pages = [("" if p == ACCUEIL else p) for p in (u["pages"] or ([] if page is None else [page or ACCUEIL]))]
+            nouveau = _voisin(entree["fr"], [p for p in pages if p in sur_le_site], sur_le_site, table)
+            trad = u["trad"] if not u["erreur"] else None
+            if nouveau is not None and trad and trad.strip():
+                rapport["reorientes"].append({"cle": ident, "nouvelle_cle": cle(nouveau), "fr_avant": _normal(entree["fr"]),
+                                              "fr": nouveau, "trad": trad, "pages": pages})
+                rejeter(PLUS_PRESENT, f"remplacé sur le site par « {nouveau[:60]} » (clé {cle(nouveau)}) : la traduction "
+                                      "rendue devient le contexte de ce texte pour l'adaptation")
+            else:
+                rejeter(PLUS_PRESENT, "aucun texte identifiable ne l'a remplacé ; traduction rendue : "
+                                      + (_MARQ.sub("", trad) if trad else "aucune"))
             continue
         if u["erreur"]:
             rejeter("balisage", u["erreur"])
@@ -553,16 +605,51 @@ def _appliquer(unites, table, relecteur, glossaire, jour, sans_etat=False):
         rapport["relus"] += 1
         rapport["invariants"] += identique
         rapport["mt_adapte_intacts"] += (not modifie and ancienne["statut"] in ("mt", "adapte"))
+        # traduction V1 confirmée sans modification (provenance V1 gardée, ou invariant si identique au français)
+        rapport["v1_intacts"] += (not modifie and (ancienne["statut"] == "v1" or bool(ancienne.get("v1"))))
         if modifie:
             pages = u["pages"] or ([] if page is None else [page or ACCUEIL])
             rapport["modifies"].append({"cle": ident, "fr": _normal(entree["fr"]), "avant": avant, "apres": trad,
                                         "pages": pages, "autres_pages": u["autres_pages"]})
         for p in ([] if exemptee else controles.terminologie(entree["fr"], trad, table.langue, glossaire)):
             rapport["avertissements"].append({"cle": ident, "detail": p["detail"]})
+    if attendues is not None:
+        rendus = {u["id"] for u in unites}
+        for ident in attendues:
+            if ident not in rendus:
+                entree = table.entrees.get(_decouper_id(ident)[0])
+                rapport["absents"].append({"cle": ident, "fr": _normal(entree["fr"]) if entree else ""})
     return rapport
 
 
-def importer_xliff(fichier, table, relecteur, glossaire=None, jour=None, sans_etat=False):
+def unites_exportees(fichier, langue):
+    """Identifiants des unités d'un XLIFF exporté (l'export d'origine, pour dire ce que le fichier rendu a perdu)."""
+    return [u["id"] for u in _lire_xliff(fichier, langue)]
+
+
+def garder_contextes_relecture(anciens, nouveaux):
+    """Contextes recalculés par la mémoire (nouveaux) complétés de ceux qu'un réimport avait posés (NATURE_RELECTURE) dans
+    l'ancien contextes.json : relancer la commande memoire ne les efface pas."""
+    return {**{k: e for k, e in anciens.items() if (e.get("contexte") or {}).get("nature") == NATURE_RELECTURE},
+            **nouveaux}
+
+
+def contextes_reorientes(contextes, rapport):
+    """contextes.json ({clé: {"fr", "contexte"}}) complété des traductions rendues pour un texte FR modifié depuis
+    l'export (rapport["reorientes"] d'un réimport) : la nouvelle clé reçoit un contexte NATURE_RELECTURE (ancien français,
+    traduction du relecteur), repris dans a_traduire.json, le lot d'adaptation et la note de l'export suivant. Un contexte
+    V1 déjà présent pour la clé est gardé."""
+    sortie = dict(contextes)
+    for r in rapport.get("reorientes", []):
+        if r["nouvelle_cle"] in sortie and (sortie[r["nouvelle_cle"]].get("contexte") or {}).get("nature") != NATURE_RELECTURE:
+            continue
+        sortie[r["nouvelle_cle"]] = {"fr": r["fr"], "contexte": {
+            "nature": NATURE_RELECTURE, "page_v1": ", ".join(p or ACCUEIL for p in r["pages"]) or "pages inconnues",
+            "fr_complet": r["fr_avant"], "trad_complete": r["trad"]}}
+    return sortie
+
+
+def importer_xliff(fichier, table, relecteur, glossaire=None, jour=None, sans_etat=False, assemblees=None, export=None):
     """Réimporte un XLIFF corrigé par le relecteur dans la table (en mémoire : l'appelant fait enregistrer()). Rend
     {"relus": int, "invariants": int, "modifies": [{cle, fr, avant, apres, pages, autres_pages}], "rejetes": [{cle, raison,
     detail, fr}], "avertissements": [{cle, detail}]} ; relus compte les segments acceptés (dont les « invariants » posés
@@ -573,14 +660,22 @@ def importer_xliff(fichier, table, relecteur, glossaire=None, jour=None, sans_et
     les autres restent tels quels et sont listés dans « non_confirmes » [{cle, raison, modifie, fr}] ; « modifie » dit si le
     relecteur y a écrit autre chose que la traduction actuelle (ignoré). sans_etat : tout segment valide vaut confirmation.
     « mt_adapte_intacts » compte les segments mt ou adapte confirmés sans aucune modification. Une traduction v1 qui passe
-    relu sans changement garde le champ « v1 » de la table (Ruling 30)."""
-    return _appliquer(_lire_xliff(fichier, table.langue), table, relecteur, glossaire, jour, sans_etat)
+    relu sans changement garde le champ « v1 » de la table (Ruling 30) ; « v1_intacts » les compte à part.
+    Texte FR modifié sur le site depuis l'export (vague finale, point 2) : une unité dont la clé n'apparaît plus dans les
+    pages assemblées (assemblees : {page: html} ou {page: {mode: html}}, traduire.pages_union par défaut) est rejetée
+    (« segment plus présent sur le site ») ; quand le texte qui l'a remplacé sur ses pages est identifiable (_voisin), la
+    traduction rendue va dans « reorientes » [{cle, nouvelle_cle, fr_avant, fr, trad, pages}] (contextes_reorientes en
+    fait le contexte de la nouvelle clé), sinon dans le détail du rejet. export : XLIFF d'origine (unites_exportees) ; ses
+    unités absentes du fichier rendu sont listées dans « absents » [{cle, fr}] (None sans export)."""
+    attendues = unites_exportees(export, table.langue) if export is not None else None
+    return _appliquer(_lire_xliff(fichier, table.langue), table, relecteur, glossaire, jour, sans_etat, assemblees,
+                      attendues)
 
 
-def importer_csv(fichier, table, relecteur, glossaire=None, jour=None):
+def importer_csv(fichier, table, relecteur, glossaire=None, jour=None, assemblees=None):
     """Repli tableur : réimporte un CSV de colonnes cle;fr;trad (la clé d'une traduction de page : « <clé>@<page> »), mêmes
-    contrôles et même rapport que importer_xliff ; une ligne du CSV vaut confirmation (Ruling 31)."""
-    return _appliquer(_lire_csv(fichier), table, relecteur, glossaire, jour)
+    contrôles et même rapport que importer_xliff (assemblees : idem) ; une ligne du CSV vaut confirmation (Ruling 31)."""
+    return _appliquer(_lire_csv(fichier), table, relecteur, glossaire, jour, assemblees=assemblees)
 
 
 def nom_pour_fichier(texte):
