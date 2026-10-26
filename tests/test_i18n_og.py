@@ -6,6 +6,7 @@ from pathlib import Path
 
 import build
 from outils.i18n import og_image
+from outils.i18n.table import Table
 
 ICI = Path(__file__).resolve().parent.parent
 TEXTES = ICI / "src/data/og/textes.json"
@@ -51,6 +52,26 @@ class TestGabarit(unittest.TestCase):
         self.assertIn("og-neuron.jpg", (ICI / "build.py").read_text(encoding="utf-8"))
         self.assertFalse((ICI / "assets/img/og-neuron-fr.png").exists())
 
+    def test_textes_non_relus_refuses(self):
+        """Vague finale, point 9 : titre et signature doivent être des traductions relues, v1 ou invariantes de la table."""
+        with tempfile.TemporaryDirectory() as tmp:
+            t = Table("de", Path(tmp))
+            t.poser("Titre FR", TITRE, "relu", "test")
+            t.poser("Signature FR", SIGNATURE, "adapte", "test")
+            with self.assertRaises(ValueError) as e:
+                og_image.generer("de", TITRE, ACCENT, SIGNATURE, Path(tmp) / "x.png", t)
+            self.assertIn("relue", str(e.exception))
+            with self.assertRaises(ValueError):
+                og_image.verifier_textes(t, "Texte absent de la table")
+            t.poser("Signature FR", SIGNATURE, "v1", "V1 de/")
+            og_image.verifier_textes(t, TITRE, SIGNATURE)  # aucune exception
+            with self.assertRaises(ValueError):
+                og_image.generer("it", TITRE, ACCENT, SIGNATURE, Path(tmp) / "x.png", t)
+            self.assertFalse((Path(tmp) / "x.png").exists())
+
+    def test_ligne_de_commande_francais_seulement(self):
+        self.assertEqual(og_image._principal(["de", "x.png"]), 2)
+
     def test_aucun_tiret_long(self):
         for f in (og_image.GABARIT, TEXTES, ICI / "outils/i18n/og_image.py"):
             texte = f.read_text(encoding="utf-8")
@@ -63,7 +84,10 @@ class TestImage(unittest.TestCase):
     def test_image_dimensions(self):
         with tempfile.TemporaryDirectory() as tmp:
             sortie = Path(tmp) / "sous-dossier" / "og-test.png"
-            og_image.generer("de", TITRE, ACCENT, SIGNATURE, sortie)
+            t = Table("de", Path(tmp))
+            t.poser("Titre FR", TITRE, "relu", "test")
+            t.poser("Signature FR", SIGNATURE, "invariant", "test")
+            og_image.generer("de", TITRE, ACCENT, SIGNATURE, sortie, t)
             self.assertEqual(build.taille_image(sortie), (1200, 630))
             self.assertGreater(sortie.stat().st_size, 10000)  # une image rendue, pas une page blanche
 

@@ -5,8 +5,10 @@ langues DE, IT et EN de CONFIG["langues"] vivent à côté, sous leur propre adr
 Le build travaille en trois passes : (1) assembler_fr compose chaque page française, liens encore en {{ROOT}} ;
 (2) TRADUIRE en tire la page de chaque autre langue (outils/i18n/traduire.py, table src/langues/<l>/segments.json) ; une
 page n'est construite dans une langue que si elle y est entièrement traduite, et en production une langue ne l'est que
-si toutes ses pages, sa 404 et ses llms.txt le sont (décision V3) ; (3) finaliser résout images, dimensions et liens,
-puis la page est écrite à chemin_page(page, langue).
+si toutes ses pages, sa 404 et ses llms.txt le sont (décision V3) et passent les contrôles bloquants (controler_production,
+vague finale, point 5 ; sinon message et français seul) ; (3) finaliser résout images, dimensions et liens, puis la page
+est écrite à chemin_page(page, langue). En aperçu, un lien resté vers une page non traduite porte data-lien-fr et le
+build les liste ; en production, une langue publiée sans image de partage propre est signalée.
 
 Bibliothèque standard uniquement. Lit le site Neur.on (Sites/neuron) pour le méga-menu, le pied de
 page, la page 404, les redirections, les images et les données de démonstration, sans jamais y écrire. Le
@@ -35,7 +37,7 @@ from pathlib import Path
 import menu
 import redirections
 from outils import donnees_structurees, envoi, llms, post
-from outils.i18n import langues, localiser, traduire
+from outils.i18n import controles, langues, localiser, traduire
 from outils.i18n.table import Table
 
 ICI = Path(__file__).resolve().parent
@@ -480,14 +482,18 @@ def assembler_fr(meta, corps, page, nav, pied, v):
     return html
 
 
-def finaliser(html, page, langue, construites, racine=None):
+def finaliser(html, page, langue, construites, racine=None, absentes=None):
     """Dernière passe d'une page assemblée dans une langue : attribut lang, hreflang de toutes les langues construites
     (poser_alternates, français compris), localisation des liens, de la tête et des données structurées (localiser,
     hors français), sélecteur de langue (menu.resoudre_selecteur), images recopiées, dimensions, puis liens relatifs
-    (relier). construites : pages construites par langue (langue vers ensemble de pages). racine : voir relier (la 404 passe racine="")."""
+    (relier). construites : pages construites par langue (langue vers ensemble de pages). racine : voir relier (la 404 passe racine="").
+    absentes : ensemble complété des pages non traduites vers lesquelles la page garde un lien français ; en aperçu, ces
+    liens portent data-lien-fr (localiser, vague finale, point 13)."""
     html = html.replace('<html lang="@LANG@"', f'<html lang="{langue}"', 1)
     html = localiser.poser_alternates(html, page, construites)
-    html, _ = localiser.localiser(html, page, langue, construites)
+    html, liens_fr = localiser.localiser(html, page, langue, construites, marquer=bool(CONFIG["apercu"]))
+    if absentes is not None:
+        absentes.update(liens_fr)
     html = menu.resoudre_selecteur(html, page, langue, construites)  # après localiser : voir resoudre_selecteur
     copier_images(html)
     return relier(dimensionner(html), page, racine, langue)
@@ -712,6 +718,21 @@ TRADUIRE = traduire_page
 LIBELLES = libelles_llms
 
 
+def controler_production(langue, traduites, construites, pages_404, nav, pied, v):
+    """Contrôles bloquants des pages traduites d'une langue avant la production (vague finale, point 5) : chaque page
+    traduite et sa 404, finalisées comme elles seront écrites, passent controles.controler_production (tirets,
+    termes interdits, <html lang>, og:locale, inLanguage). Les milliers et les marques se contrôlent segment par
+    segment dans traduire.analyser, où une traduction V1 validée reste exemptée (Ruling 30). Rend [(page, problème)]."""
+    problemes = []
+    for page in sorted(construites[langue]):
+        html = finaliser(traduites[langue, page], page, langue, construites)
+        problemes += [(page, p) for p in controles.controler_production(html, langue)]
+    if langue in pages_404:
+        html = page_404(nav, pied, v, langue, construites, pages_404[langue])
+        problemes += [("404", p) for p in controles.controler_production(html, langue, tete=False)]
+    return problemes
+
+
 def assembler_pages():
     """Passe 1 : copie les assets dans DOCS puis assemble chaque page française (liens encore en {{ROOT}}). Renvoie
     (métas, pages assemblées, menu, pied, version des assets)."""
@@ -745,7 +766,11 @@ def main():
         incompletes = ([p for p, (_, m) in resultats.items() if m] + (["404"] if manquants_404 else [])
                        + (["llms"] if manquants_llms else []))
         if not CONFIG["apercu"] and incompletes:  # production : la langue entière ou rien (décision V3)
-            print(f"Langue {langue} non publiée : {len(incompletes)} pages incomplètes")
+            controlees = sum(1 for _, m in [*resultats.values(), (None, manquants_404)]
+                             if any(isinstance(x, dict) and x.get("raison") == "controles" for x in m))
+            print(f"Langue {langue} non publiée : {len(incompletes)} pages incomplètes"
+                  + (f", dont {controlees} aux contrôles bloquants (python3 -m outils.i18n etat {langue} --production)"
+                     if controlees else ""))
             construites[langue] = set()
             continue
         construites[langue] = {p for p, (_, m) in resultats.items() if not m}
@@ -754,12 +779,33 @@ def main():
             pages_404[langue] = html_404
         if not manquants_llms:
             libelles[langue] = t
+    if not CONFIG["apercu"]:  # production : une page traduite aux contrôles bloquants retient toute la langue (point 5)
+        for langue in [l for l in autres if construites[l]]:
+            problemes = controler_production(langue, traduites, construites, pages_404, nav, pied, v)
+            if problemes:
+                print(f"Langue {langue} non publiée : {len(problemes)} problème(s) bloquant(s) sur "
+                      f"{len({p for p, _ in problemes})} page(s) traduite(s) : "
+                      + " ; ".join(f"{p or 'accueil'} : {x['regle']}, {x['detail']}" for p, x in problemes[:5]))
+                construites[langue] = set()
+                pages_404.pop(langue, None)
+                libelles.pop(langue, None)
+        for langue in [l for l in autres if construites[l]]:
+            if not (localiser.IMAGES / f"og-neuron-{langue}.png").is_file():
+                print(f"Avertissement : langue {langue} sans image de partage (assets/img/og-neuron-{langue}.png) : "
+                      "og:image reste l'image française (python3 -m outils.i18n.og_image, textes relus)")
+    liens_fr = {l: set() for l in autres}
     for page in PAGES:  # passe 3 : finalisation et écriture, français d'abord
         pages_langues = [("fr", assemblees[page])] + [(l, traduites[l, page]) for l in autres if page in construites[l]]
         for langue, html in pages_langues:
             sortie = chemin_page(page, langue)
             sortie.parent.mkdir(parents=True, exist_ok=True)
-            sortie.write_text(finaliser(html, page, langue, construites), encoding="utf-8")
+            sortie.write_text(finaliser(html, page, langue, construites, absentes=liens_fr.get(langue)), encoding="utf-8")
+    if CONFIG["apercu"]:  # aperçu : liens restés vers une page non traduite (en production, la langue est entière)
+        for langue in autres:
+            if liens_fr[langue] & set(PAGES):
+                cibles = sorted(liens_fr[langue] & set(PAGES))
+                print(f"Liens vers des pages non traduites ({langue}, data-lien-fr) : {len(cibles)} page(s) : "
+                      + ", ".join(p or "accueil" for p in cibles[:10]) + (f" et {len(cibles) - 10} autre(s)" if len(cibles) > 10 else ""))
     (DOCS / "404.html").write_text(page_404(nav, pied, v, "fr", construites, fr404), encoding="utf-8")
     for langue in autres:  # une 404 par langue construite et traduite, désignée par le .htaccess de son dossier ; sinon
         if construites[langue] and langue in pages_404:  # la 404 française de la racine sert de repli

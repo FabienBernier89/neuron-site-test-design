@@ -610,3 +610,27 @@ def controler_page(html, langue):
     visible = "\n".join(texte_visible(sans_citations(html), langue))
     return (tirets(html) + interdits(html) + langue_page(html, langue) + restes_fr(html, langue)
             + milliers(visible, langue))
+
+
+def controler_production(html, langue, tete=True):
+    """Contrôles bloquants d'une page traduite et finalisée avant la production (vague finale, point 5 ; build.py) : les
+    règles déterministes de controler_page qui ne dépendent d'aucun segment, tirets, termes interdits et langue de la page
+    (<html lang>, og:locale, inLanguage). Les milliers et les marques se contrôlent par segment (controler_segment) : une
+    traduction V1 validée en reste exemptée (Ruling 30 ; l'explication du séparateur de milliers de la page de style
+    cite « 15 000 » à dessein). restes_fr, heuristique, n'avertit qu'à part. tete=False (page 404, sans og:locale ni
+    données structurées) : seul <html lang> est contrôlé pour la langue."""
+    problemes = tirets(html) + interdits(html)
+    if tete:
+        return problemes + langue_page(html, langue)
+    lang = _tete(html).lang
+    if _primaire(lang) != langue:
+        problemes.append(probleme("langue", f"<html lang> « {lang or ''} » : « {langue} » attendu", f'lang="{lang}"'))
+    return problemes
+
+
+def controler_segment(fr, tr, langue):
+    """Contrôles bloquants d'une traduction acceptée en production (traduire.analyser, mode production ; vague finale,
+    point 5) : tirets, termes interdits, marques (même nombre qu'en français) et milliers (de, it). L'appelant n'y soumet
+    pas une traduction exemptée (exemptee : v1, invariant, champ « v1 »)."""
+    return tirets(tr) + interdits(tr) + marques(fr, tr) + milliers(_MARQUEURS_EN_LIGNE.sub(" ", tr), langue)
+

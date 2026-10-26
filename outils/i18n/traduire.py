@@ -15,6 +15,9 @@ langue que si elle est entièrement et correctement traduite ; sinon traduire re
   7.3, les démos lisent leurs textes dans un bloc JSON extrait : aucune page du site n'est concernée) ;
 - « exemples » : l'exemple de loi d'une page du glossaire ne se remplace pas de façon certaine par celui de la V1 (italien
   et anglais, tâche 3.3, exemples_glossaire.py) ; la page est alors non publiable, sans autre manquant relevé.
+- « controles » (production seulement) : la traduction porte un défaut bloquant (controles.controler_segment : tirets,
+  termes interdits, marques, milliers), hors traductions validées de la V1 (Ruling 30) ; le build ne publie pas la langue
+  (vague finale, point 5, comme le Ruling 17).
 
 Restent en français, sans être manquants : les unités sous un lang="fr" explicite (Ruling 14 : sources françaises des
 démos, français de l'exemple de loi du glossaire, balisé par outils/post/y_accessibilite.py), les invariants
@@ -148,6 +151,11 @@ def analyser(html, page, langue, table, mode, neuron=None):
         if controles.variables(texte, entree["trad"]):
             traductions.pop(u["id"])
             signaler(_manquant(texte, entree["statut"], "variables"))
+            continue
+        if mode == "production" and not controles.exemptee(entree) and \
+                controles.controler_segment(texte, entree["trad"], langue):
+            traductions.pop(u["id"])  # vague finale, point 5 : jamais publié avec un défaut bloquant
+            signaler(_manquant(texte, entree["statut"], "controles"))
             continue
         utilises.add(entree["statut"])
     ecrits = S.textes_des_scripts(html)

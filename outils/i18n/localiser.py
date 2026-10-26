@@ -15,6 +15,7 @@ from .langues import HREFLANG, ICI, LANGUES, OG_LOCALE, route
 
 PRODUCTION = "https://neur-on.ai/"  # adresse du site publié (même valeur que build.PRODUCTION)
 IMAGES = ICI / "assets/img"  # visuels du site : og-neuron-<langue>.png s'y trouve quand il a été produit
+ATTRIBUT_LIEN_FR = "data-lien-fr"  # aperçu : lien d'une page traduite resté vers une page française non traduite
 
 # Un seul passage sur la page, quatre formes reconnues. Une balise alternate est reconnue pour être laissée telle quelle.
 _FORMES = re.compile(
@@ -54,7 +55,7 @@ def _fedlex(m, langue):
     return m.group(1) + cible
 
 
-def localiser(html, page, langue, construites):
+def localiser(html, page, langue, construites, marquer=False):
     """(html, pages absentes) : la page française assemblée, localisée dans la langue (hors français, sinon rien ne
     change). Un lien ({{ROOT}}[fr/]<p> en attribut, {{ROOT}}fr/<p> ailleurs, ou https://neur-on.ai/fr/<p>) mène à l'adresse de la langue quand p est une page
     construite dans cette langue (construites[langue]) ; sinon il reste inchangé et p est renvoyée dans l'ensemble des
@@ -65,7 +66,8 @@ def localiser(html, page, langue, construites):
     og-neuron.jpg devient og-neuron-<langue>.png quand ce fichier existe ; les visuels d'articles restent. Un champ
     <input name="langue" value="fr"> prend la langue. Un lien Fedlex vers un acte en français (…/eli/cc/<acte>/fr) mène
     à l'acte dans la langue de la page ; en anglais, au texte allemand si Fedlex ne publie pas l'anglais de l'acte
-    (FEDLEX_ANGLAIS, règle de la V1)."""
+    (FEDLEX_ANGLAIS, règle de la V1). marquer (aperçu, vague finale, point 13) : un lien href resté vers une page non
+    traduite reçoit l'attribut data-lien-fr, pour le repérer dans la page."""
     if langue == "fr":
         return html, set()
     absentes = set()
@@ -89,7 +91,9 @@ def localiser(html, page, langue, construites):
         if m.group("relatif").startswith("assets/"):
             return m.group(0)
         cible = adresse(m.group("relatif"))
-        return m.group(0) if cible is None else f'{m.group("attr")}="{{{{ROOT}}}}{cible}{m.group("suite") or ""}"'
+        if cible is None:
+            return m.group(0) + (" " + ATTRIBUT_LIEN_FR if marquer and m.group("attr") == "href" else "")
+        return f'{m.group("attr")}="{{{{ROOT}}}}{cible}{m.group("suite") or ""}"'
 
     html = _FORMES.sub(sub, html)
     html = _LANG_HTML.sub(f'<html lang="{langue}"', html, count=1)

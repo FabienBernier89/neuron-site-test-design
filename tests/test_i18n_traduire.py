@@ -37,11 +37,17 @@ def doc(corps, tete=""):
     return f'<!DOCTYPE html>\n<html lang="fr"><head><meta charset="utf-8">{tete}</head><body>\n{corps}</body></html>'
 
 
+def milliers_suisses(texte):
+    """15 000 devient 15'000 : la traduction factice respecte la règle des milliers (bloquante en production)."""
+    return controles._MILLIERS.sub(lambda m: re.sub(r"\s", "'", m.group(0)), texte)
+
+
 def pseudo(table, html, statut="relu"):
-    """Pose « DE <texte FR> » pour chaque texte à traduire de la page (hors lang="fr", invariants et avis fictifs)."""
+    """Pose « DE <texte FR> » pour chaque texte à traduire de la page (hors lang="fr", invariants et avis fictifs), milliers
+    à l'apostrophe."""
     for u in S.extraire_page(T.retirer_avis_fictifs(html)):
         if not u["lang_fr"] and not T._invariant(u["texte"], table.langue):
-            table.poser(u["texte"], "DE " + u["texte"], statut, "test")
+            table.poser(u["texte"], "DE " + milliers_suisses(u["texte"]), statut, "test")
     return table
 
 
@@ -118,6 +124,20 @@ class TestTraduire(unittest.TestCase):
         html, manquants = T.traduire(PAGE, "contact/", "de", t, "production")
         self.assertEqual(html, "")
         self.assertEqual([(m["raison"], m["statut"]) for m in manquants], [("statut", "adapte")])
+
+    def test_controles_de_segment_en_production(self):
+        """Vague finale, point 5 : en production, une traduction relue à défaut bloquant (milliers) rend la page non
+        publiable (raison « controles ») ; la même, V1 validée passée relue sans changement (champ « v1 »), est
+        exemptée (Ruling 30) ; l'aperçu ne la bloque pas."""
+        t = table_fixture()
+        fr = "Ce champ est obligatoire."
+        t.poser(fr, "Pflichtfeld, 15 000 Zeichen", "relu", "relu par Alice")
+        _, manquants = T.traduire(PAGE, "contact/", "de", t, "production")
+        self.assertEqual([(m["fr"], m["raison"]) for m in manquants], [(fr, "controles")])
+        t.poser(T.LIBELLE_BANDEAU, BANDEAU_DE, "relu", "test")
+        self.assertEqual(T.traduire(PAGE, "contact/", "de", t, "apercu")[1], [])
+        t.poser(fr, "Pflichtfeld, 15 000 Zeichen", "relu", "V1 de/ ; relu par Alice", v1=True)
+        self.assertEqual(T.traduire(PAGE, "contact/", "de", t, "production")[1], [])
 
     def test_marqueurs_restaures(self):
         h = doc('<p><a href="{{ROOT}}contact/">Démo</a> à demander</p>\n')
@@ -387,6 +407,80 @@ class TestBuild(unittest.TestCase):
             sortie, console = self.construire(tmp, self.PAGES_MULTI, apercu=False)
             self.assertFalse((sortie / "de").exists())
             self.assertIn(f"Langue de non publiée : {len(self.PAGES_MULTI) + 2} pages incomplètes", console)
+
+    def test_production_bloquee_par_un_defaut_de_segment(self):
+        """Vague finale, point 5 : une traduction relue au séparateur de milliers français bloque la langue en
+        production (message, français seul) ; une traduction V1 validée qui cite « 15 000 » reste exemptée."""
+        with tempfile.TemporaryDirectory() as tmp:
+            t = table_complete(Path(tmp) / "langues", self.PAGES_MULTI, apercu=False)
+            k, e = next((k, e) for k, e in t.entrees.items() if e["trad"] and e["trad"].startswith("DE ")
+                        and len(e["trad"]) > 20 and "{" not in e["trad"])
+            t.poser(e["fr"], e["trad"] + " (20 000 Dokumente)", "v1", "V1 de/")  # V1 validée : exemptée
+            t.enregistrer()
+            sortie, console = self.construire(tmp, self.PAGES_MULTI, apercu=False)
+            self.assertNotIn("non publiée", console)
+            t.poser(e["fr"], e["trad"] + " (20 000 Dokumente)", "relu", "relu par Alice")
+            t.enregistrer()
+            sortie, console = self.construire(tmp, self.PAGES_MULTI, apercu=False)
+            self.assertFalse((sortie / "de").exists())
+            self.assertRegex(console, r"Langue de non publiée : \d+ pages incomplètes, dont \d+ aux contrôles bloquants")
+
+    def test_production_bloquee_par_un_controle_de_page(self):
+        """Vague finale, point 5 : un problème de controles.controler_production sur une page traduite et finalisée
+        retient toute la langue (message, français seul)."""
+        with tempfile.TemporaryDirectory() as tmp:
+            table_complete(Path(tmp) / "langues", self.PAGES_MULTI, apercu=False)
+            faux = lambda html, langue, tete=True: ([controles.probleme("langue", "inLanguage « fr-CH » dans le JSON-LD", "x")]
+                                         if 'lang="de"' in html and "kontakt/danke" in html else [])
+            sortie, console = self.construire(tmp, self.PAGES_MULTI, apercu=False,
+                                              patches=[mock.patch.object(controles, "controler_production", faux)])
+            self.assertFalse((sortie / "de").exists())
+            self.assertFalse(list(sortie.glob("sitemap-de.xml")))
+            self.assertIn("Langue de non publiée : ", console)
+            self.assertIn("problème(s) bloquant(s)", console)
+
+    def test_controler_production(self):
+        page = ('<!DOCTYPE html><html lang="de"><head><meta property="og:locale" content="de_CH">'
+                '<script type="application/ld+json">{"@type":"WebPage","inLanguage":"de-CH"}</script></head>'
+                "<body><p>Rund 15 000 Dokumente</p></body></html>")
+        self.assertEqual(controles.controler_production(page, "de"), [])  # milliers : contrôlés par segment
+        self.assertEqual([p["regle"] for p in controles.controler_production(page.replace("de-CH", "fr-CH"), "de")],
+                         ["langue"])
+        self.assertEqual([p["regle"] for p in controles.controler_segment("Corrext, 20 000 documents",
+                                                                          "Corrext, 20 000 Dokumente", "de")], ["milliers"])
+        self.assertEqual([p["regle"] for p in controles.controler_segment("Corrext", "Korrext", "de")], ["marques"])
+        self.assertEqual(controles.controler_segment("Corrext, 20 000 documents", "Corrext, 20'000 Dokumente", "de"), [])
+
+    def test_production_avertit_sans_image_de_partage(self):
+        """Vague finale, point 9 : une langue publiée sans og-neuron-<l>.png est signalée ; le français garde la sienne."""
+        with tempfile.TemporaryDirectory() as tmp:
+            table_complete(Path(tmp) / "langues", self.PAGES, apercu=False)
+            images = Path(tmp) / "img"
+            images.mkdir()
+            from outils.i18n import localiser
+            with mock.patch.object(localiser, "IMAGES", images):
+                sortie, console = self.construire(tmp, self.PAGES, apercu=False)
+                self.assertIn("Avertissement : langue de sans image de partage", console)
+                (images / "og-neuron-de.png").write_bytes(b"png")
+                sortie, console = self.construire(tmp, self.PAGES, apercu=False)
+                self.assertNotIn("sans image de partage", console)
+            self.assertIn("og-neuron.jpg", (sortie / "fr/index.html").read_text(encoding="utf-8"))
+
+    def test_apercu_signale_les_liens_vers_une_page_non_traduite(self):
+        """Vague finale, point 13 : en aperçu, un lien d'une page traduite vers une page non traduite est listé dans le
+        rapport du build et porte data-lien-fr ; en production, la langue est entière ou absente (V3)."""
+        with tempfile.TemporaryDirectory() as tmp:
+            table_complete(Path(tmp) / "langues", self.PAGES, sauf=("contact/",))
+            sortie, console = self.construire(tmp, self.PAGES)
+            self.assertIn("Liens vers des pages non traduites (de, data-lien-fr) : 1 page(s) : contact/", console)
+            accueil = (sortie / "de/index.html").read_text(encoding="utf-8")
+            self.assertRegex(accueil, r'href="(?:\.\./)*fr/contact/" data-lien-fr')
+            self.assertNotIn("data-lien-fr", (sortie / "fr/index.html").read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as tmp:
+            table_complete(Path(tmp) / "langues", self.PAGES, apercu=False, sauf=("contact/",))
+            sortie, console = self.construire(tmp, self.PAGES, apercu=False)
+            self.assertFalse((sortie / "de").exists())  # jamais de page allemande avec un lien vers le français
+            self.assertNotIn("Liens vers des pages non traduites", console)
 
     def test_production_llms_incomplets_bloquent_la_langue(self):
         with tempfile.TemporaryDirectory() as tmp:

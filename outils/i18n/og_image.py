@@ -1,10 +1,12 @@
 """Image de partage (og:image) d'une langue : remplit le gabarit src/data/og/og.html (1200 x 630, reproduction de
 assets/img/og-neuron.jpg de la V1, décision V10) et en fait une capture PNG avec Chrome sans interface.
 
-    python3 -m outils.i18n.og_image <langue> <sortie.png>     # textes FR de src/data/og/textes.json, pour contrôler le gabarit
+    python3 -m outils.i18n.og_image fr <sortie.png>     # textes FR de src/data/og/textes.json, pour contrôler le gabarit
 
-generer(langue, titre, accent, signature, sortie) : le titre passe en deux lignes à la largeur du gabarit ; l'accent est la
-fin du titre, affichée en bleu. La police (Inter) et le logo blanc sont intégrés au HTML en données : la capture ne dépend
+generer(langue, titre, accent, signature, sortie, table) : le titre passe en deux lignes à la largeur du gabarit ; l'accent
+est la fin du titre, affichée en bleu. Le titre et la signature doivent être des traductions de la table de la langue au
+statut relu, v1 ou invariant (vague finale, point 9 : aucune traduction non relue sur une image publiée) ; sinon ValueError.
+La ligne de commande ne produit que l'image française de contrôle du gabarit, jamais celle d'une langue. La police (Inter) et le logo blanc sont intégrés au HTML en données : la capture ne dépend
 d'aucun fichier voisin. Le logo vient du site Neur.on V1 (variable NEURON_SRC, comme build.py), lu sans y écrire.
 
 Chrome : /Applications/Google Chrome.app sur macOS, ou le programme donné par la variable CHROME. Sans Chrome, generer lève
@@ -54,8 +56,31 @@ def remplir(langue, titre, accent, signature, ressources=True):
     return gabarit
 
 
-def generer(langue: str, titre: str, accent: str, signature: str, sortie: Path) -> None:
-    """Écrit l'image de partage de la langue dans sortie (PNG de 1200 x 630)."""
+STATUTS_ACCEPTES = ("relu", "v1", "invariant")  # traductions relues ou validées : seules admises sur une image publiée
+
+
+def verifier_textes(table, *textes):
+    """ValueError si un texte n'est pas la traduction (par défaut ou propre à une page) d'une entrée de la table au statut
+    relu, v1 ou invariant."""
+    valides = {" ".join(v["trad"].split()) for e in table.entrees.values() for v in (e, *e["par_page"].values())
+               if v.get("trad") and v.get("statut") in STATUTS_ACCEPTES}
+    for texte in textes:
+        if " ".join(texte.split()) not in valides:
+            raise ValueError(f"« {texte} » n'est pas une traduction relue ({', '.join(STATUTS_ACCEPTES)}) de la table "
+                             f"{table.langue} : image de partage refusée")
+
+
+def generer(langue: str, titre: str, accent: str, signature: str, sortie: Path, table) -> None:
+    """Écrit l'image de partage de la langue dans sortie (PNG de 1200 x 630), après verifier_textes (titre et signature
+    relus) ; ValueError si la table n'est pas celle de la langue ou si un texte n'est pas relu."""
+    if table.langue != langue:
+        raise ValueError(f"table « {table.langue} » pour une image « {langue} »")
+    verifier_textes(table, titre, signature)
+    _capturer(langue, titre, accent, signature, sortie)
+
+
+def _capturer(langue, titre, accent, signature, sortie):
+    """Capture PNG du gabarit rempli (sans contrôle des textes : generer, ou l'image française de contrôle)."""
     programme = chrome()
     if programme is None:
         raise RuntimeError("Chrome introuvable (variable CHROME ou /Applications/Google Chrome.app)")
@@ -80,9 +105,13 @@ def _principal(argv):
         print(__doc__.split("\n\n")[0], file=sys.stderr)
         return 2
     textes = {e["id"]: e for e in json.loads((GABARIT.parent / "textes.json").read_text(encoding="utf-8"))["entrees"]}
+    if argv[0] != "fr":
+        print("Seule l'image française de contrôle du gabarit se produit ici (langue fr) ; une autre langue passe par "
+              "generer et les textes relus de sa table.", file=sys.stderr)
+        return 2
     t = textes["titre"]
-    generer(argv[0], t["texte"], t["accent"], textes["signature"]["texte"], Path(argv[1]))
-    print(f"Image écrite : {argv[1]}")
+    _capturer("fr", t["texte"], t["accent"], textes["signature"]["texte"], Path(argv[1]))
+    print(f"Image de contrôle écrite : {argv[1]}")
     return 0
 
 

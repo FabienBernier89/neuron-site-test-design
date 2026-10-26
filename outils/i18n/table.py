@@ -57,8 +57,8 @@ class Table:
 
     def chercher(self, texte_fr, page):
         """Traduction de la page (par_page[page]) d'abord, sinon celle par défaut de l'entrée : {fr, trad, statut,
-        source}, une copie ; None si le texte n'est pas dans la table, ou si l'entrée n'a que des traductions de page
-        et aucune pour cette page."""
+        source} (et « v1 » quand le champ existe : controles.exemptee), une copie ; None si le texte n'est pas dans la
+        table, ou si l'entrée n'a que des traductions de page et aucune pour cette page."""
         entree = self.entrees.get(cle(texte_fr))
         if entree is None:
             return None
@@ -67,7 +67,7 @@ class Table:
             return {"fr": entree["fr"], **propre}
         if entree["trad"] is None:
             return None
-        return {k: entree[k] for k in ("fr", "trad", "statut", "source")}
+        return {k: entree[k] for k in ("fr", "trad", "statut", "source", "v1") if k in entree}
 
     def poser(self, texte_fr, trad, statut, source, page=None, sans_defaut=False, v1=False):
         """Enregistre la traduction par défaut du texte, ou celle d'une page (la traduction par défaut doit alors
