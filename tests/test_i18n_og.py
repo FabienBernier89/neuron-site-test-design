@@ -70,7 +70,12 @@ class TestGabarit(unittest.TestCase):
             self.assertFalse((Path(tmp) / "x.png").exists())
 
     def test_ligne_de_commande_francais_seulement(self):
-        self.assertEqual(og_image._principal(["de", "x.png"]), 2)
+        import contextlib
+        import io
+        erreur = io.StringIO()
+        with contextlib.redirect_stderr(erreur):
+            self.assertEqual(og_image._principal(["de", "x.png"]), 2)
+        self.assertIn("image française de contrôle", erreur.getvalue())
 
     def test_aucun_tiret_long(self):
         for f in (og_image.GABARIT, TEXTES, ICI / "outils/i18n/og_image.py"):
