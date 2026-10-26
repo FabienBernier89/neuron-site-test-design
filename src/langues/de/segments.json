@@ -62,6 +62,13 @@
   "source": "variante de balisage V1 de/uebersetzung/geschaeftsberichte/ (marqueur englobant)",
   "par_page": {}
  },
+ "00441b1d2263bf47": {
+  "fr": "{1}Neur.on{/1}{2}Une société suisse, une infrastructure suisse, un moteur entraîné sur le droit suisse.{/2}{3}À propos et distinctions{/3}",
+  "trad": "{1}Neur.on{/1} {2}eine Schweizer Gesellschaft, eine Schweizer Infrastruktur, ein auf Schweizer Recht ausgebildeter Motor.{/2} {3}über und Unterscheidungen{/3}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "00499d4a684fadf6": {
   "fr": "{1}13 juin 2024{/1}",
   "trad": "{1}13. Juni 2024{/1}",
@@ -116,6 +123,13 @@
   "trad": "Wie Sie sehen: Fortgeschrittene KI-Projekte brauchen für ihren Erfolg viel menschliches Fachwissen.",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/handelsregister-schwyz-englisch/",
+  "par_page": {}
+ },
+ "007c38047d46393f": {
+  "fr": "Confirmation et progression",
+  "trad": "Bestätigung und Fortschritt",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "0088f068f217b49d": {
@@ -335,6 +349,13 @@
   "trad": "Paula Reichenberg, CEO von Neur.on, ist Teil des Female Founder Project 2025 von UBS. Das Programm bereitet Gründerinnen auf die Begegnung mit Investorinnen und Investoren vor. Laut Harvard Business Review drehen sich die Fragen an Unternehmerinnen vor allem um Risiken, was ihnen schaden kann. Paula Reichenberg will deshalb vorbereitet sein.",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/female-founder-project-ubs-2025/",
+  "par_page": {}
+ },
+ "014759f3c6088025": {
+  "fr": "Hébergé en Suisse",
+  "trad": "In der Schweiz untergebracht",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "014a88cfae1345a1": {
@@ -679,6 +700,13 @@
   "trad": "{1}Französisch{/1}{2}soustraction d'impôt{/2}",
   "statut": "v1",
   "source": "V1 de/ressourcen/glossar/steuerhinterziehung/",
+  "par_page": {}
+ },
+ "02c99a384627dde5": {
+  "fr": "Le plugin Word est-il un complément de la boutique Microsoft ?",
+  "trad": "Ist das Word-Plugin eine Ergänzung zum Microsoft-Shop?",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "02c9c5e8dc4212c7": {
@@ -1076,6 +1104,13 @@
   "trad": "Die meistgenutzten Tools von Treuhandunternehmen",
   "statut": "v1",
   "source": "V1 de/loesungen/treuhand/",
+  "par_page": {}
+ },
+ "04a9ad312aa8fe30": {
+  "fr": "{1}LexMachina{2}Suisse{/2}{/1}",
+  "trad": "{1}LexMachina {2}Schweiz{/2}{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "04abf921ad90f329": {
@@ -2122,6 +2157,13 @@
   "source": "V1 de/ressourcen/blog/aktuelles/",
   "par_page": {}
  },
+ "08a679d2c54f2874": {
+  "fr": "{1}Swiss FinTech Awards 2024{/1}{2}Lauréat Early Stage{/2}",
+  "trad": "{1}Swiss FinTech Awards 2024{/1} {2}Lauréat Early Stage{/2}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "08b35a9a66f13190": {
   "fr": "Quel niveau de certification demander ?",
   "trad": "Welche Beglaubigungsstufe sollten Sie verlangen?",
@@ -2235,6 +2277,13 @@
   "source": "variante de balisage V1 de/ueber-uns/ (marqueur englobant)",
   "par_page": {}
  },
+ "08f46d0c1d6085e0": {
+  "fr": "{1}Corrext, le poste de commande{/1} {2}LexMachina{/2} {3}Sécurité et souveraineté{/3} {4}API et on-premises{/4}",
+  "trad": "{1}Corrext, die Bestellposition{/1} {2}LexMachina{/2} {3}Sicherheit und Souveränität{/3} {4}API und on-Premises{/4}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "09091b40d69134cb": {
   "fr": "Traduction certifiée {1}authentifiée par un notaire suisse{/1}.{2}En règle générale : autorités et tribunaux suisses.{/2}",
   "trad": "Übersetzung mit {1}Beglaubigung durch ein Schweizer Notariat{/1}.{2}In der Regel: Schweizer Behörden und Gerichte.{/2}",
@@ -2338,6 +2387,13 @@
   "trad": "Was Corrext in einer Rechtsabteilung verändert",
   "statut": "v1",
   "source": "V1 de/loesungen/rechtsabteilungen/",
+  "par_page": {}
+ },
+ "098be5204d0ddb72": {
+  "fr": "Le moteur de traduction neuronale de Neur.on, entraîné sur plus de 15 millions de segments juridiques et financiers suisses.",
+  "trad": "Der neuronale Übersetzungsmotor von Neur.on, der in über 15 Millionen Schweizer Rechts- und Finanzsektoren trainiert wird.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "099fd04e4849652e": {
@@ -2484,6 +2540,13 @@
   "trad": "{1}Datum:{/1} 17. April 2024",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/slta-podium-zuerich-2024/",
+  "par_page": {}
+ },
+ "0a47511a75e92fc4": {
+  "fr": "Hébergé et exécuté en Suisse",
+  "trad": "In der Schweiz untergebracht und ausgeführt",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "0a56ca549dbe7c83": {
@@ -2721,6 +2784,13 @@
    }
   }
  },
+ "0b1a1eda73a1914c": {
+  "fr": "{1}{2}Allemand vers français{/2}{3}Le droit suisse d'une rive à l'autre, avec le mot du même texte de loi{/3}{/1} {4}{5}Français vers allemand{/5}{6}Écrire pour un lecteur alémanique, avec les mots des lois fédérales{/6}{/4} {7}{8}Allemand vers anglais{/8}{9}Rendre le droit suisse intelligible, sans inventer un droit qui n'existe pas{/9}{/7} {10}{11}Français vers anglais{/11}{12}Le dossier romand à l'international, le droit suisse rendu compréhensible{/12}{/10} {13}{14}Italien vers français{/14}{15}La troisième langue officielle, à part entière{/15}{/13} {16}{17}Anglais vers allemand{/17}{18}Ramener le contrat au droit suisse, chaque clause rattachée au CO{/18}{/16}",
+  "trad": "Deutsch auf Französisch Schweizer Recht von einem Ufer zum anderen, mit dem Wort des gleichen Gesetzestextes Französisch auf Deutsch Schreiben für einen deutschen Leser, mit den Worten der Bundesgesetze Deutsch auf Englisch Schweizerisches Recht verständlich machen, ohne ein Recht zu erfinden, das nicht besteht Deutsch auf Englisch Das Westschweizer Dossier ist international verständlich gemacht Italienisch auf Französisch Die dritte eigenständige Amtssprache Englisch auf Deutsch den Vertrag auf Schweizer Recht zurückführen, wobei jede dem OR angegliederte Klausel",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "0b1f55c5f0d15b48": {
   "fr": "Traduire un contrat en droit suisse : ce que change le quadrilinguisme légal",
   "trad": "Einen Vertrag nach Schweizer Recht übersetzen: Was die Mehrsprachigkeit der Gesetze ändert",
@@ -2754,6 +2824,13 @@
   "trad": "Die {1}HES-SO Fachhochschule Westschweiz{/1} hat {2}unsere CEO{/2} Paula Reichenberg für die Jahre 2025 bis 2028 in ihren Strategischen Rat berufen.",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/strategierat-hes-so/",
+  "par_page": {}
+ },
+ "0b3cf8564e4745b7": {
+  "fr": "Le moteur s'y choisit à chaque envoi. CHnell s'y ouvre sans quitter la traduction.",
+  "trad": "CHnell öffnet sich, ohne die Übersetzung zu verlassen.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "0b3ffe946049c588": {
@@ -3193,6 +3270,13 @@
   "source": "V1 de/ressourcen/blog/aktuelles/",
   "par_page": {}
  },
+ "0cec75e13e806fe8": {
+  "fr": "Le Fast Lookup ouvre CHnell sur le terme surligné.",
+  "trad": "Fast Lookup öffnet CHnell den markierten Begriff.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "0cee11da883aa2df": {
   "fr": "Langues cibles de la traduction",
   "trad": "Zielsprachen der Übersetzung",
@@ -3413,6 +3497,13 @@
   "trad": "{1}Prozesse und Schiedsverfahren{/1}{2}Rechtsschriften, Beilagen, Schiedssprüche: übersetzen, was ein Gericht lesen wird.{/2}",
   "statut": "v1",
   "source": "V1 de/uebersetzung/",
+  "par_page": {}
+ },
+ "0ddbde51fd7a4a68": {
+  "fr": "Alternatives par moteur",
+  "trad": "Alternativen pro Motor",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "0ddff260a06115fc": {
@@ -3771,6 +3862,13 @@
   "source": "V1 de/ressourcen/blog/aktuelles/",
   "par_page": {}
  },
+ "0efae692a642cb76": {
+  "fr": "{1}{2}Kickstart Innovation 2024{/2}{3}Cohorte 2024, verticale Finance & Insurance{/3}{/1}{4}Sélection{/4}",
+  "trad": "{1}{2}Kickstart Innovation 2024{/2} {3}Kohorte 2024, vertikale Finance & Insurance{/3}{/1} {4}Auswahl{/4}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "0efeb89e497f12cc": {
   "fr": "Droit du travail",
   "trad": "Arbeitsrecht",
@@ -3874,6 +3972,13 @@
   "trad": "Die Translation Memories, Terminologiedatenbanken und Ressourcen in CHnell, die Ihrer Organisation gehören: So arbeitet Corrext von Anfang an mit Ihrem Wortschatz.",
   "statut": "v1",
   "source": "V1 de/hilfe/admin-uebersetzungsspeicher/",
+  "par_page": {}
+ },
+ "0f7ce89c39f69c4b": {
+  "fr": "{1}Vous hésitez encore ?{/1}{2}Ce que Corrext fait que les outils génériques ne font pas, comparé point par point.{/2}{3}Voir les comparatifs{/3}",
+  "trad": "{1}Sie zögern noch?{/1} {2}Was Corrext bewirkt, dass generische Tools nicht tun, verglichen mit Punkt.{/2} {3}Siehe Vergleiche{/3}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "0f846ed02f7743c2": {
@@ -4012,6 +4117,13 @@
   "trad": "Mehr über den Werdegang von Orane erfahren Sie im {1}vollständigen Artikel{/1}.",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/orane-laeri-werdegang/",
+  "par_page": {}
+ },
+ "10068dab8c6ab022": {
+  "fr": "{1}{2}Plus de 15 millions de segments{/2}{3}La donnée juridique et financière suisse sur laquelle LexMachina est entraîné{/3}{/1}{4}Moteur{/4}",
+  "trad": "{1}{2}mehr als 15 Millionen Segmente{/2} {3}Die Schweizer Rechts- und Finanzdaten, auf denen LexMachina trainiert wird{/3}{/1} {4}Motor{/4}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "101a52cc7d4a4281": {
@@ -4468,6 +4580,13 @@
   "trad": "Die abgedeckten Rechtsgebiete",
   "statut": "v1",
   "source": "V1 de/loesungen/behoerden/",
+  "par_page": {}
+ },
+ "11c1d9310088038a": {
+  "fr": "Corrext, LexMachina, CHnell : {1}qui fait quoi{/1}",
+  "trad": "Corrext, LexMachina, CHnell: {1}Wer macht was{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "11d61b21e5956a08": {
@@ -4992,6 +5111,13 @@
   "trad": "{1}Das Kriterienraster{/1} mit den verwendeten Definitionen für Nichtkonformität.",
   "statut": "v1",
   "source": "V1 de/ressourcen/studien/uebersetzungsmotor-evaluieren/",
+  "par_page": {}
+ },
+ "147009092fa7b4b8": {
+  "fr": "Résultats bilingues, terme surligné des deux côtés",
+  "trad": "Zweisprachige Ergebnisse, beidseitig markierter Begriff",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "14859262a7676550": {
@@ -5589,6 +5715,13 @@
   "source": "V1 de/hilfe/erste-schritte/",
   "par_page": {}
  },
+ "177b10aa357b6d5f": {
+  "fr": "Fermer le menu",
+  "trad": "Menü schliessen",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "1782c3c8e727df8f": {
   "fr": "Resource type",
   "trad": null,
@@ -6074,6 +6207,13 @@
     "source": "V1 de/corrext/chnell/"
    }
   }
+ },
+ "1917557a84d44b8a": {
+  "fr": "Ce qui freine une {1}traduction juridique{/1}",
+  "trad": "Dies bremst eine {1}juristische Übersetzung{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
  },
  "19194bdf5e490fa1": {
   "fr": "Crédit",
@@ -6764,6 +6904,13 @@
   "source": "V1 de/uebersetzung/deutsch-franzoesisch/",
   "par_page": {}
  },
+ "1b3f7f2cb740ca28": {
+  "fr": "Un moteur, une plateforme, {1}un concordancier{/1}",
+  "trad": "Motor, Plattform, {1}Konkordanten{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "1b476315bc1c54d3": {
   "fr": "Hébergement",
   "trad": "Hosting",
@@ -7061,6 +7208,13 @@
   "source": "V1 de/ressourcen/glossar/personendaten/",
   "par_page": {}
  },
+ "1c837101385b43e9": {
+  "fr": "Harmonisation des termes",
+  "trad": "Vereinheitlichung der Begriffe",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "1c86561732e40899": {
   "fr": "Qu’est-ce que le Conseil stratégique de la HES-SO ?",
   "trad": "Was ist der Strategische Rat der HES-SO?",
@@ -7273,6 +7427,13 @@
   "trad": "Übersetzung im Gesellschaftsrecht",
   "statut": "v1",
   "source": "V1 de/loesungen/treuhand/",
+  "par_page": {}
+ },
+ "1d7af52dea2d13ba": {
+  "fr": "{1}Quatre niveaux{/1} de qualité, du gisting à l'assermentation",
+  "trad": "{1}vier Qualitätsstufen{/1} vom Gisting bis zur Vereidigung",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "1d838ba78baa99ec": {
@@ -7831,6 +7992,13 @@
    }
   }
  },
+ "1f501afa51495683": {
+  "fr": "Relancer l'animation",
+  "trad": "Animation wieder ankurbeln",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "1f62c0a7b37fdeae": {
   "fr": "{1}vorsorgliche Massnahmen · mesures provisionnelles{/1}",
   "trad": null,
@@ -8252,6 +8420,13 @@
   "source": "V1 de/vergleich/deepl-juristische-uebersetzung/",
   "par_page": {}
  },
+ "21336e0c42fa8700": {
+  "fr": "{1}Votre solution de traduction par IA{/1} {2}pour le droit, la fiscalité et la finance{/2}",
+  "trad": "{1}Ihre KI-Übersetzungslösung{/1} {2}für Recht, Steuern und Finanzen{/2}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "2134740247530a57": {
   "fr": "{1}Références légales{/1}",
   "trad": "{1}Gesetzliche Fundstellen{/1}",
@@ -8431,6 +8606,13 @@
   "trad": "PDF to Word",
   "statut": "v1",
   "source": "V1 de/",
+  "par_page": {}
+ },
+ "21d551037b5330fd": {
+  "fr": "Ouvert depuis la traduction, d'un simple surlignage",
+  "trad": "Offen seit Übersetzung mit blosser Markierung",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "21dae690035312e8": {
@@ -8804,6 +8986,13 @@
   "source": "variante de balisage V1 de/vergleich/ (marqueur englobant)",
   "par_page": {}
  },
+ "23501a03c8a9117c": {
+  "fr": "Texte ou fichier traduit instantanément, alternatives par moteur, PDF vers Word, réécriture en cinq styles.",
+  "trad": "Text oder Datei übersetzt sofort, Alternativen pro Motor, PDF zu Word, Umschreiben in fünf Stile.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "2351d21cb8eae702": {
   "fr": "Oui. Le mode Internal review du tunnel projet organise la relecture par vos équipes et chiffre le temps nécessaire à partir du nombre de pages standard détecté.",
   "trad": "Ja. Der Modus Internal review im Projektablauf organisiert das Lektorat durch Ihre Teams und berechnet den Zeitaufwand aus der erkannten Zahl der Normseiten.",
@@ -8942,6 +9131,13 @@
     "source": "V1 de/ressourcen/glossar/buergschaft/"
    }
   }
+ },
+ "23e05d3b26b8c26c": {
+  "fr": "{1}{2}Cabinets d'avocats{/2}{3}Traduire un dossier sans jamais le sortir de Suisse{/3}{/1} {4}{5}Banques et finance{/5}{6}Le vocabulaire prudentiel, traité en Suisse{/6}{/4} {7}{8}Directions juridiques et Legal Ops{/8}{9}Une traduction mesurable : demande, devis et relecture au même endroit{/9}{/7} {10}{11}Autorités et administration{/11}{12}Rien ne quitte la Suisse, avec la terminologie des textes publiés{/12}{/10} {13}{14}Fiduciaires et conseil{/14}{15}Documents d'entreprise traduits et certifiés{/15}{/13} {16}{17}LegalTechs et éditeurs{/17}{18}Notre moteur et le concordancier CHnell dans votre produit{/18}{/16}",
+  "trad": "{1}{2}Rechtsanwaltskanzleien{/2} {3}Dossiers ohne Austritt aus der Schweiz übersetzen{/3}{/1} {4}{5}Banken und Finanzen{/5} {6}Aufsichtliches Vokabular, bearbeitet in der Schweiz{/6}{/4} {7}{8}juristische Direktionen und Legal Ops{/8} {9}eine messbare Übersetzung: Antrag, Kostenvoranschlag und Lektüre am gleichen Ort{/9}{/7} {10}{11}Behörden und Verwaltung{/11} {12}nichts verlässt die Schweiz mit der Terminologie der veröffentlichten Texte{/12}{/10} {13}{14}Treuhänder und Beratung{/14} {15}übersetzte und zertifizierte Unternehmensunterlagen{/15}{/13} {16}{17}Legaltechs und Publisher{/17} {18}Unser Motor und der in Ihrem Produkt{/18}{/16} CHnell Kongressleiter",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
  },
  "23e132c98c45d371": {
   "fr": "Le service mobilise des traducteurs juridiques du corporate housekeeping, assistés de modèles entraînés sur les extraits du registre suisse.",
@@ -9619,6 +9815,13 @@
    }
   }
  },
+ "26134bad94367c09": {
+  "fr": "L'assistant IA détecte un changement de terme. Il propose de l'harmoniser dans tout le document.",
+  "trad": "Der IA-Assistent erkennt einen Terminwechsel. Er schlägt eine Harmonisierung im ganzen Dokument vor.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "26184f2c25eed640": {
   "fr": "Elle définit les quatre opérations de restructuration, leurs documents obligatoires et leurs majorités ; FusG en allemand.",
   "trad": "Es definiert die vier Umstrukturierungen, ihre Pflichtdokumente und ihre Mehrheiten; auf Französisch LFus.",
@@ -9925,6 +10128,13 @@
   "source": "V1 de/ressourcen/blog/pwc-legaltech-fund-london/",
   "par_page": {}
  },
+ "27134ea21a9874a7": {
+  "fr": "Suisse : entité, infrastructure et moteur LexMachina",
+  "trad": "Schweiz: LexMachina Einheit, Infrastruktur und Motor",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "2715687bfc2c7d49": {
   "fr": "LexMachina : le moteur de Corrext entraîné sur le droit suisse",
   "trad": "LexMachina: maschinelle Übersetzung für Schweizer Recht",
@@ -10122,6 +10332,13 @@
     "source": "V1 de/uebersetzung/gesellschaftsrecht/"
    }
   }
+ },
+ "280c862208f5a737": {
+  "fr": "Thème d'affichage",
+  "trad": "Displaythema",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
  },
  "281ecb04dc762b45": {
   "fr": "En allemand de Suisse, le ß n'existe pas : on écrit toujours ss. Les milliers se séparent par une apostrophe. En italien de Suisse, plusieurs institutions portent un nom différent de leur homonyme italien : la société anonyme se dit società anonima et non società per azioni, et le Conseil d'État tessinois n'est pas le Consiglio di Stato italien. Le nom de la juridiction suprême est Tribunal fédéral, Bundesgericht, Tribunale federale, jamais le nom d'une juridiction étrangère.",
@@ -10686,6 +10903,13 @@
   "source": "V1 de/vergleich/",
   "par_page": {}
  },
+ "2a448880aa189782": {
+  "fr": "Segments juridiques et financiers multilingues",
+  "trad": "Mehrsprachige Rechts- und Finanzsektoren",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "2a47e2ae89d2ae04": {
   "fr": "{1}Mietvertrag · bail à loyer{/1}",
   "trad": null,
@@ -10919,6 +11143,13 @@
   "source": "V1 de/ressourcen/blog/",
   "par_page": {}
  },
+ "2b24a813a0eedc98": {
+  "fr": "Traduire les mots, retrouver le terme exact",
+  "trad": "Wörter übersetzen, den richtigen Begriff finden",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "2b314c0c4034f6a1": {
   "fr": "{1}Entreprise{/1}",
   "trad": "{1}Unternehmen{/1}",
@@ -11063,6 +11294,13 @@
   "source": "V1 de/ressourcen/studien/uebersetzungsmotor-evaluieren/",
   "par_page": {}
  },
+ "2bd550b3787b2258": {
+  "fr": "Projet en trois étapes, relecture interne ou externe en trois niveaux, devis et délai instantanés.",
+  "trad": "Projekt in drei Schritten, internes oder externes Lektüre in drei Stufen, Kostenvoranschlag und Momentaufschub.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "2bdf08f9180af465": {
   "fr": "{1}API et on-premises{/1}{2}Les modes d'intégration disponibles.{/2}{3}Découvrir l'outil",
   "trad": "{1}API und On-Premises{/1}{2}Die verfügbaren Integrationsarten.{/2}{3}Zum Tool",
@@ -11165,6 +11403,13 @@
   "trad": "{1}Französisch{/1}{2}réserve{/2}",
   "statut": "v1",
   "source": "V1 de/ressourcen/glossar/pflichtteil/",
+  "par_page": {}
+ },
+ "2c4afbfe5b541d89": {
+  "fr": "{1}Voyez le plugin Word{/1} {2}sur vos propres documents{/2}",
+  "trad": "{1}Geben Sie das Word Plugin{/1} {2}auf Ihren eigenen Dokumenten{/2} ein",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "2c53f21cefbbeb92": {
@@ -11303,6 +11548,13 @@
   "trad": "Ein Rechtshilfeersuchen richtet sich an eine ausländische Behörde und muss deren Vokabular ebenso verwenden wie das schweizerische.",
   "statut": "v1",
   "source": "V1 de/uebersetzung/strafrecht/",
+  "par_page": {}
+ },
+ "2cd38641285011bf": {
+  "fr": "Dans le tableau de bord du projet, exportez le fichier à relire.",
+  "trad": "Im Projekt-Dashboard exportieren Sie die zu lesende Datei.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "2cea1b09bda45b87": {
@@ -11497,6 +11749,13 @@
   "source": "variante de balisage V1 de/uebersetzung/deutsch-franzoesisch/ (marqueur englobant)",
   "par_page": {}
  },
+ "2dc3ed8e32b59651": {
+  "fr": "Plugin Word · relecture Corrext dans Microsoft Word · Neur.on",
+  "trad": "Word · Lektüre Corrext in Microsoft Word · Neur.on",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "2dcaabb247468ee8": {
   "fr": "Statuts",
   "trad": "Statuten",
@@ -11522,6 +11781,13 @@
   "trad": "Stellen Sie einen Teil des Korpus bewusst aus Segmenten zusammen, die enthalten, was Sie messen wollen: Gesetzesverweise, Gerichtsnamen, Beträge, Datumsangaben, regulatorische Begriffe. Ein Korpus aus neutralen Sätzen misst nichts Nützliches, weil alle Motoren daran bestehen.",
   "statut": "v1",
   "source": "V1 de/ressourcen/studien/uebersetzungsmotor-evaluieren/",
+  "par_page": {}
+ },
+ "2dd71fc4ae2a7fb2": {
+  "fr": "La même phrase traduite par plusieurs moteurs, côte à côte : LexMachina et les moteurs tiers autorisés par votre organisation. D'autres alternatives sur demande.",
+  "trad": "Der gleiche Satz übersetzt sich in mehrere Motoren nebeneinander: LexMachina und die von Ihrer Organisation zugelassenen Drittmotoren. Weitere Alternativen auf Anfrage.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "2dd72e78b63155ee": {
@@ -11773,9 +12039,9 @@
  },
  "2e9ada0c7f102192": {
   "fr": "{1}Blog{/1} {2}Guides{/2} {3}Études et benchmarks{/3}",
-  "trad": null,
-  "statut": null,
-  "source": null,
+  "trad": "{1}Blog{/1} {2}Ratgeber{/2} {3}Studien und Benchmarks{/3}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {
    "": {
     "trad": "{1}Blog{/1} {2}Leitfäden{/2} {3}Studien und Benchmarks{/3}",
@@ -12670,6 +12936,13 @@
   "source": "V1 de/",
   "par_page": {}
  },
+ "2f0503a825e98bd5": {
+  "fr": "{1}Digital Shapers{2}2023{/1}",
+  "trad": "{1}Digital Shapers {2} 2023{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "2f118f8377abd0bd": {
   "fr": "impôt anticipé",
   "trad": null,
@@ -12695,6 +12968,13 @@
   "trad": "Füllen Sie den Block «Internal review specifications» aus: Anzahl zu prüfender Normseiten und Preis pro Normseite, den Sie verrechnen.",
   "statut": "v1",
   "source": "V1 de/hilfe/uebersetzungsprojekte/",
+  "par_page": {}
+ },
+ "2f1d24030bf77620": {
+  "fr": "{1}Corrext et DeepL{/1} {2}Corrext et les IA génératives{/2} {3}Agence de traduction ou plateforme{/3} {4}À propos et distinctions{/4}",
+  "trad": "{1}Corrext und DeepL{/1} {2}Corrext und generelle KI{/2} {3}Übersetzungsagentur oder Plattform{/3} {4}über und Unterscheidungen{/4}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "2f21f073dcfe0e0b": {
@@ -13306,6 +13586,13 @@
   "source": "V1 de/ressourcen/glossar/fristlose-kuendigung/",
   "par_page": {}
  },
+ "315ad3939d276e68": {
+  "fr": "Certification obtenue en février 2024.",
+  "trad": "Zertifizierung im Februar 2024.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "31636a71faf45db6": {
   "fr": "Centralisez les traductions de l'entreprise en Suisse : devis et délais immédiats, relecture interne ou externe, mémoire réutilisable, accès par document.",
   "trad": "Übersetzung für Rechtsabteilungen in der Schweiz: Offerte und Lieferfrist sofort, internes oder externes Lektorat, Translation Memory, Zugriff pro Dokument.",
@@ -13617,6 +13904,13 @@
   "source": "V1 de/hilfe/uebersetzungsprojekte/",
   "par_page": {}
  },
+ "32918c8bdaf6e762": {
+  "fr": "{1}Cabinets d'avocats{/1} {2}Banques et finance{/2} {3}Directions juridiques et Legal Ops{/3} {4}Autorités et administration{/4} {5}Fiduciaires et conseil{/5} {6}LegalTechs et éditeurs{/6}",
+  "trad": "{1}Rechtsanwaltskanzleien{/1} {2}Banken und Finanzen{/2} {3}Rechtsleitungen und Legal Ops{/3} {4}Behörden und Verwaltung{/4} {5}Treuhänder und Berater{/5} {6}Legaltechs und Publisher{/6}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "329a12780199f9bb": {
   "fr": "{1}Sécurité et souveraineté{/1}{2}Serveurs suisses, mode Highly sensitive content, ISO 27001, nLPD et RGPD.{/2}",
   "trad": "{1}Sicherheit und Datensouveränität{/1}{2}Schweizer Server, Modus Highly sensitive content, ISO 27001, nDSG und DSGVO.{/2}",
@@ -13684,6 +13978,13 @@
   "trad": "Gesetzesabkürzungen der jeweiligen Amtssprache.",
   "statut": "v1",
   "source": "V1 de/ressourcen/leitfaeden/mehrsprachiger-geschaeftsbericht/",
+  "par_page": {}
+ },
+ "32e02965a1e25bd0": {
+  "fr": "La relecture, l'une des étapes les plus coûteuses",
+  "trad": "Lesen ist einer der teuersten Schritte",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "32e53d76e634635f": {
@@ -13768,6 +14069,13 @@
   "source": "V1 de/ressourcen/glossar/konventionalstrafe/",
   "par_page": {}
  },
+ "330ffc4c4615aab5": {
+  "fr": "Vos traductions juridiques et financières de bout en bout, avec LexMachina : le moteur entraîné sur le droit suisse, hébergé et exécuté en Suisse.",
+  "trad": "Ihre rechtlichen und finanziellen Übersetzungen von Ende zu Ende, mit LexMachina: der Impuls zum Schweizer Recht, der in der Schweiz untergebracht und ausgeführt wird.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "331508275627fc1c": {
   "fr": "L'assemblée générale des actionnaires est le pouvoir suprême de la société anonyme. Ses convocations, ses procès-verbaux et ses décisions sont parmi les documents les plus souvent traduits dans un contexte multilingue.",
   "trad": "Die Generalversammlung der Aktionäre ist das oberste Organ der Aktiengesellschaft. Einberufungen, Protokolle und Beschlüsse gehören in einem mehrsprachigen Umfeld zu den am häufigsten übersetzten Dokumenten.",
@@ -13822,6 +14130,13 @@
   "trad": "Die Lieferfrist hängt von der Anzahl Normseiten, der erkannten Rechtskategorie, der Lektoratsstufe und dem gewünschten Liefertermin ab. Corrext zeigt sie vor jeder Bestellung in der Offerte an, aufgeteilt in Vorbereitung, internes und externes Lektorat. Stufe 1, die maschinelle Übersetzung allein, erhalten Sie sofort in Text- und Dokumentübersetzung.",
   "statut": "v1",
   "source": "V1 de/qualitaetsstufen/",
+  "par_page": {}
+ },
+ "334b961d3c3bf6dc": {
+  "fr": "Reimport docx",
+  "trad": "Reimport Dokx",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "334d1f7be30abf0a": {
@@ -13947,6 +14262,13 @@
   "trad": "Übersetzung und FINMA-Compliance",
   "statut": "v1",
   "source": "V1 de/loesungen/banken/",
+  "par_page": {}
+ },
+ "33ba01e2b728e583": {
+  "fr": "Via le {1}plugin Microsoft Word{/1}, l'application web Corrext, ou l'API REST pour vos DMS, intranets et workflows. La gestion des droits est granulaire, jusqu'au niveau document (SharePoint / AD). Un déploiement on-premises est possible. Réservez une démo pour cadrer l'intégration avec un expert.",
+  "trad": "Über das {1}Microsoft Word Plugin{/1}, die Corrext Webapplikation oder die REST API für Ihre DMS, Intranets und Workflows. Die Rechteverwaltung erfolgt granular bis zur Dokumentenebene (SharePoint/AD). Ein stationärer Einsatz ist möglich. Buchen Sie eine Demo, um die Integration mit einem Experten zu erfassen.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "33c32b2848cc509d": {
@@ -14431,6 +14753,13 @@
   "source": "V1 de/ressourcen/glossar/buergschaft/",
   "par_page": {}
  },
+ "362da08a25020a19": {
+  "fr": "Le concordancier bilingue de Corrext : plus de 20 000 documents officiels alignés (Feuille fédérale, Fedlex, FINMA, administrations), dans 30 domaines.",
+  "trad": "Der zweisprachige Konkordanten von Corrext: mehr als 20 000 amtliche Dokumente (Bundesblatt, Fedlex, FINMA, Verwaltungen) in 30 Bereichen.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "363b2e5e8a72ae6b": {
   "fr": "{1}Corrext, la plateforme{/1}",
   "trad": "{1}Corrext, die Plattform{/1}",
@@ -14520,6 +14849,13 @@
   "trad": "Umformulierung eines Texts {1}bis 5'000 Zeichen{/1}. Stile Formal legal, Financial, Simplified, Formal, Informal; Option Shorten. Geänderte Wörter sind unterstrichen.",
   "statut": "v1",
   "source": "V1 de/corrext/dokumente-uebersetzen/",
+  "par_page": {}
+ },
+ "36aad5ba7881004d": {
+  "fr": "{1}Prêt à voir Neur.on{/1} {2}sur vos propres documents ?{/2}",
+  "trad": "{1}Bereitschaft, Neur.on{/1} {2}auf Ihren eigenen Dokumenten zu sehen?{/2}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "36d9ab932e8c7b74": {
@@ -14709,6 +15045,13 @@
   "trad": "Die Lieferfrist Express gibt es auch für internationale Sendungen, mit den entsprechenden Versandoptionen.",
   "statut": "v1",
   "source": "V1 de/hilfe/handelsregisterauszug/",
+  "par_page": {}
+ },
+ "3785f5a2b9b7b810": {
+  "fr": "{1}Soutenu par{2}Innosuisse{/1}",
+  "trad": "{1}unterstützt durch {2} Innosuisse{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "3795e6df88223932": {
@@ -15212,6 +15555,13 @@
   "trad": "Studie lesen",
   "statut": "v1",
   "source": "V1 de/ressourcen/studien/",
+  "par_page": {}
+ },
+ "39b7d3e72de1a08c": {
+  "fr": "Vous exportez le document de votre projet Corrext, puis vous le relisez dans Word. Le panneau reprend les fonctions de l'éditeur de relecture. Une fois la relecture terminée, vous réimportez le fichier dans le projet.",
+  "trad": "Sie exportieren das Dokument aus Ihrem Corrext Projekt und lesen es anschliessend in Word. Das Schild übernimmt die Funktion des Lektüre-Verlegers. Nach erfolgreichem Lesen importieren Sie die Datei wieder in das Projekt.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "39cd4de00e9e1666": {
@@ -16184,6 +16534,13 @@
   "source": "V1 de/impressum/",
   "par_page": {}
  },
+ "3dc464194bafe8c5": {
+  "fr": "{1}{2}LexMachina{3}Suisse{/3}{/2}{4}DeepL Pro{/4}{5}Azure OpenAI - GPT{/5}{/1}",
+  "trad": "{1}{2}LexMachina {3}Schweiz{/3}{/2} {4}DeepL Pro{/4} {5}Azure OpenAI - GPT{/5}{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "3dc7c8bbb1e1f74c": {
   "fr": "Allemand, français, italien et anglais en natif, toutes paires, avec la terminologie des textes officiels.",
   "trad": "Deutsch, Französisch, Italienisch und Englisch als Kernsprachen, in allen Sprachpaaren, mit der Terminologie der amtlichen Texte.",
@@ -17076,6 +17433,13 @@
   "source": "V1 de/ressourcen/blog/berufsgeheimnis-uebersetzungstools/",
   "par_page": {}
  },
+ "4179da8df3177637": {
+  "fr": "LexMachina renvoie la traduction dans Corrext.",
+  "trad": "LexMachina verweist die Übersetzung in Corrext zurück.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "417c1463f1f79146": {
   "fr": "{1}{2}Aktiengesellschaft{/2}{/1}",
   "trad": null,
@@ -17673,6 +18037,13 @@
   "trad": "Anmeldung zum Anlass per E-Mail an info@aibl.ch.",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/aktuelles/",
+  "par_page": {}
+ },
+ "43f5952d5854c8a8": {
+  "fr": "{1}{/1}Agence de traduction ou plateforme",
+  "trad": "{1}{/1} Übersetzungsagentur oder Plattform",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "43f895104f317244": {
@@ -18555,6 +18926,13 @@
   "trad": "Das Dashboard des Projekts enthält einen Bereich für das Team, in dem Sie die Mitwirkenden des Projekts verwalten. Im Editor führt danach die Registerkarte «Sync» der Seitenleiste die Arbeit aller zusammen: Konflikte zwischen Versionen, eingehende Änderungen von Kolleginnen und Kollegen und Entscheidungen zur Übernahme in wiederholte Segmente.",
   "statut": "v1",
   "source": "V1 de/hilfe/uebersetzungsprojekte/",
+  "par_page": {}
+ },
+ "46d7d9422da01bf8": {
+  "fr": "Thème du système",
+  "trad": "Thema System",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "46e3759352c2e068": {
@@ -19804,6 +20182,13 @@
   "source": "V1 de/ressourcen/blog/aktuelles/",
   "par_page": {}
  },
+ "48ac7d1204f45177": {
+  "fr": "{1}{2}Contrats{/2}{3}Le Code des obligations, d'une langue à l'autre{/3}{/1} {4}{5}Droit des sociétés{/5}{6}Statuts et procès-verbaux traduits avec les termes du Code des obligations{/6}{/4} {7}{8}Fusions et acquisitions{/8}{9}Lire la data room vite, puis traduire au mot près les documents engageants{/9}{/7} {10}{11}Contentieux et arbitrage{/11}{12}Ce que lira un juge ou un arbitre : des traductions citables{/12}{/10} {13}{14}Banque et finance{/14}{15}Du contrat de crédit au prospectus, sous le secret bancaire{/15}{/13} {16}{17}Compliance et FINMA{/17}{18}Écrire dans la langue de l'autorité, avec les termes des lois{/18}{/16} {19}{20}Voir tous les domaines{/20}{/19}",
+  "trad": "{1}{2}Verträge{/2} {3}Das Obligationenrecht, je nach Sprache{/3}{/1} {4}{5}Gesellschaftsrecht{/5} {6}Statuten und Protokolle, die mit den Bestimmungen des Obligationenrechts{/6}{/4} {7}übersetzt sind {8}Fusionen und Übernahmen{/8} {9}Data Room schnell lesen und anschliessende Dokumente{/9}{/7} {10}{11}Rechtsstreitigkeiten und Schiedsverfahren{/11} {12}wörtlich übersetzen Was ein Richter oder Schiedsrichter liest: zitierbare Übersetzungen{/12}{/10} {13}{14}Bank und Finanz{/14} {15}aus dem Prospektkreditvertrag unter dem Bankgeheimnis{/15}{/13} {16}{17}Compliance und FINMA{/17} {18}in der Amtssprache schreiben, mit den Gesetzen{/18}{/16} {19}{20}Siehe alle Bereiche{/20}{/19}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "48b07059c49c31e5": {
   "fr": "{1}IT{/1}",
   "trad": null,
@@ -19983,6 +20368,13 @@
     "source": "V1 de/uebersetzung/strafrecht/"
    }
   }
+ },
+ "497208adeef21452": {
+  "fr": "Mettre l'animation en pause",
+  "trad": "Animation in Pause bringen",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
  },
  "49806933fab461f2": {
   "fr": "{1}Premiers pas{/1}{2}Se connecter, identifier les quatre outils de l'accueil, choisir un moteur de traduction et décider du niveau de confidentialité : tout ce qu'il faut avoir compris avant de traduire votre premier document dans Corrext.{/2}{3}6 questions",
@@ -20210,6 +20602,20 @@
   "source": "V1 de/uebersetzung/steuerrecht/",
   "par_page": {}
  },
+ "4a32cfc2c86abdb5": {
+  "fr": "Un moteur entraîné sur le droit suisse",
+  "trad": "Geübter Motor für Schweizer Recht",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
+ "4a357a7ff470454f": {
+  "fr": "Les autres outils {1}de Corrext{/1}",
+  "trad": "Weitere {1}- Tools von Corrext{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "4a3a9455084a80d1": {
   "fr": "{1}eingeschränkte Revision{/1}",
   "trad": null,
@@ -20277,6 +20683,13 @@
     "source": "V1 de/uebersetzung/versicherungsrecht/"
    }
   }
+ },
+ "4a76a9ec3c430a9c": {
+  "fr": "Recherche en direct dans vos mémoires et dans CHnell, côté source ou côté cible. Chaque résultat est bilingue, avec son document d'origine.",
+  "trad": "Live-Suche in Ihren Memoiren und in CHnell, Quell - oder Zielseite. Jedes Ergebnis ist zweisprachig, mit dem Originaldokument.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
  },
  "4a79e3f3f82f6328": {
   "fr": "Le mémoire est rédigé en anglais et doit être déposé en allemand. La Full review par un traducteur juridique vérifie les conclusions ligne à ligne, et la Double review avec certificat couvre les cas où le tribunal exige une attestation.",
@@ -20466,6 +20879,13 @@
   "source": "V1 de/uebersetzung/",
   "par_page": {}
  },
+ "4b3f3d977e1dd716": {
+  "fr": "{1}{2}Glossaire juridique suisse{/2}{3}Chaque terme en allemand, français, italien et anglais{/3}{/1} {4}{5}Centre d'aide Corrext{/5}{6}Prise en main et réponses pratiques, vérifiées dans l'application{/6}{/4} {7}{8}Questions fréquentes{/8}{9}Corrext, LexMachina, relecture, prix : les réponses essentielles{/9}{/7}",
+  "trad": "{1}{2}Schweizer Rechtslossar{/2} {3}Jeder Begriff in Deutsch, Französisch, Italienisch und Englisch{/3}{/1} {4}{5}Corrext Hilfszentrum{/5} {6}übernommen und praktische Antworten in der Anwendung{/6}{/4} {7}{8}Häufige Fragen{/8} {9}Corrext, LexMachina, Lektüre, Preis: wesentliche Antworten{/9}{/7}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "4b420234bd8ed37f": {
   "fr": "{1}{2}Regarder l’intégralité de la discussion{/2}.{/1}",
   "trad": "{1}{2}Die ganze Diskussion als Video ansehen{/2}.{/1}",
@@ -20478,6 +20898,13 @@
   "trad": "Wo Ihre Dokumente gespeichert sind, sagt fast nichts aus. Für das Berufsgeheimnis zählt, wo der Text gelesen und berechnet wird: Motor für Motor, Übermittlung für Übermittlung. So stellen Sie diese Frage, und so lesen Sie die Antwort.",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/berufsgeheimnis-uebersetzungstools/",
+  "par_page": {}
+ },
+ "4b45a1d2cdbb85d3": {
+  "fr": "Version de travail, traduction non relue",
+  "trad": "Arbeitsversion, Übersetzung nicht weiterverfolgt",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "4b4ae8915bbfc343": {
@@ -21226,6 +21653,13 @@
   "trad": "nDSG · DSGVO",
   "statut": "v1",
   "source": "V1 de/",
+  "par_page": {}
+ },
+ "4e4aedc6e8d79498": {
+  "fr": "Enregistrez le document, puis réimportez-le dans le projet.",
+  "trad": "Speichern Sie das Dokument und importieren Sie es anschliessend wieder ins Projekt.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "4e4d1e6c6d7b8b82": {
@@ -22140,6 +22574,13 @@
   "source": "V1 de/loesungen/rechtsabteilungen/",
   "par_page": {}
  },
+ "519b6babc2f43dfe": {
+  "fr": "Corrext envoie le texte au moteur choisi, ici LexMachina.",
+  "trad": "Corrext sendet den Text an den hier LexMachina gewählten Motor.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "51a925eee199810c": {
   "fr": "DeepL",
   "trad": null,
@@ -22418,6 +22859,13 @@
    }
   }
  },
+ "52e548a5164f9064": {
+  "fr": "Les termes suisses : impôt anticipé, assujetti",
+  "trad": "Schweizerische Begriffe: Verrechnungssteuer, Steuerpflichtige",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "52ec77c54ed9a771": {
   "fr": "Délai estimé",
   "trad": "Geschätzte Lieferfrist",
@@ -22451,6 +22899,13 @@
   "trad": "Sehen Sie Corrext an Ihren amtlichen Dokumenten",
   "statut": "v1",
   "source": "V1 de/loesungen/behoerden/",
+  "par_page": {}
+ },
+ "53048cdc0e0d7d89": {
+  "fr": "Un outil générique s'en tient aux mots. Le droit suisse attend aussi le terme consacré et la forme des références légales, qui change d'une langue à l'autre.",
+  "trad": "Ein generisches Tool hält an Worten fest. Das schweizerische Recht erwartet auch den Begriff und die Form der gesetzlichen Referenzen, die sich von Sprache zu Sprache ändern.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "53150789feef71b1": {
@@ -23117,6 +23572,13 @@
   "source": "variante de balisage V1 de/uebersetzung/vertraege/ (marqueur englobant)",
   "par_page": {}
  },
+ "55dc211ff83db681": {
+  "fr": "Une case par segment confirme sa relecture. La progression du document s'affiche en pourcentage.",
+  "trad": "Ein Kästchen pro Segment bestätigt seine Wiedergabe. Der Zuwachs des Dokuments wird in Prozenten ausgewiesen.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "55e87a69ca64fa53": {
   "fr": "Externe",
   "trad": "Extern",
@@ -23499,6 +23961,13 @@
   "source": "V1 de/hilfe/admin-uebersetzungsspeicher/",
   "par_page": {}
  },
+ "571e262d7aaa3572": {
+  "fr": "{1}Traduction texte et document{/1} {2}Gestion de projet{/2} {3}Éditeur de relecture{/3} {4}Plugin Word{/4} {5}Fast lookup CHnell{/5} {6}Extraits du registre{/6}",
+  "trad": "{1}Übersetzung Text und Dokument{/1} {2}Projektmanagement{/2} {3}Leseeditor{/3} {4}Word Plugin{/4} {5}Fast Lookup CHnell{/5} {6}Registerauszüge{/6}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "5725b90ece59d352": {
   "fr": "DTF",
   "trad": null,
@@ -23736,6 +24205,13 @@
   "trad": "Mit der Bürgschaft verpflichtet sich eine Person, für die Schuld einer anderen einzustehen. Ihre Gültigkeit hängt von strengen Formvorschriften ab. Deshalb darf man sie nie mit einer selbständigen Garantie verwechseln.",
   "statut": "v1",
   "source": "V1 de/ressourcen/glossar/buergschaft/",
+  "par_page": {}
+ },
+ "583cf033e16cd4cf": {
+  "fr": "{1}{2}Corrext et DeepL{/2}{3}Le même moteur, dans un cadre qui protège le secret professionnel{/3}{/1} {4}{5}Corrext et les IA génératives{/5}{6}Utiles pour comprendre, à encadrer pour engager{/6}{/4} {7}{8}Agence de traduction ou plateforme{/8}{9}Comparer des modèles de travail, pas des fournisseurs{/9}{/7}",
+  "trad": "{1}{2}Corrext und DeepL{/2} {3}der gleiche Motor, in einem Rahmen, der das Berufsgeheimnis{/3}{/1} {4}{5}Corrext und die allgemeinen KI{/5} {6}schützt, die für das Verständnis von{/6}{/4} {7}nützlich sind {8}Übersetzungsagentur oder Plattform{/8} {9}Arbeitsmodelle vergleichen, keine Lieferanten{/9}{/7}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "5853f7e5c88311b3": {
@@ -26269,6 +26745,13 @@
   "source": "V1 de/ressourcen/blog/epfl-investor-day-2024/",
   "par_page": {}
  },
+ "628971549fa91001": {
+  "fr": "Refuser",
+  "trad": "Ablehnen",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "628b4212d60c1694": {
   "fr": "{1}Semaine 38 · triés par échéance{/1}",
   "trad": "{1}Woche 38 · nach Fälligkeit sortiert{/1}",
@@ -26628,6 +27111,13 @@
   "source": "variante de balisage V1 de/uebersetzung/arbeitsrecht/ (marqueur englobant)",
   "par_page": {}
  },
+ "644ed4e29c77186a": {
+  "fr": "Accès réservé",
+  "trad": "Reservierter Zugang",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "6456534bbb2c90e9": {
   "fr": "art. 111 CPP",
   "trad": "Art. 111 StPO",
@@ -26878,6 +27368,13 @@
   "source": "V1 de/vergleich/deepl-juristische-uebersetzung/",
   "par_page": {}
  },
+ "656e0976a9d87018": {
+  "fr": "Harmoniser les termes, les vérifier en contexte, faire relire par un juriste-linguiste : chaque étape pèse sur le coût d'une traduction juridique.",
+  "trad": "Begriffe vereinheitlichen, im Kontext überprüfen, juristisch-linguistisch lesen lassen: Jeder Schritt belastet die Kosten einer juristischen Übersetzung.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "657cc6a86267a45b": {
   "fr": "{1}Standard confidentiality{/1} : traitement en Suisse ou à l'étranger selon le moteur choisi, projet enregistré sur les serveurs suisses de Corrext. {2}Highly sensitive content{/2} : {3}stockage et traitement exclusivement en Suisse{/3}, pour EN, FR, IT et DE.{4}En mode sensible, le contenu traduit n'alimente aucune mémoire de traduction.{/4}",
   "trad": "{1}Standard confidentiality{/1}: Verarbeitung je nach gewähltem Motor in der Schweiz oder im Ausland, Projekt auf den Schweizer Servern von Corrext gespeichert. {2}Highly sensitive content{/2}: {3}Speicherung und Verarbeitung ausschliesslich in der Schweiz{/3}, für DE, FR, IT und EN.{4}Im sensiblen Modus fliesst der übersetzte Inhalt in kein Translation Memory.{/4}",
@@ -26911,6 +27408,13 @@
   "trad": "Hier geht es zum Podcast auf {1}Spotify{/1}!",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/aktuelles/",
+  "par_page": {}
+ },
+ "659bdfb8d7da98e9": {
+  "fr": "À vous : changez de moteur, activez Highly sensitive content ou ouvrez le Fast Lookup sur le terme surligné.",
+  "trad": "Zu Ihnen: Wechseln Sie den Motor, aktivieren Sie Highly Sensitive Content oder öffnen Sie das Fast Lookup auf den markierten Begriff.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "65a24e2bb95d64ec": {
@@ -26959,6 +27463,13 @@
   "trad": "{1}{2}Schweizer Korpus:{/2} Bundesgesetze, Rechtsprechung und Finanzpublikationen in den Amtssprachen{/1}",
   "statut": "v1",
   "source": "V1 de/ressourcen/studien/",
+  "par_page": {}
+ },
+ "65d0ac0476696200": {
+  "fr": "Ces solutions traduisent. Neur.on {1}maîtrise le droit suisse{/1}.",
+  "trad": "Diese Lösungen übersetzen. Neur.on {1}beherrscht Schweizer Recht{/1}.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "65d298cdc1fe5e80": {
@@ -27099,6 +27610,13 @@
   "source": "V1 de/ressourcen/blog/aktuelles/",
   "par_page": {}
  },
+ "6648f8ac667d30e2": {
+  "fr": "Segments",
+  "trad": "Segmente",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "664a2a785a202686": {
   "fr": "Oui. Ces moteurs sont disponibles dans Corrext, aux côtés de LexMachina, et se choisissent à chaque envoi. Comme ils sont hébergés à l'étranger, leur sélection déclenche l'avis Attorney-Client privilege de votre organisation, qui exige une pseudonymisation complète du document. Notre proposition n'est donc pas de renoncer à ces moteurs, mais de les utiliser dans un cadre qui protège votre secret professionnel.",
   "trad": "Ja. Diese Motoren sind in Corrext neben LexMachina verfügbar und werden bei jedem Versand gewählt. Da sie im Ausland gehostet sind, löst ihre Wahl den Hinweis Attorney-Client privilege Ihrer Organisation aus. Er verlangt eine vollständige Pseudonymisierung des Dokuments. Wir schlagen also nicht vor, auf diese Motoren zu verzichten, sondern sie in einem Rahmen zu nutzen, der Ihr Berufsgeheimnis schützt.",
@@ -27207,6 +27725,13 @@
   "trad": "{1}Steuerhinterziehung · soustraction d'impôt{/1}{2}Die Widerhandlung der steuerpflichtigen Person, die vorsätzlich oder fahrlässig bewirkt, dass eine Veranlagung unterbleibt oder unvollständig ist.{/2}",
   "statut": "v1",
   "source": "V1 de/ressourcen/glossar/quellensteuer/",
+  "par_page": {}
+ },
+ "6699521d41d1a44a": {
+  "fr": "Non. Le plugin Word est installé sur le poste de l'utilisateur. Il ne passe pas par la boutique des compléments Microsoft.",
+  "trad": "Nein. Das Word-Plugin wird auf dem Endgerät des Nutzers installiert. Es geht nicht über den Microsoft Add-in-Store.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "66a04b72160454dc": {
@@ -27444,6 +27969,13 @@
   "source": "V1 de/ressourcen/blog/berufsgeheimnis-uebersetzungstools/",
   "par_page": {}
  },
+ "67edbec90bca50a8": {
+  "fr": "Le plugin a-t-il les mêmes fonctions que l'éditeur de relecture ?",
+  "trad": "Hat das Plugin die gleichen Funktionen wie der Lektüre-Herausgeber?",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "67f69f1136655d35": {
   "fr": "Source : Fedlex, {1}loi fédérale sur le Tribunal fédéral{/1}. Dans Corrext, ce segment et ceux qui l'entourent s'affichent dans {2}Fast lookup CHnell{/2}, chacun avec sa référence.",
   "trad": "Quelle: Fedlex, {1}Bundesgesetz über das Bundesgericht{/1}. In Corrext erscheinen dieses Segment und die umliegenden Segmente in {2}Fast lookup CHnell{/2}, jeweils mit Fundstelle.",
@@ -27606,6 +28138,13 @@
   "trad": "Das ist der häufigste Fehler und für Schweizer Leserinnen und Leser der sichtbarste. Gesetzesabkürzungen sind keine internationalen Kürzel: Jede Amtssprache hat ihre eigene, und sie lässt sich nicht aus dem übersetzten Namen ableiten. Ein generalistischer Übersetzungsmotor, der «OR» im französischen Text als «OR» stehen lässt, liefert einen lesbaren Satz und eine falsche Fundstelle.",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/vertrag-uebersetzen-schweizer-recht/",
+  "par_page": {}
+ },
+ "687a0fe4195eb8e3": {
+  "fr": "Toutes les paires DE · FR · IT · EN en natif",
+  "trad": "Alle Paare VON Geburtshelferinnen und - HELFERN",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "687b2cdad7e4b331": {
@@ -27932,6 +28471,13 @@
   "source": "V1 de/ressourcen/blog/aktuelles/",
   "par_page": {}
  },
+ "69f60f9fe32f3d1c": {
+  "fr": "Les outils génériques traduisent du texte sans connaître le droit suisse ni ses sources officielles, et hébergent vos données hors de Suisse. Corrext vous laisse les utiliser quand c'est pertinent, dans un cadre gouverné, et met à côté un moteur entraîné sur le droit suisse, la comparaison d'alternatives, la vérification terminologique en contexte et un mode 100 % Suisse.",
+  "trad": "Die generischen Tools übersetzen Text, ohne das schweizerische Recht und seine offiziellen Quellen zu kennen, und hosten Ihre Daten ausserhalb der Schweiz. Corrext lässt Sie dort verwenden, wo es sinnvoll ist, in einem geregelten Rahmen, und nebst einem geübten Motor zum Schweizer Recht, dem Vergleich von Alternativen, der Begriffsprüfung im Kontext und einem 100% Schweizer Modus.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "6a12304c3289bf26": {
   "fr": "art. 321c CO",
   "trad": "Art. 321c OR",
@@ -28097,6 +28643,13 @@
   "source": "V1 de/uebersetzung/bank-und-finanzrecht/",
   "par_page": {}
  },
+ "6aa0c845f3ef1a08": {
+  "fr": "Questions fréquentes sur le {1}plugin Word{/1}",
+  "trad": "Häufige Fragen zum {1}Word Plugin{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "6aa9021f9654f80e": {
   "fr": "{1}19 avril 2024{/1}{2}Prix et distinctions{/2}",
   "trad": "{1}19. April 2024{/1}{2}Preise und Auszeichnungen{/2}",
@@ -28198,6 +28751,13 @@
   "trad": "Projekte im Modus Standard dienen als privates Translation Memory; im sensiblen Modus keine Wiederverwendung",
   "statut": "v1",
   "source": "V1 de/corrext/",
+  "par_page": {}
+ },
+ "6b3a2e253ec72a37": {
+  "fr": "Quels documents peut-on relire dans Word ?",
+  "trad": "Welche Dokumente können Sie in Word lesen?",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "6b4000c239134d4d": {
@@ -29054,6 +29614,13 @@
   "source": "V1 de/ressourcen/glossar/generalversammlung/",
   "par_page": {}
  },
+ "6e3f75d5d3029a60": {
+  "fr": "Le plugin Word ouvre le panneau Corrext dans Word : mémoire de traduction, Fast Lookup CHnell, alternatives par moteur. Installé sur votre poste.",
+  "trad": "Das Word Plugin öffnet das Corrext Schild in Word: Übersetzungsspeicher, Fast Lookup CHnell, Alternativen pro Motor. Installiert auf Ihrer Stelle.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "6e43c47191ec0161": {
   "fr": "{1}Italien{/1}{2}tribunale arbitrale{/2}",
   "trad": "{1}Italienisch{/1}{2}tribunale arbitrale{/2}",
@@ -29616,6 +30183,13 @@
   "source": "V1 de/ressourcen/glossar/bundesgericht/",
   "par_page": {}
  },
+ "70cc7f1b8ef1a193": {
+  "fr": "Une pièce sensible collée dans un service en ligne",
+  "trad": "Sensibler Raum geklebt im Online-Service",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "70f31451836cc03d": {
   "fr": "{1}Contentieux et arbitrage{/1}",
   "trad": "{1}Prozesse und Schiedsverfahren{/1}",
@@ -29888,6 +30462,13 @@
   "source": "V1 de/loesungen/behoerden/",
   "par_page": {}
  },
+ "71e737cb9482dac6": {
+  "fr": "Vos documents les plus sensibles {1}restent en Suisse{/1}",
+  "trad": "Ihre heikelsten Dokumente {1}verbleiben in der Schweiz{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "71f7b4ffb696f8ab": {
   "fr": "{1}punkt4{/1}",
   "trad": null,
@@ -29995,6 +30576,13 @@
   "trad": "Natives Plug-in für MS Word oder eigenständige Anwendung im Browser. REST-API für Ihre DMS und Intranets, Installation on-premises für besonders sensible Umgebungen.",
   "statut": "v1",
   "source": "V1 de/corrext/",
+  "par_page": {}
+ },
+ "722e033bffec69b8": {
+  "fr": "Une solution {1}entièrement suisse{/1}",
+  "trad": "Eine vollständig schweizerische Lösung {1}{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "72333e2621920893": {
@@ -30457,6 +31045,13 @@
     "source": "V1 de/corrext/chnell/"
    }
   }
+ },
+ "73d7760fe8342fb4": {
+  "fr": "{1}{2}Quatre niveaux de qualité{/2}{3}De la traduction machine à la certification{/3}{/1} {4}{5}Langues et formats{/5}{6}30 langues, quatre natives, tous vos formats bureautiques{/6}{/4} {7}{8}Centre d'aide{/8}{9}Comment faire, étape par étape, vérifié dans l'application{/9}{/7}",
+  "trad": "{1}{2}vier Qualitätsstufen{/2} {3}von der maschinellen Übersetzung zur Zertifizierung{/3}{/1} {4}{5}Sprachen und Formate{/5} {6}30 Sprachen, vier Natives, alle Ihre Büroformate{/6}{/4} {7}{8}Help Center{/8} {9}Wie Schritt für Schritt in der App{/9}{/7} überprüft wird",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
  },
  "73e10287d44b3953": {
   "fr": "Plus de pièces sensibles par courriel",
@@ -31054,6 +31649,13 @@
     "source": "V1 de/uebersetzung/vertraege/"
    }
   }
+ },
+ "75eedd83576921f7": {
+  "fr": "Stockage et traitement uniquement en Suisse, aucune réutilisation en mémoire. Vous le choisissez à la création du projet.",
+  "trad": "Lagerung und Verarbeitung nur in der Schweiz, keine Wiederverwendung gespeichert. Sie wählen es bei der Projektinitiation aus.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
  },
  "75f38f4cbf917a96": {
   "fr": "D'après sa carte, LexMachina, le moteur recommandé, reste au plus près du texte source.",
@@ -31663,6 +32265,13 @@
   "source": "V1 de/loesungen/",
   "par_page": {}
  },
+ "781dc534115b92de": {
+  "fr": "Plugin Word",
+  "trad": "Word Plugin",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "781e1ff1362903b3": {
   "fr": "Un même terme source est-il rendu par un même terme cible d'un bout à l'autre du document, titres, notes et annexes compris ?",
   "trad": "Wird ein Ausgangsbegriff im ganzen Dokument, einschliesslich Titeln, Fussnoten und Anhängen, mit demselben Zielbegriff wiedergegeben?",
@@ -31775,6 +32384,13 @@
   "trad": "{1}Richtigkeit des Gesetzesverweises{/1}",
   "statut": "adapte",
   "source": "variante de balisage V1 de/ressourcen/studien/uebersetzungsmotor-evaluieren/ (marqueur englobant)",
+  "par_page": {}
+ },
+ "7895aa6abf47fa68": {
+  "fr": "{1}Quatre niveaux de qualité{/1} {2}Langues et formats{/2} {3}Centre d'aide{/3} {4}Ouvrir la démo en direct{/4}",
+  "trad": "{1}vier Qualitätsstufen{/1} {2}Sprachen und Formate{/2} {3}Hilfszentrum{/3} {4}Live Demo öffnen{/4}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "78a048a6488463f8": {
@@ -32411,6 +33027,13 @@
   "source": "variante de balisage V1 de/ueber-uns/presse/ (marqueur englobant)",
   "par_page": {}
  },
+ "7adb8891aed80566": {
+  "fr": "Où vos documents sont stockés, où ils sont traités, et sous quel droit : les réponses tiennent en un pays.",
+  "trad": "Wo Ihre Dokumente gespeichert, wo und unter welchem Recht verarbeitet werden: Die Antworten finden in einem Land statt.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "7ae07c7bc17a0bcf": {
   "fr": "art. 69 LP · source : Fedlex, loi fédérale sur la poursuite pour dettes et la faillite",
   "trad": "Art. 69 SchKG · Quelle: Fedlex, Bundesgesetz über Schuldbetreibung und Konkurs",
@@ -32811,6 +33434,13 @@
   "source": "V1 de/loesungen/legaltech-verlage/",
   "par_page": {}
  },
+ "7ce69cd0ef7de92b": {
+  "fr": "{1}{2}Blog{/2}{3}Droit suisse, traduction et intelligence artificielle{/3}{/1} {4}{5}Guides{/5}{6}Méthodes de fond, signées par nos spécialistes{/6}{/4} {7}{8}Études et benchmarks{/8}{9}Nos mesures sur corpus de droit suisse, méthode et critères publiés{/9}{/7}",
+  "trad": "{1}{2}Blog{/2} {3}Schweizer Recht, Übersetzung und künstliche Intelligenz{/3}{/1} {4}{5}Ratgeber{/5} {6}Hintergrundmethoden, von unseren Spezialisten unterzeichnet{/6}{/4} {7}{8}Studien und Benchmarks{/8} {9}Unsere Messungen nach schweizerischem Recht, veröffentlichte Methode und Kriterien{/9}{/7}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "7ceb676d5942293c": {
   "fr": "Connectez-vous avec {1}« Log in »{/1} si le panneau le demande.",
   "trad": "Melden Sie sich mit {1}«Log in»{/1} an, falls der Bereich danach fragt.",
@@ -33005,6 +33635,13 @@
   "source": "V1 de/ressourcen/glossar/verfuegung/",
   "par_page": {}
  },
+ "7e0714344a5e76ab": {
+  "fr": "Relecture dans l'éditeur ou dans Word",
+  "trad": "Lektüre im Herausgeber oder in Word",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "7e163e9ed6d64e41": {
   "fr": "{1}Un test simple.{/1} Prenez les cinq dernières traductions du cabinet et demandez, pour chacune, qui a décidé du niveau de relecture. Si la réponse est « personne » ou « celui qui a appelé le prestataire », la répartition des rôles n'existe pas encore.",
   "trad": "{1}Ein einfacher Test.{/1} Nehmen Sie die letzten fünf Übersetzungen der Kanzlei und fragen Sie bei jeder, wer die Lektoratsstufe festgelegt hat. Lautet die Antwort «niemand» oder «wer den Dienstleister angerufen hat», gibt es die Rollenverteilung noch nicht.",
@@ -33136,6 +33773,13 @@
   "source": "variante de balisage V1 de/corrext/api-on-premises/ (marqueur englobant)",
   "par_page": {}
  },
+ "7ead2e79af986fda": {
+  "fr": "{1}30 {2}Langues{/2}{/1}",
+  "trad": "{1}30 {2}Sprachen{/2}{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "7eb55bebcb568d62": {
   "fr": "Choisissez {1}« Standard confidentiality »{/1} si le traitement peut suivre le moteur retenu : le stockage reste suisse.",
   "trad": "Wählen Sie {1}«Standard confidentiality»{/1}, wenn die Verarbeitung dem gewählten Motor folgen darf: Die Speicherung bleibt in der Schweiz.",
@@ -33190,6 +33834,13 @@
   "trad": "Mehrere Motoren stehen zur Wahl, darunter LexMachina, der Schweizer Übersetzungsmotor von Neur.on.",
   "statut": "v1",
   "source": "V1 de/hilfe/corrext-kennenlernen/",
+  "par_page": {}
+ },
+ "7ef9bef4aed94c34": {
+  "fr": "{1}BILANZ{/1}{2}Entreprises les plus innovantes 2024{/2}",
+  "trad": "{1}BILANZ{/1} {2}innovativste Unternehmen 2024{/2}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "7efb5d6c2d6f05be": {
@@ -34210,6 +34861,13 @@
   "source": "V1 de/uebersetzung/bank-und-finanzrecht/",
   "par_page": {}
  },
+ "838adbeb17cc5c9e": {
+  "fr": "Texte et fichiers traduits, PDF vers Word",
+  "trad": "Text und übersetzte Dateien, PDF zu Word",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "8393169e23f721b5": {
   "fr": "Droit des sociétés",
   "trad": "Gesellschaftsrecht",
@@ -34287,6 +34945,13 @@
   "source": "V1 de/uebersetzung/italienisch-franzoesisch/",
   "par_page": {}
  },
+ "8418d573872210c0": {
+  "fr": "Démonstration du plugin Word : le panneau Corrext dans Microsoft Word, sur un contrat fictif",
+  "trad": "Vorführung des Word-Plugins: Schild Corrext in Microsoft Word auf fiktivem Vertrag",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "841cc34f0950abff": {
   "fr": "Le Tessin rend la justice en italien et la Confédération publie ses lois dans cette langue. L'italien juridique suisse n'est pas celui d'Italie : un moteur généraliste le remplace volontiers.",
   "trad": "Im Tessin wird auf Italienisch Recht gesprochen, und der Bund veröffentlicht seine Gesetze auch in dieser Sprache. Schweizer Rechtsitalienisch ist nicht das Italienisch Italiens: Ein allgemeiner Übersetzungsmotor ersetzt das eine gern durch das andere.",
@@ -34313,6 +34978,13 @@
   "trad": "Markieren Sie in Corrext das Wort im Ausgangstext und klicken Sie auf Fast Lookup. Die Konkordanz CHnell zeigt alignierte Segmente aus amtlichen Schweizer Quellen, mit Fachgebiet und Quelle jedes Treffers und dem Link Show in context. «Verzugszins» liefert so über 300 Treffer, «Bankgeheimnis» über 400. Diese Nachvollziehbarkeit bietet ein Übersetzungsmotor allein nicht.",
   "statut": "v1",
   "source": "V1 de/vergleich/deepl-juristische-uebersetzung/",
+  "par_page": {}
+ },
+ "8435bd0afe19b3c5": {
+  "fr": "Le plugin travaille sur un projet Corrext. Les règles de confidentialité du projet s'appliquent dans Word aussi.",
+  "trad": "Das Plugin arbeitet an einem Corrext Projekt. Die Geheimhaltungsregeln des Projekts gelten auch in Word.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "8440d0a3554ef05f": {
@@ -34923,6 +35595,13 @@
   "source": "V1 de/ressourcen/blog/",
   "par_page": {}
  },
+ "867489d68876f465": {
+  "fr": "Feuille fédérale, Fedlex, FINMA, ESTV",
+  "trad": "Bundesblatt, Fedlex, FINMA, ESTV",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "867e24964a85310e": {
   "fr": "{1}Spaltung{/1}",
   "trad": null,
@@ -34976,6 +35655,13 @@
   "trad": "Eine Demo des Projektablaufs mit einer Fachperson: Normseiten, erkannte Kategorie, Lektoratsstufen und Lieferfrist, mit Ihren Dateien.",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/offerte-juristische-uebersetzung/",
+  "par_page": {}
+ },
+ "8699309c44ca0186": {
+  "fr": "Trois briques conçues pour le droit suisse : LexMachina traduit, Corrext organise votre travail, CHnell vérifie chaque terme.",
+  "trad": "Drei Ziegelsteine für das schweizerische Recht: übersetzter LexMachina, Corrext organisiert Ihre Arbeit, CHnell überprüft jeden Begriff.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "86ad40f929263d1c": {
@@ -35640,6 +36326,13 @@
   "source": "V1 de/corrext/dokumente-uebersetzen/",
   "par_page": {}
  },
+ "89861d5f2d6d4b38": {
+  "fr": "Les mêmes garanties {1}que Corrext{/1}",
+  "trad": "Dieselben Garantien {1}wie Corrext{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "898aa474bd77ec78": {
   "fr": "Droits granulaires synchronisés avec SharePoint et Active Directory : chacun accède aux projets et aux documents qui le concernent, et à eux seuls.",
   "trad": "Granulare Rechte, synchronisiert mit SharePoint und Active Directory: Jede Person greift nur auf die Projekte und Dokumente zu, die sie betreffen.",
@@ -35695,6 +36388,13 @@
   "source": "V1 de/ressourcen/blog/trust-valley-2023-datensouveraenitaet/",
   "par_page": {}
  },
+ "89e1753c61e148bb": {
+  "fr": "Vous choisissez, projet par projet. En mode Standard, vos données sont stockées sur les serveurs suisses de Corrext et traitées par le moteur que vous sélectionnez : LexMachina en Suisse ; DeepL Pro, Azure OpenAI GPT ou Claude à l'étranger, avec l'avis Attorney-Client privilege, qui rappelle la politique de votre organisation. En mode Highly sensitive, stockage et traitement restent exclusivement en Suisse, sans réutilisation en mémoire. Le tout certifié ISO 27001, conforme nLPD et RGPD.",
+  "trad": "Sie wählen, pro Projekt. Im Standard-Modus werden Ihre Daten auf den Schweizer Servern von Corrext gespeichert und durch den von Ihnen ausgewählten Motor verarbeitet: LexMachina in der Schweiz; DeepL Pro, Azure OpenAI GPT oder Claude im Ausland, mit dem Hinweis Attorney-Client privilege, der an die Politik Ihrer Organisation erinnert. Im Highly-sensitiven Modus verbleiben Speicherung und Verarbeitung ausschliesslich in der Schweiz, ohne Wiederverwendung im Gedächtnis. Das alles ist nach ISO 27001 zertifiziert, entspricht nDSG und DSGVO.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "89e6a5b6ec3dde58": {
   "fr": "{1}Six critères mesurables{/1}",
   "trad": "{1}Sechs messbare Kriterien{/1}",
@@ -35717,9 +36417,9 @@
  },
  "89fd5f04808e2be8": {
   "fr": "Set-up{1}{2}{/2}",
-  "trad": null,
-  "statut": null,
-  "source": null,
+  "trad": "Set-up {1} {2}{/2}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {
    "solutions/autorites-administration/": {
     "trad": "Set-up{1}{2}{/2}",
@@ -36308,6 +37008,13 @@
   "source": "V1 de/ressourcen/glossar/quellensteuer/",
   "par_page": {}
  },
+ "8c041a06cd0d1eb1": {
+  "fr": "{1}ISO 27001{2}certifié{/1}",
+  "trad": "{1}ISO 27001 {2} zertifiziert{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "8c11bfd5a830a1c7": {
   "fr": "{1}LegalTechs et éditeurs{/1}{2}Intégrer un moteur juridique suisse dans votre produit, par API ou en marque blanche.{/2}",
   "trad": "{1}LegalTechs und Verlage{/1}{2}Einen Schweizer Übersetzungsmotor für Recht in Ihr Produkt integrieren, per API oder als White Label.{/2}",
@@ -36487,6 +37194,13 @@
   "trad": "Mietvertrag: Miete von Wohn- und Geschäftsräumen · Neur.on",
   "statut": "v1",
   "source": "V1 de/ressourcen/glossar/mietvertrag/",
+  "par_page": {}
+ },
+ "8cbf214d9e926505": {
+  "fr": "{1}Contrats{/1} {2}Droit des sociétés{/2} {3}Fusions et acquisitions{/3} {4}Contentieux et arbitrage{/4} {5}Banque et finance{/5} {6}Compliance et FINMA{/6} {7}Tous les domaines{/7}",
+  "trad": "{1}Verträge{/1} {2}Gesellschaftsrecht{/2} {3}Fusionen und Übernahmen{/3} {4}Rechtsstreitigkeiten und Schiedsverfahren{/4} {5}Bank und Finanzen{/5} {6}Compliance und FINMA{/6} {7}Alle Bereiche{/7}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "8ccee0ea1d4cc36b": {
@@ -37858,6 +38572,13 @@
   "source": "V1 de/corrext/handelsregisterauszug/",
   "par_page": {}
  },
+ "92502cab90a01261": {
+  "fr": "Chaque terme vérifié dans son contexte officiel",
+  "trad": "Jeder Begriff wird im amtlichen Kontext überprüft",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "9258894c4d9d9867": {
   "fr": "{1}Staatsanwaltschaft{/1}",
   "trad": null,
@@ -38535,6 +39256,13 @@
   "source": "V1 de/ressourcen/blog/",
   "par_page": {}
  },
+ "94cc5e4468de95ad": {
+  "fr": "Vos projets sont conservés sur les serveurs suisses de Corrext, chez Infomaniak.",
+  "trad": "Ihre Projekte werden auf den Schweizer Servern von Corrext bei Infomaniak aufbewahrt.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "94d3bb54fcfda12c": {
   "fr": "Restez sous {1}5'000 caractères{/1} pour une reformulation dans l'onglet « Rephrasing ».",
   "trad": "Bleiben Sie unter {1}5'000 Zeichen{/1} für eine Umformulierung auf der Registerkarte «Rephrasing».",
@@ -39060,6 +39788,13 @@
   "trad": "Das Originalformat macht die Datei oft kleiner und verbessert zugleich das Layout.",
   "statut": "v1",
   "source": "V1 de/hilfe/formate-und-sprachen/",
+  "par_page": {}
+ },
+ "976aae3d14ae6d70": {
+  "fr": "Thème clair",
+  "trad": "Klares Thema",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "976c03f5a20c9356": {
@@ -40499,6 +41234,13 @@
   "source": "V1 de/hilfe/sicherheit-und-vertraulichkeit/",
   "par_page": {}
  },
+ "9dd7d2931170a899": {
+  "fr": "{1}Plugin Word{/1}",
+  "trad": "{1}Word Plugin{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "9dda947798070b45": {
   "fr": "Correspondance administrative",
   "trad": "Korrespondenz mit der Verwaltung",
@@ -40982,6 +41724,13 @@
    }
   }
  },
+ "9fcf13e000f8610d": {
+  "fr": "File overview{1}{2}{/2}{3}{4}3{/4}Quotes{/3}",
+  "trad": "File Overview {1} {2}{/2} {3}{4}3{/4} Quoten{/3}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "9fd01ae477222174": {
   "fr": "prescription",
   "trad": null,
@@ -41117,6 +41866,13 @@
   "trad": "Fachartikel zur juristischen Übersetzung in der Schweiz (Terminologie, Offerten, Berufsgeheimnis) und Aktuelles von Neur.on: Konferenzen, Anlässe, Presse.",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/",
+  "par_page": {}
+ },
+ "a038d79bc78226a7": {
+  "fr": "CHnell, le concordancier de Neur.on, apporte la preuve terminologique officielle : chaque terme se lit dans les textes publiés par les autorités suisses, la référence des juristes. 30 domaines, ouverts d'un simple surlignage.",
+  "trad": "CHnell, der Konkordante von Neur.on, weist den amtlichen Terminalbeweis nach: jeder Begriff findet sich in den von den Schweizer Behörden veröffentlichten Texten, der Referenz der Juristen. 30 Bereiche, die nur markiert sind.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "a03d55bfcab558c9": {
@@ -42283,6 +43039,13 @@
   "source": "V1 de/hilfe/dokumente-uebersetzen/",
   "par_page": {}
  },
+ "a4f5c87a8f9db0a4": {
+  "fr": "Le plugin Word affiche le panneau Corrext à côté de votre document. Vous y retrouvez les fonctions de l'éditeur de relecture : mémoire de traduction, Fast Lookup dans CHnell, alternatives par moteur. Le plugin s'installe sur votre poste.",
+  "trad": "Das Word Plugin zeigt das Corrext Schild neben Ihrem Dokument an. Hier finden Sie die Funktionen des Lektüre-Herausgebers: Übersetzungsspeicher, Fast Lookup in CHnell, Alternativen pro Motor. Das Plugin setzt sich auf Ihre Stelle.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "a50b49e2c47c1694": {
   "fr": "Choisissez {1}« Light review »{/1}, assurée par un traducteur juridique, pour un document destiné à la compréhension et à la diffusion interne.",
   "trad": "Wählen Sie {1}«Light review»{/1}, durchgeführt von einer juristischen Übersetzerin oder einem juristischen Übersetzer, für ein Dokument zum Verständnis und zur internen Verbreitung.",
@@ -42425,6 +43188,13 @@
     "source": "V1 de/uebersetzung/geistiges-eigentum/"
    }
   }
+ },
+ "a5c094b5190fa4b1": {
+  "fr": "{1}{/1}Corrext et les IA génératives",
+  "trad": "{1}{/1} Corrext und generative KI",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
  },
  "a5cbea5b67046a32": {
   "fr": "{1}Code des obligations{/1}",
@@ -43380,6 +44150,13 @@
   "source": "variante de balisage V1 de/sprachen-und-formate/",
   "par_page": {}
  },
+ "a96973ebd1043b64": {
+  "fr": "+30 langues disponibles",
+  "trad": "+30 Sprachen verfügbar",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "a9764441ebeb0af4": {
   "fr": "{1}Actualités{/1}",
   "trad": "{1}Aktuelles{/1}",
@@ -43400,6 +44177,13 @@
    }
   }
  },
+ "a97bf586c6198fd5": {
+  "fr": "Fast Lookup et CHnell",
+  "trad": "Fast Lookup und CHnell",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "a97c87e70e351e13": {
   "fr": "{1}Mois 3{/1} : présentation au cabinet, ouverture du glossaire, premier relevé d'indicateurs qui servira de base de comparaison.",
   "trad": "{1}Monat 3{/1}: Präsentation in der Kanzlei, Glossar eröffnen, erste Erhebung der Kennzahlen als Vergleichsbasis.",
@@ -43419,6 +44203,13 @@
   "trad": "Ja, eine On-Premises-Bereitstellung ist für die sensibelsten Umgebungen vorgesehen.",
   "statut": "v1",
   "source": "V1 de/loesungen/legaltech-verlage/",
+  "par_page": {}
+ },
+ "a993ab21efc3407b": {
+  "fr": "Connexion requise, réservé aux membres du projet.",
+  "trad": "Anmeldung erforderlich, nur für Projektmitglieder.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "a99619141f863771": {
@@ -43990,6 +44781,13 @@
   "source": "V1 de/ressourcen/blog/aktuelles/",
   "par_page": {}
  },
+ "abf6bf21436d2e56": {
+  "fr": "Les fonctions de l'éditeur de relecture, {1}dans Word{/1}",
+  "trad": "Funktionen des Lese-Herausgebers, {1}in Word{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "abf82b180a6fbaad": {
   "fr": "Mise en route",
   "trad": "Start",
@@ -44549,6 +45347,13 @@
   "source": "V1 de/uebersetzung/compliance-finma/",
   "par_page": {}
  },
+ "ae3ab812af83c30c": {
+  "fr": "Translation project",
+  "trad": "Translation Project",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "ae3e111cd0e8d966": {
   "fr": "Créer le projet : Gestion de projet",
   "trad": "Projekt erstellen: Projektmanagement",
@@ -44719,6 +45524,13 @@
   "trad": "Für Start-ups mit knappen Finanzen kann die Erfüllung der Anforderungen des AI Act jedoch zum Damoklesschwert werden: Sie bindet Ressourcen und bremst die Entwicklung.",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/ai-act-grand-challenge-st-gallen/",
+  "par_page": {}
+ },
+ "aee3edcb21d1cd3c": {
+  "fr": "Word 2021 ou Microsoft 365, et un accès au projet Corrext : il faut en être membre. Le panneau demande une connexion.",
+  "trad": "Word 2021 oder Microsoft 365 und Zugang zum Corrext-Projekt: Man muss Mitglied sein. Das Schild verlangt eine Verbindung.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "aee5d5739bfcf350": {
@@ -45323,6 +46135,13 @@
   "source": "V1 de/loesungen/anwaltskanzleien/",
   "par_page": {}
  },
+ "b16d6cdc90be7752": {
+  "fr": "Vérifier",
+  "trad": "Überprüfen",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "b17009457b0bc66b": {
   "fr": "La limite de la reformulation est inférieure à celle de la traduction : un texte traduisible d'un bloc ne sera pas forcément reformulable d'un bloc.",
   "trad": "Die Grenze für die Umformulierung liegt tiefer als jene für die Übersetzung: Ein Text, der sich in einem Stück übersetzen lässt, lässt sich nicht unbedingt in einem Stück umformulieren.",
@@ -45820,6 +46639,13 @@
   "trad": "Übersetzung Gesellschaftsrecht: Statuten, DE FR IT · Neur.on",
   "statut": "v1",
   "source": "V1 de/uebersetzung/gesellschaftsrecht/",
+  "par_page": {}
+ },
+ "b3d45d4fde04a75f": {
+  "fr": "Installé sur votre poste, {1}relié à votre projet{/1}",
+  "trad": "Auf Ihrer Stelle installiert, {1}mit Ihrem Projekt verknüpft{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "b3e65f8b1ccb867f": {
@@ -46392,6 +47218,13 @@
   "trad": "{1}{2}Speicherung in der Schweiz in beiden Fällen.{/2} Das Projekt wird auf den Schweizer Servern von Corrext gespeichert, unabhängig vom gewählten Modus.{/1}",
   "statut": "v1",
   "source": "V1 de/corrext/uebersetzungsprojekte/",
+  "par_page": {}
+ },
+ "b69fda4ccbfff26f": {
+  "fr": "{1}{/1}{2}{/2}{3}{/3}{4}Microsoft Word{/4}",
+  "trad": "{1}{/1} {2}{/2} {3}{/3} {4}Microsoft Word{/4}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "b6a44f58cd7fe2a6": {
@@ -47021,6 +47854,13 @@
   "source": "V1 de/ueber-uns/",
   "par_page": {}
  },
+ "b97f25708ad50d38": {
+  "fr": "Source et cible côte à côte, segment par segment. Un segment, c'est une phrase ou un titre.",
+  "trad": "Quelle und Ziel nebeneinander, Segment für Segment. Ein Segment ist ein Satz oder ein Titel.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "b981261bf13ec83f": {
   "fr": "La liste complète des 30 domaines s'ouvre dans l'application : elle couvre aussi bien le droit des sociétés que le droit pénal ou la fiscalité.",
   "trad": "Die vollständige Liste der 30 Rechtsgebiete öffnet sich in der App: Sie umfasst Gesellschaftsrecht ebenso wie Strafrecht oder Steuerrecht.",
@@ -47499,6 +48339,13 @@
   "source": "V1 de/uebersetzung/strafrecht/",
   "par_page": {}
  },
+ "bb56a691049aad31": {
+  "fr": "LexMachina traduit un texte fiscal suisse de l’anglais vers le français",
+  "trad": "LexMachina übersetzt Schweizer Steuertexte vom Englischen ins Französische",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "bb64ec25c869cb01": {
   "fr": "Les coûts initiaux de l’IA ne sont-ils que des « frais de formation » ? Pour qui maîtrise son budget, l’IA doit améliorer le retour sur investissement. À Genève, un panel partage des conseils concrets pour l’utiliser de façon rentable.",
   "trad": "Sind die Anfangskosten der KI nur «Lehrgeld»? Wer sein Budget im Griff hat, erwartet von der KI einen besseren Return on Investment. In Genf teilt ein Panel konkrete Tipps, wie sich KI rentabel einsetzen lässt.",
@@ -47659,6 +48506,20 @@
   "trad": "Visual des SLTA Student Chapter Zurich mit den vier Podiumsgästen: Porträts, Namen und Funktionen auf Deutsch",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/slta-podium-zuerich-2024/",
+  "par_page": {}
+ },
+ "bbc7369aaae4d526": {
+  "fr": "Vous travaillez dans Corrext. La traduction passe par LexMachina ou par le moteur tiers choisi. Le Fast Lookup ouvre CHnell, qui montre chaque terme dans son contexte officiel.",
+  "trad": "Sie arbeiten in Corrext. Die Übersetzung erfolgt über LexMachina oder die gewählte Drittmaschine. Das Fast Lookup eröffnet CHnell, das jeden Begriff in seinem offiziellen Kontext zeigt.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
+ "bbcf6a727744e4e0": {
+  "fr": "Le plugin Word est un complément installé sur le poste de l'utilisateur. Ce n'est pas un complément de la boutique Microsoft. Il s'ouvre sur un document exporté de votre projet Corrext. Il faut être membre du projet et disposer de Word 2021 ou de Microsoft 365.",
+  "trad": "Das Word-Plugin ist eine Ergänzung auf dem Endgerät des Nutzers. Das ist keine Ergänzung zum Microsoft-Shop. Es öffnet sich auf einem Dokument, das aus Ihrem Corrext Projekt exportiert wird. Man muss Mitglied des Projekts sein und über Word 2021 oder Microsoft 365 verfügen.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "bbe4beda07792b5a": {
@@ -48315,6 +49176,13 @@
   "source": "V1 de/ueber-uns/presse/",
   "par_page": {}
  },
+ "be2cb6711f0f1ca4": {
+  "fr": "{1}Voir l'éditeur de relecture{/1}",
+  "trad": "{1}Siehe den Lektüre-Herausgeber{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "be32e5b6e1d14b02": {
   "fr": "Dans quelles langues pouvons-nous échanger ?",
   "trad": "In welchen Sprachen können wir mit Ihnen kommunizieren?",
@@ -48816,6 +49684,13 @@
   "trad": "{1}Paula Reichenberg, unsere CEO{/1}, durfte an der Konferenz des {2}BDÜ e.V. - die qualifizierten Dolmetscher und Übersetzer{/2} an einem Podium teilnehmen. Thema war die Arbeit in und mit Anwaltskanzleien. Mit auf dem Podium sassen {3}Karen Rückert{/3} und Dirk Poppendieck. Moderiert wurde die Diskussion von Richard Delaney.",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/bdue-konferenz-2022/",
+  "par_page": {}
+ },
+ "bfac465064b5b0d8": {
+  "fr": "Un document exporté d'un projet Corrext avec Export docx. Un fichier issu de la traduction rapide est refusé. Après la relecture, vous réimportez le fichier dans le projet avec Reimport docx.",
+  "trad": "Ein Exportdokument aus einem mit Export docx Corrext Projekt. Eine Datei aus der schnellen Übersetzung wird abgelehnt. Nach dem Lesen importieren Sie die Datei mit Reimport docx wieder in das Projekt.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "bfb9de29b21548a9": {
@@ -49515,6 +50390,13 @@
    }
   }
  },
+ "c2958c0414cd4493": {
+  "fr": "{1}Connexion{/1}{2}Demander une démo{/2}",
+  "trad": "{1}Anmeldung{/1} {2}Demo anfordern{/2}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "c2a0e90604cf2f39": {
   "fr": "Prokurist ?",
   "trad": "Prokurist?",
@@ -49620,6 +50502,13 @@
   "source": "V1 de/uebersetzung/gesellschaftsrecht/",
   "par_page": {}
  },
+ "c33b00b2febf8a97": {
+  "fr": "Préférences cookies",
+  "trad": "Cookie-Einstellungen",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "c33bedb5a2c126a7": {
   "fr": "Estonien {1}Estonian{/1}",
   "trad": "Estnisch {1}Estonian{/1}",
@@ -49653,6 +50542,13 @@
   "trad": "Was der Dienst genau abdeckt",
   "statut": "v1",
   "source": "V1 de/corrext/handelsregisterauszug/",
+  "par_page": {}
+ },
+ "c3777bfd9603a235": {
+  "fr": "Par discrétion, Neur.on ne publie ni nom de client ni témoignage.",
+  "trad": "Aus Diskretion veröffentlicht Neur.on weder Kundennamen noch Aussagen.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "c395e4664f6f6083": {
@@ -50325,6 +51221,13 @@
   "source": "V1 de/corrext/dokumente-uebersetzen/",
   "par_page": {}
  },
+ "c65d782fec6e9243": {
+  "fr": "{1}4 {2}Moteurs{/2}{/1}",
+  "trad": "{1}4 {2}Motoren{/2}{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "c6639fbdf25886e5": {
   "fr": "Voilà quelques enseignements de la conférence. Notez déjà l’édition de l’année prochaine dans vos agendas ! Un grand merci à {1}Bradley Collins{/1}, {2}Charlotte Johnstone{/2} et {3}Merlin Beyts{/3} pour cette brillante organisation.",
   "trad": "Das waren einige Erkenntnisse der Konferenz. Tragen Sie sich die Ausgabe des nächsten Jahres schon jetzt in die Agenda ein! Ein grosses Dankeschön an {1}Bradley Collins{/1}, {2}Charlotte Johnstone{/2} und {3}Merlin Beyts{/3} für die hervorragende Organisation.",
@@ -50344,6 +51247,13 @@
   "trad": "Welche Sprachen sind verfügbar, und welche sind Kernsprachen?",
   "statut": "v1",
   "source": "V1 de/hilfe/formate-und-sprachen/",
+  "par_page": {}
+ },
+ "c67600280afc28c6": {
+  "fr": "{1}{2}{/2}{/1}{3}des segments confirmés{/3}",
+  "trad": "{1}{2}{/2}{/1} {3}der bestätigten Segmente{/3}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "c67b3a90bcef7954": {
@@ -50560,6 +51470,13 @@
   "source": "V1 de/ressourcen/studien/uebersetzungsmotor-evaluieren/",
   "par_page": {}
  },
+ "c7af3895036d1384": {
+  "fr": "{1}15 M+{/1}",
+  "trad": "{1}15 M +{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "c7b66343e40cde19": {
   "fr": "{1}Non conforme si :{/1} l'abréviation reste celle de la langue source, l'abréviation appartient à un autre texte, le numéro d'article ou l'alinéa change, la nomenclature de subdivision n'est pas celle de la langue cible.",
   "trad": "{1}Nicht konform, wenn:{/1} die Abkürzung jene der Ausgangssprache bleibt, die Abkürzung zu einem anderen Erlass gehört, sich die Artikelnummer oder der Absatz ändert oder die Untergliederung nicht der Nomenklatur der Zielsprache folgt.",
@@ -50760,6 +51677,13 @@
   "source": "V1 de/ressourcen/blog/digital-shaper-2023-bilanz/",
   "par_page": {}
  },
+ "c869c09098110017": {
+  "fr": "{1}{2}Traduction texte et document{/2}{3}Texte, fichiers, PDF vers Word, réécriture, avec le moteur de votre choix{/3}{/1} {4}{5}Gestion de projet{/5}{6}Relecture humaine à la carte, devis et délai instantanés{/6}{/4} {7}{8}Éditeur de relecture{/8}{9}Relecture phrase par phrase, corrections gardées en mémoire{/9}{/7} {10}{11}Plugin Word{/11}{12}Le panneau de relecture Corrext, dans Microsoft Word{/12}{/10} {13}{14}Fast lookup CHnell{/14}{15}Le concordancier du droit suisse, 30 domaines{/15}{/13} {16}{17}Extraits du registre{/17}{18}Traduction certifiée, notariée, apostillée, commandée entièrement en ligne{/18}{/16}",
+  "trad": "{1}{2}Übersetzung Text und Dokument{/2} {3}Text, Dateien, PDF zu Word, Reschreiben, mit dem Motor Ihrer Wahl{/3}{/1} {4}{5}Projektmanagement{/5} {6}menschliches Kartenlesen, Kostenvoranschlag und Instant Timing{/6}{/4} {7}{8}Wiedergabeverteiler{/8} {9}Wiedergabe Satz für Satz, Speicherkorrekturen{/9}{/7} {10}{11}Word Plugin{/11} {12}Das Corrext Wiedergabetafel in Microsoft Word{/12}{/10} {13}{14}Fast Lookup CHnell{/14} {15}der Konkordante schweizerischen Rechts, 30 Domains{/15}{/13} {16}{17}Registerauszüge{/17} {18}beglaubigte, notarielle, apostilisierte, vollständig online bestellte Übersetzung{/18}{/16}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "c86c56b44469daa7": {
   "fr": "Les 30 langues couvrent les principales langues européennes et plusieurs langues asiatiques, ainsi que les deux variantes du portugais et du chinois.",
   "trad": "Die 30 Sprachen umfassen die wichtigsten europäischen und mehrere asiatische Sprachen sowie je zwei Varianten des Portugiesischen und des Chinesischen.",
@@ -50772,6 +51696,13 @@
   "trad": "{1}{2}FR{/2}{3}impôt fédéral direct{/3}{/1}{4}{5}Steuerrecht{/5}{6}Veranlagungsverfügungen, Einsprachen, Austausch mit der Steuerverwaltung.{/6}{7}Zum Rechtsgebiet",
   "statut": "v1",
   "source": "V1 de/uebersetzung/geschaeftsberichte/",
+  "par_page": {}
+ },
+ "c8732875e85053d1": {
+  "fr": "Orchestrés dans Corrext, dont LexMachina, entraîné sur le droit suisse",
+  "trad": "Orchester in Corrext, darunter LexMachina, trainiert Schweizer Recht",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "c8770a17457c9f23": {
@@ -53750,6 +54681,20 @@
    }
   }
  },
+ "d3a88d83369823d6": {
+  "fr": "Que faut-il pour utiliser le plugin Word ?",
+  "trad": "Was braucht es, um das Word-Plugin zu nutzen?",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
+ "d3b2deceab7e16e8": {
+  "fr": "Ouvrez le fichier dans Word. Le bouton Corrext du ruban affiche le panneau Corrext editor.",
+  "trad": "Öffnen Sie die Datei in Word. Der Corrext Button im Band zeigt das Corrext Editor-Schild.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "d3b3743688fa0801": {
   "fr": "art. 3 à 8 LBA · source : Fedlex, loi sur le blanchiment d'argent",
   "trad": "Art. 3 bis 8 GwG · Quelle: Fedlex, Geldwäschereigesetz",
@@ -54420,6 +55365,13 @@
   "source": "V1 de/loesungen/rechtsabteilungen/",
   "par_page": {}
  },
+ "d66f1133ad484c2e": {
+  "fr": "L'outil de traduction assistée par ordinateur que vous utilisez : traduction de textes et de fichiers, relecture, gestion de projet, {1}plugin Word{/1} et extraits certifiés du registre du commerce.",
+  "trad": "Das von Ihnen verwendete computergestützte Übersetzungstool: Übersetzung von Texten und Dateien, Lektüre, Projektmanagement, {1}Word Plugin{/1} und beglaubigte Handelsregisterauszüge.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "d670db368d176c6f": {
   "fr": "Nous présenterons {1}notre suite d’IA de traduction juridique{/1} en décembre à un groupe choisi d’investisseurs, de géants du secteur et de pairs chevronnés, comme {2}Dru Armstrong{/2} d’{3}AffiniPay{/3}, {4}Wendy Butler Curtis{/4} d’{5}Orrick, Herrington & Sutcliffe LLP{/5} ou Jay Greenberg de LexShares, pour n’en citer que quelques-uns.",
   "trad": "Im Dezember präsentieren wir {1}unsere KI-Suite für juristische Übersetzung{/1} einem ausgewählten Kreis von Investorinnen und Investoren, Branchengrössen und erfahrenen Fachleuten. Darunter sind etwa {2}Dru Armstrong{/2} von {3}AffiniPay{/3}, {4}Wendy Butler Curtis{/4} von {5}Orrick, Herrington & Sutcliffe LLP{/5} oder Jay Greenberg von LexShares, um nur einige zu nennen.",
@@ -54446,6 +55398,13 @@
   "trad": "{1}{2}FR{/2}{3}intérêt moratoire{/3}{/1}{4}{5}Deutsch-Französisch{/5}{6}Dieselbe Ausgangssprache, für die Westschweiz{/6}{7}Zum Sprachpaar",
   "statut": "v1",
   "source": "V1 de/uebersetzung/deutsch-englisch/",
+  "par_page": {}
+ },
+ "d68de1026ee4fe24": {
+  "fr": "Relisez avec les onglets AI Assistant, Fast Lookup, Matches et Sync. Connectez-vous si le panneau le demande.",
+  "trad": "Lesen Sie mit den Registerkarten AI Assistant, Fast Lookup, Spiele und Sync. Loggen Sie sich ein, wenn das Schild dies verlangt.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "d692255f39770a0b": {
@@ -54723,6 +55682,13 @@
   "source": "V1 de/hilfe/chnell/",
   "par_page": {}
  },
+ "d73aa6a9e629a58e": {
+  "fr": "Bouton Corrext",
+  "trad": "Corrext Knopf",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "d74377d9950e5fb0": {
   "fr": "Lisez l'en-tête des résultats : il rappelle le terme cherché, la langue et le nombre de résultats trouvés.",
   "trad": "Lesen Sie den Kopf der Ergebnisse: Er nennt den gesuchten Begriff, die Sprache und die Anzahl Treffer.",
@@ -54895,6 +55861,13 @@
    }
   }
  },
+ "d7ecf57e7b113c2c": {
+  "fr": "Cookies de mesure d'audience",
+  "trad": "Cookies zur Messung des Publikums",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "d7f29fe737a5f2d6": {
   "fr": "art. 2 LSA",
   "trad": "Art. 2 VAG",
@@ -54907,6 +55880,13 @@
   "trad": "{1}KI-Assistent{/1}",
   "statut": "v1",
   "source": "V1 de/corrext/lektorat/",
+  "par_page": {}
+ },
+ "d7f4d197ba039494": {
+  "fr": "Thème sombre",
+  "trad": "Dunkles Thema",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "d80b3dbfcceb38ab": {
@@ -54976,6 +55956,13 @@
   "trad": "Bankgeheimnis, secret bancaire, segreto bancario, banking secrecy: das Berufsgeheimnis der Bank nach Art. 47 BankG, mit dem Begriff in allen vier Sprachen.",
   "statut": "v1",
   "source": "V1 de/ressourcen/glossar/bankgeheimnis/",
+  "par_page": {}
+ },
+ "d84fde97a365f3fe": {
+  "fr": "{1}Allemand vers français{/1} {2}Français vers allemand{/2} {3}Allemand vers anglais{/3} {4}Français vers anglais{/4} {5}Italien vers français{/5} {6}Anglais vers allemand{/6} {7}Voir les comparatifs{/7}",
+  "trad": "{1}Deutsch auf Französisch{/1} {2}Französisch auf Deutsch{/2} {3}Deutsch auf Englisch{/3} {4}Französisch auf Englisch{/4} {5}Italienisch auf Französisch{/5} {6}Englisch auf Deutsch{/6} {7}Siehe Vergleiche{/7}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "d853bb22d6d08ec7": {
@@ -56469,6 +57456,13 @@
   "source": "V1 de/uebersetzung/deutsch-franzoesisch/",
   "par_page": {}
  },
+ "de146e21df7ee97a": {
+  "fr": "Nous aimerions mesurer la fréquentation du site avec Google Analytics. Aucun cookie de mesure n'est déposé sans votre accord. {1}Protection des données{/1}",
+  "trad": "Wir möchten die Seitenfrequenzen mit Google Analytics messen. Ohne Ihre Zustimmung werden keine Messcookie hinterlegt. {1}Datenschutz{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "de187a6f9cdbdaaf": {
   "fr": "{1}Langues et formats{/1}",
   "trad": "{1}Sprachen und Formate{/1}",
@@ -56516,6 +57510,13 @@
   "trad": "Das Schweizer Steuerrecht schichtet ein Bundesgesetz, ein Harmonisierungsgesetz für die Kantone und eigene kantonale Gesetze übereinander. Die indirekten Steuern sind in separaten Erlassen geregelt, alle in den drei Amtssprachen veröffentlicht.",
   "statut": "v1",
   "source": "V1 de/uebersetzung/steuerrecht/",
+  "par_page": {}
+ },
+ "de5457842c2294f1": {
+  "fr": "Relire",
+  "trad": "Lesen",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "de58722244a0af94": {
@@ -56599,6 +57600,13 @@
   "trad": "Jeder italienische Begriff erscheint in Fast lookup CHnell mit seinem Ursprungssegment und seiner Fundstelle, neben der französischen und der deutschen Fassung desselben Artikels.",
   "statut": "v1",
   "source": "V1 de/uebersetzung/italienisch-franzoesisch/",
+  "par_page": {}
+ },
+ "deed27001676ee51": {
+  "fr": "{1}LexMachina{/1} {2}Tarifs{/2}",
+  "trad": "{1}LexMachina{/1} {2}Tarife{/2}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "def7878cead472c8": {
@@ -57304,6 +58312,13 @@
   "source": "V1 de/corrext/",
   "par_page": {}
  },
+ "e19e630fe8771377": {
+  "fr": "{1}{/1}Corrext et DeepL",
+  "trad": "{1}{/1} Corrext und DeepL",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "e1a149d5173d346f": {
   "fr": "{1}Voir le registre de preuve{/1}",
   "trad": "{1}Zu den Nachweisen{/1}",
@@ -57549,6 +58564,13 @@
   "trad": "{1}{2}Der geschützte Modus steht daneben bereit.{/2} LexMachina oder Highly sensitive content: Alles bleibt in der Schweiz, in DE, FR, IT und EN.{/1}",
   "statut": "v1",
   "source": "V1 de/vergleich/chatgpt-juristische-uebersetzung/",
+  "par_page": {}
+ },
+ "e2a8f5cf3befbfe9": {
+  "fr": "Le texte quitte votre environnement. Son lieu de traitement et sa réutilisation ne sont plus maîtrisés.",
+  "trad": "Der Text verlässt Ihre Umgebung. Ihr Behandlungsort und ihre Weiterverwendung sind nicht mehr beherrscht.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "e2a8fbda8f325972": {
@@ -58063,6 +59085,13 @@
     "source": "V1 de/uebersetzung/steuerrecht/"
    }
   }
+ },
+ "e4b8077bf12beb48": {
+  "fr": "{1}Glossaire juridique suisse{/1} {2}Centre d'aide Corrext{/2} {3}Questions fréquentes{/3}",
+  "trad": "{1}Schweizerisches Rechtslossar{/1} {2}Corrext Hilfszentrum{/2} {3}Häufige Fragen{/3}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
  },
  "e4cb565bc726a37d": {
   "fr": "Kilian Marty rejoint le conseil consultatif de Neur.on comme expert en cybersécurité",
@@ -59359,6 +60388,13 @@
    }
   }
  },
+ "e9f7003578ad49fe": {
+  "fr": "Corrext affiche les traductions déjà validées les plus proches du segment choisi. Un clic sur Apply les reprend dans la traduction.",
+  "trad": "Corrext zeigt die bereits validierten Übersetzungen an, die dem gewählten Segment am nächsten sind. Ein Klick auf Apply nimmt sie in die Übersetzung zurück.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "ea054273f9da0feb": {
   "fr": "{1}Accord de confidentialité signé avant la séance si vos pièces l'exigent.{/1}",
   "trad": "{1}Geheimhaltungsvereinbarung vor der Sitzung, wenn Ihre Unterlagen es erfordern.{/1}",
@@ -59384,6 +60420,13 @@
   "trad": "Art. 38 VVG",
   "statut": "v1",
   "source": "V1 de/uebersetzung/versicherungsrecht/",
+  "par_page": {}
+ },
+ "ea12c37c584e402e": {
+  "fr": "Appelé depuis une traduction par le Fast Lookup, d'un simple surlignage.",
+  "trad": "Abgerufen von einer Übersetzung des Fast Lookup, einer einfachen Markierung.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "ea1e1f32fb3b1e25": {
@@ -59862,6 +60905,13 @@
   "source": "V1 de/ressourcen/glossar/fristlose-kuendigung/",
   "par_page": {}
  },
+ "ebd16b7cafbecb38": {
+  "fr": "Les moteurs tiers restent au choix : DeepL Pro, Azure OpenAI GPT et Claude.",
+  "trad": "Drittmotoren stehen zur Auswahl: DeepL Pro, Azure OpenAI GPT und Claude.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "ebd3fc2af03b593b": {
   "fr": "Neur.on intègre la cohorte 2024 de Kickstart Innovation, verticale Finance & Insurance",
   "trad": "Neur.on in der Kohorte 2024 von Kickstart Innovation, Vertikale Finance & Insurance",
@@ -60305,6 +61355,13 @@
   "trad": "Ihr privates Translation Memory",
   "statut": "v1",
   "source": "V1 de/",
+  "par_page": {}
+ },
+ "ed8e7a07b2cf7eb7": {
+  "fr": "{1}Hébergement 100% suisse{/1}{2}Infomaniak{/2}",
+  "trad": "{1}100% Schweizer Beherbergung{/1} {2}Infomaniak{/2}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "ed91044585026322": {
@@ -63123,6 +64180,13 @@
   "source": "V1 de/ueber-uns/",
   "par_page": {}
  },
+ "f56a4e2db79c4092": {
+  "fr": "{1}Banques et finance{/1}",
+  "trad": "{1}Banken und Finanzen{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "f5747998354c53ce": {
   "fr": "{1}Tenir l'ambiguïté{/1}Proposer plusieurs lectures d'une formulation équivoque et expliciter ce qui les sépare, là où un moteur de traduction classique tranche sans le dire.",
   "trad": "{1}Mehrdeutigkeit aushalten{/1}Mehrere Lesarten einer unklaren Formulierung vorschlagen und zeigen, was sie unterscheidet, wo ein klassischer Übersetzungsmotor stillschweigend entscheidet.",
@@ -63315,6 +64379,13 @@
   "trad": "Vier Gäste, zwei Frauen und zwei Männer, sitzen bei einem Podium in Sesseln auf der Bühne",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/bdue-konferenz-2022/",
+  "par_page": {}
+ },
+ "f64e4a156c8938e4": {
+  "fr": "Oui. Le panneau reprend la mémoire de traduction, Fast Lookup dans CHnell, les alternatives par moteur et l'assistant IA. Vous confirmez chaque segment, et la progression du document s'affiche. L'onglet Sync sert à relire à plusieurs.",
+  "trad": "Ja. Das Schild übernimmt den Übersetzungsspeicher Fast Lookup in CHnell, die Motoralternativen und den KI-Assistenten. Sie bestätigen jedes Segment und der Fortschritt des Dokuments wird angezeigt. Die Sync-Registerkarte dient dazu, mehrere zu lesen.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "f650efb980f56cfa": {
@@ -63666,6 +64737,13 @@
   "source": "V1 de/",
   "par_page": {}
  },
+ "f78d83d9b3478dfd": {
+  "fr": "Sur la plateforme, dont l'allemand, le français, l'italien et l'anglais en natif",
+  "trad": "Auf der Plattform, einschliesslich Deutsch, Französisch, Italienisch und Englisch nativ",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "f7904554deff1bc1": {
   "fr": "Le coût affiché est hors taxe. Corrext l'indique explicitement dans l'encadré d'estimation.",
   "trad": "Die angezeigten Kosten verstehen sich ohne MWST. Corrext gibt das im Kasten der Schätzung ausdrücklich an.",
@@ -63797,6 +64875,13 @@
   "source": "V1 de/ressourcen/blog/aktuelles/",
   "par_page": {}
  },
+ "f81e697e9ad7988c": {
+  "fr": "{1}Plugin Word.{/1} {2}Relisez dans Word, avec le panneau Corrext{/2}",
+  "trad": "{1}Word Plugin.{/1} {2}Lesen Sie in Word mit dem Corrext-Schild{/2}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "f824ad78238f0205": {
   "fr": "Les trois niveaux de relecture externe, dans les termes de l'application",
   "trad": "Die drei Stufen des externen Lektorats, im Wortlaut der Anwendung",
@@ -63908,6 +64993,13 @@
   "source": "V1 de/uebersetzung/versicherungsrecht/",
   "par_page": {}
  },
+ "f889df9cf1028339": {
+  "fr": "Des faits que vous pouvez {1}vérifier{/1}",
+  "trad": "Fakten, die Sie {1}überprüfen können{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "f88b4eb48ea6bc0e": {
   "fr": "Source : Fedlex, {1}loi fédérale sur les services financiers{/1}. Dans Corrext, ce segment et ceux qui l'entourent s'affichent dans {2}Fast lookup CHnell{/2}, chacun avec sa référence.",
   "trad": "Quelle: Fedlex, {1}Bundesgesetz über die Finanzdienstleistungen{/1}. In Corrext erscheinen dieses Segment und die umliegenden Segmente in {2}Fast lookup CHnell{/2}, jeweils mit Fundstelle.",
@@ -63955,6 +65047,13 @@
   "trad": "{1}Die Ergebnisse pro Kriterium und pro Zelle{/1}, nie ein einziger Gesamtscore.",
   "statut": "v1",
   "source": "V1 de/ressourcen/studien/uebersetzungsmotor-evaluieren/",
+  "par_page": {}
+ },
+ "f8b9b80ecde90853": {
+  "fr": "Accepter",
+  "trad": "Akzeptieren",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "f8bfbf98e4116afd": {
@@ -64162,6 +65261,13 @@
   "source": "V1 de/uebersetzung/gesellschaftsrecht/",
   "par_page": {}
  },
+ "f98ba6f2a71abcbc": {
+  "fr": "Gestion de projet et extraits certifiés du registre",
+  "trad": "Projektmanagement und beglaubigte Registerauszüge",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "f9a545caa556c1a5": {
   "fr": "{1}Correspondance administrative{/1}",
   "trad": "{1}Korrespondenz mit der Verwaltung{/1}",
@@ -64362,6 +65468,13 @@
   "trad": "Quelle: Fedlex, {1}Bundesgesetz über das Verwaltungsverfahren{/1}. In Corrext erscheinen dieses Segment und die umliegenden Segmente in {2}Fast lookup CHnell{/2}, jeweils mit Fundstelle.",
   "statut": "v1",
   "source": "V1 de/ressourcen/glossar/verfuegung/",
+  "par_page": {}
+ },
+ "fae46d9c9305a043": {
+  "fr": "{1}Essayez sans inscription{/1}{2}L'interface de Corrext, reproduite à l'identique sur trois extraits de droit suisse.{/2}{3}Ouvrir la démo en direct{/3}",
+  "trad": "{1}Versuchen Sie ohne Registrierung{/1} {2}die Corrext-Schnittstelle, die auf drei Auszügen schweizerischen Rechts identisch abgebildet ist.{/2} {3}Live Demo öffnen{/3}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "fae5737978c4b4de": {
@@ -65023,6 +66136,13 @@
   "source": "V1 de/ressourcen/glossar/sorgfaltspflichten/",
   "par_page": {}
  },
+ "fd672f8e000cd369": {
+  "fr": "Relisez la traduction du projet phrase par phrase ; vos corrections nourrissent votre mémoire.",
+  "trad": "Lesen Sie die Übersetzung des Entwurfs Satz für Satz durch; Ihre Korrekturen nähren Ihr Gedächtnis.",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
+  "par_page": {}
+ },
  "fd742fb41a963d62": {
   "fr": "{1}{2}5{/2} projets actifs{/1}{3}{4}4{/4} devis générés{/3}{5}{6}30{/6} domaines CHnell{/5}{7}{8}2{/8} projets Highly sensitive{/7}",
   "trad": "{1}{2}5{/2} aktive Projekte{/1}{3}{4}4{/4} erstellte Offerten{/3}{5}{6}30{/6} Fachgebiete in CHnell{/5}{7}{8}2{/8} Projekte Highly sensitive{/7}",
@@ -65228,6 +66348,13 @@
   "trad": "Wird ein Auftragsbearbeitungsvertrag angeboten, und sieht er ein realistisches Auditrecht vor?",
   "statut": "v1",
   "source": "V1 de/ressourcen/blog/berufsgeheimnis-uebersetzungstools/",
+  "par_page": {}
+ },
+ "fe144c1a5fe8564a": {
+  "fr": "Tout ce qu'il {1}faut savoir{/1}",
+  "trad": "Alles, was es {1}wissen muss{/1}",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "fe1dd8adb3ff6496": {
@@ -65450,6 +66577,13 @@
   "trad": "Zum Verständnis ja, als verbindlicher Beleg nein. Englisch ist keine Amtssprache des Bundes, und die englischen Gesetzesfassungen dienen nur der Information. Sicher ist es, den französischen, deutschen oder italienischen Text zu zitieren und dann die englische Übersetzung anzufügen.",
   "statut": "v1",
   "source": "V1 de/uebersetzung/franzoesisch-englisch/",
+  "par_page": {}
+ },
+ "ff673dc28e899181": {
+  "fr": "Produit",
+  "trad": "Produkt",
+  "statut": "mt",
+  "source": "LexMachina 2026-10-26",
   "par_page": {}
  },
  "ff84d500b6e39f8f": {

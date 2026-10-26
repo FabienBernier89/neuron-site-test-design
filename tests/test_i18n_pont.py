@@ -342,6 +342,20 @@ class TestReinjection(Base):
         fichier = self.langues / "de" / "brut" / "a_revoir.json"
         self.assertEqual({a["cle"] for a in json.loads(fichier.read_text(encoding="utf-8"))}, {cle(LIEN), cle(ADRESSE)})
 
+    def test_traduction_identique_au_francais_jamais_posee_par_defaut(self):
+        # Ruling 19 : un défaut identique au français n'existe que pour un invariant ; la sortie brute identique (« Blog »,
+        # « {1}MT{/1} ») va dans a_revoir, l'adaptation tranche (statut invariant ou vraie traduction)
+        table, rapport = self.reinjecter([("Blog", "Blog"), ("{1}MT{/1}", "{1} MT {/1}"), (DEMO, "Demo anfragen")])
+        self.assertEqual(rapport["poses"], 1)
+        self.assertIsNone(table.chercher("Blog", ""))
+        self.assertIsNone(table.chercher("{1}MT{/1}", ""))
+        self.assertEqual({a["cle"] for a in rapport["a_revoir"]}, {cle("Blog"), cle("{1}MT{/1}")})
+        self.assertTrue(all("identique au français" in a["probleme"] for a in rapport["a_revoir"]))
+
+    def test_identique_au_francais_pose_si_invariant(self):
+        table, rapport = self.reinjecter([("Corrext", "Corrext")])
+        self.assertEqual((rapport["poses"], rapport["a_revoir"]), (1, []))
+
     def test_espaces_ajoutees_dans_les_marqueurs_retirees(self):
         table, rapport = self.reinjecter([(LIEN, "Das {1} Aktienkapital {/1} der Gesellschaft")])
         self.assertEqual(table.chercher(LIEN, "")["trad"], "Das {1}Aktienkapital{/1} der Gesellschaft")

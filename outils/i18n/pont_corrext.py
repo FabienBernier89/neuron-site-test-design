@@ -326,6 +326,11 @@ def reinjecter(langue, table, dossier=SRC_LANGUES, jour=None):
             for p in controles.eszett(fr, trad):
                 trad = trad.replace(p["extrait"], p["extrait"].replace("ß", "ss"))
             rapport["eszett"] += trad != avant
+        if " ".join(trad.split()) == " ".join(fr.split()) and not table.est_invariant(fr):
+            # Ruling 19 : pas de défaut identique au français hors invariant ; l'adaptation tranche (invariant ou traduction)
+            rapport["a_revoir"].append({"cle": k, "fr": fr, "trad_brute": brut,
+                                        "probleme": "identique au français : invariant à confirmer ou à traduire"})
+            continue
         try:
             table.poser(fr, trad, "mt", source)
         except ValueError as e:  # filet : ce que poser refuse encore (tiret écrit en entité HTML)
