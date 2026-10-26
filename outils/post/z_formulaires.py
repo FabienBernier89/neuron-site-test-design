@@ -4,7 +4,8 @@ l'encart newsletter qu'un autre lot insère.
 - Tout formulaire dont l'action finit par « envoi.php » reçoit l'action absolue /envoi.php, la méthode POST (imposée),
   les champs cachés de suivi (remplis dans le navigateur par assets/global/suivi.js, dont « duree », le temps passé sur
   la page au moment de l'envoi), le champ caché « langue » (« fr » : le build le règle sur la langue des pages traduites)
-  et le champ piège. Sur l'aperçu, il porte
+  et le champ piège. Un formulaire qui a un champ message porte aussi data-prerempli (phrase de la demande de
+  documentation API, lue par suivi.js). Sur l'aperçu, il porte
   data-demo : nav.js bloque l'envoi. En production, data-demo, novalidate et l'avis « aucun envoi » disparaissent :
   le formulaire part, après le contrôle des champs obligatoires par le navigateur.
 - Le formulaire de démo de la page contact reçoit son action et le champ Secteur (les 6 pages secteur, plus « Autre »).
@@ -34,6 +35,9 @@ SECTEURS = (("cabinets-avocats", "Cabinets d'avocats"), ("banques-finance", "Ban
 CACHES = ("type", "t0", "duree", "page_entree", "page_origine", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
           "langue")
 VALEURS_CACHEES = {"type": "demo", "langue": "fr"}  # les autres champs cachés partent vides
+# Phrase préremplie dans le message d'une demande de documentation API (?demande=documentation-api) : suivi.js la lit dans
+# l'attribut data-prerempli du formulaire. Elle est dans le HTML, donc extraite et traduite avec la page.
+PREREMPLI = "Je souhaite recevoir la documentation technique de l'API."
 PIEGE = '<div class="piege" aria-hidden="true"><input type="text" name="site_url" tabindex="-1" autocomplete="off"></div>'
 FORMULAIRE = re.compile(r"(<form\b[^>]*>)(.*?)(</form>)", re.S)
 AVIS = re.compile(r'<p class="avis"[^>]*>.*?</p>', re.S)
@@ -68,7 +72,10 @@ def _resume():
     return f'<div class="f-err" role="alert"{attributs}></div>'
 
 
-def _ouverture(o, apercu):
+def _ouverture(o, apercu, corps):
+    # Message prérempli de la demande de documentation API : seulement un formulaire qui a un champ message
+    if 'name="message"' in corps and not _attribut("data-prerempli").search(o):
+        o = o[:-1] + f' data-prerempli="{H.escape(PREREMPLI, quote=True)}">'
     # Méthode imposée : envoi.php refuse tout autre méthode que POST
     if re.search(r"\smethod=", o):
         o = re.sub(r"""\smethod=(?:"[^"]*"|'[^']*'|[^\s>]+)""", ' method="post"', o, count=1)
@@ -115,7 +122,7 @@ def traiter(html, page):
             return m.group(0)
         if action != ACTION:  # {{ROOT}}envoi.php, ../envoi.php... : toujours le chemin absolu
             o = re.sub(r'\saction="[^"]*"', f' action="{ACTION}"', o, count=1)
-        return _ouverture(o, apercu) + _corps(corps, apercu) + fin
+        return _ouverture(o, apercu, corps) + _corps(corps, apercu) + fin
 
     html = FORMULAIRE.sub(formulaire, html)
     if page == MERCI and '<meta name="robots"' not in html:

@@ -95,7 +95,9 @@
     if (type && type.value === "demo" && parametre("demande") === "documentation-api") {
       type.value = "documentation";
       var m = f.querySelector('textarea[name="message"]');
-      if (m && !m.value) m.value = "Je souhaite recevoir la documentation technique de l'API.";
+      /* phrase dans la langue de la page : posée sur le formulaire par outils/post/z_formulaires.py (data-prerempli) */
+      var phrase = f.getAttribute("data-prerempli");
+      if (m && !m.value && phrase) m.value = phrase;
     }
     var s = f.querySelector('select[name="secteur"]');
     /* ?secteur= d'abord, sinon la dernière page secteur visitée ; une valeur hors liste est ignorée */
