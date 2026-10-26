@@ -1,6 +1,7 @@
 """Outil de mesure des débordements (outils/debordements.mjs, tâche 6.3) : pages de fixtures minimales mesurées dans Chrome
 sans interface, jamais le site. Ignorés si Node ou Chrome manquent."""
 import json
+import os
 import shutil
 import subprocess
 import tempfile
@@ -161,19 +162,29 @@ class TestDebordements(unittest.TestCase):
         self.assertIn("--reference", r.stdout)
 
     def test_chrome_sans_port_arrete_et_profil_supprime(self):
-        """Vague finale, point 12 : Chrome qui n'ouvre jamais son port est arrêté et son profil temporaire supprimé."""
+        """Vague finale, point 12 : Chrome qui n'ouvre jamais son port est arrêté et son profil temporaire supprimé.
+        Le faux Chrome note le profil reçu avant de dormir. Le délai d'ouverture du port doit laisser au faux Chrome le
+        temps de démarrer : trop court (1 ms), il est arrêté avant d'écrire et la trace manque. Le délai est donc large
+        (machine chargée), et les profils vont dans un dossier temporaire propre au test (TMPDIR), pour que ni les profils
+        d'autres lancements ni une trace manquante ne faussent la vérification."""
         self.ecrire("de", page("<p>Inhalt</p>"))
+        temp = Path(self._tmp.name) / "tmp"
+        temp.mkdir()
         trace = Path(self._tmp.name) / "profil.txt"
         faux = Path(self._tmp.name) / "faux-chrome.sh"
         faux.write_text("#!/bin/sh\nfor a in \"$@\"; do case $a in --user-data-dir=*) echo \"${a#--user-data-dir=}\" > "
                         f"'{trace}';; esac; done\nexec sleep 60\n", encoding="utf-8")
         faux.chmod(0o755)
         r = subprocess.run([NODE, str(OUTIL), "--racine", str(self.racine), "--pages", "de/"], capture_output=True, text=True,
-                           timeout=60, env={**__import__("os").environ, "CHROME": str(faux), "DEBORDEMENTS_DELAI_CHROME": "1500"})
+                           timeout=60, env={**os.environ, "CHROME": str(faux), "DEBORDEMENTS_DELAI_CHROME": "5000",
+                                            "TMPDIR": str(temp)})
         self.assertEqual(r.returncode, 2, r.stderr)
         self.assertIn("port de pilotage", r.stderr)
+        self.assertTrue(trace.exists(), "le faux Chrome n'a pas démarré avant la fin du délai (machine surchargée ?)")
         profil = Path(trace.read_text(encoding="utf-8").strip())
+        self.assertEqual(profil.parent, temp, "le profil doit être créé dans le TMPDIR du test")
         self.assertFalse(profil.exists(), profil)
+        self.assertEqual(list(temp.glob("neuron-debordements-*")), [], "aucun profil ne doit rester")
 
     def test_erreur_d_usage(self):
         """Page absente de la racine : code 2 et message en français, sans lancer Chrome."""
