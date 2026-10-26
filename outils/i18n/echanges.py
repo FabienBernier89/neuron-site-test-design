@@ -14,16 +14,29 @@ Export TMX 1.4 (exporter_tmx) : les traductions des statuts demandés (les segme
 fr-CH, marqueurs en <bpt>/<ept>/<ph>. Glossaire CSV (exporter_glossaire_csv) : fr;<langue>;source;statut, UTF-8 avec BOM,
 séparateur point-virgule (ouverture directe dans Excel).
 
+Réimport (importer_xliff, importer_csv) : chaque unité rendue est contrôlée avant d'entrer dans la table. Un segment est
+rejeté, avec sa raison, et garde sa traduction et son statut précédents, si : « segment inconnu » (clé absente de la table),
+« segment FR modifié depuis l'export », « traduction vide », « balisage » (marqueur supprimé, ajouté, en double, inversé ou
+élément XLIFF inconnu : segments.restaurer), « tirets », « eszett », « marques », « interdits » (contrôles bloquants de
+controles.py) ou « doublon ». La terminologie du glossaire n'avertit que (avertissements, jamais un rejet). Un segment
+accepté passe au statut relu, avec « ; relu par <relecteur> le <date> » ajouté à sa source ; une traduction identique au
+français passe au statut invariant (Ruling 18), source « relu par <relecteur> le <date>, identique au français ». Un fichier
+écrit pour une autre langue est refusé en entier (ValueError). L'import ne modifie que la table en mémoire : enregistrer()
+reste à l'appelant.
+
 Les exports vont hors du dépôt public (verifier_hors_depot : un dossier du dépôt est refusé sauf s'il est ignoré par git),
 par défaut dans ~/Claude project/Bibliotheque-Claude/07-Ressources-traduction/Neuron/site-v2/<date>-<langue>/.
 
-Commande : python3 -m outils.i18n exporter <langue> ... (outils/i18n/__main__.py). Bibliothèque standard seulement."""
+Commandes : python3 -m outils.i18n exporter <langue> ... et importer <langue> <fichier> --relecteur <nom>
+(outils/i18n/__main__.py). Bibliothèque standard seulement."""
 import csv
 import json
 import re
 import subprocess
+import unicodedata
 from datetime import date
 from pathlib import Path
+from xml.etree import ElementTree as ET
 from xml.sax.saxutils import escape
 
 from outils.i18n import chnell, controles, terminologie, traduire
@@ -41,8 +54,21 @@ ETATS = {"mt": "needs-review-translation", "adapte": "needs-review-adaptation", 
 ACCUEIL = "accueil"  # la page d'accueil (clé de page « ») dans les notes et les identifiants
 LLMS = "llms"        # pseudo-page des libellés fixes des fichiers llms.txt
 PAGES_VISIBLES = 8
+COLONNES_CSV = ("cle", "fr", "trad")
 
 _MARQ = re.compile(r"\{(/?)(\d+)\}")
+_BLANCS = re.compile(r"[ \t\r\n\f]+")  # pas \s : l'espace insécable est une modification
+
+
+def _normal(texte):
+    return " ".join(texte.split())
+
+
+def _blancs(texte):
+    """Texte aux blancs ASCII regroupés : une espace insécable remplacée par une espace est une vraie modification."""
+    return _BLANCS.sub(" ", texte).strip()
+
+
 # ---------- destination des exports ----------
 
 def dossier_export(langue, jour=None):
@@ -119,6 +145,34 @@ def _en_tmx(texte):
             sortie.append(f'<ph x="{n}">{brut}</ph>')
     sortie.append(escape(texte[pos:]))
     return "".join(sortie)
+
+
+def _vers_marqueurs(element):
+    """Contenu d'un <source> ou <target> XLIFF -> texte à marqueurs. <mrk> (segmentation des outils) est déplié ;
+    tout autre élément que <g> et <x> est refusé (ValueError)."""
+    morceaux = [element.text or ""]
+    for enfant in element:
+        nom = enfant.tag.rsplit("}", 1)[-1]
+        n = (enfant.get("id") or "").strip()
+        if nom in ("g", "x"):
+            if not n.isdigit():
+                raise ValueError(f"<{nom}> sans identifiant numérique")
+            n = str(int(n))
+            morceaux.append("{%s}" % n if nom == "x" else "{%s}%s{/%s}" % (n, _vers_marqueurs(enfant), n))
+        elif nom == "mrk":
+            morceaux.append(_vers_marqueurs(enfant))
+        else:
+            raise ValueError(f"élément <{nom}> non géré")
+        morceaux.append(enfant.tail or "")
+    return "".join(morceaux)
+
+
+def _table_marqueurs(fr):
+    """Table des marqueurs du texte français, au format de segments.restaurer : paires (ouvre, ferme) et marqueurs seuls
+    (vide)."""
+    fermants = {int(m.group(2)) for m in _MARQ.finditer(fr) if m.group(1)}
+    return {n: ({"ouvre": "", "ferme": ""} if n in fermants else {"vide": ""})
+            for n in sorted({int(m.group(2)) for m in _MARQ.finditer(fr)})}
 
 
 # ---------- export ----------
@@ -291,3 +345,176 @@ def exporter_glossaire_csv(langue, glossaire, sortie):
         ecrivain.writerow(["fr", langue, "source", "statut"])
         ecrivain.writerows(lignes)
     return len(lignes)
+
+
+# ---------- réimport ----------
+
+def _decouper_id(ident):
+    """Identifiant d'unité -> (clé du texte, page ou None) : « <clé> » ou « <clé>@<page> » (« accueil » pour la page « »)."""
+    if "@" not in ident:
+        return ident, None
+    k, page = ident.split("@", 1)
+    return k, "" if page == ACCUEIL else page
+
+
+def _pages_de_la_note(unite):
+    """Pages lues dans la note d'une unité (« Pages : a, b et 3 autre(s) ») : (noms de pages, nombre d'autres pages)."""
+    for note in unite.iter(f"{{{NS_XLIFF}}}note"):
+        m = re.search(r"^Pages : (.*)$", note.text or "", re.M)
+        if m:
+            texte = m.group(1).strip()
+            autres = re.search(r" et (\d+) autre\(s\)$", texte)
+            if autres:
+                texte = texte[:autres.start()]
+            return [p.strip() for p in texte.split(", ") if p.strip()], int(autres.group(1)) if autres else 0
+    return [], 0
+
+
+def _lire_xliff(fichier, langue):
+    """Unités d'un XLIFF rendu : [{"id", "fr", "trad", "erreur", "pages", "autres_pages"}]. ValueError si le fichier est
+    illisible, n'est pas du XLIFF 1.2, ou n'est pas écrit pour cette langue."""
+    try:
+        racine = ET.parse(fichier).getroot()
+    except (ET.ParseError, OSError) as e:
+        raise ValueError(f"fichier XLIFF illisible : {e}") from e
+    if racine.tag != f"{{{NS_XLIFF}}}xliff":
+        raise ValueError("ce fichier n'est pas un XLIFF 1.2 (espace de noms attendu : " + NS_XLIFF + ")")
+    unites, fichiers = [], list(racine.iter(f"{{{NS_XLIFF}}}file"))
+    if not fichiers:
+        raise ValueError("fichier XLIFF sans élément <file>")
+    for f in fichiers:
+        if f.get("target-language") != HREFLANG[langue] or f.get("source-language") != SOURCE_LANGUE:
+            raise ValueError(f"fichier refusé : il est écrit de « {f.get('source-language')} » vers « "
+                             f"{f.get('target-language')} » (target-language), pas de {SOURCE_LANGUE} vers « {HREFLANG[langue]} »")
+        for tu in f.iter(f"{{{NS_XLIFF}}}trans-unit"):
+            source, cible = tu.find(f"{{{NS_XLIFF}}}source"), tu.find(f"{{{NS_XLIFF}}}target")
+            u = {"id": tu.get("id") or "", "fr": "", "trad": None, "erreur": None}
+            try:
+                u["fr"] = _vers_marqueurs(source) if source is not None else ""
+                u["trad"] = _vers_marqueurs(cible) if cible is not None else None
+            except ValueError as e:
+                u["erreur"] = str(e)
+            u["pages"], u["autres_pages"] = _pages_de_la_note(tu)
+            unites.append(u)
+    return unites
+
+
+def _lire_csv(fichier):
+    """Lignes d'un CSV de corrections (colonnes cle;fr;trad, UTF-8 avec ou sans BOM) : mêmes unités que _lire_xliff."""
+    try:
+        with open(fichier, encoding="utf-8-sig", newline="") as f:
+            lecteur = csv.DictReader(f, delimiter=";")
+            champs = [(c or "").strip() for c in (lecteur.fieldnames or [])]
+            if not set(COLONNES_CSV) <= set(champs):
+                raise ValueError(f"colonnes attendues : {';'.join(COLONNES_CSV)} (trouvé : {';'.join(champs) or 'aucune'})")
+            lecteur.fieldnames = champs
+            lignes = list(lecteur)
+    except (OSError, UnicodeDecodeError, csv.Error) as e:
+        raise ValueError(f"fichier CSV illisible : {e}") from e
+    unites = []
+    for ligne in lignes:
+        ident = (ligne["cle"] or "").strip()
+        page = _decouper_id(ident)[1]
+        unites.append({"id": ident, "fr": ligne["fr"] or "", "trad": ligne["trad"], "erreur": None,
+                       "pages": [] if page is None else [page or ACCUEIL], "autres_pages": 0})
+    return unites
+
+
+def _appliquer(unites, table, relecteur, glossaire, jour):
+    """Contrôle chaque unité rendue et pose les acceptées dans la table (en mémoire). Voir importer_xliff."""
+    if not relecteur or not relecteur.strip():
+        raise ValueError("le nom du relecteur est obligatoire")
+    if controles.tirets(relecteur):
+        raise ValueError("le nom du relecteur contient un tiret long")
+    jour = jour or date.today().isoformat()
+    glossaire = _glossaire_de(table.langue, glossaire)
+    suite = f"relu par {relecteur.strip()} le {jour}"
+    rapport = {"relus": 0, "invariants": 0, "modifies": [], "rejetes": [], "avertissements": []}
+    vus = set()
+    for u in unites:
+        ident = u["id"]
+        k, page = _decouper_id(ident)
+        entree = table.entrees.get(k)
+
+        def rejeter(raison, detail=""):
+            rapport["rejetes"].append({"cle": ident, "raison": raison, "detail": detail,
+                                       "fr": _normal(entree["fr"]) if entree else _normal(u["fr"])})
+
+        if ident in vus:
+            rejeter("doublon", "unité présente plusieurs fois dans le fichier")
+            continue
+        vus.add(ident)
+        if (entree is None or (page is not None and page not in entree["par_page"])
+                or (page is None and entree["trad"] is None)):
+            rejeter("segment inconnu", "aucun texte français de la table n'a cette clé")
+            continue
+        if u["erreur"]:
+            rejeter("balisage", u["erreur"])
+            continue
+        if _normal(u["fr"]) != _normal(entree["fr"]):
+            rejeter("segment FR modifié depuis l'export", "le texte français du fichier n'est plus celui de la table")
+            continue
+        trad = u["trad"]
+        if trad is None or not trad.strip():
+            rejeter("traduction vide")
+            continue
+        try:
+            S.restaurer(trad, _table_marqueurs(entree["fr"]))
+        except ValueError as e:
+            rejeter("balisage", str(e))
+            continue
+        ancienne = entree if page is None else entree["par_page"][page]
+        avant = ancienne["trad"]
+        modifie = avant is None or _blancs(trad) != _blancs(avant)
+        # une traduction v1 ou invariant rendue sans modification a été validée avant : comme controler (4.4), on ne la
+        # contrôle pas ; dès que le relecteur la change, les contrôles bloquants s'appliquent
+        problemes = [] if not modifie and ancienne["statut"] in controles.EXCLUS_DU_CONTROLE else (
+            controles.tirets(trad) + (controles.eszett(entree["fr"], trad) if table.langue == "de" else [])
+            + controles.marques(entree["fr"], trad) + controles.interdits(trad))
+        if problemes:
+            rejeter(problemes[0]["regle"], "; ".join(f"{p['detail']} : {p['extrait']}" for p in problemes))
+            continue
+        identique = _normal(trad) == _normal(entree["fr"])
+        if identique:
+            statut, source = "invariant", f"{suite}, identique au français"
+        else:
+            base = ancienne.get("source") or ""
+            statut = "relu"
+            source = base if base.endswith(suite) else (f"{base} ; {suite}" if base else suite)
+        try:
+            table.poser(entree["fr"], trad if modifie else avant, statut, source, page=page)
+        except ValueError as e:  # filet : les contrôles de Table.poser sont ceux déjà faits ci-dessus
+            rejeter("tirets" if "tirets" in str(e) else "eszett", str(e))
+            continue
+        rapport["relus"] += 1
+        rapport["invariants"] += identique
+        if modifie:
+            pages = u["pages"] or ([] if page is None else [page or ACCUEIL])
+            rapport["modifies"].append({"cle": ident, "fr": _normal(entree["fr"]), "avant": avant, "apres": trad,
+                                        "pages": pages, "autres_pages": u["autres_pages"]})
+        for p in controles.terminologie(entree["fr"], trad, table.langue, glossaire):
+            rapport["avertissements"].append({"cle": ident, "detail": p["detail"]})
+    return rapport
+
+
+def importer_xliff(fichier, table, relecteur, glossaire=None, jour=None):
+    """Réimporte un XLIFF corrigé par le relecteur dans la table (en mémoire : l'appelant fait enregistrer()). Rend
+    {"relus": int, "invariants": int, "modifies": [{cle, fr, avant, apres, pages, autres_pages}], "rejetes": [{cle, raison,
+    detail, fr}], "avertissements": [{cle, detail}]} ; relus compte les segments acceptés (dont les « invariants » posés
+    pour une traduction identique au français, Ruling 18). Un segment rejeté garde sa traduction et son statut. glossaire :
+    {fr: {langue: {terme, ...}}} (chnell.charger_glossaire par défaut) ; jour : AAAA-MM-JJ (aujourd'hui par défaut).
+    ValueError si le fichier est illisible, n'est pas du XLIFF 1.2 ou n'est pas écrit pour la langue de la table."""
+    return _appliquer(_lire_xliff(fichier, table.langue), table, relecteur, glossaire, jour)
+
+
+def importer_csv(fichier, table, relecteur, glossaire=None, jour=None):
+    """Repli tableur : réimporte un CSV de colonnes cle;fr;trad (la clé d'une traduction de page : « <clé>@<page> »), mêmes
+    contrôles et même rapport que importer_xliff."""
+    return _appliquer(_lire_csv(fichier), table, relecteur, glossaire, jour)
+
+
+def nom_pour_fichier(texte):
+    """Texte -> fragment de nom de fichier : lettres et chiffres ASCII, séparés par des tirets (« Alice Müller » donne
+    « Alice-Muller »)."""
+    ascii_ = unicodedata.normalize("NFKD", texte).encode("ascii", "ignore").decode()
+    return re.sub(r"[^A-Za-z0-9]+", "-", ascii_).strip("-") or "relecteur"

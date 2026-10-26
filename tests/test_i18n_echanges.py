@@ -1,4 +1,5 @@
-"""Échanges avec les traducteurs (tâche 5.1) : export XLIFF 1.2, TMX 1.4 et glossaire CSV : outils/i18n/echanges.py.
+"""Échanges avec les traducteurs (tâches 5.1 et 5.2) : export XLIFF 1.2, TMX 1.4 et glossaire CSV, réimport des
+corrections : outils/i18n/echanges.py.
 
 Tout est synthétique : mini table allemande et mini pages écrites ici, dossiers temporaires pour les fichiers. Aucun test
 ne lit ni n'écrit le dossier réel des échanges ni celui de la terminologie (Bibliotheque-Claude, Ruling 5)."""
@@ -6,6 +7,7 @@ import contextlib
 import csv
 import io
 import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -20,6 +22,7 @@ from outils.i18n.table import Table, cle
 ICI = Path(__file__).resolve().parent.parent
 NS = "{urn:oasis:names:tc:xliff:document:1.2}"
 XML_LANG = "{http://www.w3.org/XML/1998/namespace}lang"
+TIRET_CADRATIN = chr(0x2014)
 JOUR = "2026-10-26"
 
 CAPITAL = "Le {1}capital-actions{/1} de la société"
@@ -79,6 +82,15 @@ class Base(unittest.TestCase):
     def unites(self, fichier):
         racine = ET.parse(fichier).getroot()
         return {u.get("id"): u for u in racine.iter(NS + "trans-unit")}
+
+    def importer(self, fichier, relecteur="Alice", glossaire=None, **kw):
+        return E.importer_xliff(fichier, self.table, relecteur, glossaire=GLOSSAIRE if glossaire is None else glossaire,
+                                jour=JOUR, **kw)
+
+    def remplacer(self, fichier, ancien, nouveau):
+        texte = fichier.read_text(encoding="utf-8")
+        self.assertIn(ancien, texte)
+        fichier.write_text(texte.replace(ancien, nouveau, 1), encoding="utf-8")
 
 
 class TestExportXliff(Base):
@@ -273,6 +285,313 @@ class TestExportTmxEtGlossaire(Base):
         E.verifier_hors_depot(E.dossier_export("de", JOUR))  # le dossier réel est ignoré par git, ou hors de tout dépôt
 
 
+class TestImportXliff(Base):
+    def test_aller_retour_sans_modification(self):
+        fichier, n = self.exporter()
+        avant = json.loads(json.dumps(self.table.entrees))
+        r = self.importer(fichier)
+        self.assertEqual(r["rejetes"], [])
+        self.assertEqual(r["modifies"], [])
+        self.assertEqual(r["relus"], n)
+        for k, e in self.table.entrees.items():
+            self.assertEqual(e["trad"], avant[k]["trad"])
+            self.assertIn(e["statut"], ("relu", "invariant"), e["fr"])
+            for p in e["par_page"].values():
+                self.assertEqual(p["statut"], "relu")
+        self.assertEqual(self.table.entrees[cle(DEMO)]["statut"], "relu")
+        self.assertEqual(self.table.entrees[cle(DEMO)]["source"], f"V1 de/ ; relu par Alice le {JOUR}")
+
+    def test_aller_retour_sans_effet_de_bord_sur_les_fr(self):
+        fichier, _ = self.exporter()
+        avant = {k: e["fr"] for k, e in self.table.entrees.items()}
+        self.importer(fichier)
+        self.assertEqual({k: e["fr"] for k, e in self.table.entrees.items()}, avant)
+
+    def test_correction_appliquee(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Demo anfragen", "Demo vereinbaren")
+        r = self.importer(fichier)
+        self.assertEqual(r["rejetes"], [])
+        self.assertEqual(len(r["modifies"]), 1)
+        m = r["modifies"][0]
+        self.assertEqual((m["cle"], m["avant"], m["apres"]), (cle(DEMO), "Demo anfragen", "Demo vereinbaren"))
+        self.assertEqual(m["pages"], ["accueil", "contact/"])
+        e = self.table.entrees[cle(DEMO)]
+        self.assertEqual((e["trad"], e["statut"]), ("Demo vereinbaren", "relu"))
+        self.assertTrue(e["source"].endswith(f" ; relu par Alice le {JOUR}"))
+
+    def test_correction_avec_balises(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Aktienkapital</g> der", "Grundkapital</g> der")
+        r = self.importer(fichier)
+        self.assertEqual(r["rejetes"], [])
+        self.assertEqual(self.table.entrees[cle(CAPITAL)]["trad"], "Das {1}Grundkapital{/1} der Gesellschaft")
+        self.assertEqual(r["modifies"][0]["apres"], "Das {1}Grundkapital{/1} der Gesellschaft")
+
+    def test_variante_de_page_corrigee(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Kontakt aufnehmen", "Kontakt herstellen")
+        r = self.importer(fichier)
+        self.assertEqual(r["modifies"][0]["pages"], ["contact/"])
+        e = self.table.entrees[cle(CONTACT)]
+        self.assertEqual(e["trad"], "Kontakt")
+        self.assertEqual(e["par_page"]["contact/"]["trad"], "Kontakt herstellen")
+        self.assertEqual(e["par_page"]["contact/"]["statut"], "relu")
+
+    def test_marqueur_supprime_rejete(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, 'Das <g id="1">Aktienkapital</g>', "Das Aktienkapital")
+        r = self.importer(fichier)
+        self.assertEqual([(x["cle"], x["raison"]) for x in r["rejetes"]], [(cle(CAPITAL), "balisage")])
+        e = self.table.entrees[cle(CAPITAL)]  # traduction précédente et statut conservés
+        self.assertEqual((e["trad"], e["statut"]), ("Das {1}Aktienkapital{/1} der Gesellschaft", "adapte"))
+        self.assertEqual(r["modifies"], [])
+
+    def test_marqueur_seul_supprime_rejete(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, 'Adresse<x id="1"/>Freiburg', "Adresse Freiburg")
+        r = self.importer(fichier)
+        self.assertEqual([(x["cle"], x["raison"]) for x in r["rejetes"]], [(cle(ADRESSE), "balisage")])
+        self.assertEqual(self.table.entrees[cle(ADRESSE)]["trad"], "Adresse{1}Freiburg")
+        self.assertEqual(self.table.entrees[cle(ADRESSE)]["statut"], "mt")
+
+    def test_marqueur_ajoute_rejete(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Kontakt aufnehmen", 'Kontakt <x id="2"/>aufnehmen')
+        r = self.importer(fichier)
+        self.assertEqual([x["raison"] for x in r["rejetes"]], ["balisage"])
+        self.assertEqual(self.table.entrees[cle(CONTACT)]["par_page"]["contact/"]["trad"], "Kontakt aufnehmen")
+
+    def test_marqueur_double_rejete(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, 'Das <g id="1">Aktienkapital</g> der', 'Das <g id="1">Aktienkapital</g> <g id="1">der</g>')
+        self.assertEqual([x["raison"] for x in self.importer(fichier)["rejetes"]], ["balisage"])
+
+    def test_marqueur_inverse_rejete_par_csv(self):
+        csv_ = self.csv("{/1}Aktienkapital{1}")
+        r = E.importer_csv(csv_, self.table, "Alice", glossaire={}, jour=JOUR)
+        self.assertEqual([(x["cle"], x["raison"]) for x in r["rejetes"]], [(cle(CAPITAL), "balisage")])
+
+    def test_balise_inconnue_rejetee(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Demo anfragen", "Demo <ph id=\"9\">x</ph>anfragen")
+        r = self.importer(fichier)
+        self.assertEqual([x["raison"] for x in r["rejetes"]], ["balisage"])
+        self.assertEqual(self.table.entrees[cle(DEMO)]["trad"], "Demo anfragen")
+
+    def test_mrk_de_segmentation_ignore(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Demo anfragen", 'Demo <mrk mtype="seg" mid="1">vereinbaren</mrk>')
+        r = self.importer(fichier)
+        self.assertEqual(r["rejetes"], [])
+        self.assertEqual(self.table.entrees[cle(DEMO)]["trad"], "Demo vereinbaren")
+
+    def test_segment_inconnu_rejete(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, f'id="{cle(DEMO)}"', 'id="0000000000000000"')
+        r = self.importer(fichier)
+        self.assertEqual([(x["cle"], x["raison"]) for x in r["rejetes"]], [("0000000000000000", "segment inconnu")])
+        self.assertNotIn("0000000000000000", self.table.entrees)
+        self.assertEqual(self.table.entrees[cle(DEMO)]["statut"], "v1")  # son unité manque : rien n'y touche
+
+    def test_variante_de_page_inconnue_rejetee(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, f'id="{cle(CONTACT)}@contact/"', f'id="{cle(CONTACT)}@autre/"')
+        r = self.importer(fichier)
+        self.assertEqual([x["raison"] for x in r["rejetes"]], ["segment inconnu"])
+
+    def test_tiret_long_rejete(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Demo anfragen", f"Demo {TIRET_CADRATIN} anfragen")
+        r = self.importer(fichier)
+        self.assertEqual([(x["cle"], x["raison"]) for x in r["rejetes"]], [(cle(DEMO), "tirets")])
+        e = self.table.entrees[cle(DEMO)]
+        self.assertEqual((e["trad"], e["statut"]), ("Demo anfragen", "v1"))
+
+    def test_eszett_rejete_en_allemand(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Unser Team", "Unser Team, groß")
+        r = self.importer(fichier)
+        self.assertEqual([x["raison"] for x in r["rejetes"]], ["eszett"])
+        self.assertEqual(self.table.entrees[cle("Notre équipe")]["trad"], "Unser Team")
+
+    def test_marque_modifiee_rejetee(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Demo anfragen", "Demo anfragen bei Corrext")
+        self.assertEqual([x["raison"] for x in self.importer(fichier)["rejetes"]], ["marques"])
+
+    def test_terme_interdit_rejete(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Unser Team", "Unser Lexa Team")
+        self.assertEqual([x["raison"] for x in self.importer(fichier)["rejetes"]], ["interdits"])
+
+    def test_traduction_vide_rejetee(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Demo anfragen", "")
+        r = self.importer(fichier)
+        self.assertEqual([(x["cle"], x["raison"]) for x in r["rejetes"]], [(cle(DEMO), "traduction vide")])
+        self.assertEqual(self.table.entrees[cle(DEMO)]["trad"], "Demo anfragen")
+
+    def test_cle_fr_modifiee_depuis_export(self):
+        fichier, _ = self.exporter()
+        self.table.entrees[cle(DEMO)]["fr"] = "Demander une démonstration"  # le texte FR a changé depuis l'export
+        r = self.importer(fichier)
+        self.assertEqual([(x["cle"], x["raison"]) for x in r["rejetes"]],
+                         [(cle(DEMO), "segment FR modifié depuis l'export")])
+        e = self.table.entrees[cle(DEMO)]
+        self.assertEqual((e["trad"], e["statut"]), ("Demo anfragen", "v1"))
+
+    def test_source_modifiee_dans_le_fichier(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, f">{DEMO}</source>", ">Demander une autre démo</source>")
+        r = self.importer(fichier)
+        self.assertEqual([x["raison"] for x in r["rejetes"]], ["segment FR modifié depuis l'export"])
+
+    def test_identique_au_francais_pose_invariant(self):  # Ruling 18
+        self.table.poser("Corrext Premium ouvert", "Corrext Premium offen", "adapte", "test")
+        self.table.poser("Prix catalogue", "Listenpreis", "adapte", "test")
+        pages = {"": page("Corrext Premium ouvert", "Prix catalogue")}
+        sortie = self.sortie / "ident.xlf"
+        E.exporter_xliff("de", self.table, None, {"adapte"}, sortie, assemblees=pages, glossaire={})
+        self.remplacer(sortie, "Corrext Premium offen", "Corrext Premium ouvert")
+        r = self.importer(sortie, glossaire={})
+        self.assertEqual(r["rejetes"], [])
+        e = self.table.entrees[cle("Corrext Premium ouvert")]
+        self.assertEqual((e["statut"], e["trad"]), ("invariant", "Corrext Premium ouvert"))
+        self.assertEqual(e["source"], f"relu par Alice le {JOUR}, identique au français")
+        self.assertEqual(self.table.entrees[cle("Prix catalogue")]["statut"], "relu")
+        self.assertEqual(r["relus"], 2)
+        self.assertEqual(r["invariants"], 1)
+        self.assertEqual([m["cle"] for m in r["modifies"]], [cle("Corrext Premium ouvert")])
+
+    def test_identique_au_francais_apres_les_controles_bloquants(self):
+        # le contrôle bloquant s'applique avant la pose invariant : un texte français qui porte un terme interdit
+        self.table.poser("Notre filiale Silex", "Unsere Filiale Silex", "adapte", "test")
+        sortie = self.sortie / "ident2.xlf"
+        E.exporter_xliff("de", self.table, None, {"adapte"}, sortie, glossaire={},
+                         assemblees={"": page("Notre filiale Silex")})
+        self.remplacer(sortie, "Unsere Filiale Silex", "Notre filiale Silex")
+        r = self.importer(sortie, glossaire={})
+        self.assertEqual([x["raison"] for x in r["rejetes"]], ["interdits"])
+        self.assertEqual(self.table.entrees[cle("Notre filiale Silex")]["statut"], "adapte")
+
+    def test_v1_sans_modification_non_controlee(self):
+        # une traduction V1 validée dont la marque diffère du français (« Corrext » en plus) revient intacte : acceptée
+        self.table.poser("Exemple de prix", "Beispiel Corrext Preis", "v1", "V1 de/")
+        pages = {"": page("Exemple de prix")}
+        sortie = self.sortie / "v1.xlf"
+        E.exporter_xliff("de", self.table, [""], {"v1"}, sortie, assemblees=pages, glossaire={})
+        r = self.importer(sortie, glossaire={})
+        self.assertEqual((r["rejetes"], r["modifies"], r["relus"]), ([], [], 1))
+        self.assertEqual(self.table.entrees[cle("Exemple de prix")]["statut"], "relu")
+        # mais dès que le relecteur la modifie, les contrôles bloquants s'appliquent
+        self.table.poser("Exemple de prix", "Beispiel Corrext Preis", "v1", "V1 de/")
+        self.remplacer(sortie, "Beispiel Corrext Preis", "Beispiel Corrext Preise")
+        r = self.importer(sortie, glossaire={})
+        self.assertEqual([x["raison"] for x in r["rejetes"]], ["marques"])
+        self.assertEqual(self.table.entrees[cle("Exemple de prix")]["trad"], "Beispiel Corrext Preis")
+        self.assertEqual(self.table.entrees[cle("Exemple de prix")]["statut"], "v1")
+
+    def test_adapte_sans_modification_controle(self):
+        self.table.poser("Exemple de prix", "Beispiel Corrext Preis", "adapte", "test")
+        pages = {"": page("Exemple de prix")}
+        sortie = self.sortie / "adapte.xlf"
+        E.exporter_xliff("de", self.table, [""], {"adapte"}, sortie, assemblees=pages, glossaire={})
+        r = self.importer(sortie, glossaire={})
+        self.assertEqual([x["raison"] for x in r["rejetes"]], ["marques"])
+        self.assertEqual(self.table.entrees[cle("Exemple de prix")]["statut"], "adapte")
+
+    def test_terminologie_en_avertissement(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Aktienkapital</g> der", "Kapital</g> der")
+        r = self.importer(fichier)
+        self.assertEqual(r["rejetes"], [])  # avertissement, pas un rejet
+        self.assertEqual(self.table.entrees[cle(CAPITAL)]["statut"], "relu")
+        self.assertEqual(len(r["avertissements"]), 1)
+        self.assertEqual(r["avertissements"][0]["cle"], cle(CAPITAL))
+        self.assertIn("capital-actions", r["avertissements"][0]["detail"])
+
+    def test_doublon_rejete(self):
+        fichier, _ = self.exporter()
+        texte = fichier.read_text(encoding="utf-8")
+        bloc = re.search(r'<trans-unit id="%s".*?</trans-unit>' % cle("Notre équipe"), texte, re.S).group(0)
+        fichier.write_text(texte.replace(bloc, bloc + "\n" + bloc), encoding="utf-8")
+        r = self.importer(fichier)
+        self.assertEqual([x["raison"] for x in r["rejetes"]], ["doublon"])
+
+    def test_fichier_d_une_autre_langue_refuse(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, 'target-language="de-CH"', 'target-language="it-CH"')
+        avant = json.dumps(self.table.entrees, sort_keys=True)
+        with self.assertRaises(ValueError) as c:
+            self.importer(fichier)
+        self.assertIn("it-CH", str(c.exception))
+        self.assertEqual(json.dumps(self.table.entrees, sort_keys=True), avant)
+
+    def test_fichier_illisible_refuse(self):
+        fichier = self.tmp / "casse.xlf"
+        fichier.write_text("<xliff><file>", encoding="utf-8")
+        with self.assertRaises(ValueError):
+            self.importer(fichier)
+
+    def test_deux_importations_ne_doublent_pas_la_source(self):
+        fichier, _ = self.exporter()
+        self.importer(fichier)
+        self.importer(fichier)
+        self.assertEqual(self.table.entrees[cle(DEMO)]["source"], f"V1 de/ ; relu par Alice le {JOUR}")
+
+    def test_table_non_ecrite_par_l_import(self):
+        fichier, _ = self.exporter()
+        self.table.enregistrer()
+        avant = self.table.fichier.read_text(encoding="utf-8")
+        self.importer(fichier)
+        self.assertEqual(self.table.fichier.read_text(encoding="utf-8"), avant)  # enregistrer() reste à l'appelant
+
+    def csv(self, trad_capital):
+        f = self.tmp / "corrections.csv"
+        f.write_text("cle;fr;trad\n" + f'{cle(CAPITAL)};"{CAPITAL}";"{trad_capital}"\n', encoding="utf-8-sig")
+        return f
+
+
+class TestImportCsv(Base):
+    def ecrire(self, lignes, entete="cle;fr;trad"):
+        f = self.tmp / "corrections.csv"
+        with open(f, "w", encoding="utf-8-sig", newline="") as sortie:
+            sortie.write(entete + "\n")
+            csv.writer(sortie, delimiter=";").writerows(lignes)
+        return f
+
+    def importer_csv(self, f, **kw):
+        return E.importer_csv(f, self.table, "Alice", glossaire=kw.pop("glossaire", {}), jour=JOUR, **kw)
+
+    def test_correction_appliquee(self):
+        f = self.ecrire([[cle(DEMO), DEMO, "Demo vereinbaren"], [cle(CONTACT), CONTACT, "Kontakt"]])
+        r = self.importer_csv(f)
+        self.assertEqual(r["rejetes"], [])
+        self.assertEqual(r["relus"], 2)
+        self.assertEqual([(m["avant"], m["apres"]) for m in r["modifies"]], [("Demo anfragen", "Demo vereinbaren")])
+        self.assertEqual(self.table.entrees[cle(DEMO)]["statut"], "relu")
+
+    def test_rejets(self):
+        f = self.ecrire([["0000000000000000", "x", "y"], [cle(DEMO), "Autre texte", "Demo"], [cle(CONTACT), CONTACT, ""],
+                         [cle(CAPITAL), CAPITAL, "Das Aktienkapital"], [cle("Notre équipe"), "Notre équipe", "Équipe " + TIRET_CADRATIN]])
+        r = self.importer_csv(f)
+        self.assertEqual([x["raison"] for x in r["rejetes"]],
+                         ["segment inconnu", "segment FR modifié depuis l'export", "traduction vide", "balisage", "tirets"])
+        self.assertEqual(r["relus"], 0)
+
+    def test_variante_de_page(self):
+        f = self.ecrire([[f"{cle(CONTACT)}@contact/", CONTACT, "Kontaktieren Sie uns"]])
+        r = self.importer_csv(f)
+        self.assertEqual(self.table.entrees[cle(CONTACT)]["par_page"]["contact/"]["trad"], "Kontaktieren Sie uns")
+        self.assertEqual(r["modifies"][0]["pages"], ["contact/"])
+
+    def test_colonnes_obligatoires(self):
+        f = self.ecrire([], entete="id;texte")
+        with self.assertRaises(ValueError):
+            self.importer_csv(f)
+
+
 class TestCommandes(Base):
     """Commandes exporter et importer de outils/i18n/__main__.py, tables et sorties dans des dossiers temporaires."""
 
@@ -300,6 +619,49 @@ class TestCommandes(Base):
         self.assertEqual(code, 1)
         self.assertIn("dépôt", erreur)
         self.assertFalse((ICI / "export-refuse-test").exists())
+
+    def test_importer_ecrit_la_table_et_le_rapport(self):
+        self.table.enregistrer()
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Demo anfragen", "Demo vereinbaren")
+        code, sortie, _ = self.lancer("importer", "de", str(fichier), "--relecteur", "Alice Müller",
+                                      "--sortie", str(self.sortie))
+        self.assertEqual(code, 0)
+        self.assertIn("1 modifié(s)", sortie)
+        self.assertIn("Demo anfragen", sortie)
+        relue = Table("de", self.langues)
+        self.assertEqual(relue.entrees[cle(DEMO)]["trad"], "Demo vereinbaren")
+        rapports = list(self.sortie.glob("rapport-import-*.txt"))
+        self.assertEqual(len(rapports), 1)
+        self.assertIn("Alice", rapports[0].name)
+        self.assertIn("Demo vereinbaren", rapports[0].read_text(encoding="utf-8"))
+
+    def test_importer_avec_rejets_code_zero_et_les_dit(self):
+        self.table.enregistrer()
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Demo anfragen", f"Demo {TIRET_CADRATIN}")
+        code, sortie, _ = self.lancer("importer", "de", str(fichier), "--relecteur", "Alice", "--sortie", str(self.sortie))
+        self.assertEqual(code, 0)
+        self.assertIn("1 rejeté(s)", sortie)
+        self.assertIn("tirets", sortie)
+        self.assertEqual(Table("de", self.langues).entrees[cle(DEMO)]["trad"], "Demo anfragen")
+
+    def test_importer_csv(self):
+        self.table.enregistrer()
+        f = self.tmp / "c.csv"
+        f.write_text(f"cle;fr;trad\n{cle(DEMO)};{DEMO};Demo vereinbaren\n", encoding="utf-8-sig")
+        code, sortie, _ = self.lancer("importer", "de", str(f), "--relecteur", "Alice", "--sortie", str(self.sortie))
+        self.assertEqual(code, 0)
+        self.assertEqual(Table("de", self.langues).entrees[cle(DEMO)]["trad"], "Demo vereinbaren")
+
+    def test_importer_fichier_d_une_autre_langue(self):
+        self.table.enregistrer()
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, 'target-language="de-CH"', 'target-language="en"')
+        code, _, erreur = self.lancer("importer", "de", str(fichier), "--relecteur", "Alice", "--sortie", str(self.sortie))
+        self.assertEqual(code, 1)
+        self.assertIn("de-CH", erreur)
+        self.assertIn("« en »", erreur)
 
 
 if __name__ == "__main__":

@@ -7,6 +7,7 @@
     python3 -m outils.i18n chnell ajouter de capital-actions --retenu Aktienkapital --statut confirme ...
     python3 -m outils.i18n glossaire --langue de [--arbitrages]
     python3 -m outils.i18n exporter de [--pages accueil contact/] [--statuts mt adapte v1 invariant] [--sortie DOSSIER]
+    python3 -m outils.i18n importer de fichier.xlf --relecteur "Prénom Nom" [--sortie DOSSIER]
 
 etat : état de la traduction d'une langue, page par page (outils/i18n/traduire.py, etat), en aperçu par défaut ou selon
 les règles de la production ; écrit la liste des textes français à traduire dans src/langues/<langue>/a_traduire.json
@@ -41,7 +42,11 @@ exporter : fichiers pour les traducteurs experts (outils/i18n/echanges.py, tâch
 (neur-on-<langue>.xlf, statuts mt, adapte, v1 et invariant par défaut, éventuellement limité à des pages), TMX 1.4 des segments
 v1 (neur-on-<langue>-v1.tmx) et glossaire CSV (neur-on-<langue>-glossaire.csv). Dossier par défaut :
 Bibliotheque-Claude/07-Ressources-traduction/Neuron/site-v2/<date>-<langue>/ ; un dossier du dépôt est refusé. Produit des
-fichiers, n'envoie rien."""
+fichiers, n'envoie rien.
+
+importer : réimporte les corrections d'un relecteur (XLIFF, ou CSV cle;fr;trad) dans la table (tâche 5.2) : segments acceptés
+au statut relu (invariant s'ils sont identiques au français), rejets listés avec leur raison, traduction précédente conservée.
+Écrit la table, affiche le rapport en français et l'enregistre dans le dossier d'export (rapport-import-<date>-<relecteur>.txt)."""
 import argparse
 import json
 import sys
@@ -165,6 +170,29 @@ def afficher_export(langue, dossier, resultats, pages):
     return "\n".join(lignes)
 
 
+def afficher_import(langue, rapport, fichier, relecteur):
+    """Rapport de réimport en français : comptes, corrections, rejets (traduction précédente conservée), avertissements."""
+    lignes = [f"Réimport {langue}, relecteur {relecteur} : {rapport['relus']} segment(s) relu(s) "
+              f"(dont {rapport['invariants']} posé(s) invariant, identique au français), {len(rapport['modifies'])} modifié(s), "
+              f"{len(rapport['rejetes'])} rejeté(s), {len(rapport['avertissements'])} avertissement(s) de terminologie",
+              f"Fichier lu : {fichier}"]
+    if rapport["modifies"]:
+        lignes.append("Corrections appliquées :")
+        for m in rapport["modifies"]:
+            pages = ", ".join(m["pages"]) + (f" et {m['autres_pages']} autre(s)" if m["autres_pages"] else "")
+            lignes.append(f"  {m['cle']} [{pages or 'pages inconnues'}] « {m['fr'][:60]} »")
+            lignes.append(f"    avant : {m['avant']}")
+            lignes.append(f"    après : {m['apres']}")
+    if rapport["rejetes"]:
+        lignes.append("Rejetés (traduction et statut précédents conservés) :")
+        for r in rapport["rejetes"]:
+            lignes.append(f"  {r['cle']} « {r['fr'][:60]} » : {r['raison']}" + (f", {r['detail']}" if r["detail"] else ""))
+    if rapport["avertissements"]:
+        lignes.append("Avertissements de terminologie (à revoir par un humain, rien n'est rejeté) :")
+        lignes += [f"  {a['cle']} : {a['detail']}" for a in rapport["avertissements"]]
+    return "\n".join(lignes)
+
+
 def commande_exporter(args, build):
     """exporter : XLIFF, TMX et glossaire CSV dans un dossier hors du dépôt."""
     table = Table(args.langue, build.DOSSIER_LANGUES)
@@ -192,6 +220,37 @@ def commande_exporter(args, build):
     if not glossaire:
         print("Glossaire vide pour cette langue : le CSV ne contient que son en-tête (commande glossaire, après la "
               "session CHnell)")
+    return 0
+
+
+def commande_importer(args, build):
+    """importer : corrections d'un relecteur dans la table, rapport en français enregistré dans le dossier d'export."""
+    fichier = Path(args.fichier)
+    if not fichier.is_file():
+        print(f"Fichier introuvable : {fichier}", file=sys.stderr)
+        return 1
+    table = Table(args.langue, build.DOSSIER_LANGUES)
+    dossier = Path(args.sortie) if args.sortie else echanges.dossier_export(args.langue)
+    try:
+        echanges.verifier_hors_depot(dossier)  # avant tout : un échec ne laisse rien d'écrit
+        glossaire = {fr: l for fr, l in chnell.charger_glossaire().items() if args.langue in l}
+        importer = echanges.importer_csv if fichier.suffix.lower() == ".csv" else echanges.importer_xliff
+        rapport = importer(fichier, table, args.relecteur, glossaire=glossaire)
+    except ValueError as e:
+        print(f"Import refusé, table inchangée : {e}", file=sys.stderr)
+        return 1
+    table.enregistrer()
+    texte = afficher_import(args.langue, rapport, fichier, args.relecteur)
+    jour = date.today().isoformat()
+    base = f"rapport-import-{jour}-{echanges.nom_pour_fichier(args.relecteur)}"
+    rapport_fichier, n = dossier / f"{base}.txt", 1
+    while rapport_fichier.exists():
+        n += 1
+        rapport_fichier = dossier / f"{base}-{n}.txt"
+    dossier.mkdir(parents=True, exist_ok=True)
+    rapport_fichier.write_text(texte + "\n", encoding="utf-8")
+    print(texte)
+    print(f"Table : {table.fichier}\nRapport : {rapport_fichier}")
     return 0
 
 
@@ -267,12 +326,19 @@ def main(argv=None):
     p.add_argument("--statuts", nargs="+", choices=STATUTS,
                    help="statuts exportés dans l'XLIFF (" + ", ".join(echanges.STATUTS_XLIFF_PAR_DEFAUT) + " par défaut)")
     p.add_argument("--sortie", help="dossier de sortie (Bibliotheque-Claude/07-Ressources-traduction/Neuron/site-v2/<date>-<langue>/)")
+    p = sous.add_parser("importer", help="réimporter les corrections d'un relecteur (XLIFF ou CSV cle;fr;trad)")
+    p.add_argument("langue", choices=LANGUES)
+    p.add_argument("fichier")
+    p.add_argument("--relecteur", required=True, help="nom du relecteur (écrit dans la source des segments relus)")
+    p.add_argument("--sortie", help="dossier du rapport (le dossier d'export du jour par défaut)")
     args = parser.parse_args(argv)
     if args.commande == "chnell":
         return commande_chnell(args)
     import build  # import tardif : les dossiers de build.py (DOSSIER_LANGUES, NEURON) servent d'emplacement
     if args.commande == "exporter":
         return commande_exporter(args, build)
+    if args.commande == "importer":
+        return commande_importer(args, build)
     if args.commande == "glossaire":
         fichier_v1 = build.NEURON / "src/i18n" / f"termes-{args.langue}.json"
         if not fichier_v1.is_file():
