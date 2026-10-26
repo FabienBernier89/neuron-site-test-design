@@ -543,6 +543,17 @@ class TestImportXliff(Base):
         self.remplacer(fichier, "Unser Team", "Unser Lexa Team")
         self.assertEqual([x["raison"] for x in self.importer(fichier)["rejetes"]], ["interdits"])
 
+    def test_milliers_a_l_espace_rejetes(self):
+        """Ruling 35 : « 20 000 » rejeté dès la relecture en allemand (XLIFF et CSV), bloquant comme en production."""
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Unser Team", "Unser Team von 20 000 Fachleuten")
+        self.assertEqual([x["raison"] for x in self.importer(fichier)["rejetes"]], ["milliers"])
+        self.assertEqual(self.table.entrees[cle("Notre équipe")]["trad"], "Unser Team")
+        f = self.tmp / "c.csv"
+        f.write_text(f'cle;fr;trad\n{cle(DEMO)};{DEMO};"Demo für 15 000 Seiten"\n', encoding="utf-8-sig")
+        r = E.importer_csv(f, self.table, "Alice", glossaire={}, jour=JOUR, assemblees=PAGES)
+        self.assertEqual([x["raison"] for x in r["rejetes"]], ["milliers"])
+
     def test_traduction_vide_rejetee(self):
         fichier, _ = self.exporter()
         self.remplacer(fichier, "Demo anfragen", "")

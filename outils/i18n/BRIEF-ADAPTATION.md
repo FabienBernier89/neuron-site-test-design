@@ -85,7 +85,7 @@ Lance la fusion à blanc, qui applique tes propositions à une copie de la table
 python3 -m outils.i18n fusionner <langue> scratchpad/<lot>/propositions.json --simuler
 ```
 
-Chaque proposition refusée est listée avec sa raison : clé inconnue, marqueurs faux, tirets, ß, marque modifiée, terme interdit, entrée déjà relue ou validée. Corrige tous les refus. Traite aussi les avertissements de terminologie (un terme du glossaire absent de ta traduction), sauf choix motivé, que tu écris dans `note`.
+Chaque proposition refusée est listée avec sa raison : clé inconnue, marqueurs faux, tirets, ß, marque modifiée, terme interdit, milliers séparés par une espace (allemand, italien : 15'000), entrée déjà relue ou validée. Corrige tous les refus. Traite aussi les avertissements de terminologie (un terme du glossaire absent de ta traduction), sauf choix motivé, que tu écris dans `note`.
 
 Ne lance pas `build.py`, n'écris pas dans `src/`, ne commite pas. D'autres agents travaillent en même temps dans le dépôt : git en lecture seule (status, diff, log, show), jamais reset, checkout, restore, stash ni clean, qui effaceraient leur travail. L'appelant applique la fusion pour de bon, puis rejoue `controler <langue>`.
 

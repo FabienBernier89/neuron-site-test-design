@@ -78,6 +78,20 @@ class TestFusion(Base):
         self.assertEqual(rapport["notes"], [{"cle": cle(DEMO), "fr": DEMO, "note": "plus naturel pour un cabinet"}])
         self.assertNotIn("plus naturel", json.dumps(self.table.entrees, ensure_ascii=False))
 
+    def test_fusion_refuse_les_milliers_a_l_espace(self):
+        """Ruling 35 : « 20 000 » refusé dès la fusion en allemand et en italien (bloquant comme en production)."""
+        self.table.poser("Plus de 20 000 documents", "Über 20 000 Dokumente", "mt", "LexMachina 2026-10-25")
+        rapport = self.fusionner({"cle": cle("Plus de 20 000 documents"), "trad": "Über 20\u00a0000 Dokumente"},
+                                 {"cle": cle(DEMO), "trad": "Demo vereinbaren"})
+        self.assertEqual(self.raisons(rapport), {cle("Plus de 20 000 documents"): "milliers"})
+        self.assertEqual(self.entree("Plus de 20 000 documents")["statut"], "mt")
+        rapport = self.fusionner({"cle": cle("Plus de 20 000 documents"), "trad": "Über 20'000 Dokumente"})
+        self.assertEqual((rapport["poses"], rapport["refuses"]), (1, []))
+        en = Table("en", self.dossier)
+        en.poser("Plus de 20 000 documents", "Over 20 000 documents", "mt", "LexMachina")
+        f = self.propositions({"cle": cle("Plus de 20 000 documents"), "trad": "Over 20,000 documents"})
+        self.assertEqual(echanges.fusionner(f, en, glossaire={}, jour=JOUR)["refuses"], [])  # l'anglais : sans objet
+
     def test_fusion_ne_touche_que_les_entrees_proposees(self):
         avant = json.dumps(self.table.entrees, sort_keys=True)
         self.fusionner({"cle": cle(DEMO), "trad": "Demo vereinbaren"})

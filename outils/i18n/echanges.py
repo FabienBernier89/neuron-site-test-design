@@ -23,7 +23,8 @@ rejeté, avec sa raison, et garde sa traduction et son statut précédents, si :
 « segment plus présent sur le site » (le texte FR a changé sur le site depuis l'export, sa clé avec lui : la traduction
 rendue devient le contexte du nouveau texte quand il est identifiable), « segment FR modifié depuis l'export » (source
 retouchée dans le fichier), « traduction vide », « balisage » (marqueur supprimé, ajouté, en double, inversé ou
-élément XLIFF inconnu : segments.restaurer), « tirets », « eszett », « marques », « interdits », « variables » (variable
+élément XLIFF inconnu : segments.restaurer), « tirets », « eszett », « marques », « interdits », « milliers » (allemand et
+italien : 15'000, Ruling 35), « variables » (variable
 nommée d'un gabarit des démos perdue, ajoutée ou renommée : « Segment {n} confirmé. » ; contrôles bloquants de controles.py)
 ou « doublon ». Une traduction v1, invariant ou à champ « v1 » (table.py) rendue sans modification n'est pas
 soumise aux contrôles bloquants (Ruling 30), comme dans controler (4.4) ; la terminologie n'avertit que (avertissements,
@@ -38,7 +39,7 @@ reste à l'appelant.
 
 Fusion des adaptations (fusionner, tâche 6.2) : propositions [{"cle", "trad", "note"}] d'un agent d'adaptation ou de relecture
 croisée, posées au statut adapte dans la table. Mêmes contrôles que le réimport : clé inconnue, balisage faux (marqueurs),
-« tirets », « eszett », « marques », « interdits », « variables » ; la terminologie n'avertit que. S'y ajoutent trois refus :
+« tirets », « eszett », « marques », « interdits », « milliers », « variables » ; la terminologie n'avertit que. S'y ajoutent trois refus :
 « déjà relu » (une entrée relue par un traducteur expert, ou portant le champ « v1 », n'est jamais réécrite), « déjà validé » (statut v1 ou
 invariant : validé avant) et « format » (proposition mal formée). Une entrée au statut mt ou adapte, avec ou sans traduction
 par défaut, est remplacée ; ses traductions par page restent. Les notes de l'agent remontent dans le rapport, jamais dans la
@@ -437,6 +438,12 @@ def _voisin(fr_avant, pages, sur_le_site, table):
     return meilleurs[0][0]
 
 
+def _milliers(trad, langue):
+    """Milliers séparés par une espace en allemand et en italien (controles.milliers, marqueurs ôtés) : bloquant à la
+    fusion et au réimport comme au build de production (Ruling 35), pour qu'un « 20 000 » soit refusé dès son arrivée."""
+    return controles.milliers(_MARQ.sub(" ", trad), langue)
+
+
 def _decouper_id(ident):
     """Identifiant d'unité -> (clé du texte, page ou None) : « <clé> » ou « <clé>@<page> » (« accueil » pour la page « »)."""
     if "@" not in ident:
@@ -580,7 +587,8 @@ def _appliquer(unites, table, relecteur, glossaire, jour, sans_etat=False, assem
         exemptee = not modifie and controles.exemptee(ancienne)
         problemes = [] if exemptee else (
             controles.tirets(trad) + (controles.eszett(entree["fr"], trad) if table.langue == "de" else [])
-            + controles.marques(entree["fr"], trad) + controles.interdits(trad) + controles.variables(entree["fr"], trad))
+            + controles.marques(entree["fr"], trad) + controles.interdits(trad) + controles.variables(entree["fr"], trad)
+            + _milliers(trad, table.langue))
         if problemes:
             rejeter(problemes[0]["regle"], "; ".join(f"{p['detail']} : {p['extrait']}" for p in problemes))
             continue
@@ -726,7 +734,7 @@ def fusionner(fichier, table, statut=STATUT_FUSION, glossaire=None, jour=None):
     Raisons de refus : « format », « doublon » (clé déjà vue dans le fichier), « clé inconnue » (aucun texte de la table),
     « déjà relu » (statut relu ou champ « v1 »), « déjà validé » (v1 ou invariant), « traduction vide », « marqueurs »
     (segments.restaurer contre les marqueurs du français), puis la première règle bloquante de controles : « tirets »,
-    « eszett » (allemand), « marques », « interdits », « variables ». La source de l'entrée reçoit « ; adapté le <jour> ».
+    « eszett » (allemand), « marques », « interdits », « milliers » (allemand, italien), « variables ». La source de l'entrée reçoit « ; adapté le <jour> ».
     statut : « adapte » seulement. glossaire : {fr: {langue: {terme, ...}}} (chnell.charger_glossaire par défaut). ValueError
     si le statut n'est pas permis ou si le fichier est introuvable, illisible ou n'est pas une liste."""
     if statut != STATUT_FUSION:
@@ -780,7 +788,7 @@ def fusionner(fichier, table, statut=STATUT_FUSION, glossaire=None, jour=None):
             continue
         problemes = (controles.tirets(trad) + (controles.eszett(entree["fr"], trad) if table.langue == "de" else [])
                      + controles.marques(entree["fr"], trad) + controles.interdits(trad)
-                     + controles.variables(entree["fr"], trad))
+                     + controles.variables(entree["fr"], trad) + _milliers(trad, table.langue))
         if problemes:
             refuser(problemes[0]["regle"], "; ".join(f"{q['detail']} : {q['extrait']}" for q in problemes))
             continue
