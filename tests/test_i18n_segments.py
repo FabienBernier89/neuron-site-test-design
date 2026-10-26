@@ -213,12 +213,14 @@ class TestDecoupage(unittest.TestCase):
         self.assertFalse(any(t.startswith("http") or t == "team@corrext.com" for t in ld_page))
 
     def test_valeur_des_champs(self):
-        # value : libellé de bouton ou champ affiché sans saisie (disabled) ; jamais la valeur d'un champ de démo
+        # value : libellé de bouton ou champ affiché sans saisie (disabled, readonly : relecture 7.3, « 2,5 » devient
+        # « 2.5 » dans la V1 anglaise) ; jamais la valeur d'un champ saisissable de démo
         u = S.extraire_page(doc('<input type="submit" value="Envoyer la demande"><input type="text" class="cxp-input" '
                                 'value="masqué en démo" disabled><input type="text" value="intérêt moratoire">'
                                 '<input type="checkbox" value="Allemand"><input type="hidden" value="">'
                                 '<input type="text" value="2,5" readonly>'))
-        self.assertEqual([(x["attr"], x["texte"]) for x in u], [("value", "Envoyer la demande"), ("value", "masqué en démo")])
+        self.assertEqual([(x["attr"], x["texte"]) for x in u],
+                         [("value", "Envoyer la demande"), ("value", "masqué en démo"), ("value", "2,5")])
 
     def test_menus_de_demonstration(self):
         # data-v : valeur affichée par sim.js et comparée au texte visible, elle suit donc le segment du libellé
@@ -448,6 +450,7 @@ class TestClassement(unittest.TestCase):
         self.assertEqual(c("input", {"type": "button"}, "value"), "texte")
         self.assertEqual(c("input", {"type": "text", "disabled": ""}, "value"), "texte")
         self.assertEqual(c("input", {"type": "text"}, "value"), "jamais")
+        self.assertEqual(c("input", {"type": "text", "readonly": ""}, "value"), "texte")  # relecture 7.3
         self.assertEqual(c("p", {}, "data-v-newsletter"), "texte")
         self.assertEqual(c("div", {}, "class"), "technique")
         self.assertIsNone(c("div", {}, "data-inconnu"))

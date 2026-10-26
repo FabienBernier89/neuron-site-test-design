@@ -174,6 +174,21 @@ class TestVisiteGestionDeProjet(unittest.TestCase):
         self.assertNotIn("langue.slice(0, 4)", self.visite)
         self.assertNotIn("var langue = caseLangue.value", self.visite)
 
+    def test_nom_de_projet_par_defaut_traduit(self):
+        """Relecture 7.3 : le nom de projet par défaut (champ en lecture seule, relu par le script à la réinitialisation)
+        est une unité à traduire, comme dans la V1 (« Organisation_Benutzer ») ; sur une page allemande, le champ porte la
+        traduction. Les autres valeurs affichées des trois démos : « 2,5 » (lecture seule ; « 2.5 » dans la V1 anglaise,
+        donc extrait, invariant faute d'entrée), « masqué en démo » (champ désactivé, déjà extrait) ; les autres value
+        sont des données (termes de recherche dans leur langue, date) ou des clés."""
+        unites = {u["texte"]: u for u in S.extraire_page(self.fr) if u["genre"] == "attr" and u["attr"] == "value"}
+        self.assertEqual(sorted(unites), ["2,5", "2026-09-14_Organisation_Utilisateur", "masqué en démo"])
+        fr = assemblees([GESTION], apercu=False)[GESTION]
+        de, manquants = T.traduire(fr, GESTION, "de", pseudo(Table("de", ABSENT), fr), "production")
+        self.assertEqual(manquants, [])
+        self.assertRegex(de, r'<input type="text" class="cxp-input" id="cxpName" value="DE 2026-09-14_Organisation_Utilisateur" readonly>')
+        script = re.findall(r"<script>(.*?)</script>", self.fr, re.S)[-1]
+        self.assertIn("nameIn.value=nameIn.defaultValue", script)
+
     def test_pastilles_lisent_le_libelle_affiche(self):
         """Les pastilles et leur nom accessible (« Retirer {langue} ») prennent le libellé de la case, traduit avec la
         page, jamais sa valeur (relecture 7.2 : « Allemand » restait écrit sur la page allemande)."""
@@ -284,24 +299,32 @@ def scripts_inline(h):
             if "json" not in m.group(1) and "src=" not in m.group(1)]
 
 
-class TestDetectionDuFrancais(unittest.TestCase):
-    """segments.scripts_a_traduire : un texte français écrit par un script, même d'un seul mot (relecture 2.1 :
-    « Retirer » n'était pas vu) ; jamais l'anglais de l'application, le code ni les données dans leur langue."""
+class TestDetectionDesTextes(unittest.TestCase):
+    """segments.scripts_a_traduire : liste blanche (relecture 7.3). Toute chaîne lisible d'un script inline (majuscule
+    initiale, espace ou lettre accentuée ; hors code, sélecteurs et clés) doit être un libellé de l'application, une
+    marque ou une chaîne de CHAINES_SCRIPTS_ADMISES ; sinon la page est bloquée."""
 
-    def test_mot_seul_et_phrase_coupee(self):
-        for js in ("b.setAttribute('aria-label','Retirer '+l);", "setEst({prep:'1 jour'});", "x.textContent='à calculer';",
-                   "say('Segment '+i+' confirmé.');", "n.textContent=\"l'application\";", "t=`Aucun segment`;"):
-            with self.subTest(js=js):
+    def test_mots_et_phrases_hors_liste_bloquent(self):
+        for t in ("Masquer", "Afficher", "Modifier", "Envoyer", "Erreur", "Merci", "Chargement…", "Voir plus", "1 jour",
+                  "à calculer", "Retirer ", "Démo : x", "l'application", "Kann die Zahlstelle des fehlenden Betrages",
+                  "Some English text"):
+            with self.subTest(texte=t):
+                js = "x.textContent=" + json.dumps(t) + ";"
                 self.assertTrue(S.scripts_a_traduire(f"<script>{js}</script>"))
+                self.assertEqual(S.textes_des_scripts(f"<script>{js}</script>"), [t.strip()])
+        self.assertTrue(S.scripts_a_traduire("<script>b.setAttribute('aria-label','Retirer '+l);</script>"))
+        self.assertTrue(S.scripts_a_traduire("<script>say('Segment '+i+' confirmé.');</script>"))
 
-    def test_anglais_code_et_donnees_ignores(self):
+    def test_liste_blanche_code_et_cles_admis(self):
         for js in ("h='<p class=\"cxe-h\">Translation memories</p>'+'No result';", "if(e.key==='Escape'){}",
-                   "lang='de';x.classList.toggle('on')", "s.style.transform='scaleX(0)'", "u='../fr/protection-des-donnees/';",
-                   "t='From this project\\'s TM';", "var RX={src:/int[ée]r[êe]ts?\\s+moratoires?/gi};",
-                   "/* Démo : commentaire en français */ var a=1; // la suite", "a='Kann die Zahlstelle des fehlenden Betrages';",
-                   "x='Keep all My Edits'+' · LM';"):
+                   "lang='de';x.classList.toggle('on');b.className='cx-chip on'", "s.style.transform='scaleX(0)'",
+                   "u='../fr/protection-des-donnees/';", "t='From this project\\'s TM';",
+                   "var RX={src:/int[ée]r[êe]ts?\\s+moratoires?/gi};", "/* Démo : commentaire en français */ var a=1; // la suite",
+                   "x='Keep all My Edits'+' · LM';", "q.querySelector('.cxe-seg button');m=matchMedia('(prefers-reduced-motion: reduce)')",
+                   "e.closest('input,button');s.style='display:block;width:60%'", "h+='<div id=\"c'+i+'\" hidden>'",
+                   "t='Fast Lookup'+'LexMachina'"):
             with self.subTest(js=js):
-                self.assertFalse(S.scripts_a_traduire(f"<script>{js}</script>"), S.francais_des_scripts(f"<script>{js}</script>"))
+                self.assertEqual(S.textes_des_scripts(f"<script>{js}</script>"), [])
 
     def test_blocs_json_ignores(self):
         self.assertFalse(S.scripts_a_traduire('<script type="application/json" data-textes>{"a": "Aucun résultat."}</script>'))
@@ -309,6 +332,15 @@ class TestDetectionDuFrancais(unittest.TestCase):
     def test_litteraux_js(self):
         self.assertEqual(S.litteraux_js("a='l\\'un'+\"b\"+`c`;r=/x'y/g;d=a/2/3;// 'non'\n/* 'non' */e='fin'"),
                          ["l'un", "b", "c", "fin"])
+
+    def test_liste_blanche_sans_entree_morte(self):
+        """Chaque chaîne admise sert sur le site construit (une entrée devenue inutile est retirée)."""
+        vus = set()
+        for f in support.site_complet().rglob("*.html"):
+            for m in re.finditer(r"<script\b([^>]*)>(.*?)</script>", f.read_text(encoding="utf-8"), re.S):
+                if "json" not in m.group(1):
+                    vus |= {t for c in S.litteraux_js(m.group(2)) for t in S.textes_lisibles(c)}
+        self.assertEqual(set(S.CHAINES_SCRIPTS_ADMISES) - vus, set())
 
 
 class TestVariables(unittest.TestCase):
@@ -378,46 +410,14 @@ class TestDemos(unittest.TestCase):
         cls.pages = {p: support.chemin(cls.sortie, p).read_text(encoding="utf-8") for p in DEMOS}
 
     def test_aucune_chaine_fr_dans_les_scripts_inline(self):
-        """Sur toutes les pages construites, aucun script inline n'écrit de français (gabarit, mot seul ou phrase)."""
+        """Sur toutes les pages construites, aucun script inline n'écrit de chaîne lisible hors liste blanche (gabarit,
+        mot seul ou phrase française compris)."""
         trouves = {}
         for f in sorted(self.sortie.rglob("*.html")):
-            ecrits = S.francais_des_scripts(f.read_text(encoding="utf-8"))
+            ecrits = S.textes_des_scripts(f.read_text(encoding="utf-8"))
             if ecrits:
                 trouves[f.relative_to(self.sortie).as_posix()] = ecrits[:3]
         self.assertEqual(trouves, {})
-
-    # Textes des scripts des démos qui restent dans le code : libellés anglais de l'application, noms de touches et de
-    # langues de l'interface, comparés ou affichés tels quels. Toute autre chaîne lisible fait échouer : un texte nouveau
-    # va dans le bloc data-textes (s'il est français) ou ici (s'il est un libellé de l'application).
-    LIBELLES = {
-        CHNELL: {"German", "French", "No results", "No results for these filters", "Show in context", "Enter"},
-        EDITEUR: {"From this project's TM", "Apply", "Source", "Target", "Translation memories", "CHnell", "No result",
-                  "Conflicting changes", "Segment ", "My Edit · AM", "Last Edit · LM", "Keep all My Edits",
-                  "Apply all Last Edits", "No conflicting change to resolve.", "Incoming changes", " · LM",
-                  "No incoming change to apply.", "Propagation decisions", "Keep as is", " Segment ",
-                  "No propagation decision required.",
-                  "Enter", "ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft", "Home", "End", "Escape"},
-        GESTION: {"Escape", "ArrowRight", "ArrowLeft", "×"},
-    }
-
-    @staticmethod
-    def textes_lisibles(chaine):
-        """Morceaux de texte d'une chaîne du script, hors balises (entières ou coupées en bord de chaîne) et hors code :
-        un morceau sans majuscule ni lettre accentuée (clé, classe, sélecteur, style, événement) n'est pas lu."""
-        chaine = re.sub(r"<[^<>]*$", "", re.sub(r'^[^<>]*">', "", chaine))
-        for morceau in re.split(r"<[^>]*>", chaine):
-            lisible = H.unescape(morceau)
-            code = not re.search(r"\s", lisible) and (lisible[:1].islower() or re.search(r"[()\[\]:.=#\"]", lisible)
-                                                     or lisible.isupper())
-            if re.search(r"[A-ZÀ-ÿ]", lisible) and not code:  # identifiant (cxlL2X), sélecteur, style, sigle (NFD)
-                yield lisible
-
-    def test_litteraux_des_demos_inventories(self):
-        for page, h in self.pages.items():
-            vus = {t for js in scripts_inline(h) for c in S.litteraux_js(js) for t in self.textes_lisibles(c)}
-            with self.subTest(page=page):
-                self.assertEqual(vus - self.LIBELLES[page], set())
-                self.assertEqual(self.LIBELLES[page] - vus, set())  # liste tenue à jour
 
     def test_textes_extraits(self):
         """Chaque texte du bloc data-textes est une unité de extraire_page (genre json) ; le bloc des données
@@ -433,9 +433,9 @@ class TestDemos(unittest.TestCase):
                     fin = h.index("</script>", debut)
                     self.assertFalse([u for u in S.extraire_page(h) if debut < u["debut"] < fin])
                 js = "".join(scripts_inline(h))
-                lues = set(re.findall(r"""\bt\(\s*['"]([\w-]+)['"]""", js))
+                lues = set(re.findall(r"""\bth?\(\s*['"]([\w-]+)['"]""", js))
                 # clés écrites en toutes lettres, jamais calculées (sauf le choix entre deux clés écrites)
-                self.assertNotRegex(js, r"""(?<!function )\bt\(\s*(?!['"]|pend>1\?'attente_plusieurs':'attente_un')""")
+                self.assertNotRegex(js, r"""(?<!function )\bth?\(\s*(?!['"]|pend>1\?'attente_plusieurs':'attente_un')""")
                 lues |= set(re.findall(r"""pend>1\?'(\w+)':'(\w+)'""", js)[0]) if page == EDITEUR else set()
                 self.assertEqual(lues - set(textes), set())
                 self.assertEqual(set(textes) - lues, set())

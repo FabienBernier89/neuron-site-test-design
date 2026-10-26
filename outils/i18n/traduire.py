@@ -142,7 +142,7 @@ def analyser(html, page, langue, table, mode, neuron=None):
             signaler(_manquant(texte, entree["statut"], "variables"))
             continue
         utilises.add(entree["statut"])
-    ecrits = S.francais_des_scripts(html)
+    ecrits = S.textes_des_scripts(html)
     if ecrits:
         manquants.append({"cle": None, "fr": f"texte écrit par un script de la page : « {_normal(ecrits[0])[:60]} »"
                           + (f" et {len(ecrits) - 1} autre(s)" if len(ecrits) > 1 else ""), "statut": None,

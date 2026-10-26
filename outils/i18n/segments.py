@@ -22,6 +22,7 @@ import bisect
 import html
 import json
 import re
+from pathlib import Path
 
 # ---------- copie de la V1 : découpe en blocs et marqueurs ----------
 
@@ -129,30 +130,38 @@ def _a_du_texte(fragment):
     return bool(LETTRE.search(html.unescape(t)))
 
 
-# ---------- texte français écrit par un script (tâche 7.3) ----------
+# ---------- texte écrit par un script (tâche 7.3) ----------
 
-# Lettres accentuées du français (ni ä, ö, ü, ß : allemand) ; un seul de ces caractères suffit.
-_ACCENTS_FR = frozenset("éèêëàâçùûîïôœÉÈÊËÀÂÇÙÛÎÏÔŒ")
-# Mots du français sans accent, assez sûrs pour qu'un seul suffise : mots outils (sans « a », « on », « plus », « son »,
-# communs à l'anglais) et mots d'interface (« Retirer », « 1 jour ») qu'un libellé d'un seul mot peut porter.
-MOTS_FR = frozenset((
-    "le", "la", "les", "un", "une", "des", "du", "de", "au", "aux", "et", "ou", "est", "sont", "ce", "cet", "cette",
-    "ces", "qui", "que", "dont", "dans", "pour", "avec", "sans", "sur", "sous", "par", "vers", "chez", "entre", "ne",
-    "pas", "se", "sa", "ses", "leur", "leurs", "votre", "vos", "notre", "nos", "nous", "vous", "il", "ils", "elle",
-    "elles", "je", "tu", "en", "tout", "tous", "toute", "toutes", "aucun", "aucune",
-    "oui", "non", "retirer", "ajouter", "fermer", "ouvrir", "replier", "supprimer", "annuler", "valider", "confirmer",
-    "enregistrer", "rechercher", "copier", "effacer", "choisir", "choisissez", "cliquez", "appliquer", "calculer",
-    "suivant", "jour", "jours", "heure", "heures", "semaine", "mois", "fichier", "fichiers", "langue", "langues",
-    "projet", "projets", "devis", "relecture", "traduction", "traductions", "panneau"))
-# élision du français (« l'intérêt », « d'un ») : la lettre est un mot entier, suivi d'une apostrophe et d'une lettre ;
-# « project's » ou « I'd » n'en sont pas
-_ELISION = re.compile(r"(?<![^\W\d_])(?:l|d|qu|n|s|c|j)['’](?=[^\W\d_])", re.I)
-# Mots outils allemands : un texte allemand (« des Betrages ») n'est pas pris pour du français
-MOTS_DE = frozenset(("der", "die", "das", "und", "ist", "nicht", "mit", "von", "dem", "den", "ein", "eine", "zu",
-                     "im", "auf", "zum", "zur", "wird", "werden"))
-_MOT_FR = re.compile(r"[^\W\d_]+")
-_CODE = re.compile(r"[a-z][A-Za-z0-9_-]*")  # clé, code de langue, événement, classe : jamais du texte
-_CHEMIN_JS = re.compile(r"\S*/\S*")  # adresse ou chemin sans espace (« ../fr/protection-des-donnees/ »)
+# Un script inline n'écrit aucun texte à traduire : ses textes vont dans un bloc JSON extrait (data-textes) et ses
+# données dans un bloc translate="no" (data-donnees). Toute chaîne lisible d'un script (majuscule initiale, espace ou
+# lettre accentuée ; hors code, sélecteurs et clés) doit donc être un libellé de l'application ou une marque
+# (src/langues/proteges.json), ou une chaîne de CHAINES_SCRIPTS_ADMISES ; sinon la page est bloquée (raison
+# « scripts »). Liste blanche, et non détection du français : un mot oublié (« Masquer », « Voir plus ») bloque.
+PROTEGES = Path(__file__).resolve().parents[2] / "src/langues/proteges.json"
+CHAINES_SCRIPTS_ADMISES = frozenset((
+    # touches du clavier (KeyboardEvent.key), comparées par les démos
+    "Enter", "Escape", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight", "Home", "End",
+    # langues de l'interface de l'application (valeurs des sélecteurs de CHnell, anglais, jamais traduites)
+    "German", "French",
+    # libellés anglais de l'application écrits par les démos, absents de proteges.json (interface Corrext reproduite)
+    "No results", "No results for these filters", "Show in context", "From this project's TM", "Source", "Target",
+    "Translation memories", "No result", "Conflicting changes", "Segment", "My Edit · AM", "Last Edit · LM",
+    "Keep all My Edits", "Apply all Last Edits", "No conflicting change to resolve.", "Incoming changes", "· LM",
+    "No incoming change to apply.", "Propagation decisions", "· repeated", "Keep as is",
+    "No propagation decision required.", "Apply",
+    # démo Extraits du registre du commerce : libellés anglais de l'application, société et numéro IDE fictifs de la démo
+    # (identiques dans toutes les langues, comme dans le HTML de la page)
+    "Company Name", "Company UID", "Switzerland", "To be chosen", "· UID", "Muster AG", "CHE-000.000.000",
+    # directive JavaScript
+    "use strict",
+    # code : forme de normalisation Unicode (String.prototype.normalize)
+    "NFD",
+))
+_CODE_JS = (re.compile(r"[.#\[(].*"),                      # sélecteur, requête média : « .cxp-stepper li », « (prefers-…) »
+            re.compile(r"[\w-]+(?:,[\w-]+)+"),              # liste de balises : « input,button »
+            re.compile(r"[\w-]+:[^\s;]+(?:;[\w-]+:[^\s;]+)*;?"),  # style en ligne : « display:block;width:60% »
+            re.compile(r"\S*/\S*"))                         # adresse ou chemin sans espace
+_IDENTIFIANT = re.compile(r"[a-z][\w$-]*")                  # clé, code de langue, événement, classe, identifiant
 # avant un « / », ces signes et ces mots ouvrent une expression régulière (sinon c'est une division)
 _AVANT_REGEX = set("(,=:[!&|?{};+-*%<>~^")
 _MOTS_AVANT_REGEX = {"return", "typeof", "instanceof", "in", "of", "new", "delete", "void", "throw", "case", "do", "else"}
@@ -175,6 +184,11 @@ def litteraux_js(code):
             while j < n and code[j] != c:
                 if code[j] == "\\" and j + 1 < n:
                     suivant = code[j + 1]
+                    hexa = re.match(r"u([0-9a-fA-F]{4})|x([0-9a-fA-F]{2})", code[j + 1:j + 6])
+                    if hexa:  # « \u00e0 » : la lettre elle-même
+                        morceaux.append(chr(int(hexa.group(1) or hexa.group(2), 16)))
+                        j += 1 + hexa.end()
+                        continue
                     morceaux.append({"n": "\n", "t": "\t", "r": ""}.get(suivant, suivant))
                     j += 2
                 else:
@@ -208,34 +222,47 @@ def litteraux_js(code):
     return sortie
 
 
-def est_francais(texte):
-    """Vrai si une chaîne (HTML compris) porte du texte français : une lettre accentuée du français, ou un mot de MOTS_FR
-    ou une élision (« l'intérêt »), sans mot outil allemand. Une chaîne d'un seul mot en minuscules (clé, code « de »,
-    classe, événement) ou un chemin sans espace n'en est pas."""
-    t = html.unescape(re.sub(r"<[^>]*>", " ", texte))
-    if not LETTRE.search(t) or _CODE.fullmatch(t.strip()) or _CHEMIN_JS.fullmatch(t.strip()):
-        return False
-    if _ACCENTS_FR & set(t):
-        return True
-    mots = {m.lower() for m in _MOT_FR.findall(t)}
-    return bool(mots & MOTS_FR or _ELISION.search(t)) and not (mots & MOTS_DE)
+def _admises():
+    """Liste blanche des chaînes lisibles d'un script : CHAINES_SCRIPTS_ADMISES, marques et libellés de l'application."""
+    if not hasattr(_admises, "valeur"):
+        p = json.loads(PROTEGES.read_text(encoding="utf-8"))
+        _admises.valeur = CHAINES_SCRIPTS_ADMISES | set(p["marques"]) | set(p["libelles_application"])
+    return _admises.valeur
 
 
-def francais_des_scripts(source):
-    """Chaînes françaises des scripts d'une page (hors JSON : JSON-LD, index de l'aide, textes et données des démos,
-    lus par extraire_page ou exclus par translate="no"), dans l'ordre de la page."""
-    trouves = []
+def textes_lisibles(chaine):
+    """Morceaux lisibles d'une chaîne de script : coupée à ses balises (entières ou coupées en bord de chaîne), entités
+    résolues, espaces de bord retirés ; lisible = majuscule initiale, espace, apostrophe ou lettre accentuée, hors code
+    (sélecteur, style, chemin), hors clé en minuscules (« click », « cxlL2X », « de », mais aussi « jour » : un mot seul
+    en minuscules sans accent ne se distingue pas d'une clé) et hors liste de classes (« cx-chip on »)."""
+    chaine = re.sub(r"<[^<>]*$", "", re.sub(r'^[^<>]*"[^<>]*>', "", chaine))
+    for morceau in re.split(r"<[^>]*>", chaine):
+        t = " ".join(html.unescape(morceau).split())
+        if not LETTRE.search(t) or any(c.fullmatch(t) for c in _CODE_JS):
+            continue
+        accent = any(c.isalpha() and not c.isascii() for c in t)
+        mots = t.split(" ")
+        if not accent and all(_IDENTIFIANT.fullmatch(m) for m in mots) and (len(mots) == 1 or any("-" in m for m in mots)):
+            continue
+        if accent or " " in t or t[:1].isupper() or "'" in t or "’" in t:
+            yield t
+
+
+def textes_des_scripts(source):
+    """Chaînes lisibles des scripts d'une page hors liste blanche (hors JSON : JSON-LD, index de l'aide, textes et
+    données des démos, lus par extraire_page ou exclus par translate="no"), dans l'ordre de la page."""
+    admises, trouves = _admises(), []
     for m in re.finditer(r"<script\b([^>]*)>(.*?)</script>", source, re.S):
         if "json" in m.group(1):
             continue
-        trouves += [s for s in litteraux_js(m.group(2)) if est_francais(s)]
+        trouves += [t for c in litteraux_js(m.group(2)) for t in textes_lisibles(c) if t not in admises]
     return trouves
 
 
 def scripts_a_traduire(source):
-    """Vrai si un script de la page écrit du texte français que l'extraction ne voit pas (francais_des_scripts) ; un mot
-    seul compte (« Retirer »). Les libellés anglais de l'application et les données dans leur langue ne comptent pas."""
-    return bool(francais_des_scripts(source))
+    """Vrai si un script de la page écrit une chaîne lisible hors liste blanche (textes_des_scripts) : un texte à
+    traduire que l'extraction ne verrait pas (« Retirer », « Masquer », « 1 jour »)."""
+    return bool(textes_des_scripts(source))
 
 
 # ---------- gabarits à variables nommées (tâche 7.3) ----------
@@ -295,8 +322,9 @@ METAS_TEXTE = ("description", "og:title", "og:description", "og:image:alt", "twi
 # métas sans texte de langue : réglages, adresses, gabarit de couleur, nom de marque
 METAS_JAMAIS = ("viewport", "robots", "theme-color", "og:url", "og:type", "og:image", "og:locale", "og:site_name",
                 "twitter:card", "twitter:image", "referrer", "color-scheme", "format-detection", "generator")
-# value : libellé d'un bouton, ou champ affiché mais non saisissable (disabled) ; sinon valeur de démo, clé de script ou
-# donnée de formulaire, jamais traduite
+# value : libellé d'un bouton, ou champ affiché mais non saisissable (disabled, ou readonly : nom de projet par défaut de
+# la démo Gestion de projet, que la V1 traduisait, relecture 7.3) ; sinon valeur de démo, clé de script ou donnée de
+# formulaire, jamais traduite
 BOUTONS = ("submit", "button", "reset")
 
 
@@ -316,7 +344,7 @@ def classer_attribut(balise, attrs, nom):
             return "jamais"
         return None
     if nom == "value":
-        if balise == "input" and (attrs.get("type", "").lower() in BOUTONS or "disabled" in attrs):
+        if balise == "input" and (attrs.get("type", "").lower() in BOUTONS or "disabled" in attrs or "readonly" in attrs):
             return "texte"
         return "jamais"
     if nom in ATTRS_TECHNIQUES:
@@ -584,7 +612,8 @@ def extraire_page(source):
                     if v is None or classer_attribut(nom, attrs, n) != "texte":
                         continue
                     brut = html.unescape(v)
-                    if not LETTRE.search(brut) or CHEMIN.match(brut):
+                    # un nombre affiché dans un champ (« 2,5 » pages) se localise aussi (« 2.5 » dans la V1 anglaise)
+                    if not (LETTRE.search(brut) or (n == "value" and re.search(r"\d", brut))) or CHEMIN.match(brut):
                         continue
                     if n in ATTRS_HTML:
                         texte, table = proteger(brut)
