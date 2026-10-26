@@ -83,7 +83,14 @@ class Base(unittest.TestCase):
         racine = ET.parse(fichier).getroot()
         return {u.get("id"): u for u in racine.iter(NS + "trans-unit")}
 
-    def importer(self, fichier, relecteur="Alice", glossaire=None, **kw):
+    def confirmer(self, fichier):
+        """Le relecteur confirme tous les segments à relire (état translated), comme Trados le ferait."""
+        texte = fichier.read_text(encoding="utf-8")
+        fichier.write_text(texte.replace('state="needs-review-translation"', 'state="translated"'), encoding="utf-8")
+
+    def importer(self, fichier, relecteur="Alice", glossaire=None, confirme=True, **kw):
+        if confirme:
+            self.confirmer(fichier)
         return E.importer_xliff(fichier, self.table, relecteur, glossaire=GLOSSAIRE if glossaire is None else glossaire,
                                 jour=JOUR, **kw)
 
@@ -118,6 +125,39 @@ class TestExportXliff(Base):
         self.assertEqual([x.get("id") for x in a.find(NS + "source").iter(NS + "x")], ["1"])
         self.assertEqual([x.get("id") for x in a.find(NS + "target").iter(NS + "x")], ["1"])
         self.assertNotIn("{1}", fichier.read_text(encoding="utf-8"))
+
+    def test_etats_a_l_export(self):  # Ruling 31
+        fichier, _ = self.exporter()
+        u = self.unites(fichier)
+        etat = lambda t: u[cle(t)].find(NS + "target").get("state")
+        self.assertEqual((etat(CAPITAL), etat(ADRESSE)), ("needs-review-translation", "needs-review-translation"))
+        self.assertEqual((etat(DEMO), etat("Neur.on"), etat("Notre équipe")), ("final", "final", "signed-off"))
+        self.assertEqual(u[cle(DEMO)].get("approved"), "yes")
+        self.assertIsNone(u[cle(CAPITAL)].get("approved"))
+
+    def test_caractere_interdit_en_xml_refuse(self):
+        self.table.poser(DEMO, "Demo\x0b anfragen", "v1", "V1 de/")
+        with self.assertRaises(ValueError) as c:
+            self.exporter()
+        self.assertIn("U+000B", str(c.exception))
+        self.assertIn(cle(DEMO), str(c.exception))
+        self.assertFalse((self.sortie / "de.xlf").exists())
+        with self.assertRaises(ValueError):
+            E.exporter_tmx("de", self.table, {"v1"}, self.sortie / "de.tmx")
+        self.assertFalse((self.sortie / "de.tmx").exists())
+
+    def test_tabulation_et_saut_de_ligne_acceptes(self):
+        self.table.poser(DEMO, "Demo\tanfragen\nbitte", "v1", "V1 de/")
+        fichier, _ = self.exporter()
+        self.assertEqual(self.unites(fichier)[cle(DEMO)].find(NS + "target").text, "Demo\tanfragen\nbitte")
+
+    def test_sans_traduction(self):
+        pages = {"": page(DEMO, "Texte jamais traduit", "Neur.on"), "contact/": page("Texte jamais traduit", "12 345")}
+        m = E.sans_traduction("de", self.table, {"", "contact/"}, pages)
+        self.assertEqual(m, {cle("Texte jamais traduit"): {"fr": "Texte jamais traduit", "pages": ["", "contact/"]}})
+        self.assertEqual(E.sans_traduction("de", self.table, {"contact/"}, pages)[cle("Texte jamais traduit")]["pages"],
+                         ["contact/"])
+        self.assertIn("Accueil", {x["fr"] for x in E.sans_traduction("de", self.table, None, pages).values()})  # llms
 
     def test_langues_des_unites(self):
         fichier, _ = self.exporter()
@@ -300,6 +340,62 @@ class TestImportXliff(Base):
                 self.assertEqual(p["statut"], "relu")
         self.assertEqual(self.table.entrees[cle(DEMO)]["statut"], "relu")
         self.assertEqual(self.table.entrees[cle(DEMO)]["source"], f"V1 de/ ; relu par Alice le {JOUR}")
+
+    def test_mt_adapte_intacts_comptes_a_part(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Das <g id=\"1\">Aktienkapital</g> der Gesellschaft", "Das <g id=\"1\">Grundkapital</g> der Gesellschaft")
+        r = self.importer(fichier)
+        self.assertEqual(r["mt_adapte_intacts"], 1)  # ADRESSE (mt) ; CAPITAL (adapte) a été modifié
+        self.assertEqual(len(r["modifies"]), 1)
+
+    def test_sans_etat_ni_approved_non_confirme(self):  # Ruling 31
+        fichier, n = self.exporter()
+        r = self.importer(fichier, confirme=False)
+        self.assertEqual(sorted(x["cle"] for x in r["non_confirmes"]), sorted([cle(CAPITAL), cle(ADRESSE)]))
+        self.assertEqual({x["raison"] for x in r["non_confirmes"]}, {"non confirmé par le relecteur"})
+        self.assertEqual(r["relus"], n - 2)
+        self.assertEqual(r["rejetes"], [])
+        for texte, statut in ((CAPITAL, "adapte"), (ADRESSE, "mt")):
+            e = self.table.entrees[cle(texte)]
+            self.assertEqual((e["statut"], e["source"].endswith("Alice le " + JOUR)), (statut, False), texte)
+        self.assertEqual(self.table.entrees[cle(DEMO)]["statut"], "relu")  # approved="yes" à l'export
+
+    def test_non_confirme_modifie_non_applique(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, "Adresse<x id=\"1\"/>Freiburg", "Adresse<x id=\"1\"/>Zürich")
+        r = self.importer(fichier, confirme=False)
+        non = next(x for x in r["non_confirmes"] if x["cle"] == cle(ADRESSE))
+        self.assertTrue(non["modifie"])
+        self.assertEqual(self.table.entrees[cle(ADRESSE)]["trad"], "Adresse{1}Freiburg")
+        self.assertEqual(r["modifies"], [])
+
+    def test_state_translated_vaut_confirmation(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, 'state="needs-review-translation">Adresse', 'state="translated">Adresse')
+        r = self.importer(fichier, confirme=False)
+        self.assertEqual([x["cle"] for x in r["non_confirmes"]], [cle(CAPITAL)])
+        self.assertEqual(self.table.entrees[cle(ADRESSE)]["statut"], "relu")
+        self.assertEqual(self.table.entrees[cle(CAPITAL)]["statut"], "adapte")
+
+    def test_approved_vaut_confirmation(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, f'<trans-unit id="{cle(CAPITAL)}"', f'<trans-unit id="{cle(CAPITAL)}" approved="yes"')
+        r = self.importer(fichier, confirme=False)
+        self.assertEqual([x["cle"] for x in r["non_confirmes"]], [cle(ADRESSE)])
+        self.assertEqual(self.table.entrees[cle(CAPITAL)]["statut"], "relu")
+
+    def test_etat_new_ou_needs_review_non_confirme(self):
+        fichier, _ = self.exporter()
+        self.remplacer(fichier, 'state="needs-review-translation">Das', 'state="needs-review-l10n">Das')
+        self.remplacer(fichier, 'state="needs-review-translation">Adresse', 'state="new">Adresse')
+        r = self.importer(fichier, confirme=False)
+        self.assertEqual(len(r["non_confirmes"]), 2)
+
+    def test_sans_etat_option_explicite(self):
+        fichier, n = self.exporter()
+        r = self.importer(fichier, confirme=False, sans_etat=True)
+        self.assertEqual((r["non_confirmes"], r["relus"]), ([], n))
+        self.assertEqual(self.table.entrees[cle(CAPITAL)]["statut"], "relu")
 
     def test_aller_retour_sans_effet_de_bord_sur_les_fr(self):
         fichier, _ = self.exporter()
@@ -501,6 +597,68 @@ class TestImportXliff(Base):
         self.assertEqual([x["raison"] for x in r["rejetes"]], ["marques"])
         self.assertEqual(self.table.entrees[cle("Exemple de prix")]["statut"], "adapte")
 
+    def poser_v1_avec_marque_en_trop(self):
+        self.table.poser("Exemple de prix", "Beispiel Corrext Preis", "v1", "V1 de/")  # Ruling 30
+        self.table.poser(CONTACT, "Kontakt Corrext", "v1", "V1 de/", page="contact/")
+
+    def bloquants(self):
+        _, problemes = controles.controler_traductions("de", self.table.entrees, {})
+        return [p for p in problemes if p["gravite"] == "bloquant"]
+
+    def test_import_intact_puis_controler_zero_bloquant(self):  # Ruling 30
+        self.poser_v1_avec_marque_en_trop()
+        pages = {**PAGES, "prix/": page("Exemple de prix")}
+        sortie = self.sortie / "intact.xlf"
+        E.exporter_xliff("de", self.table, None, {"mt", "adapte", "v1", "invariant"}, sortie, assemblees=pages, glossaire={})
+        self.assertEqual(self.bloquants(), [])
+        r = self.importer(sortie, glossaire={})
+        self.assertEqual(r["rejetes"], [])
+        e = self.table.entrees[cle("Exemple de prix")]
+        self.assertEqual((e["statut"], e["v1"]), ("relu", True))
+        self.assertTrue(self.table.entrees[cle(CONTACT)]["par_page"]["contact/"]["v1"])
+        self.assertEqual(self.bloquants(), [])  # la provenance V1 garde l'exemption après le passage à relu
+        self.table.enregistrer()  # et le champ survit à l'écriture
+        self.assertEqual(Table("de", self.langues).entrees[cle("Exemple de prix")]["v1"], True)
+
+    def test_v1_relu_reste_reimportable_a_l_identique(self):
+        self.poser_v1_avec_marque_en_trop()
+        sortie = self.sortie / "deux.xlf"
+        E.exporter_xliff("de", self.table, None, {"v1"}, sortie, assemblees={**PAGES, "prix/": page("Exemple de prix")},
+                         glossaire={})
+        self.importer(sortie, glossaire={})
+        sortie2 = self.sortie / "trois.xlf"
+        E.exporter_xliff("de", self.table, None, {"relu"}, sortie2, assemblees={**PAGES, "prix/": page("Exemple de prix")},
+                         glossaire={})
+        r = self.importer(sortie2, glossaire={})
+        self.assertEqual(r["rejetes"], [])
+        self.assertTrue(self.table.entrees[cle("Exemple de prix")]["v1"])
+
+    def test_modification_retire_l_exemption(self):
+        self.poser_v1_avec_marque_en_trop()
+        sortie = self.sortie / "modif.xlf"
+        pages = {**PAGES, "prix/": page("Exemple de prix")}
+        E.exporter_xliff("de", self.table, None, {"v1"}, sortie, assemblees=pages, glossaire={})
+        self.importer(sortie, glossaire={})
+        sortie2 = self.sortie / "modif2.xlf"
+        E.exporter_xliff("de", self.table, None, {"relu"}, sortie2, assemblees=pages, glossaire={})
+        self.remplacer(sortie2, "Beispiel Corrext Preis", "Beispiel Corrext Preise")  # modifié : contrôles bloquants
+        r = self.importer(sortie2, glossaire={})
+        self.assertIn(("marques", cle("Exemple de prix")), [(x["raison"], x["cle"]) for x in r["rejetes"]])
+        self.assertEqual(self.table.entrees[cle("Exemple de prix")]["trad"], "Beispiel Corrext Preis")
+        # une modification acceptée (sans le défaut) fait disparaître le champ
+        self.remplacer(sortie2, "Beispiel Corrext Preise", "Beispiel Preis")
+        self.importer(sortie2, glossaire={})
+        e = self.table.entrees[cle("Exemple de prix")]
+        self.assertEqual((e["trad"], e["statut"], "v1" in e), ("Beispiel Preis", "relu", False))
+
+    def test_controler_traductions_respecte_le_champ_v1(self):
+        entrees = {cle("Exemple de prix"): {"fr": "Exemple de prix", "trad": "Beispiel Corrext Preis", "statut": "relu",
+                                            "source": "x", "v1": True, "par_page": {}}}
+        self.assertEqual(controles.controler_traductions("de", entrees, {}), (0, []))
+        del entrees[cle("Exemple de prix")]["v1"]
+        controlees, problemes = controles.controler_traductions("de", entrees, {})
+        self.assertEqual((controlees, [p["regle"] for p in problemes]), (1, ["marques"]))
+
     def test_terminologie_en_avertissement(self):
         fichier, _ = self.exporter()
         self.remplacer(fichier, "Aktienkapital</g> der", "Kapital</g> der")
@@ -614,10 +772,22 @@ class TestCommandes(Base):
         self.assertIn("6 unité(s) XLIFF", sortie)  # sans le segment relu
         ET.parse(self.sortie / "neur-on-de.xlf")
 
+    def test_exporter_dit_les_textes_sans_traduction(self):
+        self.table.enregistrer()
+        pages = {**PAGES, "nouveau/": page("Texte jamais traduit", "Autre texte neuf")}
+        with mock.patch.object(traduire, "pages_assemblees", lambda langue, mode: pages):
+            sortie = io.StringIO()
+            with contextlib.redirect_stdout(sortie), mock.patch.object(build, "DOSSIER_LANGUES", self.langues), \
+                    mock.patch.object(cli.chnell, "charger_glossaire", lambda *a, **k: GLOSSAIRE):
+                code = cli.main(["exporter", "de", "--pages", "nouveau/", "--sortie", str(self.sortie)])
+        self.assertEqual(code, 0)
+        self.assertIn("2 texte(s) sans traduction, non exportés, sur 1 page(s) : nouveau/ (2)", sortie.getvalue())
+
     def test_exporter_refuse_le_depot(self):
         code, _, erreur = self.lancer("exporter", "de", "--sortie", str(ICI / "export-refuse-test"))
         self.assertEqual(code, 1)
         self.assertIn("dépôt", erreur)
+        self.assertEqual(erreur.lower().count("refusé"), 1)  # pas de « export refusé : export refusé »
         self.assertFalse((ICI / "export-refuse-test").exists())
 
     def test_importer_ecrit_la_table_et_le_rapport(self):
@@ -646,6 +816,21 @@ class TestCommandes(Base):
         self.assertIn("tirets", sortie)
         self.assertEqual(Table("de", self.langues).entrees[cle(DEMO)]["trad"], "Demo anfragen")
 
+    def test_importer_sans_confirmation_puis_sans_etat(self):
+        self.table.enregistrer()
+        fichier, _ = self.exporter()
+        code, sortie, _ = self.lancer("importer", "de", str(fichier), "--relecteur", "Alice", "--sortie", str(self.sortie))
+        self.assertEqual(code, 0)
+        self.assertIn("2 non confirmé(s) par le relecteur", sortie)
+        self.assertIn("Non confirmés par le relecteur", sortie)
+        self.assertEqual(Table("de", self.langues).entrees[cle(CAPITAL)]["statut"], "adapte")
+        code, sortie, _ = self.lancer("importer", "de", str(fichier), "--relecteur", "Alice", "--sortie", str(self.sortie),
+                                      "--sans-etat")
+        self.assertEqual(code, 0)
+        self.assertIn("0 non confirmé(s)", sortie)
+        self.assertIn("2 segment(s) mt ou adapte confirmé(s) sans aucune modification", sortie)
+        self.assertEqual(Table("de", self.langues).entrees[cle(CAPITAL)]["statut"], "relu")
+
     def test_importer_csv(self):
         self.table.enregistrer()
         f = self.tmp / "c.csv"
@@ -662,6 +847,7 @@ class TestCommandes(Base):
         self.assertEqual(code, 1)
         self.assertIn("de-CH", erreur)
         self.assertIn("« en »", erreur)
+        self.assertEqual(erreur.lower().count("refusé"), 1)
 
 
 if __name__ == "__main__":

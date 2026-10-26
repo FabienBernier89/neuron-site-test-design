@@ -7,7 +7,7 @@
     python3 -m outils.i18n chnell ajouter de capital-actions --retenu Aktienkapital --statut confirme ...
     python3 -m outils.i18n glossaire --langue de [--arbitrages]
     python3 -m outils.i18n exporter de [--pages accueil contact/] [--statuts mt adapte v1 invariant] [--sortie DOSSIER]
-    python3 -m outils.i18n importer de fichier.xlf --relecteur "Prénom Nom" [--sortie DOSSIER]
+    python3 -m outils.i18n importer de fichier.xlf --relecteur "Prénom Nom" [--sortie DOSSIER] [--sans-etat]
 
 etat : état de la traduction d'une langue, page par page (outils/i18n/traduire.py, etat), en aperçu par défaut ou selon
 les règles de la production ; écrit la liste des textes français à traduire dans src/langues/<langue>/a_traduire.json
@@ -46,7 +46,9 @@ fichiers, n'envoie rien.
 
 importer : réimporte les corrections d'un relecteur (XLIFF, ou CSV cle;fr;trad) dans la table (tâche 5.2) : segments acceptés
 au statut relu (invariant s'ils sont identiques au français), rejets listés avec leur raison, traduction précédente conservée.
-Écrit la table, affiche le rapport en français et l'enregistre dans le dossier d'export (rapport-import-<date>-<relecteur>.txt)."""
+Un segment relu doit être confirmé par le relecteur (state translated, final ou signed-off, ou approved="yes", Ruling 31) ; les
+autres restent tels quels et sont listés « non confirmé par le relecteur ». --sans-etat : tout segment valide vaut confirmation
+(à n'utiliser que pour un outil qui n'écrit pas les états, à décider au pilote). Écrit la table, affiche le rapport en français et l'enregistre dans le dossier d'export (rapport-import-<date>-<relecteur>.txt)."""
 import argparse
 import json
 import sys
@@ -162,11 +164,21 @@ def afficher_controle(langue, controlees, problemes, glossaire):
     return "\n".join(lignes)
 
 
-def afficher_export(langue, dossier, resultats, pages):
-    """Résumé lisible d'un export : fichiers écrits et nombre d'unités."""
+def afficher_export(langue, dossier, resultats, pages, absents=None):
+    """Résumé lisible d'un export : fichiers écrits, nombre d'unités, et textes sans traduction non exportés (absents :
+    echanges.sans_traduction) avec leurs pages."""
     lignes = [f"Export {langue} : {len(resultats)} fichier(s) dans {dossier}"]
     lignes += [f"  {nom} : {n} {unite}" for nom, n, unite in resultats]
     lignes.append("Périmètre : " + (", ".join(p or echanges.ACCUEIL for p in pages) if pages else "tout le site"))
+    absents = absents or {}
+    par_page = {}
+    for m in absents.values():
+        for p in m["pages"]:
+            par_page[p] = par_page.get(p, 0) + 1
+    lignes.append(f"{len(absents)} texte(s) sans traduction, non exportés, sur {len(par_page)} page(s)"
+                  + (" : " + ", ".join(f"{p or echanges.ACCUEIL} ({n})" for p, n in
+                                       sorted(par_page.items(), key=lambda x: -x[1])[:10])
+                     + (f" et {len(par_page) - 10} autre(s)" if len(par_page) > 10 else "") if absents else ""))
     return "\n".join(lignes)
 
 
@@ -174,7 +186,9 @@ def afficher_import(langue, rapport, fichier, relecteur):
     """Rapport de réimport en français : comptes, corrections, rejets (traduction précédente conservée), avertissements."""
     lignes = [f"Réimport {langue}, relecteur {relecteur} : {rapport['relus']} segment(s) relu(s) "
               f"(dont {rapport['invariants']} posé(s) invariant, identique au français), {len(rapport['modifies'])} modifié(s), "
-              f"{len(rapport['rejetes'])} rejeté(s), {len(rapport['avertissements'])} avertissement(s) de terminologie",
+              f"{len(rapport['rejetes'])} rejeté(s), {len(rapport['non_confirmes'])} non confirmé(s) par le relecteur, "
+              f"{len(rapport['avertissements'])} avertissement(s) de terminologie",
+              f"Dont {rapport['mt_adapte_intacts']} segment(s) mt ou adapte confirmé(s) sans aucune modification",
               f"Fichier lu : {fichier}"]
     if rapport["modifies"]:
         lignes.append("Corrections appliquées :")
@@ -187,6 +201,11 @@ def afficher_import(langue, rapport, fichier, relecteur):
         lignes.append("Rejetés (traduction et statut précédents conservés) :")
         for r in rapport["rejetes"]:
             lignes.append(f"  {r['cle']} « {r['fr'][:60]} » : {r['raison']}" + (f", {r['detail']}" if r["detail"] else ""))
+    if rapport["non_confirmes"]:
+        lignes.append("Non confirmés par le relecteur (segments laissés tels quels, jamais relus) :")
+        for r in rapport["non_confirmes"]:
+            lignes.append(f"  {r['cle']} « {r['fr'][:60]} »" + (" : texte modifié dans le fichier, non appliqué"
+                                                                  if r["modifie"] else ""))
     if rapport["avertissements"]:
         lignes.append("Avertissements de terminologie (à revoir par un humain, rien n'est rejeté) :")
         lignes += [f"  {a['cle']} : {a['detail']}" for a in rapport["avertissements"]]
@@ -205,6 +224,7 @@ def commande_exporter(args, build):
         if inconnues:
             raise ValueError("page(s) inconnue(s) : " + ", ".join(inconnues) + " (clés de page : accueil, contact/, ...)")
         glossaire = {fr: l for fr, l in chnell.charger_glossaire().items() if args.langue in l}
+        absents = echanges.sans_traduction(args.langue, table, None if pages is None else set(pages), assemblees)
         statuts = set(args.statuts or echanges.STATUTS_XLIFF_PAR_DEFAUT)
         nom = f"neur-on-{args.langue}"
         resultats = [(f"{nom}.xlf", echanges.exporter_xliff(args.langue, table, pages, statuts, dossier / f"{nom}.xlf",
@@ -216,7 +236,7 @@ def commande_exporter(args, build):
     except ValueError as e:
         print(f"Export refusé : {e}", file=sys.stderr)
         return 1
-    print(afficher_export(args.langue, dossier, resultats, pages))
+    print(afficher_export(args.langue, dossier, resultats, pages, absents))
     if not glossaire:
         print("Glossaire vide pour cette langue : le CSV ne contient que son en-tête (commande glossaire, après la "
               "session CHnell)")
@@ -235,7 +255,8 @@ def commande_importer(args, build):
         echanges.verifier_hors_depot(dossier)  # avant tout : un échec ne laisse rien d'écrit
         glossaire = {fr: l for fr, l in chnell.charger_glossaire().items() if args.langue in l}
         importer = echanges.importer_csv if fichier.suffix.lower() == ".csv" else echanges.importer_xliff
-        rapport = importer(fichier, table, args.relecteur, glossaire=glossaire)
+        options = {"sans_etat": args.sans_etat} if importer is echanges.importer_xliff else {}
+        rapport = importer(fichier, table, args.relecteur, glossaire=glossaire, **options)
     except ValueError as e:
         print(f"Import refusé, table inchangée : {e}", file=sys.stderr)
         return 1
@@ -331,6 +352,8 @@ def main(argv=None):
     p.add_argument("fichier")
     p.add_argument("--relecteur", required=True, help="nom du relecteur (écrit dans la source des segments relus)")
     p.add_argument("--sortie", help="dossier du rapport (le dossier d'export du jour par défaut)")
+    p.add_argument("--sans-etat", action="store_true",
+                   help="tout segment valide vaut confirmation, sans lire state ni approved (outil qui n'écrit pas les états)")
     args = parser.parse_args(argv)
     if args.commande == "chnell":
         return commande_chnell(args)

@@ -343,8 +343,15 @@ BLOQUANTS = ("tirets", "eszett", "marques", "interdits")  # règles de controler
 EXCLUS_DU_CONTROLE = ("v1", "invariant")  # statuts d'une traduction déjà validée ou jamais traduite
 
 
+def exemptee(version):
+    """Vrai si la traduction (une entrée de table ou une traduction de page) n'est pas soumise aux contrôles bloquants : statut
+    v1 ou invariant, ou champ « v1 » (traduction V1 validée passée relu par le réimport sans changement, Ruling 30)."""
+    return version.get("statut") in EXCLUS_DU_CONTROLE or bool(version.get("v1"))
+
+
 def controler_traductions(langue, entrees, glossaire):
-    """Contrôle les traductions d'une table (Table.entrees) hors statuts v1 et invariant, par défaut et par page.
+    """Contrôle les traductions d'une table (Table.entrees) hors statuts v1 et invariant et hors champ « v1 » (exemptee), par
+    défaut et par page.
     Rend (nombre de traductions contrôlées, problèmes) ; chaque problème : {lieu, regle, detail, extrait, gravite} avec
     gravite « bloquant » (tirets, eszett, marques, interdits) ou « avertissement » (terminologie)."""
     controlees, problemes = 0, []
@@ -352,7 +359,7 @@ def controler_traductions(langue, entrees, glossaire):
         e = entrees[cle]
         versions = [(None, e)] + [(page, e["par_page"][page]) for page in sorted(e["par_page"])]
         for page, v in versions:
-            if v.get("trad") is None or v.get("statut") in EXCLUS_DU_CONTROLE:
+            if v.get("trad") is None or exemptee(v):
                 continue
             controlees += 1
             lieu = f"« {_extrait(e['fr'], 50)} » [{cle}" + (f", page {page or 'accueil'}" if page is not None else "") + "]"

@@ -8,6 +8,12 @@ Une entrée « par page seulement » (Ruling 19) n'a pas de traduction par défa
 valent null, et chercher ne rend rien hors de ses pages. C'est le cas d'un texte que la V1 garde en français sur une
 page (terme d'une colonne française de tableau) : il n'est accepté tel quel que là.
 
+Champ facultatif « v1 »: true : la traduction vient de la V1 validée par les traducteurs (statut v1) et le réimport l'a passée
+au statut relu sans la modifier (outils/i18n/echanges.py). Elle reste exemptée des contrôles bloquants de controles.py, comme
+une traduction v1 (Ruling 30 : un texte V1 validé peut porter une marque ou un libellé que le français n'a pas). Le champ n'existe
+que sur l'entrée ou la traduction de page concernée, est absent sinon, et disparaît dès que poser() réécrit la traduction sans
+v1=True, c'est-à-dire dès qu'elle change.
+
 Statuts, du moins au plus sûr : mt (sortie brute de LexMachina), adapte (adaptée, non relue), v1 (validée par les
 traducteurs en V1), invariant (jamais traduit), relu (relue par un traducteur expert). ACCEPTES dit lesquels une page
 construite peut contenir : l'aperçu montre les traductions adaptées non relues (avec bandeau), jamais la production.
@@ -63,10 +69,10 @@ class Table:
             return None
         return {k: entree[k] for k in ("fr", "trad", "statut", "source")}
 
-    def poser(self, texte_fr, trad, statut, source, page=None, sans_defaut=False):
+    def poser(self, texte_fr, trad, statut, source, page=None, sans_defaut=False, v1=False):
         """Enregistre la traduction par défaut du texte, ou celle d'une page (la traduction par défaut doit alors
         exister déjà, sauf sans_defaut : l'entrée est alors créée « par page seulement », sans traduction par défaut).
-        La table n'est écrite sur disque que par enregistrer()."""
+        v1 : pose le champ « v1 » (voir plus haut). La table n'est écrite sur disque que par enregistrer()."""
         if statut not in STATUTS:
             raise ValueError(f"statut inconnu : « {statut} » (attendu : {', '.join(STATUTS)})")
         problemes = controles.tirets(trad)
@@ -83,9 +89,9 @@ class Table:
                 entree = self.entrees[k] = {"fr": fr, "trad": None, "statut": None, "source": None, "par_page": {}}
             if entree is None:
                 raise ValueError(f"« {fr[:50]} » : poser d'abord la traduction par défaut, puis celle de la page")
-            entree["par_page"][page] = {"trad": trad, "statut": statut, "source": source}
+            entree["par_page"][page] = {"trad": trad, "statut": statut, "source": source, **({"v1": True} if v1 else {})}
             return
-        self.entrees[k] = {"fr": fr, "trad": trad, "statut": statut, "source": source,
+        self.entrees[k] = {"fr": fr, "trad": trad, "statut": statut, "source": source, **({"v1": True} if v1 else {}),
                            "par_page": entree["par_page"] if entree else {}}
 
     def t(self, texte_fr):

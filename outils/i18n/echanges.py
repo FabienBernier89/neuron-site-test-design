@@ -7,7 +7,9 @@ du texte (table.cle) ; une traduction propre à une page (par_page) a sa propre 
 pour la page d'accueil). Les marqueurs des balises en ligne deviennent des éléments XLIFF : {n}…{/n} en <g id="n">…</g>,
 {n} seul en <x id="n"/>. La <note> de chaque unité dit les pages (huit au plus, puis « et N autre(s) »), le statut, les
 termes du glossaire de projet présents dans le texte et le contexte V1 (contextes.json et a_traduire.json). Les segments
-v1 et invariant sont marqués approved="yes" (décision V2 : visibles et corrigeables, sans nouvelle relecture). La source
+v1 et invariant sont marqués approved="yes" et state="final" (décision V2 : visibles et corrigeables, sans nouvelle relecture) ;
+mt et adapte portent state="needs-review-translation", relu state="signed-off". Un caractère interdit en XML 1.0 (contrôles C0
+hors tabulation, saut de ligne et retour chariot) fait refuser l'export. La source
 des traductions (« V1 de/kontakt/ », nom du moteur) n'est jamais écrite : l'export part chez un tiers.
 
 Export TMX 1.4 (exporter_tmx) : les traductions des statuts demandés (les segments v1 approuvés, décision V12), source
@@ -18,9 +20,14 @@ Réimport (importer_xliff, importer_csv) : chaque unité rendue est contrôlée 
 rejeté, avec sa raison, et garde sa traduction et son statut précédents, si : « segment inconnu » (clé absente de la table),
 « segment FR modifié depuis l'export », « traduction vide », « balisage » (marqueur supprimé, ajouté, en double, inversé ou
 élément XLIFF inconnu : segments.restaurer), « tirets », « eszett », « marques », « interdits » (contrôles bloquants de
-controles.py) ou « doublon ». La terminologie du glossaire n'avertit que (avertissements, jamais un rejet). Un segment
-accepté passe au statut relu, avec « ; relu par <relecteur> le <date> » ajouté à sa source ; une traduction identique au
-français passe au statut invariant (Ruling 18), source « relu par <relecteur> le <date>, identique au français ». Un fichier
+controles.py) ou « doublon ». Une traduction v1, invariant ou à champ « v1 » (table.py) rendue sans modification n'est pas
+soumise aux contrôles bloquants (Ruling 30), comme dans controler (4.4) ; la terminologie n'avertit que (avertissements,
+jamais un rejet). Ruling 31 : l'import ne pose relu que sur une confirmation positive du relecteur, state translated, final ou
+signed-off, ou approved="yes" dans le fichier rendu (un CSV est une confirmation en soi) ; sinon le segment est laissé tel
+quel et listé « non confirmé par le relecteur » (option sans_etat : tout segment valide vaut confirmation, pour un outil qui
+n'écrirait pas les états). Un segment accepté passe au statut relu, avec « ; relu par <relecteur> le <date> » ajouté à sa source ; une traduction identique au
+français passe au statut invariant (Ruling 18), source « relu par <relecteur> le <date>, identique au français » ; une
+traduction v1 qui passe relu sans changement garde le champ « v1 ». Un fichier
 écrit pour une autre langue est refusé en entier (ValueError). L'import ne modifie que la table en mémoire : enregistrer()
 reste à l'appelant.
 
@@ -49,8 +56,10 @@ XML_LANG = "{http://www.w3.org/XML/1998/namespace}lang"
 SOURCE_LANGUE = HREFLANG["fr"]  # fr-CH
 STATUTS_XLIFF_PAR_DEFAUT = ("mt", "adapte", "v1", "invariant")  # relu a déjà été relu par un expert
 APPROUVES = ("v1", "invariant")  # marqués approved="yes" dans l'XLIFF (décision V2)
-ETATS = {"mt": "needs-review-translation", "adapte": "needs-review-adaptation", "v1": "final", "invariant": "final",
+ETATS = {"mt": "needs-review-translation", "adapte": "needs-review-translation", "v1": "final", "invariant": "final",
          "relu": "signed-off"}  # état XLIFF 1.2 de la cible
+ETATS_CONFIRMES = ("translated", "final", "signed-off")  # états d'une cible que le relecteur a confirmée (Ruling 31)
+_XML_INTERDIT = re.compile("[\x00-\x08\x0b\x0c\x0e-\x1f\ufffe\uffff\ud800-\udfff]")  # hors XML 1.0
 ACCUEIL = "accueil"  # la page d'accueil (clé de page « ») dans les notes et les identifiants
 LLMS = "llms"        # pseudo-page des libellés fixes des fichiers llms.txt
 PAGES_VISIBLES = 8
@@ -90,7 +99,7 @@ def verifier_hors_depot(chemin):
         except OSError:
             ignore = False  # git absent : dans le doute, refuser
         if not ignore:
-            raise ValueError(f"export refusé : {chemin} est dans le dépôt {dossier} (public) ; choisir un dossier de "
+            raise ValueError(f"{chemin} est dans le dépôt {dossier} (public) ; choisir un dossier de "
                              f"Bibliotheque-Claude/07-Ressources-traduction/Neuron/site-v2/")
         return
 
@@ -99,6 +108,15 @@ def _ecrire(sortie, texte, encodage="utf-8"):
     sortie = Path(sortie)
     sortie.parent.mkdir(parents=True, exist_ok=True)
     sortie.write_text(texte, encoding=encodage, newline="")
+
+
+def _controler_xml(ident, *textes):
+    """ValueError clair si un texte contient un caractère interdit en XML 1.0 (le fichier serait illisible)."""
+    for t in textes:
+        m = _XML_INTERDIT.search(t)
+        if m:
+            raise ValueError(f"caractère interdit en XML 1.0 (U+{ord(m.group(0)):04X}) dans l'unité {ident} : "
+                             f"« {t[max(0, m.start() - 20):m.end() + 20]!r} », à corriger dans la table avant l'export")
 
 
 # ---------- marqueurs ----------
@@ -196,43 +214,58 @@ def _contextes(table):
     return sortie
 
 
+def _textes(pages, assemblees):
+    """Textes français à traduire des pages choisies (None : tout le site), dans l'ordre du site : couples (page, texte).
+    Hors unités lang="fr" et avis fictifs ; les libellés fixes des llms.txt viennent en dernier sous la page « llms »."""
+    from outils import llms
+    for page, html in assemblees.items():
+        if pages is not None and page not in pages:
+            continue
+        for u in S.extraire_page(traduire.retirer_avis_fictifs(html)):
+            if not u["lang_fr"]:
+                yield page, u["texte"]
+    if pages is None or LLMS in pages:
+        for texte in llms.libelles_fixes():
+            yield LLMS, texte
+
+
 def _unites(table, pages, statuts, assemblees):
     """Unités à exporter, dans l'ordre du site : [{"id", "cle", "page", "fr", "trad", "statut", "pages"}]. Une traduction
-    propre à une page a son unité, la traduction par défaut la sienne pour les pages sans variante. Les textes que
-    l'extraction ne voit sur aucune page (et les libellés fixes des llms.txt sous la page « llms ») n'en font pas partie
-    s'ils sont hors de la sélection."""
-    from outils import llms
+    propre à une page a son unité, la traduction par défaut la sienne pour les pages sans variante. Un texte hors de la
+    sélection ou sans entrée dans la table n'en fait pas partie."""
     unites = {}
-
-    def ajouter(texte, page):
+    for page, texte in _textes(pages, assemblees):
         k = cle(texte)
         entree = table.entrees.get(k)
         if entree is None:
-            return
+            continue
         propre = entree["par_page"].get(page)
         if propre is not None:
             ident, version, variante = f"{k}@{page or ACCUEIL}", propre, page
         elif entree["trad"] is not None:
             ident, version, variante = k, entree, None
         else:
-            return
+            continue
         if version["statut"] not in statuts or version["trad"] is None:
-            return
+            continue
         u = unites.setdefault(ident, {"id": ident, "cle": k, "page": variante, "fr": entree["fr"],
                                       "trad": version["trad"], "statut": version["statut"], "pages": []})
         if page not in u["pages"]:
             u["pages"].append(page)
-
-    for page, html in assemblees.items():
-        if pages is not None and page not in pages:
-            continue
-        for u in S.extraire_page(traduire.retirer_avis_fictifs(html)):
-            if not u["lang_fr"]:
-                ajouter(u["texte"], page)
-    if pages is None or LLMS in pages:
-        for texte in llms.libelles_fixes():
-            ajouter(texte, LLMS)
     return list(unites.values())
+
+
+def sans_traduction(langue, table, pages, assemblees):
+    """Textes des pages choisies (None : tout le site) sans aucune traduction pour la page (ni par défaut ni propre à la
+    page) et qui ne sont pas des invariants : ils ne peuvent pas figurer dans l'export. Rend {clé: {"fr", "pages":
+    {page: ...}}}, pages dans l'ordre du site, pour dire au relecteur ce qui reste à traduire d'abord."""
+    manquants = {}
+    for page, texte in _textes(pages, assemblees):
+        if table.chercher(texte, page) is None and not traduire._invariant(texte, langue):
+            m = manquants.setdefault(cle(texte), {"fr": " ".join(texte.split()), "pages": []})
+            if page not in m["pages"]:
+                m["pages"].append(page)
+    return manquants
 
 
 def _liste_pages(pages):
@@ -280,6 +313,8 @@ def exporter_xliff(langue, table, pages, statuts, sortie, assemblees=None, gloss
                 f'datatype="html">\n    <body>\n']
     for u in unites:
         termes = controles.termes_presents(u["fr"], langue, glossaire)
+        _controler_xml(u["id"], u["fr"], u["trad"], *(eq for _, eq in termes), *[
+            str(v) for v in (contextes.get(u["cle"]) or {}).values()])
         avertissement = ""
         try:
             en_cible = _en_xliff(u["trad"])
@@ -319,6 +354,7 @@ def exporter_tmx(langue, table, statuts, sortie):
             if v.get("trad") is None or v.get("statut") not in statuts:
                 continue
             ident = k if page is None else f"{k}@{page or ACCUEIL}"
+            _controler_xml(ident, e["fr"], v["trad"])
             props = f'      <prop type="x-statut">{v["statut"]}</prop>\n'
             if page is not None:
                 props += f'      <prop type="x-page">{escape(page or ACCUEIL)}</prop>\n'
@@ -371,7 +407,8 @@ def _pages_de_la_note(unite):
 
 
 def _lire_xliff(fichier, langue):
-    """Unités d'un XLIFF rendu : [{"id", "fr", "trad", "erreur", "pages", "autres_pages"}]. ValueError si le fichier est
+    """Unités d'un XLIFF rendu : [{"id", "fr", "trad", "erreur", "confirme", "pages", "autres_pages"}] (confirme : approved="yes"
+    ou état de la cible dans ETATS_CONFIRMES). ValueError si le fichier est
     illisible, n'est pas du XLIFF 1.2, ou n'est pas écrit pour cette langue."""
     try:
         racine = ET.parse(fichier).getroot()
@@ -384,11 +421,12 @@ def _lire_xliff(fichier, langue):
         raise ValueError("fichier XLIFF sans élément <file>")
     for f in fichiers:
         if f.get("target-language") != HREFLANG[langue] or f.get("source-language") != SOURCE_LANGUE:
-            raise ValueError(f"fichier refusé : il est écrit de « {f.get('source-language')} » vers « "
-                             f"{f.get('target-language')} » (target-language), pas de {SOURCE_LANGUE} vers « {HREFLANG[langue]} »")
+            raise ValueError(f"le fichier est écrit de « {f.get('source-language')} » vers « {f.get('target-language')} » "
+                             f"(target-language), pas de {SOURCE_LANGUE} vers « {HREFLANG[langue]} »")
         for tu in f.iter(f"{{{NS_XLIFF}}}trans-unit"):
             source, cible = tu.find(f"{{{NS_XLIFF}}}source"), tu.find(f"{{{NS_XLIFF}}}target")
-            u = {"id": tu.get("id") or "", "fr": "", "trad": None, "erreur": None}
+            u = {"id": tu.get("id") or "", "fr": "", "trad": None, "erreur": None,
+                 "confirme": tu.get("approved") == "yes" or (cible is not None and cible.get("state") in ETATS_CONFIRMES)}
             try:
                 u["fr"] = _vers_marqueurs(source) if source is not None else ""
                 u["trad"] = _vers_marqueurs(cible) if cible is not None else None
@@ -415,12 +453,12 @@ def _lire_csv(fichier):
     for ligne in lignes:
         ident = (ligne["cle"] or "").strip()
         page = _decouper_id(ident)[1]
-        unites.append({"id": ident, "fr": ligne["fr"] or "", "trad": ligne["trad"], "erreur": None,
+        unites.append({"id": ident, "fr": ligne["fr"] or "", "trad": ligne["trad"], "erreur": None, "confirme": True,
                        "pages": [] if page is None else [page or ACCUEIL], "autres_pages": 0})
     return unites
 
 
-def _appliquer(unites, table, relecteur, glossaire, jour):
+def _appliquer(unites, table, relecteur, glossaire, jour, sans_etat=False):
     """Contrôle chaque unité rendue et pose les acceptées dans la table (en mémoire). Voir importer_xliff."""
     if not relecteur or not relecteur.strip():
         raise ValueError("le nom du relecteur est obligatoire")
@@ -429,7 +467,8 @@ def _appliquer(unites, table, relecteur, glossaire, jour):
     jour = jour or date.today().isoformat()
     glossaire = _glossaire_de(table.langue, glossaire)
     suite = f"relu par {relecteur.strip()} le {jour}"
-    rapport = {"relus": 0, "invariants": 0, "modifies": [], "rejetes": [], "avertissements": []}
+    rapport = {"relus": 0, "invariants": 0, "mt_adapte_intacts": 0, "modifies": [], "rejetes": [], "non_confirmes": [],
+               "avertissements": []}
     vus = set()
     for u in unites:
         ident = u["id"]
@@ -466,13 +505,18 @@ def _appliquer(unites, table, relecteur, glossaire, jour):
         ancienne = entree if page is None else entree["par_page"][page]
         avant = ancienne["trad"]
         modifie = avant is None or _blancs(trad) != _blancs(avant)
-        # une traduction v1 ou invariant rendue sans modification a été validée avant : comme controler (4.4), on ne la
-        # contrôle pas ; dès que le relecteur la change, les contrôles bloquants s'appliquent
-        problemes = [] if not modifie and ancienne["statut"] in controles.EXCLUS_DU_CONTROLE else (
+        # une traduction v1, invariant ou à champ « v1 » rendue sans modification a été validée avant : comme controler (4.4),
+        # on ne la contrôle pas (Ruling 30) ; dès que le relecteur la change, les contrôles bloquants s'appliquent
+        exemptee = not modifie and controles.exemptee(ancienne)
+        problemes = [] if exemptee else (
             controles.tirets(trad) + (controles.eszett(entree["fr"], trad) if table.langue == "de" else [])
             + controles.marques(entree["fr"], trad) + controles.interdits(trad))
         if problemes:
             rejeter(problemes[0]["regle"], "; ".join(f"{p['detail']} : {p['extrait']}" for p in problemes))
+            continue
+        if not (u["confirme"] or sans_etat):  # Ruling 31 : jamais relu sans confirmation positive, segment laissé tel quel
+            rapport["non_confirmes"].append({"cle": ident, "raison": "non confirmé par le relecteur", "modifie": modifie,
+                                             "fr": _normal(entree["fr"])})
             continue
         identique = _normal(trad) == _normal(entree["fr"])
         if identique:
@@ -482,34 +526,42 @@ def _appliquer(unites, table, relecteur, glossaire, jour):
             statut = "relu"
             source = base if base.endswith(suite) else (f"{base} ; {suite}" if base else suite)
         try:
-            table.poser(entree["fr"], trad if modifie else avant, statut, source, page=page)
+            # la provenance V1 validée suit une traduction passée relu sans changement (Ruling 30)
+            v1 = (not modifie and not identique and (ancienne["statut"] == "v1" or bool(ancienne.get("v1"))))
+            table.poser(entree["fr"], trad if modifie else avant, statut, source, page=page, v1=v1)
         except ValueError as e:  # filet : les contrôles de Table.poser sont ceux déjà faits ci-dessus
             rejeter("tirets" if "tirets" in str(e) else "eszett", str(e))
             continue
         rapport["relus"] += 1
         rapport["invariants"] += identique
+        rapport["mt_adapte_intacts"] += (not modifie and ancienne["statut"] in ("mt", "adapte"))
         if modifie:
             pages = u["pages"] or ([] if page is None else [page or ACCUEIL])
             rapport["modifies"].append({"cle": ident, "fr": _normal(entree["fr"]), "avant": avant, "apres": trad,
                                         "pages": pages, "autres_pages": u["autres_pages"]})
-        for p in controles.terminologie(entree["fr"], trad, table.langue, glossaire):
+        for p in ([] if exemptee else controles.terminologie(entree["fr"], trad, table.langue, glossaire)):
             rapport["avertissements"].append({"cle": ident, "detail": p["detail"]})
     return rapport
 
 
-def importer_xliff(fichier, table, relecteur, glossaire=None, jour=None):
+def importer_xliff(fichier, table, relecteur, glossaire=None, jour=None, sans_etat=False):
     """Réimporte un XLIFF corrigé par le relecteur dans la table (en mémoire : l'appelant fait enregistrer()). Rend
     {"relus": int, "invariants": int, "modifies": [{cle, fr, avant, apres, pages, autres_pages}], "rejetes": [{cle, raison,
     detail, fr}], "avertissements": [{cle, detail}]} ; relus compte les segments acceptés (dont les « invariants » posés
     pour une traduction identique au français, Ruling 18). Un segment rejeté garde sa traduction et son statut. glossaire :
     {fr: {langue: {terme, ...}}} (chnell.charger_glossaire par défaut) ; jour : AAAA-MM-JJ (aujourd'hui par défaut).
-    ValueError si le fichier est illisible, n'est pas du XLIFF 1.2 ou n'est pas écrit pour la langue de la table."""
-    return _appliquer(_lire_xliff(fichier, table.langue), table, relecteur, glossaire, jour)
+    ValueError si le fichier est illisible, n'est pas du XLIFF 1.2 ou n'est pas écrit pour la langue de la table.
+    Ruling 31 : seuls les segments confirmés (approved="yes", ou état de la cible translated, final, signed-off) passent relu ;
+    les autres restent tels quels et sont listés dans « non_confirmes » [{cle, raison, modifie, fr}] ; « modifie » dit si le
+    relecteur y a écrit autre chose que la traduction actuelle (ignoré). sans_etat : tout segment valide vaut confirmation.
+    « mt_adapte_intacts » compte les segments mt ou adapte confirmés sans aucune modification. Une traduction v1 qui passe
+    relu sans changement garde le champ « v1 » de la table (Ruling 30)."""
+    return _appliquer(_lire_xliff(fichier, table.langue), table, relecteur, glossaire, jour, sans_etat)
 
 
 def importer_csv(fichier, table, relecteur, glossaire=None, jour=None):
     """Repli tableur : réimporte un CSV de colonnes cle;fr;trad (la clé d'une traduction de page : « <clé>@<page> »), mêmes
-    contrôles et même rapport que importer_xliff."""
+    contrôles et même rapport que importer_xliff ; une ligne du CSV vaut confirmation (Ruling 31)."""
     return _appliquer(_lire_csv(fichier), table, relecteur, glossaire, jour)
 
 
