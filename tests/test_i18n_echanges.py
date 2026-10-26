@@ -645,14 +645,14 @@ class TestImportXliff(Base):
 
     def test_identique_au_francais_apres_les_controles_bloquants(self):
         # le contrôle bloquant s'applique avant la pose invariant : un texte français qui porte un terme interdit
-        self.table.poser("Notre filiale Silex", "Unsere Filiale Silex", "adapte", "test")
+        self.table.poser("Notre ancien hébergeur Exoscale", "Unser früherer Hoster Exoscale", "adapte", "test")
         sortie = self.sortie / "ident2.xlf"
         E.exporter_xliff("de", self.table, None, {"adapte"}, sortie, glossaire={},
-                         assemblees={"": page("Notre filiale Silex")})
-        self.remplacer(sortie, "Unsere Filiale Silex", "Notre filiale Silex")
-        r = self.importer(sortie, glossaire={}, assemblees={"": page("Notre filiale Silex")})
+                         assemblees={"": page("Notre ancien hébergeur Exoscale")})
+        self.remplacer(sortie, "Unser früherer Hoster Exoscale", "Notre ancien hébergeur Exoscale")
+        r = self.importer(sortie, glossaire={}, assemblees={"": page("Notre ancien hébergeur Exoscale")})
         self.assertEqual([x["raison"] for x in r["rejetes"]], ["interdits"])
-        self.assertEqual(self.table.entrees[cle("Notre filiale Silex")]["statut"], "adapte")
+        self.assertEqual(self.table.entrees[cle("Notre ancien hébergeur Exoscale")]["statut"], "adapte")
 
     def test_v1_sans_modification_non_controlee(self):
         # une traduction V1 validée dont la marque diffère du français (« Corrext » en plus) revient intacte : acceptée

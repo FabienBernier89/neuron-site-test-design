@@ -39,7 +39,7 @@ class TestProteges(unittest.TestCase):
     def test_valeurs_du_plan(self):
         p = controles.proteges()
         self.assertEqual(p["invariants_exacts"], ["Place de la Gare 15, 1700 Fribourg", "team@corrext.com"])
-        self.assertEqual(p["interdits"], ["Neur.on LLM", "Exoscale", "Legal 230", "Legal230", "Lexa", "Silex"])
+        self.assertEqual(p["interdits"], ["Neur.on LLM", "Exoscale", "Legal 230", "Legal230", "Lexa"])
         self.assertIn("Neur.on AI Solutions SA", p["marques"])
         self.assertIn("Double review & certified translation", p["libelles_application"])
 
@@ -104,7 +104,7 @@ class TestControles(unittest.TestCase):
     def test_interdits_mots_entiers(self):
         self.assertTrue(controles.interdits("Wir nutzen Lexa."))
         self.assertTrue(controles.interdits("Partenaire : Legal 230"))
-        self.assertFalse(controles.interdits("Lexical, Silexit et Exoscaleur"))
+        self.assertFalse(controles.interdits("Lexical, Lexalis et Exoscaleur"))
 
     def test_marques_jamais_traduites(self):
         self.assertTrue(controles.marques("Corrext et LexMachina", "Korrext und LexMachina"))
