@@ -6,6 +6,7 @@
     python3 -m outils.i18n chnell file de [--priorite-max 3]
     python3 -m outils.i18n chnell ajouter de capital-actions --retenu Aktienkapital --statut confirme ...
     python3 -m outils.i18n glossaire --langue de [--arbitrages]
+    python3 -m outils.i18n exporter de [--pages accueil contact/] [--statuts mt adapte v1 invariant] [--sortie DOSSIER]
 
 etat : état de la traduction d'une langue, page par page (outils/i18n/traduire.py, etat), en aperçu par défaut ou selon
 les règles de la production ; écrit la liste des textes français à traduire dans src/langues/<langue>/a_traduire.json
@@ -34,15 +35,21 @@ retenus du lexique sans ligne de journal (critère de la décision V5).
 
 controler : contrôle les traductions de la table d'une langue hors statuts v1 et invariant (outils/i18n/controles.py,
 controler_traductions, tâche 4.4) : tirets longs, ß en allemand, marques, termes interdits (bloquants) et terminologie du
-glossaire (avertissement). Code de sortie 1 s'il y a un problème bloquant. Sans glossaire, le dit et contrôle le reste."""
+glossaire (avertissement). Code de sortie 1 s'il y a un problème bloquant. Sans glossaire, le dit et contrôle le reste.
+
+exporter : fichiers pour les traducteurs experts (outils/i18n/echanges.py, tâche 5.1) : XLIFF 1.2 de la langue
+(neur-on-<langue>.xlf, statuts mt, adapte, v1 et invariant par défaut, éventuellement limité à des pages), TMX 1.4 des segments
+v1 (neur-on-<langue>-v1.tmx) et glossaire CSV (neur-on-<langue>-glossaire.csv). Dossier par défaut :
+Bibliotheque-Claude/07-Ressources-traduction/Neuron/site-v2/<date>-<langue>/ ; un dossier du dépôt est refusé. Produit des
+fichiers, n'envoie rien."""
 import argparse
 import json
 import sys
 from datetime import date
 from pathlib import Path
 
-from outils.i18n import chnell, controles, memoire_v1, recomposition, terminologie, traduire
-from outils.i18n.table import LANGUES, Table
+from outils.i18n import chnell, controles, echanges, memoire_v1, recomposition, terminologie, traduire
+from outils.i18n.table import LANGUES, STATUTS, Table
 
 
 def afficher_etat(langue, mode, etat, a_traduire):
@@ -150,6 +157,44 @@ def afficher_controle(langue, controlees, problemes, glossaire):
     return "\n".join(lignes)
 
 
+def afficher_export(langue, dossier, resultats, pages):
+    """Résumé lisible d'un export : fichiers écrits et nombre d'unités."""
+    lignes = [f"Export {langue} : {len(resultats)} fichier(s) dans {dossier}"]
+    lignes += [f"  {nom} : {n} {unite}" for nom, n, unite in resultats]
+    lignes.append("Périmètre : " + (", ".join(p or echanges.ACCUEIL for p in pages) if pages else "tout le site"))
+    return "\n".join(lignes)
+
+
+def commande_exporter(args, build):
+    """exporter : XLIFF, TMX et glossaire CSV dans un dossier hors du dépôt."""
+    table = Table(args.langue, build.DOSSIER_LANGUES)
+    dossier = Path(args.sortie) if args.sortie else echanges.dossier_export(args.langue)
+    try:
+        echanges.verifier_hors_depot(dossier)
+        assemblees = traduire.pages_assemblees(args.langue, "apercu")
+        pages = [("" if p == echanges.ACCUEIL else p) for p in args.pages] if args.pages else None
+        inconnues = [p for p in pages or [] if p not in assemblees and p != echanges.LLMS]
+        if inconnues:
+            raise ValueError("page(s) inconnue(s) : " + ", ".join(inconnues) + " (clés de page : accueil, contact/, ...)")
+        glossaire = {fr: l for fr, l in chnell.charger_glossaire().items() if args.langue in l}
+        statuts = set(args.statuts or echanges.STATUTS_XLIFF_PAR_DEFAUT)
+        nom = f"neur-on-{args.langue}"
+        resultats = [(f"{nom}.xlf", echanges.exporter_xliff(args.langue, table, pages, statuts, dossier / f"{nom}.xlf",
+                                                         assemblees=assemblees, glossaire=glossaire), "unité(s) XLIFF"),
+                     (f"{nom}-v1.tmx", echanges.exporter_tmx(args.langue, table, {"v1"}, dossier / f"{nom}-v1.tmx"),
+                      "unité(s) de traduction TMX"),
+                     (f"{nom}-glossaire.csv", echanges.exporter_glossaire_csv(args.langue, glossaire,
+                                                                              dossier / f"{nom}-glossaire.csv"), "terme(s)")]
+    except ValueError as e:
+        print(f"Export refusé : {e}", file=sys.stderr)
+        return 1
+    print(afficher_export(args.langue, dossier, resultats, pages))
+    if not glossaire:
+        print("Glossaire vide pour cette langue : le CSV ne contient que son en-tête (commande glossaire, après la "
+              "session CHnell)")
+    return 0
+
+
 def commande_chnell(args):
     """chnell file, ajouter et lire : n'ont besoin ni du site V1 ni de build.py."""
     if args.action == "lire":
@@ -216,10 +261,18 @@ def main(argv=None):
     p.add_argument("--arbitrages", action="store_true", help="liste détaillée des arbitrages pour Fabien")
     p = sous.add_parser("controler", help="contrôler les traductions de la table d'une langue (hors v1 et invariant)")
     p.add_argument("langue", choices=LANGUES)
+    p = sous.add_parser("exporter", help="XLIFF 1.2, TMX 1.4 et glossaire CSV pour les traducteurs experts")
+    p.add_argument("langue", choices=LANGUES)
+    p.add_argument("--pages", nargs="+", help="limiter l'XLIFF à ces pages (accueil, contact/, ...) ; tout le site par défaut")
+    p.add_argument("--statuts", nargs="+", choices=STATUTS,
+                   help="statuts exportés dans l'XLIFF (" + ", ".join(echanges.STATUTS_XLIFF_PAR_DEFAUT) + " par défaut)")
+    p.add_argument("--sortie", help="dossier de sortie (Bibliotheque-Claude/07-Ressources-traduction/Neuron/site-v2/<date>-<langue>/)")
     args = parser.parse_args(argv)
     if args.commande == "chnell":
         return commande_chnell(args)
     import build  # import tardif : les dossiers de build.py (DOSSIER_LANGUES, NEURON) servent d'emplacement
+    if args.commande == "exporter":
+        return commande_exporter(args, build)
     if args.commande == "glossaire":
         fichier_v1 = build.NEURON / "src/i18n" / f"termes-{args.langue}.json"
         if not fichier_v1.is_file():

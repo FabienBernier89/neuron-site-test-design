@@ -299,15 +299,18 @@ _MARQUEURS_EN_LIGNE = re.compile(r"\{/?\d+\}")  # marqueurs {n}…{/n} des balis
 _AVANT_LETTRE, _APRES_LETTRE = r"(?<![^\W\d_])", r"(?![^\W\d_])"  # bord de mot de la V1 : ni lettre avant, ni lettre après
 
 
-def terminologie(fr, tr, langue, glossaire):
+def _normaliser_terminologie(texte):
+    return " ".join(H.unescape(_MARQUEURS_EN_LIGNE.sub(" ", texte)).split())
+
+
+def termes_presents(fr, langue, glossaire):
     """Termes du glossaire de projet (chnell.construire_glossaire : {fr: {langue: {"terme", ...}}}) dont le terme français
-    figure dans le texte FR sans que l'équivalent retenu figure dans la traduction. Logique de « _termes » de la V1 : un
+    figure dans le texte FR : liste de (terme français, équivalent retenu dans la langue), dans l'ordre du glossaire. Un
     sigle (CO, LB : majuscules, 6 caractères au plus) se cherche en mot entier à la casse exacte, un autre terme avec un
-    pluriel facultatif, sans tenir compte de la casse ; l'équivalent est reconnu par le début (5 lettres) de chacun de
-    ses mots d'au moins 3 lettres, pour tolérer les flexions. Une alerte, jamais une certitude : à revoir par un humain."""
-    fr = " ".join(H.unescape(_MARQUEURS_EN_LIGNE.sub(" ", fr)).split())
-    tr = " ".join(H.unescape(_MARQUEURS_EN_LIGNE.sub(" ", tr)).split())
-    problemes = []
+    pluriel facultatif, sans tenir compte de la casse (logique de « _termes » de la V1). Sert au contrôle terminologique et
+    à la note des exports pour les traducteurs."""
+    fr = _normaliser_terminologie(fr)
+    trouves = []
     for terme_fr, langues in glossaire.items():
         eq = (langues.get(langue) or {}).get("terme")
         if not eq or not terme_fr.strip():
@@ -317,9 +320,21 @@ def terminologie(fr, tr, langue, glossaire):
         else:
             motif = re.compile(_AVANT_LETTRE + r"[sx]?\s+".join(re.escape(m) for m in terme_fr.split()) + r"[sx]?"
                                + _APRES_LETTRE, re.I)
+        if motif.search(fr):
+            trouves.append((terme_fr, eq))
+    return trouves
+
+
+def terminologie(fr, tr, langue, glossaire):
+    """Termes du glossaire de projet dont le terme français figure dans le texte FR (termes_presents) sans que l'équivalent
+    retenu figure dans la traduction : l'équivalent est reconnu par le début (5 lettres) de chacun de ses mots d'au moins
+    3 lettres, pour tolérer les flexions. Une alerte, jamais une certitude : à revoir par un humain."""
+    tr = _normaliser_terminologie(tr)
+    problemes = []
+    for terme_fr, eq in termes_presents(fr, langue, glossaire):
         mots = _MOT.findall(eq)
         prefixes = [m[:5].casefold() for m in ([m for m in mots if len(m) >= 3] or mots)]
-        if motif.search(fr) and not all(p in tr.casefold() for p in prefixes):
+        if not all(p in tr.casefold() for p in prefixes):
             problemes.append(probleme("terminologie", f"« {terme_fr} » sans « {eq} »", tr))
     return problemes
 
