@@ -97,10 +97,11 @@ class TestAuditDesign(unittest.TestCase):
     def test_liens_legaux_coupables(self):
         self.assertIn("overflow-wrap:anywhere", self.regles(".lg-c a")[0])
 
-    # Item 10 : commander un extrait depuis la page Fiduciaires
+    # Item 10 : commander la traduction d'un extrait depuis la page Fiduciaires (libellé corrigé par décision de Fabien
+    # du 2026-10-27 : le service vend la traduction des extraits, certifiée si besoin, lot Z des contenus)
     def test_fiduciaires_commander_un_extrait(self):
         h = self.page("solutions/fiduciaires-conseil/")
-        self.assertRegex(h, r'<a class="lien" href="https://auszug-hr\.ch" rel="noopener">Commander un extrait</a>')
+        self.assertRegex(h, r'<a class="lien" href="https://auszug-hr\.ch" rel="noopener">Commander une traduction</a>')
 
     # Item 11 : la marque dans les articles du blog
     def test_marque_sans_capitales_dans_le_blog(self):
