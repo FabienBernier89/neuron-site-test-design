@@ -5804,6 +5804,19 @@
   "source": "V1 de/loesungen/legaltech-verlage/",
   "par_page": {}
  },
+ "17b6db0c83edc871": {
+  "fr": "{1}MT{/1}",
+  "trad": null,
+  "statut": null,
+  "source": null,
+  "par_page": {
+   "corrext/plugin-word/": {
+    "trad": "{1}MT{/1}",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
+   }
+  }
+ },
  "17be4de27fcf8286": {
   "fr": "{1}Prämie{/1}",
   "trad": null,
@@ -6786,6 +6799,11 @@
     "trad": "Terminologie",
     "statut": "v1",
     "source": "V1 de/"
+   },
+   "corrext/plugin-word/": {
+    "trad": "Terminologie",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
    }
   }
  },
@@ -12941,7 +12959,13 @@
   "trad": "{1}Digital Shapers {2} 2023{/1}",
   "statut": "mt",
   "source": "LexMachina 2026-10-26",
-  "par_page": {}
+  "par_page": {
+   "": {
+    "trad": "{1}Digital Shapers{2}2023{/1}",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
+   }
+  }
  },
  "2f118f8377abd0bd": {
   "fr": "impôt anticipé",
@@ -14137,7 +14161,13 @@
   "trad": "Reimport Dokx",
   "statut": "mt",
   "source": "LexMachina 2026-10-26",
-  "par_page": {}
+  "par_page": {
+   "corrext/plugin-word/": {
+    "trad": "Reimport docx",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
+   }
+  }
  },
  "334d1f7be30abf0a": {
   "fr": "{1}Règle de tri en une phrase.{/1} Si la seule mesure qui rend un envoi acceptable est la pseudonymisation, demandez-vous ce qu'il resterait du risque si elle était imparfaite. Quand la réponse est « beaucoup », choisissez un traitement qui ne sort pas de Suisse.",
@@ -19359,6 +19389,11 @@
     "trad": "{1}Blog{/1}",
     "statut": "v1",
     "source": "V1 de/corrext/uebersetzungsprojekte/"
+   },
+   "corrext/plugin-word/": {
+    "trad": "{1}Blog{/1}",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
    },
    "corrext/traduction-texte-et-document/": {
     "trad": "{1}Blog{/1}",
@@ -36421,6 +36456,11 @@
   "statut": "mt",
   "source": "LexMachina 2026-10-26",
   "par_page": {
+   "corrext/plugin-word/": {
+    "trad": "Set-up{1}{2}{/2}",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
+   },
    "solutions/autorites-administration/": {
     "trad": "Set-up{1}{2}{/2}",
     "statut": "v1",
@@ -41729,7 +41769,13 @@
   "trad": "File Overview {1} {2}{/2} {3}{4}3{/4} Quoten{/3}",
   "statut": "mt",
   "source": "LexMachina 2026-10-26",
-  "par_page": {}
+  "par_page": {
+   "corrext/plugin-word/": {
+    "trad": "File overview{1}{2}{/2}{3}{4}3{/4}Quotes{/3}",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
+   }
+  }
  },
  "9fd01ae477222174": {
   "fr": "prescription",
@@ -42922,6 +42968,11 @@
   "statut": null,
   "source": null,
   "par_page": {
+   "": {
+    "trad": "{1}Terminologie{/1}",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
+   },
    "solutions/cabinets-avocats/": {
     "trad": "{1}Terminologie{/1}",
     "statut": "v1",
@@ -43876,6 +43927,24 @@
   "statut": "v1",
   "source": "V1 de/ressourcen/glossar/schadenersatz/",
   "par_page": {}
+ },
+ "a871bde8eec8292d": {
+  "fr": "ISO 27001",
+  "trad": null,
+  "statut": null,
+  "source": null,
+  "par_page": {
+   "": {
+    "trad": "ISO 27001",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
+   },
+   "corrext/plugin-word/": {
+    "trad": "ISO 27001",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
+   }
+  }
  },
  "a8728ed28b39531d": {
   "fr": "Effacer le filtre source",
@@ -45352,7 +45421,13 @@
   "trad": "Translation Project",
   "statut": "mt",
   "source": "LexMachina 2026-10-26",
-  "par_page": {}
+  "par_page": {
+   "corrext/plugin-word/": {
+    "trad": "Translation project",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
+   }
+  }
  },
  "ae3e111cd0e8d966": {
   "fr": "Créer le projet : Gestion de projet",
@@ -47225,7 +47300,13 @@
   "trad": "{1}{/1} {2}{/2} {3}{/3} {4}Microsoft Word{/4}",
   "statut": "mt",
   "source": "LexMachina 2026-10-26",
-  "par_page": {}
+  "par_page": {
+   "corrext/plugin-word/": {
+    "trad": "{1}{/1}{2}{/2}{3}{/3}{4}Microsoft Word{/4}",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
+   }
+  }
  },
  "b6a44f58cd7fe2a6": {
   "fr": "Protection des données · Neur.on",
@@ -54186,6 +54267,19 @@
   "statut": "v1",
   "source": "V1 de/vergleich/uebersetzungsbuero-oder-plattform/",
   "par_page": {}
+ },
+ "d1d7c38136e76b9e": {
+  "fr": "Export docx",
+  "trad": null,
+  "statut": null,
+  "source": null,
+  "par_page": {
+   "corrext/plugin-word/": {
+    "trad": "Export docx",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
+   }
+  }
  },
  "d1e0b83a0e5fc68b": {
   "fr": "Pourquoi les notions juridiques suisses sont-elles difficiles à traduire en anglais ?",
@@ -63041,6 +63135,11 @@
     "trad": "{1}Presse{/1}",
     "statut": "v1",
     "source": "V1 de/corrext/uebersetzungsprojekte/"
+   },
+   "corrext/plugin-word/": {
+    "trad": "{1}Presse{/1}",
+    "statut": "invariant",
+    "source": "confirmé par Fabien le 2026-10-27, identique au français (relecture croisée des agents)"
    },
    "corrext/traduction-texte-et-document/": {
     "trad": "{1}Presse{/1}",
