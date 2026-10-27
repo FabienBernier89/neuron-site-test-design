@@ -333,7 +333,15 @@ def commande_fusionner(args, build):
     """fusionner : propositions d'un agent dans la table, au statut adapte."""
     table = Table(args.langue, build.DOSSIER_LANGUES)
     try:
-        rapport = echanges.fusionner(Path(args.fichier), table, args.statut, harmonisation=args.harmonisation)
+        # textes jamais traduits : leur français vient de a_traduire.json et des lots donnés (--lot)
+        textes = {}
+        liste = build.DOSSIER_LANGUES / args.langue / "a_traduire.json"
+        if liste.is_file():
+            textes.update({k: e["fr"] for k, e in json.loads(liste.read_text(encoding="utf-8")).items()})
+        for lot in args.lot or []:
+            textes.update({x["cle"]: x["fr"] for x in json.loads(Path(lot).read_text(encoding="utf-8"))})
+        rapport = echanges.fusionner(Path(args.fichier), table, args.statut, harmonisation=args.harmonisation,
+                                     textes=textes)
     except ValueError as e:
         print(f"Fusion refusée, table inchangée : {e}", file=sys.stderr)
         return 1
@@ -514,6 +522,7 @@ def main(argv=None):
     p.add_argument("fichier", help="propositions.json ou relecture.json")
     p.add_argument("--statut", default=echanges.STATUT_FUSION, help="statut posé (adapte, le seul permis)")
     p.add_argument("--simuler", action="store_true", help="contrôler et rapporter sans écrire la table")
+    p.add_argument("--lot", nargs="+", help="lot(s) de l'agent (lot-<langue>.json) : texte français des textes neufs")
     p.add_argument("--harmonisation", action="store_true",
                    help="propositions d'harmonisation : un texte V1 réécrit passe au statut adapte (jamais un texte relu)")
     args = parser.parse_args(argv)

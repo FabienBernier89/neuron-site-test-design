@@ -258,6 +258,28 @@ class TestHarmonisation(Base):
         rapport = self.fusionner({"cle": cle("Contact"), "trad": "Kontakt " + TIRET_CADRATIN + " Team"}, harmonisation=True)
         self.assertEqual(self.raisons(rapport), {cle("Contact"): "tirets"})
 
+class TestTextesNeufs(Base):
+    """Méthode du 2026-10-27 : un texte jamais traduit n'a pas d'entrée dans la table ; la fusion la crée quand le texte
+    français est connu (a_traduire.json ou lot de l'agent), sinon la clé reste refusée."""
+
+    def test_cle_neuve_creee_depuis_le_texte_francais(self):
+        neuf = "Un texte {1}neuf{/1} du site"
+        rapport = self.fusionner({"cle": cle(neuf), "trad": "Ein {1}neuer{/1} Text der Website"}, textes={cle(neuf): neuf})
+        self.assertEqual((rapport["poses"], rapport["refuses"]), (1, []))
+        e = self.entree(neuf)
+        self.assertEqual((e["trad"], e["statut"]), ("Ein {1}neuer{/1} Text der Website", "adapte"))
+        self.assertEqual(self.table.entrees[cle(neuf)]["source"], f"adapté le {JOUR}")
+
+    def test_cle_neuve_sans_texte_francais_refusee(self):
+        rapport = self.fusionner({"cle": cle("Inconnu"), "trad": "Unbekannt"})
+        self.assertEqual(self.raisons(rapport), {cle("Inconnu"): "clé inconnue"})
+
+    def test_cle_neuve_controles_et_marqueurs_appliques(self):
+        neuf = "Un texte {1}neuf{/1}"
+        rapport = self.fusionner({"cle": cle(neuf), "trad": "Ein neuer Text"}, textes={cle(neuf): neuf})
+        self.assertEqual(self.raisons(rapport), {cle(neuf): "marqueurs"})
+        self.assertNotIn(cle(neuf), self.table.entrees)
+
 class TestCommande(Base):
     def lancer(self, *argv):
         sortie, erreur = io.StringIO(), io.StringIO()
@@ -266,6 +288,19 @@ class TestCommande(Base):
                 mock.patch.object(cli.chnell, "charger_glossaire", lambda *a, **k: GLOSSAIRE):
             code = cli.main(list(argv))
         return code, sortie.getvalue(), erreur.getvalue()
+
+    def test_commande_textes_neufs_par_le_lot_et_a_traduire(self):
+        self.table.enregistrer()
+        neuf, autre = "Un texte neuf", "Un autre texte neuf"
+        lot = self.dossier / "lot.json"
+        lot.write_text(json.dumps([{"cle": cle(neuf), "fr": neuf, "contexte_v1": None, "glossaire": []}]), encoding="utf-8")
+        (self.dossier / "de").mkdir(exist_ok=True)
+        (self.dossier / "de" / "a_traduire.json").write_text(json.dumps({cle(autre): {"fr": autre}}), encoding="utf-8")
+        fichier = self.propositions({"cle": cle(neuf), "trad": "Ein neuer Text"}, {"cle": cle(autre), "trad": "Ein anderer Text"})
+        code, sortie, _ = self.lancer("fusionner", "de", str(fichier), "--lot", str(lot))
+        self.assertEqual(code, 0, sortie)
+        t = Table("de", self.dossier)
+        self.assertEqual((t.chercher(neuf, "")["trad"], t.chercher(autre, "")["trad"]), ("Ein neuer Text", "Ein anderer Text"))
 
     def test_commande_fusionner(self):
         self.table.enregistrer()

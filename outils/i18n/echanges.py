@@ -749,7 +749,7 @@ def preparer_lot_v1(table, textes, glossaire):
 STATUT_FUSION = "adapte"  # seul statut que la fusion pose : relu vient toujours d'un relecteur humain (importer)
 
 
-def fusionner(fichier, table, statut=STATUT_FUSION, glossaire=None, jour=None, harmonisation=False):
+def fusionner(fichier, table, statut=STATUT_FUSION, glossaire=None, jour=None, harmonisation=False, textes=None):
     """Fusionne dans la table (en mémoire : l'appelant fait enregistrer()) les propositions d'un fichier JSON, liste de
     {"cle": clé du texte français (table.cle), "trad": traduction à marqueurs {n}, "note": remarque facultative}. Chaque
     proposition passe les contrôles ci-dessous ; une proposition refusée laisse la table intacte et les autres sont posées.
@@ -779,6 +779,10 @@ def fusionner(fichier, table, statut=STATUT_FUSION, glossaire=None, jour=None, h
     for p in propositions:
         ident = p.get("cle") if isinstance(p, dict) and isinstance(p.get("cle"), str) else None
         entree = table.entrees.get(ident)
+        # texte jamais traduit (méthode du 2026-10-27) : l'entrée est créée d'après le français connu (a_traduire.json,
+        # lot de l'agent), seulement si la clé est bien celle de ce texte
+        if entree is None and ident in (textes or {}) and cle(textes[ident]) == ident:
+            entree = {"fr": _normal(textes[ident]), "trad": None, "statut": None, "source": None, "par_page": {}}
 
         def refuser(raison, detail=""):
             rapport["refuses"].append({"cle": ident, "raison": raison, "detail": detail,
