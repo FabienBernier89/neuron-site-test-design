@@ -174,11 +174,37 @@ def sources_francaises(html):
                   html)
 
 
+def _colonnes_de_langue(m):
+    """Tableau dont l'en-tête nomme des langues (« Allemand », « Français »...) : chaque cellule de ces colonnes porte le
+    lang de sa colonne, le français compris (passage français voulu, jamais traduit : Ruling 14). Les autres colonnes
+    (« Domaine ») restent du texte de la page. Tableau des termes du glossaire, traduction allemande du 2026-10-27."""
+    table = m.group(0)
+    entete = re.search(r"<thead>.*?</thead>", table, flags=re.S)
+    if not entete:
+        return table
+    codes = [CODES.get(H.unescape(re.sub(r"<[^>]+>", "", c)).strip())
+             for c in re.findall(r"<th\b[^>]*>(.*?)</th>", entete.group(0), flags=re.S)]
+    if not any(codes):
+        return table
+
+    def ligne(r):
+        n = [0]
+
+        def cellule(c):
+            code = codes[n[0]] if n[0] < len(codes) else None
+            n[0] += 1
+            return _lang(c.group(0), code, francais=True)
+        return re.sub(r"<td\b[^>]*>", cellule, r.group(0))
+    corps = table[entete.end():]
+    return table[:entete.end()] + re.sub(r"<tr\b.*?</tr>", ligne, corps, flags=re.S)
+
+
 def langues_tableaux(html):
     """Cellules des tableaux de termes, étiquetées par leur colonne (data-m) ; tuiles « quatre langues » du glossaire
     (<b>terme</b><p>Allemand</p>) ou fiche des langues (<dt>Allemand</dt><dd>terme</dd>) ; terme du h1 du glossaire, s'il
     figure dans l'une ou l'autre."""
     html = re.sub(r'<(th|td)\b[^>]*\sdata-m="([^"]+)"[^>]*>', lambda m: _lang(m.group(0), CODES.get(m.group(2))), html)
+    html = re.sub(r"<table\b.*?</table>", _colonnes_de_langue, html, flags=re.S)
     tuiles = {}
 
     def tuile(m):
