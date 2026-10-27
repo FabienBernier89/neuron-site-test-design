@@ -18,5 +18,8 @@ def _paires(page):
 
 def traiter(html, page):
     for ancien, nouveau in _paires(page):
-        html = html.replace(ancien, nouveau).replace(H.escape(ancien, quote=False), H.escape(nouveau, quote=False))
+        html = html.replace(ancien, nouveau)
+        echappe = H.escape(ancien, quote=False)
+        if echappe != ancien:  # sinon la correction s'appliquerait deux fois (« est exigé » donnerait « est exigéee »)
+            html = html.replace(echappe, H.escape(nouveau, quote=False))
     return html
