@@ -835,7 +835,8 @@ class TestImportCsv(Base):
 
 
 class TestPreparer(Base):
-    """Vague finale, point 7 (Ruling 32) : lot d'adaptation {cle, fr, mt, contexte_v1, glossaire} hors du dépôt."""
+    """Vague finale, point 7 (Ruling 32) et décision de Fabien du 2026-10-27 : lot de traduction {cle, fr, contexte_v1,
+    glossaire} hors du dépôt, depuis le français (aucune sortie LexMachina comme base)."""
 
     def a_traduire(self):
         contexte = {"nature": "morceau", "page_v1": "de/", "fr_complet": "Le capital-actions de la société anonyme",
@@ -846,21 +847,21 @@ class TestPreparer(Base):
     def test_lot(self):
         self.table.poser(CAPITAL, "Das {1}Aktienkapital{/1} der Firma", "mt", "LexMachina")
         a_traduire, contexte = self.a_traduire()
-        lot, sans_mt = E.preparer_lot(self.table, a_traduire, {}, GLOSSAIRE)
-        self.assertEqual([x["cle"] for x in lot], sorted([cle(CAPITAL), cle(ADRESSE)]))
+        lot = E.preparer_lot(self.table, a_traduire, {}, GLOSSAIRE)
+        # tous les textes à traduire, avec ou sans sortie brute ; la sortie brute n'est jamais transmise
+        self.assertEqual([x["cle"] for x in lot], sorted([cle(CAPITAL), cle(ADRESSE), cle("Texte neuf")]))
         capital = next(x for x in lot if x["cle"] == cle(CAPITAL))
-        self.assertEqual(capital, {"cle": cle(CAPITAL), "fr": CAPITAL, "mt": "Das {1}Aktienkapital{/1} der Firma",
-                                   "contexte_v1": contexte, "glossaire": [{"fr": "capital-actions", "terme": "Aktienkapital"}]})
+        self.assertEqual(capital, {"cle": cle(CAPITAL), "fr": CAPITAL, "contexte_v1": contexte,
+                                   "glossaire": [{"fr": "capital-actions", "terme": "Aktienkapital"}]})
+        self.assertNotIn("mt", json.dumps(lot))
         self.assertEqual(next(x for x in lot if x["cle"] == cle(ADRESSE))["contexte_v1"], None)
-        self.assertEqual(sans_mt, {cle("Texte neuf"): "Texte neuf"})
         # contextes.json l'emporte ; des textes relevés à l'instant (--pages) remplacent a_traduire.json
         autre = {"nature": "variante de balisage"}
-        lot, _ = E.preparer_lot(self.table, a_traduire, {cle(CAPITAL): {"fr": CAPITAL, "contexte": autre}}, GLOSSAIRE,
-                                textes={cle(CAPITAL): CAPITAL})
+        lot = E.preparer_lot(self.table, a_traduire, {cle(CAPITAL): {"fr": CAPITAL, "contexte": autre}}, GLOSSAIRE,
+                             textes={cle(CAPITAL): CAPITAL})
         self.assertEqual([(x["cle"], x["contexte_v1"]) for x in lot], [(cle(CAPITAL), autre)])
 
     def test_commande_hors_depot(self):
-        self.table.poser(CAPITAL, "Das {1}Aktienkapital{/1} der Firma", "mt", "LexMachina")
         self.table.enregistrer()
         a_traduire, _ = self.a_traduire()
         (self.langues / "de" / "a_traduire.json").write_text(json.dumps(a_traduire), encoding="utf-8")
@@ -869,13 +870,41 @@ class TestPreparer(Base):
                 mock.patch.object(cli.chnell, "charger_glossaire", lambda *a, **k: GLOSSAIRE):
             self.assertEqual(cli.main(["preparer", "de", "--sortie", str(self.sortie / "lot")]), 0)
             lot = json.loads((self.sortie / "lot" / "lot-de.json").read_text(encoding="utf-8"))
-            self.assertEqual([x["cle"] for x in lot], sorted([cle(CAPITAL), cle(ADRESSE)]))
-            self.assertIn("1 texte(s) sans sortie brute", sortie.getvalue())
+            self.assertEqual([x["cle"] for x in lot], sorted([cle(CAPITAL), cle(ADRESSE), cle("Texte neuf")]))
+            self.assertNotIn("sortie brute", sortie.getvalue())
             with contextlib.redirect_stderr(io.StringIO()) as erreur:
                 self.assertEqual(cli.main(["preparer", "de", "--sortie", str(ICI / "lot-refuse-test")]), 1)
             self.assertIn("dépôt", erreur.getvalue())
         self.assertFalse((ICI / "lot-refuse-test").exists())
 
+
+class TestHarmonisationV1(Base):
+    """Décision de Fabien du 2026-10-27 : passe d'harmonisation du style sur les textes V1 repris. Le lot porte la
+    traduction V1 actuelle ; seuls les textes réécrits reviennent (fusionner --harmonisation) et repartent en relecture."""
+
+    def test_cles_par_statut_des_pages(self):
+        cles = E.cles_par_statut("de", ["", "contact/", "a-propos/"], self.table, ("v1",), assemblees=PAGES)
+        # DEMO et CONTACT par défaut, CONTACT aussi par page sur contact/ ; « Notre équipe » est relu, jamais pris
+        self.assertEqual(cles, {cle(DEMO): DEMO, cle(CONTACT): CONTACT})
+        self.assertEqual(E.cles_par_statut("de", ["a-propos/"], self.table, ("v1",), assemblees=PAGES), {})
+
+    def test_lot_v1(self):
+        lot = E.preparer_lot_v1(self.table, {cle(DEMO): DEMO, cle(CONTACT): CONTACT}, GLOSSAIRE)
+        self.assertEqual(lot, sorted([{"cle": cle(DEMO), "fr": DEMO, "v1": "Demo anfragen", "glossaire": []},
+                                      {"cle": cle(CONTACT), "fr": CONTACT, "v1": "Kontakt", "glossaire": []}],
+                                     key=lambda x: x["cle"]))
+
+    def test_commande_preparer_v1_hors_depot(self):
+        self.table.enregistrer()
+        sortie = io.StringIO()
+        with contextlib.redirect_stdout(sortie), mock.patch.object(build, "DOSSIER_LANGUES", self.langues), \
+                mock.patch.object(traduire, "pages_assemblees", lambda langue, mode: PAGES), \
+                mock.patch.object(cli.chnell, "charger_glossaire", lambda *a, **k: GLOSSAIRE):
+            self.assertEqual(cli.main(["preparer", "de", "--v1", "--pages", "accueil", "contact/",
+                                       "--sortie", str(self.sortie / "lot")]), 0)
+        lot = json.loads((self.sortie / "lot" / "lot-v1-de.json").read_text(encoding="utf-8"))
+        self.assertEqual({x["cle"] for x in lot}, {cle(DEMO), cle(CONTACT)})
+        self.assertIn("harmonisation", sortie.getvalue())
 
 class TestCommandes(Base):
     """Commandes exporter et importer de outils/i18n/__main__.py, tables et sorties dans des dossiers temporaires."""

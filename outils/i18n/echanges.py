@@ -696,29 +696,52 @@ def nom_pour_fichier(texte):
 # ---------- lot d'adaptation (Ruling 32) ----------
 
 def preparer_lot(table, a_traduire, contextes, glossaire, textes=None):
-    """Lot d'adaptation d'une langue (commande preparer, Ruling 32 ; consigne : BRIEF-ADAPTATION.md) : (lot, sans_mt).
-    lot : [{"cle", "fr", "mt", "contexte_v1", "glossaire"}], dans l'ordre des clés, pour chaque texte à traduire qui a
-    une sortie brute de LexMachina dans la table (statut mt) ; « contexte_v1 » : le contexte de contextes.json, sinon celui
-    de a_traduire.json, sinon None ; « glossaire » : [{"fr", "terme"}] des termes du glossaire de projet présents dans le
-    texte (controles.termes_presents). sans_mt : {clé: texte FR} des textes sans sortie brute (à passer d'abord par le
-    pont). a_traduire : contenu de a_traduire.json ({clé: {"fr", "contexte"}}) ; contextes : contenu de contextes.json ;
-    glossaire : {fr: {langue: {terme, ...}}} ; textes : {clé: texte FR} qui remplacent a_traduire (pages données,
-    pont_corrext.textes_des_pages)."""
+    """Lot de traduction d'une langue (commande preparer, Ruling 32 ; consigne : BRIEF-ADAPTATION.md). Décision de Fabien
+    du 2026-10-27 : les textes sans traduction V1 sont traduits par l'agent depuis le français ; aucune sortie de
+    LexMachina ne sert de base, et le lot n'en contient jamais. Rend [{"cle", "fr", "contexte_v1", "glossaire"}] dans
+    l'ordre des clés, pour chaque texte à traduire ; « contexte_v1 » : le contexte de contextes.json, sinon celui de
+    a_traduire.json, sinon None ; « glossaire » : [{"fr", "terme"}] des termes du glossaire de projet présents dans le
+    texte (controles.termes_presents). a_traduire : contenu de a_traduire.json ({clé: {"fr", "contexte"}}) ; contextes :
+    contenu de contextes.json ; glossaire : {fr: {langue: {terme, ...}}} ; textes : {clé: texte FR} qui remplacent
+    a_traduire (pages données, pont_corrext.textes_des_pages)."""
     if textes is not None:
         a_traduire = {k: {"fr": fr, **({"contexte": a_traduire[k]["contexte"]} if a_traduire.get(k, {}).get("contexte")
                                        else {})} for k, fr in textes.items()}
     glossaire = _glossaire_de(table.langue, glossaire)
-    lot, sans_mt = [], {}
+    lot = []
     for k in sorted(a_traduire):
         fr = a_traduire[k]["fr"]
-        entree = table.entrees.get(k)
-        if entree is None or entree["statut"] != "mt" or entree["trad"] is None:
-            sans_mt[k] = fr
-            continue
         contexte = (contextes.get(k) or {}).get("contexte") or a_traduire[k].get("contexte")
-        lot.append({"cle": k, "fr": fr, "mt": entree["trad"], "contexte_v1": contexte,
+        lot.append({"cle": k, "fr": fr, "contexte_v1": contexte,
                     "glossaire": [{"fr": t, "terme": eq} for t, eq in controles.termes_presents(fr, table.langue, glossaire)]})
-    return lot, sans_mt
+    return lot
+
+
+def cles_par_statut(langue, pages, table, statuts, assemblees=None):
+    """{clé: texte FR} des textes des pages données (clés de build.PAGES, « accueil » pour l'accueil ; toutes si pages est
+    None) dont la traduction utilisée sur la page a un des statuts donnés (traduire.analyser, mode aperçu). assemblees :
+    {page: html} ou {page: {mode: html}} (traduire.pages_union si absent). Sert au lot d'harmonisation des textes V1."""
+    assemblees = assemblees if assemblees is not None else traduire.pages_union(langue)
+    pages = list(assemblees) if pages is None else ["" if p == ACCUEIL else p for p in pages]
+    textes = {}
+    for page in pages:
+        if page not in assemblees:
+            raise ValueError(f"page inconnue : « {page or ACCUEIL} »")
+        for html in traduire.variantes(assemblees[page]):
+            for k, statut in traduire.analyser(html, page, langue, table, "apercu")["statuts"].items():
+                if statut in statuts and k in table.entrees:
+                    textes[k] = table.entrees[k]["fr"]
+    return textes
+
+
+def preparer_lot_v1(table, textes, glossaire):
+    """Lot d'harmonisation (décision de Fabien du 2026-10-27) : [{"cle", "fr", "v1", "glossaire"}] dans l'ordre des clés,
+    « v1 » étant la traduction par défaut actuelle du texte. L'agent ne rend que les textes qu'il réécrit
+    (fusionner --harmonisation) ; les autres gardent leur validation V1."""
+    glossaire = _glossaire_de(table.langue, glossaire)
+    return [{"cle": k, "fr": fr, "v1": table.entrees[k]["trad"],
+             "glossaire": [{"fr": t, "terme": eq} for t, eq in controles.termes_presents(fr, table.langue, glossaire)]}
+            for k, fr in sorted(textes.items()) if table.entrees.get(k, {}).get("trad") is not None]
 
 
 # ---------- fusion des adaptations ----------
@@ -726,7 +749,7 @@ def preparer_lot(table, a_traduire, contextes, glossaire, textes=None):
 STATUT_FUSION = "adapte"  # seul statut que la fusion pose : relu vient toujours d'un relecteur humain (importer)
 
 
-def fusionner(fichier, table, statut=STATUT_FUSION, glossaire=None, jour=None):
+def fusionner(fichier, table, statut=STATUT_FUSION, glossaire=None, jour=None, harmonisation=False):
     """Fusionne dans la table (en mémoire : l'appelant fait enregistrer()) les propositions d'un fichier JSON, liste de
     {"cle": clé du texte français (table.cle), "trad": traduction à marqueurs {n}, "note": remarque facultative}. Chaque
     proposition passe les contrôles ci-dessous ; une proposition refusée laisse la table intacte et les autres sont posées.
@@ -750,7 +773,7 @@ def fusionner(fichier, table, statut=STATUT_FUSION, glossaire=None, jour=None):
     if not isinstance(propositions, list):
         raise ValueError(f"{fichier} : une liste de propositions [{{\"cle\", \"trad\", \"note\"}}] est attendue")
     glossaire = _glossaire_de(table.langue, glossaire)
-    suite = f"adapté le {jour or date.today().isoformat()}"
+    suite = f"{'harmonisé' if harmonisation else 'adapté'} le {jour or date.today().isoformat()}"
     rapport = {"poses": 0, "refuses": [], "avertissements": [], "notes": []}
     vus = set()
     for p in propositions:
@@ -772,10 +795,11 @@ def fusionner(fichier, table, statut=STATUT_FUSION, glossaire=None, jour=None):
         if entree is None:
             refuser("clé inconnue", "aucun texte français de la table n'a cette clé")
             continue
-        if entree["statut"] == "relu" or entree.get("v1"):
+        # harmonisation (décision du 2026-10-27) : un texte V1 peut être réécrit pour le style, jamais un texte relu
+        if entree["statut"] == "relu" or (entree.get("v1") and not harmonisation):
             refuser("déjà relu", "traduction relue par un traducteur expert : jamais réécrite")
             continue
-        if entree["statut"] in ("v1", "invariant"):
+        if entree["statut"] == "invariant" or (entree["statut"] == "v1" and not harmonisation):
             refuser("déjà validé", f"statut {entree['statut']} : validé avant la V2")
             continue
         if not trad.strip():

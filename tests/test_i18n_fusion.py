@@ -233,6 +233,31 @@ class TestFusion(Base):
         self.assertFalse(self.table.fichier.exists())  # enregistrer() est l'affaire de l'appelant
 
 
+class TestHarmonisation(Base):
+    """fusionner(..., harmonisation=True) : un texte V1 réécrit pour le style devient adapte (repart en relecture)."""
+
+    def test_remplace_un_texte_v1(self):
+        rapport = self.fusionner({"cle": cle("Contact"), "trad": "Kontaktieren Sie uns", "note": "style"},
+                                 harmonisation=True)
+        self.assertEqual((rapport["poses"], rapport["refuses"]), (1, []))
+        e = self.table.entrees[cle("Contact")]
+        self.assertEqual((e["trad"], e["statut"]), ("Kontaktieren Sie uns", "adapte"))
+        self.assertTrue(e["source"].startswith("V1 de/kontakt/"))
+        self.assertTrue(e["source"].endswith(f"harmonisé le {JOUR}"))
+        self.assertNotIn("v1", e)
+
+    def test_ne_touche_jamais_un_texte_relu(self):
+        rapport = self.fusionner({"cle": cle("Notre équipe"), "trad": "Unser Team bei Neur.on"}, harmonisation=True)
+        self.assertEqual(self.raisons(rapport), {cle("Notre équipe"): "déjà relu"})
+
+    def test_sans_harmonisation_le_v1_reste_refuse(self):
+        rapport = self.fusionner({"cle": cle("Contact"), "trad": "Kontaktieren Sie uns"})
+        self.assertEqual(self.raisons(rapport), {cle("Contact"): "déjà validé"})
+
+    def test_controles_bloquants_toujours_appliques(self):
+        rapport = self.fusionner({"cle": cle("Contact"), "trad": "Kontakt " + TIRET_CADRATIN + " Team"}, harmonisation=True)
+        self.assertEqual(self.raisons(rapport), {cle("Contact"): "tirets"})
+
 class TestCommande(Base):
     def lancer(self, *argv):
         sortie, erreur = io.StringIO(), io.StringIO()

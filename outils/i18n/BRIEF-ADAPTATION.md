@@ -1,16 +1,15 @@
 # Consigne d'adaptation (agents de traduction)
 
-Tu adaptes un lot de **segments** du site Neur.on du français vers la langue cible (`<langue>` : `de`, `it` ou `en`). Un segment est un texte français de la table de traduction (`src/langues/<langue>/segments.json`), repéré par sa clé : un titre, une phrase, un libellé, une réponse de FAQ. Le point de départ est la sortie brute de LexMachina, le moteur de traduction neuronale de Neur.on. Ton travail : faire de cette sortie un texte que l'on croirait écrit directement pour le marché suisse de cette langue, sans rien perdre du sens, de l'exactitude juridique ni du référencement.
+Tu traduis un lot de **segments** du site Neur.on du français vers la langue cible (`<langue>` : `de`, `it` ou `en`). Un segment est un texte français de la table de traduction (`src/langues/<langue>/segments.json`), repéré par sa clé : un titre, une phrase, un libellé, une réponse de FAQ. Décision de Fabien du 2026-10-27, valable pour l'allemand, l'italien et l'anglais : tu traduis directement depuis le français. LexMachina, le moteur de traduction neuronale de Neur.on, n'est pas conçu pour le rédactionnel d'un site web : aucune de ses sorties ne sert de base. Seule la terminologie validée dans CHnell (le glossaire de ton lot) est imposée. Ton travail : un texte que l'on croirait écrit directement pour le marché suisse de cette langue, sans rien perdre du sens, de l'exactitude juridique ni du référencement. Adapte les tournures de phrase d'une langue à l'autre chaque fois que c'est nécessaire : ne calque jamais la syntaxe française.
 
 Tu ne travailles pas sur des pages ni sur des fichiers du site. Tu reçois des propositions de segments et tu rends des propositions de segments.
 
 ## Ce que contient ton lot
 
-Le lot est un fichier JSON préparé par `python3 -m outils.i18n preparer <langue>` hors du dépôt : une liste de `{cle, fr, mt, contexte_v1, glossaire}`. Pour chaque segment :
+Le lot est un fichier JSON préparé par `python3 -m outils.i18n preparer <langue>` hors du dépôt : une liste de `{cle, fr, contexte_v1, glossaire}`. Pour chaque segment :
 
 - `cle` : l'identifiant du segment (jamais modifié) ;
 - le texte français (FR), avec ses marqueurs ;
-- la sortie brute de LexMachina, avec les mêmes marqueurs (ou aplatie, sans marqueur, si LexMachina les a abîmés : voir plus bas) ;
 - le contexte V1 quand la mémoire des traductions validées en a un : `nature` (morceau d'un texte V1 plus long, variante de balisage, correction V2, recomposition), `fr_complet` (le texte V1 entier) et `trad_complete` (sa traduction validée par les traducteurs). Pars de cette traduction pour le morceau concerné : c'est la formulation que les traducteurs ont déjà approuvée. Un segment sans contexte n'a pas d'équivalent V1 ;
 - les lignes utiles du glossaire de projet : pour chaque terme français présent dans le segment, l'équivalent vérifié dans CHnell. Ces équivalents ne changent pas.
 
@@ -43,12 +42,11 @@ Les balises en ligne (liens, gras, retours à la ligne, jetons) sont remplacées
 - tu traduis le texte entre les marqueurs, jamais les marqueurs ;
 - tu places chaque marqueur autour du passage qui correspond à celui du français, même si l'ordre des mots change ;
 - pas d'espace ajoutée à l'intérieur d'une paire quand le français n'en a pas (`{1}Texte{/1}`, pas `{1} Texte {/1}`) ;
-- si la sortie brute est aplatie parce que LexMachina a abîmé les marqueurs, remets-les d'après le français ;
 - tu ne touches pas à ce qui est caché dans les marqueurs : adresses, classes, jetons, valeurs techniques.
 
 ## Comment adapter
 
-- Pars du sens du FR, pas des mots de la sortie brute. Corrige toute tournure calquée (exemple DE : « Konsultieren Sie die Datenschutzerklärung » devient « Lesen Sie die Datenschutzerklärung »). Un calque se repère à un lecteur suisse de la langue qui devinerait la traduction.
+- Pars du sens du FR, pas de ses mots. Évite toute tournure calquée (exemple DE : « Konsultieren Sie die Datenschutzerklärung » devient « Lesen Sie die Datenschutzerklärung »). Un calque se repère à un lecteur suisse de la langue qui devinerait la traduction.
 - Phrases courtes, une idée par phrase, ton expert et sobre de la marque. Aucun superlatif sans preuve, aucune affirmation ajoutée, aucune donnée inventée.
 - Terminologie juridique : celle des textes officiels suisses de la langue (glossaire du lot, guide, Fedlex). Abréviations des lois dans la langue (CO = OR en allemand). En cas de doute sur un terme, garde l'équivalent officiel et signale-le dans `note`.
 - Formats suisses : CHF 15'000 en allemand et en italien (apostrophe), 15,000 en anglais (virgule), dates selon le guide.
@@ -92,9 +90,19 @@ Ne lance pas `build.py`, n'écris pas dans `src/`, ne commite pas. D'autres agen
 ## Rapport (en français, court)
 
 - Nombre de segments traités.
-- Problèmes de la sortie brute corrigés, par grandes catégories, avec 3 exemples marquants.
+- Choix de traduction marquants (tournures adaptées, termes), par grandes catégories, avec 3 exemples.
 - Termes ou formulations incertains, à soumettre à un traducteur expert (ce sont aussi tes `note`).
 - Résultat de la fusion à blanc : propositions acceptées, refusées, avertissements.
+
+## Passe d'harmonisation des textes V1
+
+Décision de Fabien du 2026-10-27 : pour un style rédactionnel homogène sur tout le site, les textes repris de la V1 (validés par les traducteurs le 2026-10-05) sont relus avec les mêmes exigences que les textes neufs. Le lot vient de `python3 -m outils.i18n preparer <langue> --v1 [--pages ...]` : une liste de `{cle, fr, v1, glossaire}`, où `v1` est la traduction actuelle.
+
+- Tu ne réécris un texte V1 que s'il en a besoin : tournure calquée sur le français, ton ou registre différent du reste du site (guide de la langue), terme du glossaire non respecté, erreur de sens. Jamais pour une simple préférence : un texte V1 juste et naturel reste tel quel, il garde sa validation.
+- Les traducteurs ont validé la précision juridique de la V1 : ne la défais pas. Une réécriture garde les termes, les références et les nuances juridiques du texte V1, sauf erreur que tu motives dans `note`.
+- Tu rends `scratchpad/<lot>/harmonisation.json`, au format des propositions, **seulement pour les textes réécrits**. Chacun repart dans la file du traducteur expert (statut `adapte`).
+- Fusion à blanc : `python3 -m outils.i18n fusionner <langue> scratchpad/<lot>/harmonisation.json --harmonisation --simuler`.
+- Rapport : nombre de textes réécrits sur le total du lot, par motif, avec 3 exemples avant et après.
 
 ## Relecture croisée (second agent)
 
