@@ -18430,6 +18430,13 @@
    }
   }
  },
+ "44e9d960ccc226b2": {
+  "fr": "Gestion de projet et traduction des extraits du registre",
+  "trad": "Projektmanagement und Übersetzung von Handelsregisterauszügen",
+  "statut": "adapte",
+  "source": "adapté le 2026-10-27",
+  "par_page": {}
+ },
  "44ead7313d26569c": {
   "fr": "{1}{2}Schiedsgericht{/2}{/1}",
   "trad": null,
@@ -57039,6 +57046,13 @@
   "trad": "Warten Sie, bis jede Datei fertig verarbeitet ist, bevor Sie die Registerkarte verlassen.",
   "statut": "v1",
   "source": "V1 de/hilfe/dokumente-uebersetzen/",
+  "par_page": {}
+ },
+ "dc56a1234b0b6c45": {
+  "fr": "L'outil de traduction assistée par ordinateur que vous utilisez : traduction de textes et de fichiers, relecture, gestion de projet, {1}plugin Word{/1} et traduction des extraits du registre du commerce, certifiée si besoin.",
+  "trad": "Das Tool für computergestützte Übersetzung, mit dem Sie arbeiten: Übersetzung von Texten und Dateien, Lektorat, Projektmanagement, {1}Word-Plug-in{/1} und Übersetzung von Handelsregisterauszügen, auf Wunsch beglaubigt.",
+  "statut": "adapte",
+  "source": "adapté le 2026-10-27",
   "par_page": {}
  },
  "dc5800b328bb5b60": {
