@@ -10847,6 +10847,13 @@
   "source": "variante de balisage V1 it/traduzione/diritto-tributario/ (marqueur englobant)",
   "par_page": {}
  },
+ "22540d6fb935109c": {
+  "fr": "Oui. auszug-hr.ch est le service en ligne de Corrext dédié aux extraits du registre du commerce, accessible aussi depuis l'accueil de la plateforme. Les traductions sont réalisées par des traducteurs juridiques spécialisés dans le corporate housekeeping, assistés des modèles de traduction que l'équipe Corrext de juristes-linguistes et de data scientists a entraînés sur les extraits du registre du commerce suisse.",
+  "trad": "Sì. auszug-hr.ch è il servizio in linea di Corrext dedicato agli estratti del registro di commercio, accessibile anche dalla pagina iniziale della piattaforma. Le traduzioni sono eseguite da traduttori giuridici specializzati nel corporate housekeeping. Lavorano con modelli di traduzione che il team Corrext di giuristi linguisti e data scientist ha addestrato sugli estratti del registro di commercio svizzero.",
+  "statut": "v1",
+  "source": "V1 it/corrext/estratto-registro-di-commercio/",
+  "par_page": {}
+ },
  "225424436f681d77": {
   "fr": "Un contrat d'acquisition suisse",
   "trad": "Un contratto di acquisizione svizzero",
@@ -12830,9 +12837,9 @@
  },
  "285a9fddcceef6a8": {
   "fr": "Le service en ligne se parcourt en quatre étapes : recherche de la société par raison sociale ou par numéro IDE, choix du niveau de certification, choix du mode de livraison, choix du délai. Tout se fait en ligne, sans rendez-vous.",
-  "trad": "Il servizio in linea si completa in quattro passi: ricerca della società per ragione sociale o numero IDI, scelta del livello di certificazione, scelta del modo di consegna, scelta del termine di consegna. Tutto avviene in linea, senza appuntamento.",
-  "statut": "v1",
-  "source": "V1 it/soluzioni/fiduciarie/",
+  "trad": "Il servizio in linea si completa in quattro passi: ricerca della società per ditta o numero IDI, scelta del livello di certificazione, scelta del modo di consegna, scelta del termine di consegna. Tutto avviene in linea, senza appuntamento.",
+  "statut": "adapte",
+  "source": "V1 it/soluzioni/fiduciarie/ ; harmonisé le 2026-10-28",
   "par_page": {}
  },
  "285cbf93fd64067a": {
@@ -14198,6 +14205,13 @@
   "source": "V1 it/traduzione/contratti/",
   "par_page": {}
  },
+ "2ccc8a8a67c96a0a": {
+  "fr": "La traduction certifiée d'un extrait du registre du commerce suisse se commande depuis un service en ligne dédié, accessible par la carte « Commercial register extract » de l'accueil de Corrext. Le parcours tient en quatre étapes : trouver la société par son nom ou son numéro d'identification, choisir le niveau de certification, choisir le mode de livraison, puis fixer le délai. Le service couvre plus de 30 langues. Depuis l'accueil de Corrext, cliquez sur la carte « Commercial register extract » : un service en ligne distinct s'ouvre. Cherchez la société par son nom de société, ou par son numéro d'identification des entreprises. Sélectionnez la société trouvée et choisissez la langue cible de la traduction. Choisissez le niveau de certification parmi les trois proposés. Choisissez le mode de livraison, puis le délai souhaité. Validez avec le bouton « Order a translation » , ou utilisez « Contact us » pour une demande particulière. À savoir Le service est conçu pour les usages officiels : traductions destinées aux autorités, aux banques ou à une publication. La terminologie des extraits est traitée par des modèles de traduction spécifiquement entraînés sur les extraits du registre du commerce suisse. La confidentialité du service s'appuie sur une certification ISO 27001, la loi suisse sur la protection des données, le RGPD et une infrastructure suisse.",
+  "trad": "La traduzione certificata di un estratto del registro di commercio svizzero si ordina da un servizio in linea dedicato, accessibile dal riquadro «Commercial register extract» della pagina iniziale di Corrext. Il percorso si svolge in quattro fasi: trovare la società per nome o per numero d'identificazione, scegliere il livello di certificazione, scegliere la modalità di consegna, fissare il termine di consegna. Il servizio copre oltre 30 lingue. Dalla pagina iniziale di Corrext, cliccate sul riquadro «Commercial register extract» : si apre un servizio in linea separato. Cercate la società per ditta o per numero d'identificazione delle imprese. Selezionate la società trovata e scegliete la lingua di arrivo della traduzione. Scegliete il livello di certificazione tra i tre proposti. Scegliete la modalità di consegna, poi il termine di consegna desiderato. Confermate con il pulsante «Order a translation» , o usate «Contact us» per una richiesta particolare. Da sapere Il servizio è pensato per usi ufficiali: traduzioni destinate ad autorità, banche o a una pubblicazione. La terminologia degli estratti è trattata da modelli di traduzione addestrati specificamente sugli estratti del registro di commercio svizzero. La riservatezza del servizio si basa su una certificazione ISO 27001, sulla legge federale sulla protezione dei dati, sul GDPR e su un'infrastruttura svizzera.",
+  "statut": "adapte",
+  "source": "V1 it/aiuto/estratto-registro-di-commercio/ ; harmonisé le 2026-10-28",
+  "par_page": {}
+ },
  "2cd017c708e27ffc": {
   "fr": "{1}Kündigung · résiliation{/1}{2}La déclaration qui met fin à un contrat de durée indéterminée, à l'expiration du délai de congé.{/2}",
   "trad": "{1}Kündigung · disdetta{/1}{2}La dichiarazione che pone fine a un contratto di durata indeterminata, alla scadenza del termine di disdetta.{/2}",
@@ -14270,9 +14284,9 @@
  },
  "2d0ede5053cf11a5": {
   "fr": "Recherche par raison sociale ou par numéro IDE, choix du niveau de certification, de la livraison et du délai, entièrement en ligne.",
-  "trad": "Ricerca per ragione sociale o numero IDI, scelta del livello di certificazione, del modo di consegna e del termine di consegna, interamente in linea.",
-  "statut": "v1",
-  "source": "V1 it/soluzioni/fiduciarie/",
+  "trad": "Ricerca per ditta o numero IDI, scelta del livello di certificazione, del modo di consegna e del termine di consegna, interamente in linea.",
+  "statut": "adapte",
+  "source": "V1 it/soluzioni/fiduciarie/ ; harmonisé le 2026-10-28",
   "par_page": {}
  },
  "2d13ef5db0d69339": {
@@ -16150,6 +16164,13 @@
   "trad": "art. 1 LIVA · fonte: Fedlex, legge federale concernente l'imposta sul valore aggiunto",
   "statut": "v1",
   "source": "V1 it/risorse/glossario/mehrwertsteuer/",
+  "par_page": {}
+ },
+ "2fe0049c1e4bce98": {
+  "fr": "Double review certifiée ; traduction des extraits du registre du commerce jusqu'à l'apostille",
+  "trad": "Double review e traduzione certificata; traduzione degli estratti del registro di commercio, fino all'apostille",
+  "statut": "adapte",
+  "source": "adapté le 2026-10-27",
   "par_page": {}
  },
  "2fe6b4ad1543e409": {
@@ -27688,6 +27709,13 @@
   "source": "V1 it/risorse/blog/trust-valley-2023-sovranita-dati/",
   "par_page": {}
  },
+ "525c45c84574c8ee": {
+  "fr": "La terminologie des extraits est traitée par des modèles de traduction spécifiquement entraînés sur les extraits du registre du commerce suisse.",
+  "trad": "La terminologia degli estratti è trattata da modelli di traduzione addestrati specificamente sugli estratti del registro di commercio svizzero.",
+  "statut": "v1",
+  "source": "V1 it/aiuto/estratto-registro-di-commercio/",
+  "par_page": {}
+ },
  "525d04aeb15a6472": {
   "fr": "Harmonisation terminologique sur tout le document",
   "trad": "Armonizzazione terminologica in tutto il documento",
@@ -29542,6 +29570,13 @@
   "trad": "Ognuno traduce a modo suo: organizzare la traduzione giuridica in uno studio legale svizzero",
   "statut": "adapte",
   "source": "adapté le 2026-10-27",
+  "par_page": {}
+ },
+ "57f54b30c1d078a8": {
+  "fr": "Des {1}traducteurs juridiques professionnels{/1} spécialisés dans le corporate housekeeping, assistés des modèles de traduction que l'équipe Corrext de juristes-linguistes et de data scientists a entraînés sur les extraits du registre du commerce suisse.",
+  "trad": "{1}Traduttori giuridici professionisti{/1} specializzati nel corporate housekeeping, che lavorano con modelli di traduzione addestrati dal team Corrext di giuristi linguisti e data scientist sugli estratti del registro di commercio svizzero.",
+  "statut": "v1",
+  "source": "V1 it/corrext/estratto-registro-di-commercio/",
   "par_page": {}
  },
  "57f5e81c25d373fe": {
@@ -38207,6 +38242,13 @@
    }
   }
  },
+ "72b660a4d63788dd": {
+  "fr": "Dans Corrext, ces éléments ne sont pas négociés par échange de courriels : le tunnel {1}Gestion de projet{/1} se déroule en trois étapes (Set-up, File overview, Quotes), affiche le nombre de pages standard et la catégorie détectée dès le dépôt, puis produit un devis et un délai à partir du niveau de relecture et de l'échéance choisis, fichier par fichier. Les quatre {2}niveaux de qualité{/2} et le service de {3}traduction des extraits du registre du commerce{/3} couvrent le reste du spectre, jusqu'à l'apostille.",
+  "trad": "In Corrext questi elementi non si negoziano via e-mail. Il percorso {1}Gestione dei progetti{/1} si svolge in tre fasi (Set-up, File overview, Quotes): mostra il numero di pagine standard e la categoria rilevata fin dal caricamento, poi produce un'offerta e un termine di consegna in base al livello di revisione e alla scadenza scelti, file per file. I quattro {2}livelli di qualità{/2} e il servizio di{3}traduzione degli estratti del registro di commercio{/3} coprono il resto dello spettro, fino all'apostille.",
+  "statut": "adapte",
+  "source": "adapté le 2026-10-27",
+  "par_page": {}
+ },
  "72be46529f7f2c27": {
   "fr": "{1}Traduction texte et document{/1}{2}Lire vite un jeu d'annexes ou de statuts.{/2}{3}Découvrir l'outil",
   "trad": "{1}Traduzione di testi e documenti{/1}{2}Leggere in fretta una serie di allegati o di statuti.{/2}{3}Scoprire lo strumento",
@@ -45922,9 +45964,9 @@
  },
  "8cbbbe814fb8c5bb": {
   "fr": "Cherchez la société par son nom de société, ou par son numéro d'identification des entreprises.",
-  "trad": "Cercate la società per ragione sociale o per numero d'identificazione delle imprese.",
-  "statut": "v1",
-  "source": "V1 it/aiuto/estratto-registro-di-commercio/",
+  "trad": "Cercate la società per ditta o per numero d'identificazione delle imprese.",
+  "statut": "adapte",
+  "source": "V1 it/aiuto/estratto-registro-di-commercio/ ; harmonisé le 2026-10-28",
   "par_page": {}
  },
  "8cbd459d4b9355f1": {
@@ -48555,9 +48597,9 @@
  },
  "94e90c3ceeb8f548": {
   "fr": "La traduction certifiée d'un extrait du registre du commerce suisse se commande depuis un service en ligne dédié, accessible par la carte « Commercial register extract » de l'accueil de Corrext. Le parcours tient en quatre étapes : trouver la société par son nom ou son numéro d'identification, choisir le niveau de certification, choisir le mode de livraison, puis fixer le délai. Le service couvre plus de 30 langues. Depuis l'accueil de Corrext, cliquez sur la carte « Commercial register extract » : un service en ligne distinct s'ouvre. Cherchez la société par son nom de société, ou par son numéro d'identification des entreprises. Sélectionnez la société trouvée et choisissez la langue cible de la traduction. Choisissez le niveau de certification parmi les trois proposés. Choisissez le mode de livraison, puis le délai souhaité. Validez avec le bouton « Order a translation » , ou utilisez « Contact us » pour une demande particulière. À savoir Le service est conçu pour les usages officiels : traductions destinées aux autorités, aux banques ou à une publication. La terminologie des extraits est traitée par des modèles de langue spécifiquement entraînés sur les extraits du registre du commerce suisse. La confidentialité du service s'appuie sur une certification ISO 27001, la loi suisse sur la protection des données, le RGPD et une infrastructure suisse.",
-  "trad": "La traduzione certificata di un estratto del registro di commercio svizzero si ordina da un servizio in linea dedicato, accessibile dal riquadro «Commercial register extract» della pagina iniziale di Corrext. Il percorso si svolge in quattro fasi: trovare la società per nome o per numero d'identificazione, scegliere il livello di certificazione, scegliere la modalità di consegna, fissare il termine di consegna. Il servizio copre oltre 30 lingue. Dalla pagina iniziale di Corrext, cliccate sul riquadro «Commercial register extract» : si apre un servizio in linea separato. Cercate la società per ragione sociale o per numero d'identificazione delle imprese. Selezionate la società trovata e scegliete la lingua di arrivo della traduzione. Scegliete il livello di certificazione tra i tre proposti. Scegliete la modalità di consegna, poi il termine di consegna desiderato. Confermate con il pulsante «Order a translation» , o usate «Contact us» per una richiesta particolare. Da sapere Il servizio è pensato per usi ufficiali: traduzioni destinate ad autorità, banche o a una pubblicazione. La terminologia degli estratti è trattata da modelli di traduzione addestrati specificamente sugli estratti del registro di commercio svizzero. La riservatezza del servizio si basa su una certificazione ISO 27001, sulla legge federale sulla protezione dei dati, sul GDPR e su un'infrastruttura svizzera.",
-  "statut": "v1",
-  "source": "V1 it/aiuto/estratto-registro-di-commercio/",
+  "trad": "La traduzione certificata di un estratto del registro di commercio svizzero si ordina da un servizio in linea dedicato, accessibile dal riquadro «Commercial register extract» della pagina iniziale di Corrext. Il percorso si svolge in quattro fasi: trovare la società per nome o per numero d'identificazione, scegliere il livello di certificazione, scegliere la modalità di consegna, fissare il termine di consegna. Il servizio copre oltre 30 lingue. Dalla pagina iniziale di Corrext, cliccate sul riquadro «Commercial register extract» : si apre un servizio in linea separato. Cercate la società per ditta o per numero d'identificazione delle imprese. Selezionate la società trovata e scegliete la lingua di arrivo della traduzione. Scegliete il livello di certificazione tra i tre proposti. Scegliete la modalità di consegna, poi il termine di consegna desiderato. Confermate con il pulsante «Order a translation» , o usate «Contact us» per una richiesta particolare. Da sapere Il servizio è pensato per usi ufficiali: traduzioni destinate ad autorità, banche o a una pubblicazione. La terminologia degli estratti è trattata da modelli di traduzione addestrati specificamente sugli estratti del registro di commercio svizzero. La riservatezza del servizio si basa su una certificazione ISO 27001, sulla legge federale sulla protezione dei dati, sul GDPR e su un'infrastruttura svizzera.",
+  "statut": "adapte",
+  "source": "V1 it/aiuto/estratto-registro-di-commercio/ ; harmonisé le 2026-10-28",
   "par_page": {}
  },
  "94edce7762abc1c4": {
@@ -53289,9 +53331,9 @@
  },
  "a570c5bcd1630bc9": {
   "fr": "Aktiengesellschaft se rend par company limited by shares dans les textes de la Confédération, pas par corporation. Le sigle AG se conserve dans la raison sociale, qui ne se traduit jamais.{1}Une raison sociale inscrite au registre du commerce garde sa forme inscrite.{/1}",
-  "trad": "Nei testi della Confederazione Aktiengesellschaft si rende con company limited by shares, non con corporation. La sigla AG resta nella ragione sociale, che non si traduce mai.{1}Una ragione sociale iscritta nel registro di commercio mantiene la forma iscritta.{/1}",
-  "statut": "v1",
-  "source": "V1 it/traduzione/tedesco-inglese/",
+  "trad": "Nei testi della Confederazione Aktiengesellschaft si rende con company limited by shares, non con corporation. La sigla AG resta nella ditta, che non si traduce mai.{1}Una ditta iscritta nel registro di commercio mantiene la forma iscritta.{/1}",
+  "statut": "adapte",
+  "source": "V1 it/traduzione/tedesco-inglese/ ; harmonisé le 2026-10-28",
   "par_page": {}
  },
  "a588a76faac9a573": {

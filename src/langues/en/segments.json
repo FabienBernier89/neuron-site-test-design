@@ -144,9 +144,9 @@
   "source": null,
   "par_page": {
    "traduction/propriete-intellectuelle/": {
-    "trad": "{1}{2}DE{/2}MSchG{/1}{3}{4}IT{/4}LPM{/3}",
-    "statut": "invariant",
-    "source": "identique au français, même règle que l'allemand confirmée par Fabien le 2026-10-27"
+    "trad": "{1}{2}DE{/2}MSchG{/1}{3}{4}FR · IT{/4}LPM{/3}",
+    "statut": "adapte",
+    "source": "adapté le 2026-10-28 : règle des pastilles EN (sigles allemand et français, « FR · IT » quand l'italien est identique), décision sur délégation de Fabien"
    }
   }
  },
@@ -12358,6 +12358,13 @@
   "source": "variante de balisage V1 en/translation/tax-law/ (marqueur englobant)",
   "par_page": {}
  },
+ "22540d6fb935109c": {
+  "fr": "Oui. auszug-hr.ch est le service en ligne de Corrext dédié aux extraits du registre du commerce, accessible aussi depuis l'accueil de la plateforme. Les traductions sont réalisées par des traducteurs juridiques spécialisés dans le corporate housekeeping, assistés des modèles de traduction que l'équipe Corrext de juristes-linguistes et de data scientists a entraînés sur les extraits du registre du commerce suisse.",
+  "trad": "Yes. auszug-hr.ch is the Corrext online service for commercial register extracts, also accessible from the platform's home page. The translations are done by legal translators who specialise in corporate housekeeping, assisted by translation models trained on Swiss commercial register extracts by the Corrext team of lawyer-linguists and data scientists.",
+  "statut": "adapte",
+  "source": "V1 en/corrext/commercial-register-extracts/ ; harmonisé le 2026-10-28",
+  "par_page": {}
+ },
  "225424436f681d77": {
   "fr": "Un contrat d'acquisition suisse",
   "trad": "A Swiss acquisition agreement",
@@ -15696,6 +15703,13 @@
   "source": "V1 en/translation/contracts/",
   "par_page": {}
  },
+ "2ccc8a8a67c96a0a": {
+  "fr": "La traduction certifiée d'un extrait du registre du commerce suisse se commande depuis un service en ligne dédié, accessible par la carte « Commercial register extract » de l'accueil de Corrext. Le parcours tient en quatre étapes : trouver la société par son nom ou son numéro d'identification, choisir le niveau de certification, choisir le mode de livraison, puis fixer le délai. Le service couvre plus de 30 langues. Depuis l'accueil de Corrext, cliquez sur la carte « Commercial register extract » : un service en ligne distinct s'ouvre. Cherchez la société par son nom de société, ou par son numéro d'identification des entreprises. Sélectionnez la société trouvée et choisissez la langue cible de la traduction. Choisissez le niveau de certification parmi les trois proposés. Choisissez le mode de livraison, puis le délai souhaité. Validez avec le bouton « Order a translation » , ou utilisez « Contact us » pour une demande particulière. À savoir Le service est conçu pour les usages officiels : traductions destinées aux autorités, aux banques ou à une publication. La terminologie des extraits est traitée par des modèles de traduction spécifiquement entraînés sur les extraits du registre du commerce suisse. La confidentialité du service s'appuie sur une certification ISO 27001, la loi suisse sur la protection des données, le RGPD et une infrastructure suisse.",
+  "trad": "You order the certified translation of a Swiss commercial register extract from a dedicated online service, which you reach from the ‘Commercial register extract’ card on the Corrext home page. The process has four steps: find the company by its name or its identification number, choose the certification level, choose the delivery method, then set the delivery time. The service covers more than 30 languages. On the Corrext home page, click the Commercial register extract card: a separate online service opens. Search for the company by its name or by its business identification number (UID). Select the company you found and choose the target language of the translation. Choose one of the three certification levels offered. Choose the delivery method, then the delivery time you need. Confirm with the Order a translation button, or use Contact us for a specific request. Good to know The service is designed for official use: translations intended for authorities, banks or publication. The terminology of the extracts is handled by translation models trained specifically on Swiss commercial register extracts. The confidentiality of the service relies on ISO 27001 certification, the Swiss Data Protection Act (FADP), the GDPR and Swiss infrastructure.",
+  "statut": "v1",
+  "source": "V1 en/help/commercial-register-extracts/",
+  "par_page": {}
+ },
  "2cd017c708e27ffc": {
   "fr": "{1}Kündigung · résiliation{/1}{2}La déclaration qui met fin à un contrat de durée indéterminée, à l'expiration du délai de congé.{/2}",
   "trad": "{1}Kündigung · termination{/1}{2}The notice of termination that ends a contract of unlimited duration when the notice period expires.{/2}",
@@ -17665,6 +17679,13 @@
   "trad": "Art. 1 VAT Act · source: Fedlex, Value Added Tax Act",
   "statut": "v1",
   "source": "V1 en/resources/glossary/mehrwertsteuer/",
+  "par_page": {}
+ },
+ "2fe0049c1e4bce98": {
+  "fr": "Double review certifiée ; traduction des extraits du registre du commerce jusqu'à l'apostille",
+  "trad": "Double review & certified translation; translation of commercial register extracts, up to the apostille",
+  "statut": "adapte",
+  "source": "adapté le 2026-10-28",
   "par_page": {}
  },
  "2fe6b4ad1543e409": {
@@ -29081,6 +29102,13 @@
   "source": "V1 en/resources/blog/trust-valley-2023-data-sovereignty/",
   "par_page": {}
  },
+ "525c45c84574c8ee": {
+  "fr": "La terminologie des extraits est traitée par des modèles de traduction spécifiquement entraînés sur les extraits du registre du commerce suisse.",
+  "trad": "The terminology of the extracts is handled by translation models trained specifically on Swiss commercial register extracts.",
+  "statut": "v1",
+  "source": "V1 en/help/commercial-register-extracts/",
+  "par_page": {}
+ },
  "525d04aeb15a6472": {
   "fr": "Harmonisation terminologique sur tout le document",
   "trad": "Terminology harmonised across the whole document",
@@ -30947,6 +30975,13 @@
   "source": "adapté le 2026-10-28",
   "par_page": {}
  },
+ "57f54b30c1d078a8": {
+  "fr": "Des {1}traducteurs juridiques professionnels{/1} spécialisés dans le corporate housekeeping, assistés des modèles de traduction que l'équipe Corrext de juristes-linguistes et de data scientists a entraînés sur les extraits du registre du commerce suisse.",
+  "trad": "{1}Professional legal translators{/1} who specialise in corporate housekeeping, assisted by translation models trained on Swiss commercial register extracts by the Corrext team of lawyer-linguists and data scientists.",
+  "statut": "adapte",
+  "source": "V1 en/corrext/commercial-register-extracts/ ; harmonisé le 2026-10-28",
+  "par_page": {}
+ },
  "57f5e81c25d373fe": {
   "fr": "Hébergement chez Infomaniak, en Suisse. Vos projets et vos fichiers y sont stockés, quel que soit le moteur retenu.",
   "trad": "Hosted by Infomaniak in Switzerland. Your projects and files are stored there, whichever engine you choose.",
@@ -32068,9 +32103,9 @@
   "source": null,
   "par_page": {
    "traduction/propriete-intellectuelle/": {
-    "trad": "{1}{2}DE{/2}PatG{/1}{3}{4}IT{/4}LBI{/3}",
-    "statut": "invariant",
-    "source": "identique au français, même règle que l'allemand confirmée par Fabien le 2026-10-27"
+    "trad": "{1}{2}DE{/2}PatG{/1}{3}{4}FR · IT{/4}LBI{/3}",
+    "statut": "adapte",
+    "source": "adapté le 2026-10-28 : règle des pastilles EN (sigles allemand et français, « FR · IT » quand l'italien est identique), décision sur délégation de Fabien"
    }
   }
  },
@@ -39583,6 +39618,13 @@
    }
   }
  },
+ "72b660a4d63788dd": {
+  "fr": "Dans Corrext, ces éléments ne sont pas négociés par échange de courriels : le tunnel {1}Gestion de projet{/1} se déroule en trois étapes (Set-up, File overview, Quotes), affiche le nombre de pages standard et la catégorie détectée dès le dépôt, puis produit un devis et un délai à partir du niveau de relecture et de l'échéance choisis, fichier par fichier. Les quatre {2}niveaux de qualité{/2} et le service de {3}traduction des extraits du registre du commerce{/3} couvrent le reste du spectre, jusqu'à l'apostille.",
+  "trad": "In Corrext, these items are not negotiated by email. The {1}Translation projects{/1} workflow runs in three steps (Set-up, File overview, Quotes). It shows the number of standard pages and the detected category as soon as you upload, then produces a quote and a delivery time for each file, based on the review level and due date you choose. The four {2}quality levels{/2} and the {3}translation service for commercial register extracts{/3} cover the rest of the range, up to the apostille.",
+  "statut": "adapte",
+  "source": "adapté le 2026-10-28",
+  "par_page": {}
+ },
  "72be46529f7f2c27": {
   "fr": "{1}Traduction texte et document{/1}{2}Lire vite un jeu d'annexes ou de statuts.{/2}{3}Découvrir l'outil",
   "trad": "{1}Text and document translation{/1}{2}Read a set of appendices or articles of association quickly.{/2}{3}See the tool",
@@ -46246,9 +46288,9 @@
   "source": null,
   "par_page": {
    "traduction/droit-penal/": {
-    "trad": "{1}{2}DE{/2}StPO{/1}{3}{4}IT{/4}CPP{/3}",
-    "statut": "invariant",
-    "source": "identique au français, même règle que l'allemand confirmée par Fabien le 2026-10-27"
+    "trad": "{1}{2}DE{/2}StPO{/1}{3}{4}FR · IT{/4}CPP{/3}",
+    "statut": "adapte",
+    "source": "adapté le 2026-10-28 : règle des pastilles EN (sigles allemand et français, « FR · IT » quand l'italien est identique), décision sur délégation de Fabien"
    }
   }
  },
@@ -48213,9 +48255,9 @@
   "source": null,
   "par_page": {
    "traduction/propriete-intellectuelle/": {
-    "trad": "{1}{2}DE{/2}URG{/1}{3}{4}IT{/4}LDA{/3}",
-    "statut": "invariant",
-    "source": "identique au français, même règle que l'allemand confirmée par Fabien le 2026-10-27"
+    "trad": "{1}{2}DE{/2}URG{/1}{3}{4}FR · IT{/4}LDA{/3}",
+    "statut": "adapte",
+    "source": "adapté le 2026-10-28 : règle des pastilles EN (sigles allemand et français, « FR · IT » quand l'italien est identique), décision sur délégation de Fabien"
    }
   }
  },
@@ -54943,14 +54985,14 @@
   "source": null,
   "par_page": {
    "traduction/fiscalite/": {
-    "trad": "{1}{2}DE{/2}DBG{/1}{3}{4}IT{/4}LIFD{/3}",
-    "statut": "invariant",
-    "source": "identique au français, même règle que l'allemand confirmée par Fabien le 2026-10-27"
+    "trad": "{1}{2}DE{/2}DBG{/1}{3}{4}FR · IT{/4}LIFD{/3}",
+    "statut": "adapte",
+    "source": "adapté le 2026-10-28 : règle des pastilles EN (sigles allemand et français, « FR · IT » quand l'italien est identique), décision sur délégation de Fabien"
    },
    "traduction/rapports-annuels-financiers/": {
-    "trad": "{1}{2}DE{/2}DBG{/1}{3}{4}IT{/4}LIFD{/3}",
-    "statut": "invariant",
-    "source": "identique au français, même règle que l'allemand confirmée par Fabien le 2026-10-27"
+    "trad": "{1}{2}DE{/2}DBG{/1}{3}{4}FR · IT{/4}LIFD{/3}",
+    "statut": "adapte",
+    "source": "adapté le 2026-10-28 : règle des pastilles EN (sigles allemand et français, « FR · IT » quand l'italien est identique), décision sur délégation de Fabien"
    }
   }
  },
@@ -56205,9 +56247,9 @@
   "source": null,
   "par_page": {
    "traduction/fiscalite/": {
-    "trad": "{1}{2}DE{/2}StHG{/1}{3}{4}IT{/4}LAID{/3}",
-    "statut": "invariant",
-    "source": "identique au français, même règle que l'allemand confirmée par Fabien le 2026-10-27"
+    "trad": "{1}{2}DE{/2}StHG{/1}{3}{4}FR{/4}LHID{/3}",
+    "statut": "adapte",
+    "source": "adapté le 2026-10-28 : règle des pastilles EN (sigles allemand et français, « FR · IT » quand l'italien est identique), décision sur délégation de Fabien"
    }
   }
  },
@@ -76329,9 +76371,9 @@
   "source": null,
   "par_page": {
    "traduction/fiscalite/": {
-    "trad": "{1}{2}DE{/2}MWSTG{/1}{3}{4}IT{/4}LIVA{/3}",
-    "statut": "invariant",
-    "source": "identique au français, même règle que l'allemand confirmée par Fabien le 2026-10-27"
+    "trad": "{1}{2}DE{/2}MWSTG{/1}{3}{4}FR{/4}LTVA{/3}",
+    "statut": "adapte",
+    "source": "adapté le 2026-10-28 : règle des pastilles EN (sigles allemand et français, « FR · IT » quand l'italien est identique), décision sur délégation de Fabien"
    }
   }
  },

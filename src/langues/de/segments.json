@@ -11034,6 +11034,13 @@
   "source": "variante de balisage V1 de/uebersetzung/steuerrecht/ (marqueur englobant)",
   "par_page": {}
  },
+ "22540d6fb935109c": {
+  "fr": "Oui. auszug-hr.ch est le service en ligne de Corrext dédié aux extraits du registre du commerce, accessible aussi depuis l'accueil de la plateforme. Les traductions sont réalisées par des traducteurs juridiques spécialisés dans le corporate housekeeping, assistés des modèles de traduction que l'équipe Corrext de juristes-linguistes et de data scientists a entraînés sur les extraits du registre du commerce suisse.",
+  "trad": "Ja. auszug-hr.ch ist der Online-Dienst von Corrext für Handelsregisterauszüge und auch über die Startseite der Plattform erreichbar. Die Übersetzungen erstellen juristische Übersetzerinnen und Übersetzer, die auf Corporate Housekeeping spezialisiert sind. Sie arbeiten mit Übersetzungsmodellen, die das Team von Corrext aus Rechtslinguistinnen, Rechtslinguisten und Data Scientists auf Schweizer Handelsregisterauszüge trainiert hat.",
+  "statut": "v1",
+  "source": "V1 de/corrext/handelsregisterauszug/",
+  "par_page": {}
+ },
  "225424436f681d77": {
   "fr": "Un contrat d'acquisition suisse",
   "trad": "Ein Schweizer Unternehmenskaufvertrag",
@@ -14521,6 +14528,13 @@
   "source": "V1 de/uebersetzung/vertraege/",
   "par_page": {}
  },
+ "2ccc8a8a67c96a0a": {
+  "fr": "La traduction certifiée d'un extrait du registre du commerce suisse se commande depuis un service en ligne dédié, accessible par la carte « Commercial register extract » de l'accueil de Corrext. Le parcours tient en quatre étapes : trouver la société par son nom ou son numéro d'identification, choisir le niveau de certification, choisir le mode de livraison, puis fixer le délai. Le service couvre plus de 30 langues. Depuis l'accueil de Corrext, cliquez sur la carte « Commercial register extract » : un service en ligne distinct s'ouvre. Cherchez la société par son nom de société, ou par son numéro d'identification des entreprises. Sélectionnez la société trouvée et choisissez la langue cible de la traduction. Choisissez le niveau de certification parmi les trois proposés. Choisissez le mode de livraison, puis le délai souhaité. Validez avec le bouton « Order a translation » , ou utilisez « Contact us » pour une demande particulière. À savoir Le service est conçu pour les usages officiels : traductions destinées aux autorités, aux banques ou à une publication. La terminologie des extraits est traitée par des modèles de traduction spécifiquement entraînés sur les extraits du registre du commerce suisse. La confidentialité du service s'appuie sur une certification ISO 27001, la loi suisse sur la protection des données, le RGPD et une infrastructure suisse.",
+  "trad": "Die beglaubigte Übersetzung eines Schweizer Handelsregisterauszugs bestellen Sie über einen eigenen Online-Dienst. Sie erreichen ihn über die Kachel «Commercial register extract» auf der Startseite von Corrext. Die Bestellung umfasst vier Schritte: das Unternehmen über Firmennamen oder Identifikationsnummer finden, die Beglaubigungsstufe wählen, die Lieferart wählen und die Lieferfrist festlegen. Der Dienst deckt über 30 Sprachen ab. Klicken Sie auf der Startseite von Corrext auf die Kachel «Commercial register extract» : Ein eigener Online-Dienst öffnet sich. Suchen Sie das Unternehmen über seinen Firmennamen oder seine Unternehmens-Identifikationsnummer (UID). Wählen Sie das gefundene Unternehmen aus und legen Sie die Zielsprache der Übersetzung fest. Wählen Sie eine der drei angebotenen Beglaubigungsstufen. Wählen Sie die Lieferart und danach die gewünschte Lieferfrist. Bestätigen Sie mit der Schaltfläche «Order a translation» oder nutzen Sie «Contact us» für ein besonderes Anliegen. Gut zu wissen Der Dienst ist für amtliche Zwecke gedacht: Übersetzungen für Behörden, Banken oder eine Veröffentlichung. Die Terminologie der Auszüge verarbeiten Modelle, die eigens mit Schweizer Handelsregisterauszügen trainiert wurden. Die Vertraulichkeit des Dienstes stützt sich auf eine ISO-27001-Zertifizierung, das Schweizer Datenschutzgesetz (DSG), die DSGVO und eine Schweizer Infrastruktur.",
+  "statut": "v1",
+  "source": "V1 de/hilfe/handelsregisterauszug/",
+  "par_page": {}
+ },
  "2cd017c708e27ffc": {
   "fr": "{1}Kündigung · résiliation{/1}{2}La déclaration qui met fin à un contrat de durée indéterminée, à l'expiration du délai de congé.{/2}",
   "trad": "{1}Kündigung · résiliation{/1}{2}Die Erklärung, die einen unbefristeten Vertrag auf das Ende der Kündigungsfrist beendet.{/2}",
@@ -16498,6 +16512,13 @@
   "trad": "Art. 1 MWSTG · Quelle: Fedlex, Bundesgesetz über die Mehrwertsteuer",
   "statut": "v1",
   "source": "V1 de/ressourcen/glossar/mehrwertsteuer/",
+  "par_page": {}
+ },
+ "2fe0049c1e4bce98": {
+  "fr": "Double review certifiée ; traduction des extraits du registre du commerce jusqu'à l'apostille",
+  "trad": "Double review und beglaubigte Übersetzung; Übersetzung von Handelsregisterauszügen bis zur Apostille",
+  "statut": "adapte",
+  "source": "adapté le 2026-10-27",
   "par_page": {}
  },
  "2fe6b4ad1543e409": {
@@ -28196,6 +28217,13 @@
   "source": "V1 de/ressourcen/blog/trust-valley-2023-datensouveraenitaet/",
   "par_page": {}
  },
+ "525c45c84574c8ee": {
+  "fr": "La terminologie des extraits est traitée par des modèles de traduction spécifiquement entraînés sur les extraits du registre du commerce suisse.",
+  "trad": "Die Terminologie der Auszüge verarbeiten Modelle, die eigens mit Schweizer Handelsregisterauszügen trainiert wurden.",
+  "statut": "v1",
+  "source": "V1 de/hilfe/handelsregisterauszug/",
+  "par_page": {}
+ },
  "525d04aeb15a6472": {
   "fr": "Harmonisation terminologique sur tout le document",
   "trad": "Einheitliche Terminologie im ganzen Dokument",
@@ -30053,6 +30081,13 @@
   "trad": "Alle übersetzen auf ihre Art: juristische Übersetzungen in einer Schweizer Kanzlei organisieren",
   "statut": "adapte",
   "source": "adapté le 2026-10-27",
+  "par_page": {}
+ },
+ "57f54b30c1d078a8": {
+  "fr": "Des {1}traducteurs juridiques professionnels{/1} spécialisés dans le corporate housekeeping, assistés des modèles de traduction que l'équipe Corrext de juristes-linguistes et de data scientists a entraînés sur les extraits du registre du commerce suisse.",
+  "trad": "{1}Professionelle juristische Übersetzerinnen und Übersetzer{/1}, spezialisiert auf Corporate Housekeeping, unterstützt von Übersetzungsmodellen, die das Team von Corrext aus Rechtslinguistinnen, Rechtslinguisten und Data Scientists auf Schweizer Handelsregisterauszüge trainiert hat.",
+  "statut": "v1",
+  "source": "V1 de/corrext/handelsregisterauszug/",
   "par_page": {}
  },
  "57f5e81c25d373fe": {
@@ -38819,6 +38854,13 @@
     "source": "V1 de/uebersetzung/steuerrecht/"
    }
   }
+ },
+ "72b660a4d63788dd": {
+  "fr": "Dans Corrext, ces éléments ne sont pas négociés par échange de courriels : le tunnel {1}Gestion de projet{/1} se déroule en trois étapes (Set-up, File overview, Quotes), affiche le nombre de pages standard et la catégorie détectée dès le dépôt, puis produit un devis et un délai à partir du niveau de relecture et de l'échéance choisis, fichier par fichier. Les quatre {2}niveaux de qualité{/2} et le service de {3}traduction des extraits du registre du commerce{/3} couvrent le reste du spectre, jusqu'à l'apostille.",
+  "trad": "In Corrext werden diese Punkte nicht per E-Mail ausgehandelt. Der Ablauf {1}Projektmanagement{/1} umfasst drei Schritte (Set-up, File overview, Quotes). Er zeigt die Anzahl Normseiten und die erkannte Kategorie gleich beim Hochladen an. Danach erstellt er Datei für Datei eine Offerte und eine Lieferfrist, ausgehend von der gewählten Lektoratsstufe und dem Liefertermin. Die vier {2}Qualitätsstufen{/2} und der Service zur {3}Übersetzung von Handelsregisterauszügen{/3} decken den Rest des Spektrums ab, bis zur Apostille.",
+  "statut": "adapte",
+  "source": "adapté le 2026-10-27",
+  "par_page": {}
  },
  "72be46529f7f2c27": {
   "fr": "{1}Traduction texte et document{/1}{2}Lire vite un jeu d'annexes ou de statuts.{/2}{3}Découvrir l'outil",
