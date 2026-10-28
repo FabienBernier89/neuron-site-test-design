@@ -319,7 +319,7 @@ def termes_presents(fr, langue, glossaire):
     pluriel facultatif, sans tenir compte de la casse (logique de « _termes » de la V1). Sert au contrôle terminologique et
     à la note des exports pour les traducteurs."""
     fr = _normaliser_terminologie(fr)
-    trouves = []
+    occurrences = []  # (terme français, équivalent, positions trouvées)
     for terme_fr, langues in glossaire.items():
         eq = (langues.get(langue) or {}).get("terme")
         if not eq or not terme_fr.strip():
@@ -329,9 +329,15 @@ def termes_presents(fr, langue, glossaire):
         else:
             motif = re.compile(_AVANT_LETTRE + r"[sx]?\s+".join(re.escape(m) for m in terme_fr.split()) + r"[sx]?"
                                + _APRES_LETTRE, re.I)
-        if motif.search(fr):
-            trouves.append((terme_fr, eq))
-    return trouves
+        positions = [m.span() for m in motif.finditer(fr)]
+        if positions:
+            occurrences.append((terme_fr, eq, positions))
+    # un terme couvert par un terme plus long du glossaire n'est pas exigé à cet endroit (« certificat » dans « certificat
+    # de travail », décision de Fabien du 2026-10-28) ; il reste exigé s'il apparaît aussi seul
+    def couvert(debut, fin, terme):
+        return any(t != terme and d <= debut and fin <= f and (f - d) > (fin - debut)
+                   for t, _, spans in occurrences for d, f in spans)
+    return [(t, eq) for t, eq, spans in occurrences if any(not couvert(d, f, t) for d, f in spans)]
 
 
 def terminologie(fr, tr, langue, glossaire):

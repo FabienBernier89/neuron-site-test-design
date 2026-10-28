@@ -285,6 +285,15 @@ class TestExportXliff(Base):
         self.assertEqual(controles.termes_presents(CAPITAL, "it", GLOSSAIRE), [])
         self.assertEqual(controles.termes_presents("Le Prix", "it", GLOSSAIRE), [("prix", "prezzo")])
 
+    def test_terme_le_plus_long_l_emporte(self):
+        # décision du 2026-10-28 : « certificat » = Bescheinigung, « certificat de travail » = Zeugnis ; un terme couvert
+        # par un terme plus long du glossaire n'est pas exigé à cet endroit, il l'est encore ailleurs dans le texte
+        g = {"certificat": {"de": {"terme": "Bescheinigung"}}, "certificat de travail": {"de": {"terme": "Zeugnis"}}}
+        self.assertEqual(controles.termes_presents("Le certificat de travail", "de", g),
+                         [("certificat de travail", "Zeugnis")])
+        self.assertEqual(controles.termes_presents("Les certificats de travail et le certificat", "de", g),
+                         [("certificat", "Bescheinigung"), ("certificat de travail", "Zeugnis")])
+
 
 class TestExportTmxEtGlossaire(Base):
     def test_tmx_bien_forme(self):
