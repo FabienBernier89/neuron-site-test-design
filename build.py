@@ -708,9 +708,10 @@ def traduire_page(html, page, langue):
 
 
 def libelles_llms(langue):
-    """Libellés fixes des llms.txt d'une langue : (Table(langue).t, manquants) ; les llms de la langue ne sont écrits que
-    sans manquant."""
-    return table(langue).t, traduire.verifier_libelles(table(langue), mode_build())
+    """Libellés fixes des llms.txt d'une langue : (fonction de traduction, manquants), traduction de la pseudo-page
+    « llms » d'abord (traduire.traducteur_libelles) ; les llms de la langue ne sont écrits que sans manquant."""
+    return (traduire.traducteur_libelles(table(langue), mode_build()),
+            traduire.verifier_libelles(table(langue), mode_build()))
 
 
 # Points d'injection de la traduction, remplacés par l'identité dans les tests de structure (tests/support.identite)

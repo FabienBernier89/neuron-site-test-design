@@ -52,6 +52,7 @@ RELUS = {"v1", "invariant", "relu"}  # statuts qui ne demandent pas le bandeau d
 IDENTIQUES = {"invariant", "v1"}      # statuts d'une traduction identique au français admise par l'exhaustivité
 LIBELLE_BANDEAU = "Version de travail, traduction non relue"
 PAGE_BANDEAU = "bandeau"  # pseudo-page du libellé du bandeau (etat, export, pont), comme « llms » pour les llms.txt
+PAGE_LLMS = "llms"  # pseudo-page des libellés fixes des llms.txt : un libellé identique au français y est un invariant
 CONTEXTES = "contextes.json"  # contextes V1 des textes à traduire, par langue (recomposition.recomposer, commande memoire)
 BANDEAU = '<div class="bandeau-travail" role="note">{}</div>\n'
 # Avis fictifs des pages métier (outils/composer/metier_modele.py, avis) : la section qui les porte, ou l'avis seul
@@ -326,4 +327,10 @@ def fichier_a_traduire(a_traduire, contextes):
 def verifier_libelles(table, mode):
     """Manquants des libellés fixes des llms.txt d'une langue (outils/llms.py, libelles_fixes)."""
     from outils import llms
-    return [m for m in (libelle(table, t, mode)[1] for t in llms.libelles_fixes()) if m]
+    return [m for m in (libelle(table, t, mode, PAGE_LLMS)[1] for t in llms.libelles_fixes()) if m]
+
+
+def traducteur_libelles(table, mode):
+    """Fonction de traduction des libellés fixes des llms.txt (build.ecrire_llms) : traduction de la pseudo-page « llms »
+    d'abord, sinon traduction par défaut, comme verifier_libelles. Les llms d'une langue ne sont écrits que sans manquant."""
+    return lambda texte: libelle(table, texte, mode, PAGE_LLMS)[0]

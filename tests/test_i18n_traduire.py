@@ -233,6 +233,19 @@ class TestExhaustivite(unittest.TestCase):
         t.poser("Contact", "Contact", "invariant", "test")
         self.assertEqual(T.libelle(t, "Contact", "production"), ("Contact", None))
 
+    def test_libelle_llms_identique_pose_sur_la_pseudo_page(self):
+        # Ruling 19 : pas de traduction identique par défaut ; le libellé « Contact » des llms.txt anglais est un
+        # invariant de la pseudo-page « llms », lu par verifier_libelles et par le build
+        t = Table("en", ABSENT)
+        for texte in llms.libelles_fixes():
+            if texte != "Contact":
+                t.poser(texte, "EN " + texte, "relu", "test")
+        t.poser("Contact", "Contact", "invariant", "test", page=T.PAGE_LLMS, sans_defaut=True)
+        self.assertEqual(T.verifier_libelles(t, "production"), [])
+        traduire_libelle = T.traducteur_libelles(t, "production")
+        self.assertEqual(traduire_libelle("Contact"), "Contact")
+        self.assertEqual(traduire_libelle(llms.TITRE_COMPLET), "EN " + llms.TITRE_COMPLET)
+
 
 class TestBandeau(unittest.TestCase):
     """Ruling 2 : bandeau « Version de travail, traduction non relue » en aperçu, sur une page qui contient au moins une
