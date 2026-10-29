@@ -23,7 +23,9 @@
 //  2. les éléments qui sortent de la fenêtre (à gauche de 0 ou à droite de la largeur), hors ceux contenus par un parent
 //     qui les rogne ou les fait défiler (le corps et la racine ne comptent pas : ils cachent l'erreur, ils ne la réparent pas)
 //     et hors ceux entièrement à gauche de la fenêtre (technique volontaire des liens d'évitement, positionnés à -9999 px) ;
-//  3. les éléments d'un sélecteur de --regles qui passent leur nombre de lignes.
+//  3. les éléments d'un sélecteur de --regles qui passent leur nombre de lignes ;
+//  4. les noms de marque (LexMachina, Corrext, CHnell, Neur.on) coupés sur deux lignes, par la césure automatique
+//     notamment : un nom de marque ne se coupe jamais.
 // Les menus sont mesurés ouverts : un par un le méga-menu à partir de 1024 px, le menu mobile déplié en dessous.
 // Les animations sont réduites (prefers-reduced-motion) et la page est parcourue d'un bout à l'autre avant la mesure.
 //
@@ -259,7 +261,7 @@ function mesurerDansPage(regles, L) {
     return n;
   };
 
-  const res = { debordements: [], hors_fenetre: [], lignes: [] };
+  const res = { debordements: [], hors_fenetre: [], lignes: [], marques: [] };
   window.__problemes = [];
   const noter = (liste, el, donnees) => { liste.push({ selecteur: selecteur(el), texte: extrait(el), ...donnees }); window.__problemes.push(el); };
 
@@ -286,6 +288,19 @@ function mesurerDansPage(regles, L) {
       if (!rend(el)) continue;
       const n = nbLignes(el);
       if (n > max) { res.lignes.push({ selecteur: sel, max, lignes: n, element: selecteur(el), texte: extrait(el) }); window.__problemes.push(el); }
+    }
+  }
+  // 4. noms de marque coupés : les rectangles d'une même occurrence sont sur plusieurs lignes
+  const marche = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let n = marche.nextNode(); n; n = marche.nextNode()) {
+    const parent = n.parentElement;
+    if (!parent || parent.closest("svg, script, style") || !rend(parent)) continue;
+    for (const m of n.nodeValue.matchAll(/LexMachina|Corrext|CHnell|Neur\.on/g)) {
+      const r = document.createRange();
+      r.setStart(n, m.index);
+      r.setEnd(n, m.index + m[0].length);
+      const hauts = [...r.getClientRects()].filter(x => x.width > 0.5).map(x => x.top);
+      if (hauts.length > 1 && Math.max(...hauts) - Math.min(...hauts) > 1) noter(res.marques, parent, { marque: m[0] });
     }
   }
   return res;
@@ -317,7 +332,7 @@ async function mesurer(session, url, largeur, regles, captures, nomCapture) {
   await charge;
   const hauteurPage = await evaluer(cdp, `(${parcourirDansPage})()`);
   const noms = await evaluer(cdp, `(${preparerDansPage})()`);
-  const cumul = { debordements: [], hors_fenetre: [], lignes: [] };
+  const cumul = { debordements: [], hors_fenetre: [], lignes: [], marques: [] };
   const vus = new Set();
   for (let i = 0; i < noms.length; i++) {
     if (i > 0) { await evaluer(cdp, `window.__ouvrir[${i}](); true`); await attendre(150); }
@@ -340,7 +355,7 @@ async function mesurer(session, url, largeur, regles, captures, nomCapture) {
 }
 
 // Relevés déjà présents dans le rapport de référence (pages françaises, Ruling 33) : retirés des problèmes, comptés à part.
-const GENRES = ["debordements", "hors_fenetre", "lignes"];
+const GENRES = ["debordements", "hors_fenetre", "lignes", "marques"];
 const cleReference = (genre, largeur, o) => JSON.stringify([genre, largeur, o.selecteur, o.element || ""]);
 
 function lireReference(fichier) {
@@ -361,7 +376,8 @@ function retirerConnus(resultat, connus) {
   return resultat;
 }
 
-const problemes = r => r.debordements.length + r.hors_fenetre.length + r.lignes.length + (r.introuvables || []).length;
+const problemes = r => r.debordements.length + r.hors_fenetre.length + r.lignes.length + r.marques.length
+  + (r.introuvables || []).length;
 
 // ---------- rapport ----------
 function regrouper(liste) {
@@ -383,6 +399,7 @@ function texteRapport(resultats) {
     for (const o of regrouper(r.debordements)) lignes.push(`  contenu plus large que sa boîte : ${o.selecteur} (${o.nombre}) : ${o.scrollWidth} px pour ${o.clientWidth} px [${o.etat}] « ${o.texte} »`);
     for (const o of regrouper(r.hors_fenetre)) lignes.push(`  hors de la fenêtre : ${o.selecteur} (${o.nombre}) : de ${o.gauche} à ${o.droite} px pour ${o.fenetre} px [${o.etat}] « ${o.texte} »`);
     for (const o of regrouper(r.lignes)) lignes.push(`  trop de lignes : ${o.selecteur} (${o.nombre}) : ${o.lignes} lignes pour ${o.max} au plus [${o.etat}] « ${o.texte} »`);
+    for (const o of regrouper(r.marques)) lignes.push(`  marque coupée : ${o.selecteur} (${o.nombre}) : « ${o.marque} » sur deux lignes [${o.etat}] « ${o.texte} »`);
     for (const c of r.introuvables || []) lignes.push(`  ressource introuvable (404) : ${c}`);
   }
   return lignes.join("\n");

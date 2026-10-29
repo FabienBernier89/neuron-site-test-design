@@ -54,6 +54,17 @@
 
 /* Débordements des langues autres que le français (outils/debordements.mjs, tâche 6.3) : chaque règle est limitée à la langue
    concernée, jamais au français. Les titres de tuiles forcés sur une ligne (outils.css) passent à la ligne, équilibrés, quand
-   un mot composé ou une formule plus longue ne tient plus ; la césure automatique coupe les mots composés allemands. */
+   un mot composé ou une formule plus longue ne tient plus ; la césure automatique coupe les mots composés allemands, jamais
+   un mot de moins de 12 lettres : les noms de marque (LexMachina, Corrext, CHnell) restent entiers (contrôle « marques »
+   de outils/debordements.mjs). */
 html:not([lang="fr"]) .tf-3 .tf-t h3{white-space:normal;text-wrap:balance}
-html[lang="de"] main{hyphens:auto}
+html[lang="de"] main{hyphens:auto;hyphenate-limit-chars:12 5 5}
+/* Paires de termes des cartes de domaine (.cd .kv) : quand un terme allemand ou italien ne tient pas à côté de l'autre,
+   les deux passent l'un sous l'autre au lieu de sortir de la carte. */
+html:not([lang="fr"]) .cd .kv{display:flex;flex-wrap:wrap}
+html:not([lang="fr"]) .cd .kv > span{flex:1 1 0;min-width:max-content}
+/* Chiffres des tuiles à quatre colonnes : l'unité traduite (« 30 Languages ») est plus longue qu'en français. */
+html:not([lang="fr"]) .tl.t4 .n .u{font-size:clamp(26px,2.3vw,34px)}
+/* Chiffres de la page LexMachina : « 15 Mio.+ » demande une colonne plus large que « 15 M+ ». */
+html[lang="de"] .lm-ch li{grid-template-columns:136px minmax(0,1fr)}
+@media (max-width:640px){html[lang="de"] .lm-ch li{grid-template-columns:112px minmax(0,1fr)}}

@@ -146,6 +146,17 @@ class TestDebordements(unittest.TestCase):
         self.assertTrue(any("#n" in o["selecteur"] for o in p["hors_fenetre"] + p["debordements"]), p)
         self.assertEqual(code, 1)
 
+    def test_marque_coupee(self):
+        """Un nom de marque (LexMachina, Corrext, CHnell, Neur.on) coupé sur deux lignes est relevé (genre « marques »),
+        avec la marque en cause ; la même marque entière sur une ligne ne l'est pas."""
+        self.ecrire("de", page('<p id="c" style="width:48px;word-break:break-all">LexMachina</p>'
+                               '<p id="e">Corrext und CHnell von Neur.on</p>'))
+        code, rapport = self.mesurer("de/", largeurs="1440")
+        marques = rapport["pages"][0]["marques"]
+        self.assertEqual(code, 1)
+        self.assertEqual([(o["selecteur"], o["marque"]) for o in marques], [("#c", "LexMachina")])
+        self.assertEqual(rapport["total"], 1)
+
     def test_ressource_introuvable_signalee(self):
         """Vague finale, point 12 : un 404 du serveur (image absente) est un problème listé avec la page ; une adresse
         mal encodée ne fait pas tomber le serveur (decodeURIComponent rattrapé)."""
