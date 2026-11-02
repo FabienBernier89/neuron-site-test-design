@@ -147,7 +147,8 @@ class TestLiensDepuisDe(unittest.TestCase):
 
     def test_toutes_les_pages_de(self):
         attendues = {build.chemin_page(p, "de").relative_to(build.DOCS).as_posix() for p in build.PAGES}
-        ecrites = {f.relative_to(self.sortie).as_posix() for f in (self.sortie / "de").rglob("index.html")}
+        ecrites = {f.relative_to(self.sortie).as_posix() for f in (self.sortie / "de").rglob("index.html")
+                   if 'http-equiv="refresh"' not in f.read_text(encoding="utf-8")}  # sans les anciennes adresses (10.1)
         self.assertEqual(ecrites, attendues)
 
     def test_liens_relatifs_resolus_depuis_de(self):

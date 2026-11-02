@@ -175,7 +175,9 @@ class TestPolices(unittest.TestCase):
                 filtre = None
             elif ligne.startswith("Header "):
                 self.assertEqual(ouverts, ["<IfModule mod_headers.c>"], ligne)  # jamais hors du garde-fou
-                self.assertIsNotNone(filtre, ligne)
+                if filtre is None:  # hors FilesMatch : seulement un en-tête réservé à certaines réponses (Vary de la racine)
+                    self.assertRegex(ligne, r" env=[A-Z_]+$")
+                    continue
                 blocs.setdefault(filtre, []).append(ligne)
         self.assertEqual(ouverts, [])
         selon = {fichier: [f for f in blocs if re.search(f, fichier)]

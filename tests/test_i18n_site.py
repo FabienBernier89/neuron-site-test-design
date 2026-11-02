@@ -66,7 +66,9 @@ class TestInvariantsLangues(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.sortie = support.site_complet()
-        cls.pages = {l: sorted((cls.sortie / l).rglob("index.html")) for l in LANGUES}
+        # pages de redirection des anciennes adresses (meta refresh) exclues : ce ne sont pas des pages du site
+        cls.pages = {l: sorted(f for f in (cls.sortie / l).rglob("index.html")
+                               if not controles._REDIRECTION.search(f.read_text(encoding="utf-8"))) for l in LANGUES}
 
     def test_nombre_de_pages_controlees(self):
         for l in LANGUES:
