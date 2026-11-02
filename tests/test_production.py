@@ -73,7 +73,7 @@ class TestHreflang(unittest.TestCase):
         """Tant que seule la version fr est construite : hreflang fr-CH et x-default, tous deux vers la page elle-même
         (x-default désigne la version française, page indexable, et non plus la racine d'aiguillage non indexée)."""
         for apercu in (False, True):
-            docs = support.site_complet(apercu=apercu)
+            docs = support.site_complet(langues=("fr",), apercu=apercu)
             for p in build.PAGES:
                 h = support.chemin(docs, p).read_text(encoding="utf-8")
                 alternates = ALTERNATE.findall(h[:h.index("</head>")])
@@ -91,6 +91,12 @@ class TestHreflang(unittest.TestCase):
         self.assertEqual(avec["x-default"], "https://neur-on.ai/fr/corrext/")
 
     def test_adresse_construite(self):
+        """Sur un site construit en français seul (le dossier docs/ du dépôt suit le réglage des langues)."""
+        from unittest import mock
+        with mock.patch.object(build, "DOCS", support.site_complet(langues=("fr",))):
+            self.verifier_adresses()
+
+    def verifier_adresses(self):
         self.assertTrue(build.adresse_construite("https://neur-on.ai/"))
         self.assertTrue(build.adresse_construite("https://neur-on.ai/fr/corrext/"))
         self.assertFalse(build.adresse_construite("https://neur-on.ai/de/corrext/"))
@@ -101,7 +107,7 @@ class TestPlanDuSite(unittest.TestCase):
     def test_sitemap_des_pages_indexables(self):
         import xml.etree.ElementTree as ET
         import redirections
-        docs = support.site_complet(apercu=False)
+        docs = support.site_complet(langues=("fr",), apercu=False)
         racine = ET.parse(docs / "sitemap.xml").getroot()
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
         self.assertEqual(racine.tag, ns + "urlset")

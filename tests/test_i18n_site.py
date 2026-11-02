@@ -36,10 +36,10 @@ class TestNonRegressionFR(unittest.TestCase):
         self.assertEqual(obtenu, attendu, ecarts(obtenu, attendu))
 
     def test_apercu_identique(self):
-        self.verifier(support.site_complet(), REF_APERCU)
+        self.verifier(support.site_complet(langues=("fr",)), REF_APERCU)
 
     def test_production_identique(self):
-        self.verifier(support.site_complet(apercu=False), REF_PRODUCTION)
+        self.verifier(support.site_complet(langues=("fr",), apercu=False), REF_PRODUCTION)
 
 
 class TestEmpreintes(unittest.TestCase):

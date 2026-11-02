@@ -80,6 +80,7 @@ class TestMenu(unittest.TestCase):
         for f in avec:
             h = f.read_text(encoding="utf-8")
             entete = h[h.index('<div class="hd-cta">'):]
+            entete = re.sub(r'^(<div class="hd-cta">)<nav class="hd-lang".*?</nav>', r'\1', entete)  # sélecteur de langue
             self.assertTrue(entete.startswith(f'<div class="hd-cta"><a class="hd-cx" href="{url}">Connexion</a><a class="btn btn-s"'), f)
             self.assertIn(f'<a class="mm-cx" href="{url}">Connexion</a><a class="btn mm-cta"', h, f)
 

@@ -18,11 +18,12 @@ from tests import support  # noqa: E402
 
 
 class TestBuild(unittest.TestCase):
-    """Site complet construit en mode aperçu forcé (dossier temporaire), quel que soit le réglage du dépôt."""
+    """Site complet construit en français seul et en mode aperçu forcé (dossier temporaire), quel que soit le réglage du
+    dépôt ; les autres langues sont vérifiées par test_production.TestProductionMultilingue et test_i18n_*."""
 
     @classmethod
     def setUpClass(cls):
-        cls.docs = support.site_complet(apercu=True)
+        cls.docs = support.site_complet(langues=("fr",), apercu=True)
         cls.pages = {p: support.chemin(cls.docs, p).read_text(encoding="utf-8") for p in build.PAGES}
 
     def test_arborescence_fr_et_racine(self):

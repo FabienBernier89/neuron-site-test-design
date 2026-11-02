@@ -2,7 +2,7 @@
 
 > Le moteur de traduction du droit, de la fiscalité et de la finance suisses. Quadrilingue natif, plus de 15 millions de segments, hébergement 100% suisse.
 
-Site en français (Suisse), mis à jour le 2026-10-23. Texte intégral des pages principales : https://neur-on.ai/llms-full.txt
+Site en français (Suisse), mis à jour le 2026-10-27. Texte intégral des pages principales : https://neur-on.ai/llms-full.txt
 
 ## Accueil
 
@@ -109,6 +109,12 @@ Site en français (Suisse), mis à jour le 2026-10-23. Texte intégral des pages
 - [Premiers pas dans Corrext : se connecter et traduire](https://neur-on.ai/fr/aide/premiers-pas/): Ouvrir Corrext, reconnaître les quatre outils de l'accueil, choisir un moteur de traduction et comprendre le mode de confidentialité avant de commencer.
 - [Sécurité, confidentialité et compte · Centre d'aide](https://neur-on.ai/fr/aide/securite-et-confidentialite/): Où sont stockées et traitées vos données, quels moteurs traitent hors de Suisse, comment fonctionnent les mémoires et comment gérer son compte.
 - [Traduction texte et document dans Corrext](https://neur-on.ai/fr/aide/traduction-texte-et-document/): Traduire un texte, envoyer jusqu'à 25 fichiers, convertir un PDF en Word, comparer les moteurs et reformuler : les gestes de base, pas à pas.
+
+## Versions linguistiques
+
+- [Deutsch](https://neur-on.ai/de/llms.txt)
+- [Italiano](https://neur-on.ai/it/llms.txt)
+- [English](https://neur-on.ai/en/llms.txt)
 
 ## Optional
 

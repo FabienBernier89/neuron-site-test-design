@@ -33,7 +33,7 @@ class TestLlmsTxt(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.sortie = support.site_complet(apercu=False)
+        cls.sortie = support.site_complet(langues=("fr",), apercu=False)
         cls.texte = (cls.sortie / "llms.txt").read_text(encoding="utf-8")
         cls.complet = (cls.sortie / "llms-full.txt").read_text(encoding="utf-8")
         cls.liens = re.findall(r"^- \[([^\]]+)\]\((https://neur-on\.ai/[^)]*)\)(?:: (.*))?$", cls.texte, re.M)
@@ -79,7 +79,7 @@ class TestLlmsTxt(unittest.TestCase):
             self.assertNotIn(scene, self.complet, scene)
 
     def test_identique_en_apercu(self):
-        apercu = support.site_complet(apercu=True)
+        apercu = support.site_complet(langues=("fr",), apercu=True)
         self.assertEqual((apercu / "llms.txt").read_text(encoding="utf-8"), self.texte)
 
 
@@ -208,7 +208,7 @@ class TestPlanDuSiteDate(unittest.TestCase):
     """4. Chaque <url> du sitemap porte un <lastmod>, la date de la page (date_page)."""
 
     def test_lastmod(self):
-        racine = ET.parse(support.site_complet(apercu=False) / "sitemap.xml").getroot()
+        racine = ET.parse(support.site_complet(langues=("fr",), apercu=False) / "sitemap.xml").getroot()
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
         urls = racine.findall(ns + "url")
         self.assertGreater(len(urls), 150)

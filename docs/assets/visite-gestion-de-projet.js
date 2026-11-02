@@ -1,7 +1,7 @@
 /* Visite guidée de la démo Gestion de projet : le tunnel en trois étapes joué sur les vrais contrôles
    (nom, confidentialité, langue cible, dépôt du fichier d'exemple, devis interne puis personnalisé),
    puis retour à l'état initial, car la scène n'est pas réinitialisée entre deux boucles.
-   Aucun texte n'est écrit ici : le nom et la langue viennent de la démo (valeur du champ, liste des langues). */
+   Aucun texte n'est écrit ici : le nom et la langue viennent de la démo (valeur du champ, liste des langues, libellé affiché). */
 (function () {
   "use strict";
   if (!window.SIM) return;
@@ -76,10 +76,12 @@
     var q = function (s) { return l.q(s); };
     var nom = q("#cxpName"), defaut = q("#cxpDefault"), recherche = q("#cxpLangSearch"), pop = q("#cxpLangPop");
     var niveau = q("#cxpLevel"), info = q("#cxpInfo");
-    /* Langue cible : l'allemand, cohérent avec la paire FR → DE du tableau de devis */
-    var caseLangue = q('#cxpLangList input[value="Allemand"]');
-    var langue = caseLangue.value;
+    /* Langue cible : l'allemand, cohérent avec la paire FR → DE du tableau de devis. La case se vise par son code de
+       langue (data-code, jamais traduit) ; la recherche tape le début du libellé affiché, que la démo filtre et qui suit
+       la langue de la page. */
+    var caseLangue = q('#cxpLangList input[data-code="de"]');
     var ligneLangue = caseLangue.closest("label");
+    var libelle = ligneLangue.textContent.trim();
     function etape(n) { return q("#cxpStep" + n).classList.contains("on"); }
 
     return SIM.jouer(l, [
@@ -99,7 +101,7 @@
       /* Langues cibles : ouverture de la liste, recherche, case cochée, puce affichée */
       function (l) { return cliquer(l, "#cxpLangBtn"); },
       SIM.fixe(500),
-      function (l) { return saisir(l, recherche, langue.slice(0, 4)); },
+      function (l) { return saisir(l, recherche, libelle.slice(0, 4)); },
       SIM.fixe(700),
       /* appui sur la ligne, clic sur la case elle-même (un clic sur l'étiquette déplacerait le focus) */
       function (l) { return l.appui(ligneLangue).then(function () { caseLangue.click(); return l.attendre(250); }); },

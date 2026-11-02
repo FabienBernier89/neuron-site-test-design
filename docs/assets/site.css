@@ -1585,6 +1585,38 @@ form [aria-invalid="true"]{border-color:var(--erreur)}
 @media (max-width:1023px){.lf-ns{grid-template-columns:repeat(2,minmax(0,1fr))}.lf-l{grid-template-columns:repeat(2,minmax(0,1fr))}.lf-m{grid-template-columns:minmax(0,1fr);gap:28px}.lf-f{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:767px){.lf-ns,.lf-r{grid-template-columns:minmax(0,1fr)}.lf-r{gap:24px}.lf-l{grid-template-columns:minmax(0,1fr)}}
 
+/* Sélecteur de langue de l'en-tête et du menu mobile (menu.py, tâche 1.4 de la traduction). Émis seulement quand plusieurs
+   langues sont construites. Couleurs par les jetons du thème : en clair, --muted vaut #5b6880 et --ink #06122e. */
+.hd-lang{display:flex;align-items:center;gap:2px}
+.hd-lang a{padding:8px 6px;font:500 12px/16px var(--sans);color:var(--muted);text-decoration:none}
+.hd-lang a:hover{color:var(--ink)}
+.hd-lang a[aria-current]{color:var(--ink);text-decoration:underline;text-underline-offset:3px}  /* langue de la page : aussi soulignée, jamais la couleur seule */
+.hd-in > .hd-lang{margin-left:auto}  /* gabarit minimal (contact) : à droite, sans .hd-cta */
+.mm .hd-lang{margin-top:24px;gap:8px}
+.mm .hd-lang a{padding:14px 16px}  /* cibles tactiles de 44 px */
+@media (max-width:1023px){.hd-cta .hd-lang{display:none}}  /* sous 1024 px le menu mobile porte le sélecteur */
+
+/* Bandeau des pages de l'aperçu qui contiennent une traduction non relue (outils/i18n/traduire.py, décision V4), jamais en
+   production. --ink sur --tile : #06122e sur #F5F8FF en clair, #ffffff sur #06246b en sombre (contraste AA largement). */
+.bandeau-travail{padding:10px 16px;background:var(--tile);border-bottom:2px solid var(--accent-d);font:600 14px/20px var(--sans);color:var(--ink);text-align:center}
+
+/* Débordements des langues autres que le français (outils/debordements.mjs, tâche 6.3) : chaque règle est limitée à la langue
+   concernée, jamais au français. Les titres de tuiles forcés sur une ligne (outils.css) passent à la ligne, équilibrés, quand
+   un mot composé ou une formule plus longue ne tient plus ; la césure automatique coupe les mots composés allemands, jamais
+   un mot de moins de 12 lettres : les noms de marque (LexMachina, Corrext, CHnell) restent entiers (contrôle « marques »
+   de outils/debordements.mjs). */
+html:not([lang="fr"]) .tf-3 .tf-t h3{white-space:normal;text-wrap:balance}
+html[lang="de"] main{hyphens:auto;hyphenate-limit-chars:12 5 5}
+/* Paires de termes des cartes de domaine (.cd .kv) : quand un terme allemand ou italien ne tient pas à côté de l'autre,
+   les deux passent l'un sous l'autre au lieu de sortir de la carte. */
+html:not([lang="fr"]) .cd .kv{display:flex;flex-wrap:wrap}
+html:not([lang="fr"]) .cd .kv > span{flex:1 1 0;min-width:max-content}
+/* Chiffres des tuiles à quatre colonnes : l'unité traduite (« 30 Languages ») est plus longue qu'en français. */
+html:not([lang="fr"]) .tl.t4 .n .u{font-size:clamp(26px,2.3vw,34px)}
+/* Chiffres de la page LexMachina : « 15 Mio.+ » demande une colonne plus large que « 15 M+ ». */
+html[lang="de"] .lm-ch li{grid-template-columns:136px minmax(0,1fr)}
+@media (max-width:640px){html[lang="de"] .lm-ch li{grid-template-columns:112px minmax(0,1fr)}}
+
 /* composants/legal.css */
 /* Pages légales : sommaire collant à gauche, texte courant en 16 px, espace sous l'en-tête.
    Mesures relevées sur une page légale de référence (sommaire 256 px, colonne de 768 px, 64 px d'écart), couleurs Neur.on. */

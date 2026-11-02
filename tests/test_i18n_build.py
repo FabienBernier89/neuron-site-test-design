@@ -135,7 +135,7 @@ class TestPagesNonConstruites(unittest.TestCase):
 
     def test_traduire_jamais_appele_en_francais_seul(self):
         with tempfile.TemporaryDirectory() as tmp, mock.patch.object(build, "TRADUIRE", side_effect=AssertionError("appelé")):
-            support.construire(tmp, pages=PAGES)
+            support.construire(tmp, pages=PAGES, langues=("fr",))
 
 
 class TestLiensDepuisDe(unittest.TestCase):
