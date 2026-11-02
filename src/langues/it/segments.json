@@ -3752,9 +3752,9 @@
  },
  "0b1a1eda73a1914c": {
   "fr": "{1}{2}Allemand vers français{/2}{3}Le droit suisse d'une rive à l'autre, avec le mot du même texte de loi{/3}{/1} {4}{5}Français vers allemand{/5}{6}Écrire pour un lecteur alémanique, avec les mots des lois fédérales{/6}{/4} {7}{8}Allemand vers anglais{/8}{9}Rendre le droit suisse intelligible, sans inventer un droit qui n'existe pas{/9}{/7} {10}{11}Français vers anglais{/11}{12}Le dossier romand à l'international, le droit suisse rendu compréhensible{/12}{/10} {13}{14}Italien vers français{/14}{15}La troisième langue officielle, à part entière{/15}{/13} {16}{17}Anglais vers allemand{/17}{18}Ramener le contrat au droit suisse, chaque clause rattachée au CO{/18}{/16}",
-  "trad": "{1}{2}Dal tedesco al francese{/2}{3}Il diritto svizzero da una regione linguistica all'altra, con il termine dello stesso testo di legge{/3}{/1} {4}{5}Dal francese al tedesco{/5}{6}Scrivere per un lettore della Svizzera tedesca, con i termini delle leggi federali{/6}{/4} {7}{8}Dal tedesco all'inglese{/8}{9}Rendere comprensibile il diritto svizzero, senza inventare un diritto che non esiste{/9}{/7} {10}{11}Dal francese all'inglese{/11}{12}Il dossier romando sulla scena internazionale, con il diritto svizzero reso comprensibile{/12}{/10} {13}{14}Dall'italiano al francese{/14}{15}La terza lingua ufficiale, a pieno titolo{/15}{/13} {16}{17}Dall'inglese al tedesco{/17}{18}Ricondurre il contratto al diritto svizzero, ogni clausola collegata al CO{/18}{/16}",
+  "trad": "{1}{2}Dal tedesco al francese{/2}{3}Il diritto svizzero da una lingua all'altra, con il termine della stessa legge{/3}{/1} {4}{5}Dal francese al tedesco{/5}{6}Scrivere per un lettore della Svizzera tedesca, con i termini delle leggi federali{/6}{/4} {7}{8}Dal tedesco all'inglese{/8}{9}Rendere comprensibile il diritto svizzero, senza inventare un diritto che non esiste{/9}{/7} {10}{11}Dal francese all'inglese{/11}{12}Il dossier romando all'estero, con il diritto svizzero reso comprensibile{/12}{/10} {13}{14}Dall'italiano al francese{/14}{15}La terza lingua ufficiale, a pieno titolo{/15}{/13} {16}{17}Dall'inglese al tedesco{/17}{18}Ricondurre il contratto al diritto svizzero, ogni clausola collegata al CO{/18}{/16}",
   "statut": "relu",
-  "source": "adapté le 2026-10-27 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
+  "source": "adapté le 2026-10-27 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29 ; sous-titre de menu raccourci (débordement), validé par les traducteurs experts le 2026-11-02 ; sous-titre de menu raccourci (débordement), validé par les traducteurs experts le 2026-11-02",
   "par_page": {}
  },
  "0b1f55c5f0d15b48": {
@@ -11887,9 +11887,9 @@
  },
  "23e05d3b26b8c26c": {
   "fr": "{1}{2}Cabinets d'avocats{/2}{3}Traduire un dossier sans jamais le sortir de Suisse{/3}{/1} {4}{5}Banques et finance{/5}{6}Le vocabulaire prudentiel, traité en Suisse{/6}{/4} {7}{8}Directions juridiques et Legal Ops{/8}{9}Une traduction mesurable : demande, devis et relecture au même endroit{/9}{/7} {10}{11}Autorités et administration{/11}{12}Rien ne quitte la Suisse, avec la terminologie des textes publiés{/12}{/10} {13}{14}Fiduciaires et conseil{/14}{15}Documents d'entreprise traduits et certifiés{/15}{/13} {16}{17}LegalTechs et éditeurs{/17}{18}Notre moteur et le concordancier CHnell dans votre produit{/18}{/16}",
-  "trad": "{1}{2}Studi legali{/2}{3}Tradurre un dossier senza che lasci mai la Svizzera{/3}{/1} {4}{5}Banche e finanza{/5}{6}Il lessico prudenziale, trattato in Svizzera{/6}{/4} {7}{8}Uffici legali e Legal Ops{/8}{9}Una traduzione misurabile: richiesta, offerta e revisione in un unico luogo{/9}{/7} {10}{11}Autorità e amministrazioni{/11}{12}Nulla lascia la Svizzera, con la terminologia dei testi pubblicati{/12}{/10} {13}{14}Fiduciarie e consulenza{/14}{15}Documenti aziendali tradotti e certificati{/15}{/13} {16}{17}LegalTech ed editori{/17}{18}Il nostro motore di traduzione e il concordanziere CHnell nel vostro prodotto{/18}{/16}",
+  "trad": "{1}{2}Studi legali{/2}{3}Tradurre un dossier senza che lasci mai la Svizzera{/3}{/1} {4}{5}Banche e finanza{/5}{6}Il lessico prudenziale, trattato in Svizzera{/6}{/4} {7}{8}Uffici legali e Legal Ops{/8}{9}Una traduzione misurabile: richiesta, offerta e revisione in un unico luogo{/9}{/7} {10}{11}Autorità e amministrazioni{/11}{12}Nulla lascia la Svizzera, con la terminologia dei testi pubblicati{/12}{/10} {13}{14}Fiduciarie e consulenza{/14}{15}Documenti aziendali tradotti e certificati{/15}{/13} {16}{17}LegalTech ed editori{/17}{18}Il nostro motore e il concordanziere CHnell nel vostro prodotto{/18}{/16}",
   "statut": "relu",
-  "source": "adapté le 2026-10-27 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
+  "source": "adapté le 2026-10-27 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29 ; sous-titre de menu raccourci (débordement), validé par les traducteurs experts le 2026-11-02",
   "par_page": {}
  },
  "23e132c98c45d371": {
@@ -25697,9 +25697,9 @@
  },
  "48ac7d1204f45177": {
   "fr": "{1}{2}Contrats{/2}{3}Le Code des obligations, d'une langue à l'autre{/3}{/1} {4}{5}Droit des sociétés{/5}{6}Statuts et procès-verbaux traduits avec les termes du Code des obligations{/6}{/4} {7}{8}Fusions et acquisitions{/8}{9}Lire la data room vite, puis traduire au mot près les documents engageants{/9}{/7} {10}{11}Contentieux et arbitrage{/11}{12}Ce que lira un juge ou un arbitre : des traductions citables{/12}{/10} {13}{14}Banque et finance{/14}{15}Du contrat de crédit au prospectus, sous le secret bancaire{/15}{/13} {16}{17}Compliance et FINMA{/17}{18}Écrire dans la langue de l'autorité, avec les termes des lois{/18}{/16} {19}{20}Voir tous les domaines{/20}{/19}",
-  "trad": "{1}{2}Contratti{/2}{3}Il Codice delle obbligazioni, da una lingua all'altra{/3}{/1} {4}{5}Diritto societario{/5}{6}Statuti e verbali tradotti con i termini del Codice delle obbligazioni{/6}{/4} {7}{8}Fusioni e acquisizioni{/8}{9}Leggere in fretta la data room, poi tradurre alla lettera i documenti vincolanti{/9}{/7} {10}{11}Contenzioso e arbitrato{/11}{12}Ciò che leggerà un giudice o un arbitro: traduzioni citabili{/12}{/10} {13}{14}Banca e finanza{/14}{15}Dal contratto di credito al prospetto, nel rispetto del segreto bancario{/15}{/13} {16}{17}Compliance e FINMA{/17}{18}Scrivere nella lingua dell'autorità, con i termini delle leggi{/18}{/16} {19}{20}Tutti i settori del diritto{/20}{/19}",
+  "trad": "{1}{2}Contratti{/2}{3}Il Codice delle obbligazioni, da una lingua all'altra{/3}{/1} {4}{5}Diritto societario{/5}{6}Statuti e verbali tradotti con i termini del Codice delle obbligazioni{/6}{/4} {7}{8}Fusioni e acquisizioni{/8}{9}Leggere in fretta la data room, poi tradurre alla lettera gli atti vincolanti{/9}{/7} {10}{11}Contenzioso e arbitrato{/11}{12}Ciò che leggerà un giudice o un arbitro: traduzioni citabili{/12}{/10} {13}{14}Banca e finanza{/14}{15}Dal contratto di credito al prospetto, nel rispetto del segreto bancario{/15}{/13} {16}{17}Compliance e FINMA{/17}{18}Scrivere nella lingua dell'autorità, con i termini delle leggi{/18}{/16} {19}{20}Tutti i settori del diritto{/20}{/19}",
   "statut": "relu",
-  "source": "adapté le 2026-10-27 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
+  "source": "adapté le 2026-10-27 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29 ; sous-titre de menu raccourci (débordement), validé par les traducteurs experts le 2026-11-02",
   "par_page": {}
  },
  "48b07059c49c31e5": {
@@ -27619,6 +27619,19 @@
   "statut": "relu",
   "source": "variante de balisage V1 it/risorse/glossario/arrest/ (marqueur englobant) ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
   "par_page": {}
+ },
+ "4e333216c6482789": {
+  "fr": "Corrext et LexMachina · données stockées en Suisse · ISO 27001",
+  "trad": null,
+  "statut": null,
+  "source": null,
+  "par_page": {
+   "og": {
+    "trad": "Corrext e LexMachina · dati archiviati in Svizzera · ISO 27001",
+    "statut": "relu",
+    "source": "og-neuron.jpg (V1) ; traduction validée par les traducteurs experts le 2026-11-02"
+   }
+  }
  },
  "4e37a89f85ddc6b7": {
   "fr": "Devis et délai affichés avant validation",
@@ -52963,6 +52976,19 @@
   "source": "V1 it/contatto/",
   "par_page": {}
  },
+ "9c2b502f3ae70ac7": {
+  "fr": "Traduction par IA pour le droit, la fiscalité et la finance",
+  "trad": null,
+  "statut": null,
+  "source": null,
+  "par_page": {
+   "og": {
+    "trad": "Traduzione con l'IA per il diritto, il fisco e la finanza",
+    "statut": "relu",
+    "source": "og-neuron.jpg (V1) ; traduction validée par les traducteurs experts le 2026-11-02"
+   }
+  }
+ },
  "9c30e6e6bd15aebd": {
   "fr": "Oui, DeepL Pro peut traduire un texte juridique : c'est un moteur rapide et fluide. Dans Corrext, il reste disponible, mais sous la gouvernance de votre organisation. La différence ne tient pas à la fluidité : elle tient au lieu de traitement des données, à la terminologie du droit suisse et à la chaîne de relecture.",
   "trad": "Sì, DeepL Pro può tradurre un testo giuridico: è un motore rapido e scorrevole. In Corrext resta disponibile, ma secondo le regole della vostra organizzazione. La differenza non sta nella scorrevolezza: sta nel luogo di trattamento dei dati, nella terminologia del diritto svizzero e nella catena di revisione.",
@@ -67569,9 +67595,9 @@
  },
  "c869c09098110017": {
   "fr": "{1}{2}Traduction texte et document{/2}{3}Texte, fichiers, PDF vers Word, réécriture, avec le moteur de votre choix{/3}{/1} {4}{5}Gestion de projet{/5}{6}Relecture humaine à la carte, devis et délai instantanés{/6}{/4} {7}{8}Éditeur de relecture{/8}{9}Relecture phrase par phrase, corrections gardées en mémoire{/9}{/7} {10}{11}Plugin Word{/11}{12}Le panneau de relecture Corrext, dans Microsoft Word{/12}{/10} {13}{14}Fast lookup CHnell{/14}{15}Le concordancier du droit suisse, 30 domaines{/15}{/13} {16}{17}Extraits du registre{/17}{18}Traduction certifiée, notariée, apostillée, commandée entièrement en ligne{/18}{/16}",
-  "trad": "{1}{2}Traduzione di testi e documenti{/2}{3}Testi, file, da PDF a Word, riformulazione, con il motore di vostra scelta{/3}{/1} {4}{5}Gestione dei progetti{/5}{6}Revisione umana a scelta, offerta e termine di consegna immediati{/6}{/4} {7}{8}Editor di revisione{/8}{9}Revisione frase per frase, correzioni salvate in memoria{/9}{/7} {10}{11}Plug-in per Word{/11}{12}Il riquadro attività di revisione Corrext, in Microsoft Word{/12}{/10} {13}{14}Fast lookup CHnell{/14}{15}Il concordanziere del diritto svizzero, 30 ambiti{/15}{/13} {16}{17}Estratti del registro di commercio{/17}{18}Traduzione certificata, autenticata da un notaio o con apostille, ordinata interamente in linea{/18}{/16}",
+  "trad": "{1}{2}Traduzione di testi e documenti{/2}{3}Testi, file, PDF in Word, riformulazione, con il motore scelto{/3}{/1} {4}{5}Gestione dei progetti{/5}{6}Revisione umana a scelta, offerta e termine di consegna immediati{/6}{/4} {7}{8}Editor di revisione{/8}{9}Revisione frase per frase, correzioni salvate in memoria{/9}{/7} {10}{11}Plug-in per Word{/11}{12}Il riquadro attività di revisione Corrext, in Microsoft Word{/12}{/10} {13}{14}Fast lookup CHnell{/14}{15}Il concordanziere del diritto svizzero, 30 ambiti{/15}{/13} {16}{17}Estratti del registro di commercio{/17}{18}Traduzione certificata, notarile o con apostille, ordinata online{/18}{/16}",
   "statut": "relu",
-  "source": "adapté le 2026-10-27 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
+  "source": "adapté le 2026-10-27 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29 ; sous-titre de menu raccourci (débordement), validé par les traducteurs experts le 2026-11-02 ; sous-titre de menu raccourci (débordement), validé par les traducteurs experts le 2026-11-02",
   "par_page": {}
  },
  "c86b3e789e2f891b": {

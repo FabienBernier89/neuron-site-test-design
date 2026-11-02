@@ -4507,9 +4507,9 @@
  },
  "0b1a1eda73a1914c": {
   "fr": "{1}{2}Allemand vers français{/2}{3}Le droit suisse d'une rive à l'autre, avec le mot du même texte de loi{/3}{/1} {4}{5}Français vers allemand{/5}{6}Écrire pour un lecteur alémanique, avec les mots des lois fédérales{/6}{/4} {7}{8}Allemand vers anglais{/8}{9}Rendre le droit suisse intelligible, sans inventer un droit qui n'existe pas{/9}{/7} {10}{11}Français vers anglais{/11}{12}Le dossier romand à l'international, le droit suisse rendu compréhensible{/12}{/10} {13}{14}Italien vers français{/14}{15}La troisième langue officielle, à part entière{/15}{/13} {16}{17}Anglais vers allemand{/17}{18}Ramener le contrat au droit suisse, chaque clause rattachée au CO{/18}{/16}",
-  "trad": "{1}{2}German to French{/2}{3}Swiss law across the language border, with the term from the same legal text{/3}{/1} {4}{5}French to German{/5}{6}Writing for German-speaking Swiss readers, in the terms of the Federal Acts{/6}{/4} {7}{8}German to English{/8}{9}Making Swiss law intelligible without inventing law that does not exist{/9}{/7} {10}{11}French to English{/11}{12}Files from French-speaking Switzerland for an international audience, with Swiss law made clear{/12}{/10} {13}{14}Italian to French{/14}{15}The third official language, in its own right{/15}{/13} {16}{17}English to German{/17}{18}Bringing the contract back to Swiss law, with every clause linked to the CO{/18}{/16}",
+  "trad": "{1}{2}German to French{/2}{3}Swiss law across the language border, with the term from the same legal text{/3}{/1} {4}{5}French to German{/5}{6}Writing for German-speaking Swiss readers, in the terms of the Federal Acts{/6}{/4} {7}{8}German to English{/8}{9}Making Swiss law intelligible without inventing law that does not exist{/9}{/7} {10}{11}French to English{/11}{12}Swiss French files for an international audience, Swiss law made clear{/12}{/10} {13}{14}Italian to French{/14}{15}The third official language, in its own right{/15}{/13} {16}{17}English to German{/17}{18}Bringing the contract back to Swiss law, with every clause linked to the CO{/18}{/16}",
   "statut": "relu",
-  "source": "adapté le 2026-10-28 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
+  "source": "adapté le 2026-10-28 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29 ; sous-titre de menu raccourci (débordement), validé par les traducteurs experts le 2026-11-02",
   "par_page": {}
  },
  "0b1f55c5f0d15b48": {
@@ -27202,9 +27202,9 @@
  },
  "48ac7d1204f45177": {
   "fr": "{1}{2}Contrats{/2}{3}Le Code des obligations, d'une langue à l'autre{/3}{/1} {4}{5}Droit des sociétés{/5}{6}Statuts et procès-verbaux traduits avec les termes du Code des obligations{/6}{/4} {7}{8}Fusions et acquisitions{/8}{9}Lire la data room vite, puis traduire au mot près les documents engageants{/9}{/7} {10}{11}Contentieux et arbitrage{/11}{12}Ce que lira un juge ou un arbitre : des traductions citables{/12}{/10} {13}{14}Banque et finance{/14}{15}Du contrat de crédit au prospectus, sous le secret bancaire{/15}{/13} {16}{17}Compliance et FINMA{/17}{18}Écrire dans la langue de l'autorité, avec les termes des lois{/18}{/16} {19}{20}Voir tous les domaines{/20}{/19}",
-  "trad": "{1}{2}Contracts{/2}{3}The Code of Obligations, from one language to another{/3}{/1} {4}{5}Company law{/5}{6}Articles of association and minutes, translated with the terms of the Code of Obligations{/6}{/4} {7}{8}Mergers and acquisitions{/8}{9}Read the data room quickly, then translate the binding documents word for word{/9}{/7} {10}{11}Litigation and arbitration{/11}{12}What a judge or arbitrator will read: translations you can cite{/12}{/10} {13}{14}Banking and finance{/14}{15}From credit agreement to prospectus, under banking secrecy{/15}{/13} {16}{17}Compliance and FINMA{/17}{18}Write in the authority's language, with the terms of the legislation{/18}{/16} {19}{20}See all areas of law{/20}{/19}",
+  "trad": "{1}{2}Contracts{/2}{3}The Code of Obligations, from one language to another{/3}{/1} {4}{5}Company law{/5}{6}Articles of association and minutes, in Code of Obligations terms{/6}{/4} {7}{8}Mergers and acquisitions{/8}{9}Read the data room fast, then translate binding documents word for word{/9}{/7} {10}{11}Litigation and arbitration{/11}{12}What a judge or arbitrator will read: translations you can cite{/12}{/10} {13}{14}Banking and finance{/14}{15}From credit agreement to prospectus, under banking secrecy{/15}{/13} {16}{17}Compliance and FINMA{/17}{18}Write in the authority's language, with the terms of the legislation{/18}{/16} {19}{20}See all areas of law{/20}{/19}",
   "statut": "relu",
-  "source": "adapté le 2026-10-28 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
+  "source": "adapté le 2026-10-28 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29 ; sous-titre de menu raccourci (débordement), validé par les traducteurs experts le 2026-11-02 ; sous-titre de menu raccourci (débordement), validé par les traducteurs experts le 2026-11-02",
   "par_page": {}
  },
  "48b07059c49c31e5": {
@@ -29049,6 +29049,19 @@
   "statut": "relu",
   "source": "variante de balisage V1 en/resources/glossary/arrest/ (marqueur englobant) ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
   "par_page": {}
+ },
+ "4e333216c6482789": {
+  "fr": "Corrext et LexMachina · données stockées en Suisse · ISO 27001",
+  "trad": null,
+  "statut": null,
+  "source": null,
+  "par_page": {
+   "og": {
+    "trad": "Corrext and LexMachina · data stored in Switzerland · ISO 27001",
+    "statut": "relu",
+    "source": "og-neuron.jpg (V1) ; traduction validée par les traducteurs experts le 2026-11-02"
+   }
+  }
  },
  "4e37a89f85ddc6b7": {
   "fr": "Devis et délai affichés avant validation",
@@ -44860,9 +44873,9 @@
  },
  "7ce69cd0ef7de92b": {
   "fr": "{1}{2}Blog{/2}{3}Droit suisse, traduction et intelligence artificielle{/3}{/1} {4}{5}Guides{/5}{6}Méthodes de fond, signées par nos spécialistes{/6}{/4} {7}{8}Études et benchmarks{/8}{9}Nos mesures sur corpus de droit suisse, méthode et critères publiés{/9}{/7}",
-  "trad": "{1}{2}Blog{/2}{3}Swiss law, translation and artificial intelligence{/3}{/1} {4}{5}Guides{/5}{6}In-depth methods, signed by our specialists{/6}{/4} {7}{8}Studies and benchmarks{/8}{9}Our measurements on Swiss law corpora, with method and criteria published{/9}{/7}",
+  "trad": "{1}{2}Blog{/2}{3}Swiss law, translation and artificial intelligence{/3}{/1} {4}{5}Guides{/5}{6}In-depth methods, signed by our specialists{/6}{/4} {7}{8}Studies and benchmarks{/8}{9}Our measurements on Swiss law corpora, method and criteria published{/9}{/7}",
   "statut": "relu",
-  "source": "adapté le 2026-10-28 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
+  "source": "adapté le 2026-10-28 ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29 ; sous-titre de menu raccourci (débordement), validé par les traducteurs experts le 2026-11-02",
   "par_page": {}
  },
  "7ceb676d5942293c": {
@@ -54408,6 +54421,19 @@
     "trad": "{1}Contact{/1}",
     "statut": "v1",
     "source": "V1 en/contact/"
+   }
+  }
+ },
+ "9c2b502f3ae70ac7": {
+  "fr": "Traduction par IA pour le droit, la fiscalité et la finance",
+  "trad": null,
+  "statut": null,
+  "source": null,
+  "par_page": {
+   "og": {
+    "trad": "AI translation for law, tax and finance",
+    "statut": "relu",
+    "source": "og-neuron.jpg (V1) ; traduction validée par les traducteurs experts le 2026-11-02"
    }
   }
  },
