@@ -6,23 +6,24 @@ on suit les chaînes jusqu'à une page réelle, et on en tire deux formes :
 - des pages de redirection pour l'aperçu (GitHub Pages ne sait pas faire de 301) ;
 - un .htaccess de vraies 301 pour Hostpoint.
 
-Périmètre : français seul. Les redirections sous de/, it/, en/ relèvent des versions allemande, italienne et
-anglaise (lot F). Les anciennes adresses de la racine renvoyaient vers la version anglaise ; faute de version
-anglaise dans ce site, elles renvoient vers l'équivalent français de la même page, que la page anglaise
-déclare dans son hreflang fr-CH.
+Périmètre : les langues ouvertes (tâche 10.1). Les anciennes adresses sous de/, it/ ou en/ ne sont reprises que si
+leur langue est ouverte, vers la page de cette langue (les adresses DE, IT et EN de la V1 sont celles de la V2). Les
+anciennes adresses de la racine renvoyaient vers la version anglaise : elles y renvoient dès que l'anglais est ouvert,
+sinon vers l'équivalent français de la même page, que la page anglaise déclare dans son hreflang fr-CH. Une cible dans
+une langue fermée passe de même par son équivalent français.
 """
 import html as H
 import posixpath
 import re
 from pathlib import Path
 
-LANGUES_HORS_PERIMETRE = ("de", "it", "en")
+LANGUES = ("fr", "de", "it", "en")  # préfixes de langue des adresses du site
 IGNORES = ("maquettes",)
 PRODUCTION = "https://neur-on.ai"
 REFRESH = re.compile(r'<meta http-equiv="refresh" content="[^"]*?url=([^"]+)"')
 HREFLANG_FR = re.compile(r'<link rel="alternate" hreflang="fr-CH" href="' + re.escape(PRODUCTION) + r'(/fr/[^"]*)"')
 ANCIEN_SUR = re.compile(r"^[a-z0-9_/-]+/$")                              # ancien chemin : pas de caractère à échapper
-CIBLE_SURE = re.compile(r"^/fr/[a-z0-9/-]*(#[A-Za-z0-9_-]+)?$")
+CIBLE_SURE = re.compile(r"^/(?:fr|de|it|en)/[a-z0-9/-]*(#[A-Za-z0-9_-]+)?$")
 UN_AN = "public, max-age=31536000, immutable"
 
 
@@ -45,10 +46,12 @@ def _page_reelle(docs, chemin, redirs, ancien):
     return f
 
 
-def lire(neuron):
+def lire(neuron, ouvertes=("fr",)):
     """Redirections du périmètre : {ancien chemin (sans barre initiale, avec barre finale): cible absolue
-    /fr/<page>/[#ancre]}. Lève ValueError si une cible n'existe pas, si une chaîne boucle, si une ancre manque
-    dans la page cible ou si une page d'une autre langue n'a pas d'équivalent français."""
+    /<langue>/<page>/[#ancre]}. ouvertes : langues servies (le français toujours). Lève ValueError si une cible n'existe
+    pas, si une chaîne boucle, si une ancre manque dans la page cible ou si une page d'une langue fermée n'a pas
+    d'équivalent français."""
+    ouvertes = set(ouvertes) | {"fr"}
     docs = Path(neuron) / "docs"
     redirs = {}  # toutes les pages de redirection, toutes langues : "/ancien/" -> (cible, ancre)
     for f in sorted(docs.rglob("index.html")):
@@ -60,7 +63,8 @@ def lire(neuron):
             redirs["/" + dossier.as_posix() + "/"] = r
     resultat = {}
     for ancien in sorted(redirs):
-        if ancien.split("/")[1] in LANGUES_HORS_PERIMETRE:
+        prefixe = ancien.split("/")[1]
+        if prefixe in LANGUES and prefixe not in ouvertes:  # ancienne adresse d'une langue fermée : hors périmètre
             continue
         cible, ancre = redirs[ancien]
         vus = {ancien}
@@ -71,7 +75,7 @@ def lire(neuron):
             cible, suite = redirs[cible]
             ancre = suite or ancre
         page = _page_reelle(docs, cible, redirs, ancien)
-        if not cible.startswith("/fr/"):  # autre langue : l'équivalent français est déclaré par la page elle-même
+        if cible.split("/")[1] not in ouvertes:  # langue fermée : l'équivalent français est déclaré par la page elle-même
             alt = HREFLANG_FR.search(page.read_text(encoding="utf-8"))
             if not alt:
                 raise ValueError(f"{ancien} : la page {cible} n'a pas d'équivalent français (hreflang fr-CH)")
@@ -105,23 +109,41 @@ UN_MOIS = "public, max-age=2592000"
 REVALIDER = "no-cache"
 
 
-def htaccess(redirs):
+def racine(ouvertes):
+    """Règles de la racine. Français seul : 302 vers /fr/, comme avant. Plusieurs langues (tâche 10.2, décision V7) :
+    302 selon la première langue d'Accept-Language parmi les langues ouvertes (gsw, le suisse allemand, vers
+    l'allemand), repli sur l'anglais s'il est ouvert, sinon sur le français. Seule la racine redirige : une page
+    intérieure garde la langue de son adresse (robots, liens partagés). E=LANGUE_RACINE marque ces réponses pour
+    l'en-tête Vary: Accept-Language (bloc mod_headers)."""
+    base = f"https://{HOTE}"
+    langues = [l for l in LANGUES if l in set(ouvertes) | {"fr"}]
+    if langues == ["fr"]:
+        return ["# La langue n'est pas encore choisie côté serveur : la racine part vers le français (302, provisoire).",
+                f"RewriteRule ^$ {base}/fr/ [R=302,L]"]
+    repli = "en" if "en" in langues else "fr"
+    lignes = ["# Racine : la première langue du navigateur parmi les langues ouvertes, sinon " + repli + " (302, décision V7)."]
+    for langue in langues:
+        lignes += [f"RewriteCond %{{HTTP:Accept-Language}} ^{'(de|gsw)' if langue == 'de' else langue} [NC]",
+                   f"RewriteRule ^$ {base}/{langue}/ [R=302,L,E=LANGUE_RACINE:1]"]
+    return lignes + [f"RewriteRule ^$ {base}/{repli}/ [R=302,L,E=LANGUE_RACINE:1]"]
+
+
+def htaccess(redirs, ouvertes=("fr",)):
     """.htaccess de production pour Hostpoint (Apache), dans cet ordre :
     1. page d'erreur ;
-    2. racine vers le français (302, provisoire : la langue n'est pas encore choisie côté serveur) ;
+    2. racine : vers le français seul, ou selon la langue du navigateur dès que plusieurs langues sont ouvertes (racine) ;
     3. une 301 par ancienne adresse ;
     4. adresse canonique : HTTP vers HTTPS et www.neur-on.ai vers neur-on.ai, en 301 ;
     5. compression (mod_deflate) et en-têtes de cache (mod_headers), chacun sous garde IfModule.
-    Pas de chaîne : les règles 2 et 3 renvoient directement vers https://neur-on.ai/fr/..., si bien que
-    http://www.neur-on.ai/about/ arrive en un seul saut sur https://neur-on.ai/fr/a-propos/ ; la règle 4 ne sert
+    Pas de chaîne : les règles 2 et 3 renvoient directement vers https://neur-on.ai/<langue>/..., si bien que
+    http://www.neur-on.ai/fr/about/ arrive en un seul saut sur https://neur-on.ai/fr/a-propos/ ; la règle 4 ne sert
     qu'aux autres adresses et va elle aussi droit à la forme finale. Derrière un proxy qui termine le HTTPS,
     l'en-tête X-Forwarded-Proto évite une boucle de redirection."""
     base = f"https://{HOTE}"
     lignes = ["# Généré par build.py : ne pas modifier à la main.",
               "ErrorDocument 404 /404.html",
               "RewriteEngine On",
-              "# La langue n'est pas encore choisie côté serveur : la racine part vers le français (302, provisoire).",
-              f"RewriteRule ^$ {base}/fr/ [R=302,L]",
+              *racine(ouvertes),
               "# Anciennes adresses : avec ou sans barre finale, ancre conservée (NE), directement en HTTPS sur l'hôte canonique.",
               ]
     for ancien, cible in sorted(redirs.items()):
@@ -145,6 +167,8 @@ def htaccess(redirs):
         "</IfModule>",
         "# Cache. Sans mod_headers, rien n'est posé.",
         "<IfModule mod_headers.c>",
+        *(["  # Racine redirigée selon la langue du navigateur : les caches gardent une réponse par langue.",
+            "  Header always append Vary Accept-Language env=LANGUE_RACINE"] if len(racine(ouvertes)) > 2 else []),
         "  # Polices (assets/fonts/) : remplacer une police impose de changer son nom de fichier, le navigateur ne la",
         "  # redemande pas pendant un an.",
         '  <FilesMatch "\\.woff2$">',

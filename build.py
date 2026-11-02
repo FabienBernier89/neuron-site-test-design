@@ -251,15 +251,14 @@ def nom_fil(chemin):
     return _libelles_fil().get(chemin) or chemin.rstrip("/").split("/")[-1].replace("-", " ").capitalize()
 
 
-LANGUE_PAR_DEFAUT = "fr"  # langue de la page désignée par hreflang x-default
+LANGUE_PAR_DEFAUT = "fr"  # langue désignée par hreflang x-default tant que l'anglais n'est pas construit (décision V7)
 X_DEFAULT = re.compile(r'<link rel="alternate" hreflang="x-default" href="[^"]*">')
 
 
 def adresse_x_default(page):
-    """Cible du hreflang x-default d'une page : sa version dans la langue par défaut (le français), une page réelle et
-    indexable. La racine du domaine, page d'aiguillage non indexée (redirigée côté serveur), n'en est plus la cible.
-    Quand les versions DE, IT et EN existeront, chacune gardera ce x-default : la version française de la même page
-    (ou celle de LANGUE_PAR_DEFAUT si l'on en change)."""
+    """Cible provisoire du hreflang x-default d'une page : sa version française, une page réelle et indexable (la racine
+    du domaine, page d'aiguillage non indexée, n'en est plus la cible). finaliser la remplace par celle de
+    localiser.alternates : la version anglaise dès qu'elle est construite (décision V7)."""
     return f"{PRODUCTION}{LANGUE_PAR_DEFAUT}/{page}"
 
 
@@ -549,14 +548,15 @@ def page_404(nav, pied, v, langue="fr", construites=None, html=None):
 
 def page_racine(dispo=("fr",)):
     """Page d'aiguillage de la racine : celle du site Neur.on, réduite aux langues construites (dispo : le français et les
-    langues dont la page d'accueil l'est). Elle choisit la langue côté navigateur, repli sur le français ; elle reste
-    non indexée, comme dans le site actuel. Redirection par Accept-Language et bascule de x-default vers l'anglais :
-    lot 10 (décision V7)."""
+    langues dont la page d'accueil l'est). Elle choisit la langue côté navigateur (aperçu sans serveur ; en production,
+    le .htaccess redirige la racine selon Accept-Language avant elle) ; elle reste non indexée, comme dans le site
+    actuel. Décision V7 : repli et x-default vers l'anglais dès qu'il est proposé, sinon vers le français."""
     h = (NEURON / "docs/index.html").read_text(encoding="utf-8")
     liste = json.dumps(list(dispo), separators=(",", ":"))
-    h, n = re.subn(r'var dispo=\[[^\]]*\],def="[a-z]+"', lambda m: f'var dispo={liste},def="fr"', h)
+    repli = "en" if "en" in dispo else LANGUE_PAR_DEFAUT
+    h, n = re.subn(r'var dispo=\[[^\]]*\],def="[a-z]+"', lambda m: f'var dispo={liste},def="{repli}"', h)
     h = h.replace('<html lang="en">', '<html lang="fr">', 1)
-    h = X_DEFAULT.sub(f'<link rel="alternate" hreflang="x-default" href="{adresse_x_default("")}">', h)
+    h = X_DEFAULT.sub(f'<link rel="alternate" hreflang="x-default" href="{PRODUCTION}{repli}/">', h)
     absentes = "|".join(l for l in ("de", "it", "en") if l not in dispo)
     if absentes:
         h = re.sub(rf'<link rel="alternate" hreflang="(?:{absentes})[^"]*" href="[^"]*">\n', "", h)
@@ -661,28 +661,33 @@ def garde_sortie():
 
 
 def cible_v2(cible):
-    """Cible d'une redirection vérifiée dans la sortie V2 : une ancre (#actu-108) absente de la page V2 construite est
+    """Cible d'une redirection vérifiée dans la sortie V2 : une page d'une autre langue que le français qui n'est pas
+    construite cède la place à sa version française ; une ancre (#actu-108) absente de la page V2 construite est
     retirée, la redirection mène alors en haut de la page. Les ancres de la V1 (cartes de la page actualités) n'existent
     pas dans la V2 ; vérifié le 2026-10-23 : aucune des actualités de 2020 et 2021 visées n'a de billet dans la V2,
     la page actualités sans ancre est donc la meilleure cible existante."""
     chemin, _, ancre = cible.partition("#")
+    page, langue = langues.page_de(chemin[1:]) or (chemin[len("/fr/"):], "fr")
+    if langue != "fr" and not chemin_page(page, langue).is_file():  # page non construite dans sa langue : le français
+        chemin, langue = f"/fr/{page}", "fr"
+    fichier = chemin_page(page, langue)
     if not ancre:
-        return cible
-    page = chemin_page(chemin[len("/fr/"):])
-    return cible if page.is_file() and f'id="{ancre}"' in page.read_text(encoding="utf-8") else chemin
+        return chemin
+    return chemin + "#" + ancre if fichier.is_file() and f'id="{ancre}"' in fichier.read_text(encoding="utf-8") else chemin
 
 
-def ecrire_redirections():
+def ecrire_redirections(ouvertes=("fr",)):
     """Anciennes adresses du site Neur.on : une page de redirection par adresse (aperçu) et un .htaccess de 301.
-    Appelée après l'écriture des pages : chaque ancre est vérifiée dans la page V2 (cible_v2)."""
-    redirs = {ancien: cible_v2(cible) for ancien, cible in redirections.lire(NEURON).items()}
+    Appelée après l'écriture des pages : chaque ancre est vérifiée dans la page V2 (cible_v2). ouvertes : langues
+    construites (tâche 10.1 : anciennes adresses de ces langues ; 10.2 : racine selon la langue du navigateur)."""
+    redirs = {ancien: cible_v2(cible) for ancien, cible in redirections.lire(NEURON, ouvertes).items()}
     for ancien, cible in redirs.items():
         sortie = DOCS / ancien / "index.html"
         if sortie.exists():
             sys.exit(f"Redirection {ancien} : la page existe déjà dans la sortie, elle serait écrasée")
         sortie.parent.mkdir(parents=True, exist_ok=True)
         sortie.write_text(redirections.page(ancien, cible), encoding="utf-8")
-    (DOCS / ".htaccess").write_text(redirections.htaccess(redirs), encoding="utf-8")
+    (DOCS / ".htaccess").write_text(redirections.htaccess(redirs, ouvertes), encoding="utf-8")
 
 
 _TABLES = {}  # tables de traduction lues pendant un build (vidé au début de main)
@@ -830,7 +835,7 @@ def main():
         (DOCS / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {PRODUCTION}sitemap.xml\n", encoding="utf-8")
     ecrire_llms(metas, construites, libelles)  # résumé et texte intégral pour les moteurs IA, un jeu par langue construite
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
-    ecrire_redirections()
+    ecrire_redirections(presentes)
     # envoi des formulaires sur Hostpoint, réglé par la configuration ; sa table des pages de remerciement ne garde
     # que les langues dont cette page est construite, le français toujours (une langue absente renvoie vers lui)
     envoi.ecrire(DOCS / "envoi.php", CONFIG,

@@ -177,11 +177,14 @@ class TestAlternates(unittest.TestCase):
         u = U + "fr/corrext/"
         self.assertEqual(localiser.alternates("corrext/", {"fr": {"corrext/"}}), [("fr-CH", u), ("x-default", u)])
 
-    def test_ordre_des_langues_et_x_default_francais(self):
-        construites = {"fr": {"contact/"}, "en": {"contact/"}, "de": {"contact/"}}
+    def test_ordre_des_langues_et_x_default_anglais(self):
+        """Décision V7 : dès que la version anglaise d'une page est construite, x-default la désigne (même langue que le
+        repli de la racine) ; sinon x-default reste la version française."""
+        construites = {"fr": {"contact/", "tarifs/"}, "en": {"contact/"}, "de": {"contact/", "tarifs/"}}
         self.assertEqual(localiser.alternates("contact/", construites),
                          [("fr-CH", U + "fr/contact/"), ("de-CH", U + "de/kontakt/"), ("en", U + "en/contact/"),
-                          ("x-default", U + "fr/contact/")])
+                          ("x-default", U + "en/contact/")])
+        self.assertEqual(localiser.alternates("tarifs/", construites)[-1], ("x-default", U + "fr/tarifs/"))
 
     def test_page_francaise_absente_de_la_table(self):
         """Une page française sans adresse dans routes.json garde son alternate fr-CH et son x-default."""

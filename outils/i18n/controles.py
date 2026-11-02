@@ -565,7 +565,8 @@ _REDIRECTION = re.compile(r'<meta http-equiv="refresh"')
 
 
 def hreflang(sortie):
-    """Pour chaque page de sortie/{fr,de,it,en}/ : auto-référence, x-default vers une page française, cibles existantes
+    """Pour chaque page de sortie/{fr,de,it,en}/ : auto-référence, x-default vers la version de repli (décision V7 : la
+    version anglaise que la page annonce, sinon la française), cibles existantes
     et dans la bonne langue, réciprocité (si A annonce B sous la langue de B, B annonce A sous la langue de A). Les pages
     de redirection des anciennes adresses (meta refresh, noindex) ne sont pas des pages du site : elles sont ignorées."""
     sortie = Path(sortie)
@@ -591,8 +592,10 @@ def hreflang(sortie):
                 problemes.append(probleme("hreflang", f"{chemin} : adresse hors du site pour « {hl} »", href))
                 continue
             if hl == "x-default":
-                if cible.split("/")[0] != "fr":
-                    problemes.append(probleme("hreflang", f"{chemin} : x-default ne mène pas à la version française", href))
+                anglais = par_langue.get(HREFLANG["en"])
+                if (href != anglais) if anglais else cible.split("/")[0] != "fr":
+                    problemes.append(probleme("hreflang", f"{chemin} : x-default ne mène pas à la version de repli "
+                                                          "(anglaise si elle existe, sinon française)", href))
             elif cible.split("/")[0] != next((l for l in LANGUES if HREFLANG[l] == hl), None):
                 problemes.append(probleme("hreflang", f"{chemin} : « {hl} » mène à une page d'une autre langue", href))
             if not _cible_existe(sortie, cible):

@@ -108,12 +108,13 @@ def localiser(html, page, langue, construites, marquer=False):
 
 def alternates(page, construites):
     """[(hreflang, adresse de production)] d'une page : ses versions construites dans l'ordre de LANGUES, puis
-    ("x-default", version française). Avec le seul français : [("fr-CH", u), ("x-default", u)]. La version française
-    est la cible de x-default (règle V2 ; elle ne basculera vers l'anglais qu'à l'ouverture de cette langue)."""
+    ("x-default", version de repli). Avec le seul français : [("fr-CH", u), ("x-default", u)]. Décision V7 : x-default
+    désigne la version anglaise dès qu'elle est construite (même langue que le repli de la racine), sinon la française."""
     francais = PRODUCTION + "fr/" + page  # déduite de la page : une page française absente de la table est permise
     versions = [(HREFLANG[l], francais if l == "fr" else PRODUCTION + route(page, l))
                 for l in LANGUES if page in construites.get(l, ())]
-    return versions + [("x-default", francais)]
+    anglais = PRODUCTION + route(page, "en") if page in construites.get("en", ()) else None
+    return versions + [("x-default", anglais or francais)]
 
 
 def poser_alternates(html, page, construites):

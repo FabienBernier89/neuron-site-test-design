@@ -216,6 +216,20 @@ class TestControles(unittest.TestCase):
             ecrire(tmp, "de/x", page_alternates(*tout))
             self.assertEqual(controles.hreflang(Path(tmp)), [])
 
+    def test_hreflang_x_default_anglais(self):
+        """Décision V7 : la page annonce une version anglaise, x-default la désigne ; la version française serait une faute."""
+        with tempfile.TemporaryDirectory() as tmp:
+            tout = (("fr-CH", "fr/x/"), ("en", "en/x/"), ("x-default", "en/x/"))
+            ecrire(tmp, "fr/x", page_alternates(*tout))
+            ecrire(tmp, "en/x", page_alternates(*tout))
+            self.assertEqual(controles.hreflang(Path(tmp)), [])
+        with tempfile.TemporaryDirectory() as tmp:
+            tout = (("fr-CH", "fr/x/"), ("en", "en/x/"), ("x-default", "fr/x/"))
+            ecrire(tmp, "fr/x", page_alternates(*tout))
+            ecrire(tmp, "en/x", page_alternates(*tout))
+            self.assertEqual(sorted({p["detail"].split(" : ")[1] for p in controles.hreflang(Path(tmp))}),
+                             ["x-default ne mène pas à la version de repli (anglaise si elle existe, sinon française)"])
+
     def test_hreflang_ignore_les_pages_de_redirection(self):
         """Une ancienne adresse (meta refresh, sans alternate) n'est pas une page du site : ni auto-référence exigée,
         ni réciprocité."""

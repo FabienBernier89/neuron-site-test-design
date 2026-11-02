@@ -371,14 +371,15 @@ class TestPageRacine(unittest.TestCase):
     def test_liste_et_liens_des_seules_langues_donnees(self):
         for dispo in (["fr"], ["fr", "de"], ["fr", "it", "en"], ["fr", "de", "it", "en"]):
             h = build.page_racine(dispo)
-            self.assertIn("var dispo=" + str(dispo).replace("'", '"').replace(" ", "") + ',def="fr"', h)
+            repli = "en" if "en" in dispo else "fr"  # décision V7 : repli et x-default vers l'anglais dès qu'il est ouvert
+            self.assertIn("var dispo=" + str(dispo).replace("'", '"').replace(" ", "") + f',def="{repli}"', h)
             codes = {"fr": "fr-CH", "de": "de-CH", "it": "it-CH", "en": "en"}
             for langue, hreflang in codes.items():
                 presente = langue in dispo
                 self.assertEqual(f'hreflang="{hreflang}" href="https://neur-on.ai/{langue}/"' in h, presente, (dispo, langue))
                 self.assertEqual(f'<a href="{langue}/" hreflang="{hreflang}">' in h, presente, (dispo, langue))
             self.assertNotIn(" · </p>", h)
-            self.assertIn('hreflang="x-default" href="https://neur-on.ai/fr/"', h)
+            self.assertIn(f'hreflang="x-default" href="https://neur-on.ai/{repli}/"', h)
 
     def test_defaut_francais_seul(self):
         self.assertEqual(build.page_racine(), build.page_racine(["fr"]))

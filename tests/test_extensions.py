@@ -143,7 +143,7 @@ class TestRepliSeo(unittest.TestCase):
             f.parent.mkdir(parents=True, exist_ok=True)
             f.write_text(f"<!--page\ntitle: {t}\ndescription: {d}\nmenu: corrext\n-->\n"
                          '<section class="hero"><div class="wrap"><h1 class="h1">Titre factice</h1></div></section>\n', encoding="utf-8")
-        return support.construire(tmp, ["", PAGE_FACTICE], patches=[mock.patch.object(build, "SRC", src)])
+        return support.construire(tmp, ["", PAGE_FACTICE], patches=[mock.patch.object(build, "SRC", src)], langues=("fr",))
 
     def test_page_sans_source_v1(self):
         with tempfile.TemporaryDirectory() as tmp:

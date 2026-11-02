@@ -231,8 +231,8 @@ class TestRedirectionsAncres(unittest.TestCase):
     def test_aucune_ancre_absente(self):
         for mode in (False, True):
             sortie = support.site_complet(apercu=mode)
-            cibles = re.findall(r"^RewriteRule \^\S+ https://neur-on\.ai(/fr/\S*) \[R=30[12]", (sortie / ".htaccess").read_text(encoding="utf-8"), re.M)
-            for ancien in redirections.lire(build.NEURON):
+            cibles = re.findall(r"^RewriteRule \^\S+ https://neur-on\.ai(/(?:fr|de|it|en)/\S*) \[R=30[12]", (sortie / ".htaccess").read_text(encoding="utf-8"), re.M)
+            for ancien in redirections.lire(build.NEURON, build.CONFIG["langues"]):
                 url = re.search(r'url=([^"]+)"', (sortie / ancien / "index.html").read_text(encoding="utf-8")).group(1)
                 cibles.append("/" + url.replace("../", ""))
             self.assertGreater(len(cibles), 100)
@@ -251,10 +251,11 @@ class TestRedirectionsAncres(unittest.TestCase):
 
 
 class TestXDefault(unittest.TestCase):
-    """6. x-default vers une page indexable : la version française de chaque page, jamais la racine d'aiguillage."""
+    """6. x-default vers une page indexable : la version française de chaque page tant que l'anglais n'est pas construit
+    (décision V7 ; avec l'anglais : test_i18n_localiser.TestAlternates), jamais la racine d'aiguillage."""
 
     def test_x_default_indexable(self):
-        sortie = support.site_complet(apercu=False)
+        sortie = support.site_complet(langues=("fr",), apercu=False)
         for p, h in pages_html(sortie).items():
             x = re.findall(r'<link rel="alternate" hreflang="x-default" href="([^"]+)">', h)
             self.assertEqual(x, [PROD + "fr/" + p], p)
