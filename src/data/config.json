@@ -1,7 +1,7 @@
 {
   "apercu": true,
   "langues": ["fr", "de", "it", "en"],
-  "ga_id": "G-H128S2PTKN",
+  "gtm_id": "GTM-MW854F4D",
   "destinataire": "team@corrext.com",
   "expediteur": "",
   "base": "/neuron-site-test-design/"

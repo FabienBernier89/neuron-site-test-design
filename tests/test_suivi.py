@@ -1,5 +1,5 @@
 """Suivi des parcours (lot C, spec V2 § 6) : formulaire de démo (secteur, champs cachés, piège), envoi.php écrit par
-le build, Google Analytics avec consentement (jamais sur l'aperçu), page de remerciement, textes à relire.
+le build, Google Tag Manager avec consentement (jamais sur l'aperçu), page de remerciement, textes à relire.
 
 Le comportement dans le navigateur (UTM gardés sur plusieurs pages, stockage bloqué, refus sans appel à Google) se
 vérifie dans Chrome : voir le rapport du lot C."""
@@ -21,7 +21,7 @@ from outils import contenus, envoi  # noqa: E402
 from outils.post import consentement, z_formulaires  # noqa: E402
 from tests import support  # noqa: E402
 
-GA_TEST = "G-TEST12345"
+GTM_TEST = "GTM-TEST123"
 # Les 6 pages secteur de la V2 : dossier solutions/<slug>/ et libellé du pied de page (repris du site actuel)
 SECTEURS = [("cabinets-avocats", "Cabinets d'avocats"), ("banques-finance", "Banques et finance"),
             ("directions-juridiques", "Directions juridiques"), ("autorites-administration", "Autorités et administration"),
@@ -67,7 +67,7 @@ class TestSuivi(unittest.TestCase):
         for p in build.PAGES:
             h = support.chemin(self.docs, p).read_text(encoding="utf-8")
             self.assertNotIn("googletagmanager.com", h, p)
-            self.assertNotIn('name="ga-id"', h, p)
+            self.assertNotIn('name="gtm-id"', h, p)
             self.assertNotIn('id="cc"', h, p)
             self.assertNotIn("data-cc-ouvrir", h, p)
 
@@ -192,9 +192,9 @@ class TestConsentement(unittest.TestCase):
         cls.tmp = tempfile.TemporaryDirectory()
         pages = ["", "contact/", "contact/merci/", "protection-des-donnees/"]
         chemins = ("fr/index.html", "fr/contact/index.html", "fr/contact/merci/index.html", "404.html")
-        cls.sortie = support.construire(Path(cls.tmp.name) / "p", pages, config={"ga_id": GA_TEST, "apercu": False})
+        cls.sortie = support.construire(Path(cls.tmp.name) / "p", pages, config={"gtm_id": GTM_TEST, "apercu": False})
         cls.pages = {c: (cls.sortie / c).read_text(encoding="utf-8") for c in chemins}
-        apercu = support.construire(Path(cls.tmp.name) / "a", pages, config={"ga_id": GA_TEST, "apercu": True})
+        apercu = support.construire(Path(cls.tmp.name) / "a", pages, config={"gtm_id": GTM_TEST, "apercu": True})
         cls.apercu = {c: (apercu / c).read_text(encoding="utf-8") for c in chemins}
 
     @classmethod
@@ -202,26 +202,29 @@ class TestConsentement(unittest.TestCase):
         cls.tmp.cleanup()
 
     def test_identifiant_du_site_dans_la_configuration(self):
-        self.assertEqual(build.CONFIG["ga_id"], "G-H128S2PTKN")  # site existant, décision de Fabien du 2026-10-14
-        self.assertRegex(build.CONFIG["ga_id"], consentement.IDENTIFIANT)
+        # Conteneur Tag Manager du site (porte la nouvelle propriété Google Analytics G-MGB1RJ8XJV), décision d'Olivier
+        # du 2026-11-10 : la propriété G-H128S2PTKN de l'ancien site n'est pas reprise
+        self.assertEqual(build.CONFIG["gtm_id"], "GTM-MW854F4D")
+        self.assertRegex(build.CONFIG["gtm_id"], consentement.IDENTIFIANT)
 
     def test_apercu_jamais_de_mesure_meme_avec_identifiant(self):
         for c, h in self.apercu.items():
-            for absent in ('name="ga-id"', 'id="cc"', "data-cc-ouvrir", "googletagmanager.com"):
+            for absent in ('name="gtm-id"', 'id="cc"', "data-cc-ouvrir", "googletagmanager.com"):
                 self.assertNotIn(absent, h, c)
 
     def test_identifiant_dans_la_tete(self):
         for c, h in self.pages.items():
             tete = h[:h.index("</head>")]
-            self.assertEqual(tete.count(f'<meta name="ga-id" content="{GA_TEST}">'), 1, c)
+            self.assertEqual(tete.count(f'<meta name="gtm-id" content="{GTM_TEST}">'), 1, c)
 
-    def test_gtag_jamais_dans_le_html(self):
-        """gtag.js n'est chargé que par consentement.js, après « Accepter »."""
+    def test_gtm_jamais_dans_le_html(self):
+        """gtm.js n'est chargé que par consentement.js, après « Accepter »."""
         for c, h in self.pages.items():
             self.assertNotIn("googletagmanager.com", h, c)
             self.assertNotIn("gtag(", h, c)
         js = (self.sortie / "assets/global.js").read_text(encoding="utf-8")
-        self.assertIn("googletagmanager.com/gtag/js", js)
+        self.assertIn("googletagmanager.com/gtm.js", js)
+        self.assertNotIn("googletagmanager.com/gtag/js", js)
 
     def test_bandeau_cache_au_depart_et_tot_dans_la_page(self):
         for c, h in self.pages.items():
@@ -255,13 +258,13 @@ class TestConsentement(unittest.TestCase):
 
     def test_idempotent(self):
         h = self.pages["fr/index.html"]
-        with mock.patch.object(build, "CONFIG", {**build.CONFIG, "ga_id": GA_TEST, "apercu": False}):
+        with mock.patch.object(build, "CONFIG", {**build.CONFIG, "gtm_id": GTM_TEST, "apercu": False}):
             self.assertEqual(consentement.traiter(h, ""), h)
 
     def test_identifiant_invalide_refuse(self):
         h = "<!DOCTYPE html>\n<html><head></head><body></body></html>\n"
-        for mauvais in ('G-1"><script>alert(1)</script>', "UA-12345-1", "G-"):
-            with mock.patch.object(build, "CONFIG", {**build.CONFIG, "ga_id": mauvais, "apercu": False}):
+        for mauvais in ('GTM-1"><script>alert(1)</script>', "G-H128S2PTKN", "UA-12345-1", "GTM-"):
+            with mock.patch.object(build, "CONFIG", {**build.CONFIG, "gtm_id": mauvais, "apercu": False}):
                 with self.assertRaises(ValueError, msg=mauvais):
                     consentement.traiter(h, "")
 
