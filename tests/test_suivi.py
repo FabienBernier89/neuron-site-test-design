@@ -426,5 +426,84 @@ class TestTextesC(unittest.TestCase):
             self.assertNotIn(e["texte"][:80], page, apercu)
 
 
+
+class TestConsentementScript(unittest.TestCase):
+    """assets/global/consentement.js dans un navigateur factice (Node, ignoré s'il manque) : cookies de Google Analytics
+    et de HubSpot effacés au refus, suivi de HubSpot arrêté sur la page, cookie de refus de HubSpot retiré au nouvel
+    accord."""
+
+    NODE = shutil.which("node")
+    SCRIPT = r"""
+    const fs = require("fs"), vm = require("vm");
+    const [choix, cookies, hubspot, clics] = JSON.parse(process.argv[2]);
+    const jar = {};
+    cookies.forEach((c) => { const [n, v] = c.split("="); jar[n] = v; });
+    const scripts = [];
+    const stockage = { "neuron-consent": choix };
+    let clic = null;
+    const element = () => ({ hasAttribute: () => true, setAttribute: () => {}, focus: () => {}, tagName: "MAIN" });
+    const bandeau = { hidden: true, offsetHeight: 80, addEventListener: (t, f) => { clic = f; },
+                      querySelector: () => element() };
+    const doc = {
+      querySelector: (s) => (/gtm-id/.test(s) ? { getAttribute: () => "GTM-TEST123" } : null),
+      querySelectorAll: () => [],
+      getElementById: (id) => (id === "cc" ? bandeau : element()),
+      head: { appendChild: (s) => scripts.push(s.src) },
+      body: { style: {} },
+      createElement: () => ({}),
+    };
+    Object.defineProperty(doc, "cookie", {
+      get: () => Object.keys(jar).map((n) => n + "=" + jar[n]).join("; "),
+      set: (v) => { const [paire, ...attrs] = v.split(";"); const n = paire.split("=")[0].trim();
+                    if (attrs.some((a) => /max-age=0/i.test(a.trim()))) delete jar[n]; else jar[n] = paire.split("=")[1]; },
+    });
+    const fenetre = { addEventListener: () => {} };
+    if (hubspot) fenetre._hsq = [];
+    const contexte = { window: fenetre, document: doc, location: { hostname: "www.neur-on.ai" },
+                       localStorage: { getItem: (k) => stockage[k] || null, setItem: (k, v) => { stockage[k] = v; } } };
+    vm.createContext(contexte);
+    vm.runInContext(fs.readFileSync(process.argv[1], "utf8"), contexte);
+    const bouton = (quoi) => ({ getAttribute: () => quoi });
+    clics.forEach((quoi) => clic({ target: { closest: () => bouton(quoi) } }));
+    process.stdout.write(JSON.stringify({ cookies: Object.keys(jar).sort(), hsq: fenetre._hsq || null, scripts,
+                                          choix: stockage["neuron-consent"] }));
+    """
+
+    def lancer(self, choix, cookies, hubspot, clics):
+        r = subprocess.run([self.NODE, "-e", self.SCRIPT, str(ICI / "assets/global/consentement.js"),
+                            json.dumps([choix, cookies, hubspot, clics])], capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        return json.loads(r.stdout)
+
+    SUIVI = ["_ga=GA1", "_ga_MGB1RJ8XJV=GS1", "__hstc=1", "hubspotutk=2", "__hssc=3", "__hssrc=4"]
+
+    @unittest.skipUnless(NODE, "node absent de cette machine")
+    def test_refus_apres_accord_efface_ga_et_hubspot_et_arrete_hubspot(self):
+        r = self.lancer("granted", self.SUIVI + ["neuron-autre=1"], True, ["refuser"])
+        self.assertEqual(r["cookies"], ["neuron-autre"])  # seuls les cookies de mesure et de suivi sont effacés
+        self.assertEqual(r["hsq"], [["doNotTrack"]])
+        self.assertEqual(r["choix"], "denied")
+
+    @unittest.skipUnless(NODE, "node absent de cette machine")
+    def test_refus_sans_hubspot_charge(self):
+        r = self.lancer(None, self.SUIVI, False, ["refuser"])
+        self.assertEqual(r["cookies"], [])
+        self.assertIsNone(r["hsq"])
+        self.assertEqual(r["scripts"], [])  # Tag Manager jamais chargé
+
+    @unittest.skipUnless(NODE, "node absent de cette machine")
+    def test_nouvel_accord_retire_le_cookie_de_refus_de_hubspot(self):
+        r = self.lancer("granted", ["__hs_do_not_track=yes", "neuron-autre=1"], False, [])
+        self.assertEqual(r["cookies"], ["neuron-autre"])
+        self.assertEqual(len(r["scripts"]), 1)
+        self.assertIn("googletagmanager.com/gtm.js?id=GTM-TEST123", r["scripts"][0])
+
+    @unittest.skipUnless(NODE, "node absent de cette machine")
+    def test_nouvel_accord_sur_la_meme_page_relance_hubspot(self):
+        r = self.lancer("granted", [], True, ["refuser", "accepter"])
+        self.assertEqual(r["hsq"], [["doNotTrack"], ["doNotTrack", {"track": True}]])
+        self.assertEqual(len(r["scripts"]), 1)  # Tag Manager chargé une seule fois
+        self.assertEqual(r["choix"], "granted")
+
 if __name__ == "__main__":
     unittest.main()

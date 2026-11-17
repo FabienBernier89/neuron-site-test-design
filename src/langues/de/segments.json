@@ -1102,6 +1102,13 @@
   "source": "V1 de/",
   "par_page": {}
  },
+ "03362e13ce709af5": {
+  "fr": "Cookies de mesure d'audience et de suivi",
+  "trad": "Cookies zur Messung der Besucherzahlen und zur Nachverfolgung",
+  "statut": "relu",
+  "source": "adapté le 2026-11-17 ; relu par Fabien Bernier le 2026-11-17",
+  "par_page": {}
+ },
  "0338573998c8419d": {
   "fr": "DE, FR",
   "trad": null,
@@ -5525,6 +5532,13 @@
   "statut": "relu",
   "source": "V1 de/hilfe/handelsregisterauszug/ ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
   "v1": true,
+  "par_page": {}
+ },
+ "0fa862d740cc1263": {
+  "fr": "Vos demandes nous parviennent par e-mail par l'intermédiaire de nos prestataires techniques, qui les traitent pour notre compte. Si vous avez accepté les cookies de suivi, elles sont aussi enregistrées dans HubSpot (voir la rubrique « Outils de suivi web »).",
+  "trad": "Ihre Anfragen erreichen uns per E-Mail über unsere technischen Dienstleister, die diese in unserem Auftrag bearbeiten. Wenn Sie Tracking-Cookies akzeptiert haben, werden diese auch in HubSpot gespeichert (siehe Abschnitt «Web-Tracking-Tools»).",
+  "statut": "relu",
+  "source": "adapté le 2026-11-17 ; relu par Fabien Bernier le 2026-11-17",
   "par_page": {}
  },
  "0fb2b32fa5a2ac66": {
@@ -77231,6 +77245,13 @@
   "source": "variante de balisage V1 de/uebersetzung/vertraege/ (marqueur englobant) ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
   "par_page": {}
  },
+ "e128a152448bbee7": {
+  "fr": "Nous aimerions mesurer la fréquentation du site avec Google Analytics et suivre les visites avec HubSpot. Aucun cookie de mesure ni de suivi n'est déposé sans votre accord. {1}Protection des données{/1}",
+  "trad": "Wir möchten die Besucherzahlen der Website mit Google Analytics messen und die Besuche mit HubSpot nachverfolgen. Es werden keine Mess- oder Tracking-Cookies ohne Ihre Zustimmung gesetzt. {1}Datenschutz{/1}",
+  "statut": "relu",
+  "source": "adapté le 2026-11-17 ; relu par Fabien Bernier le 2026-11-17",
+  "par_page": {}
+ },
  "e12a3c9723efca2f": {
   "fr": "art. 158 CP",
   "trad": "Art. 158 StGB",
@@ -80089,6 +80110,13 @@
   "trad": "{1}Patente{/1}",
   "statut": "v1",
   "source": "V1 de/uebersetzung/geistiges-eigentum/",
+  "par_page": {}
+ },
+ "e9aeaa1c42564c96": {
+  "fr": "Avec votre accord, notre site utilise aussi HubSpot, notre outil de gestion de la relation client. Sans cet accord, HubSpot n'est pas chargé. Une fois accepté, il enregistre des identifiants dans des cookies de votre navigateur et collecte des données de navigation : pages consultées, date et durée des visites, site de provenance. Si vous envoyez ensuite un formulaire du site, HubSpot relie ces visites aux informations saisies (coordonnées et message) et les enregistre dans notre base de contacts. Ces données servent à suivre nos échanges avec les personnes qui nous contactent et à mieux répondre à leurs demandes. Elles sont hébergées par HubSpot dans l'Union européenne ; HubSpot, société américaine, peut y accéder depuis d'autres pays, notamment les États-Unis. Elles sont conservées tant que notre relation le justifie. Vous pouvez retirer votre accord à tout moment par le lien « Préférences cookies » en pied de page. HubSpot n'est alors plus chargé et ses cookies sont supprimés.",
+  "trad": "Mit Ihrer Zustimmung nutzt unsere Website ausserdem HubSpot, unser Tool zur Kundenbeziehungsmanagement. Ohne diese Zustimmung wird HubSpot nicht geladen. Sobald Sie zugestimmt haben, speichert es Identifikatoren in Cookies Ihres Browsers und erhebt Navigationsdaten: aufgerufene Seiten, Datum und Dauer der Besuche, verweisende Website. Wenn Sie anschliessend ein Formular auf der Website absenden, verknüpft HubSpot diese Besuche mit den eingegebenen Informationen (Kontaktdaten und Nachricht) und speichert sie in unserer Kontaktdatenbank. Diese Daten dienen dazu, unseren Austausch mit den Personen, die uns kontaktieren, nachzuverfolgen und besser auf ihre Anfragen einzugehen. Sie werden von HubSpot in der Europäischen Union gehostet; HubSpot, ein US-amerikanisches Unternehmen, kann von anderen Ländern aus darauf zugreifen, insbesondere aus den Vereinigten Staaten. Sie werden so lange aufbewahrt, wie es unsere Geschäftsbeziehung rechtfertigt. Sie können Ihre Einwilligung jederzeit über den Link «Cookie-Einstellungen» in der Fusszeile widerrufen. HubSpot wird dann nicht mehr geladen und seine Cookies werden gelöscht.",
+  "statut": "relu",
+  "source": "adapté le 2026-11-17 ; relu par Fabien Bernier le 2026-11-17",
   "par_page": {}
  },
  "e9b1a867d01aeeb9": {

@@ -1,10 +1,11 @@
 /* Mesure d'audience : bandeau de consentement et Google Tag Manager, chargé seulement après « Accepter » ; le conteneur
-   porte Google Analytics 4 et les événements poussés par suivi.js dans dataLayer.
+   porte Google Analytics 4, les événements poussés par suivi.js dans dataLayer et HubSpot (suivi des visites, formulaires).
    Sans identifiant (<meta name="gtm-id">, absente de l'aperçu), ce script ne fait rien : ni bandeau, ni appel à Google.
    Mode consentement v2 : tout est refusé par défaut, seule la mesure (analytics_storage) est accordée, et seulement avec
    l'accord du visiteur ; Tag Manager n'est chargé qu'à ce moment-là.
    Le choix est gardé dans ce navigateur (même clé que le site actuel) ; « Préférences cookies », dans le pied de
-   page, rouvre le bandeau. Un refus après un accord coupe la mesure et efface les cookies de Google Analytics.
+   page, rouvre le bandeau. Un refus après un accord coupe la mesure, arrête le suivi de HubSpot sur la page (cookie
+   __hs_do_not_track) et efface les cookies de Google Analytics et de HubSpot ; un nouvel accord retire ce cookie de refus.
    Tant qu'il est affiché, le bandeau réserve sa hauteur en bas de page ; après un choix, le focus revient au bouton
    qui l'a ouvert, sinon au contenu principal.
    window.NeuronConsentement.mesure() dit si la mesure est active (utilisé par suivi.js). */
@@ -24,8 +25,10 @@
 
   function charger() {
     actif = true;
+    effacerCookies(/^__hs_do_not_track$/);  // refus antérieur : HubSpot reprend le suivi après ce nouvel accord
     if (charge) {  // déjà chargé sur cette page : la mesure reprend
       window.gtag("consent", "update", { analytics_storage: "granted" });
+      if (window._hsq) window._hsq.push(["doNotTrack", { track: true }]);
       return;
     }
     charge = true;
@@ -40,11 +43,14 @@
     document.head.appendChild(s);
   }
 
-  function effacerCookies() {
+  /* Cookies de mesure et de suivi : Google Analytics (_ga, _ga_<flux>) et HubSpot (cookies de suivi des visites) */
+  var COOKIES_SUIVI = /^(_ga(_|$)|__hstc$|hubspotutk$|__hssc$|__hssrc$)/;
+
+  function effacerCookies(motif) {
     var morceaux = location.hostname.split(".");
     document.cookie.split(";").forEach(function (c) {
       var nom = c.split("=")[0].trim();
-      if (!/^_ga(_|$)/.test(nom)) return;
+      if (!nom || !motif.test(nom)) return;
       document.cookie = nom + "=; Max-Age=0; path=/";
       for (var i = 0; i < morceaux.length - 1; i++) {
         document.cookie = nom + "=; Max-Age=0; path=/; domain=." + morceaux.slice(i).join(".");
@@ -56,7 +62,9 @@
     actif = false;
     /* Les balises du conteneur exigent analytics_storage : plus aucun envoi vers Google depuis cette page */
     if (charge) window.gtag("consent", "update", { analytics_storage: "denied" });
-    effacerCookies();
+    /* HubSpot déjà chargé par le conteneur : plus de suivi sur cette page */
+    if (window._hsq) window._hsq.push(["doNotTrack"]);
+    effacerCookies(COOKIES_SUIVI);
   }
 
   var ouvreur = null;
