@@ -1,7 +1,8 @@
 /* Suivi des parcours : UTM, page d'entrée, page d'origine et secteur, gardés pour la visite (sessionStorage), puis
    versés dans les champs cachés de tout formulaire envoyé à envoi.php ; t0 (horodatage du chargement) et, à l'envoi,
    duree : millisecondes passées sur la page, mesurées par ce navigateur, pour le délai minimal de envoi.php.
-   Événements Google Analytics, sans effet tant que la mesure n'est pas acceptée (consentement.js) :
+   Événements de mesure, poussés dans dataLayer pour Google Tag Manager, sans effet tant que la mesure n'est pas
+   acceptée (consentement.js) :
    generate_lead (demande de démo) et sign_up (newsletter) à l'arrivée sur la page de remerciement après un envoi
    réussi, cta_click sur [data-suivi], demo_interaction au premier geste réel dans une démo [data-interactif] (le bouton
    pause n'en est pas un), outbound_click sur un lien vers un autre site.
@@ -37,11 +38,15 @@
     try { return new URLSearchParams(location.search).get(nom) || ""; } catch (e) { return ""; }
   }
 
-  /* Événement GA : seulement si le visiteur a accepté la mesure */
+  /* Événement de mesure : seulement si le visiteur a accepté la mesure. Poussé dans dataLayer, où le conteneur Tag
+     Manager le lit (déclencheur sur le nom, paramètres en variables de couche de données) */
   function evenement(nom, params) {
     var c = window.NeuronConsentement;
-    if (!c || !c.mesure() || typeof window.gtag !== "function") return;
-    window.gtag("event", nom, params || {});
+    if (!c || !c.mesure() || !window.dataLayer) return;
+    var donnees = { event: nom };
+    params = params || {};
+    for (var k in params) if (Object.prototype.hasOwnProperty.call(params, k)) donnees[k] = params[k];
+    window.dataLayer.push(donnees);
   }
   window.NeuronSuivi = { evenement: evenement };
 

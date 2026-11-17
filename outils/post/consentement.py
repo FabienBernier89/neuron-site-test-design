@@ -1,9 +1,10 @@
-"""Mesure d'audience (lot C, spec V2 § 6) : identifiant Google Analytics, bandeau de consentement, bouton « Préférences
+"""Mesure d'audience (lot C, spec V2 § 6) : identifiant Google Tag Manager, bandeau de consentement, bouton « Préférences
 cookies ».
 
-Rien n'est ajouté sur l'aperçu (« apercu » vrai dans src/data/config.json), ni quand l'identifiant (« ga_id ») est vide :
-l'aperçu n'affiche jamais le bandeau et ne charge jamais Google Analytics. En production, avec un identifiant :
-- <meta name="ga-id"> dans la tête : assets/global/consentement.js le lit, et lui seul charge gtag.js, après « Accepter » ;
+Rien n'est ajouté sur l'aperçu (« apercu » vrai dans src/data/config.json), ni quand l'identifiant (« gtm_id ») est vide :
+l'aperçu n'affiche jamais le bandeau et ne charge jamais Tag Manager. En production, avec un identifiant :
+- <meta name="gtm-id"> dans la tête : assets/global/consentement.js le lit, et lui seul charge gtm.js, après « Accepter »
+  (le conteneur porte Google Analytics 4 et les événements de suivi.js) ;
 - le bandeau, caché, juste après le lien d'évitement (tôt dans l'ordre de lecture et de tabulation) ;
 - le bouton qui le rouvre, dans la barre basse du pied (.fp-b), caché tant que le script ne l'a pas activé.
 Les textes viennent de src/data/contenus-v2/C-suivi.json. Idempotent."""
@@ -13,7 +14,7 @@ import re
 from outils import contenus
 from outils.post import _reglages
 
-IDENTIFIANT = re.compile(r"G-[A-Z0-9]{4,16}")
+IDENTIFIANT = re.compile(r"GTM-[A-Z0-9]{4,12}")
 PROTECTION = "{{ROOT}}protection-des-donnees/#suivi"  # § 5 « Outils de suivi web »
 EVITEMENT = '<a class="skip" href="#main">Aller au contenu</a>\n'
 
@@ -35,13 +36,13 @@ def bouton():
 
 def traiter(html, page):
     reglages = _reglages.config()
-    ga = reglages.get("ga_id") or ""
-    if reglages.get("apercu") or not ga:
+    gtm = reglages.get("gtm_id") or ""
+    if reglages.get("apercu") or not gtm:
         return html
-    if not IDENTIFIANT.fullmatch(ga):
-        raise ValueError(f"ga_id invalide dans src/data/config.json : {ga!r} (attendu : G-XXXXXXXX)")
-    if 'name="ga-id"' not in html:
-        html = html.replace("</head>", f'<meta name="ga-id" content="{ga}">\n</head>', 1)
+    if not IDENTIFIANT.fullmatch(gtm):
+        raise ValueError(f"gtm_id invalide dans src/data/config.json : {gtm!r} (attendu : GTM-XXXXXXX)")
+    if 'name="gtm-id"' not in html:
+        html = html.replace("</head>", f'<meta name="gtm-id" content="{gtm}">\n</head>', 1)
     if 'id="cc"' not in html:
         if EVITEMENT in html:
             html = html.replace(EVITEMENT, EVITEMENT + bandeau(), 1)

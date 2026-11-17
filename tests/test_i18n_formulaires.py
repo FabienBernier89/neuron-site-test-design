@@ -306,7 +306,7 @@ class TestScriptsAssets(unittest.TestCase):
         const fenetre = {
           performance: { now: () => 5000, getEntriesByType: () => [{ type: "navigate" }] },
           NeuronConsentement: { mesure: () => true },
-          gtag: (...a) => evenements.push(a),
+          dataLayer: evenements,
         };
         const doc = {
           referrer: "https://neur-on.ai/",
@@ -322,7 +322,8 @@ class TestScriptsAssets(unittest.TestCase):
         fenetre.document = doc;
         vm.createContext(contexte);
         vm.runInContext(fs.readFileSync(process.argv[1], "utf8"), contexte);
-        process.stdout.write(JSON.stringify(evenements));
+        // forme [commande, nom, paramètres], comme les appels gtag d'avant Tag Manager
+        process.stdout.write(JSON.stringify(evenements.map((e) => ["event", e.event, e])));
         """
         r = subprocess.run([self.NODE, "-e", script, str(ICI / "assets/global/suivi.js"), json.dumps([chemin, alternate])],
                            capture_output=True, text=True)
