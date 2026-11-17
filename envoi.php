@@ -1,7 +1,20 @@
 <?php
 /*
  * Envoi des formulaires du site Neur.on : demande de démo et inscription à la lettre d'information.
- * Hébergement : Hostpoint (Apache, PHP 8, extension mbstring). Aucun service tiers : la fonction mail() du serveur.
+ * Hébergement : Hostpoint (Apache, PHP 8, extensions mbstring et curl).
+ *
+ * Transmission : quand un fichier de configuration n8n existe (FICHIERS_N8N), la demande validée est transmise à un
+ * webhook n8n, qui envoie l'e-mail au destinataire depuis Microsoft 365 (charge_n8n, envoyer_n8n). Sans ce fichier,
+ * l'e-mail part par la fonction mail() du serveur, comme avant. Raison : le SPF de neur-on.ai n'autorise que
+ * Microsoft 365 et son DMARC est en p=reject, si bien qu'un e-mail envoyé par mail() depuis Hostpoint au nom de
+ * neur-on.ai est refusé par la boîte de destination.
+ * Le fichier de configuration est un script PHP qui renvoie un tableau, sans rien afficher même s'il est appelé
+ * depuis le web : <?php return ['url' => 'https://…/webhook/…', 'jeton' => '…'];
+ * Il n'est jamais dans le dépôt (le jeton ne doit pas être public) : il est posé sur chaque serveur, de préférence
+ * hors de la racine web (premier emplacement de FICHIERS_N8N), sinon dans un dossier prive/ de la racine fermé par un
+ * .htaccess « Require all denied ». Le jeton part dans l'en-tête X-Neuron-Jeton ; le webhook refuse toute requête
+ * sans le bon jeton. Le webhook choisit lui-même la boîte qui reçoit l'e-mail selon le domaine (DOMAINE) : en
+ * production, le destinataire configuré ; sur une préprod ou une version de test, une boîte de test.
  *
  * Le build (outils/envoi.py) copie ce fichier à la racine du site et y écrit le destinataire et l'expéditeur lus
  * dans src/data/config.json. Le destinataire ne vient jamais de la requête.
@@ -24,8 +37,9 @@
  * La langue de la page figure dans l'e-mail (rubrique « Parcours sur le site ») ; destinataire et contenu inchangés.
  *
  * Les fonctions pures (nettoyer_entete, valider, langue_demandee, origine_autorisee, reseau_ip, cle_ip, limiter,
- * encoder_entete, composer, adresse_retour, expediteur), ainsi que compter et preparer_dossier sur un fichier ou un
- * dossier donnés, sont testées par tests/test_envoi.php : php tests/test_envoi.php
+ * encoder_entete, corps_texte, composer, charge_n8n, adresse_retour, expediteur), ainsi que compter et preparer_dossier
+ * sur un fichier ou un dossier donnés et config_n8n sur des fichiers donnés, sont testées par tests/test_envoi.php :
+ * php tests/test_envoi.php (envoyer_n8n n'y est appelé que sans configuration valide : aucune requête réseau).
  */
 declare(strict_types=1);
 
@@ -54,6 +68,10 @@ const DOSSIER_LIMITES = __DIR__ . '/../envoi-limites';
 // Octets de texte par mot encodé d'un en-tête : 39 octets donnent 52 caractères base64, soit 64 avec
 // « =?UTF-8?B?…?= » ; la première ligne, préfixe « Reply-To: » compris, tient en 75 caractères.
 const OCTETS_PAR_MOT = 39;
+// Fichier de configuration n8n (adresse du webhook et jeton) : le premier qui existe est lu. Aucun : mail().
+const FICHIERS_N8N = [__DIR__ . '/../envoi-n8n.php', __DIR__ . '/prive/envoi-n8n.php'];
+// Délai maximal de la requête au webhook n8n, en secondes (le webhook répond après l'envoi de l'e-mail).
+const DELAI_N8N = 15;
 // Pages de réponse par langue (chemins absolus du site, adresses de src/data/routes.json). Cette source les porte
 // toutes, pour que tests/test_envoi.php les exerce ; le build (outils/envoi.py) n'en garde que les langues construites
 // dont la page de remerciement existe, le français toujours : une langue absente de la table renvoie au français.
@@ -386,10 +404,10 @@ function encoder_entete(string $texte): string
 }
 
 /**
- * E-mail d'une demande validée : ['objet' => ..., 'corps' => ..., 'entetes' => ...], prêts pour mail().
- * Corps en texte UTF-8 (base64), qui liste les champs remplis ; Reply-To : l'e-mail du visiteur ; From : $expediteur.
+ * Texte d'une demande validée, lignes séparées par LF : les champs remplis, le message, puis le parcours sur le site.
+ * Corps de l'e-mail de composer (en CRLF) et texte transmis à n8n (charge_n8n).
  */
-function composer(string $type, array $donnees, string $expediteur): array
+function corps_texte(string $type, array $donnees): string
 {
     $lignes = [OBJETS[$type] . ' envoyée depuis le site.', ''];
     foreach (CHAMPS as $nom => $definition) {
@@ -410,7 +428,16 @@ function composer(string $type, array $donnees, string $expediteur): array
     if ($parcours) {
         array_push($lignes, '', 'Parcours sur le site', ...$parcours);
     }
-    $corps = str_replace("\n", "\r\n", implode("\n", $lignes) . "\n");
+    return implode("\n", $lignes) . "\n";
+}
+
+/**
+ * E-mail d'une demande validée : ['objet' => ..., 'corps' => ..., 'entetes' => ...], prêts pour mail().
+ * Corps en texte UTF-8 (base64), qui liste les champs remplis ; Reply-To : l'e-mail du visiteur ; From : $expediteur.
+ */
+function composer(string $type, array $donnees, string $expediteur): array
+{
+    $corps = str_replace("\n", "\r\n", corps_texte($type, $donnees));
 
     $nom = trim(($donnees['prenom'] ?? '') . ' ' . ($donnees['nom'] ?? ''));
     $entetes = [
@@ -426,6 +453,105 @@ function composer(string $type, array $donnees, string $expediteur): array
         'corps' => rtrim(chunk_split(base64_encode($corps), 76, "\r\n")),
         'entetes' => implode("\r\n", $entetes),
     ];
+}
+
+/**
+ * Demande validée prête pour le webhook n8n (encodée en JSON par envoyer_n8n). $site : DOMAINE, qui permet au webhook
+ * de distinguer la production d'une préprod ; $destinataire : DESTINATAIRE, que le webhook n'accepte qu'à l'intérieur
+ * de sa propre liste. L'objet est celui de la table OBJETS, le texte celui de corps_texte ; l'e-mail du visiteur sert
+ * d'adresse de réponse.
+ */
+function charge_n8n(string $type, array $donnees, string $site, string $destinataire): array
+{
+    return [
+        'site' => $site,
+        'type' => $type,
+        'objet' => OBJETS[$type],
+        'destinataire' => $destinataire,
+        'repondre_a' => $donnees['email'] ?? '',
+        'nom' => trim(($donnees['prenom'] ?? '') . ' ' . ($donnees['nom'] ?? '')),
+        'langue' => $donnees['langue'] ?? 'fr',
+        'texte' => corps_texte($type, $donnees),
+    ];
+}
+
+/**
+ * Configuration n8n : le premier fichier de $fichiers qui existe, lu par include (il renvoie un tableau).
+ * null si aucun fichier n'existe (l'e-mail part alors par mail()). Un fichier présent mais mal formé (adresse qui
+ * n'est pas en https, jeton absent ou trop court) donne une configuration vide, que envoyer_n8n refuse : jamais de
+ * repli silencieux sur mail() quand n8n est prévu. Une ligne dans le journal du serveur le signale.
+ */
+function config_n8n(array $fichiers): ?array
+{
+    foreach ($fichiers as $fichier) {
+        if (!@is_file($fichier)) {
+            continue;
+        }
+        $config = (static function (string $f) {
+            return @include $f;
+        })($fichier);
+        $url = is_array($config) && is_string($config['url'] ?? null) ? $config['url'] : '';
+        $jeton = is_array($config) && is_string($config['jeton'] ?? null) ? $config['jeton'] : '';
+        if (preg_match('#^https://[A-Za-z0-9.-]+(:\d{1,5})?/[A-Za-z0-9._~/-]*\z#', $url) === 1
+            && preg_match('/^[A-Za-z0-9]{32,128}\z/', $jeton) === 1) {
+            return ['url' => $url, 'jeton' => $jeton];
+        }
+        error_log('envoi.php : configuration n8n mal formée (' . basename($fichier) . '), envoi refusé');
+        return ['url' => '', 'jeton' => ''];
+    }
+    return null;
+}
+
+/**
+ * Transmet une demande au webhook n8n : POST JSON, jeton dans l'en-tête X-Neuron-Jeton, sans suivre de redirection.
+ * Vrai si le webhook répond 2xx (il ne répond qu'après l'envoi de l'e-mail). Configuration vide : faux, sans requête.
+ * curl si l'extension est là, sinon les flux de PHP.
+ */
+function envoyer_n8n(array $config, array $charge): bool
+{
+    $url = (string) ($config['url'] ?? '');
+    $jeton = (string) ($config['jeton'] ?? '');
+    $json = json_encode($charge, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    if ($url === '' || $jeton === '' || $json === false) {
+        return false;
+    }
+    $entetes = ['Content-Type: application/json; charset=utf-8', 'X-Neuron-Jeton: ' . $jeton];
+    if (function_exists('curl_init')) {
+        $c = curl_init($url);
+        if ($c === false) {
+            return false;
+        }
+        curl_setopt_array($c, [
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $json,
+            CURLOPT_HTTPHEADER => $entetes,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => false,
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_TIMEOUT => DELAI_N8N,
+            CURLOPT_PROTOCOLS => CURLPROTO_HTTPS,
+        ]);
+        $reponse = curl_exec($c);
+        $code = (int) curl_getinfo($c, CURLINFO_RESPONSE_CODE);
+        return $reponse !== false && $code >= 200 && $code < 300;
+    }
+    $contexte = stream_context_create(['http' => [
+        'method' => 'POST',
+        'header' => implode("\r\n", $entetes),
+        'content' => $json,
+        'timeout' => DELAI_N8N,
+        'follow_location' => 0,
+        'ignore_errors' => true,
+    ]]);
+    $reponse = @file_get_contents($url, false, $contexte);
+    $lignes = function_exists('http_get_last_response_headers') ? (http_get_last_response_headers() ?? []) : ($http_response_header ?? []);
+    $code = 0;
+    foreach ($lignes as $ligne) {
+        if (preg_match('#^HTTP/\S+\s+(\d{3})#', (string) $ligne, $m) === 1) {
+            $code = (int) $m[1];
+        }
+    }
+    return $reponse !== false && $code >= 200 && $code < 300;
 }
 
 /**
@@ -491,14 +617,24 @@ function traiter(): void
         repondre(adresse_retour($type, 'refus', $langue));
         return;
     }
-    $expediteur = expediteur(EXPEDITEUR, DOMAINE);
     $reussi = false;
-    if (filter_var(DESTINATAIRE, FILTER_VALIDATE_EMAIL) !== false && filter_var($expediteur, FILTER_VALIDATE_EMAIL) !== false) {
-        $courriel = composer($type, $resultat['donnees'], $expediteur);
-        $reussi = mail(DESTINATAIRE, $courriel['objet'], $courriel['corps'], $courriel['entetes'], '-f' . $expediteur);
-    }
-    if (!$reussi) {
-        error_log('envoi.php : e-mail non envoyé (destinataire, expéditeur ou fonction mail() du serveur)');
+    $n8n = config_n8n(FICHIERS_N8N);
+    if ($n8n !== null) {
+        if (filter_var(DESTINATAIRE, FILTER_VALIDATE_EMAIL) !== false) {
+            $reussi = envoyer_n8n($n8n, charge_n8n($type, $resultat['donnees'], DOMAINE, DESTINATAIRE));
+        }
+        if (!$reussi) {
+            error_log('envoi.php : demande non transmise à n8n (destinataire, configuration ou réponse du webhook)');
+        }
+    } else {
+        $expediteur = expediteur(EXPEDITEUR, DOMAINE);
+        if (filter_var(DESTINATAIRE, FILTER_VALIDATE_EMAIL) !== false && filter_var($expediteur, FILTER_VALIDATE_EMAIL) !== false) {
+            $courriel = composer($type, $resultat['donnees'], $expediteur);
+            $reussi = mail(DESTINATAIRE, $courriel['objet'], $courriel['corps'], $courriel['entetes'], '-f' . $expediteur);
+        }
+        if (!$reussi) {
+            error_log('envoi.php : e-mail non envoyé (destinataire, expéditeur ou fonction mail() du serveur)');
+        }
     }
     repondre(adresse_retour($type, $reussi ? 'ok' : 'refus', $langue));
 }
