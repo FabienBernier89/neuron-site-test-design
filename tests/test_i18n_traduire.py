@@ -586,7 +586,7 @@ class TestUnionDesModes(unittest.TestCase):
     """Vague finale, point 1 : la chaîne (etat, export, pont, lexique, mémoire) lit l'union des pages des deux modes ; le
     bandeau de consentement (production seulement) est listé et exporté, et une langue entièrement relue par cette chaîne
     se construit en production sans intervention."""
-    COOKIES = ("Cookies de mesure d'audience", "Préférences cookies", "Refuser", "Accepter")
+    COOKIES = ("Cookies de mesure d'audience et de suivi", "Préférences cookies", "Refuser", "Accepter")
 
     def test_union_et_variantes(self):
         faux = {"apercu": {"": "A", "404": "N"}, "production": {"": "P", "404": "N"}}

@@ -1098,6 +1098,13 @@
   "source": "V1 en/",
   "par_page": {}
  },
+ "03362e13ce709af5": {
+  "fr": "Cookies de mesure d'audience et de suivi",
+  "trad": "Audience measurement and tracking cookies",
+  "statut": "relu",
+  "source": "adapté le 2026-11-17 ; relu par Fabien Bernier le 2026-11-17",
+  "par_page": {}
+ },
  "0338573998c8419d": {
   "fr": "DE, FR",
   "trad": null,
@@ -6241,6 +6248,13 @@
   "statut": "relu",
   "source": "V1 en/help/commercial-register-extracts/ ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
   "v1": true,
+  "par_page": {}
+ },
+ "0fa862d740cc1263": {
+  "fr": "Vos demandes nous parviennent par e-mail par l'intermédiaire de nos prestataires techniques, qui les traitent pour notre compte. Si vous avez accepté les cookies de suivi, elles sont aussi enregistrées dans HubSpot (voir la rubrique « Outils de suivi web »).",
+  "trad": "We receive your enquiries by email via our technical service providers, who process them on our behalf. If you have accepted tracking cookies, these are also stored in HubSpot (see the “Web tracking” section).",
+  "statut": "relu",
+  "source": "adapté le 2026-11-17 ; relu par Fabien Bernier le 2026-11-17",
   "par_page": {}
  },
  "0fb2b32fa5a2ac66": {
@@ -78082,6 +78096,13 @@
   "source": "variante de balisage V1 en/translation/contracts/ (marqueur englobant) ; relu par traducteurs experts (validation globale transmise par Fabien) le 2026-10-29",
   "par_page": {}
  },
+ "e128a152448bbee7": {
+  "fr": "Nous aimerions mesurer la fréquentation du site avec Google Analytics et suivre les visites avec HubSpot. Aucun cookie de mesure ni de suivi n'est déposé sans votre accord. {1}Protection des données{/1}",
+  "trad": "We would like to measure traffic to the website using Google Analytics and track visits using HubSpot. No tracking or measurement cookies are placed without your consent. {1}Privacy policy{/1}",
+  "statut": "relu",
+  "source": "adapté le 2026-11-17 ; relu par Fabien Bernier le 2026-11-17",
+  "par_page": {}
+ },
  "e12a3c9723efca2f": {
   "fr": "art. 158 CP",
   "trad": "Art. 158 SCC",
@@ -80914,6 +80935,13 @@
   "trad": "{1}Patents{/1}",
   "statut": "v1",
   "source": "V1 en/translation/intellectual-property/",
+  "par_page": {}
+ },
+ "e9aeaa1c42564c96": {
+  "fr": "Avec votre accord, notre site utilise aussi HubSpot, notre outil de gestion de la relation client. Sans cet accord, HubSpot n'est pas chargé. Une fois accepté, il enregistre des identifiants dans des cookies de votre navigateur et collecte des données de navigation : pages consultées, date et durée des visites, site de provenance. Si vous envoyez ensuite un formulaire du site, HubSpot relie ces visites aux informations saisies (coordonnées et message) et les enregistre dans notre base de contacts. Ces données servent à suivre nos échanges avec les personnes qui nous contactent et à mieux répondre à leurs demandes. Elles sont hébergées par HubSpot dans l'Union européenne ; HubSpot, société américaine, peut y accéder depuis d'autres pays, notamment les États-Unis. Elles sont conservées tant que notre relation le justifie. Vous pouvez retirer votre accord à tout moment par le lien « Préférences cookies » en pied de page. HubSpot n'est alors plus chargé et ses cookies sont supprimés.",
+  "trad": "With your consent, our website also uses HubSpot, our customer relationship management tool. Without this consent, HubSpot is not loaded. Once you have given your consent, it stores identifiers in cookies on your browser and collects browsing data: pages viewed, date and duration of visits, and the referring website. If you subsequently submit a form on the website, HubSpot links these visits to the information entered (contact details and message) and stores them in our contact database. This data is used to track our communications with those who contact us and to better respond to their enquiries. It is hosted by HubSpot within the European Union; HubSpot, a US-based company, may access it from other countries, notably the United States. It is retained for as long as our relationship warrants. You may withdraw your consent at any time via the “Cookie preferences” link at the bottom of the page. HubSpot will then no longer be loaded and its cookies will be deleted.",
+  "statut": "relu",
+  "source": "adapté le 2026-11-17 ; relu par Fabien Bernier le 2026-11-17",
   "par_page": {}
  },
  "e9b1a867d01aeeb9": {
