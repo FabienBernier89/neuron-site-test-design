@@ -312,5 +312,53 @@ verifier(strpos(base64_decode(str_replace("\r\n", '', $courriel_fr['corps'])), "
 verifier($courriel_de['entetes'] === $courriel_fr['entetes'] && $courriel_de['objet'] === $courriel_fr['objet'], 'en-têtes et objet du courriel inchangés par la langue');
 verifier(stripos($courriel_de['entetes'], "\r\nTo:") === false && stripos($courriel_de['entetes'], 'bcc') === false, 'aucun destinataire ajouté par la langue');
 
+// Transmission à n8n (lot MVD) : corps commun avec mail(), charge du webhook, configuration hors dépôt
+$donnees_demo = valider(['langue' => 'de', 'message' => "Ligne 1\nLigne 2", 'utm_source' => 'linkedin'] + $demande)['donnees'];
+$texte_demo = corps_texte('demo', $donnees_demo);
+verifier(base64_decode(str_replace("\r\n", '', composer('demo', $donnees_demo, 'noreply@neur-on.ai')['corps'])) === str_replace("\n", "\r\n", $texte_demo), 'corps_texte : même texte que le corps de composer (en LF)');
+verifier(strpos($texte_demo, "\r") === false && substr($texte_demo, -1) === "\n", 'corps_texte : lignes en LF, dernière ligne terminée');
+$charge = charge_n8n('demo', $donnees_demo, 'neur-on.ai', 'team@corrext.com');
+verifier(array_keys($charge) === ['site', 'type', 'objet', 'destinataire', 'repondre_a', 'nom', 'langue', 'texte'], 'charge_n8n : champs attendus, dans l\'ordre');
+verifier($charge['objet'] === 'Demande de démo' && $charge['repondre_a'] === 'anne.muster@exemple.ch' && $charge['nom'] === 'Anne Muster', 'charge_n8n : objet, adresse de réponse et nom');
+verifier($charge['site'] === 'neur-on.ai' && $charge['destinataire'] === 'team@corrext.com' && $charge['langue'] === 'de', 'charge_n8n : site, destinataire et langue repris');
+verifier($charge['texte'] === $texte_demo && strpos($charge['texte'], "Organisation : Étude Muster\n") !== false, 'charge_n8n : texte de corps_texte');
+verifier(charge_n8n('newsletter', valider($lettre)['donnees'], 'neur-on.ai', 'team@corrext.com')['objet'] === 'Inscription newsletter', 'charge_n8n : objet de la lettre d\'information');
+verifier(charge_n8n('newsletter', valider($lettre)['donnees'], 'neur-on.ai', 'team@corrext.com')['nom'] === '', 'charge_n8n : nom vide pour la lettre d\'information');
+verifier(json_encode($charge, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !== false, 'charge_n8n : encodable en JSON');
+
+$dossier_n8n = sys_get_temp_dir() . '/envoi-n8n-' . bin2hex(random_bytes(4));
+mkdir($dossier_n8n);
+$absent = $dossier_n8n . '/absent.php';
+$valide = $dossier_n8n . '/valide.php';
+$http = $dossier_n8n . '/http.php';
+$court = $dossier_n8n . '/court.php';
+$tableau = $dossier_n8n . '/tableau.php';
+file_put_contents($valide, "<?php return ['url' => 'https://n8n.exemple.ch/webhook/neuron-formulaire', 'jeton' => '" . str_repeat('a1', 24) . "'];\n");
+file_put_contents($http, "<?php return ['url' => 'http://n8n.exemple.ch/webhook/x', 'jeton' => '" . str_repeat('a1', 24) . "'];\n");
+file_put_contents($court, "<?php return ['url' => 'https://n8n.exemple.ch/webhook/x', 'jeton' => 'abc'];\n");
+file_put_contents($tableau, "<?php echo 'rien';\n");
+verifier(config_n8n([$absent]) === null, 'config_n8n : aucun fichier, null (mail() comme avant)');
+verifier(config_n8n([]) === null, 'config_n8n : aucun emplacement, null');
+verifier(config_n8n([$absent, $valide]) === ['url' => 'https://n8n.exemple.ch/webhook/neuron-formulaire', 'jeton' => str_repeat('a1', 24)], 'config_n8n : second emplacement lu quand le premier manque');
+$journal = tempnam(sys_get_temp_dir(), 'envoi-journal');
+ini_set('error_log', $journal);
+ob_start();
+$vide_http = config_n8n([$http]);
+$vide_court = config_n8n([$court]);
+$vide_tableau = config_n8n([$tableau]);
+$sortie = ob_get_clean();
+verifier($vide_http === ['url' => '', 'jeton' => ''], 'config_n8n : adresse en http refusée (configuration vide, pas de repli sur mail())');
+verifier($vide_court === ['url' => '', 'jeton' => ''], 'config_n8n : jeton trop court refusé');
+verifier($vide_tableau === ['url' => '', 'jeton' => ''], 'config_n8n : fichier qui ne renvoie pas de tableau refusé');
+verifier(substr_count((string) file_get_contents($journal), 'configuration n8n mal formée') === 3, 'config_n8n : configuration mal formée notée au journal');
+verifier(!envoyer_n8n($vide_http, $charge) && !envoyer_n8n([], $charge), 'envoyer_n8n : configuration vide, refus sans requête');
+ini_restore('error_log');
+unlink($journal);
+foreach ([$valide, $http, $court, $tableau] as $f) {
+    unlink($f);
+}
+rmdir($dossier_n8n);
+verifier(substr(FICHIERS_N8N[0], -strlen('/../envoi-n8n.php')) === '/../envoi-n8n.php', 'FICHIERS_N8N : premier emplacement hors de la racine web');
+
 echo $echecs === 0 ? "\nTous les cas passent.\n" : "\n$echecs cas en échec.\n";
 exit($echecs === 0 ? 0 : 1);
