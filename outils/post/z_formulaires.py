@@ -32,8 +32,10 @@ SECTEURS = (("cabinets-avocats", "Cabinets d'avocats"), ("banques-finance", "Ban
 # « duree » (millisecondes sur la page) sert au délai minimal de envoi.php ; « t0 » (horodatage) reste pour l'interface.
 # « langue » : langue de la page (« fr » ici ; outils/i18n/localiser.py la remplace dans les pages traduites), qui décide de
 # la page de remerciement de envoi.php et figure dans l'e-mail.
+# « source », « medium », « campaign », « landing_page », « gclid » et « page » : provenance de la visite pour le dashboard
+# (mêmes noms que le site Robb), transmise à n8n par envoi.php, jamais dans l'e-mail.
 CACHES = ("type", "t0", "duree", "page_entree", "page_origine", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
-          "langue")
+          "source", "medium", "campaign", "landing_page", "gclid", "page", "langue")
 VALEURS_CACHEES = {"type": "demo", "langue": "fr"}  # les autres champs cachés partent vides
 # Phrase préremplie dans le message d'une demande de documentation API (?demande=documentation-api) : suivi.js la lit dans
 # l'attribut data-prerempli du formulaire. Elle est dans le HTML, donc extraite et traduite avec la page.

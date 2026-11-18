@@ -26,7 +26,8 @@ GTM_TEST = "GTM-TEST123"
 SECTEURS = [("cabinets-avocats", "Cabinets d'avocats"), ("banques-finance", "Banques et finance"),
             ("directions-juridiques", "Directions juridiques"), ("autorites-administration", "Autorités et administration"),
             ("fiduciaires-conseil", "Fiduciaires et conseil"), ("editeurs-legaltech", "LegalTechs et éditeurs")]
-CACHES = ("page_entree", "page_origine", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "t0", "duree", "type")
+CACHES = ("page_entree", "page_origine", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "t0", "duree", "type",
+          "source", "medium", "campaign", "landing_page", "gclid", "page")
 NEWSLETTER = ('<form class="nl-f" action="/envoi.php" method="post" data-demo><input type="hidden" name="type" value="newsletter">'
               '<input type="hidden" name="t0" value=""><div class="nl-piege" aria-hidden="true"><input type="text" name="site_url" '
               'tabindex="-1"></div><input type="email" name="email" required><input type="checkbox" name="consentement" value="oui" '
@@ -58,7 +59,8 @@ class TestSuivi(unittest.TestCase):
 
     def test_formulaire_secteur_et_champs_caches(self):
         self.assertIn('name="secteur"', self.contact)
-        for n in ("page_entree", "page_origine", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "site_url", "t0", "type"):
+        for n in ("page_entree", "page_origine", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "site_url", "t0", "type",
+                  "source", "medium", "campaign", "landing_page", "gclid", "page"):
             self.assertRegex(self.contact, r'<input[^>]+name="%s"' % n)
         for _slug, libelle in SECTEURS:
             self.assertIn(libelle, self.contact)
@@ -401,7 +403,8 @@ class TestEnvoiPhp(unittest.TestCase):
                     'e-mail avec " < > , ou ; refusé', ".htaccess écrit par renommage", "Origin d'un autre site refusé",
                     "compter : fichier partagé", "lignes de 75 caractères au plus", "rien en clair hors de",
                     "virgule légitime dans un nom accentué", "objet décodé", "IPv6 ramenée à son réseau /64",
-                    "plafond global noté au journal", "Require all denied"):
+                    "plafond global noté au journal", "Require all denied", "provenance : les six champs transmis à n8n",
+                    "provenance : absente de l'e-mail", "provenance trop longue : coupée, demande acceptée"):
             self.assertTrue(cas in t, cas)
 
 
@@ -504,6 +507,89 @@ class TestConsentementScript(unittest.TestCase):
         self.assertEqual(r["hsq"], [["doNotTrack"], ["doNotTrack", {"track": True}]])
         self.assertEqual(len(r["scripts"]), 1)  # Tag Manager chargé une seule fois
         self.assertEqual(r["choix"], "granted")
+
+
+class TestProvenanceScript(unittest.TestCase):
+    """assets/global/suivi.js dans un navigateur factice (Node, ignoré s'il manque) : provenance de la visite (source,
+    medium, campaign, landing_page, gclid) prise à la première page vue et gardée pour la visite, page du formulaire sans
+    paramètres, sans cookie ni accord à la mesure (règles du site Robb, pour le dashboard)."""
+
+    NODE = shutil.which("node")
+    SCRIPT = r"""
+    const fs = require("fs"), vm = require("vm");
+    const stockage = {}, resultats = [];
+    for (const [adresse, referent] of JSON.parse(process.argv[2])) {
+      const u = new URL(adresse), champs = {};
+      const champ = (n) => (champs[n] = champs[n] || { value: "" });
+      const formulaire = {
+        getAttribute: (a) => (a === "action" ? "/envoi.php" : null),
+        querySelector: (s) => { const m = s.match(/^input\[type="hidden"\]\[name="(\w+)"\]$/); return m ? champ(m[1]) : null; },
+        addEventListener: () => {},
+      };
+      const doc = { referrer: referent, querySelector: () => null, addEventListener: () => {},
+                    querySelectorAll: (s) => (s === "form[action]" ? [formulaire] : []) };
+      const contexte = { document: doc, URL, URLSearchParams,
+                         location: { pathname: u.pathname, search: u.search, hostname: u.hostname, origin: u.origin, href: u.href },
+                         sessionStorage: { getItem: (k) => (k in stockage ? stockage[k] : null), setItem: (k, v) => { stockage[k] = String(v); } } };
+      contexte.window = contexte;
+      vm.createContext(contexte);
+      vm.runInContext(fs.readFileSync(process.argv[1], "utf8"), contexte);
+      const r = {};
+      ["source", "medium", "campaign", "landing_page", "gclid", "page"].forEach((n) => { r[n] = champ(n).value; });
+      resultats.push(r);
+    }
+    process.stdout.write(JSON.stringify(resultats));
+    """
+
+    def visite(self, *pages):
+        """Pages vues dans une même visite, [adresse, référent] : les champs de provenance du formulaire de chacune."""
+        r = subprocess.run([self.NODE, "-e", self.SCRIPT, str(ICI / "assets/global/suivi.js"), json.dumps(pages)],
+                           capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        return json.loads(r.stdout)
+
+    def source(self, referent, adresse="https://neur-on.ai/fr/"):
+        r = self.visite([adresse, referent])[0]
+        return r["source"], r["medium"]
+
+    @unittest.skipUnless(NODE, "node absent de cette machine")
+    def test_campagne_gardee_pour_la_visite(self):
+        r = self.visite(["https://neur-on.ai/fr/corrext/?utm_source=linkedin&utm_medium=social&utm_campaign=lancement", "https://www.linkedin.com/"],
+                        ["https://neur-on.ai/fr/contact/?secteur=banques-finance", "https://neur-on.ai/fr/corrext/"])
+        self.assertEqual(r[1], {"source": "linkedin", "medium": "social", "campaign": "lancement", "landing_page": "/fr/corrext/",
+                                "gclid": "", "page": "https://neur-on.ai/fr/contact/"})
+
+    @unittest.skipUnless(NODE, "node absent de cette machine")
+    def test_premiere_page_de_la_visite_seulement(self):
+        r = self.visite(["https://neur-on.ai/de/", "https://www.google.ch/"],
+                        ["https://neur-on.ai/de/kontakt/?utm_source=newsletter", "https://neur-on.ai/de/"])
+        self.assertEqual((r[1]["source"], r[1]["medium"], r[1]["landing_page"]), ("google.ch", "organic", "/de/"))
+
+    @unittest.skipUnless(NODE, "node absent de cette machine")
+    def test_clic_d_annonce_google(self):
+        r = self.visite(["https://neur-on.ai/fr/?gclid=Cj0KCQ-test", "https://www.google.com/"])[0]
+        self.assertEqual((r["source"], r["medium"], r["gclid"]), ("google", "cpc", "Cj0KCQ-test"))
+        self.assertEqual(self.source("", "https://neur-on.ai/fr/?gbraid=0AAA"), ("google", "cpc"))
+
+    @unittest.skipUnless(NODE, "node absent de cette machine")
+    def test_site_de_provenance(self):
+        self.assertEqual(self.source("https://www.google.ch/"), ("google.ch", "organic"))
+        self.assertEqual(self.source("https://www.bing.com/search?q=neuron"), ("bing.com", "organic"))
+        self.assertEqual(self.source("https://chatgpt.com/"), ("chatgpt.com", "ia"))
+        self.assertEqual(self.source("https://www.perplexity.ai/"), ("perplexity.ai", "ia"))
+        self.assertEqual(self.source("https://www.linkedin.com/feed/"), ("linkedin.com", "social"))
+        self.assertEqual(self.source("https://lnkd.in/abc"), ("lnkd.in", "social"))
+        self.assertEqual(self.source("https://t.co/abc"), ("t.co", "social"))
+        self.assertEqual(self.source("https://legal230.com/"), ("legal230.com", "referral"))
+        # microsoft.com contient « t.co » et dropbox.com « x.com » : des sites, pas des réseaux sociaux
+        self.assertEqual(self.source("https://teams.microsoft.com/"), ("teams.microsoft.com", "referral"))
+        self.assertEqual(self.source("https://www.dropbox.com/"), ("dropbox.com", "referral"))
+
+    @unittest.skipUnless(NODE, "node absent de cette machine")
+    def test_visite_directe(self):
+        self.assertEqual(self.source(""), ("(direct)", "(none)"))
+        self.assertEqual(self.source("https://neur-on.ai/en/"), ("(direct)", "(none)"))  # référent du site lui-même
+        self.assertEqual(self.source("", "https://neur-on.ai/fr/?utm_source=salon"), ("salon", "(not set)"))
 
 if __name__ == "__main__":
     unittest.main()

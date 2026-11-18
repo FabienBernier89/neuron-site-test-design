@@ -318,13 +318,36 @@ $texte_demo = corps_texte('demo', $donnees_demo);
 verifier(base64_decode(str_replace("\r\n", '', composer('demo', $donnees_demo, 'noreply@neur-on.ai')['corps'])) === str_replace("\n", "\r\n", $texte_demo), 'corps_texte : même texte que le corps de composer (en LF)');
 verifier(strpos($texte_demo, "\r") === false && substr($texte_demo, -1) === "\n", 'corps_texte : lignes en LF, dernière ligne terminée');
 $charge = charge_n8n('demo', $donnees_demo, 'neur-on.ai', 'team@corrext.com');
-verifier(array_keys($charge) === ['site', 'type', 'objet', 'destinataire', 'repondre_a', 'nom', 'langue', 'texte'], 'charge_n8n : champs attendus, dans l\'ordre');
+verifier(array_keys($charge) === ['site', 'type', 'objet', 'destinataire', 'repondre_a', 'nom', 'langue', 'texte', 'source', 'medium', 'campaign', 'landing_page', 'gclid', 'page'], 'charge_n8n : champs attendus, dans l\'ordre');
 verifier($charge['objet'] === 'Demande de démo' && $charge['repondre_a'] === 'anne.muster@exemple.ch' && $charge['nom'] === 'Anne Muster', 'charge_n8n : objet, adresse de réponse et nom');
 verifier($charge['site'] === 'neur-on.ai' && $charge['destinataire'] === 'team@corrext.com' && $charge['langue'] === 'de', 'charge_n8n : site, destinataire et langue repris');
 verifier($charge['texte'] === $texte_demo && strpos($charge['texte'], "Organisation : Étude Muster\n") !== false, 'charge_n8n : texte de corps_texte');
 verifier(charge_n8n('newsletter', valider($lettre)['donnees'], 'neur-on.ai', 'team@corrext.com')['objet'] === 'Inscription newsletter', 'charge_n8n : objet de la lettre d\'information');
 verifier(charge_n8n('newsletter', valider($lettre)['donnees'], 'neur-on.ai', 'team@corrext.com')['nom'] === '', 'charge_n8n : nom vide pour la lettre d\'information');
 verifier(json_encode($charge, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !== false, 'charge_n8n : encodable en JSON');
+
+// Provenance de la visite (dashboard) : transmise à n8n à part, jamais dans l'e-mail, jamais motif de refus
+$provenance = ['source' => 'google.ch', 'medium' => 'organic', 'campaign' => 'lancement', 'landing_page' => '/fr/corrext/',
+               'gclid' => 'Cj0KCQ-test', 'page' => 'https://neur-on.ai/fr/contact/'];
+$r = valider($provenance + $demande);
+verifier($r['ok'], 'provenance : demande acceptée');
+$charge_p = charge_n8n('demo', $r['donnees'], 'neur-on.ai', 'team@corrext.com');
+$ok = true;
+foreach ($provenance as $nom => $valeur) {
+    $ok = $ok && $charge_p[$nom] === $valeur;
+}
+verifier($ok, 'provenance : les six champs transmis à n8n tels quels');
+$texte_p = corps_texte('demo', $r['donnees']);
+verifier($texte_p === corps_texte('demo', valider($demande)['donnees']), "provenance : texte de l'e-mail identique avec ou sans provenance");
+$courriel_p = composer('demo', $r['donnees'], 'noreply@neur-on.ai');
+$corps_p = base64_decode(str_replace("\r\n", '', $courriel_p['corps']));
+verifier(strpos($corps_p, 'google.ch') === false && strpos($corps_p, 'Cj0KCQ-test') === false && strpos($corps_p, 'landing_page') === false, "provenance : absente de l'e-mail envoyé par mail()");
+$charge_vide = charge_n8n('newsletter', valider($lettre)['donnees'], 'neur-on.ai', 'team@corrext.com');
+verifier($charge_vide['source'] === '' && $charge_vide['page'] === '' && $charge_vide['gclid'] === '', 'provenance absente (sans JavaScript) : champs vides, demande acceptée');
+$r = valider(['page' => 'https://neur-on.ai/' . str_repeat('é', 600), 'gclid' => str_repeat('a', 400)] + $demande);
+verifier($r['ok'] && mb_strlen($r['donnees']['page'], 'UTF-8') === 500 && strlen($r['donnees']['gclid']) === 300, 'provenance trop longue : coupée, demande acceptée');
+$r = valider(['source' => ['google'], 'medium' => "\xC3\x28", 'campaign' => "lancement\r\nBcc: x@exemple.ch"] + $demande);
+verifier($r['ok'] && $r['donnees']['source'] === '' && $r['donnees']['medium'] === '' && strpos($r['donnees']['campaign'], "\n") === false, 'provenance illisible (tableau, UTF-8 invalide, saut de ligne) : vidée ou nettoyée, demande acceptée');
 
 $dossier_n8n = sys_get_temp_dir() . '/envoi-n8n-' . bin2hex(random_bytes(4));
 mkdir($dossier_n8n);

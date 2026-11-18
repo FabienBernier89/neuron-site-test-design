@@ -197,7 +197,8 @@ class TestSuiviDesAppels(unittest.TestCase):
         champs = {n: int(m) for n, m in re.findall(r"'(\w+)' => \[(\d+), ", php)}
         longueurs = re.search(r"var LONGUEURS = \{([^}]*)\}", self.js).group(1)
         js = {n: int(m) for n, m in re.findall(r"(\w+): (\d+)", longueurs)}
-        attendus = ("page_entree", "page_origine", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content")
+        attendus = ("page_entree", "page_origine", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
+                    "source", "medium", "campaign", "landing_page", "gclid", "page")
         self.assertEqual(sorted(js), sorted(attendus))
         for n in attendus:
             self.assertEqual(js[n], champs[n], n)
