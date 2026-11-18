@@ -103,11 +103,21 @@ const CHAMPS = [
     'utm_campaign' => [200, 'utm_campaign'],
     'utm_term' => [200, 'utm_term'],
     'utm_content' => [200, 'utm_content'],
+    // Provenance de la visite pour le dashboard (suivi.js, mêmes noms que le site Robb) : transmise à n8n (charge_n8n),
+    // jamais dans l'e-mail (corps_texte), et jamais refusée : illisible, elle part vide ; trop longue, elle est coupée.
+    'source' => [200, 'source'],
+    'medium' => [200, 'medium'],
+    'campaign' => [200, 'campaign'],
+    'landing_page' => [500, 'landing_page'],
+    'gclid' => [300, 'gclid'],
+    'page' => [500, 'page'],
     // Langue de la page du formulaire : jamais refusée (langue_demandee), donc sans limite de longueur utile
     'langue' => [2, 'Langue de la page'],
 ];
 // Champs du parcours, regroupés en fin d'e-mail.
 const PARCOURS = ['page_entree', 'page_origine', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'langue'];
+// Champs de provenance : hors de l'e-mail, transmis à n8n pour le dashboard.
+const PROVENANCE = ['source', 'medium', 'campaign', 'landing_page', 'gclid', 'page'];
 // Champs obligatoires par type de formulaire.
 const OBLIGATOIRES = [
     'demo' => ['prenom', 'nom', 'email', 'organisation', 'fonction', 'consentement'],
@@ -185,6 +195,12 @@ function valider(array $post): array
     foreach (CHAMPS as $nom => $definition) {
         if ($nom === 'langue') {  // jamais refusée : un code hors table redevient le français
             $donnees[$nom] = langue_demandee($post);
+            continue;
+        }
+        if (in_array($nom, PROVENANCE, true)) {  // jamais refusée : illisible, vide ; trop longue, coupée
+            $brut = $post[$nom] ?? '';
+            $valeur = (is_string($brut) && utf8_valide($brut)) ? (string) preg_replace('/[\x00-\x1F\x7F]+/', ' ', $brut) : '';
+            $donnees[$nom] = trim(mb_substr(trim($valeur), 0, $definition[0], 'UTF-8'));
             continue;
         }
         $brut = $post[$nom] ?? '';
@@ -405,6 +421,7 @@ function encoder_entete(string $texte): string
 
 /**
  * Texte d'une demande validée, lignes séparées par LF : les champs remplis, le message, puis le parcours sur le site.
+ * Les champs de PROVENANCE n'y figurent pas : ils ne vont qu'au dashboard (charge_n8n).
  * Corps de l'e-mail de composer (en CRLF) et texte transmis à n8n (charge_n8n).
  */
 function corps_texte(string $type, array $donnees): string
@@ -412,7 +429,7 @@ function corps_texte(string $type, array $donnees): string
     $lignes = [OBJETS[$type] . ' envoyée depuis le site.', ''];
     foreach (CHAMPS as $nom => $definition) {
         $valeur = $donnees[$nom] ?? '';
-        if ($valeur !== '' && $nom !== 'message' && !in_array($nom, PARCOURS, true)) {
+        if ($valeur !== '' && $nom !== 'message' && !in_array($nom, PARCOURS, true) && !in_array($nom, PROVENANCE, true)) {
             $lignes[] = $definition[1] . ' : ' . $valeur;
         }
     }
@@ -459,11 +476,11 @@ function composer(string $type, array $donnees, string $expediteur): array
  * Demande validée prête pour le webhook n8n (encodée en JSON par envoyer_n8n). $site : DOMAINE, qui permet au webhook
  * de distinguer la production d'une préprod ; $destinataire : DESTINATAIRE, que le webhook n'accepte qu'à l'intérieur
  * de sa propre liste. L'objet est celui de la table OBJETS, le texte celui de corps_texte ; l'e-mail du visiteur sert
- * d'adresse de réponse.
+ * d'adresse de réponse. Les champs de PROVENANCE suivent, à part, pour le dashboard (vides s'ils manquent).
  */
 function charge_n8n(string $type, array $donnees, string $site, string $destinataire): array
 {
-    return [
+    $charge = [
         'site' => $site,
         'type' => $type,
         'objet' => OBJETS[$type],
@@ -473,6 +490,10 @@ function charge_n8n(string $type, array $donnees, string $site, string $destinat
         'langue' => $donnees['langue'] ?? 'fr',
         'texte' => corps_texte($type, $donnees),
     ];
+    foreach (PROVENANCE as $nom) {
+        $charge[$nom] = $donnees[$nom] ?? '';
+    }
+    return $charge;
 }
 
 /**

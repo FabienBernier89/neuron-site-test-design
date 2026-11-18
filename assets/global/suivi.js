@@ -9,6 +9,10 @@
    Convention des data-suivi : cta-<contexte>-<position>, position « hero », « milieu » (bouton d'une bande en cours de
    page) ou « fin » (cta-accueil-hero, cta-securite-milieu, cta-plugin-word-fin, cta-secteur-<slug>-hero) ; le bouton
    de l'en-tête : cta-entete, et cta-entete-mobile dans le menu mobile.
+   Provenance de la visite pour le dashboard (mêmes champs que le site Robb) : source, medium, campaign, landing_page et
+   gclid, pris une fois à la première page vue de la visite, et page (adresse de la page du formulaire, sans paramètres).
+   Comme le reste du parcours, ils sont gardés dans le stockage de la visite, sans cookie et sans attendre l'accord à la
+   mesure : ils ne quittent le navigateur qu'avec un formulaire envoyé. envoi.php les transmet à n8n, hors de l'e-mail.
    Les champs cachés sont tronqués à la longueur maximale qu'accepte envoi.php (CHAMPS), sinon l'envoi serait refusé.
    Chaque accès au stockage est protégé : stockage bloqué, le formulaire reçoit au moins ce que porte la page affichée. */
 (function () {
@@ -16,7 +20,9 @@
   var CLE = "neuron-suivi";
   var UTM = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
   /* Longueur maximale de chaque champ caché, en caractères : celle de CHAMPS dans envoi.php */
-  var LONGUEURS = { page_entree: 500, page_origine: 500, utm_source: 200, utm_medium: 200, utm_campaign: 200, utm_term: 200, utm_content: 200 };
+  var LONGUEURS = { page_entree: 500, page_origine: 500, utm_source: 200, utm_medium: 200, utm_campaign: 200, utm_term: 200, utm_content: 200,
+                    source: 200, medium: 200, campaign: 200, landing_page: 500, gclid: 300, page: 500 };
+  var PROVENANCE = ["source", "medium", "campaign", "landing_page", "gclid"];
   var chemin = location.pathname;
 
   /* Les repères pris sur l'adresse (page secteur, page de remerciement) se lisent sur la version française de la page :
@@ -61,6 +67,29 @@
     etat.precedente = etat.derniere || "";
     etat.derniere = chemin;
   }
+  /* Provenance, une fois par visite : UTM, sinon clic d'annonce Google, sinon site d'où vient le visiteur (moteur de
+     recherche, assistant IA, réseau social ou autre site), sinon « (direct) » (règles du site Robb ; t.co et x.com ne
+     valent que pour ces domaines, pas pour microsoft.com ou dropbox.com) */
+  function provenance() {
+    var source = "(direct)", medium = "(none)", hote = "";
+    try { hote = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, "") : ""; } catch (e) { /* référent illisible */ }
+    if (parametre("utm_source")) {
+      source = parametre("utm_source");
+      medium = parametre("utm_medium") || "(not set)";
+    } else if (parametre("gclid") || parametre("gbraid") || parametre("wbraid")) {
+      source = "google";
+      medium = "cpc";
+    } else if (hote && hote !== String(location.hostname || "").replace(/^www\./, "")) {
+      source = hote;
+      if (/(^|\.)(google|bing|yahoo|duckduckgo|ecosia|qwant|yandex|baidu|lilo)\./.test(hote)) medium = "organic";
+      else if (/(chatgpt|openai|perplexity|gemini|copilot|claude|mistral)/.test(hote)) medium = "ia";
+      else if (/(^|\.)(facebook|instagram|linkedin|twitter|pinterest|youtube|tiktok|whatsapp)\.|(^|\.)(t\.co|x\.com|lnkd\.in)$/.test(hote)) medium = "social";
+      else medium = "referral";
+    }
+    return { source: source.slice(0, 200), medium: medium.slice(0, 200), campaign: parametre("utm_campaign").slice(0, 200),
+             landing_page: etat.entree, gclid: parametre("gclid").slice(0, 300) };
+  }
+  if (!etat.provenance) etat.provenance = provenance();
   var secteur = cheminFr().match(/\/solutions\/([a-z0-9-]+)\/$/);
   if (secteur) etat.secteur = secteur[1];
   garder(etat);
@@ -94,6 +123,8 @@
     poser(f, "page_origine", origine());
     poser(f, "t0", t0);
     UTM.forEach(function (k) { poser(f, k, (etat.utm && etat.utm[k]) || parametre(k).slice(0, 200)); });
+    PROVENANCE.forEach(function (k) { poser(f, k, etat.provenance[k] || ""); });
+    poser(f, "page", location.origin + chemin);
     /* ?demande=documentation-api (bouton de la page API et on-premises) : le formulaire de démo devient une demande
        de documentation API, objet d'e-mail distinct dans envoi.php ; le message est prérempli s'il est vide */
     var type = f.querySelector('input[type="hidden"][name="type"]');
